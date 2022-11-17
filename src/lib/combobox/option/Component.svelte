@@ -57,7 +57,8 @@
 
 	const classes = b
 		.addFeature('base', ctx.base)
-		.addVariant('default', ctx.theme)
+		 .addVariant('default', ctx.theme)
+		.addHandlerClass('selected', isSelected, ctx.theme)
 		.addUserClass($$restProps.class, true)
 		.bundle();
 
@@ -117,3 +118,5 @@
 		</span>
 	{/if}
 </li>
+
+

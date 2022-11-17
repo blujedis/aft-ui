@@ -11,6 +11,9 @@ const main = {
 		left: 'left-0 pl-1.5',
 		right: 'right-0 pr-4'
 	},
+	selected: (theme: any) => {
+		return '!bg-rose-600 !text-white';
+	},
 	variant: {
 		default: {
 			default: defTheme,

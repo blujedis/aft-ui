@@ -193,6 +193,19 @@
 
 	// Event Handling
 
+	let hooks: Array<any> = [];
+  let idx: number = 0;
+	function nextTick(cb: () => void, deps: any[]) {
+		const oldDeps = hooks[idx];
+    let hasChanged = true;
+    if (oldDeps) {
+      hasChanged = deps.some((dep, i) => !Object.is(dep, oldDeps[i]));
+    }
+    hooks[idx] = deps;
+    idx++;
+    if (hasChanged) cb();
+	}
+
 	function handleFocus(e: FocusEvent) {}
 
 	function handleKeyup(e: KeyboardEvent) {}
@@ -256,7 +269,7 @@
 			const isSelected = node.dataset?.selected === 'true';
 			if (isSelected) {
 				activeNode = node;
-				node.focus();
+				// node.focus();
 			}
 			nodes.push(node);
 		}
@@ -298,7 +311,10 @@
 	}
 	function handleInputKeyDown(e: KeyboardEvent) {
 		if (e.repeat) return;
-		if (e.key === 'ArrowDown' && $itemsStore.length) expanded = true;
+		if (e.key === 'ArrowDown' && $itemsStore.length) 
+			expanded = true;
+		if (e.key === 'Tab')
+			console.log('tabbed');
 	}
 
 	function handleMouseOver(e: MouseEvent) {
