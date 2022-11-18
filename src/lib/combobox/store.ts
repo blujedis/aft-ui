@@ -12,6 +12,11 @@ export interface ListStore<T extends string | Record<string, any>> {
 	selected: Writable<T | null>;
 
 	/**
+	 * Selected item store.
+	 */
+	active: Writable<T | null>;
+
+	/**
 	 * Replaces the store with the new collection.
 	 *
 	 * @param collection the collection to set as store value.
@@ -53,6 +58,37 @@ export interface ListStore<T extends string | Record<string, any>> {
 	unselect(): void;
 
 	/**
+	 * Sets the activated value.
+	 * 
+	 * @param value the value to be set as activated
+	 */
+	activate(value: T | null): void;
+
+	/**
+	 * Gets the currently selected index.
+	 */
+	getSelectedIndex(): number;
+
+	/**
+	 * Gets the currently selected index.
+	 */
+	getActiveIndex(): number;
+
+	/**
+	 * Sets item as selected by it's index.
+	 * 
+	 * @param index the index of the item to select.
+	 */
+	selectByIndex(index: number): void;
+
+	/**
+	 * Sets item as activated by it's index.
+	 * 
+	 * @param index the index of the item to activate.
+	 */
+	 activateByIndex(index: number): void;
+
+	/**
 	 * Resets both the items store and the selected store initialized values.
 	 */
 	reset(): void;
@@ -73,16 +109,23 @@ export function createList<T extends string | Record<string, any>>(
 
 	const itemsStore = writable(initCollection);
 	const selectedStore = writable(selected as T | null);
+	const activeStore = writable(selected as T | null);
 
 	const api = {
 		items: itemsStore,
 		selected: selectedStore,
+		active: activeStore,
 		replace,
 		add,
 		filter,
 		unfilter,
 		select,
 		unselect,
+		activate,
+		getSelectedIndex,
+		getActiveIndex,
+		selectByIndex,
+		activateByIndex,
 		reset
 	};
 
@@ -142,10 +185,56 @@ export function createList<T extends string | Record<string, any>>(
 	}
 
 	/**
+	 * Sets the activated value.
+	 * 
+	 * @param value the value to be set as activated
+	 */
+	function activate(value: T | null) {
+		activeStore.set(value);
+	}
+
+	/**
 	 * Removes selected value setting to null.
 	 */
 	function unselect() {
 		select(null);
+	}
+
+	/**
+	 * Gets the currently selected index.
+	 */
+	function getSelectedIndex() {
+		return get(itemsStore).indexOf(get(selectedStore) as T);
+	}
+
+
+	/**
+	 * Gets the currently selected index.
+	 */
+	function getActiveIndex() {
+		return get(itemsStore).indexOf(get(activeStore) as T);
+	}
+
+	/**
+	 * Sets item as selected by it's index.
+	 * 
+	 * @param index the index of the item to select.
+	 */
+	function selectByIndex(index: number) {
+		const item = get(itemsStore)[index];
+		if (item)
+			select(item);
+	}
+
+	/**
+	 * Sets item as activated by it's index.
+	 * 
+	 * @param index the index of the item to activate.
+	 */
+	function activateByIndex(index: number) {
+		const item = get(itemsStore)[index];
+		if (item)
+			activate(item);
 	}
 
 	/**

@@ -16,7 +16,6 @@
 	type T = $$Generic<string | Record<string, any>>;
 
 	interface $$Props extends Defaults {
-		key?: string | number;
 		label?: string;
 		value: T;
 	}
@@ -28,25 +27,34 @@
 	const bl = new Builder(components.comboboxOption.icon);
 	const br = new Builder(components.comboboxOption.icon);
 
-	const defaults = b.defaults(
-		{
-			base: true
-		},
-		['variant', 'position', 'theme']
-	);
+	const defaults = b
+		.defaults({	base: true},
+			['variant', 'position', 'theme']
+		);
 
 	export let value: T;
 	export let label = typeof value === 'string' ? value : '';
 
+	if (!$$slots.default && !label)
+		throw new Error(`ComboboxOption must contain a slot value or a label.`);
+
 	const ctx = getContext('Combobox') as Required<ComboboxContext<T>>;
 
 	let isSelected = false;
+	let isActive = false;
 
-	const unsubscribe = ctx.controller.selected.subscribe((selectedValue) => {
+	const unsubscribeSelected = ctx.controller.selected.subscribe((selectedValue) => {
 		isSelected = ctx.onMatch(selectedValue, value);
 	});
 
-	onDestroy(() => unsubscribe());
+	const unsubscribeActive= ctx.controller.active.subscribe((activeValue) => {
+		isActive = ctx.onMatch(activeValue, value);
+	});
+
+	onDestroy(() =>{
+		unsubscribeSelected();
+		unsubscribeActive();
+	});
 
 	const left = $$slots.left && ctx.icons;
 	const right = ctx.icons; // if icons enabled always show right fallback.
@@ -57,7 +65,9 @@
 
 	const classes = b
 		.addFeature('base', ctx.base)
-		 .addVariant('default', ctx.theme)
+		.addVariant('default', ctx.theme)
+		.addHandlerClass('inactive', !isActive && !isSelected, ctx.theme)
+		.addHandlerClass('active', isActive, ctx.theme)
 		.addHandlerClass('selected', isSelected, ctx.theme)
 		.addUserClass($$restProps.class, true)
 		.bundle();

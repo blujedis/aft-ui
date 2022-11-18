@@ -9,6 +9,7 @@
 	import type { ComboboxContext } from './types';
 	import { createList, type ListStore } from './store';
 	import { getProperty } from 'dot-prop';
+	import { writable } from 'svelte/store';
 
 	type ElementProps = PickElement<'div', 'size'>;
 	type InputProps = PickElement<'div', 'size'>;
@@ -44,7 +45,8 @@
 	const defaults = b.defaults({
 		base: true,
 		size: 'md',
-		variant: 'filled'
+		variant: 'filled',
+		theme: ''
 	});
 
 	export let id = uniqid() as InputProps['id'];
@@ -85,8 +87,9 @@
 	export let threshold = 2;
 
 	let input: HTMLInputElement;
-	let itemsStore = controller.items;
-	let selectedStore = controller.selected;
+	const itemsStore = controller.items;
+	const selectedStore = controller.selected;
+	const activeStore = controller.active;
 
 	export let getValue = (v: T | null) => pickProp(v, 'value');
 
@@ -104,15 +107,15 @@
 	export const handleSelect = (item: T | null, close = false, e?: MouseEvent | TouchEvent) => {
 		controller.select(item);
 		if (close) expanded = false;
-		else if (activeNode) activeNode.focus();
+		// else if (activeNode) 
+		// 	activeNode.focus();
 	};
 
 	export let onFilter = async (query: string) => {
 		const filtered = await controller.filter((item) => {
 			const result = fuzzyFull(query, getValue(item), { threshold });
 			if (result.score === 10)
-				// if exact match select it.
-				handleSelect(item, false);
+				handleSelect(item, false); // if exact match select it.
 			return result.match;
 		});
 		return filtered;
@@ -124,11 +127,20 @@
 
 	const unsubSelected = selectedStore.subscribe((selectedItem) => {
 		onSelected(selectedItem);
-		if (input) {
+		if (input) 
 			input.value = getValue(selectedItem);
-		}
 	});
 
+	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape'];
+
+	let ul: HTMLUListElement;
+	let expanded = false;
+	let nodes = [] as HTMLLIElement[];
+	let activeNode = null as HTMLLIElement | null;
+
+	$: expanded && ul && parseNodes();
+	$: !expanded && parseNodes();
+ 
 	const context: ComboboxContext<T> = {
 		base,
 		theme,
@@ -181,30 +193,21 @@
 		hovered
 	};
 
-	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape'];
-
-	let ul: HTMLUListElement;
-	let expanded = false;
-	let nodes = [] as HTMLLIElement[];
-	let activeNode = null as HTMLLIElement | null;
-
-	$: expanded && ul && parseNodes();
-	$: !expanded && parseNodes();
 
 	// Event Handling
 
-	let hooks: Array<any> = [];
-  let idx: number = 0;
-	function nextTick(cb: () => void, deps: any[]) {
-		const oldDeps = hooks[idx];
-    let hasChanged = true;
-    if (oldDeps) {
-      hasChanged = deps.some((dep, i) => !Object.is(dep, oldDeps[i]));
-    }
-    hooks[idx] = deps;
-    idx++;
-    if (hasChanged) cb();
-	}
+	// let hooks: Array<any> = [];
+  // let idx: number = 0;
+	// function nextTick(cb: () => void, deps: any[]) {
+	// 	const oldDeps = hooks[idx];
+  //   let hasChanged = true;
+  //   if (oldDeps) {
+  //     hasChanged = deps.some((dep, i) => !Object.is(dep, oldDeps[i]));
+  //   }
+  //   hooks[idx] = deps;
+  //   idx++;
+  //   if (hasChanged) cb();
+	// }
 
 	function handleFocus(e: FocusEvent) {}
 
@@ -263,6 +266,7 @@
 			return;
 		}
 		if (nodes.length || !ul?.childNodes) return;
+		let i = 0;
 		for (const n of ul.childNodes) {
 			const node = n as HTMLLIElement;
 			if (node?.tagName !== 'LI') continue;
@@ -271,6 +275,7 @@
 				activeNode = node;
 				// node.focus();
 			}
+			i++
 			nodes.push(node);
 		}
 	}
@@ -286,7 +291,7 @@
 		next = code === 'ArrowUp' ? Math.max(0, currentIndex - 1) : currentIndex + 1;
 		if (next >= 0 && next <= nodes.length - 1) {
 			activeNode = nodes[next];
-			activeNode?.focus();
+			// activeNode?.focus();
 		}
 		pauseMouse();
 	}
@@ -320,8 +325,9 @@
 	function handleMouseOver(e: MouseEvent) {
 		const node = e.target as HTMLLIElement;
 		if (node.nodeName === 'LI') {
-			node.focus();
+			//node.focus();
 			activeNode = node;
+			
 		}
 	}
 

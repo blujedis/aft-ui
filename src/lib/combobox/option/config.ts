@@ -1,8 +1,8 @@
-import { pick, pickVariant } from '@forewind/util';
+import { pick, pickVariant, type Palette, type TypeOrValue } from '@forewind/util';
 import config from '../../_config/config';
 
 const { colormap } = config;
-const defTheme = pick(colormap.theme.default, 'hover_glass', 'text', 'bg_active', 'text_active');
+const defTheme = pick(colormap.theme.default, 'hover_glass', 'text');
 const themes = pickVariant(colormap.theme, 'hover_text_white', 'hover', 'text');
 
 const main = {
@@ -11,8 +11,17 @@ const main = {
 		left: 'left-0 pl-1.5',
 		right: 'right-0 pr-4'
 	},
-	selected: (theme: any) => {
-		return '!bg-rose-600 !text-white';
+	inactive: (theme: TypeOrValue<keyof Palette>) => {
+		const conf = colormap.theme[theme as keyof typeof colormap.theme || 'default'];
+		return conf.state_inactive;
+	},
+	active: (theme: TypeOrValue<keyof Palette>) => {
+		const conf = colormap.theme[theme as keyof typeof colormap.theme || 'default'];
+		return conf.state_active;
+	},
+	selected: (theme: TypeOrValue<keyof Palette>) => {
+		const conf = colormap.theme[theme as keyof typeof colormap.theme || 'default'];
+		return conf.state_selected;
 	},
 	variant: {
 		default: {

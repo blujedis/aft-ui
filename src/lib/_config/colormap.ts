@@ -18,8 +18,10 @@ const form = {
 const common = {
 	bg_form: bg,
 	text_white: 'text-white dark:text-white',
-	text_active: 'focus:text-white dark:focus:text-white hover:text-white dark:hover:text-white',
-	hover_text_white: 'hover:text-white dark:hover:text-white'
+	hover_text_white: 'hover:text-white dark:hover:text-white',
+	state_active: 'bg-rose-600 text-white',
+	state_inactive: '',
+	state_selected: 'bg-rose-600 text-white'
 };
 
 const _default = {
@@ -29,8 +31,6 @@ const _default = {
 	bg_glass: 'bg-slate-100 dark:bg-slate-500/20',
 	bg_glass_focus: 'focus:bg-slate-200/90 dark:focus:bg-slate-500/30',
 	bg_range: 'bg-slate-500/40 dark:bg-slate-500/40',
-	selected:
-		'focus:bg-slate-500 dark:focus:bg-slate-500/20 hover:bg-slate-500 dark:hover:bg-slate-500/20',
 	hover: 'hover:bg-slate-300/80 dark:hover:bg-slate-700',
 	hover_text: 'hover:text-slate-700 dark:hover:text-slate-400',
 	hover_glass: 'hover:bg-slate-100 dark:hover:bg-slate-500/20',
@@ -51,7 +51,6 @@ const primary = {
 	bg: 'bg-primary dark:bg-primary-600',
 	bg_glass: 'bg-primary-50  dark:bg-primary-600/30',
 	bg_glass_focus: 'focus:bg-primary-100/60 dark:focus:bg-primary-500/30',
-	selected: 'focus:bg-primary dark:focus:bg-primary-600',
 	hover: 'hover:bg-primary-700 dark:hover:bg-primary-700',
 	hover_text: 'hover:text-primary-700 dark:hover:text-primary-700',
 	hover_glass: 'hover:bg-primary-50  dark:hover:bg-primary-600/30',
@@ -72,7 +71,6 @@ const secondary = {
 	bg: 'bg-secondary dark:bg-secondary',
 	bg_glass: 'bg-secondary-50  dark:bg-secondary-500/20',
 	bg_glass_focus: 'focus:bg-secondary-100/60 dark:focus:bg-secondary-500/30',
-	selected: 'focus:bg-secondary dark:focus:bg-secondary',
 	hover: 'hover:bg-secondary-700 dark:hover:bg-secondary-700',
 	hover_text: 'hover:text-secondary-700 dark:hover:text-secondary-700',
 	hover_glass: 'hover:bg-secondary-50 dark:hover:bg-secondary-500/20',
@@ -93,7 +91,6 @@ const tertiary = {
 	bg: 'bg-tertiary dark:bg-tertiary',
 	bg_glass: 'bg-tertiary-50  dark:bg-tertiary-500/20',
 	bg_glass_focus: 'focus:bg-tertiary-100/60 dark:focus:bg-tertiary-500/30',
-	selected: 'focus:bg-tertiary dark:focus:bg-tertiary',
 	hover: 'hover:bg-tertiary-700 dark:hover:bg-tertiary-700',
 	hover_text: 'hover:text-tertiary-700 dark:hover:text-tertiary-700',
 	hover_glass: 'hover:bg-tertiary-50  dark:hover:bg-tertiary-500/20',
@@ -114,7 +111,6 @@ const quaternary = {
 	bg: 'bg-quaternary dark:bg-quaternary',
 	bg_glass: 'bg-quaternary-50  dark:bg-quaternary-500/20',
 	bg_glass_focus: 'focus:bg-quaternary-100/60 dark:focus:bg-quaternary-500/30',
-	selected: 'focus:bg-quaternary dark:focus:bg-quaternary',
 	hover: 'hover:bg-quaternary-700 dark:hover:bg-quaternary-700',
 	hover_text: 'hover:text-quaternary-700 dark:hover:text-quaternary-700',
 	hover_glass: 'hover:bg-quaternary-50  dark:hover:bg-quaternary-500/20',
@@ -135,7 +131,6 @@ const danger = {
 	bg: 'bg-danger dark:bg-danger',
 	bg_glass: 'bg-danger-50 dark:bg-danger-500/20',
 	bg_glass_focus: 'focus:bg-danger-100/60 dark:focus:bg-danger-500/30',
-	selected: 'focus:bg-danger dark:focus:bg-danger',
 	hover: 'hover:bg-danger-700 dark:hover:bg-danger-700',
 	hover_text: 'hover:text-danger-700 dark:hover:text-danger-700',
 	hover_glass: 'hover:bg-danger-50  dark:hover:bg-danger-500/20',
@@ -156,7 +151,6 @@ const warning = {
 	bg: 'bg-warning dark:bg-warning',
 	bg_glass: 'bg-warning-50  dark:bg-warning-500/20',
 	bg_glass_focus: 'focus:bg-warning-100/60 dark:focus:bg-warning-500/30',
-	selected: 'focus:bg-warning dark:focus:bg-warning',
 	hover: 'hover:bg-warning-700 dark:hover:bg-warning-700',
 	hover_text: 'hover:text-warning-700 dark:hover:text-warning-700',
 	hover_glass: 'hover:bg-warning-50  dark:hover:bg-warning-500/20',
@@ -177,7 +171,6 @@ const success = {
 	bg: 'bg-success dark:bg-success',
 	bg_glass: 'bg-success-50  dark:bg-success-500/20',
 	bg_glass_focus: 'focus:bg-success-100/60 dark:focus:bg-success-500/30',
-	selected: 'focus:bg-success dark:focus:bg-success',
 	hover: 'hover:bg-success-700 dark:hover:bg-success-700',
 	hover_text: 'hover:text-success-700 dark:hover:text-success-700',
 	hover_glass: 'hover:bg-success-50  dark:hover:bg-success-500/20',
@@ -197,8 +190,7 @@ const info = {
 	text: 'text-info dark:text-info',
 	bg: 'bg-info dark:bg-info',
 	bg_glass: 'bg-info-50  dark:bg-info-500/20',
-	bg_glass_focus: 'focus:bg-info-100/60 dark:focus:bg-info-500/30',
-	selected: 'focus:bg-info dark:focus:bg-info',
+	bg_glass_focus: 'focus:bg-info-100/60 dark:focus:bg-info-500/30text',
 	hover: 'hover:bg-info-700 dark:hover:bg-info-700',
 	hover_text: 'hover:text-info-700 dark:hover:text-info-700',
 	hover_glass: 'hover:bg-info-50  dark:hover:bg-info-500/20',

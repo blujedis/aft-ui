@@ -14,10 +14,4 @@ export interface ComboboxContext<T extends string | Record<string, any>> {
 	controller: ListStore<T>;
 	onMatch: (value: T | null, row: T) => boolean;
 	handleSelect(item: T | null, close?: boolean, e?: MouseEvent | TouchEvent): void;
-	// itemsStore: Writable<T[]>;
-	// selectedStore: Writable<T>;
-	// rounded: Rounded;
-	// transition: boolean;
-	// hovered: boolean;
-	// variant: TypeOrValue<keyof typeof combobox.main.variant>;
 }
