@@ -19,9 +19,6 @@ const common = {
 	bg_form: bg,
 	text_white: 'text-white dark:text-white',
 	hover_text_white: 'hover:text-white dark:hover:text-white',
-	state_active: 'bg-rose-600 text-white',
-	state_inactive: '',
-	state_selected: 'bg-rose-600 text-white'
 };
 
 const _default = {

@@ -34,6 +34,9 @@
 		{ value: 'Michael Bolton' }
 	];
 
+
+	let value = 'Peter Gibbons';
+
 	const items = ['Bill Lumbergh', 'Milton Waddams', 'Peter Gibbons', 'Michael Bolton'];
 
 	const options = {
@@ -47,7 +50,6 @@
 		transform: ''
 	};
 
-	let value = 'Peter Gibbons';
 </script>
 
 <Page {title} {description}>

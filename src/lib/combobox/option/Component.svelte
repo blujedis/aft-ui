@@ -3,6 +3,7 @@
 	import { Builder, normalize } from '@forewind/util';
 	import themeStore from '../../init';
 	import type { ComboboxContext } from '../types';
+	// import { writable } from 'svelte/store';
 
 	interface LiProps {
 		title?: string;
@@ -17,7 +18,7 @@
 
 	interface $$Props extends Defaults {
 		label?: string;
-		value: T;
+		value: T;  
 	}
 
 	const { components, palette } = $themeStore;
@@ -39,38 +40,29 @@
 		throw new Error(`ComboboxOption must contain a slot value or a label.`);
 
 	const ctx = getContext('Combobox') as Required<ComboboxContext<T>>;
+	const left = $$slots.left && ctx.icons;
+	const right = ctx.icons; // if icons enabled always show right fallback.
 
 	let isSelected = false;
-	let isActive = false;
+	// let isActive = false;
+	
+	const classes = b
+		.addFeature('base', ctx.base)
+		.addVariant('default', ctx.theme)
+		.addUserClass($$restProps.class, true)
+		.bundle() || '';
 
 	const unsubscribeSelected = ctx.controller.selected.subscribe((selectedValue) => {
 		isSelected = ctx.onMatch(selectedValue, value);
 	});
 
-	const unsubscribeActive= ctx.controller.active.subscribe((activeValue) => {
-		isActive = ctx.onMatch(activeValue, value);
-	});
-
-	onDestroy(() =>{
-		unsubscribeSelected();
-		unsubscribeActive();
-	});
-
-	const left = $$slots.left && ctx.icons;
-	const right = ctx.icons; // if icons enabled always show right fallback.
+	// const unsubscribeActive= ctx.controller.active.subscribe((activeValue) => {
+	// 	isActive = ctx.onMatch(activeValue, value);
+	// });
 
 	const leftIcon = bl.addFeature('base', ctx.base).addFeature('position', 'left').bundle();
 
 	const rightIcon = br.addFeature('base', ctx.base).addFeature('position', 'right').bundle();
-
-	const classes = b
-		.addFeature('base', ctx.base)
-		.addVariant('default', ctx.theme)
-		.addHandlerClass('inactive', !isActive && !isSelected, ctx.theme)
-		.addHandlerClass('active', isActive, ctx.theme)
-		.addHandlerClass('selected', isSelected, ctx.theme)
-		.addUserClass($$restProps.class, true)
-		.bundle();
 
 	const itemClasses = 'block truncate';
 
@@ -82,6 +74,11 @@
 		if (e.key !== 'Enter') return;
 		ctx.handleSelect(value);
 	}
+
+	onDestroy(() => {
+		unsubscribeSelected();
+		// unsubscribeActive();
+	});
 </script>
 
 <li
@@ -128,5 +125,3 @@
 		</span>
 	{/if}
 </li>
-
-

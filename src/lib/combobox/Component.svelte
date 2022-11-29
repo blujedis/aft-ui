@@ -12,7 +12,7 @@
 	import { writable } from 'svelte/store';
 
 	type ElementProps = PickElement<'div', 'size'>;
-	type InputProps = PickElement<'div', 'size'>;
+	type InputProps = PickElement<'input', 'size'>;
 	type Defaults = typeof defaults & ElementProps;
 
 	type T = $$Generic<string | Record<string, any>>;
@@ -89,7 +89,6 @@
 	let input: HTMLInputElement;
 	const itemsStore = controller.items;
 	const selectedStore = controller.selected;
-	const activeStore = controller.active;
 
 	export let getValue = (v: T | null) => pickProp(v, 'value');
 
@@ -131,12 +130,13 @@
 			input.value = getValue(selectedItem);
 	});
 
-	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape'];
+	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape', 'Enter'];
 
 	let ul: HTMLUListElement;
 	let expanded = false;
 	let nodes = [] as HTMLLIElement[];
 	let activeNode = null as HTMLLIElement | null;
+	let initValue = value;
 
 	$: expanded && ul && parseNodes();
 	$: !expanded && parseNodes();
@@ -196,19 +196,6 @@
 
 	// Event Handling
 
-	// let hooks: Array<any> = [];
-  // let idx: number = 0;
-	// function nextTick(cb: () => void, deps: any[]) {
-	// 	const oldDeps = hooks[idx];
-  //   let hasChanged = true;
-  //   if (oldDeps) {
-  //     hasChanged = deps.some((dep, i) => !Object.is(dep, oldDeps[i]));
-  //   }
-  //   hooks[idx] = deps;
-  //   idx++;
-  //   if (hasChanged) cb();
-	// }
-
 	function handleFocus(e: FocusEvent) {}
 
 	function handleKeyup(e: KeyboardEvent) {}
@@ -253,10 +240,13 @@
 
 	function handleExpand(e?: Event) {
 		expanded = !expanded;
+		if (expanded === false && !(input.value + '').length)
+			input.value = getValue($selectedStore);
 	}
 
 	function handleOutsideClick(e?: Event) {
 		expanded = false;
+		input.value = getValue($selectedStore);
 	}
 
 	function parseNodes() {
@@ -273,7 +263,7 @@
 			const isSelected = node.dataset?.selected === 'true';
 			if (isSelected) {
 				activeNode = node;
-				// node.focus();
+				node.focus();
 			}
 			i++
 			nodes.push(node);
@@ -291,7 +281,10 @@
 		next = code === 'ArrowUp' ? Math.max(0, currentIndex - 1) : currentIndex + 1;
 		if (next >= 0 && next <= nodes.length - 1) {
 			activeNode = nodes[next];
-			// activeNode?.focus();
+			activeNode?.focus();
+		}
+		else {
+			activeNode?.focus();
 		}
 		pauseMouse();
 	}
@@ -301,7 +294,12 @@
 		if (e.repeat || !expanded || !navCodes.includes(code)) return;
 		if (code === 'Escape' && escapable) {
 			handleOutsideClick();
-		} else if (navigatable) {
+			return;
+		} 
+		if (code === 'Enter') {
+			expanded = false;
+		}
+		else if (navigatable) {
 			handleNavigate(code as any);
 		}
 	}
@@ -313,11 +311,17 @@
 			if (!$itemsStore.length) controller.unfilter();
 			onFilter(val);
 		}
+		else if (!val.length) {
+			controller.unfilter();
+		}
+		setTimeout(() => input.focus(), 0);
 	}
+
 	function handleInputKeyDown(e: KeyboardEvent) {
 		if (e.repeat) return;
-		if (e.key === 'ArrowDown' && $itemsStore.length) 
+		if (e.key === 'ArrowDown' && $itemsStore.length) {
 			expanded = true;
+		}
 		if (e.key === 'Tab')
 			console.log('tabbed');
 	}
@@ -325,9 +329,8 @@
 	function handleMouseOver(e: MouseEvent) {
 		const node = e.target as HTMLLIElement;
 		if (node.nodeName === 'LI') {
-			//node.focus();
 			activeNode = node;
-			
+			node.focus();
 		}
 	}
 

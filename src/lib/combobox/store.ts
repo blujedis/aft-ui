@@ -86,7 +86,7 @@ export interface ListStore<T extends string | Record<string, any>> {
 	 * 
 	 * @param index the index of the item to activate.
 	 */
-	 activateByIndex(index: number): void;
+	activateByIndex(index: number): void;
 
 	/**
 	 * Resets both the items store and the selected store initialized values.
@@ -109,7 +109,7 @@ export function createList<T extends string | Record<string, any>>(
 
 	const itemsStore = writable(initCollection);
 	const selectedStore = writable(selected as T | null);
-	const activeStore = writable(selected as T | null);
+	const activeStore = writable(null as T | null);
 
 	const api = {
 		items: itemsStore,
