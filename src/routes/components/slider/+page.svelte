@@ -74,8 +74,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-col -m-2">
 				{#key options}
-					<Slider {...options} value={20} min={0} max={100} />
-					<span class="pl-2 text-sm">default</span>
 					{#each comp.items as item}
 						<Slider theme={item.theme} {...options} class="mt-8" value={20} min={0} max={100} />
 						<span class="pl-2 text-sm">{item.theme}</span>

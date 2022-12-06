@@ -81,13 +81,6 @@
 			<Section section={comp.title} />
 			<div class="flex -m-2 flex-row flex-wrap space-x-8">
 				{#key options}
-					<label
-						for="default"
-						class="m-2 bg-transparent inline-flex relative items-center align-middle"
-					>
-						<Radio id="default" name="theme" bind:group value="default" {...options} />
-						<span class="ml-2 dark:text-slate-400 text-sm"> default </span>
-					</label>
 					{#each comp.items as item}
 						<label
 							for={item.theme}

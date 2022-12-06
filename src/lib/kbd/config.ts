@@ -3,11 +3,14 @@ import { pickVariant, pick, classnames } from '@forewind/util';
 
 const { shadow, rounded, common, colormap } = config;
 
-const defFilled = pick(colormap.theme.default, 'bg', 'text');
-const defOutline = pick(colormap.theme.default, 'text', 'border');
+// const defFilled = pick(colormap.theme.default, 'bg', 'text');
+// const defOutline = pick(colormap.theme.default, 'text', 'border');
 
 const filled = pickVariant(colormap.theme, 'bg');
 const outline = pickVariant(colormap.theme, 'text', 'border');
+
+filled.default = pick(colormap.theme.default, 'bg', 'text');
+outline.default = pick(colormap.theme.default, 'text', 'border');
 
 const main = {
 	base: classnames('inline-flex items-center text-sm border px-1', common.shadow),
@@ -24,14 +27,14 @@ const main = {
 	variant: {
 		filled: {
 			base: 'border-transparent text-white',
-			default: defFilled,
+			// default: defFilled,
 			themes: {
 				...filled
 			}
 		},
 		outline: {
 			base: 'bg-transparent',
-			default: defOutline,
+			// default: defOutline,
 			themes: {
 				...outline
 			}

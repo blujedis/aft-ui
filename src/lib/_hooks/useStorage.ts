@@ -88,8 +88,8 @@ const mock: StorageApi = {
 	getOrCreate: (_k, _d) => null,
 	set: (_k, _v) => false,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	remove: (_) => {}
+	remove: (_) => { }
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-export const storage: StorageApi = !browser ? mock : createStorageApi();
+export const useStorage: () => StorageApi = !browser ? () => mock : createStorageApi;

@@ -1,29 +1,26 @@
 import { config } from '../_config';
 import { concat, pick, pickVariant } from '@forewind/util';
-const { font_weight: fontWeight, dropshadow, font_transform: fontTransform, colormap, common } = config;
+import { font_size } from '$lib/_config/config';
+const { font_weight, dropshadow, font_transform, colormap, common } = config;
 
 const themes = pickVariant(colormap.theme, 'text');
 themes.default = pick(colormap.theme.default, 'text');
 
 const main = {
 	base: concat(`bg-transparent inline-flex relative items-center align-middle`, common.shadow),
-	dropshadow: { ...dropshadow },
+	dropshadow: { 
+		...dropshadow 
+	},
 	weight: {
-		...fontWeight
+		...font_weight
 	},
 	transform: {
-		...fontTransform
+		...font_transform
 	},
 	size: {
-		unstyled: '',
-		base: 'text-base',
-		xs: 'text-xs',
-		sm: 'text-sm',
-		md: 'text-md',
-		lg: 'text-lg',
-		xl: 'text-xl',
-		'2xl': 'text-2xl'
+		...font_size
 	},
+	as: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'label', 'blockquote', 'p', 'abbr', 'cite', 'i', 'kbd', 'q', 's', 'small', 'strong', 'sup', 'sub', 'time', 'u', 'var', 'samp', 'mark', 'em', 'b', '' ] as const,
 	variant: {
 		default: {
 			base: '',

@@ -1,10 +1,11 @@
 import { config } from '../_config';
 import { concat, pick, pickVariant } from '@forewind/util';
 
-const { shadow, common, colormap, fontTransform, fontWeight, fieldTextSize } = config;
+const { shadow, common, colormap, font_transform: fontTransform, font_weight: fontWeight, field_text_size: fieldTextSize } = config;
 
-const default_ring = pick(colormap.theme.default, 'ring_focus');
-const themes = pickVariant(colormap.theme, 'ring', 'ring_focus_peer', 'checked_peer');
+// const default_ring = pick(colormap.theme.default, 'ring_focus');
+const themes = pickVariant(colormap.theme, 'ring', 'ring_focus_peer', 'bg_checked_peer');
+themes.default = pick(colormap.theme.default, 'ring_focus');
 
 const main = {
 	base: concat(
@@ -12,7 +13,7 @@ const main = {
 		common.shadow
 	),
 	shadow: { ...shadow },
-	ringed: common.ringedPeer,
+	ringed: common.ringed_peer,
 	active: common.active,
 	position: {
 		top: 'flex-col-reverse', // { label: 'flex-col-reverse', text: 'mb-2' },
@@ -38,7 +39,7 @@ const main = {
 	variant: {
 		default: {
 			base: '',
-			default: default_ring,
+			// default: default_ring,
 			themes: {
 				...themes
 			}

@@ -15,3 +15,4 @@ export { default as Select } from './select/Component.svelte';
 export { default as Slider } from './slider/Component.svelte';
 export { default as Switcher } from './switcher/Component.svelte';
 export { default as Textarea } from './textarea/Component.svelte';
+export { default as Text } from './text/Component.svelte';

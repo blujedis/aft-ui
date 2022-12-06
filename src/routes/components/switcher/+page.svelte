@@ -130,12 +130,6 @@
 			<Section section={comp.title} />
 			<div class="-m-2 flex flex-row flex-wrap space-x-8">
 				{#key options}
-					<Switcher
-						checked={comp.title === 'active' ? true : false}
-						{...options}
-						text={'default'}
-						class="m-2"
-					/>
 					{#each comp.items as item}
 						<Switcher theme={item.theme} checked={true} text={item.theme} {...options} class="m-2">
 							<Label class="mx-2">{item.theme}</Label>

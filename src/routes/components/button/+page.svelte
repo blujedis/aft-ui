@@ -146,7 +146,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-wrap -m-2">
 				{#key options}
-					<Button variant={comp.title} {...options} full={options.full} class="m-2">default</Button>
 					{#each comp.items as item}
 						<Button theme={item.theme} variant={item.variant} {...options} class="m-2">
 							{item.theme}

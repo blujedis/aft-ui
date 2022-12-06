@@ -40,8 +40,8 @@
 				{ title: 'Select', path: '/components/select' },
 				{ title: 'Slider', path: '/components/slider' },
 				{ title: 'Switcher', path: '/components/switcher' },
+				{ title: 'Text', path: '/components/text' },
 				{ title: 'Textarea', path: '/components/textarea' },
-				{ title: 'Typography', path: '/components/typography' }
 			]
 		],
 		['Customization', [{ title: 'Theme', path: '/customize/theme' }]]

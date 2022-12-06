@@ -90,7 +90,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-row space-x-8">
 				{#key options}
-					<Kbd {...options}>alt</Kbd>
 					{#each comp.items as item}
 						<Kbd variant={comp.title} theme={item.theme} {...options}>shift</Kbd>
 					{/each}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { Combobox } from '$lib';
+	import themeStore, { Combobox, ComboboxOption} from '$lib';
 	import Section from '$docs/layout/Section.svelte';
 	import Page from '$docs/layout/Page.svelte';
 	import { withThemes } from '@forewind/util';
@@ -26,14 +26,6 @@
 		if (v === 'filled') a.push(obj);
 		return a;
 	}, [] as { title: any; items: Conf[] }[]);
-
-	const items2 = [
-		{ value: 'Bill Lumbergh' },
-		{ value: 'Milton Waddams' },
-		{ value: 'Peter Gibbons' },
-		{ value: 'Michael Bolton' }
-	];
-
 
 	let value = 'Peter Gibbons';
 
@@ -155,25 +147,22 @@
 	<div class="mt-4 inline-flex">
 		<Combobox {...options} {items} {value} />
 	</div>
-	<!-- {#each examples as comp}
+	{#each examples as comp}
 			<div class="my-6">
 				<Section section={comp.title} />
 				<div class="flex flex-wrap -m-2">
 					{#key options}
-					<div class="m-2">
-						<Combobox {...options} variant={comp.title} items={items} value={value} />
-					</div>
-						{#each comp.items as item}
+						<!-- {#each comp.items as item}
 							<div class="m-2">
-								<Combobox {...options } variant={item.variant} theme={item.theme}>
+								<Combobox {...options } variant={item.variant} theme={item.theme} value={value}>
 									{#each items as item}
-										<ComboboxOption {...item} />
+										<ComboboxOption key={item} value={item} />
 									{/each}
 								</Combobox> 
 							</div>
-						{/each}
+						{/each} -->
 					{/key}
 				</div> 
 			</div>
-		{/each} -->
+		{/each}
 </Page>

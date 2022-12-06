@@ -180,13 +180,6 @@
 						</svg>
 					</svelte:fragment>
 				</Addon> -->
-					<Input
-						{...options}
-						variant={comp.title}
-						full={options.full}
-						placeholder="default"
-						class="m-2"
-					/>
 					{#each comp.items as item}
 						<Input
 							{...options}

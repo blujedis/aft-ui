@@ -3,8 +3,9 @@ import { config } from '../../_config';
 
 const { colormap } = config;
 
-const defTheme = pick(colormap.theme.default, 'text');
-const themes = { ...pickVariant(colormap.theme, 'text') };
+// const defTheme = pick(colormap.theme.default, 'text');
+const themes = pickVariant(colormap.theme, 'text');
+themes.default = pick(colormap.theme.default, 'text');
 
 const main = {
 	base: 'relative inline-flex',
@@ -20,7 +21,7 @@ const main = {
 	},
 	variant: {
 		default: {
-			default: defTheme,
+			// default: defTheme,
 			themes
 		}
 	}

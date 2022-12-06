@@ -6,16 +6,15 @@
 	import { createCustomEvent, fuzzyFull } from '../_utils';
 	import { fade } from 'svelte/transition';
 	import ComboboxOption from './option/Component.svelte';
-	import type { ComboboxContext } from './types';
-	import { createList, type ListStore } from './store';
-	import { getProperty } from 'dot-prop';
-	import { writable } from 'svelte/store';
+	import type { ComboboxContext, ListItem, ComboboxItem } from './types';
+	import { useListController, type ListStore } from '../_hooks';
 
 	type ElementProps = PickElement<'div', 'size'>;
 	type InputProps = PickElement<'input', 'size'>;
 	type Defaults = typeof defaults & ElementProps;
 
-	type T = $$Generic<string | Record<string, any>>;
+	type T = $$Generic<ComboboxItem>;
+	type S = $$Generic<ListItem>;
 
 	interface $$Props extends Defaults {
 		controller?: ListStore<T>;
@@ -24,12 +23,12 @@
 		animate?: number;
 		threshold?: number;
 		icons?: boolean;
-		items?: T[];
-		onSelected?: (item: T | null) => void;
+		items?: S[];
+		valueProp?: S extends string ? never : keyof S;
+		keyProp?: S extends string ? never : keyof S;
+		onSelected?: (item: S | null) => void;
 		onFilter?: (query: string) => Promise<T[]>;
 		onMatch?: (selected: T | null, row: T) => boolean;
-		getValue?: (item: T | null) => string;
-		getLabel?: (item: T | null) => string;
 		setInput?: (value: string) => void;
 		register?: (cb: (input: HTMLInputElement) => void) => void;
 	}
@@ -45,8 +44,7 @@
 	const defaults = b.defaults({
 		base: true,
 		size: 'md',
-		variant: 'filled',
-		theme: ''
+		variant: 'filled'
 	});
 
 	export let id = uniqid() as InputProps['id'];
@@ -68,8 +66,9 @@
 	export let icons = true;
 	export let escapable = true;
 	export let navigatable = true;
+	export let newable = false;
 	export let animate = 50;
-	export let items = [] as T[];
+	export let items = [] as S[];
 	export let base = defaults.base;
 	export let rounded = defaults.rounded;
 	export let shadow = defaults.shadow;
@@ -83,63 +82,86 @@
 	export let transform = defaults.transform;
 	export let weight = defaults.weight;
 
-	export let controller = createList<T>(items, value);
+	export let valueProp = 'value';
+	export let keyProp = 'key';
+
+	// Normalize items.
+	const initialItems = items.reduce((a, i) => {
+		if (i === null || Array.isArray(i) || (typeof i !== 'string' && typeof i !== 'object'))
+			return a;
+		let obj = (typeof i === 'string' ? { key: i, value: i } : { ...i }) as ComboboxItem<S>;
+		if (typeof i === 'object') { // map label and value to user defined keys.
+			if (valueProp)
+				obj.value = i[valueProp];
+			if (keyProp)
+				obj.key = i[keyProp];
+		}
+		obj.source = i;
+		a = [...a, obj as T];
+		return a;
+	}, [] as T[]) as T[];
+
+	const initialValue = value === '' || typeof value === 'undefined' ? null : initialItems.find(v => v.value === value) || null;
+
+	export let controller = useListController<T>(initialItems, initialValue);
 	export let threshold = 2;
 
-	let input: HTMLInputElement;
+	let input: HTMLInputElement | undefined;
+	let ul: HTMLUListElement | undefined;
+
 	const itemsStore = controller.items;
 	const selectedStore = controller.selected;
+	const activeStore = controller.active;
 
-	export let getValue = (v: T | null) => pickProp(v, 'value');
-
-	export let getLabel = (v: T | null) => pickProp(v, 'label', 'value');
-
-	export let onSelected = (item: T | null) => {};
+	export let onSelected = (item: S | null) => {};
 
 	export let onMatch = (v: T | null, row: T) => {
-		const matchValue = getValue(v);
-		const rowValue = getValue(row);
-		if (!matchValue.length || !rowValue.length) return false;
-		return matchValue.toLowerCase() === rowValue.toLowerCase();
-	};
-
-	export const handleSelect = (item: T | null, close = false, e?: MouseEvent | TouchEvent) => {
-		controller.select(item);
-		if (close) expanded = false;
-		// else if (activeNode) 
-		// 	activeNode.focus();
+		if (v?.value === 'null' || typeof v?.value === 'undefined') 
+			return false;
+		return v.value === row.value;
 	};
 
 	export let onFilter = async (query: string) => {
 		const filtered = await controller.filter((item) => {
-			const result = fuzzyFull(query, getValue(item), { threshold });
+			const result = fuzzyFull(query, item.value, { threshold });
 			if (result.score === 10)
-				handleSelect(item, false); // if exact match select it.
+				handleSelect(item.key, false); // if exact match select it.
 			return result.match;
 		});
 		return filtered;
 	};
 
-	export const setInput = (v: string) => (input.value = v);
+	export const setInput = (v: string) => {
+		if (input)
+			input.value = v;
+	};
 
-	export const register = (cb: (input: HTMLInputElement) => void) => cb(input);
+	export const register = (cb: (input?: HTMLInputElement) => void) => cb(input);
 
 	const unsubSelected = selectedStore.subscribe((selectedItem) => {
-		onSelected(selectedItem);
-		if (input) 
-			input.value = getValue(selectedItem);
+		if (!input || selectedItem === null) return;
+		onSelected(selectedItem.source as S);
+		input.value = selectedItem.value;
 	});
 
-	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape', 'Enter'];
+	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape', 'Enter'] as const;
 
-	let ul: HTMLUListElement;
-	let expanded = false;
-	let nodes = [] as HTMLLIElement[];
-	let activeNode = null as HTMLLIElement | null;
-	let initValue = value;
+	const handleSelect = (key?: string | null, close = false) => {
+		const item = controller.getByKey(key);
+		if (item) {
+			controller.select(item);
+			controller.activate(item);
+		}
+		if (close)
+			expanded = false;
+	};
 
-	$: expanded && ul && parseNodes();
-	$: !expanded && parseNodes();
+	const addItem = (item: T) => {
+		controller.add({ ...item, source: item.value });
+		// When user manually adds options, check if is selected.
+		if (item.value === value) 
+			handleSelect(item.key);
+	};
  
 	const context: ComboboxContext<T> = {
 		base,
@@ -150,6 +172,7 @@
 		weight,
 		icons,
 		controller,
+		addItem,
 		onMatch,
 		handleSelect
 	};
@@ -190,47 +213,40 @@
 		theme,
 		rounded,
 		transition,
-		hovered
+		hovered,
+		full: true
 	};
-
 
 	// Event Handling
 
-	function handleFocus(e: FocusEvent) {}
-
-	function handleKeyup(e: KeyboardEvent) {}
+	let expanded = false;
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
-		return n && !n.contains(e.target) && !e.defaultPrevented;
+		return (n && !n.contains(e.target) && !e.defaultPrevented && expanded);
 	});
 
-	function pickProp(item: string | Record<string, any> | null, ...keys: string[]): string {
-		if (item === null) return '';
-		if (typeof item === 'string') return item;
-		return keys.reduce((a, c) => {
-			if (a) return a;
-			const lookup = getProperty(item, c);
-			if (typeof lookup !== 'undefined' && (lookup + '').length > 0) return lookup + '';
-			return a;
-		}, '');
-	}
-
-	function toggleCursor(enable: boolean) {
-		nodes.forEach((n) => {
-			n.style.cursor = enable ? 'default' : 'none';
-			n.style.pointerEvents = enable ? 'auto' : 'none';
+	// When navigating disable cursor/pointer events.
+	function toggleCursor(el: HTMLElement | undefined, enable: boolean) {
+		el?.childNodes.forEach(n => {
+			const node = n as HTMLLIElement;
+			if (node && node.style) {
+				node.style.cursor = enable ? 'default' : 'none';
+				node.style.pointerEvents = enable ? 'auto' : 'none';
+			}
 		});
 	}
 
+	// Event listener to pause the mouse
+	// used when navigating with keyboard events..
 	function pauseMouse() {
 		let unsub: () => void;
 		const handler = () => unsub();
 		const initListener = () => {
 			if (typeof document === 'undefined') return () => {};
-			toggleCursor(false);
+			toggleCursor(ul, false);
 			document.body.addEventListener('mousemove', handler, true);
 			return () => {
-				toggleCursor(true);
+				toggleCursor(ul, true);
 				document.body.removeEventListener('mousemove', handler, true);
 			};
 		};
@@ -240,100 +256,74 @@
 
 	function handleExpand(e?: Event) {
 		expanded = !expanded;
-		if (expanded === false && !(input.value + '').length)
-			input.value = getValue($selectedStore);
+		if (!expanded) handleExit();
 	}
 
-	function handleOutsideClick(e?: Event) {
+	function handleExit() {
 		expanded = false;
-		input.value = getValue($selectedStore);
-	}
-
-	function parseNodes() {
-		if (!expanded) {
-			nodes = [];
-			if (!(input?.value || '').length) controller.unfilter();
-			return;
+		// new items not permitted, reset to 
+		// the selected value.
+		if (!newable) { 
+			if (input)
+				input.value =  $selectedStore?.value || '';
+			if (!controller.getByKey($selectedStore?.key)) 
+				controller.unfilter(); // if exiting without value in list.
+			handleSelect($selectedStore?.key, true);
 		}
-		if (nodes.length || !ul?.childNodes) return;
-		let i = 0;
-		for (const n of ul.childNodes) {
-			const node = n as HTMLLIElement;
-			if (node?.tagName !== 'LI') continue;
-			const isSelected = node.dataset?.selected === 'true';
-			if (isSelected) {
-				activeNode = node;
-				node.focus();
-			}
-			i++
-			nodes.push(node);
+		else {
+			const inputValue = input?.value || '';
 		}
 	}
 
-	function getNodeIndex(node: HTMLLIElement | null) {
-		if (!node) return -1;
-		return nodes.indexOf(node);
+	function handleOutsideClick(e: Event) {
+		handleExit();
 	}
 
 	function handleNavigate(code: 'ArrowUp' | 'ArrowDown') {
-		const currentIndex = getNodeIndex(activeNode);
-		let next = 0;
-		next = code === 'ArrowUp' ? Math.max(0, currentIndex - 1) : currentIndex + 1;
-		if (next >= 0 && next <= nodes.length - 1) {
-			activeNode = nodes[next];
-			activeNode?.focus();
-		}
-		else {
-			activeNode?.focus();
-		}
+		let currentIndex = controller.getActiveIndex();
+		if (currentIndex === -1)
+			currentIndex = controller.getSelectedIndex();
+		const next = code === 'ArrowUp' ? Math.max(0, currentIndex - 1) : currentIndex + 1;
+		if (next >= 0 && next <= $itemsStore.length - 1)
+			controller.activateByIndex(next);
 		pauseMouse();
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
-		const code = e.key;
-		if (e.repeat || !expanded || !navCodes.includes(code)) return;
+		const code = e.key as typeof navCodes[number];
+		if (navCodes.includes(code) && expanded && !e.repeat) {
 		if (code === 'Escape' && escapable) {
-			handleOutsideClick();
-			return;
-		} 
-		if (code === 'Enter') {
-			expanded = false;
+			handleOutsideClick(e);
 		}
-		else if (navigatable) {
-			handleNavigate(code as any);
+		else if (code === 'Enter') {
+			e.preventDefault();
+			e.stopPropagation();
+			handleSelect($activeStore?.key, true);
+		}
+		else if (navigatable && (code === 'ArrowDown' || code === 'ArrowUp'))
+			handleNavigate(code);
 		}
 	}
 
 	function handleInputChange(e: Event & { currentTarget: Partial<HTMLInputElement> | null }) {
-		expanded = true;
-		const val = e.currentTarget?.value || '';
-		if (val.length) {
-			if (!$itemsStore.length) controller.unfilter();
-			onFilter(val);
-		}
-		else if (!val.length) {
+		if ($itemsStore.length)
+			expanded = true;
+		const val =(e.currentTarget?.value || '').trim();
+		if (!val.length || (!$itemsStore.length && initialItems.length)){
 			controller.unfilter();
+			return;
 		}
-		setTimeout(() => input.focus(), 0);
+		onFilter(val);
+		// setTimeout(() => input?.focus());
 	}
 
 	function handleInputKeyDown(e: KeyboardEvent) {
 		if (e.repeat) return;
-		if (e.key === 'ArrowDown' && $itemsStore.length) {
+		if (e.key === 'ArrowDown' && $itemsStore.length)
 			expanded = true;
-		}
-		if (e.key === 'Tab')
-			console.log('tabbed');
+		if (e.key === 'Tab') 
+			handleExit();
 	}
-
-	function handleMouseOver(e: MouseEvent) {
-		const node = e.target as HTMLLIElement;
-		if (node.nodeName === 'LI') {
-			activeNode = node;
-			node.focus();
-		}
-	}
-
 	onDestroy(() => unsubSelected);
 </script>
 
@@ -351,7 +341,6 @@
 			aria-placeholder={placeholder}
 			aria-controls="options"
 			aria-expanded={expanded}
-			full={true}
 			class={$$restProps.class}
 			bind:value
 			on:input
@@ -388,24 +377,20 @@
 			</svg>
 		</button>
 	</slot>
-
-	{#if expanded && $itemsStore.length}
 		<ul
 			bind:this={ul}
 			in:fade={{ duration: animate }}
 			out:fade={{ duration: animate }}
+			hidden={!expanded}
 			id="option"
 			class={ulClasses}
 			role="listbox"
-			on:mouseover={handleMouseOver}
-			on:focus={handleFocus}
-			on:keyup={handleKeyup}
 		>
 			<slot>
 				{#each $itemsStore as item}
-					<ComboboxOption label={getLabel(item)} value={item} class="" />
+					<ComboboxOption { ...item } add={false} />
 				{/each}
 			</slot>
 		</ul>
-	{/if}
+
 </div>

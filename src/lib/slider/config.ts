@@ -4,13 +4,14 @@ import { pickVariant, pick, classnames } from '@forewind/util';
 
 const { shadow, rounded, common, colormap } = config;
 
-const defProps = pick(colormap.theme.default, 'bg_range');
+// const defProps = pick(colormap.theme.default, 'bg_range');
 const themes = pickVariant(colormap.theme);
+themes.default = pick(colormap.theme.default, 'bg_range');
 
 const main = {
 	base: classnames(
 		'focus:ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 w-full',
-		defProps
+		themes.default
 	),
 	rounded: (size: BaseSize) => {
 		return {
@@ -38,7 +39,6 @@ const main = {
 	variant: {
 		default: {
 			base: '',
-			default: '',
 			themes: {
 				...themes
 			}

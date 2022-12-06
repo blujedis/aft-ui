@@ -1,6 +1,6 @@
 import { get, writable, type Writable } from 'svelte/store';
 
-export interface ListStore<T extends string | Record<string, any>> {
+export interface ListStore<T extends Record<string, any> & { key: string }> {
 	/**
 	 * Item collection store.
 	 */
@@ -65,6 +65,11 @@ export interface ListStore<T extends string | Record<string, any>> {
 	activate(value: T | null): void;
 
 	/**
+	 * Removes selected value setting to null.
+	 */
+	deactivate(): void;
+
+	/**
 	 * Gets the currently selected index.
 	 */
 	getSelectedIndex(): number;
@@ -89,6 +94,20 @@ export interface ListStore<T extends string | Record<string, any>> {
 	activateByIndex(index: number): void;
 
 	/**
+	 * Gets the index of an item in the collection.
+	 * 
+	 * @param item the item to get an index for.
+	 */
+	getItemIndex(item: T | null): number;
+
+	/**
+	 * Gets item by key.
+	 * 
+	 * @param key the key to get item for.
+	 */
+	getByKey(key?: string | null): T | null;
+
+	/**
 	 * Resets both the items store and the selected store initialized values.
 	 */
 	reset(): void;
@@ -100,7 +119,7 @@ export interface ListStore<T extends string | Record<string, any>> {
  * @param collection the collection to create store for.
  * @param selected the initially selected value.
  */
-export function createList<T extends string | Record<string, any>>(
+export function useListController<T extends Record<string, any> & { key: string }>(
 	initCollection = [] as T[],
 	selected = null as T | null
 ): ListStore<T> {
@@ -109,7 +128,7 @@ export function createList<T extends string | Record<string, any>>(
 
 	const itemsStore = writable(initCollection);
 	const selectedStore = writable(selected as T | null);
-	const activeStore = writable(null as T | null);
+	const activeStore = writable(selected as T | null);
 
 	const api = {
 		items: itemsStore,
@@ -122,8 +141,11 @@ export function createList<T extends string | Record<string, any>>(
 		select,
 		unselect,
 		activate,
+		deactivate,
+		getItemIndex,
 		getSelectedIndex,
 		getActiveIndex,
+		getByKey,
 		selectByIndex,
 		activateByIndex,
 		reset
@@ -200,6 +222,10 @@ export function createList<T extends string | Record<string, any>>(
 		select(null);
 	}
 
+	function deactivate() {
+		activate(null);
+	}
+
 	/**
 	 * Gets the currently selected index.
 	 */
@@ -222,8 +248,7 @@ export function createList<T extends string | Record<string, any>>(
 	 */
 	function selectByIndex(index: number) {
 		const item = get(itemsStore)[index];
-		if (item)
-			select(item);
+		item && select(item);
 	}
 
 	/**
@@ -233,8 +258,27 @@ export function createList<T extends string | Record<string, any>>(
 	 */
 	function activateByIndex(index: number) {
 		const item = get(itemsStore)[index];
-		if (item)
-			activate(item);
+		item && activate(item);
+	}
+
+	/**
+	 * Gets the index of an item.
+	 * 
+	 * @param item the item to get index for.
+	 */
+	function getItemIndex(item: T | null) {
+		if (item === null || typeof item === 'undefined') return -1;
+		return get(itemsStore).indexOf(item);
+	}
+
+	/**
+	 * Gets an item by its key.
+	 * 
+	 * @param key the key used to get item.
+	 */
+	function getByKey(key?: string | null) {
+		const items = get(itemsStore);
+		return items.find(i => i.key === key) || null;
 	}
 
 	/**

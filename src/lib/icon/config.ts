@@ -1,17 +1,20 @@
 import { config } from '../_config';
-import { pickVariant, type Palette, pick } from '@forewind/util';
+import { pickVariant, pick } from '@forewind/util';
 
 const { shadow, rounded, common, colormap, animate } = config;
 
-const default_ring = pick(colormap.theme.default, 'ring_focus');
-const defGhost = { ...pick(colormap.theme.default, 'text'), default_ring };
+// const default_ring = pick(colormap.theme.default, 'ring_focus');
+// const defGhost = { ...pick(colormap.theme.default, 'text'), default_ring };
+// const defFilled = { ...pick(colormap.theme.default, 'bg', 'text'), default_ring };
+// const defOutline = { ...pick(colormap.theme.default, 'text', 'border'), default_ring };
+
 const ghost = pickVariant(colormap.theme, 'text');
-
-const defFilled = { ...pick(colormap.theme.default, 'bg', 'text'), default_ring };
 const filled = pickVariant(colormap.theme, 'bg');
-
-const defOutline = { ...pick(colormap.theme.default, 'text', 'border'), default_ring };
 const outline = pickVariant(colormap.theme, 'text', 'border');
+
+ghost.default = pick(colormap.theme.default, 'text', 'ring_focus');
+filled.default = pick(colormap.theme.default, 'bg', 'text', 'ring_focus');
+outline.default = pick(colormap.theme.default, 'text', 'border', 'ring_focus');
 
 const main = {
 	base: 'inline-flex items-center justify-center border',
@@ -32,27 +35,27 @@ const main = {
 	border: [] as const,
 	hovered: (variant: any, theme = 'default' as any) => {
 		const conf = colormap.theme[theme as keyof typeof colormap.theme];
-		if (variant === 'filled') return conf.hover;
-		return conf.hover_text;
+		if (variant === 'filled') return conf.bg_hover;
+		return conf.text_hover;
 	},
 	variant: {
 		filled: {
 			base: 'text-white border-transparent',
-			default: defFilled,
+			// default: defFilled,
 			themes: {
 				...filled
 			}
 		},
 		outlined: {
 			base: 'border-2',
-			default: defOutline,
+			// default: defOutline,
 			themes: {
 				...outline
 			}
 		},
 		ghost: {
 			base: 'border-transparent',
-			default: defGhost,
+			// default: defGhost,
 			themes: {
 				...ghost
 			}

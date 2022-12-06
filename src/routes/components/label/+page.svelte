@@ -116,7 +116,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-row space-x-4">
 				{#key options}
-					<Label {...options}>default</Label>
 					{#each comp.items as item}
 						<Label theme={item.theme} {...options}>
 							{item.theme}

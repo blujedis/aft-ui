@@ -15,27 +15,27 @@ const {
 	shadow,
 	common,
 	colormap,
-	fieldPaddingY,
-	fieldRoundedPaddingX,
-	fieldPaddingX,
-	fieldTextSize,
-	fontTransform,
-	fontWeight
+	field_padding_y: fieldPaddingY,
+	field_rounded_padding_x: fieldRoundedPaddingX,
+	field_padding_x: fieldPaddingX,
+	field_text_size: fieldTextSize,
+	font_transform: fontTransform,
+	font_weight: fontWeight
 } = config;
 
-const default_ring = pick(colormap.theme.default, 'ring_focus');
-const defFilled = {
-	...pick(colormap.theme.default, 'text', 'bg_glass', 'border_focus'),
-	default_ring
-};
-const defOutline = {
-	...pick(colormap.theme.default, 'text', 'border', 'border_focus'),
-	default_ring
-};
-const defFlush = {
-	...pick(colormap.theme.default, 'text', 'border', 'border_focus', 'bg_glass_focus'),
-	default_ring
-};
+// const default_ring = pick(colormap.theme.default, 'ring_focus');
+// const defFilled = {
+// 	...pick(colormap.theme.default, 'text', 'bg_glass', 'border_focus'),
+// 	default_ring
+// };
+// const defOutline = {
+// 	...pick(colormap.theme.default, 'text', 'border', 'border_focus'),
+// 	default_ring
+// };
+// const defFlush = {
+// 	...pick(colormap.theme.default, 'text', 'border', 'border_focus', 'bg_glass_focus'),
+// 	default_ring
+// };
 
 const filled = pickVariant(colormap.theme, 'bg_glass', 'text', 'ring_focus', 'border_focus');
 const outline = pickVariant(colormap.theme, 'text', 'border', 'ring_focus', 'border_focus');
@@ -47,6 +47,10 @@ const flush = pickVariant(
 	'border_focus',
 	'bg_glass_focus'
 );
+
+filled.default = pick(colormap.theme.default, 'text', 'bg_glass', 'border_focus', 'ring_focus');
+outline.default = pick(colormap.theme.default, 'text', 'border', 'border_focus', 'ring_focus');
+flush.default = pick(colormap.theme.default, 'text', 'border', 'border_focus', 'bg_glass_focus', 'ring_focus');
 
 const main = {
 	base: classnames(
@@ -70,8 +74,8 @@ const main = {
 		theme = 'default' as TypeOrValue<keyof Palette>
 	) => {
 		const conf = colormap.theme[theme as keyof typeof colormap.theme];
-		if (variant === 'filled') return conf.hover_glass_highlight;
-		else return conf.hover_glass;
+		if (variant === 'filled') return conf.bg_glass_highlight_hover;
+		else return conf.bg_glass_hover;
 	},
 	size: mergeConfigs(
 		{
@@ -94,21 +98,21 @@ const main = {
 	variant: {
 		filled: {
 			base: 'border-transparent',
-			default: defFilled,
+			// default: defFilled,
 			themes: {
 				...filled
 			}
 		},
 		outline: {
 			base: 'bg-transparent',
-			default: defOutline,
+			// default: defOutline,
 			themes: {
 				...outline
 			}
 		},
 		flush: {
 			base: 'bg-transparent border-t-0 border-l-0 border-r-0 border-b rounded-b-none',
-			default: defFlush,
+			// default: defFlush,
 			themes: {
 				...flush
 			}

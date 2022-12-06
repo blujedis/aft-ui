@@ -138,13 +138,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-wrap -m-2">
 				{#key options}
-					<Textarea
-						{...options}
-						variant={comp.title}
-						full={options.full}
-						placeholder="Default"
-						class="m-2"
-					/>
 					{#each comp.items as item}
 						<Textarea
 							{...options}
@@ -152,6 +145,7 @@
 							theme={item.theme}
 							placeholder={item.theme}
 							class="m-2"
+							disabled
 						/>
 					{/each}
 				{/key}

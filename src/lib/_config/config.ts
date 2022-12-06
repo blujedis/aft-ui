@@ -2,7 +2,7 @@ import colormap from './colormap';
 
 // Tailwind Default classes
 
-export const fontSize = {
+export const font_size = {
 	unstyled: '',
 	base: 'text-base',
 	xs: 'text-xs',
@@ -20,7 +20,7 @@ export const fontSize = {
 	'9xl': 'text-9xl'
 };
 
-export const fontTransform = {
+export const font_transform = {
 	unstyled: '',
 	uppercase: 'uppercase',
 	lowercase: 'lowercase',
@@ -30,7 +30,7 @@ export const fontTransform = {
 	unitalic: 'not-italic'
 };
 
-export const fontWeight = {
+export const font_weight = {
 	unstyled: '',
 	thin: 'font-thin',
 	extralight: 'font-extralight',
@@ -43,7 +43,7 @@ export const fontWeight = {
 	black: 'font-black'
 };
 
-export const fontSpacing = {
+export const font_spacing = {
 	unstyled: '',
 	tighter: 'tracking-tighter',
 	tight: 'tracking-tight',
@@ -53,7 +53,7 @@ export const fontSpacing = {
 	widest: 'tracking-widest'
 };
 
-export const fontLeading = {
+export const font_leading = {
 	unstyled: '',
 	'3': 'leading-3',
 	'4': 'leading-3',
@@ -71,7 +71,7 @@ export const fontLeading = {
 	none: 'leading-none'
 };
 
-export const fontOverflow = {
+export const font_overflow = {
 	unstyled: '',
 	truncate: 'truncate',
 	ellipsis: 'ellipsis',
@@ -80,17 +80,17 @@ export const fontOverflow = {
 
 // Size related classes.
 
-export const fieldTextSize = {
+export const field_text_size = {
 	unstyled: '',
-	xs: fontSize.xs,
-	sm: fontSize.sm,
-	md: fontSize.sm,
-	lg: fontSize.md,
-	xl: fontSize.lg,
-	'2xl': fontSize.xl
+	xs: font_size.xs,
+	sm: font_size.sm,
+	md: font_size.sm,
+	lg: font_size.md,
+	xl: font_size.lg,
+	'2xl': font_size.xl
 };
 
-export const fieldPaddingY = {
+export const field_padding_y = {
 	unstyled: '',
 	xs: 'py-1',
 	sm: 'py-1.5',
@@ -100,7 +100,7 @@ export const fieldPaddingY = {
 	'2xl': 'py-4'
 };
 
-export const fieldPaddingX = {
+export const field_padding_x = {
 	unstyled: '',
 	xs: 'px-2',
 	sm: 'px-2.5',
@@ -202,7 +202,7 @@ export const rounded = {
 	none: 'rounded-none'
 };
 
-export const fieldRoundedPaddingX = {
+export const field_rounded_padding_x = {
 	unstyled: { unstyled: '', xs: '', sm: '', md: '', lg: '', xl: '', '2xl': '' },
 	none: { unstyled: '', xs: '', sm: '', md: '', lg: '', xl: '', '2xl': '' },
 	xs: {
@@ -278,7 +278,7 @@ export const common = {
 	ringed:
 		'focus:ring focus:ring-offset-0 focus:outline-none focus:ring-offset-white dark:focus:ring-offset-gray-800',
 	/** Sets the default size, offset background for ring effect for peers */
-	ringedPeer:
+	ringed_peer:
 		'peer-focus:ring peer-focus:ring-offset-0 peer-focus:outline-none peer-focus:ring-offset-white dark:peer-focus:ring-offset-gray-800',
 	/** Applied on inputs, buttons to smoothly transition colors. */
 	transition: 'transition-colors duration-100',
@@ -291,7 +291,7 @@ export const common = {
 	/** Placeholder color */
 	placeholder: 'placeholder:text-slate-400 dark:placeholder:text-slate-400',
 	/** Placeholder color for peer placeholders like in floating label effect. */
-	placeholderPeerShown:
+	placeholder_peer_shown:
 		'peer-placeholder-shown:text-slate-400 dark:peer-placeholder-shown:text-slate-400'
 };
 
@@ -300,19 +300,19 @@ export const config = {
 	common,
 	animate,
 	border,
-	fieldTextSize,
-	fieldPaddingY,
-	fieldPaddingX,
+	field_text_size: field_text_size,
+	field_padding_y: field_padding_y,
+	field_padding_x: field_padding_x,
 	shadow,
 	dropshadow,
 	rounded,
-	fieldRoundedPaddingX,
-	fontWeight,
-	fontSpacing,
-	fontLeading,
-	fontTransform,
-	fontOverflow,
-	fontSize
+	field_rounded_padding_x: field_rounded_padding_x,
+	font_weight: font_weight,
+	font_spacing: font_spacing,
+	font_leading: font_leading,
+	font_transform: font_transform,
+	font_overflow: font_overflow,
+	font_size: font_size
 };
 
 export default config;

@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { getContext, onDestroy } from 'svelte';
-	import { Builder, normalize } from '@forewind/util';
+	import { Builder, mergeTailwind, normalize, type Palette, type TypeOrValue } from '@forewind/util';
 	import themeStore from '../../init';
 	import type { ComboboxContext } from '../types';
-	// import { writable } from 'svelte/store';
 
 	interface LiProps {
 		title?: string;
@@ -13,17 +12,16 @@
 		translate?: 'yes' | 'no';
 		draggable?: 'true' | 'false' | 'auto';
 	}
-	type Defaults = typeof defaults & LiProps;
-	type T = $$Generic<string | Record<string, any>>;
 
-	interface $$Props extends Defaults {
-		label?: string;
-		value: T;  
-	}
+	type T = $$Generic<ComboboxItem>;
+
+	type Defaults = typeof defaults & LiProps & T;
+	type $$Props = Defaults;
 
 	const { components, palette } = $themeStore;
 
 	const li = normalize(components.comboboxOption.main, palette);
+
 	const b = new Builder(li, palette);
 	const bl = new Builder(components.comboboxOption.icon);
 	const br = new Builder(components.comboboxOption.icon);
@@ -33,83 +31,108 @@
 			['variant', 'position', 'theme']
 		);
 
-	export let value: T;
-	export let label = typeof value === 'string' ? value : '';
+	export let add = true;
+	export let value: any;
+	export let key = value + '';
+	
+	let selected = false;
+	let active = selected;
 
-	if (!$$slots.default && !label)
-		throw new Error(`ComboboxOption must contain a slot value or a label.`);
+	if (!$$slots.default && !key)
+		throw new Error(`ComboboxOption must contain a slot or value.`);
 
 	const ctx = getContext('Combobox') as Required<ComboboxContext<T>>;
 	const left = $$slots.left && ctx.icons;
 	const right = ctx.icons; // if icons enabled always show right fallback.
+	const item =  { key, value } as T;
 
-	let isSelected = false;
-	// let isActive = false;
+	if (add) 
+		ctx.addItem({ key, value } as T);
 	
-	const classes = b
+	// Build main classes.
+ 
+ 	const classes = b
 		.addFeature('base', ctx.base)
 		.addVariant('default', ctx.theme)
 		.addUserClass($$restProps.class, true)
-		.bundle() || '';
+		.bundle();
 
-	const unsubscribeSelected = ctx.controller.selected.subscribe((selectedValue) => {
-		isSelected = ctx.onMatch(selectedValue, value);
-	});
+	// Build left icon classes.
 
-	// const unsubscribeActive= ctx.controller.active.subscribe((activeValue) => {
-	// 	isActive = ctx.onMatch(activeValue, value);
-	// });
+	const leftIconClasses = bl
+		.addFeature('base', ctx.base)
+		.addFeature('position', 'left')
+		.bundle();
 
-	const leftIcon = bl.addFeature('base', ctx.base).addFeature('position', 'left').bundle();
+	// Build right icon classes.
 
-	const rightIcon = br.addFeature('base', ctx.base).addFeature('position', 'right').bundle();
+	 const rightIconClasses = br
+		.addFeature('base', ctx.base)
+		.addFeature('position', 'right')
+		.bundle();
 
 	const itemClasses = 'block truncate';
 
-	function handleClick(e: MouseEvent | TouchEvent) {
-		ctx.handleSelect(value, true, e);
-	}
+	let activeItemClasses = '';
+	let selectedIconClasses = '';
 
-	function handleKeyDown(e: KeyboardEvent) {
-		if (e.key !== 'Enter') return;
-		ctx.handleSelect(value);
+	const updateClasses = () => {
+		activeItemClasses = components.comboboxOption.main.state(ctx.theme, active ? 'active' : 'inactive');
+		selectedIconClasses = components.comboboxOption.icon.state(ctx.theme, active ? 'active': selected ? 'selected' : 'inactive');
+	};
+
+	const unsubscribeSelected = ctx.controller.selected.subscribe((selectedValue) => {
+		selected = ctx.onMatch(selectedValue, item);
+		console.log('select fired', selectedValue?.value, item.value);
+		updateClasses();
+	});
+
+	const unsubscribeActive = ctx.controller.active.subscribe((activeValue) => {
+		active = ctx.onMatch(activeValue, item);
+		updateClasses();
+	});
+
+	function handleClick(e: MouseEvent | TouchEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		ctx.handleSelect(item.key, true);
 	}
 
 	onDestroy(() => {
 		unsubscribeSelected();
-		// unsubscribeActive();
+		unsubscribeActive();
 	});
+
 </script>
 
 <li
 	{...$$restProps}
 	role="option"
 	tabindex="-1"
-	class={classes}
-	data-value={value}
-	data-selected={isSelected}
-	aria-selected={isSelected}
+	class={mergeTailwind(classes, activeItemClasses)}
+	data-item={{ key, value }}
+	data-selected={selected}
+	aria-selected={selected}
 	on:click={handleClick}
-	on:keydown={handleKeyDown}
 	on:touchstart={handleClick}
 >
 	{#if left}
-		<span class={leftIcon}>
+		<span class={leftIconClasses}>
 			<slot name="left" />
 		</span>
 	{/if}
 
 	<span class={itemClasses}>
 		<slot>
-			{label}
+			{value}
 		</slot>
 	</span>
 
 	{#if right}
-		<span class={rightIcon}>
+		<span class={mergeTailwind(rightIconClasses, selectedIconClasses)}>
 			<slot name="right">
 				<svg
-					class="h-5 w-5 {!isSelected ? 'hidden' : 'visible'}"
+					class="h-5 w-5 {!selected ? 'hidden' : 'visible'}"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"

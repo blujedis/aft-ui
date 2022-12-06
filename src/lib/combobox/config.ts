@@ -2,7 +2,7 @@ import { concat, pick } from '@forewind/util';
 import input from '../input/config';
 import config from '../_config/config';
 
-const { fieldTextSize, colormap, common, rounded } = config;
+const { field_text_size: fieldTextSize, colormap, common, rounded } = config;
 
 const defTheme = pick(colormap.theme.default, 'bg_form', 'text');
 
@@ -30,8 +30,10 @@ const ul = {
 	variant: {
 		default: {
 			base: colormap.theme.default.bg_form,
-			default: defTheme,
-			themes: {}
+			// default: defTheme,
+			themes: {
+				default: defTheme
+			}
 		}
 	}
 };

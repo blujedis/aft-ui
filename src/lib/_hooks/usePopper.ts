@@ -27,7 +27,7 @@ export type PopperOptions<M> = Partial<OptionsGeneric<M>> | undefined;
  *
  * @param options the options to initialize with.
  */
-export function createPopper<M extends Partial<Modifier<any, any>>>(
+export function usePopper<M extends Partial<Modifier<any, any>>>(
 	initOptions?: PopperOptions<M>
 ) {
 	let popper: Instance | null = null;

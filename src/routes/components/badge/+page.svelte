@@ -128,7 +128,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-row flex-wrap -m-2 space-x-4">
 				{#key options}
-					<Badge {...options} class="m-2">default</Badge>
 					{#each comp.items as item}
 						<Badge theme={item.theme} {...options} class="m-2">
 							{item.theme}

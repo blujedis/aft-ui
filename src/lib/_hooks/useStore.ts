@@ -1,6 +1,6 @@
 import { writable, type Readable, type Unsubscriber, type Writable } from 'svelte/store';
 import loashMerge from 'lodash.merge';
-import { storage } from './storage';
+import { useStorage } from './useStorage';
 import type { DeepPartial } from '@forewind/util';
 
 interface Store<T> {
@@ -60,12 +60,13 @@ function getPersistData<T extends StoreType | Record<string, any>, K extends key
  * @param persistKey the optional key for persisting to localStorage.
  * @param persistProps the properties in the object that should persist to localStorage.
  */
-export function createStore<T extends StoreType | Record<string, any>>(
+export function useStore<T extends StoreType | Record<string, any>>(
 	data: T,
 	options: StoreOptions<T>
 ) {
 	const { persistKey, persistProps } = options;
 	const { subscribe, set, update } = writable(data);
+	const storage = useStorage();
 
 	let unsubscriber: Unsubscriber;
 

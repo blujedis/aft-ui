@@ -1,5 +1,5 @@
-import { createStore, storage, type PersistentStore } from './_utils';
-import { useVars } from '@forewind/util';
+import { useStore, type PersistentStore } from './_hooks';
+// import { useVars } from '@forewind/util';
 
 // configuration.
 import { palette, config } from './_config';
@@ -19,6 +19,7 @@ import radio from './radio/config';
 import select from './select/config';
 import slider from './slider/config';
 import switcher from './switcher/config';
+import text from './text/config';
 import textarea from './textarea/config';
 
 const STORE_KEY = '__forewind_theme__';
@@ -39,6 +40,7 @@ const components = {
 	select,
 	slider,
 	switcher,
+	text,
 	textarea
 };
 
@@ -56,7 +58,7 @@ function initStore() {
 	// if (isDev)
 	//   storage.remove(STORE_KEY);
 
-	themeStore = createStore(baseConfig, {
+	themeStore = useStore(baseConfig, {
 		persistKey: STORE_KEY,
 		persistProps: ['palette']
 	});

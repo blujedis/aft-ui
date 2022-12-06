@@ -97,7 +97,6 @@
 			<Section section={comp.title} />
 			<div class="flex flex-row space-x-8">
 				{#key options}
-					<Checkbox checked={false} {...options} />
 					{#each comp.items as item}
 						<Checkbox theme={item.theme} checked={true} {...options} />
 					{/each}

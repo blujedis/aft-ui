@@ -3,17 +3,18 @@ import { pickVariant, pick, classnames, type TypeOrValue, type Palette } from '@
 
 const { shadow, common, colormap } = config;
 
-const default_ring = pick(colormap.theme.default, 'ring_focus');
-const defTheme = {
-	...pick(colormap.theme.default, 'bg', 'text', 'ring_focus', 'checked'),
-	default_ring
-};
-const themes = pickVariant(colormap.theme, 'text', 'ring_focus', 'checked');
+// const default_ring = pick(colormap.theme.default, 'ring_focus');
+// const defTheme = {
+// 	...pick(colormap.theme.default, 'bg', 'text', 'ring_focus', 'bg_checked'),
+// 	default_ring
+// };
+const themes = pickVariant(colormap.theme, 'text', 'ring_focus', 'bg_checked');
+themes.default = pick(colormap.theme.default, 'bg', 'text', 'ring_focus', 'bg_checked', 'ring_focus');
 
 const main = {
 	base: classnames(
 		'focus:ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 text-slate-600',
-		defTheme
+		themes.default
 	),
 	shadow: { ...shadow },
 	transition: common.transition,
@@ -29,12 +30,11 @@ const main = {
 	},
 	hovered: (theme = 'default' as TypeOrValue<keyof Palette>) => {
 		const conf = colormap.theme[theme as keyof typeof colormap.theme];
-		return conf.hover_checked;
+		return conf.bg_checked_hover;
 	},
 	variant: {
 		default: {
 			base: '',
-			default: '',
 			themes: {
 				...themes
 			}

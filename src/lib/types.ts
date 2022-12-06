@@ -1,13 +1,13 @@
 import type { defaultPalette, Features, Palette } from '@forewind/util';
 import type {
 	rounded,
-	fieldTextSize,
+	field_text_size,
 	shadow,
 	animate,
 	dropshadow,
 	border,
-	fontTransform,
-	fontWeight
+	font_transform,
+	font_weight
 } from './_config/config';
 
 // Element Helper
@@ -57,8 +57,8 @@ export type Animate = keyof typeof animate;
 
 export type Border = keyof typeof border;
 
-export type TextSize = keyof typeof fieldTextSize;
+export type TextSize = keyof typeof field_text_size;
 
-export type TextTransform = keyof typeof fontTransform;
+export type TextTransform = keyof typeof font_transform;
 
-export type TextWeight = keyof typeof fontWeight;
+export type TextWeight = keyof typeof font_weight;
