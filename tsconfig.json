@@ -9,12 +9,23 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"types": ["node", "svelte"],
+		"types": [
+			"node",
+			"svelte"
+		],
 		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$docs": ["src/docs"],
-			"$docs/*": ["src/docs/*"]
+			"$lib": [
+				"src/lib"
+			],
+			"$lib/*": [
+				"src/lib/*"
+			],
+			"$docs": [
+				"src/docs"
+			],
+			"$docs/*": [
+				"src/docs/*"
+			]
 		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

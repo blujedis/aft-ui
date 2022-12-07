@@ -5,6 +5,7 @@ export { default as Button } from './button/Component.svelte';
 export { default as Checkbox } from './checkbox/Component.svelte';
 export { default as Combobox } from './combobox/Component.svelte';
 export { default as ComboboxOption } from './combobox/option/Component.svelte';
+export { default as Dropdown } from './dropdown/Component.svelte';
 export { default as Icon } from './icon/Component.svelte';
 export { default as InputAddon } from './input/addon/Component.svelte';
 export { default as Input } from './input/Component.svelte';

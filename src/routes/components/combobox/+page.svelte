@@ -145,7 +145,7 @@
 		</label>
 	</div>
 	<div class="mt-4 inline-flex">
-		<Combobox {...options} {items} {value} />
+		<Combobox {...options} {items} {value} newable={true} />
 	</div>
 	{#each examples as comp}
 			<div class="my-6">

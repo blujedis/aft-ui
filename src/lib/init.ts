@@ -10,6 +10,7 @@ import button from './button/config';
 import checkbox from './checkbox/config';
 import combobox from './combobox/config';
 import comboboxOption from './combobox/option/config';
+import dropdown from './button/config';
 import icon from './icon/config';
 import input from './input/config';
 import inputAddon from './input/addon/config';
@@ -31,6 +32,7 @@ const components = {
 	checkbox,
 	combobox,
 	comboboxOption,
+	dropdown,
 	icon,
 	input,
 	inputAddon,

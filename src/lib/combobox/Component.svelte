@@ -21,6 +21,7 @@
 		escapable?: boolean;
 		navigatable?: boolean;
 		animate?: number;
+		newable?: boolean;
 		threshold?: number;
 		icons?: boolean;
 		items?: S[];
@@ -29,8 +30,8 @@
 		onSelected?: (item: S | null) => void;
 		onFilter?: (query: string) => Promise<T[]>;
 		onMatch?: (selected: T | null, row: T) => boolean;
-		setInput?: (value: string) => void;
-		register?: (cb: (input: HTMLInputElement) => void) => void;
+		// setInput?: (value: string) => void;
+		// register?: (cb: (input: HTMLInputElement) => void) => void;
 	}
 
 	const { components, palette } = $themeStore;
@@ -81,7 +82,6 @@
 	export let transition = defaults.transition;
 	export let transform = defaults.transform;
 	export let weight = defaults.weight;
-
 	export let valueProp = 'value';
 	export let keyProp = 'key';
 
@@ -106,12 +106,13 @@
 	export let controller = useListController<T>(initialItems, initialValue);
 	export let threshold = 2;
 
-	let input: HTMLInputElement | undefined;
-	let ul: HTMLUListElement | undefined;
-
 	const itemsStore = controller.items;
 	const selectedStore = controller.selected;
 	const activeStore = controller.active;
+	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape', 'Enter'] as const;
+
+	let input: HTMLInputElement | undefined;
+	let ul: HTMLUListElement | undefined;
 
 	export let onSelected = (item: S | null) => {};
 
@@ -122,18 +123,25 @@
 	};
 
 	export let onFilter = async (query: string) => {
+		let matched = null as string | null;
 		const filtered = await controller.filter((item) => {
 			const result = fuzzyFull(query, item.value, { threshold });
 			if (result.score === 10)
-				handleSelect(item.key, false); // if exact match select it.
+					matched = item.key; // exact match store key.
 			return result.match;
 		});
+		if (matched)
+			handleSelect(matched);
+		if (!filtered.length)
+			expanded = false;	
 		return filtered;
 	};
 
-	export const setInput = (v: string) => {
+	export const setInput = (v: string, filter = true) => {
 		if (input)
 			input.value = v;
+		if (filter)
+			onFilter(v);
 	};
 
 	export const register = (cb: (input?: HTMLInputElement) => void) => cb(input);
@@ -143,8 +151,6 @@
 		onSelected(selectedItem.source as S);
 		input.value = selectedItem.value;
 	});
-
-	const navCodes = ['ArrowUp', 'ArrowDown', 'Escape', 'Enter'] as const;
 
 	const handleSelect = (key?: string | null, close = false) => {
 		const item = controller.getByKey(key);
@@ -261,18 +267,13 @@
 
 	function handleExit() {
 		expanded = false;
-		// new items not permitted, reset to 
-		// the selected value.
-		if (!newable) { 
-			if (input)
-				input.value =  $selectedStore?.value || '';
-			if (!controller.getByKey($selectedStore?.key)) 
-				controller.unfilter(); // if exiting without value in list.
-			handleSelect($selectedStore?.key, true);
-		}
-		else {
-			const inputValue = input?.value || '';
-		}
+		// new items not permitted reset on leave.
+		if (newable) return;
+		if (input)
+			input.value =  $selectedStore?.value || '';
+		if (!controller.getByKey($selectedStore?.key)) 
+			controller.unfilter(); // if exiting without value in list.
+		handleSelect($selectedStore?.key, true);
 	}
 
 	function handleOutsideClick(e: Event) {
@@ -311,10 +312,8 @@
 		const val =(e.currentTarget?.value || '').trim();
 		if (!val.length || (!$itemsStore.length && initialItems.length)){
 			controller.unfilter();
-			return;
 		}
 		onFilter(val);
-		// setTimeout(() => input?.focus());
 	}
 
 	function handleInputKeyDown(e: KeyboardEvent) {
@@ -324,7 +323,9 @@
 		if (e.key === 'Tab') 
 			handleExit();
 	}
+
 	onDestroy(() => unsubSelected);
+
 </script>
 
 <div

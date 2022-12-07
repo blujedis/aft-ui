@@ -44,10 +44,10 @@
 	const ctx = getContext('Combobox') as Required<ComboboxContext<T>>;
 	const left = $$slots.left && ctx.icons;
 	const right = ctx.icons; // if icons enabled always show right fallback.
-	const item =  { key, value } as T;
 
-	if (add) 
+	if (add) {
 		ctx.addItem({ key, value } as T);
+	}
 	
 	// Build main classes.
  
@@ -82,26 +82,26 @@
 	};
 
 	const unsubscribeSelected = ctx.controller.selected.subscribe((selectedValue) => {
-		selected = ctx.onMatch(selectedValue, item);
-		console.log('select fired', selectedValue?.value, item.value);
+		selected = ctx.onMatch(selectedValue, { key, value } as T);
 		updateClasses();
 	});
 
 	const unsubscribeActive = ctx.controller.active.subscribe((activeValue) => {
-		active = ctx.onMatch(activeValue, item);
+		active = ctx.onMatch(activeValue, { key, value } as T);
 		updateClasses();
 	});
 
 	function handleClick(e: MouseEvent | TouchEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		ctx.handleSelect(item.key, true);
+		ctx.handleSelect(key, true);
 	}
 
 	onDestroy(() => {
 		unsubscribeSelected();
 		unsubscribeActive();
 	});
+
 
 </script>
 
