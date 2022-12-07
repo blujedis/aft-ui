@@ -1,4 +1,4 @@
-import { config } from '../_config';
+import { config } from '../app/config';
 import { concat, pick, pickVariant } from '@forewind/util';
 
 const { shadow, common, colormap, font_transform: fontTransform, font_weight: fontWeight, field_text_size: fieldTextSize } = config;

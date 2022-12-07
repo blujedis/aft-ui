@@ -1,4 +1,4 @@
-import { config } from '../_config';
+import { config } from '../app/config';
 import { pickVariant, pick } from '@forewind/util';
 
 const { shadow, rounded, common, colormap, animate } = config;

@@ -1,5 +1,5 @@
 import { classnames } from '@forewind/util';
-import { config } from '../_config';
+import { config } from '../app/config';
 
 const { common } = config;
 
@@ -8,8 +8,8 @@ const main = {
 		'focus:ring-0 inline-flex items-center justify-center font-medium focus:outline-none text-sm border border-transparent',
 		common.shadow
 	),
-  variant: {
-	
+	variant: {
+
 	}
 };
 

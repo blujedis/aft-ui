@@ -1,4 +1,4 @@
-import { config } from '../_config';
+import { config } from '../app/config';
 import type { BaseSize, Rounded } from '$lib/types';
 import {
 	classnames,

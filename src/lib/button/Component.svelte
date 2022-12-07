@@ -1,13 +1,9 @@
 
-<script context="module">
-	import type { PickElement } from '$lib/types';
-	type ElementProps = PickElement<'button', 'size'>;
-</script>
 
 <script lang="ts">
 	import { Builder, normalize } from '@forewind/util';
-	// import type { PickElement } from '$lib/types';
 	import themeStore from '../init';
+	import type { PickElement } from '$lib/types';
 
 	type ElementProps = PickElement<'button', 'size'>;
 	type Defaults = typeof defaults;

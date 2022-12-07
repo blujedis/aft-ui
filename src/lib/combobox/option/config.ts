@@ -1,10 +1,10 @@
 import { concat, pick, pickVariant, type Palette, type TypeOrValue } from '@forewind/util';
-import config from '../../_config/config';
+import config from '../../app/config/config';
 
 const { colormap } = config;
 // const defTheme = pick(colormap.theme.default, 'text', 'bg_glass_hover');
 const themes = pickVariant(colormap.theme, 'text_white_hover', 'text', 'bg_hover');
-themes.default =  pick(colormap.theme.default, 'text', 'bg_glass_hover');
+themes.default = pick(colormap.theme.default, 'text', 'bg_glass_hover');
 
 const main = {
 	base: 'relative cursor-default select-none outline-none ring-0 py-1.5 pl-3 pr-9',

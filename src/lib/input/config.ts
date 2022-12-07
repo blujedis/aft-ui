@@ -7,7 +7,7 @@ import {
 	type TypeOrValue
 } from '@forewind/util';
 import type { BaseSize, Rounded } from '$lib/types';
-import { config } from '../_config';
+import { config } from '../app/config';
 
 const {
 	rounded,

@@ -19,12 +19,10 @@
 		"test": "playwright test"
 	},
 	"dependencies": {
+		"@forewind/util": "^0.0.0-development",
 		"@popperjs/core": "^2.11.6",
 		"dot-prop": "^7.2.0",
-		"highlight.js": "^11.6.0",
-		"lodash.merge": "^4.6.2",
-		"svelte-highlight": "^6.2.1",
-		"tailwind-merge": "^1.6.0"
+		"lodash.merge": "^4.6.2"
 	},
 	"peerDependencies": {
 		"autoprefixer": "^10.4.8",
@@ -56,6 +54,7 @@
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"highlight.js": "^11.6.0",
 		"husky": "^8.0.1",
 		"postcss": "^8.4.16",
 		"prettier": "^2.6.2",
@@ -65,6 +64,7 @@
 		"semantic-release": "^19.0.3",
 		"svelte": "^3.52.0",
 		"svelte-check": "^2.9.2",
+		"svelte-highlight": "^6.2.1",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.1.8",
 		"tslib": "^2.3.1",

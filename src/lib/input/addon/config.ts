@@ -1,5 +1,5 @@
 import { classnames, pick, pickVariant } from '@forewind/util';
-import { config } from '../../_config';
+import { config } from '../../app/config';
 
 const { colormap } = config;
 

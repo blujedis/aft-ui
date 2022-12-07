@@ -1,8 +1,8 @@
 import type { BaseSize, Shadow } from '$lib/types';
 import type { Palette, TypeOrValue } from '@forewind/util';
-import type { ListStore } from '../_hooks/useListController';
+import type { ListStore } from '../app/hooks/useListController';
 
-export type ComboboxItem<S extends string | Record<string, any> = string | Record<string, any>> = Record<string, any> & { key: string; value: any, source: S  };
+export type ComboboxItem<S extends string | Record<string, any> = string | Record<string, any>> = Record<string, any> & { key: string; value: any, source: S };
 
 export type ListItem = string | Record<string, any>;
 

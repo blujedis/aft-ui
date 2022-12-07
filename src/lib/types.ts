@@ -8,7 +8,7 @@ import type {
 	border,
 	font_transform,
 	font_weight
-} from './_config/config';
+} from './app/config/config';
 
 // Element Helper
 

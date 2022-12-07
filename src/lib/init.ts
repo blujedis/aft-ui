@@ -1,8 +1,8 @@
-import { useStore, type PersistentStore } from './_hooks';
+import { useStore, type PersistentStore } from './app/hooks';
 // import { useVars } from '@forewind/util';
 
 // configuration.
-import { palette, config } from './_config';
+import { palette, config } from './app/config';
 
 // Components
 import badge from './badge/config';

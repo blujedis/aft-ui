@@ -1,6 +1,6 @@
 import { concat, pick } from '@forewind/util';
 import input from '../input/config';
-import config from '../_config/config';
+import config from '../app/config/config';
 
 const { field_text_size: fieldTextSize, colormap, common, rounded } = config;
 

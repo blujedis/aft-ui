@@ -1,4 +1,4 @@
-import { config } from '../_config';
+import { config } from '../app/config';
 import { pick, pickVariant, type Palette, type TypeOrValue } from '@forewind/util';
 
 const { font_weight: fontWeight, shadow, rounded, font_transform: fontTransform, colormap } = config;
