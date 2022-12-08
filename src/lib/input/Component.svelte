@@ -15,8 +15,7 @@
 	const input = normalize(components.input.main, palette);
 	const b = new Builder(input, palette);
 
-	const defaults = b.defaults(
-		{
+	const defaults = b.defaults({
 			base: true,
 			size: 'md'
 		},
