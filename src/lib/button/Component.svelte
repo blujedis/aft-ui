@@ -1,19 +1,25 @@
-
-
 <script lang="ts">
-	import { Builder, normalize } from '@forewind/util';
-	import themeStore from '../init';
-	import type { PickElement } from '$lib/types';
+	import { type Props, main } from './module';
+	// import { Builder, normalize } from '@forewind/util';
+	 import themeStore from '../init';
+	//import type { PickElement } from '$lib/types';
+	// type ElementProps = PickElement<'button', 'size'>;
+	// type Defaults = typeof defaults;
+	type $$Props = Props;
 
-	type ElementProps = PickElement<'button', 'size'>;
-	type Defaults = typeof defaults;
-	interface $$Props extends ElementProps, Defaults {}
+	// const { palette, components, config } = $themeStore;
+	// const button = normalize(components.button.main, palette);
+	// const b = new Builder(button, palette);
 
-	const { palette, components, config } = $themeStore;
-	const button = normalize(components.button.main, palette);
-	const b = new Builder(button, palette);
+	// const defaults = b.defaults({
+	// 	base: true,
+	// 	size: 'md'
+	// });
 
-	const defaults = b.defaults({
+	const { config } = $themeStore;
+	const button = main.clone();
+
+	const defaults = button.defaults({
 		base: true,
 		size: 'md'
 	});
@@ -32,7 +38,7 @@
 	export let weight = defaults.weight;
 	export let active = defaults.active;
 
-	const classes = b
+	const classes = button
 		.addFeature('base', base)
 		.addFeature('transition', transition)
 		.addFeature('rounded', rounded)

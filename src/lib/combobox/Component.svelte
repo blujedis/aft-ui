@@ -3,11 +3,11 @@
 	import type { PickElement } from '$lib/types';
 	import themeStore, { Input } from '$lib';
 	import { onDestroy, setContext } from 'svelte';
-	import { createCustomEvent, fuzzyFull } from '../_utils';
+	import { createCustomEvent, fuzzyFull } from '../app/utils';
 	import { fade } from 'svelte/transition';
 	import ComboboxOption from './option/Component.svelte';
 	import type { ComboboxContext, ListItem, ComboboxItem } from './types';
-	import { useListController, type ListStore } from '../_hooks';
+	import { useListController, type ListStore } from '../app/hooks';
 
 	type ElementProps = PickElement<'div', 'size'>;
 	type InputProps = PickElement<'input', 'size'>;

@@ -4,13 +4,10 @@ import type { PickElement } from '$lib/types';
 import { get } from 'svelte/store';
 
 export type ElementProps = PickElement<'button', 'size'>;
-export type Defaults = ReturnType<typeof b.defaults>;
+export type Props = ElementProps & ReturnType<typeof main.defaults>;
 
 const { palette, components } = get(themeStore);
-const button = normalize(components.button.main, palette);
-const b = new Builder(button, palette);
+const features = normalize(components.button.main, palette);
 
-const defaults = b.defaults({
-  base: true,
-  size: 'md'
-});
+export const main = new Builder(features, palette);
+
