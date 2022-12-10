@@ -4,17 +4,16 @@ import themeStore from '../init';
 import type { PickElement } from '$lib/types';
 import { get } from 'svelte/store';
 
-export type ButtonElementProps = PickElement<'button', 'size'>;
-export type ButtonDefaults = typeof defaults;
-export type ButtonProps = ButtonElementProps & ButtonDefaults;
+export type IconElementProps = PickElement<'span', 'size'>;
+export type IconDefaults = typeof defaults;
+export type IconProps = IconElementProps & IconDefaults;
 
 const { palette, components } = get(themeStore);
-const features = normalize(components.button.main, palette);
+const features = normalize(components.icon.main, palette);
 const main = new Builder(features, palette);
 const defaults = main.defaults({
   base: true,
-  size: 'md',
-  variant: 'filled'
+  size: 'md'
 });
 
 export default {

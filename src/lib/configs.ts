@@ -1,0 +1,17 @@
+export { default as badge } from './badge/config';
+export { default as button } from './button/config';
+export { default as checkbox } from './checkbox/config';
+export { default as combobox } from './combobox/config';
+export { default as comboboxOption } from './combobox/option/config';
+export { default as dropdown } from './dropdown/config';
+export { default as icon } from './icon/config';
+export { default as input } from './input/config';
+export { default as inputAddon } from './input/addon/config';
+export { default as kbd } from './kbd/config';
+export { default as label } from './label/config';
+export { default as radio } from './radio/config';
+export { default as select } from './select/config';
+export { default as slider } from './slider/config';
+export { default as switcher } from './switcher/config';
+export { default as text } from './text/config';
+export { default as textarea } from './textarea/config';

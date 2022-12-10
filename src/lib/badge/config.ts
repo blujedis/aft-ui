@@ -1,7 +1,7 @@
 import { config } from '../app/config';
 import { pick, pickVariant, type Palette, type TypeOrValue } from '@forewind/util';
 
-const { font_weight: fontWeight, shadow, rounded, font_transform: fontTransform, colormap } = config;
+const { font_weight, shadow, rounded, font_transform, colormap, common } = config;
 
 // const defTheme = pick(colormap.theme.default, 'bg', 'text');
 const themes = pickVariant(colormap.theme, 'bg', 'ring_focus');
@@ -12,11 +12,12 @@ const main = {
 	pointer: 'cursor-pointer',
 	rounded: { ...rounded },
 	shadow: { ...shadow },
+	transition: common.transition,
 	weight: {
-		...fontWeight
+		...font_weight
 	},
 	transform: {
-		...fontTransform
+		...font_transform
 	},
 	size: {
 		none: '',

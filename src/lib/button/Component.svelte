@@ -1,69 +1,41 @@
 <script lang="ts">
-	import { type Props, main, defaults } from './module';
-	import themeStore from '../init';
-	// import { Builder, normalize } from '@forewind/util';
-	//import type { PickElement } from '$lib/types';
-	// type ElementProps = PickElement<'button', 'size'>;
-	// type Defaults = typeof defaults;
-	type $$Props = Props;
+	import module, { type ButtonProps } from './module';
+	type $$Props = ButtonProps;
 
-	// const { palette, components, config } = $themeStore;
-	// const button = normalize(components.button.main, palette);
-	// const b = new Builder(button, palette);
-
-	// const defaults = b.defaults({
-	// 	base: true,
-	// 	size: 'md'
-	// });
-
-	const { config } = $themeStore;
+	const { main, defaults } = module;
 	const button = main.clone();
 
 	let { 
 		base,
-		transition,
+		active,
+		full, 
+		ringed,
+		hovered,
 		rounded,
 		shadow,
-		ringed,
-		weight,
-		active,
 		size,
-		full, 
+		transition,
+		theme,
 		transform,
 		variant,
-		theme,
-		hovered,
+		weight,
 		...rest
-	} = main.prepareProps($$props as Props, defaults);
-	
-	// export let base = defaults.base;
-	// export let rounded = defaults.rounded;
-	// export let shadow = defaults.shadow;
-	// export let ringed = defaults.ringed;
-	// export let size = defaults.size;
-	// export let full = defaults.full;
-	// export let variant = defaults.variant || 'filled';
-	// export let theme = defaults.theme;
-	// export let hovered = defaults.hovered;
-	// export let transition = defaults.transition;
-	// export let transform = defaults.transform;
-	// export let weight = defaults.weight;
-	// export let active = defaults.active;
+	} = main.prepareProps($$props as $$Props, defaults);
 
 	const classes = button
 		.addFeature('base', base)
+		.addFeature('active', active)
+		.addFeature('disabled', rest.disabled === true)
+		.addFeature('full', full)
 		.addFeature('transition', transition)
+		.addFeature('ringed', ringed)
 		.addFeature('rounded', rounded)
 		.addFeature('shadow', shadow)
-		.addFeature('ringed', ringed)
-		.addFeature('weight', weight)
-		.addFeature('active', active)
 		.addFeature('size', size)
-		.addFeature('full', full)
 		.addFeature('transform', transform)
+		.addFeature('weight', weight)
 		.addVariant(variant, theme)
 		.addHandlerClass('hovered', hovered, variant, theme)
-		.addUserClass(config.common.disabled, rest.disabled === true)
 		.addUserClass(rest.class)
 		.bundle();
 </script>
