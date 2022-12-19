@@ -1,54 +1,51 @@
 <script lang="ts">
-	import { Builder, classnames, normalize } from '@forewind/util';
-	import type { PickElement } from '$lib/types';
-	import themeStore from '../init';
+	import module, { type IconProps } from './module';
 
-	type ElementProps = PickElement<'span', 'size'>;
-	type Defaults = typeof defaults;
-	interface $$Props extends ElementProps, Defaults {}
+	type $$Props = IconProps;
 
-	const { palette, components } = $themeStore;
-	const icon = normalize(components.icon.main, palette);
-	const b = new Builder(icon, palette);
+	const icon = module.main.clone();
+	const inner = module.inner.clone();
 
-	const defaults = b.defaults({
-		base: true,
-		transition: true,
-		size: 'md'
-	});
+	let { 
+		base,
+		active,
+		disabled,
+		hovered,
+		rounded,
+		shadow,
+		size,
+		transition,
+		theme,
+		animate,
+		variant,
+		...rest
+	} = module.main.prepareProps($$props as $$Props, module.defaults);
 
-	export let base = defaults.base;
-	export let rounded = defaults.rounded;
-	export let shadow = defaults.shadow;
-	export let size = defaults.size;
-	export let variant = defaults.variant;
-	export let theme = defaults.theme;
-	export let hovered = defaults.hovered;
-	export let transition = defaults.transition;
-	export let animate = defaults.animate;
-
-	const inner = classnames(
-		b.getFeature('size')[size as keyof typeof components.icon.main.size],
-		'block'
-	);
-
-	const classes = b
+	const classes = icon
 		.addFeature('base', base)
 		.addFeature('transition', transition)
 		.addFeature('rounded', rounded)
 		.addFeature('shadow', shadow)
 		.addFeature('animate', animate)
+		.addFeature('disabled', disabled)
 		.addHandlerClass('hovered', hovered, variant, theme)
-		.addVariant(variant || 'default', theme)
-		.addUserClass($$restProps.class)
+		.addVariant(variant, theme)
+		.addUserClass(rest.class)
 		.bundle();
+
+		const innerClasses = inner
+			.addFeature('base', base)
+			.addFeature('size', size)
+			.bundle();
+
+
 </script>
 
 <!-- Wrapped in outer span so that padding does not 
-     cause inner icon to be scaled down.default
+     cause inner icon to be scaled down.
 -->
-<span {...$$restProps} class={classes}>
-	<span class={inner}>
+<span {...rest} class={classes}>
+	<span class={innerClasses}>
 		<slot />
 	</span>
 </span>

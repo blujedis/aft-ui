@@ -3,7 +3,6 @@ import { config } from '../../app/config';
 
 const { colormap } = config;
 
-// const defTheme = pick(colormap.theme.default, 'text');
 const themes = pickVariant(colormap.theme, 'text');
 themes.default = pick(colormap.theme.default, 'text');
 
@@ -21,7 +20,6 @@ const main = {
 	},
 	variant: {
 		default: {
-			// default: defTheme,
 			themes
 		}
 	}

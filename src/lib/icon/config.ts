@@ -3,11 +3,6 @@ import { pickVariant, pick } from '@forewind/util';
 
 const { shadow, rounded, common, colormap, animate } = config;
 
-// const default_ring = pick(colormap.theme.default, 'ring_focus');
-// const defGhost = { ...pick(colormap.theme.default, 'text'), default_ring };
-// const defFilled = { ...pick(colormap.theme.default, 'bg', 'text'), default_ring };
-// const defOutline = { ...pick(colormap.theme.default, 'text', 'border'), default_ring };
-
 const ghost = pickVariant(colormap.theme, 'text');
 const filled = pickVariant(colormap.theme, 'bg');
 const outline = pickVariant(colormap.theme, 'text', 'border');
@@ -23,6 +18,7 @@ const main = {
 	transition: common.transition,
 	animate: animate,
 	active: common.active,
+	disabled: common.disabled,
 	size: {
 		unstyled: '',
 		xs: 'h-4 w-4',
@@ -41,21 +37,18 @@ const main = {
 	variant: {
 		filled: {
 			base: 'text-white border-transparent',
-			// default: defFilled,
 			themes: {
 				...filled
 			}
 		},
 		outlined: {
 			base: 'border-2',
-			// default: defOutline,
 			themes: {
 				...outline
 			}
 		},
 		ghost: {
 			base: 'border-transparent',
-			// default: defGhost,
 			themes: {
 				...ghost
 			}
@@ -63,6 +56,11 @@ const main = {
 	}
 };
 
-const icon = { main };
+const inner = {
+	base: 'block',
+	size: { ...main.size}
+};
+
+const icon = { main, inner };
 
 export default icon;

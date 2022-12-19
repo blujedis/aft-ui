@@ -14,27 +14,13 @@ const {
 	shadow,
 	common,
 	colormap,
-	field_padding_y: fieldPaddingY,
-	font_transform: fontTransform,
-	field_rounded_padding_x: fieldRoundedPaddingX,
-	field_padding_x: fieldPaddingX,
-	font_weight: fontWeight,
-	field_text_size: fieldTextSize
+	field_padding_y,
+	font_transform,
+	field_rounded_padding_x,
+	field_padding_x,
+	font_weight,
+	field_text_size
 } = config;
-
-// const default_ring = pick(colormap.theme.default, 'ring_focus');
-// const defFilled = {
-// 	...pick(colormap.theme.default, 'text', 'bg_glass', 'border_focus'),
-// 	default_ring
-// };
-// const defOutline = {
-// 	...pick(colormap.theme.default, 'text', 'border', 'border_focus'),
-// 	default_ring
-// };
-// const defFlush = {
-// 	...pick(colormap.theme.default, 'text', 'border', 'border_focus', 'bg_glass_focus'),
-// 	default_ring
-// };
 
 const filled = pickVariant(colormap.theme, 'bg_glass', 'text', 'ring_focus', 'border_focus');
 const outline = pickVariant(colormap.theme, 'text', 'border', 'ring_focus', 'border_focus');
@@ -78,10 +64,10 @@ const main = {
 		else return conf.bg_glass_hover;
 	},
 	transform: {
-		...fontTransform
+		...font_transform
 	},
 	weight: {
-		...fontWeight
+		...font_weight
 	},
 	size: mergeConfigs(
 		{
@@ -93,31 +79,28 @@ const main = {
 			xl: 'px-5',
 			'2xl': 'px-5'
 		},
-		fieldPaddingY,
-		fieldPaddingX,
-		fieldTextSize
+		field_padding_y,
+		field_padding_x,
+		field_text_size
 	),
 	roundedAdjust: (round: Rounded, size: BaseSize) => {
-		return fieldRoundedPaddingX[round || 'unstyled'][size || 'unstyled'];
+		return field_rounded_padding_x[round || 'unstyled'][size || 'unstyled'];
 	},
 	variant: {
 		filled: {
 			base: 'border-transparent focus:bg-transparent',
-			// default: defFilled,
 			themes: {
 				...filled
 			}
 		},
 		outline: {
 			base: 'bg-transparent focus:bg-transparent',
-			// default: defOutline,
 			themes: {
 				...outline
 			}
 		},
 		flush: {
 			base: 'bg-transparent border-t-0 border-l-0 border-r-0 border-b rounded-b-none',
-			// default: defFlush,
 			themes: {
 				...flush
 			}

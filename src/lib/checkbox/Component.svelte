@@ -8,8 +8,7 @@
 
 	export let checked = false;
 
-	const { main, defaults } = module;
-	const checkbox = main.clone();
+	const checkbox = module.main.clone();
 
 	let { 
 		base,
@@ -24,7 +23,7 @@
 		theme,
 		value,
 		...rest
-	} = main.prepareProps($$props as $$Props, defaults);
+	} = module.main.prepareProps($$props as $$Props, module.defaults);
 
 
 	const classes = checkbox

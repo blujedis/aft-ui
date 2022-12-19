@@ -2,8 +2,7 @@
 	import module, { type ButtonProps } from './module';
 	type $$Props = ButtonProps;
 
-	const { main, defaults } = module;
-	const button = main.clone();
+	const button = module.main.clone();
 
 	let { 
 		base,
@@ -20,7 +19,7 @@
 		variant,
 		weight,
 		...rest
-	} = main.prepareProps($$props as $$Props, defaults);
+	} = module.main.prepareProps($$props as $$Props, module.defaults);
 
 	const classes = button
 		.addFeature('base', base)

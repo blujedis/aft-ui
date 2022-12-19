@@ -1,10 +1,9 @@
 <script lang="ts">
-	import BadgeModule, { type BadgeProps } from './module';
+	import module, { type BadgeProps } from './module';
 
 	type $$Props = BadgeProps;
 
-	const { main, defaults } = BadgeModule;
-	const badge = main.clone();
+	const badge = module.main.clone();
 
 	let { 
 		base,
@@ -18,7 +17,7 @@
 		variant,
 		weight,
 		...rest
-	} = main.prepareProps($$props as $$Props, defaults);
+	} = module.main.prepareProps($$props as $$Props, module.defaults);
 
 	const classes = badge
 		.addFeature('base', base)
