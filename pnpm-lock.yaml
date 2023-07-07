@@ -38,8 +38,8 @@ devDependencies:
     specifier: ^2.0.0
     version: 2.0.0
   '@playwright/test':
-    specifier: ^1.28.1
-    version: 1.28.1
+    specifier: ^1.31.2
+    version: 1.31.2
   '@semantic-release/changelog':
     specifier: ^6.0.1
     version: 6.0.1(semantic-release@19.0.5)
@@ -994,13 +994,15 @@ packages:
       '@octokit/openapi-types': 13.12.0
     dev: true
 
-  /@playwright/test@1.28.1:
-    resolution: {integrity: sha512-xN6spdqrNlwSn9KabIhqfZR7IWjPpFK1835tFNgjrlysaSezuX8PYUwaz38V/yI8TJLG9PkAMEXoHRXYXlpTPQ==}
+  /@playwright/test@1.31.2:
+    resolution: {integrity: sha512-BYVutxDI4JeZKV1+ups6dt5WiqKhjBtIYowyZIJ3kBDmJgsuPKsqqKNIMFbUePLSCmp2cZu+BDL427RcNKTRYw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.8.0
-      playwright-core: 1.28.1
+      playwright-core: 1.31.2
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /@polka/url@1.0.0-next.21:
@@ -4060,8 +4062,8 @@ packages:
       load-json-file: 4.0.0
     dev: true
 
-  /playwright-core@1.28.1:
-    resolution: {integrity: sha512-3PixLnGPno0E8rSBJjtwqTwJe3Yw72QwBBBxNoukIj3lEeBNXwbNiKrNuB1oyQgTBw5QHUhNO3SteEtHaMK6ag==}
+  /playwright-core@1.31.2:
+    resolution: {integrity: sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
