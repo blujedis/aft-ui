@@ -51,7 +51,7 @@ export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Re
 /**
  * Maintains code help while allowing arbitrary values/string.
  */
-export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
+// export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
 export type ColorType =
 	| `${'#'}${string}`
