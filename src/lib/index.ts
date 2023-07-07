@@ -1,7 +1,7 @@
-import themeStore from './init';
-export * from '@forewind/util';
-export * from './types';
-export * from './_utils';
-export * from './init';
+import { themeStore } from './theme/store';
+export * from './components/types';
+export * from './theme/types';
+export * from './stores';
+export * from './theme';
 export * from './components';
 export default themeStore;
