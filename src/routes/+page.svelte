@@ -1,4 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="p-4 dark:text-gray-100">Home Page</div>
+<div class="p-4">
+	<h1 class="text-2xl">Home</h1>
+</div>

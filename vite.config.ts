@@ -6,14 +6,11 @@ import { resolve } from 'path';
 const config: UserConfig = {
 	plugins: [sveltekit(), svg()],
 	clearScreen: false,
-	build: {
-		// commonjsOptions: {
-		// 	transformMixedEsModules: true
-		// }
-	},
+	build: {},
 	resolve: {
 		alias: {
-			$docs: resolve('./src/docs')
+			'@app': resolve('./src/app'),
+			$lib: resolve('./src/lib')
 		}
 	}
 };

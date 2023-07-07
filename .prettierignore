@@ -3,10 +3,10 @@ node_modules
 /build
 /.svelte-kit
 /package
+package.json
 .env
 .env.*
-!.env.example
-**/.tmp.*
+.tmp
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
