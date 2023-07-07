@@ -1,1 +1,1 @@
-export * from './useFocustrap';
+export * from './useFocusTrap';
