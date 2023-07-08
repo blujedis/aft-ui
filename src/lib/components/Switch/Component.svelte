@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SwitchProps, switchDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { get_current_component, onMount } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../types';

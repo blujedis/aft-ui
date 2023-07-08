@@ -1,4 +1,4 @@
-import type { SvelteComponent, SvelteComponentTyped, ComponentProps } from 'svelte';
+import type { SvelteComponent, ComponentProps } from 'svelte';
 import type { SvelteHTMLElements } from 'svelte/elements';
 
 export type PrimitiveValue = string | number | boolean | undefined | null;
@@ -37,5 +37,5 @@ export type SvelteConstructorProps<T extends typeof SvelteComponent> = Component
 >;
 
 export type TypedComponent<T extends Record<string, unknown> = Record<string, unknown>> = {
-	component: new (...args: unknown[]) => SvelteComponentTyped<T>;
+	component: new (...args: unknown[]) => SvelteComponent<T>;
 };

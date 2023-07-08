@@ -3,7 +3,7 @@
 	import { getContext, onMount } from 'svelte';
 	import type { DropdownContext } from '../Dropdown/module';
 	import { type DropdownInputProps, dropdownInputDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../types';
 	import Badge from '../Badge';
 	import { Icon } from '../Icon';

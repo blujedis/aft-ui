@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themer, styler, themeStore, pickProp, classToColorSegments } from '$lib/theme';
+	import { themer, styler, themeStore, classToColorSegments } from '$lib/theme';
 	import { onMount } from 'svelte';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
 	import type { ElementNativeProps } from '../types';

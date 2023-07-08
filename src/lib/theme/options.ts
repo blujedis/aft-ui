@@ -152,28 +152,6 @@ export const resizes = {
 	both: 'resize-both'
 };
 
-export const focusedSizes = {
-	$base: 'focus:outline-none focus-visible:outline-none',
-	unstyled: '',
-	xs: 'focus:ring-2',
-	sm: 'focus:ring-2',
-	md: 'focus:ring-2',
-	lg: 'focus:ring-4',
-	xl: 'focus:ring-4',
-	xl2: 'focus:ring-8'
-};
-
-export const focusedVisibleSizes = {
-	$base: 'focus-visible:outline-none',
-	unstyled: '',
-	xs: 'focus-visible:ring-2',
-	sm: 'focus-visible:ring-2',
-	md: 'focus-visible:ring-2',
-	lg: 'focus-visible:ring-4',
-	xl: 'focus-visible:ring-4',
-	xl2: 'focus-visible:ring-8'
-};
-
 export const fontLeadings = {
 	unstyled: '',
 	none: 'leading-none',
@@ -192,10 +170,26 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
+export const focused = {
+	// ring-offset should be set to the same as main background.
+	$base: 'focus:outline-none',
+	white: 'focus:ring-white',
+	default: 'focus:ring-default-500',
+	primary: 'focus:ring-primary-500',
+	secondary: 'focus:ring-secondary-500',
+	tertiary: 'focus:ring-tertiary-500',
+	danger: 'focus:ring-danger-500',
+	warning: 'focus:ring-warning-500',
+	success: 'focus:ring-success-500',
+	info: 'focus:ring-info-500'
+};
+
+// focus:ring-opacity-50 focus:ring-offset-2
+// focus-visible:ring-opacity-30 focus-visible:ring-offset-2
+
 export const focusedVisible = {
 	// ring-offset should be set to the same as main background.
-	$base:
-		'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-opacity-30 focus-visible:ring-offset-0',
+	$base: 'focus-visible:outline-none',
 	white: 'focus-visible:ring-white',
 	default: 'focus-visible:ring-default-500',
 	primary: 'focus-visible:ring-primary-500',
@@ -207,18 +201,37 @@ export const focusedVisible = {
 	info: 'focus-visible:ring-info-500'
 };
 
-export const focused = {
-	// ring-offset should be set to the same as main background.
-	$base: 'focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-offset-0',
-	white: 'focus:ring-white',
-	default: 'focus:ring-default-500',
-	primary: 'focus:ring-primary-500',
-	secondary: 'focus:ring-secondary-500',
-	tertiary: 'focus:ring-tertiary-500',
-	danger: 'focus:ring-danger-500',
-	warning: 'focus:ring-warning-500',
-	success: 'focus:ring-success-500',
-	info: 'focus:ring-info-500'
+export const focusedSizes = {
+	$base: '',
+	unstyled: '',
+	xs: 'focus:ring-1',
+	sm: 'focus:ring-2',
+	md: 'focus:ring-2',
+	lg: 'focus:ring-4',
+	xl: 'focus:ring-4',
+	xl2: 'focus:ring-8'
+};
+
+export const focusedVisibleSizes = {
+	$base: '',
+	unstyled: '',
+	xs: 'focus-visible:ring-1',
+	sm: 'focus-visible:ring-2',
+	md: 'focus-visible:ring-2',
+	lg: 'focus-visible:ring-4',
+	xl: 'focus-visible:ring-4',
+	xl2: 'focus-visible:ring-8'
+};
+
+export const focusedPositionSizes = {
+	$base: '',
+	unstyled: '',
+	inset: 'focus:ring-inset focus-visible:ring-inset',
+	offset0: 'focus:ring-offset-0 focus-visible:ring-offset-0',
+	offset1: 'focus:ring-offset-1 focus-visible:ring-offset-1',
+	offset2: 'focus:ring-offset-2 focus-visible:ring-offset-2',
+	offset4: 'focus:ring-offset-4 focus-visible:ring-offset-4',
+	offset8: 'focus:ring-offset-8 focus-visible:ring-offset-8'
 };
 
 export const disableds = {

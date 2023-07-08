@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { RatingItem } from '../RatingItem';
 	import type { ElementNativeProps } from '../types';
 	import {

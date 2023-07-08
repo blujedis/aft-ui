@@ -4,7 +4,7 @@
 		type PaginationControllerProps,
 		paginationControllerDefaults as defaults
 	} from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { get_current_component, setContext } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../types';

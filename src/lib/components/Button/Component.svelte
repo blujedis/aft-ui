@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
 	import type { ElementNativeProps } from '../types';
 
@@ -21,7 +21,7 @@
 		variant,
 		underlined,
 		unstyled
-	} = { ...defaults, ...$themeStore.defaults.component } as Required<ButtonProps<Tag>>;
+	} = { ...defaults } as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
 

@@ -16,8 +16,8 @@
 	} from '$lib/theme';
 	import SelectRounded from '../_Example/SelectRounded.svelte';
 
-	const title = 'Buttons';
-	const description = 'Themed Buttons with multiple variants.';
+	const title = 'Checkboxes';
+	const description = 'Themed Checkboxes with multiple variants.';
 	const code = `
   `;
 

@@ -6,7 +6,7 @@
 		transitions,
 		type TransitionParams
 	} from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { useDisclosure } from '$lib/stores';
 	import { fly, fade, scale } from 'svelte/transition';
 	import Placeholder from './Placeholder.svelte';

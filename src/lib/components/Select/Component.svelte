@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
-	import { ensureArray, themer, themeStore } from '$lib/theme';
-	import { get_current_component, setContext } from 'svelte/internal';
+	import themeStore, { ensureArray, themer } from '$lib';
+	import { setContext } from 'svelte';
+	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../types';
 	import { useSelect } from '$lib/stores/select';

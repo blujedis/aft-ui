@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../types';
 	import Icon from '../Icon';
 	import { getContext } from 'svelte';
@@ -23,8 +23,7 @@
 		transitioned,
 		variant
 	} = {
-		...defaults,
-		...context?.globals
+		...defaults
 	} as Required<BreadcrumbOptionProps>;
 
 	const th = themer($themeStore);
@@ -38,7 +37,6 @@
 		.create('Breadcrumb')
 		.variant('breadcrumbOption', variant, theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
 		.append('pointer-events-none', selected)
@@ -49,7 +47,7 @@
 <li>
 	<div class="flex items-center">
 		<slot>
-			{#if separator && index > 0}
+			{#if separator && index !== 0}
 				{#if variant === 'filled'}
 					<svg
 						class="h-full w-6 flex-shrink-0 pointer-events-none"

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HtmlTag } from 'svelte/internal';
 
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { type TabProps, tabDefaults as defaults } from './module';
 	import Button from '../Button';
 	import type { ElementNativeProps, ElementProps } from '../types';

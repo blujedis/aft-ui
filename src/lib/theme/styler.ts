@@ -17,8 +17,16 @@ type Primitive = boolean | string | number | undefined | Primitive[];
  */
 export function styler<C extends ThemeConfig>(themeConfig: C) {
 	type Components = typeof themeConfig.components;
+	type Defaults = typeof themeConfig.defaults;
+	type Options = typeof themeConfig.options;
+	type Palette = typeof themeConfig.palette;
 	type Component = keyof Components;
 	type Variant<K extends Component> = keyof Components[K];
+
+	const _components: Components = themeConfig?.components || {};
+	const _options: Options = themeConfig?.options || {};
+	const _defaults: Defaults = themeConfig?.defaults || {};
+	const _palette: Palette = themeConfig?.palette || {};
 
 	function create(instanceName: string) {
 		let styles = [] as string[];
@@ -42,6 +50,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		 * @param when if true the key/value are added.
 		 */
 		function add(key: string, value: string | number, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			if (styles.some((v) => v.startsWith(key)))
 				throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
@@ -63,8 +72,9 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			key: string,
 			when: Primitive
 		) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (typeof path === 'undefined' || !when) return api;
-			const opt = (themeConfig.options[name] || {}) as Record<string, string>;
+			const opt = (_options[name] || {}) as Record<string, string>;
 			if (!opt)
 				throw new Error(`${instanceName} option using property ${path as string} was NOT found.`);
 			const baseValue = opt.$base || '';
@@ -88,10 +98,13 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			key: string,
 			when: Primitive
 		) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			if (theme === 'white') return add(key, '#fff', true);
-			const shades = (themeConfig.palette[theme as keyof typeof themeConfig.palette] ||
-				{}) as Record<ThemeColorShade | 'DEFAULT', string>;
+			const shades = (_palette[theme as keyof typeof _palette] || {}) as Record<
+				ThemeColorShade | 'DEFAULT',
+				string
+			>;
 			if (!shades || shade === null)
 				throw new Error(`${instanceName} color palette using theme ${theme} was NOT found.`);
 			const value = shades[shade as ThemeColorShade] || '';
@@ -114,6 +127,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			key: string,
 			when: Primitive
 		) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			const value = getProperty(obj, path as string);
 			if (!value)
@@ -131,6 +145,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		 * @param when if true the value is appended to the collection.
 		 */
 		function append(value: string, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			appends = [...appends, ...(value || '').split(/;\s?/g).map((v) => v.trim())];
 			return api;
@@ -143,6 +158,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		 * @param when if true the key is removed.
 		 */
 		function remove(key: string, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			styles = styles.filter((v) => !v.startsWith(key));
 			return api;
@@ -152,6 +168,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		 * Compiles all styles and returns a string value.
 		 */
 		function compile() {
+			if (typeof themeConfig === 'undefined') return '';
 			return [...styles, ...appends].join('; ').trim();
 		}
 

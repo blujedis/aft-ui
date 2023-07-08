@@ -106,9 +106,4 @@
 			</div>
 		{/key}
 	</div>
-	<input
-		type="range"
-		value="65"
-		class="appearance-none bg-gray-500 h-1 accent-success hover:accent-success-300"
-	/>
 </ExamplePage>

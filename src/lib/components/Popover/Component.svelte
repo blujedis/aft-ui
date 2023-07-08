@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';

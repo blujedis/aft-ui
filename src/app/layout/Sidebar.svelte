@@ -51,7 +51,7 @@
 <div class={classnames('mh-full overflow-y-scroll overflow-x-hidden border-r', borderColor)}>
 	<aside class="max-h-[600px] text-sm transition-all duration-300 ease-in-out w-48 pb-28">
 		{#each sidebar as [title, items]}
-			<div class="flex flex-row items-center bg-slate-100  h-10">
+			<div class="flex flex-row items-center bg-slate-100 h-10">
 				<span class="flex-1 px-4 font-bold text-slate-600">
 					{title}
 				</span>

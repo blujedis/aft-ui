@@ -21,6 +21,7 @@ export type BreadcrumbContext = {
 export type BreadcrumbVariant = keyof typeof breadcrumbNav;
 
 export type BreadcrumbProps = {
+	flush?: boolean;
 	full?: boolean;
 	generated?: boolean;
 	rounded?: ThemeRounded;

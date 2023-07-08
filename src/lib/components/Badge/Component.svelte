@@ -1,17 +1,26 @@
 <script lang="ts">
 	import { type BadgeProps, badgeDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../types';
-	import Icon from '../Icon';
 
 	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
-	export let { removable, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } =
-		{
-			...defaults
-		} as Required<BadgeProps>;
+	export let {
+		removable,
+		full,
+		rounded,
+		shadowed,
+		size,
+		tag,
+		theme,
+		transitioned,
+		variant,
+		unstyled
+	} = {
+		...defaults
+	} as Required<BadgeProps>;
 
 	const th = themer($themeStore);
 
@@ -19,7 +28,6 @@
 		? th
 				.create('Badge')
 				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 				.option('badgePadding', size, size)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
@@ -32,9 +40,8 @@
 				.create('Badge')
 				.variant('badge', variant, theme, true)
 				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-				.option('badgePadding', size, size && !removable)
-				.option('badgeFieldPadding', size, size && !!removable)
+				.option('badgePadding', size, size)
+				.option('badgeFieldPadding', size, size && removable && tag)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)

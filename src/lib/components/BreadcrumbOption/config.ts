@@ -1,27 +1,22 @@
+const defaultBreadcrumbOption = {
+	$base: '',
+	white: 'text-white hover:text-white aria-selected:text-white',
+	default: 'text-default-600 hover:text-default-800 aria-selected:text-default-400',
+	primary: 'text-primary-600 hover:text-primary-800 aria-selected:text-primary-400',
+	secondary: 'text-secondary-600 hover:text-secondary-800 aria-selected:text-secondary-400',
+	tertiary: 'text-tertiary-600 hover:text-tertiary-800 aria-selected:text-tertiary-400',
+	danger: 'text-danger-600 hover:text-danger-800 aria-selected:text-danger-400',
+	warning: 'text-warning-600 hover:text-warning-800 aria-selected:text-warning-400',
+	success: 'text-success-600 hover:text-success-800 aria-selected:text-success-400',
+	info: 'text-info-600 hover:text-info-800 aria-selected:text-info-400'
+};
+
 export const breadcrumbOption = {
 	default: {
-		$base: '',
-		white: 'text-white hover:text-white aria-selected:text-white',
-		default: 'text-default-600 hover:text-default-800 aria-selected:text-default-400',
-		primary: 'text-primary-600 hover:text-primary-800 aria-selected:text-primary-400',
-		secondary: 'text-secondary-600 hover:text-secondary-800 aria-selected:text-secondary-400',
-		tertiary: 'text-tertiary-600 hover:text-tertiary-800 aria-selected:text-tertiary-400',
-		danger: 'text-danger-600 hover:text-danger-800 aria-selected:text-danger-400',
-		warning: 'text-warning-600 hover:text-warning-800 aria-selected:text-warning-400',
-		success: 'text-success-600 hover:text-success-800 aria-selected:text-success-400',
-		info: 'text-info-600 hover:text-info-800 aria-selected:text-info-400'
+		...defaultBreadcrumbOption
 	},
 	unfilled: {
-		$base: '',
-		white: 'text-white hover:text-white aria-selected:text-white',
-		default: 'text-default-600 hover:text-default-800 aria-selected:text-default-400',
-		primary: 'text-primary-600 hover:text-primary-800 aria-selected:text-primary-400',
-		secondary: 'text-secondary-600 hover:text-secondary-800 aria-selected:text-secondary-400',
-		tertiary: 'text-tertiary-600 hover:text-tertiary-800 aria-selected:text-tertiary-400',
-		danger: 'text-danger-600 hover:text-danger-800 aria-selected:text-danger-400',
-		warning: 'text-warning-600 hover:text-warning-800 aria-selected:text-warning-400',
-		success: 'text-success-600 hover:text-success-800 aria-selected:text-success-400',
-		info: 'text-info-600 hover:text-info-800 aria-selected:text-info-400'
+		...defaultBreadcrumbOption
 	},
 	filled: {
 		$base: 'text-white',
@@ -37,30 +32,25 @@ export const breadcrumbOption = {
 	}
 };
 
+const defaultBreadcrumbOptionItem = {
+	$base: '',
+	white: 'text-white',
+	default: 'text-default-600',
+	primary: 'text-primary-600',
+	secondary: 'text-secondary-600',
+	tertiary: 'text-tertiary-600',
+	danger: 'text-danger-600',
+	warning: 'text-warning-600',
+	success: 'text-success-600',
+	info: 'text-info-600'
+};
+
 export const breadcrumbOptionItem = {
 	default: {
-		$base: '',
-		white: 'text-white',
-		default: 'text-default-600',
-		primary: 'text-primary-600',
-		secondary: 'text-secondary-600',
-		tertiary: 'text-tertiary-600',
-		danger: 'text-danger-600',
-		warning: 'text-warning-600',
-		success: 'text-success-600',
-		info: 'text-info-600'
+		...defaultBreadcrumbOptionItem
 	},
 	unfilled: {
-		$base: '',
-		white: 'text-white',
-		default: 'text-default-600',
-		primary: 'text-primary-600',
-		secondary: 'text-secondary-600',
-		tertiary: 'text-tertiary-600',
-		danger: 'text-danger-600',
-		warning: 'text-warning-600',
-		success: 'text-success-600',
-		info: 'text-info-600'
+		...defaultBreadcrumbOptionItem
 	},
 	filled: {
 		$base: 'text-white',

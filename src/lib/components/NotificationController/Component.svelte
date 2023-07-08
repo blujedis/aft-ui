@@ -7,7 +7,7 @@
 		notificationControllerDefaults as defaults
 	} from './module';
 	import { notificationPosition } from './config';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';

@@ -4,7 +4,7 @@
 		tabControllerDefaults as defaults,
 		type TabControllerContext
 	} from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { setContext } from 'svelte';
 	import { useSelect, type SelectValue } from '$lib/stores/select';
 	import { ensureArray } from '$lib/utils';

@@ -9,16 +9,11 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import Breadcrumb, { type BreadcrumbVariant } from '.';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import DarkMode from '../_Example/DarkMode.svelte';
+	import BreadcrumbOption from '../BreadcrumbOption';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	// import DarkMode from '../_Example/DarkMode.svelte';
 
-	const title = 'Badges';
+	const title = 'Breadcrumb';
 	const description = 'Simple component for displaying tags, notification counts and more.';
 	const code = `
   `;
@@ -31,8 +26,8 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'filled' as BreadcrumbVariant
+		transitioned: false as boolean,
+		variant: 'default' as BreadcrumbVariant
 	};
 </script>
 
@@ -52,16 +47,34 @@
 		<hr />
 	</Section>
 
-	<DarkMode enabled={dark}>
+	<!-- <DarkMode enabled={dark}>
+	</DarkMode> -->
+	{#key props}
 		<Section>
-			{#key props}
-				<Breadcrumb generated {...props} />
-			{/key}
+			<Breadcrumb {...props} generated flush />
 		</Section>
 		<Section>
+			<Breadcrumb {...props} variant="filled">
+				<BreadcrumbOption label="Home" href="/" index={0} />
+				<BreadcrumbOption label="Get Started" href="/" selected />
+				<BreadcrumbOption label="Docs" href="/" />
+				<BreadcrumbOption label="Contact Us" href="/" />
+				<BreadcrumbOption label="About" href="/" />
+			</Breadcrumb>
+		</Section>
+		<Section>
+			<Breadcrumb {...props} flush>
+				<BreadcrumbOption label="Home" href="/" index={0} />
+				<BreadcrumbOption label="Get Started" href="/" />
+				<BreadcrumbOption label="Docs" href="/" />
+				<BreadcrumbOption label="Contact Us" href="/" selected />
+				<BreadcrumbOption label="About" href="/" />
+			</Breadcrumb>
+		</Section>
+	{/key}
+	<!-- <Section>
 			{#key props}
 				<Breadcrumb generated {...props} variant="unfilled" />
 			{/key}
-		</Section>
-	</DarkMode>
+		</Section> -->
 </ExamplePage>

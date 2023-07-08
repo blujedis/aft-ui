@@ -5,11 +5,13 @@
 	 * @see https://docs.iconify.design/icon-components/svelte/dimensions.html#:~:text=%22cil%3Atruck%22-,class,-%3D%22big%2Dicon
 	 */
 
-	import { Icon, type IconProps, iconDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib/theme';
+	import { type IconProps, iconDefaults as defaults } from './module';
+	import IconBase from '@iconify/svelte';
+	import themeStore, { themer } from '$lib';
 	type $$Props = IconProps;
 	export let { icon, size, unstyled } = { ...defaults } as Required<$$Props>;
 
+	const Icon = IconBase as any; // need to override iconify types.
 	const th = themer($themeStore);
 
 	$: iconClasses = unstyled

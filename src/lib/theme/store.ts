@@ -4,7 +4,7 @@ import defaults from './defaults';
 import * as options from './options';
 import * as components from '../components/configs';
 import * as componentOptions from '../components/options';
-import { appcolors } from './palettes';
+import { palette } from './palettes';
 
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 	get(): T;
@@ -15,7 +15,7 @@ const defaultTheme = {
 	options: { ...options, ...componentOptions },
 	defaults,
 	components,
-	palette: appcolors
+	palette
 };
 
 /**

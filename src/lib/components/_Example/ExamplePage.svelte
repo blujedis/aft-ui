@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Highlight from 'svelte-highlight';
-	import typescript from 'svelte-highlight/languages/typescript';
-	import github from 'svelte-highlight/styles/github';
+	// import Highlight from 'svelte-highlight';
+	// import typescript from 'svelte-highlight/languages/typescript';
+	// import github from 'svelte-highlight/styles/github';
 
 	export let title = 'Example';
 	export let description = '';
@@ -12,13 +12,15 @@
 	}
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	{@html github}
-</svelte:head>
+</svelte:head> -->
 
 <div>
 	<div class="flex mb-4">
-		<div class="flex-1 text-xl font-semibold">{title}</div>
+		<div class="flex-1 text-xl font-semibold">
+			<a href="/">{title}</a>
+		</div>
 		<div>
 			<div class="rounded-sm p-1 bg-slate-100 ring-slate-700 ring-opacity-10 ring-1">
 				<button
@@ -41,7 +43,8 @@
 	</div>
 	<div>
 		{#if visible}
-			<Highlight language={typescript} {code} />
+			<span>Todo add syntax highlighting</span>
+			<!-- <Highlight language={typescript} {code} /> -->
 		{:else}
 			<slot />
 		{/if}

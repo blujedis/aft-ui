@@ -6,7 +6,7 @@
 		type DropdownKey,
 		type DropdownItem
 	} from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { useDisclosure } from '../../stores';
 	import { createCustomEvent, ensureArray } from '$lib/utils';
 	import { setContext } from 'svelte';

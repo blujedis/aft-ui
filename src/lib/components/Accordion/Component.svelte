@@ -4,7 +4,7 @@
 		accordionDefaults as defaults,
 		type AccordionContext
 	} from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../types';
 	import { useSelect } from '$lib/stores/select';
 	import { setContext } from 'svelte';

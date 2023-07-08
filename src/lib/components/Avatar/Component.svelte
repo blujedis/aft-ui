@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { type AvatarProps, avatarDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
-	import { getContext, get_current_component } from 'svelte/internal';
+	import themeStore, { themer } from '$lib';
+	import { get_current_component } from 'svelte/internal';
+	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../types';
 	import Icon from '../Icon';
@@ -26,8 +27,6 @@
 		...defaults,
 		...context?.globals
 	} as Required<AvatarProps>;
-
-	$: console.log(context?.globals);
 
 	let _placeholder = placeholder as string | IconifyIcon;
 	if (placeholder === true) _placeholder = 'mdi:account';

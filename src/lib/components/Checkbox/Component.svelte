@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type CheckboxProps, checkboxDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../types';
@@ -25,11 +25,18 @@
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
 		.variant('checkbox', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+		.option(
+			focused === 'default' || focused === true ? 'focusedSizes' : 'focusedVisibleSizes',
+			size,
+			focused
+		)
+		.option(
+			focused === 'default' || focused === true ? 'focused' : 'focusedVisible',
+			theme,
+			focused
+		)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-		.option('iconSizes', size, size)
+		.option('checkboxSizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.option('disableds', theme, disabled)

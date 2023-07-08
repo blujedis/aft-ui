@@ -4,7 +4,7 @@ import type * as componentOptions from '../components/options';
 import type defaults from './defaults';
 import type * as configs from '../components/configs';
 import type { colors, prefixes, shades } from './constants';
-import type { appcolors, namedcolors, tailwindcolors } from './palettes';
+import type { palette, namedcolors, tailwindcolors } from './palettes';
 
 /////////////////////////////////////////////////////
 
@@ -51,7 +51,7 @@ export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Re
 /**
  * Maintains code help while allowing arbitrary values/string.
  */
-// export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
+export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
 export type ColorType =
 	| `${'#'}${string}`
@@ -76,7 +76,7 @@ export interface ThemeConfig {
 	options: ThemeOptions;
 	defaults: typeof defaults;
 	components: typeof configs;
-	palette: typeof appcolors;
+	palette: typeof palette;
 }
 
 export type ThemeOptions = typeof baseOptions & typeof componentOptions;

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { themer, themeStore } from '$lib/theme';
-	import { get_current_component, onMount, setContext } from 'svelte/internal';
+	import themeStore, { themer } from '$lib';
+	import { get_current_component } from 'svelte/internal';
+	import { setContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import BreadcrumbOption from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
@@ -10,7 +11,7 @@
 
 	type $$Props = BreadcrumbProps & ElementNativeProps<'ol'>;
 
-	export let { full, generated, rounded, shadowed, size, theme, transitioned, variant } = {
+	export let { flush, full, generated, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults
 	} as Required<BreadcrumbProps>;
 
@@ -34,7 +35,6 @@
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbSpacings', size, size)
 		.append('inline-flex items-center', true)
-
 		.compile(true);
 
 	$: breadcrumbNavClasses = th
@@ -47,6 +47,7 @@
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',
 			true
 		)
+		.append('!pl-0', flush)
 		.append($$restProps.class, true)
 		.compile(true);
 

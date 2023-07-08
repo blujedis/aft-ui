@@ -2,7 +2,7 @@
 	import type { ElementNativeProps } from '../types';
 
 	import { getContext } from 'svelte';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
 	import type { DropdownContext } from '$lib/components/Dropdown/module';

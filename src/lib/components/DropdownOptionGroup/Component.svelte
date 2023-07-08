@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext, setContext } from 'svelte';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import type { DropdownContext } from '$lib/components/Dropdown/module';
 	import { type DropdownOptionGroupProps, dropdownOptionGroupDefaults as defaults } from './module';
 

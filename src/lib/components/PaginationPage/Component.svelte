@@ -7,7 +7,7 @@
 	import type { SelectValue } from '$lib/stores/select';
 	import type { PaginationControllerContext } from '../PaginationController';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import themeStore, { themer } from '$lib';
 	import { getContext, get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import Icon from '../Icon';

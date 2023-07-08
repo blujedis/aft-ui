@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, ThemeColor, ThemeColorShade, TypeOrKey } from './types';
-import { appcolors, tailwindcolors, namedcolors } from './palettes';
+import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from './types';
+import { tailwindcolors, namedcolors } from './palettes';
 import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';
 
@@ -19,7 +19,6 @@ export function ensureArray<T = any>(value?: null | T | T[]) {
 }
 
 const tailwindKeys = Object.keys(tailwindcolors);
-const appKeys = Object.keys(appcolors);
 const namedKeys = Object.keys(namedcolors);
 
 /**
@@ -46,8 +45,8 @@ export function isTailwindColor(color: string) {
  *
  * @param color the color to eval as App color.
  */
-export function isAppColor(color: string) {
-	return appKeys.includes(color);
+export function isAppColor(palette: Record<string, Record<string, string>>, color: string) {
+	return Object.keys(palette).includes(color);
 }
 
 /**
@@ -128,13 +127,17 @@ export function classToColorSegments(path: string) {
 /**
  * Normalizes the color value returning the normalized hex, rgb, hsl color.
  *
+ * @param palette the user defined color palette.
  * @param value a tailwind color, named color, theme color or defined color.
  */
-export function classToColor(value: string) {
+export function classToColor(
+	palette: Record<string, Record<string, string>>,
+	value: string
+): string {
 	if (isCssColor(value)) return value;
 	if (isNamedColor(value)) return namedcolors[value as keyof typeof namedcolors];
 	const [color, shade, namespace] = classToColorSegments(value);
-	if (isAppColor(color)) return getProperty(appcolors, namespace);
+	if (isAppColor(palette, color)) return getProperty(palette, namespace) as unknown as string;
 	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);
 	return value;
 }
@@ -145,7 +148,7 @@ export function classToColor(value: string) {
  * @param props an object containing properties and values.
  * @param key the dot notation key to pick.
  */
-export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrKey<Path<P>>) {
+export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrValue<Path<P>>) {
 	return getProperty(props, key as string) || '';
 }
 

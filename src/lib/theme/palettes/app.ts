@@ -1,4 +1,4 @@
-export const appcolors = {
+export const palette = {
 	default: {
 		'50': '#f8fafc',
 		'100': '#f1f5f9',
@@ -112,3 +112,5 @@ export const appcolors = {
 		DEFAULT: '#06b6d4'
 	}
 };
+
+export default palette;

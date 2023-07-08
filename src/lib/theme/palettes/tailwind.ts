@@ -1,6 +1,51 @@
 import colors from 'tailwindcss/colors';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { blueGray, coolGray, lightBlue, trueGray, warmGray, ...rest } = colors;
+const {
+	slate,
+	gray,
+	zinc,
+	neutral,
+	stone,
+	red,
+	orange,
+	amber,
+	yellow,
+	lime,
+	green,
+	emerald,
+	teal,
+	cyan,
+	sky,
+	blue,
+	indigo,
+	violet,
+	purple,
+	fuchsia,
+	pink,
+	rose
+} = colors;
 
-export const tailwindcolors = rest;
+export const tailwindcolors = {
+	slate,
+	gray,
+	zinc,
+	neutral,
+	stone,
+	red,
+	orange,
+	amber,
+	yellow,
+	lime,
+	green,
+	emerald,
+	teal,
+	cyan,
+	sky,
+	blue,
+	indigo,
+	violet,
+	purple,
+	fuchsia,
+	pink,
+	rose
+};

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { colors } from './constants';
 import { getProperty } from 'dot-prop';
+
 import type {
 	PropsWithoutPrefix,
 	ThemeConfig,
@@ -67,8 +68,16 @@ export function formatter(template: string, token: string, ...args: any[]) {
 
 export function themer<C extends ThemeConfig>(themeConfig: C) {
 	type Components = typeof themeConfig.components;
+	type Defaults = typeof themeConfig.defaults;
+	type Options = typeof themeConfig.options;
+	type Palette = typeof themeConfig.palette;
 	type Component = keyof Components;
 	type Variant<K extends Component> = keyof Components[K];
+
+	const _components: Components = themeConfig?.components || {};
+	const _options: Options = themeConfig?.options || {};
+	const _defaults: Defaults = themeConfig?.defaults || {};
+	const _palette: Palette = themeConfig?.palette || {};
 
 	/**
 	 * Creates a new instance for generating themes.
@@ -93,22 +102,23 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 
 		function getVariant<N extends Component, V extends Variant<N>>(
 			name: N,
-			variant: V,
+			variant?: V,
 			when?: Primitive
 		): typeof api;
 		function getVariant<N extends Component, V extends Variant<N>>(
 			name: N,
-			variant: V,
-			theme: ThemeColor,
+			variant?: V,
+			theme?: ThemeColor,
 			when?: Primitive
 		): typeof api;
 		function getVariant<N extends Component, V extends Variant<N>>(
 			name: N,
-			variant: V,
+			variant?: V,
 			theme?: ThemeColor | Primitive,
 			when?: Primitive
 		) {
-			const conf = themeConfig.components[name][variant] as Record<string, string>;
+			if (typeof themeConfig === 'undefined') return api;
+			const conf = _components[name][variant || ('default' as V)] as Record<string, string>;
 			if (!colors.includes(theme as any) && !['white'].includes(theme as any)) {
 				when = theme as Primitive;
 				theme = '';
@@ -130,11 +140,12 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 */
 		function option<K extends ThemeOption>(
 			key: K,
-			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'>,
+			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
 			when: Primitive
 		) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (typeof prop === 'undefined' || !when) return api;
-			const opt = (themeConfig.options[key] || {}) as Record<string, string>;
+			const opt = (_options[key] || {}) as Record<string, string>;
 			if (!opt)
 				throw new Error(`${instanceName} option using property ${prop as string} was NOT found.`);
 			const baseValue = opt.$base || '';
@@ -156,6 +167,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			key: K,
 			when: Primitive
 		) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			const value = getProperty(obj, key as string);
 			if (!value)
@@ -181,6 +193,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param classes tailwind class strings to be removed.
 		 */
 		function remove(classes: string | string[], when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
 			removed = [...removed, ...(classes as string[])];
@@ -194,6 +207,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param when if value is truthy add value otherwise reject.
 		 */
 		function append(arg: ClassNameValue, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
 			arg = arg || '';
 			if (when && arg) appended = [...appended, ...ensureArray(arg)];
 			return api;
@@ -205,6 +219,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param withTailwindMerge when true runs through Tailwind Merge deduping classes.
 		 */
 		function compile(withTailwindMerge = false) {
+			if (typeof themeConfig === 'undefined') return '';
 			let normalized = classnames(...base, ...themed, ...appended).trim();
 			normalized = normalized
 				.split(' ')

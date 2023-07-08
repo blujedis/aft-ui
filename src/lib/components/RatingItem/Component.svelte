@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { classToColor, styler, themer, themeStore } from '$lib/theme';
+	import themeStore, { classToColor, styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
 	import type { RatingContext } from '../Rating';
 	import { uniqid } from '$lib/utils';
-	import type { ElementNativeProps, ElementProps } from '../types';
+	import type { ElementProps } from '../types';
 
 	type $$Props = RatingItemProps & ElementProps<'svg'>;
 
@@ -17,7 +17,7 @@
 
 	// let ref: SVGElement | undefined;
 	const id = uniqid();
-	const initFill = classToColor(fill) || '#FFA41C';
+	const initFill = classToColor($themeStore.palette, fill) || '#FFA41C';
 	const strokeColor = stroked ? initFill : undefined;
 
 	$: percentage =
