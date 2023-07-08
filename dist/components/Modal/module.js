@@ -1,5 +1,5 @@
-import { SvelteComponentTyped } from 'svelte';
-export class ModalComponent extends SvelteComponentTyped {
+import { SvelteComponent } from 'svelte';
+export class ModalComponent extends SvelteComponent {
 	disclosure;
 }
 export const transitions = {

@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare class __sveltets_Render<Item extends Record<string, any>> {
 	props(): {
 		context?: any;
@@ -412,7 +412,7 @@ export type ComponentEvents<Item extends Record<string, any>> = ReturnType<
 export type ComponentSlots<Item extends Record<string, any>> = ReturnType<
 	__sveltets_Render<Item>['slots']
 >;
-export default class Component<Item extends Record<string, any>> extends SvelteComponentTyped<
+export default class Component<Item extends Record<string, any>> extends SvelteComponent<
 	ComponentProps<Item>,
 	ComponentEvents<Item>,
 	ComponentSlots<Item>

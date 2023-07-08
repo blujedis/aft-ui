@@ -54,15 +54,15 @@
 	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		<div
 			class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-			transition:fade={{ duration: 100 }}
+			transition:fade|global={{ duration: 100 }}
 		/>
 
 		<div class="fixed inset-0 overflow-hidden">
 			<div class="absolute inset-0 overflow-hidden">
 				<div class={drawerPositionClasses}>
 					<div
-						in:fly={{ x: drawerOffsetMap[size][position], duration: drawerSpeedMap[speed] }}
-						out:fly={{
+						in:fly|global={{ x: drawerOffsetMap[size][position], duration: drawerSpeedMap[speed] }}
+						out:fly|global={{
 							x: drawerOffsetMap[size][position],
 							duration: drawerSpeedMap[speed] * 1.5,
 							opacity: 0.75

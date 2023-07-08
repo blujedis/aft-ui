@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 import { type DropdownOptionProps } from './module';
 declare class __sveltets_Render<Tag extends 'a' | 'button'> {
 	props(): DropdownOptionProps<Tag> &
@@ -23,7 +23,7 @@ export type ComponentEvents<Tag extends 'a' | 'button'> = ReturnType<
 export type ComponentSlots<Tag extends 'a' | 'button'> = ReturnType<
 	__sveltets_Render<Tag>['slots']
 >;
-export default class Component<Tag extends 'a' | 'button'> extends SvelteComponentTyped<
+export default class Component<Tag extends 'a' | 'button'> extends SvelteComponent<
 	ComponentProps<Tag>,
 	ComponentEvents<Tag>,
 	ComponentSlots<Tag>

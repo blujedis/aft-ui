@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare const __propDef: {
 	props: {
 		close?: (() => void) | undefined;
@@ -11,7 +11,7 @@ declare const __propDef: {
 export type PlaceholderProps = typeof __propDef.props;
 export type PlaceholderEvents = typeof __propDef.events;
 export type PlaceholderSlots = typeof __propDef.slots;
-export default class Placeholder extends SvelteComponentTyped<
+export default class Placeholder extends SvelteComponent<
 	PlaceholderProps,
 	PlaceholderEvents,
 	PlaceholderSlots

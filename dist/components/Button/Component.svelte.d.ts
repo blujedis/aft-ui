@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 import { type ButtonProps } from './module';
 declare class __sveltets_Render<Tag extends 'button' | 'a'> {
 	props(): ButtonProps<Tag> &
@@ -21,7 +21,7 @@ export type ComponentEvents<Tag extends 'button' | 'a'> = ReturnType<
 export type ComponentSlots<Tag extends 'button' | 'a'> = ReturnType<
 	__sveltets_Render<Tag>['slots']
 >;
-export default class Component<Tag extends 'button' | 'a'> extends SvelteComponentTyped<
+export default class Component<Tag extends 'button' | 'a'> extends SvelteComponent<
 	ComponentProps<Tag>,
 	ComponentEvents<Tag>,
 	ComponentSlots<Tag>

@@ -28,7 +28,7 @@
 		aria-labelledby={`${name}-accordion-heading`}
 		{...$$restProps}
 		class={accordionClasses}
-		transition:slide={{ axis: 'y', delay, duration, easing }}
+		transition:slide|global={{ axis: 'y', delay, duration, easing }}
 	>
 		<slot />
 	</svelte:element>

@@ -1,9 +1,9 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../theme';
 import type { EasingFunction, TransitionConfig } from 'svelte/types/runtime/transition';
 import type { modal } from './config';
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '../../stores';
-export declare class ModalComponent extends SvelteComponentTyped<ModalProps> {
+export declare class ModalComponent extends SvelteComponent<ModalProps> {
 	disclosure?: DisclosureMethods;
 }
 export type ModalVariant = keyof typeof modal;
@@ -33,7 +33,7 @@ export type ModalTransition = 'fade' | 'announce' | 'zoom' | 'reveal' | 'none' |
 export type ModalProps = {
 	abortable?: boolean;
 	backdrop?: string | boolean;
-	content?: typeof SvelteComponentTyped<Record<string, unknown>>;
+	content?: typeof SvelteComponent<Record<string, unknown>>;
 	contentProps?: Record<string, unknown>;
 	escapable?: boolean;
 	focustrap?: boolean;

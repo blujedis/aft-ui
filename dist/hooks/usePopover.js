@@ -1,7 +1,7 @@
 import { createPopper as createPopperInstance } from '@popperjs/core';
-import { onDestroy, SvelteComponent, SvelteComponentTyped } from 'svelte';
+import { onDestroy, SvelteComponent } from 'svelte';
 import Popover from '../components/Popover';
-export class PopoverComponent extends SvelteComponentTyped {}
+export class PopoverComponent extends SvelteComponent {}
 /**
  * Hook creates new Popper instance using reference node and content node Svelte Actions.
  *

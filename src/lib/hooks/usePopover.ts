@@ -6,7 +6,7 @@ import {
 	type Modifier,
 	type VirtualElement
 } from '@popperjs/core';
-import { onDestroy, SvelteComponent, SvelteComponentTyped, type ComponentProps } from 'svelte';
+import { onDestroy, SvelteComponent, type ComponentProps } from 'svelte';
 
 import Popover, { type PopoverProps } from '$lib/components/Popover';
 import type { ElementNativeProps } from '$lib/components';
@@ -43,11 +43,11 @@ export type PopperReturn<TModifier> = [
 	() => InstanceExt | null
 ];
 
-export class PopoverComponent extends SvelteComponentTyped<PopoverProps & PopoverNativeProps> {}
+export class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> {}
 
 export type PopoverOptions<
 	TModifier,
-	C extends typeof SvelteComponent
+	C extends typeof SvelteComponent<any>
 > = PopperOptions<TModifier> & {
 	target?: string | Element | ShadowRoot;
 	selector?: string;
@@ -151,7 +151,7 @@ export function createPopper<TModifier extends Partial<Modifier<any, any>>>(
 
 export function createPopover<
 	M extends Partial<Modifier<any, any>>,
-	C extends typeof SvelteComponent
+	C extends typeof SvelteComponent<any>
 >(initOptions = {} as PopoverOptions<M, C>) {
 	const options = {
 		type: 'hover',
@@ -173,11 +173,11 @@ export function createPopover<
 		...rest
 	} = options as Required<PopoverOptions<M, C>>;
 	const [createRef, createContent, getInstance] = createPopper<M>(rest);
-	const Component: typeof SvelteComponent = initComponent || Popover;
+	const Component: typeof SvelteComponent<any> = initComponent || Popover;
 
 	let visible = false;
 	let node = null as (Element & { focus: () => void }) | null;
-	let component: SvelteComponentTyped | null = null;
+	let component: SvelteComponent | null = null;
 	let content: HTMLElement | null = null;
 	let events = [] as [string, (...args: any) => void][];
 	const target = typeof initTarget === 'string' ? document.querySelector(initTarget) : initTarget;

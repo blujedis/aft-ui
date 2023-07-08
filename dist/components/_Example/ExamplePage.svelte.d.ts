@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare const __propDef: {
 	props: {
 		title?: string | undefined;
@@ -16,7 +16,7 @@ declare const __propDef: {
 export type ExamplePageProps = typeof __propDef.props;
 export type ExamplePageEvents = typeof __propDef.events;
 export type ExamplePageSlots = typeof __propDef.slots;
-export default class ExamplePage extends SvelteComponentTyped<
+export default class ExamplePage extends SvelteComponent<
 	ExamplePageProps,
 	ExamplePageEvents,
 	ExamplePageSlots

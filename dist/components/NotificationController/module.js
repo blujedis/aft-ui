@@ -1,6 +1,6 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 import Notification from '../Notification';
-export class NotificationComponent extends SvelteComponentTyped {}
+export class NotificationComponent extends SvelteComponent {}
 export const notificationControllerDefaults = {
 	Component: Notification,
 	group: 'default',

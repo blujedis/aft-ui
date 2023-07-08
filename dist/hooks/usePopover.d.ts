@@ -5,7 +5,7 @@ import {
 	type Modifier,
 	type VirtualElement
 } from '@popperjs/core';
-import { SvelteComponent, SvelteComponentTyped, type ComponentProps } from 'svelte';
+import { SvelteComponent, type ComponentProps } from 'svelte';
 import { type PopoverProps } from '../components/Popover';
 import type { ElementNativeProps } from '../components';
 export type { VirtualElement } from '@popperjs/core';
@@ -33,12 +33,12 @@ export type PopperReturn<TModifier> = [
 	ContentAction<TModifier>,
 	() => InstanceExt | null
 ];
-export declare class PopoverComponent extends SvelteComponentTyped<
+export declare class PopoverComponent extends SvelteComponent<
 	PopoverProps & PopoverNativeProps
 > {}
 export type PopoverOptions<
 	TModifier,
-	C extends typeof SvelteComponent
+	C extends typeof SvelteComponent<any>
 > = PopperOptions<TModifier> & {
 	target?: string | Element | ShadowRoot;
 	selector?: string;
@@ -78,7 +78,7 @@ export declare function createPopper<TModifier extends Partial<Modifier<any, any
 ): PopperReturn<TModifier>;
 export declare function createPopover<
 	M extends Partial<Modifier<any, any>>,
-	C extends typeof SvelteComponent
+	C extends typeof SvelteComponent<any>
 >(
 	initOptions?: Partial<OptionsGeneric<M>> & {
 		target?: string | Element | ShadowRoot | undefined;

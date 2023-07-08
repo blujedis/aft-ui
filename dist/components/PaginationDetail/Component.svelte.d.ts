@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare const __propDef: {
 	props: {
 		full?: boolean | undefined;
@@ -472,7 +472,7 @@ declare const __propDef: {
 export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
-export default class Component extends SvelteComponentTyped<
+export default class Component extends SvelteComponent<
 	ComponentProps,
 	ComponentEvents,
 	ComponentSlots

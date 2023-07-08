@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare const __propDef: {
 	props: {
 		value?: string | undefined;
@@ -12,7 +12,7 @@ declare const __propDef: {
 export type SelectSizeProps = typeof __propDef.props;
 export type SelectSizeEvents = typeof __propDef.events;
 export type SelectSizeSlots = typeof __propDef.slots;
-export default class SelectSize extends SvelteComponentTyped<
+export default class SelectSize extends SvelteComponent<
 	SelectSizeProps,
 	SelectSizeEvents,
 	SelectSizeSlots

@@ -136,14 +136,14 @@
 		{#if backdrop && $store.visible}
 			<div
 				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-				transition:fade={{ duration: 100 }}
+				transition:fade|global={{ duration: 100 }}
 			/>
 		{/if}
 		<div class={wrapperClasses}>
 			<div class={containerClasses}>
 				<div
 					bind:this={panel}
-					transition:transitioner={{ type: transition }}
+					transition:transitioner|global={{ type: transition }}
 					use:bindFocusTrap
 					class={contentClasses}
 				>

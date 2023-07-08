@@ -2,7 +2,7 @@
  * Global Options
  * dropshadow: (default: none)
  */
-import type { SvelteComponentTyped } from 'svelte';
+import type { SvelteComponent } from 'svelte';
 import type { popover } from './config';
 import type {
 	ThemeColor,
@@ -14,7 +14,7 @@ import type {
 export type PopoverVariant = keyof typeof popover;
 export type PopoverProps = {
 	arrowed?: boolean;
-	content?: string | typeof SvelteComponentTyped<any> | null;
+	content?: string | typeof SvelteComponent<any> | null;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;

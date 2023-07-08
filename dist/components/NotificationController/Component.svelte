@@ -35,8 +35,8 @@
 		{#each filtered as n (n.key)}
 			<div
 				animate:flip
-				in:fly={{ x: notificationPosition[position].x, duration: 350 }}
-				out:fly={{ x: notificationPosition[position].x, duration: 350 }}
+				in:fly|global={{ x: notificationPosition[position].x, duration: 350 }}
+				out:fly|global={{ x: notificationPosition[position].x, duration: 350 }}
 			>
 				{#if Component}
 					<svelte:component this={Component} {...n} />

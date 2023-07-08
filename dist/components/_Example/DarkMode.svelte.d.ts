@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 declare const __propDef: {
 	props: {
 		enabled?: boolean | undefined;
@@ -13,7 +13,7 @@ declare const __propDef: {
 export type DarkModeProps = typeof __propDef.props;
 export type DarkModeEvents = typeof __propDef.events;
 export type DarkModeSlots = typeof __propDef.slots;
-export default class DarkMode extends SvelteComponentTyped<
+export default class DarkMode extends SvelteComponent<
 	DarkModeProps,
 	DarkModeEvents,
 	DarkModeSlots

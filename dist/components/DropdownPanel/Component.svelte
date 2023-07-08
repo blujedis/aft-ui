@@ -95,7 +95,7 @@
 		use:bindFocusTrap
 		on:keydown={handleFocusTrap}
 		on:keydown={handleNavigation}
-		transition:scale={{ duration, start, delay, easing, opacity }}
+		transition:scale|global={{ duration, start, delay, easing, opacity }}
 		class={panelClasses}
 		style={panelStyles}
 		role={context.mode === 'menu' ? 'menu' : 'listbox'}

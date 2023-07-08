@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from 'svelte';
+import { SvelteComponent } from 'svelte';
 import { type AccordionButtonIcon } from './module';
 declare const __propDef: {
 	props: {
@@ -575,7 +575,7 @@ declare const __propDef: {
 export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
-export default class Component extends SvelteComponentTyped<
+export default class Component extends SvelteComponent<
 	ComponentProps,
 	ComponentEvents,
 	ComponentSlots
