@@ -32,6 +32,8 @@
 
 	export const store = useDisclosure({ visible: false });
 
+	let panel: HTMLDivElement;
+
 	const th = themer($themeStore);
 
 	$: drawerSizeClasses = th
@@ -51,7 +53,7 @@
 	$: drawerClasses = th
 		.create('DrawerWrapper')
 		.option('shadows', shadowed, shadowed)
-		.append('flex h-full flex-col overflow-y-scroll bg-white', true)
+		.append('flex h-full flex-col overflow-y-scroll', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -65,20 +67,27 @@
 			handleClose();
 		}
 	}
+
+	function handleClick(e: any) {
+		if (!panel?.contains(e.target)) handleClose();
+	}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 {#if $store.visible}
 	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-		<div
-			role="button"
-			tabindex="-1"
-			class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-			transition:fade={{ duration: 100 }}
-			on:click={handleClose}
-			on:keydown={handleKeydown}
-		/>
+		{#if backdrop}
+			<div
+				role="button"
+				tabindex="-1"
+				bind:this={panel}
+				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
+				transition:fade={{ duration: 100 }}
+				on:click={handleClick}
+				on:keydown={handleKeydown}
+			/>
+		{/if}
 
 		<div class="fixed inset-0 overflow-hidden">
 			<div class="absolute inset-0 overflow-hidden">

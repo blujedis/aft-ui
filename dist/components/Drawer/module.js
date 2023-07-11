@@ -3,9 +3,14 @@ export const drawerPositionMap = {
     right: 'right-0 pl-10'
 };
 export const drawerSizeMap = {
-    sm: 'max-w-xs',
-    md: 'max-w-sm',
-    lg: 'max-w-md'
+    unstyled: '',
+    none: 'max-w-none',
+    xs: 'max-w-xs',
+    sm: 'max-w-sm',
+    md: 'max-w-md',
+    lg: 'max-w-lg',
+    xl: 'max-w-xl',
+    xl2: 'max-w-2xl'
 };
 export const drawerSpeedMap = {
     slow: 600,
@@ -13,16 +18,21 @@ export const drawerSpeedMap = {
     fast: 100
 };
 export const drawerOffsetMap = {
-    sm: { left: -320, right: '100%' },
-    md: { left: -384, right: '100%' },
-    lg: { left: -448, right: '100%' }
+    unstyled: {},
+    none: { left: 0, right: '100%' },
+    xs: { left: -320, right: '100%' },
+    sm: { left: -384, right: '100%' },
+    md: { left: -448, right: '100%' },
+    lg: { left: -512, right: '100%' },
+    xl: { left: -576, right: '100%' },
+    xl2: { left: -672, right: '100%' },
 };
 export const drawerDefaults = {
     abortable: true,
     escapable: true,
     position: 'right',
     shadowed: 'lg',
-    size: 'md',
+    size: 'sm',
     speed: 'medium',
     theme: 'default',
     variant: 'default'

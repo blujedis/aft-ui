@@ -29,7 +29,7 @@ declare const __propDef: {
         contentProps?: Record<string, unknown> | undefined;
         position?: "left" | "right" | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
-        size?: import("../..").ThemeSimpleSize | undefined;
+        size?: import("../..").ThemeSize | undefined;
         speed?: import("../..").ThemeSpeed | undefined;
         theme?: import("../..").ThemeColor | undefined;
         variant?: "default" | undefined;

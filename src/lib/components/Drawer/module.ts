@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeShadowed, ThemeSimpleSize, ThemeSpeed } from '../../types';
+import type { ThemeColor, ThemeShadowed, ThemeSimpleSize, ThemeSize, ThemeSpeed } from '../../types';
 import type { SvelteComponent } from 'svelte';
 // import type { drawer } from './config';
 
@@ -12,7 +12,7 @@ export type DrawerProps = {
 	contentProps?: Record<string, unknown>;
 	position?: 'left' | 'right';
 	shadowed?: ThemeShadowed;
-	size?: ThemeSimpleSize;
+	size?: ThemeSize;
 	speed?: ThemeSpeed;
 	theme?: ThemeColor;
 	variant?: DrawerVariant;
@@ -24,9 +24,14 @@ export const drawerPositionMap = {
 };
 
 export const drawerSizeMap = {
-	sm: 'max-w-xs',
-	md: 'max-w-sm',
-	lg: 'max-w-md'
+	unstyled: '',
+	none: 'max-w-none',
+	xs: 'max-w-xs',
+	sm: 'max-w-sm',
+	md: 'max-w-md',
+	lg: 'max-w-lg',
+	xl: 'max-w-xl',
+	xl2: 'max-w-2xl'
 };
 
 export const drawerSpeedMap = {
@@ -36,17 +41,23 @@ export const drawerSpeedMap = {
 };
 
 export const drawerOffsetMap = {
-	sm: { left: -320, right: '100%' },
-	md: { left: -384, right: '100%' },
-	lg: { left: -448, right: '100%' }
-} as Record<ThemeSimpleSize, { left: string | number; right: string | number }>;
+	unstyled: {} as any,
+	none: { left: 0, right: '100%' },
+	xs: { left: -320, right: '100%' },
+	sm: { left: -384, right: '100%' },
+	md: { left: -448, right: '100%' },
+	lg: { left: -512, right: '100%' },
+	xl: { left: -576, right: '100%' },
+	xl2: { left: -672, right: '100%' },
+
+} as Record<ThemeSize, { left: string | number; right: string | number }>;
 
 export const drawerDefaults: Partial<DrawerProps> = {
 	abortable: true,
 	escapable: true,
 	position: 'right',
 	shadowed: 'lg',
-	size: 'md',
+	size: 'sm',
 	speed: 'medium',
 	theme: 'default',
 	variant: 'default'
