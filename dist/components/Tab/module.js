@@ -1,4 +1,4 @@
 export const tabDefaults = {
-	theme: 'default',
-	variant: 'default'
+    theme: 'default',
+    variant: 'default'
 };

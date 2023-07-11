@@ -5,7 +5,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = ProgressBarProps & Omit<ElementNativeProps<'progress'>, 'size'>;
 

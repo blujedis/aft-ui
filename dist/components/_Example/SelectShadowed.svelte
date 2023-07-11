@@ -1,6 +1,5 @@
-<script>
-	import Select from './Select.svelte';
-	export let value = '';
+<script>import Select from "./Select.svelte";
+export let value = "";
 </script>
 
 <Select

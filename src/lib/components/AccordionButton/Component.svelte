@@ -11,7 +11,7 @@
 		accordionButtonDefaults as defaults,
 		type AccordionButtonIcon
 	} from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = AccordianButtonProps & ElementNativeProps<'button'>;
 
@@ -51,14 +51,16 @@
 		.compile();
 </script>
 
-<ConditionalElement id={`${name}-accordion-heading`} as={htag} condition={typeof htag === 'string'}>
+<ConditionalElement as={htag} condition={typeof htag === 'string'}>
 	<Button
+		id={`${name}-accordion-heading`}
 		aria-controls={`${name}-accordion-option`}
 		{...$$restProps}
 		unstyled
 		on:click={() => context.toggle(name)}
 		class={accordionButtonClasses}
 		aria-expanded={isSelected}
+		mode="text"
 		{rounded}
 		{size}
 	>

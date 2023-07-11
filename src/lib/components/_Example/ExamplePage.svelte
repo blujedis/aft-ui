@@ -7,6 +7,8 @@
 	export let description = '';
 	export let code = '';
 	export let visible = false;
+
+	code = '';
 	function toggle() {
 		visible = !visible;
 	}

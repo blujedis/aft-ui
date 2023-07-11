@@ -1,142 +1,126 @@
-<script>
-	import { Button } from '../Button';
-	import { getContext, onMount } from 'svelte';
-	import { dropdownInputDefaults as defaults } from './module';
-	import themeStore, { themer } from '../..';
-	import Badge from '../Badge';
-	import { Icon } from '../Icon';
-	const context = getContext('Dropdown');
-	export let {
-		caret,
-		disabled,
-		focused,
-		full,
-		multiple,
-		newable,
-		placeholder,
-		removable,
-		resetable,
-		rounded,
-		roticon,
-		size,
-		shadowed,
-		theme,
-		transitioned,
-		variant,
-		unstyled
-	} = {
-		...defaults,
-		...context?.globals
-	};
-	let div;
-	let input;
-	const th = themer($themeStore);
-	$: selected = $context.items.filter((item) => $context.selected.includes(item.value));
-	$: inputWrapperClasses = th
-		.create('DropdownInputWrapper')
-		.variant('input', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-		// .append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
-		// .option('fieldPadding', size, size)
-		.option('common', 'transition', transitioned)
-		.option('fieldFontSizes', size, size)
-		.option('roundeds', rounded, rounded && variant !== 'flushed')
-		.option('shadows', shadowed, shadowed)
-		.option('disableds', theme, disabled)
-		.append('w-full', full)
-		.append('px-2', variant === 'flushed' && !multiple)
-		.append('px-1', multiple)
-		.append('inline-flex items-center justify-between', true)
-		.append($$restProps.class, true)
-		.compile(true);
-	$: iconClasses = th
-		.create('DropdownButtonIcon')
-		.option('iconDropdownSizes', size, true)
-		.append('transition-transform duration-300 origin-center', !!caret && roticon)
-		.append(
-			typeof roticon === 'string' ? roticon : '-rotate-180',
-			$context.visible && roticon && !!caret
-		)
-		.append('mr-2 shrink pointer-events-none', true)
-		.compile();
-	$: inputClasses = th
-		.create('DropdownInput')
-		.option('fieldFontSizes', size, size)
-		.option('fieldPadding', size, size)
-		.append('background-transparent outline-none border-none w-8', true)
-		.append('invisible', disabled) // transparent background shows as light gray.
-		.append('px-0', selected.length || (placeholder && !selected.length))
-		.compile(true);
-	$: placeholderClasses = th
-		.create('DropdownPlaceholder')
-		.option('fieldPadding', size, size)
-		.append('pt-0 pb-0 pr-0 capitalize', true)
-		.compile(true);
-	function handleClick(e) {
-		const target = e.target;
-		const isInput = target.tagName.toLowerCase() === 'input';
-		const isButton = target.tagName.toLowerCase() === 'button';
-		if (!isInput && !isButton) {
-			// hit icon toggle panel.
-			context.toggle();
-			return;
-		}
-		e.stopPropagation();
-		if (isButton) {
-			const childNodes = target.parentElement?.querySelectorAll('button');
-			if (!childNodes?.length || !removable) return;
-			const childNodesArray = Array.from(childNodes);
-			const index = childNodesArray.indexOf(target);
-			const item = selected[index];
-			if (item) context.remove(item.value);
-		} else if (e.key === 'ArrowDown' && !$context.visible) {
-			context.open();
-		}
-	}
-	function handleMouseEnter() {
-		if (context.trigger !== 'hover') return;
-		context.toggle();
-	}
-	function handleInput(e) {
-		if (!input) return;
-		const multiplier = ['xl', 'xl2'].includes(size) ? 8.75 : ['xs', 'sm'].includes(size) ? 6 : 7.5;
-		const value = input.value;
-		const width = value.length * multiplier + 25; // 8px per character
-		input.style.width = width + 'px';
-	}
-	function handleKeydown(e) {
-		if (!input) return;
-		const query = input.value || '';
-		if (typeof e.key !== 'undefined' && ['Backspace', 'Enter'].includes(e.key)) {
-			if (e.key === 'Backspace' && !input.value.length) {
-				e.preventDefault();
-				const last = selected.slice(-1)[0];
-				if (last && removable) context.remove(last.value);
-				input.focus();
-			} else if (e.key === 'Enter' && newable && context.mode === 'multiselect') {
-				e.preventDefault();
-				context.add(input.value);
-				context.select(input.value);
-				input.value = '';
-			}
-		} else if (query.length) {
-			// apply filter.
-		}
-	}
-	function handleBlur(e) {
-		if (!resetable) return;
-	}
-	context.subscribe((s) => {
-		if (div && !$context.visible) div.focus();
-	});
+<script>import { getContext } from "svelte";
+import { dropdownInputDefaults as defaults } from "./module";
+import themeStore, { themer } from "../..";
+import Badge from "../Badge";
+import { Icon } from "../Icon";
+const context = getContext("Dropdown");
+export let {
+  caret,
+  disabled,
+  focused,
+  full,
+  multiple,
+  newable,
+  placeholder,
+  removable,
+  resetable,
+  rounded,
+  roticon,
+  size,
+  shadowed,
+  theme,
+  transitioned,
+  variant,
+  unstyled
+} = {
+  ...defaults,
+  ...context?.globals
+};
+let div;
+let input;
+const th = themer($themeStore);
+$:
+  selected = $context.items.filter((item) => $context.selected.includes(item.value));
+$:
+  inputWrapperClasses = th.create("DropdownInputWrapper").variant("input", variant, theme, true).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded && variant !== "flushed").option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("px-2", variant === "flushed" && !multiple).append("inline-flex items-center justify-between relative", true).append($$restProps.class, true).compile(true);
+$:
+  containerWrapper = th.create("DropdownInputContainer").append("flex flex-wrap items-center overflow-clip", true).compile();
+$:
+  iconClasses = th.create("DropdownInputIcon").option("iconDropdownSizes", size, true).append("transition-transform duration-300 origin-center", !!caret && roticon).append(
+    typeof roticon === "string" ? roticon : "-rotate-180",
+    $context.visible && roticon && !!caret
+  ).append("mr-2 shrink pointer-events-none", true).compile();
+$:
+  inputClasses = th.create("DropdownInput").option("fieldFontSizes", size, size).option("fieldPadding", size, size).append("background-transparent outline-none border-none w-10 ml-1", true).append("invisible", disabled).append("px-0", selected.length || placeholder && !selected.length).compile(true);
+$:
+  placeholderClasses = th.create("DropdownPlaceholder").option("fieldPadding", size, size).append("pt-0 pb-0 pr-0 capitalize", true).compile(true);
+function updateWidth() {
+  if (!input)
+    return;
+  const multiplier = ["xl", "xl2"].includes(size) ? 8.75 : ["xs", "sm"].includes(size) ? 6 : 7.5;
+  const value = input.value;
+  const width = value.length * multiplier + 25;
+  input.style.width = width + "px";
+}
+function handleClick(e) {
+  const target = e.target;
+  const isInput = target.tagName.toLowerCase() === "input";
+  const isButton = target.tagName.toLowerCase() === "button";
+  if (!isInput && !isButton) {
+    context.toggle();
+    return;
+  }
+  e.stopPropagation();
+  if (isButton) {
+    const childNodes = target.parentElement?.querySelectorAll("button");
+    if (!childNodes?.length || !removable)
+      return;
+    const childNodesArray = Array.from(childNodes);
+    const index = childNodesArray.indexOf(target);
+    const item = selected[index];
+    if (item)
+      context.remove(item.value);
+  } else if (e.key === "ArrowDown" && !$context.visible) {
+    context.open();
+  }
+}
+function handleMouseEnter() {
+  if (context.trigger !== "hover")
+    return;
+  context.toggle();
+}
+function handleInput(e) {
+  updateWidth();
+}
+function handleKeydown(e) {
+  if (!input)
+    return;
+  const query = input.value || "";
+  if (typeof e.key !== "undefined" && ["Backspace", "Enter"].includes(e.key)) {
+    if (e.key === "Backspace" && !input.value.length) {
+      e.preventDefault();
+      const last = selected.slice(-1)[0];
+      if (last && removable)
+        context.remove(last.value);
+      input.focus();
+    } else if (e.key === "Enter" && newable && context.mode === "multiselect") {
+      e.preventDefault();
+      context.add(input.value);
+      context.select(input.value);
+      input.value = "";
+      updateWidth();
+      input.focus();
+    }
+  } else if (query.length) {
+  }
+}
+function handleBlur(e) {
+  if (!resetable)
+    return;
+}
+context.subscribe(() => {
+  if (div && !$context.visible)
+    div.focus();
+});
 </script>
 
 <div>
 	<div
 		bind:this={div}
-		tabindex="-1"
+		role="combobox"
+		tabindex={0}
 		aria-expanded={$context.visible}
+		aria-controls=""
 		aria-haspopup="true"
 		aria-disabled={disabled}
 		on:click={handleClick}
@@ -144,15 +128,15 @@
 		on:keydown={handleClick}
 		class={inputWrapperClasses}
 	>
-		<div>
+		<div class={containerWrapper}>
 			{#if !selected.length}
-				<span class={placeholderClasses}>{placeholder}</span>
+				<div class={placeholderClasses}>{placeholder}</div>
 			{/if}
 			{#if context.mode === 'multiselect'}
 				{#each selected as item}
 					<Badge
-						class="capitalize mt-1"
 						variant={variant === 'flushed' ? 'default' : variant}
+						tag
 						{rounded}
 						{theme}
 						{size}

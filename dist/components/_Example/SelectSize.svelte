@@ -1,7 +1,6 @@
-<script>
-	import Select from './Select.svelte';
-	export let value = 'md';
-	export let label = 'Size';
+<script>import Select from "./Select.svelte";
+export let value = "md";
+export let label = "Size";
 </script>
 
 <Select

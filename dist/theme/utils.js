@@ -1,16 +1,20 @@
 import { twMerge } from 'tailwind-merge';
 import { tailwindcolors, namedcolors } from './palettes';
-import { getProperty } from 'dot-prop';
+// import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getProperty = (...args) => '';
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *
  * @param value the value to inspect as any array.
  */
 export function ensureArray(value) {
-	if (typeof value === 'undefined' || value === null) [];
-	if (Array.isArray(value)) return value;
-	return [value];
+    if (typeof value === 'undefined' || value === null)
+        [];
+    if (Array.isArray(value))
+        return value;
+    return [value];
 }
 const tailwindKeys = Object.keys(tailwindcolors);
 const namedKeys = Object.keys(namedcolors);
@@ -20,8 +24,8 @@ const namedKeys = Object.keys(namedcolors);
  * @param color the possible css color to inspect.
  */
 export function isCssColor(color) {
-	const prefixes = ['#', 'rgb', 'rgba', 'hsl', 'hwb', 'currentColor'];
-	return prefixes.some((p) => color.startsWith(p));
+    const prefixes = ['#', 'rgb', 'rgba', 'hsl', 'hwb', 'currentColor'];
+    return prefixes.some((p) => color.startsWith(p));
 }
 /**
  * Checks if value is a Tailwind color.
@@ -29,7 +33,7 @@ export function isCssColor(color) {
  * @param color the color to eval as Tailwind color.
  */
 export function isTailwindColor(color) {
-	return tailwindKeys.includes(color);
+    return tailwindKeys.includes(color);
 }
 /**
  * Checks if value is an app color from palette.
@@ -37,7 +41,7 @@ export function isTailwindColor(color) {
  * @param color the color to eval as App color.
  */
 export function isAppColor(palette, color) {
-	return Object.keys(palette).includes(color);
+    return Object.keys(palette).includes(color);
 }
 /**
  * Checks if value is a known css color.
@@ -45,7 +49,7 @@ export function isAppColor(palette, color) {
  * @param color color the color to eval as css color.
  */
 export function isNamedColor(color) {
-	return namedKeys.includes(color);
+    return namedKeys.includes(color);
 }
 /**
  * Parses a Tailwind path into parts, modifiers, prefix and color.
@@ -57,35 +61,37 @@ export function isNamedColor(color) {
  * @param path the class path to be parsed.
  */
 export function parseClass(path) {
-	let modifiers = [];
-	if (path.includes(':')) {
-		const idx = path.lastIndexOf(':');
-		if (~idx) {
-			modifiers = path.slice(0, idx).split(':');
-			path = path.slice(idx + 1);
-		}
-	}
-	path = path.replace(/(-|\.)/g, '.');
-	let color = path.split('.');
-	let prefix = '';
-	if (colorPrefixes.includes(color[0])) {
-		prefix = color.shift() || '';
-		if (color[1] === 'DEFAULT') color[1] = 500;
-	}
-	color = color.filter((v) => !!v);
-	if (!color[1]) color[1] = undefined;
-	const namespace = color[1]
-		? `${color[0]}.${color[1]}`
-		: ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
-		? color[0]
-		: `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
-	color[2] = namespace;
-	return {
-		modifiers,
-		prefix,
-		color,
-		namespace
-	};
+    let modifiers = [];
+    if (path.includes(':')) {
+        const idx = path.lastIndexOf(':');
+        if (~idx) {
+            modifiers = path.slice(0, idx).split(':');
+            path = path.slice(idx + 1);
+        }
+    }
+    path = path.replace(/(-|\.)/g, '.');
+    let color = path.split('.');
+    let prefix = '';
+    if (colorPrefixes.includes(color[0])) {
+        prefix = (color.shift() || '');
+        if (color[1] === 'DEFAULT')
+            color[1] = 500;
+    }
+    color = color.filter((v) => !!v);
+    if (!color[1])
+        color[1] = undefined;
+    const namespace = color[1]
+        ? `${color[0]}.${color[1]}`
+        : ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
+            ? color[0]
+            : `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
+    color[2] = namespace;
+    return {
+        modifiers,
+        prefix,
+        color,
+        namespace
+    };
 }
 /**
  * Converts a Tailwind color class to a dot notation path.
@@ -99,7 +105,7 @@ export function parseClass(path) {
  * @param stripPrefix when true prefixes such as 'bg', 'text' are stripped.
  */
 export function classToColorPath(path) {
-	return parseClass(path).namespace;
+    return parseClass(path).namespace;
 }
 /**
  * Returns a tuple with color name and shade if any.
@@ -107,8 +113,8 @@ export function classToColorPath(path) {
  * @param path the color class to be parsed.
  */
 export function classToColorSegments(path) {
-	const { color } = parseClass(path);
-	return color;
+    const { color } = parseClass(path);
+    return color;
 }
 /**
  * Normalizes the color value returning the normalized hex, rgb, hsl color.
@@ -117,12 +123,17 @@ export function classToColorSegments(path) {
  * @param value a tailwind color, named color, theme color or defined color.
  */
 export function classToColor(palette, value) {
-	if (isCssColor(value)) return value;
-	if (isNamedColor(value)) return namedcolors[value];
-	const [color, shade, namespace] = classToColorSegments(value);
-	if (isAppColor(palette, color)) return getProperty(palette, namespace);
-	else if (isTailwindColor(color)) return getProperty(tailwindcolors, namespace);
-	return value;
+    if (isCssColor(value))
+        return value;
+    if (isNamedColor(value))
+        return namedcolors[value];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [color, shade, namespace] = classToColorSegments(value);
+    if (isAppColor(palette, color))
+        return getProperty(palette, namespace);
+    else if (isTailwindColor(color))
+        return getProperty(tailwindcolors, namespace);
+    return value;
 }
 /**
  * Picks a value using dot notation path.
@@ -131,24 +142,26 @@ export function classToColor(palette, value) {
  * @param key the dot notation key to pick.
  */
 export function pickProp(props, key) {
-	return getProperty(props, key) || '';
+    return getProperty(props, key) || '';
 }
 export function mergeConfig(target, source = {}, dedupeOrPredicate, dedupe) {
-	let predicate = dedupeOrPredicate;
-	if (typeof dedupeOrPredicate === 'boolean') {
-		dedupe = dedupeOrPredicate;
-		predicate = undefined;
-	}
-	const cloneTarget = { ...target };
-	const cloneSource = { ...source };
-	for (const k in cloneSource) {
-		const curval = ensureArray(cloneTarget[k]).join(' ');
-		const srcval = ensureArray(cloneSource[k]).join(' ');
-		cloneTarget[k] = [curval, srcval].join(' ').trim();
-		if (dedupe) cloneTarget[k] = twMerge(cloneTarget[k]);
-		if (predicate) cloneTarget[k] = predicate(cloneTarget[k]);
-	}
-	return cloneTarget;
+    let predicate = dedupeOrPredicate;
+    if (typeof dedupeOrPredicate === 'boolean') {
+        dedupe = dedupeOrPredicate;
+        predicate = undefined;
+    }
+    const cloneTarget = { ...target };
+    const cloneSource = { ...source };
+    for (const k in cloneSource) {
+        const curval = ensureArray(cloneTarget[k]).join(' ');
+        const srcval = ensureArray(cloneSource[k]).join(' ');
+        cloneTarget[k] = [curval, srcval].join(' ').trim();
+        if (dedupe)
+            cloneTarget[k] = twMerge(cloneTarget[k]);
+        if (predicate)
+            cloneTarget[k] = predicate(cloneTarget[k]);
+    }
+    return cloneTarget;
 }
 /**
  * Merges multiple theme configuration objects.
@@ -160,12 +173,13 @@ export function mergeConfig(target, source = {}, dedupeOrPredicate, dedupe) {
  * @param obj5 fouth object to merge from.
  */
 export function mergeConfigs(obj1, obj2, obj3, obj4, obj5, obj6) {
-	const configs = [obj1, obj2, obj3, obj4, obj5, obj6];
-	const target = configs.shift() || {};
-	return configs.reduce((a, c) => {
-		if (c) a = mergeConfig(a, c, true);
-		return a;
-	}, target);
+    const configs = [obj1, obj2, obj3, obj4, obj5, obj6];
+    const target = configs.shift() || {};
+    return configs.reduce((a, c) => {
+        if (c)
+            a = mergeConfig(a, c, true);
+        return a;
+    }, target);
 }
 // type CompileValue = string | number | boolean;
 /**

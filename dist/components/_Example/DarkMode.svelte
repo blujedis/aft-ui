@@ -1,5 +1,4 @@
-<script>
-	export let enabled = false;
+<script>export let enabled = false;
 </script>
 
 <div class={enabled ? 'dark relative bg-gray-900/90 p-4 -mx-4 -my-4 rounded-lg' : 'relative'}>

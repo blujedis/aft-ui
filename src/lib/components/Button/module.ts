@@ -13,8 +13,9 @@ export type ButtonVariant = keyof typeof button;
 export type ButtonProps<Tag extends 'button' | 'a'> = {
 	as?: Tag;
 	disabled?: boolean;
-	focused?: ThemeFocused; // true = focus-visible.
+	focused?: ThemeFocused;
 	full?: boolean;
+	mode?: 'button' | 'text';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -26,9 +27,9 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 };
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
-	focused: true,
+	focused: 'visible',
 	full: false,
-	rounded: 'sm',
+	mode: 'button',
 	size: 'md',
 	theme: 'default',
 	variant: 'default'

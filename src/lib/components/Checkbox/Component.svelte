@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = CheckboxProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -25,16 +25,9 @@
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
 		.variant('checkbox', variant, theme, true)
-		.option(
-			focused === 'default' || focused === true ? 'focusedSizes' : 'focusedVisibleSizes',
-			size,
-			focused
-		)
-		.option(
-			focused === 'default' || focused === true ? 'focused' : 'focusedVisible',
-			theme,
-			focused
-		)
+		.option('focused', theme, focused)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.option('common', 'transition', transitioned)
 		.option('checkboxSizes', size, size)
 		.option('roundeds', rounded, rounded)

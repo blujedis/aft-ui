@@ -10,7 +10,7 @@
 	import { useDisclosure } from '../../stores';
 	import { createCustomEvent, ensureArray } from '$lib/utils';
 	import { setContext } from 'svelte';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = DropdownProps<Tag> & ElementNativeProps<'div'>;
@@ -97,6 +97,7 @@
 		);
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleClose(e?: Event) {
 		store.close();
 	}
@@ -107,15 +108,15 @@
 		}
 	}
 
-	function normalizeItem({ value, label, group }: DropdownItem) {
-		if (typeof label === 'undefined') label = value + '';
-		group = group || '';
-		return {
-			value,
-			label,
-			group
-		} as Required<DropdownItem>;
-	}
+	// function normalizeItem({ value, label, group }: DropdownItem) {
+	// 	if (typeof label === 'undefined') label = value + '';
+	// 	group = group || '';
+	// 	return {
+	// 		value,
+	// 		label,
+	// 		group
+	// 	} as Required<DropdownItem>;
+	// }
 
 	function add(value: DropdownKey, label?: string, group?: string) {
 		if (typeof label === 'undefined') label = value + '';
@@ -182,6 +183,8 @@
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={dropdownClasses}
+	role="listbox"
+	tabindex={-1}
 >
 	<slot
 		visible={$store.visible}

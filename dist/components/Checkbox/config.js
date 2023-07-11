@@ -1,26 +1,20 @@
+const defaultCheckbox = {
+    $base: 'border',
+    white: 'border-white text-gray-300',
+    default: 'border-default-300 text-default-400',
+    primary: 'border-primary-500 text-primary-500',
+    secondary: 'border-secondary-500 text-secondary-500',
+    tertiary: 'border-tertiary-500 text-tertiary-500',
+    danger: 'border-danger-500 text-danger-500',
+    warning: 'border-warning-500 text-warning-500',
+    success: 'border-success-500 text-success-500',
+    info: 'border-info-500 text-info-500'
+};
 export const checkbox = {
-	default: {
-		$base: 'border focus:outline-none ',
-		white: 'border-white text-gray-300',
-		default: 'border-default-300 text-default-300',
-		primary: 'border-primary-500 text-primary-500',
-		secondary: 'border-secondary-500 text-secondary-500',
-		tertiary: 'border-tertiary-500 text-tertiary-500',
-		danger: 'border-danger-500 text-danger-500',
-		warning: 'border-warning-500 text-warning-500',
-		success: 'border-success-500 text-success-500',
-		info: 'border-info-500 text-info-500'
-	},
-	utlined: {
-		$base: 'border focus:outline-none ',
-		white: 'border-white text-gray-300',
-		default: 'border-default-300 text-default-300',
-		primary: 'border-primary-500 text-primary-500',
-		secondary: 'border-secondary-500 text-secondary-500',
-		tertiary: 'border-tertiary-500 text-tertiary-500',
-		danger: 'border-danger-500 text-danger-500',
-		warning: 'border-warning-500 text-warning-500',
-		success: 'border-success-500 text-success-500',
-		info: 'border-info-500 text-info-500'
-	}
+    default: {
+        ...defaultCheckbox
+    },
+    outlined: {
+        ...defaultCheckbox
+    }
 };

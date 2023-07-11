@@ -10,15 +10,13 @@
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import Breadcrumb, { type BreadcrumbVariant } from '.';
 	import BreadcrumbOption from '../BreadcrumbOption';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	// import DarkMode from '../_Example/DarkMode.svelte';
 
 	const title = 'Breadcrumb';
 	const description = 'Simple component for displaying tags, notification counts and more.';
 	const code = `
   `;
-
-	let dark = false;
 
 	const props = {
 		full: false,
@@ -53,6 +51,7 @@
 		<Section>
 			<Breadcrumb {...props} generated flush />
 		</Section>
+
 		<Section>
 			<Breadcrumb {...props} variant="filled">
 				<BreadcrumbOption label="Home" href="/" index={0} />
@@ -62,6 +61,7 @@
 				<BreadcrumbOption label="About" href="/" />
 			</Breadcrumb>
 		</Section>
+
 		<Section>
 			<Breadcrumb {...props} flush>
 				<BreadcrumbOption label="Home" href="/" index={0} />

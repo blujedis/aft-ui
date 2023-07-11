@@ -1,4 +1,4 @@
-import type { SelectStore, SelectValue } from '$lib/stores/select';
+import type { SelectStore, SelectValue } from '../../stores/select';
 import type {
 	ThemeColor,
 	ThemeFocused,
@@ -6,7 +6,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '../../theme';
 import type { TabVariant } from '../Tab';
 
 export type TabControllerProps = {
@@ -27,7 +27,7 @@ export type TabControllerProps = {
 
 export type TabControllerContext = SelectStore & {
 	globals: {
-		focused: boolean;
+		focused: ThemeFocused;
 		full: boolean;
 		rounded: ThemeRounded;
 		size: ThemeSize;

@@ -1,31 +1,29 @@
-<script>
-	import Card from './';
-	import CardContent from '../CardContent';
-	import CardHeader from '../CardHeader';
-	import CardFooter from '../CardFooter';
-	import CardImage from '../CardImage';
-	import Image from '../Image';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	const title = 'Card';
-	const description = 'Card Component.';
-	const code = `
+<script>import Card, {} from "./";
+import CardContent from "../CardContent";
+import CardHeader from "../CardHeader";
+import CardFooter from "../CardFooter";
+import CardImage from "../CardImage";
+import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectRounded from "../_Example/SelectRounded.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import Checkbox from "../_Example/Checkbox.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+const title = "Card";
+const description = "Card Component.";
+const code = `
   `;
-	const props = {
-		rounded: 'lg',
-		shadowed: 'lg',
-		size: 'md',
-		theme: 'default',
-		variant: 'default',
-		wide: false
-	};
+const props = {
+  rounded: "lg",
+  shadowed: "lg",
+  size: "md",
+  theme: "default",
+  variant: "default",
+  wide: false
+};
 </script>
 
 <ExamplePage {title} {description} {code}>

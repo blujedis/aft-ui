@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import Icon from '../Icon';
 	import { getContext } from 'svelte';
 	import type { BreadcrumbContext } from '../Breadcrumb/module';
@@ -11,6 +11,7 @@
 	const context = getContext<BreadcrumbContext>('Breadcrumb');
 
 	export let {
+		focused,
 		href,
 		index,
 		icon,
@@ -23,19 +24,27 @@
 		transitioned,
 		variant
 	} = {
-		...defaults
+		...defaults,
+		...context?.globals
 	} as Required<BreadcrumbOptionProps>;
 
 	const th = themer($themeStore);
 
-	$: breadcrumbOptionListClasses = th
-		.create('BreadcrumbListItem')
-		.variant('breadcrumbOptionItem', variant, theme, true)
-		.compile();
+	// $: breadcrumbOptionListClasses = th
+	// 	.create('BreadcrumbListItem')
+	// 	.variant('breadcrumbOptionItem', variant, theme, true)
+	// 	.compile();
 
 	$: breadcrumbOptionClasses = th
 		.create('Breadcrumb')
 		.variant('breadcrumbOption', variant, theme, true)
+		.option(
+			focused === true || focused === 'always' ? 'focusedRingSizes' : 'focusedVisibleRingSizes',
+			size,
+			focused
+		)
+		.option(focused === true || focused === 'always' ? 'focused' : 'focusedVisible', theme, focused)
+		.option('focusedOffsetSizes', 'two', focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)

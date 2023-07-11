@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type DropdownPanelProps, dropdownPanelDefaults as defaults } from './module';
-	import { ensureArray, themer, themeStore } from '$lib/theme';
-	import { getContext, onMount } from 'svelte';
+	import themeStore, { themer } from '$lib';
+	import { getContext } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import type { DropdownContext } from '$lib/components/Dropdown/module';
 	import { useFocusTrap } from '$lib/hooks';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = DropdownPanelProps & ElementNativeProps<'div'>;
 
@@ -94,11 +94,11 @@
 			if (currentNode) currentNode.focus();
 		}
 	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function initPanel(node: HTMLElement) {
 		unmounted = unmount;
-		node.focus();
+		//	node.focus();
 	}
-	onMount(() => {});
 </script>
 
 {#if (unmounted && $context.visible) || !unmounted}
@@ -109,7 +109,7 @@
 		use:bindFocusTrap
 		on:keydown={handleFocusTrap}
 		on:keydown={handleNavigation}
-		transition:scale|global={{ duration, start, delay, easing, opacity }}
+		transition:scale={{ duration, start, delay, easing, opacity }}
 		class={panelClasses}
 		style={panelStyles}
 		role={context.mode === 'menu' ? 'menu' : 'listbox'}

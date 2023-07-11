@@ -1,42 +1,29 @@
-<script>
-	import { notificationsDefaults as defaults } from './module';
-	import useNotifications from '../../stores/notification';
-	import themeStore, { themer } from '../..';
-	import Icon from '../Icon';
-	export let {
-		key,
-		description,
-		dismissible,
-		duration,
-		group,
-		icon,
-		rounded,
-		shadowed,
-		title,
-		theme,
-		variant
-	} = {
-		...defaults
-	};
-	const th = themer($themeStore);
-	$: notificationClasses = th
-		.create('Notification')
-		.variant('notification', variant, theme, true)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.append('pointer-events-auto w-full max-w-sm overflow-hidden bg-white border-l-4 w-80', true)
-		.append($$restProps.class, true)
-		.compile(true);
-	$: notificationIconClasses = th
-		.create('NotificationIcon')
-		.variant('notificationIcon', variant, theme, true)
-		.append('pr-2 pt-1', true)
-		.compile(true);
-	$: notificationTitleClasses = th
-		.create('NotificaionTitle')
-		.variant('notificationTitle', variant, theme, true)
-		.append('font-semibold', true)
-		.compile(true);
+<script>import { notificationsDefaults as defaults } from "./module";
+import useNotifications from "../../stores/notification";
+import themeStore, { themer } from "../..";
+import Icon from "../Icon";
+export let {
+  key,
+  description,
+  dismissible,
+  duration,
+  group,
+  icon,
+  rounded,
+  shadowed,
+  title,
+  theme,
+  variant
+} = {
+  ...defaults
+};
+const th = themer($themeStore);
+$:
+  notificationClasses = th.create("Notification").variant("notification", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("pointer-events-auto w-full max-w-sm overflow-hidden bg-white border-l-4 w-80", true).append($$restProps.class, true).compile(true);
+$:
+  notificationIconClasses = th.create("NotificationIcon").variant("notificationIcon", variant, theme, true).append("pr-2 pt-1", true).compile(true);
+$:
+  notificationTitleClasses = th.create("NotificaionTitle").variant("notificationTitle", variant, theme, true).append("font-semibold", true).compile(true);
 </script>
 
 <div

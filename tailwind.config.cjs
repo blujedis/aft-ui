@@ -6,8 +6,6 @@ const config = {
 	outdir: './src/lib/theme/palettes',
 	outname: 'app',
 	dynamic: true,
-	outtype: 'esm',
-	outext: 'ts',
 	outsrc: false,
 	colors: {
 		default: {

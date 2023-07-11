@@ -1,3 +1,3 @@
 export const avatarStackDefaults = {
-	direction: 'up'
+    direction: 'up'
 };

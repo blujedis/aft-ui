@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -40,13 +40,13 @@
 				.create('Badge')
 				.variant('badge', variant, theme, true)
 				.option('common', 'transition', transitioned)
-				.option('badgePadding', size, size)
-				.option('badgeFieldPadding', size, size && removable && tag)
+				.option('badgePadding', size, size && !(removable || tag))
+				.option('badgeFieldPadding', size, size && (removable || tag))
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.append('w-full', full)
-				.append('inline-block mr-1', true)
+				//	.append('ml-1', tag)
 				.append($$restProps.class, true)
 				.compile(true);
 
@@ -55,8 +55,10 @@
 
 {#if removable}
 	<button use:forwardedEvents {...$$restProps} class={badgeClasses}>
-		<slot />
-		<slot name="icon">×</slot>
+		<div class="flex flex-row items-center justify-between">
+			<slot />
+			<slot name="icon">×</slot>
+		</div>
 	</button>
 {:else}
 	<span {...$$restProps} class={badgeClasses}>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CardContent from '../CardContent';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { type CardFooterProps, cardFooterDefaults as defaults } from './module';
 	type $$Props = CardFooterProps & ElementNativeProps<'div'>;
 

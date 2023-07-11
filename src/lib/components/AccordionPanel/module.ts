@@ -1,5 +1,5 @@
 import type { SelectValue } from '$lib/stores/select';
-import type { HTMLTag } from '../types';
+import type { HTMLTag } from '../../types';
 
 export type AccordionPanelContext = {
 	name: SelectValue; // must be unique name for all accordions on page.

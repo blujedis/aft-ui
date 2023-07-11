@@ -4,7 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../types';
+	import type { ElementProps } from '../../types';
 	import Icon from '../Icon';
 	import type { AvatarStackContext } from '../AvatarStack';
 	import type { IconifyIcon } from '@iconify/svelte';

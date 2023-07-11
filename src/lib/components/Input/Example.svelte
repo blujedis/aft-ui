@@ -1,12 +1,6 @@
 <script lang="ts">
 	import Input, { type InputVariant } from '.';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -52,10 +46,15 @@
 		<hr />
 	</Section>
 
-	<div class="grid grid-cols-3 gap-4">
+	<div class="grid grid-cols-3 gap-0">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
-			<Input {...props} variant="outlined" placeholder="First Name" />
+			<div class="flex">
+				<!-- <Button>Test</Button>
+				<Button variant="outlined">Test</Button>
+				<Button variant="ghost">Test</Button> -->
+				<Input {...props} variant="outlined" placeholder="First Name" />
+			</div>
 		</label>
 		<label for="outline">
 			<div class="text-sm">Filled:</div>

@@ -1,46 +1,38 @@
-<script>
-	import { breadcrumbOptionDefaults as defaults } from './module';
-	import themeStore, { themer } from '../..';
-	import Icon from '../Icon';
-	import { getContext } from 'svelte';
-	const context = getContext('Breadcrumb');
-	export let {
-		href,
-		index,
-		icon,
-		label,
-		selected,
-		separator,
-		size,
-		sronly,
-		theme,
-		transitioned,
-		variant
-	} = {
-		...defaults,
-		...context?.globals
-	};
-	const th = themer($themeStore);
-	$: breadcrumbOptionListClasses = th
-		.create('BreadcrumbListItem')
-		.variant('breadcrumbOptionItem', variant, theme, true)
-		.compile();
-	$: breadcrumbOptionClasses = th
-		.create('Breadcrumb')
-		.variant('breadcrumbOption', variant, theme, true)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-		.option('fieldFontSizes', size, size)
-		.option('breadcrumbMargins', size, size)
-		.append('pointer-events-none', selected)
-		.append($$restProps.class, true)
-		.compile(true);
+<script>import { breadcrumbOptionDefaults as defaults } from "./module";
+import themeStore, { themer } from "../..";
+import Icon from "../Icon";
+import { getContext } from "svelte";
+const context = getContext("Breadcrumb");
+export let {
+  focused,
+  href,
+  index,
+  icon,
+  label,
+  selected,
+  separator,
+  size,
+  sronly,
+  theme,
+  transitioned,
+  variant
+} = {
+  ...defaults,
+  ...context?.globals
+};
+const th = themer($themeStore);
+$:
+  breadcrumbOptionClasses = th.create("Breadcrumb").variant("breadcrumbOption", variant, theme, true).option(
+    focused === true || focused === "always" ? "focusedRingSizes" : "focusedVisibleRingSizes",
+    size,
+    focused
+  ).option(focused === true || focused === "always" ? "focused" : "focusedVisible", theme, focused).option("focusedOffsetSizes", "two", focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).append("pointer-events-none", selected).append($$restProps.class, true).compile(true);
 </script>
 
 <li>
 	<div class="flex items-center">
 		<slot>
-			{#if separator && index > 0}
+			{#if separator && index !== 0}
 				{#if variant === 'filled'}
 					<svg
 						class="h-full w-6 flex-shrink-0 pointer-events-none"

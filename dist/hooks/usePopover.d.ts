@@ -1,10 +1,5 @@
 import type { Readable } from 'svelte/store';
-import {
-	type Instance,
-	type OptionsGeneric,
-	type Modifier,
-	type VirtualElement
-} from '@popperjs/core';
+import { type Instance, type OptionsGeneric, type Modifier, type VirtualElement } from '@popperjs/core';
 import { SvelteComponent, type ComponentProps } from 'svelte';
 import { type PopoverProps } from '../components/Popover';
 import type { ElementNativeProps } from '../components';
@@ -14,41 +9,34 @@ export type ContentNode = HTMLElement | undefined;
 export type PopperOptions<TModifier> = Partial<OptionsGeneric<TModifier>> | undefined;
 export type PopoverNativeProps = ElementNativeProps<'div'>;
 export type RefAction = (node: RefNode | Readable<VirtualElement>) => {
-	destroy?(): void;
+    destroy?(): void;
 };
-export type ContentAction<TModifier> = (
-	node: HTMLElement,
-	popperOptions?: PopperOptions<TModifier>
-) => {
-	update(popperOptions: PopperOptions<TModifier>): void;
-	destroy(): void;
+export type ContentAction<TModifier> = (node: HTMLElement, popperOptions?: PopperOptions<TModifier>) => {
+    update(popperOptions: PopperOptions<TModifier>): void;
+    destroy(): void;
 };
 export type InstanceExt = Instance & {
-	ref: VirtualElement | Element | undefined;
-	content: HTMLElement | undefined;
-	destroy: () => void;
+    ref: VirtualElement | Element | undefined;
+    content: HTMLElement | undefined;
+    destroy: () => void;
 };
 export type PopperReturn<TModifier> = [
-	RefAction,
-	ContentAction<TModifier>,
-	() => InstanceExt | null
+    RefAction,
+    ContentAction<TModifier>,
+    () => InstanceExt | null
 ];
-export declare class PopoverComponent extends SvelteComponent<
-	PopoverProps & PopoverNativeProps
-> {}
-export type PopoverOptions<
-	TModifier,
-	C extends typeof SvelteComponent<any>
-> = PopperOptions<TModifier> & {
-	target?: string | Element | ShadowRoot;
-	selector?: string;
-	node?: Element & {
-		focus: () => void;
-	};
-	type?: 'click' | 'hover' | 'focus' | 'none';
-	escapable?: boolean;
-	component?: C;
-	props?: ComponentProps<InstanceType<C>>;
+export declare class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> {
+}
+export type PopoverOptions<TModifier, C extends typeof SvelteComponent<any>> = PopperOptions<TModifier> & {
+    target?: string | Element | ShadowRoot;
+    selector?: string;
+    node?: Element & {
+        focus: () => void;
+    };
+    type?: 'click' | 'hover' | 'focus' | 'none';
+    escapable?: boolean;
+    component?: C;
+    props?: ComponentProps<InstanceType<C>>;
 };
 /**
  * Hook creates new Popper instance using reference node and content node Svelte Actions.
@@ -73,39 +61,26 @@ export type PopoverOptions<
  *
  * @param initOptions the options to initialize Popper instance.
  */
-export declare function createPopper<TModifier extends Partial<Modifier<any, any>>>(
-	initOptions?: PopperOptions<TModifier>
-): PopperReturn<TModifier>;
-export declare function createPopover<
-	M extends Partial<Modifier<any, any>>,
-	C extends typeof SvelteComponent<any>
->(
-	initOptions?: Partial<OptionsGeneric<M>> & {
-		target?: string | Element | ShadowRoot | undefined;
-		selector?: string | undefined;
-		node?:
-			| (Element & {
-					focus: () => void;
-			  })
-			| undefined;
-		type?: 'none' | 'hover' | 'click' | 'focus' | undefined;
-		escapable?: boolean | undefined;
-		component?: C | undefined;
-		props?: ComponentProps<InstanceType<C>> | undefined;
-	}
-): {
-	register: (
-		registerNode:
-			| (Element & {
-					focus: () => void;
-			  })
-			| undefined
-	) => void;
-	bind: () => void;
-	unbind: () => void;
-	show: () => void;
-	hide: () => void;
-	destroy: () => void;
+export declare function createPopper<TModifier extends Partial<Modifier<any, any>>>(initOptions?: PopperOptions<TModifier>): PopperReturn<TModifier>;
+export declare function createPopover<M extends Partial<Modifier<any, any>>, C extends typeof SvelteComponent<any>>(initOptions?: Partial<OptionsGeneric<M>> & {
+    target?: string | Element | ShadowRoot | undefined;
+    selector?: string | undefined;
+    node?: (Element & {
+        focus: () => void;
+    }) | undefined;
+    type?: "none" | "hover" | "click" | "focus" | undefined;
+    escapable?: boolean | undefined;
+    component?: C | undefined;
+    props?: ComponentProps<InstanceType<C>> | undefined;
+}): {
+    register: (registerNode: (Element & {
+        focus: () => void;
+    }) | undefined) => void;
+    bind: () => void;
+    unbind: () => void;
+    show: () => void;
+    hide: () => void;
+    destroy: () => void;
 };
 /**
  * Helper to create popover on element.
@@ -117,30 +92,18 @@ export declare function createPopover<
  * @param node the node to apply the popover to.
  * @param options the popover options to be applied.
  */
-export declare function popover<TModifier extends Partial<Modifier<any, any>>>(
-	node: Element & {
-		focus: () => void;
-	},
-	options?: Omit<
-		Partial<OptionsGeneric<TModifier>> & {
-			target?: string | Element | ShadowRoot | undefined;
-			selector?: string | undefined;
-			node?:
-				| (Element & {
-						focus: () => void;
-				  })
-				| undefined;
-			type?: 'none' | 'hover' | 'click' | 'focus' | undefined;
-			escapable?: boolean | undefined;
-			component?: typeof PopoverComponent | undefined;
-			props?:
-				| (PopoverProps &
-						import('svelte/elements').HTMLAttributes<HTMLDivElement> &
-						import('../components').ElementOverrideProps)
-				| undefined;
-		},
-		'component'
-	>
-): {
-	destroy: () => void;
+export declare function popover<TModifier extends Partial<Modifier<any, any>>>(node: Element & {
+    focus: () => void;
+}, options?: Omit<Partial<OptionsGeneric<TModifier>> & {
+    target?: string | Element | ShadowRoot | undefined;
+    selector?: string | undefined;
+    node?: (Element & {
+        focus: () => void;
+    }) | undefined;
+    type?: "none" | "hover" | "click" | "focus" | undefined;
+    escapable?: boolean | undefined;
+    component?: typeof PopoverComponent | undefined;
+    props?: any;
+}, "component">): {
+    destroy: () => void;
 };

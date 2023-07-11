@@ -4,7 +4,7 @@
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
 	import type { RatingContext } from '../Rating';
 	import { uniqid } from '$lib/utils';
-	import type { ElementProps } from '../types';
+	import type { ElementProps } from '../../types';
 
 	type $$Props = RatingItemProps & ElementProps<'svg'>;
 

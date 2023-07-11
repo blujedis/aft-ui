@@ -1,37 +1,38 @@
-<script>
-	import Select from '.';
-	import SelectOption from '../SelectOption';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	const title = 'Select';
-	const description = 'Themed select list.';
-	const code = `
+<script>import Select, {} from ".";
+import SelectOption from "../SelectOption";
+import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectRounded from "../_Example/SelectRounded.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import Checkbox from "../_Example/Checkbox.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+const title = "Select";
+const description = "Themed select list.";
+const code = `
   `;
-	const props = {
-		disabled: false,
-		focused: true,
-		full: false,
-		rounded: 'none',
-		shadowed: 'none',
-		size: 'md',
-		theme: 'default',
-		transitioned: false,
-		variant: 'default'
-	};
-	const items = [
-		{ label: 'JavaScript', value: 'javascript' },
-		{ label: 'Java', value: 'java' },
-		{ label: 'Python', value: 'python' },
-		{ label: 'React', value: 'react' },
-		{ label: 'Rust', value: 'rust' }
-	];
+const props = {
+  disabled: false,
+  focused: true,
+  // true: focus-visible.
+  full: false,
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  transitioned: false,
+  // ThemeTransitioned,
+  variant: "default"
+};
+const items = [
+  { label: "JavaScript", value: "javascript" },
+  { label: "Java", value: "java" },
+  { label: "Python", value: "python" },
+  { label: "React", value: "react" },
+  { label: "Rust", value: "rust" }
+];
 </script>
 
 <ExamplePage {title} {description} {code}>

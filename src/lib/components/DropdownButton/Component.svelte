@@ -3,9 +3,9 @@
 	import { getContext } from 'svelte';
 	import type { DropdownContext } from '../Dropdown/module';
 	import { type DropdownButtonProps, dropdownButtonDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { Icon } from '../Icon';
-	import { themer, themeStore } from '$lib';
+	import themeStore, { themer } from '$lib';
 
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = DropdownButtonProps<Tag> & ElementNativeProps<Tag>;
@@ -45,9 +45,11 @@
 		transitioned,
 		underlined,
 		variant,
-		unstyled,
-		class: 'justify-between capitalize'
+		unstyled
+		// class: 'justify-between capitalize '
 	};
+
+	$$restProps.class = 'justify-between ' + $$restProps.class;
 
 	let ref: HTMLButtonElement | undefined;
 	const th = themer($themeStore);
@@ -76,7 +78,7 @@
 		if (context.trigger !== 'hover') return;
 		context.toggle();
 	}
-	context.subscribe((s) => {
+	context.subscribe(() => {
 		// reset focus back to button when dropdown is closed.
 		if (ref && !$context.visible) ref.focus();
 	});
@@ -88,12 +90,15 @@
 		{...$$restProps}
 		on:click={handleClick}
 		on:mouseenter={handleEnter}
+		mode="text"
 		aria-expanded={$context.visible}
 		aria-haspopup="true"
 	>
 		<slot>
 			{#if ['select', 'multiselect'].includes(context.mode)}
-				{label}
+				<div>
+					{label}
+				</div>
 			{/if}
 		</slot>
 		{#if caret}

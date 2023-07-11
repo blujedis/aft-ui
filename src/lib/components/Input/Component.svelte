@@ -3,11 +3,12 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = InputProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
 	export let {
+		chars,
 		disabled,
 		focused,
 		full,
@@ -27,9 +28,9 @@
 	$: inputClasses = unstyled
 		? th
 				.create('Input')
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
+				.option('focused', theme, focused)
+				.option('focusedRingSizes', 'two', focused)
+				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -39,18 +40,17 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center', true)
+				.append('flex items-center justify-center motion-reduce:transition-none', true)
 				.append($$restProps.class, true)
 				.compile(true)
 		: th
 				.create('Input')
 				.variant('input', variant, theme, true)
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
+				.option('focused', theme, focused)
+				.option('focusedRingSizes', 'two', focused)
+				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('fieldPadding', size, size)
 				.option('roundeds', rounded, rounded && variant !== 'flushed')
@@ -58,11 +58,11 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center', true)
+				.append('flex items-center justify-center motion-reduce:transition-none', true)
 				.append($$restProps.class, true)
 				.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} use:forwardedEvents class={inputClasses} />
+<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />

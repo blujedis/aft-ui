@@ -1,29 +1,30 @@
-<script>
-	import Input from '.';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	const title = 'Input';
-	const description = 'Themed input form elements and variants.';
-	const code = `
+<script>import Input, {} from ".";
+import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+import SelectRounded from "../_Example/SelectRounded.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import Checkbox from "../_Example/Checkbox.svelte";
+const title = "Input";
+const description = "Themed input form elements and variants.";
+const code = `
   `;
-	const props = {
-		disabled: false,
-		focused: true,
-		full: false,
-		rounded: 'none',
-		shadowed: 'none',
-		size: 'md',
-		theme: 'default',
-		transitioned: false,
-		variant: 'default'
-	};
+const props = {
+  disabled: false,
+  focused: true,
+  // true: focus-visible.
+  full: false,
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  transitioned: false,
+  // ThemeTransitioned,
+  variant: "default"
+};
 </script>
 
 <ExamplePage {title} {description} {code}>
@@ -43,10 +44,15 @@
 		<hr />
 	</Section>
 
-	<div class="grid grid-cols-3 gap-4">
+	<div class="grid grid-cols-3 gap-0">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
-			<Input {...props} variant="outlined" placeholder="First Name" />
+			<div class="flex">
+				<!-- <Button>Test</Button>
+				<Button variant="outlined">Test</Button>
+				<Button variant="ghost">Test</Button> -->
+				<Input {...props} variant="outlined" placeholder="First Name" />
+			</div>
 		</label>
 		<label for="outline">
 			<div class="text-sm">Filled:</div>

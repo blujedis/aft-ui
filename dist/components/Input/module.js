@@ -1,6 +1,7 @@
 export const inputDefaults = {
-	focused: true,
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+    focused: true,
+    size: 'md',
+    theme: 'default',
+    transitioned: true,
+    variant: 'default'
 };

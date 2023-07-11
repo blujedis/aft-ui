@@ -1,6 +1,6 @@
 export const cardDefaults = {
-	edged: true,
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+    edged: true,
+    size: 'md',
+    theme: 'default',
+    variant: 'default'
 };

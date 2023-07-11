@@ -5,7 +5,7 @@
 		type AccordionContext
 	} from './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { useSelect } from '$lib/stores/select';
 	import { setContext } from 'svelte';
 

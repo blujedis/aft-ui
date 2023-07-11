@@ -2,13 +2,7 @@
 	import type { NotificationVariant } from '../Notification';
 	import NotificationController, { type NotificationPosition } from '.';
 	import notification from '$lib/stores/notification';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -17,8 +11,6 @@
 	import ListOptions from '../_Example/ListOptions.svelte';
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectTransition from '../_Example/SelectTransition.svelte';
 	import SelectPosition from '../_Example/SelectPosition.svelte';
 
 	const title = 'Notifications';
@@ -89,7 +81,7 @@
 				<textarea
 					bind:this={textarea}
 					id="notification"
-					class="text-sm mt-2"
+					class="text-sm mt-2 p-4"
 					placeholder="Enter your Notification message."
 				/>
 			</label>

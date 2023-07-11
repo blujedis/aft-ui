@@ -1,5 +1,5 @@
 import type { SelectValue } from '$lib/stores/select';
-import type { ThemeColor, ThemeRounded, ThemeSize, ThemeTransitioned } from '$lib/theme';
+import type { ThemeColor, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { paginationPage } from './config';
 

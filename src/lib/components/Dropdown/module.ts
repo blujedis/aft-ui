@@ -1,6 +1,6 @@
 import type { DisclosureStore } from '../../stores';
 import { buttonDefaults, type ButtonProps } from '../Button';
-import type { ElementNativeProps } from '../types';
+import type { ElementNativeProps } from '../../types/components';
 
 // menu - typical dropdown menu.
 // select - single selection trigger button reflects selected value.
@@ -37,7 +37,7 @@ export type DropdownContext = DisclosureStore<{
 	globals: ButtonProps<'button' | 'a'> & { multiple?: boolean };
 };
 
-export type DropdownProps<Tag extends 'button' | 'a'> = ButtonProps<Tag> & {
+export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'mode'> & {
 	autoclose?: boolean; // when blur close panel if open.
 	escapable?: boolean; // close panel when escape is entered.
 	focustrap?: boolean; // when true focus is trapped in the dropdown.
@@ -50,9 +50,11 @@ export type DropdownProps<Tag extends 'button' | 'a'> = ButtonProps<Tag> & {
 	visible?: boolean;
 	selectProps?: ElementNativeProps<'select'>;
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { mode, ...rest } = buttonDefaults;
 
 export const dropdownDefaults: Partial<DropdownProps<'button'>> = {
-	...buttonDefaults,
+	...rest,
 	as: 'button',
 	autoclose: true,
 	escapable: true,

@@ -5,9 +5,10 @@
 		paginationControllerDefaults as defaults
 	} from './module';
 	import themeStore, { themer } from '$lib';
-	import { get_current_component, setContext } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
+	import { setContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../types';
+	import type { ElementProps } from '../../types';
 
 	type Item = $$Generic<Record<string, any>>;
 	type $$Props = PaginationControllerProps<Item> & ElementProps<'nav'>;
@@ -47,7 +48,6 @@
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		// [ln] justify-between border-t border-gray-200

@@ -1,8 +1,11 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from './types';
+import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from '../types/theme';
 import { tailwindcolors, namedcolors } from './palettes';
-import { getProperty } from 'dot-prop';
+// import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getProperty = (...args: any[]) => '';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -136,6 +139,7 @@ export function classToColor(
 ): string {
 	if (isCssColor(value)) return value;
 	if (isNamedColor(value)) return namedcolors[value as keyof typeof namedcolors];
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [color, shade, namespace] = classToColorSegments(value);
 	if (isAppColor(palette, color)) return getProperty(palette, namespace) as unknown as string;
 	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);

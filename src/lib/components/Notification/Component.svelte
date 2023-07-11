@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type NotificationProps, notificationsDefaults as defaults } from './module';
 	import useNotifications from '$lib/stores/notification';
-	import themeStore, { themer, type ThemeColor } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import themeStore, { themer } from '$lib';
+	import type { ElementNativeProps } from '../../types';
 	import Icon from '../Icon';
 
 	type $$Props = NotificationProps & ElementNativeProps<'div'>;

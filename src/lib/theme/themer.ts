@@ -3,7 +3,51 @@ import { ensureArray } from './utils';
 import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { colors } from './constants';
-import { getProperty } from 'dot-prop';
+// import { getProperty } from 'dot-prop';
+
+export interface ThemerApi<C extends ThemeConfig> {
+	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
+		name: N,
+		variant?: V,
+		when?: Primitive
+	): ThemerApi<C>;
+
+	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
+		name: N,
+		variant?: V,
+		theme?: ThemeColor,
+		when?: Primitive
+	): ThemerApi<C>;
+
+	option<K extends ThemeOption>(
+		key: K,
+		prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
+		when: Primitive
+	): ThemerApi<C>;
+
+	mapped<T extends Record<string, unknown>, K extends Path<T>>(
+		obj: T,
+		key: K,
+		when: Primitive
+	): ThemerApi<C>;
+
+	remove(classes: string | string[], when: Primitive): ThemerApi<C>;
+
+	append(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
+
+	compile(withTailwindMerge?: boolean): string;
+
+	classes(): {
+		base: string[];
+		themed: string[];
+		removed: string[];
+		appended: classnames.ArgumentArray;
+	};
+}
+
+export type ThemerInstance<C extends ThemeConfig> = {
+	create: (instanceName?: string) => ThemerApi<C>;
+};
 
 import type {
 	PropsWithoutPrefix,
@@ -12,7 +56,7 @@ import type {
 	ThemeOptions,
 	ThemeColor,
 	Path
-} from './types';
+} from '../types/theme';
 
 type Primitive = boolean | string | number | undefined | Primitive[];
 
@@ -67,6 +111,56 @@ export function formatter(template: string, token: string, ...args: any[]) {
 }
 
 export function themer<C extends ThemeConfig>(themeConfig: C) {
+	const mockApi = {
+		variant: mockVariant,
+		option: mockOption,
+		mapped: mockMapped,
+		remove: mockRemove,
+		append: mockAppend,
+		compile: mockCompile,
+		classes: mockClasses
+	} as ThemerApi<C>;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockVariant(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockOption(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockMapped(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockRemove(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockAppend(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockCompile(...args: any) {
+		return '';
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockClasses(...args: any) {
+		return {
+			base: [],
+			themed: [],
+			removed: [],
+			appended: []
+		};
+	}
+	const mockThemer: ThemerInstance<C> = {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		create: (instanceName = '') => mockApi
+	};
+
+	// If no document return mock instance.
+	if (typeof document === 'undefined') return mockThemer;
+
 	type Components = typeof themeConfig.components;
 	type Defaults = typeof themeConfig.defaults;
 	type Options = typeof themeConfig.options;
@@ -169,7 +263,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		) {
 			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
-			const value = getProperty(obj, key as string);
+			const value = obj[key]; // getProperty(obj, key as string);
 			if (!value)
 				throw new Error(
 					`${instanceName} mapped value using property ${key as string} was NOT found.`
@@ -252,5 +346,3 @@ themer.join = join;
 themer.merge = merge;
 themer.format = formatter;
 themer.includes = includes;
-
-// const TOKEN = /{{([\s\S]+?)}}/g;

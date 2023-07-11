@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = RadioProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -25,10 +25,10 @@
 	$: checkboxClasses = themer($themeStore)
 		.create('Radio')
 		.variant('radio', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+		.option('focused', theme, focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+		.option('focusedOffsetSizes', 'two', focused)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('iconSizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)

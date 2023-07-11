@@ -1,10 +1,10 @@
-import { placeholder } from '../../theme';
+import { placeholder } from '../placeholder';
 const baseVariant = {
-	...placeholder
+    ...placeholder
 };
 export const accordionOption = {
-	default: { ...baseVariant },
-	outlined: { ...baseVariant },
-	flushed: { ...placeholder },
-	pills: { ...placeholder }
+    default: { ...baseVariant },
+    outlined: { ...baseVariant },
+    flushed: { ...placeholder },
+    pills: { ...placeholder }
 };

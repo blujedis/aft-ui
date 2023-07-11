@@ -7,31 +7,31 @@
  */
 export type Strategy = 'decimal' | 'percentage' | 'simple';
 export interface FuzzyOptions<T extends Record<string, any> = Record<string, any>> {
-	/**
-	 * Allowable threshold either decimal, percentage or value from 1-10
-	 */
-	threshold?: number;
-	/**
-	 * The strategy to use decimal, percentage or simple for digit 1-10.
-	 */
-	strategy?: Strategy;
-	/**
-	 * The number of decimals allowed when calculating.
-	 */
-	places?: number;
-	/**
-	 * When haystack is an object the keys to check similarity against.
-	 */
-	keys?: (keyof T)[];
+    /**
+     * Allowable threshold either decimal, percentage or value from 1-10
+     */
+    threshold?: number;
+    /**
+     * The strategy to use decimal, percentage or simple for digit 1-10.
+     */
+    strategy?: Strategy;
+    /**
+     * The number of decimals allowed when calculating.
+     */
+    places?: number;
+    /**
+     * When haystack is an object the keys to check similarity against.
+     */
+    keys?: (keyof T)[];
 }
 export interface FuzzyResult {
-	needle: string;
-	haystack: string;
-	strategy: Strategy;
-	threshold: number;
-	score: number;
-	distance: number;
-	match: boolean;
+    needle: string;
+    haystack: string;
+    strategy: Strategy;
+    threshold: number;
+    score: number;
+    distance: number;
+    match: boolean;
 }
 /**
  * Does a simple match for similarity and threshold returning whether the value
@@ -56,11 +56,7 @@ export declare function fuzzyMatch(needle: string, haystack: string, threshold?:
  * @param haystack the haystack string to be evaluated for match.
  * @param options the options to apply in search.
  */
-export declare function fuzzyMatch(
-	needle: string,
-	haystack: string,
-	options?: Omit<FuzzyOptions, 'keys'>
-): boolean;
+export declare function fuzzyMatch(needle: string, haystack: string, options?: Omit<FuzzyOptions, 'keys'>): boolean;
 /**
  * Does fuzzy search returning all data including similarity score if is
  * match, the needle and data compared and the strategy used.
@@ -79,11 +75,7 @@ export declare function fuzzyMatch(
  * @param haystack the haystack string to be evaluated for match.
  * @param threshold the max allowable threshold from 1-10.
  */
-export declare function fuzzyFull(
-	needle: string,
-	haystack: string,
-	threshold?: number
-): FuzzyResult;
+export declare function fuzzyFull(needle: string, haystack: string, threshold?: number): FuzzyResult;
 /**
  * Does fuzzy search returning all data including similarity score if is
  * match, the needle and data compared and the strategy used.
@@ -102,11 +94,7 @@ export declare function fuzzyFull(
  * @param haystack the haystack string to be evaluated for match.
  * @param options the options to apply in search.
  */
-export declare function fuzzyFull(
-	needle: string,
-	haystack: string,
-	options?: Omit<FuzzyOptions, 'keys'>
-): FuzzyResult;
+export declare function fuzzyFull(needle: string, haystack: string, options?: Omit<FuzzyOptions, 'keys'>): FuzzyResult;
 /**
  * Filters array of values which match the needles threshold.
  *
@@ -117,8 +105,4 @@ export declare function fuzzyFull(
  * @param haystack the haystack string to be evaluated for match.
  * @param options the options to apply in search.
  */
-export declare function fuzzyFilter(
-	needle: string,
-	haystack: (string | Record<string, any>)[],
-	options?: FuzzyOptions
-): (string | Record<string, any>)[];
+export declare function fuzzyFilter(needle: string, haystack: (string | Record<string, any>)[], options?: FuzzyOptions): (string | Record<string, any>)[];

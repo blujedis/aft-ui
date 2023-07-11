@@ -4,13 +4,7 @@
  */
 import type { SvelteComponent } from 'svelte';
 import type { popover } from './config';
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 
 export type PopoverVariant = keyof typeof popover;
 
@@ -21,7 +15,7 @@ export type PopoverProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	unstyled?: boolean;
 	variant?: PopoverVariant;
 };

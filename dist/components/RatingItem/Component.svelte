@@ -1,50 +1,33 @@
-<script>
-	import themeStore, { classToColor, styler, themer } from '../..';
-	import { getContext } from 'svelte';
-	import { ratingDefaults as defaults } from './module';
-	import { uniqid } from '../../utils';
-	const context = getContext('Rating');
-	export let { background, fill, index, size, stroked } = {
-		...defaults,
-		...context?.globals
-	};
-	// let ref: SVGElement | undefined;
-	const id = uniqid();
-	const initFill = classToColor($themeStore.palette, fill) || '#FFA41C';
-	const strokeColor = stroked ? initFill : undefined;
-	$: percentage =
-		index > $context.score ? 0 : index < Math.trunc($context.score) ? 1 : $context.score % 1;
-	$: isActive = $context.active > -1;
-	$: fillColor = isActive
-		? index <= $context.active
-			? initFill
-			: 'currentColor'
-		: percentage === 1
-		? initFill
-		: percentage === 0
-		? 'currentColor'
-		: `url(#${id})`;
-	const th = themer($themeStore);
-	const st = styler($themeStore);
-	$: ratingStyles = st
-		.create('RatingStyles')
-		.add('color', 'transparent', true)
-		.add('outline-color', initFill, true)
-		.append($$restProps.style, true)
-		.compile();
-	$: ratingClasses = th
-		.create('Rating')
-		.option('ratingSizes', size, size)
-		.append('pointer-events-none', $context.readonly)
-		.append('z-10 focus-visible:outline outline-2', true)
-		.append('hover:scale-125', true)
-		.append($$restProps.class, true)
-		.compile(true);
-	$: stops = [
-		{ offset: `0%`, 'stop-color': initFill, 'stop-opacity': '1' },
-		{ offset: `${percentage * 100}%`, 'stop-color': initFill, 'stop-opacity': '1' },
-		{ offset: `${percentage * 100}%`, 'stop-color': 'currentColor', 'stop-opacity': '1' }
-	];
+<script>import themeStore, { classToColor, styler, themer } from "../..";
+import { getContext } from "svelte";
+import { ratingDefaults as defaults } from "./module";
+import { uniqid } from "../../utils";
+const context = getContext("Rating");
+export let { background, fill, index, size, stroked } = {
+  ...defaults,
+  ...context?.globals
+};
+const id = uniqid();
+const initFill = classToColor($themeStore.palette, fill) || "#FFA41C";
+const strokeColor = stroked ? initFill : void 0;
+$:
+  percentage = index > $context.score ? 0 : index < Math.trunc($context.score) ? 1 : $context.score % 1;
+$:
+  isActive = $context.active > -1;
+$:
+  fillColor = isActive ? index <= $context.active ? initFill : "currentColor" : percentage === 1 ? initFill : percentage === 0 ? "currentColor" : `url(#${id})`;
+const th = themer($themeStore);
+const st = styler($themeStore);
+$:
+  ratingStyles = st.create("RatingStyles").add("color", "transparent", true).add("outline-color", initFill, true).append($$restProps.style, true).compile();
+$:
+  ratingClasses = th.create("Rating").option("ratingSizes", size, size).append("pointer-events-none", $context.readonly).append("z-10 focus-visible:outline outline-2", true).append("hover:scale-125", true).append($$restProps.class, true).compile(true);
+$:
+  stops = [
+    { offset: `0%`, "stop-color": initFill, "stop-opacity": "1" },
+    { offset: `${percentage * 100}%`, "stop-color": initFill, "stop-opacity": "1" },
+    { offset: `${percentage * 100}%`, "stop-color": "currentColor", "stop-opacity": "1" }
+  ];
 </script>
 
 <slot

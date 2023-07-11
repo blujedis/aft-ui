@@ -1,5 +1,5 @@
-<script>
-	export let close = () => {};
+<script>export let close = () => {
+};
 </script>
 
 <div class="bg-primary-600 px-4 py-6 sm:px-6">

@@ -1,10 +1,7 @@
 <script lang="ts">
-	import type { HtmlTag } from 'svelte/internal';
-
 	import themeStore, { themer } from '$lib';
 	import { type TabProps, tabDefaults as defaults } from './module';
-	import Button from '../Button';
-	import type { ElementNativeProps, ElementProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { TabControllerContext } from '../TabController';
 	import type { SelectValue } from '$lib/stores/select';
@@ -62,11 +59,15 @@
 		if ($context?.selected?.includes(value)) context.unselect(value);
 		else context.select(value);
 	}
+
+	$: console.log($$restProps);
 </script>
 
 <svelte:element
 	this={as}
 	{...$$restProps}
+	role={as === 'a' ? 'link' : 'button'}
+	tabindex="-1"
 	class={tabClasses}
 	aria-current={$context?.selected?.includes(value)}
 	aria-selected={$context?.selected?.includes(value)}

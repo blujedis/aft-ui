@@ -1,4 +1,4 @@
-import type { SelectValue } from '$lib/stores/select';
+import type { SelectValue } from '../../stores/select';
 
 export type TabPanelProps = {
 	value: SelectValue;

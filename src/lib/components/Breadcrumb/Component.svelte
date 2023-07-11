@@ -7,7 +7,7 @@
 	import BreadcrumbOption from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = BreadcrumbProps & ElementNativeProps<'ol'>;
 
@@ -15,7 +15,7 @@
 		...defaults
 	} as Required<BreadcrumbProps>;
 
-	setContext('BreadCrumb', {
+	setContext('Breadcrumb', {
 		globals: {
 			rounded,
 			shadowed,

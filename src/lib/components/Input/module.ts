@@ -14,6 +14,7 @@ export type InputProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	chars?: number; // mapped to native "size" attribute
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -27,5 +28,6 @@ export const inputDefaults: Partial<InputProps> = {
 	focused: true,
 	size: 'md',
 	theme: 'default',
+	transitioned: true,
 	variant: 'default'
 };

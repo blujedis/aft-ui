@@ -8,7 +8,7 @@
 		type AccordionPanelContext
 	} from './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps, HTMLTag } from '../../types';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionPanelProps<Tag> & ElementNativeProps<Tag>;

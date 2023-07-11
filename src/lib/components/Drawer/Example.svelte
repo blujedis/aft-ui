@@ -16,7 +16,7 @@
 	const code = `
   `;
 
-	let drawer = {} as Drawer;
+	let drawer: Drawer | undefined;
 
 	const props = {
 		position: 'right' as 'left' | 'right',

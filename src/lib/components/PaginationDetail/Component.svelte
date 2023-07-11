@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { type PaginationDetailProps, paginationDetailDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = PaginationDetailProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -24,8 +22,6 @@
 		.append('flex items-center justify-center', true)
 		.append($$restProps.class, true)
 		.compile(true);
-
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 <div {...$$restProps} class={paginationDetailClasses}>

@@ -10,20 +10,21 @@
  * }
  */
 export function createCustomEvent(event, name, beforeDispatch) {
-	const beforeDispatchHandler = beforeDispatch || ((e, n) => n && !e.preventDefault);
-	return function initListener(node) {
-		const handle = (ev) => {
-			let response = beforeDispatchHandler(ev, node);
-			if (response) {
-				if (response === true) response = { detail: null };
-				node.dispatchEvent(new CustomEvent(name, response));
-			}
-		};
-		document.addEventListener(event, handle, true);
-		return {
-			destroy() {
-				document.removeEventListener(event, handle, true);
-			}
-		};
-	};
+    const beforeDispatchHandler = beforeDispatch || ((e, n) => n && !e.preventDefault);
+    return function initListener(node) {
+        const handle = (ev) => {
+            let response = beforeDispatchHandler(ev, node);
+            if (response) {
+                if (response === true)
+                    response = { detail: null };
+                node.dispatchEvent(new CustomEvent(name, response));
+            }
+        };
+        document.addEventListener(event, handle, true);
+        return {
+            destroy() {
+                document.removeEventListener(event, handle, true);
+            }
+        };
+    };
 }

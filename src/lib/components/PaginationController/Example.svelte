@@ -13,10 +13,9 @@
 		ThemeShadowed,
 		ThemeSize,
 		ThemeTransitioned
-	} from '$lib/theme';
+	} from '../../types';
 	import ListOptions from '../_Example/ListOptions.svelte';
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 	import Section from '../_Example/Section.svelte';
 
 	const title = 'Pagination';
@@ -34,7 +33,7 @@
 	};
 
 	let pagination = null as PaginationController<any> | null;
-	const context = pagination?.context;
+	// const context = pagination?.context;
 </script>
 
 <ExamplePage {title} {description} {code}>

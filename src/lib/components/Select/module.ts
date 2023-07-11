@@ -21,6 +21,7 @@ export type SelectProps = {
 	full?: boolean;
 	multiple?: boolean;
 	placeholder?: boolean | string;
+	rows?: number; // mapped to native size attribute.
 	rounded?: ThemeRounded;
 	selected?: SelectValue | SelectValue[];
 	shadowed?: ThemeShadowed;

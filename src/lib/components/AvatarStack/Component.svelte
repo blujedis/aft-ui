@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type AvatarStackProps, avatarStackDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import { onMount, setContext } from 'svelte/internal';
-	import type { ElementNativeProps } from '../types';
+	import { onMount, setContext } from 'svelte';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = AvatarStackProps & Omit<ElementNativeProps<'span'>, 'size'>;
 

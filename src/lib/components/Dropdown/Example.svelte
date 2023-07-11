@@ -85,23 +85,42 @@
 		{#key props}
 			<label for="filled">
 				<span class="text-sm block mb-2">Select Filled Example:</span>
-				<Dropdown mode="select" selected={['react']} {...props}>
-					<DropdownButton />
-					<DropdownPanel>
-						{#each sourceItems as item, i}
-							<DropdownOption value={item.value} let:selected>
-								{item.label}
-								{#if selected}
-									<Icon
-										icon="mdi:check"
-										size="sm"
-										class="group-aria-selected:text-current group-hover:!text-white"
-									/>
-								{/if}
-							</DropdownOption>
-						{/each}
-					</DropdownPanel>
-				</Dropdown>
+				<div class="flex">
+					<Dropdown mode="select" selected={['react']} {...props}>
+						<DropdownButton />
+						<DropdownPanel>
+							{#each sourceItems as item, i}
+								<DropdownOption value={item.value} let:selected>
+									{item.label}
+									{#if selected}
+										<Icon
+											icon="mdi:check"
+											size="sm"
+											class="group-aria-selected:text-current group-hover:!text-white"
+										/>
+									{/if}
+								</DropdownOption>
+							{/each}
+						</DropdownPanel>
+					</Dropdown>
+					<!-- <Dropdown mode="multiselect" selected={['react']} {...props}>
+						<DropdownInput newable />
+						<DropdownPanel>
+							{#each sourceItems as item, i}
+								<DropdownOption value={item.value} let:selected>
+									{item.label}
+									{#if selected}
+										<Icon
+											icon="mdi:check"
+											size="sm"
+											class="group-aria-selected:text-current group-hover:!text-white"
+										/>
+									{/if}
+								</DropdownOption>
+							{/each}
+						</DropdownPanel>
+					</Dropdown> -->
+				</div>
 			</label>
 			<label for="outlined">
 				<span class="text-sm block mb-2">Select Outlined Example:</span>

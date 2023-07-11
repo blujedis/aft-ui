@@ -1,9 +1,7 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import { get_current_component } from 'svelte/internal';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = PopoverProps & ElementNativeProps<'div'>;
 
@@ -23,7 +21,6 @@
 	} as Required<$$Props>;
 
 	const role = $$restProps.role ?? arrowed ? 'tooltip' : 'region';
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
 	const th = themer($themeStore);
 
 	$: popoverClasses = th
@@ -32,14 +29,14 @@
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('popoverSizes', size, size)
+		.option('fontSizes', size, size)
 		.append('popover', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
 
-<div use:forwardedEvents {role} {...$$restProps} class={popoverClasses}>
+<div {role} {...$$restProps} class={popoverClasses}>
 	<slot>
 		{#if typeof content === 'string'}
 			{content}

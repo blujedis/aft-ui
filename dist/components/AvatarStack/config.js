@@ -1,4 +1,4 @@
-import { placeholder } from '../../theme';
+import { placeholder } from '../placeholder';
 export const avatarStack = {
-	default: { ...placeholder }
+    default: { ...placeholder }
 };

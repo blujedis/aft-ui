@@ -12,8 +12,5 @@ type CompileValue = string | number | boolean;
  * @param template a string template using back ticks
  * @param keys the keys extracted from the template literal.
  */
-export declare function compileTemplate(
-	template: string,
-	...keys: string[]
-): (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]) => string;
+export declare function compileTemplate(template: string, ...keys: string[]): (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]) => string;
 export {};

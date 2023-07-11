@@ -12,13 +12,7 @@
 	import AccordionButton from '../AccordionButton';
 	import AccordionOption from '../AccordionOption';
 	import AccordionPanel from '../AccordionPanel';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 
 	const title = 'Accordion';
 	const description = 'Boilerplate component for accordions.';
@@ -30,8 +24,8 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'danger' as ThemeColor,
-		variant: 'default' as AccordianVariant
+		theme: 'default' as ThemeColor,
+		variant: 'pills' as AccordianVariant
 	};
 </script>
 

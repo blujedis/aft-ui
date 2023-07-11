@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { ElementNativeProps } from '../types';
-
+	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import themeStore, { themer } from '$lib';
 	import { forwardEventsBuilder } from '$lib/utils';
@@ -36,6 +35,7 @@
 		.append($$restProps.class, true)
 		.compile(true);
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
 		if (['multiselect', 'tags'].includes(context.mode)) {
 			if (context.isSelected(value)) context.unselect(value);

@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { Button } from '../Button';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import type { DropdownContext } from '../Dropdown/module';
 	import { type DropdownInputProps, dropdownInputDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import Badge from '../Badge';
 	import { Icon } from '../Icon';
 
@@ -44,10 +43,9 @@
 	$: inputWrapperClasses = th
 		.create('DropdownInputWrapper')
 		.variant('input', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-		// .append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
-		// .option('fieldPadding', size, size)
+		.option('focused', theme, focused)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded && variant !== 'flushed')
@@ -55,13 +53,17 @@
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
 		.append('px-2', variant === 'flushed' && !multiple)
-		.append('px-1', multiple)
-		.append('inline-flex items-center justify-between', true)
+		.append('inline-flex items-center justify-between relative', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
+	$: containerWrapper = th
+		.create('DropdownInputContainer')
+		.append('flex flex-wrap items-center overflow-clip', true)
+		.compile();
+
 	$: iconClasses = th
-		.create('DropdownButtonIcon')
+		.create('DropdownInputIcon')
 		.option('iconDropdownSizes', size, true)
 		.append('transition-transform duration-300 origin-center', !!caret && roticon)
 		.append(
@@ -75,7 +77,7 @@
 		.create('DropdownInput')
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.append('background-transparent outline-none border-none w-8', true)
+		.append('background-transparent outline-none border-none w-10 ml-1', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
 		.append('px-0', selected.length || (placeholder && !selected.length))
 		.compile(true);
@@ -85,6 +87,14 @@
 		.option('fieldPadding', size, size)
 		.append('pt-0 pb-0 pr-0 capitalize', true)
 		.compile(true);
+
+	function updateWidth() {
+		if (!input) return;
+		const multiplier = ['xl', 'xl2'].includes(size) ? 8.75 : ['xs', 'sm'].includes(size) ? 6 : 7.5;
+		const value = input.value;
+		const width = value.length * multiplier + 25; // 8px per character
+		input.style.width = width + 'px';
+	}
 
 	function handleClick(
 		e:
@@ -123,15 +133,12 @@
 	}
 
 	function handleInput(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		e: Event & {
 			currentTarget: EventTarget & HTMLInputElement;
 		}
 	) {
-		if (!input) return;
-		const multiplier = ['xl', 'xl2'].includes(size) ? 8.75 : ['xs', 'sm'].includes(size) ? 6 : 7.5;
-		const value = input.value;
-		const width = value.length * multiplier + 25; // 8px per character
-		input.style.width = width + 'px';
+		updateWidth();
 	}
 
 	function handleKeydown(
@@ -152,17 +159,20 @@
 				context.add(input.value);
 				context.select(input.value);
 				input.value = '';
+				updateWidth(); // reset the width.
+				input.focus();
 			}
 		} else if (query.length) {
 			// apply filter.
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleBlur(e: any) {
 		if (!resetable) return;
 	}
 
-	context.subscribe((s) => {
+	context.subscribe(() => {
 		if (div && !$context.visible) div.focus();
 	});
 </script>
@@ -170,8 +180,10 @@
 <div>
 	<div
 		bind:this={div}
-		tabindex="-1"
+		role="combobox"
+		tabindex={0}
 		aria-expanded={$context.visible}
+		aria-controls=""
 		aria-haspopup="true"
 		aria-disabled={disabled}
 		on:click={handleClick}
@@ -179,15 +191,15 @@
 		on:keydown={handleClick}
 		class={inputWrapperClasses}
 	>
-		<div>
+		<div class={containerWrapper}>
 			{#if !selected.length}
-				<span class={placeholderClasses}>{placeholder}</span>
+				<div class={placeholderClasses}>{placeholder}</div>
 			{/if}
 			{#if context.mode === 'multiselect'}
 				{#each selected as item}
 					<Badge
-						class="capitalize mt-1"
 						variant={variant === 'flushed' ? 'default' : variant}
+						tag
 						{rounded}
 						{theme}
 						{size}

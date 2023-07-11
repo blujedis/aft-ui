@@ -5,7 +5,7 @@
 		type ButtonGroupContext
 	} from './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { ensureArray } from '$lib/utils';
@@ -49,7 +49,7 @@
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
-		.append('isolate inline-flex [&>:not(:first-child):not(:last-child)]:rounded-none', true)
+		.append('isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

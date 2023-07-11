@@ -1,30 +1,27 @@
-<script>
-	import Drawer from '.';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	// import SelectRounded from '../_Example/SelectRounded.svelte';
-	// import Checkbox from '../_Example/Checkbox.svelte';
-	const title = 'Checkboxes';
-	const description = 'Themed Checkboxes with multiple variants.';
-	const code = `
+<script>import Drawer, {} from ".";
+import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+const title = "Checkboxes";
+const description = "Themed Checkboxes with multiple variants.";
+const code = `
   `;
-	let drawer = {};
-	const props = {
-		position: 'right',
-		shadowed: 'xl',
-		size: 'md',
-		speed: 'medium',
-		theme: 'default',
-		variant: 'default'
-	};
-	function show() {
-		drawer?.store?.open();
-	}
+let drawer;
+const props = {
+  position: "right",
+  shadowed: "xl",
+  size: "md",
+  speed: "medium",
+  theme: "default",
+  variant: "default"
+};
+function show() {
+  drawer?.store?.open();
+}
 </script>
 
 <ExamplePage {title} {description} {code}>

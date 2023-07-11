@@ -8,7 +8,8 @@
 	import type { PaginationControllerContext } from '../PaginationController';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import { getContext, get_current_component } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
+	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import Icon from '../Icon';
 
@@ -69,6 +70,8 @@
 
 <svelte:element
 	this={as}
+	role={as === 'a' ? 'link' : 'button'}
+	tabindex="-1"
 	aria-labelledby=""
 	use:forwardedEvents
 	{...$$restProps}

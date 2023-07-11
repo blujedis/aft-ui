@@ -1,5 +1,5 @@
-<script>
-	export let close = () => {};
+<script>export let close = () => {
+};
 </script>
 
 <div>

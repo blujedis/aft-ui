@@ -1,3 +1,3 @@
 export const accordionPanelDefaults = {
-	as: 'div'
+    as: 'div'
 };

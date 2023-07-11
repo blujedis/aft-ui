@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ButtonGroup from '.';
 	import ButtonGroupItem, { type ButtonGroupItemVariant } from '../ButtonGroupItem';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -16,9 +16,6 @@
 	const description = 'Themed Buttons within selectable groups.';
 	const code = `
   `;
-
-	let visible = false;
-	let darkmode = false;
 
 	const props = {
 		disabled: false,
@@ -61,48 +58,46 @@
 		<hr />
 	</Section>
 
-	<div class={darkmode ? 'bg-gray-900 p-4' : 'bg-white'}>
-		<div class="grid grid-cols-2 gap-2">
-			<div>
-				<div class="text-sm">Filled:</div>
-				{#key props}
-					<ButtonGroup {...props}>
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
-			</div>
-			<div>
-				<div class="text-sm">Outlined:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="outlined">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
-			</div>
-			<div>
-				<div class="text-sm">Link:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="link">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
-			</div>
-			<div>
-				<div class="text-sm">Ghost:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="ghost">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
-			</div>
+	<div class="grid grid-cols-2 gap-2">
+		<div>
+			<div class="text-sm">Filled:</div>
+			{#key props}
+				<ButtonGroup {...props}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			{/key}
+		</div>
+		<div>
+			<div class="text-sm">Outlined:</div>
+			{#key props}
+				<ButtonGroup {...props} variant="outlined">
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			{/key}
+		</div>
+		<div>
+			<div class="text-sm">Link:</div>
+			{#key props}
+				<ButtonGroup {...props} variant="text">
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			{/key}
+		</div>
+		<div>
+			<div class="text-sm">Ghost:</div>
+			{#key props}
+				<ButtonGroup {...props} variant="ghost">
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			{/key}
 		</div>
 	</div>
 </ExamplePage>

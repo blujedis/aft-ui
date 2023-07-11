@@ -1,5 +1,5 @@
 export const badgeDefaults = {
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+    size: 'md',
+    theme: 'default',
+    variant: 'default'
 };

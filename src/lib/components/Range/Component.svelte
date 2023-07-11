@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { themer, styler, themeStore, classToColorSegments } from '$lib/theme';
+	import themeStore, { themer, styler, classToColorSegments } from '$lib';
 	import { onMount } from 'svelte';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = RangeProps & ElementNativeProps<'input', 'size'>;
 
@@ -15,10 +15,10 @@
 	const th = themer($themeStore);
 	const st = styler($themeStore);
 
-	$: trackBg = classToColorSegments($themeStore.components.rangeTrackBackground[variant][theme]);
-	$: trackAccent = classToColorSegments($themeStore.components.rangeTrackAccent[variant][theme]);
-	$: thumbBg = classToColorSegments($themeStore.components.rangeThumbBackground[variant][theme]);
-	$: thumbBorder = classToColorSegments($themeStore.components.rangeThumbBorder[variant][theme]);
+	$: trackBg = classToColorSegments($themeStore?.components?.rangeTrackBackground[variant][theme]);
+	$: trackAccent = classToColorSegments($themeStore?.components?.rangeTrackAccent[variant][theme]);
+	$: thumbBg = classToColorSegments($themeStore?.components?.rangeThumbBackground[variant][theme]);
+	$: thumbBorder = classToColorSegments($themeStore?.components?.rangeThumbBorder[variant][theme]);
 
 	$: rangeStyles = st
 		.create('RangeStyles')
@@ -33,10 +33,8 @@
 
 	$: rangeClasses = th
 		.create('RangeClasses')
-		.option('focusedVisible', theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('rangeTrackSizes', size, size)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
@@ -82,7 +80,7 @@
 	/* IMPORTANT If you attempt to combine the below styles together 
 	they will not be applied. Each pseudo selecteor for the 
 	thumb must be defined for each browser type. It'd be SUPER
-	if input type range were standardized wouldn't it??
+	if this were better standardized wouldn't it??
 	*/
 
 	input[type='range']::-webkit-slider-thumb {
@@ -93,6 +91,18 @@
 		border-width: var(--thumb-border-width);
 		border-radius: 50%;
 		background: var(--thumb-background-color);
+	}
+
+	input[type='range']:focus::-webkit-slider-thumb {
+		box-shadow: 0px 0px 8px var(--thumb-border-color);
+	}
+
+	input[type='range']:focus::-moz-range-thumb {
+		box-shadow: 0px 0px 8px var(--thumb-border-color);
+	}
+
+	input[type='range']:focus::-ms-thumb {
+		box-shadow: 0px 0px 8px var(--thumb-border-color);
 	}
 
 	input[type='range']::-moz-range-thumb {

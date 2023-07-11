@@ -1,4 +1,4 @@
-import { placeholder } from '$lib/theme';
+import { placeholder } from '../placeholder';
 
 export const card = {
 	default: {

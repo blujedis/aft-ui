@@ -18,14 +18,12 @@ export const badgePadding = {
 	xl2: 'px-5 py-1.5'
 };
 
+// if you adjust primary field padding
+// you'll need to adjust here for dropdown
+// tags.
 export const badgeFieldPadding = {
+	$base: 'border-0 m-0.5',
 	unstyled: '',
-	// xs: 'px-1.5 py-0',
-	// sm: 'px-2 py-1',
-	// md: 'px-3 py-1',
-	// lg: 'px-3 py-1.5',
-	// xl: 'px-4 py-2',
-	// xl2: 'px-5 py-2.5'
 	xs: 'px-1.5 py-0.5',
 	sm: 'px-2 py-1',
 	md: 'px-3 py-1',
@@ -43,9 +41,3 @@ export const badgeIconSizes = {
 	xl: 'h-4.5 w-4.5',
 	xl2: 'h-5 w-5'
 };
-
-// .75 			leading-3
-// 1.0 sm		leading-4
-// 1.25 md  leading-5
-// 1.5 lg		leading-6
-// 1.75			leading-7

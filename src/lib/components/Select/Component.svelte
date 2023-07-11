@@ -4,7 +4,7 @@
 	import { setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { useSelect } from '$lib/stores/select';
 
 	type $$Props = SelectProps & Omit<ElementNativeProps<'select'>, 'size'>;
@@ -15,6 +15,7 @@
 		full,
 		multiple,
 		placeholder,
+		rows,
 		rounded,
 		selected,
 		shadowed,
@@ -38,12 +39,11 @@
 	$: inputClasses = th
 		.create('Select')
 		.variant('select', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-		.append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
+		.option('focused', theme, focused)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.option('placeholders', theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('roundeds', rounded, rounded && variant !== 'flushed')
@@ -63,6 +63,7 @@
 	{...$$restProps}
 	use:forwardedEvents
 	{multiple}
+	size={rows}
 	class={inputClasses}
 	value={multiple ? $store.selected : $store.selected[0]}
 >

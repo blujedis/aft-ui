@@ -1,11 +1,11 @@
-<script>
-	export let label = 'List';
-	export let value = '';
-	export let placeholder = 'Please Select';
-	export let items = [];
-	$: list = items.map((v) =>
-		typeof v === 'string' ? { label: v.charAt(0).toUpperCase() + v.slice(1), value: v } : v
-	);
+<script>export let label = "List";
+export let value = "";
+export let placeholder = "Please Select";
+export let items = [];
+$:
+  list = items.map(
+    (v) => typeof v === "string" ? { label: v.charAt(0).toUpperCase() + v.slice(1), value: v } : v
+  );
 </script>
 
 <label class="flex flex-col">

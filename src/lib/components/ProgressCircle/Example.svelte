@@ -2,22 +2,19 @@
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
 	import SelectShadowed from '../_Example/SelectShadowed.svelte';
 	import ListOptions from '../_Example/ListOptions.svelte';
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import ProgressCircle, { type ProgressCircleVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
-	import Select from '../_Example/Select.svelte';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 
 	const title = 'Progress Circle';
 	const description = 'Progress circle with themes.';
 	const code = `
   `;
 	let progress: ProgressCircle;
-	let tracksize: number;
 
 	const props = {
 		animate: true,

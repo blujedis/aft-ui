@@ -2,7 +2,7 @@
 	import themeStore, { themer } from '$lib';
 	import { type ButtonGroupItemProps, buttonGroupItemDefaults as defaults } from './module';
 	import Button from '../Button';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectValue } from '$lib/stores/select';
@@ -41,14 +41,13 @@
 		variant
 	};
 
+	//  first:ml-0
+
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
 		.variant('buttonGroupItem', variant, theme, true)
 		.option('buttonPadding', size, size)
-		.append(
-			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
-			true
-		)
+		.append('relative first:ml-0 focus:z-10  -ml-px first:rounded-r-none last:rounded-l-none', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

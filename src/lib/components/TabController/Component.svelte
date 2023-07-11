@@ -6,9 +6,9 @@
 	} from './module';
 	import themeStore, { themer } from '$lib';
 	import { setContext } from 'svelte';
-	import { useSelect, type SelectValue } from '$lib/stores/select';
+	import { useSelect } from '$lib/stores/select';
 	import { ensureArray } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = TabControllerProps & ElementNativeProps<'div'>;
 

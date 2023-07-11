@@ -1,3 +1,4 @@
+export * from './shared';
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';
@@ -9,6 +10,7 @@ export * from './Empty/options';
 export * from './Icon/options';
 export * from './RatingItem/options';
 export * from './PaginationPage/options';
+export * from './Popover/options';
 export * from './ProgressBar/options';
 export * from './ProgressCircle/options';
 export * from './Range/options';

@@ -1,9 +1,8 @@
 import type { SelectStore, SelectValue } from '$lib/stores/select';
 import type { accordion } from './config';
 import type { AccordianOptionProps } from '../AccordionOption';
-import type { HTMLTag } from '../types';
+import type { HTMLTag, ThemeRounded, ThemeShadowed } from '../../types';
 import { accordionOptionDefaults } from '../AccordionOption';
-import type { ThemeRounded, ThemeShadowed } from '$lib/theme';
 
 export type AccordianVariant = keyof typeof accordion;
 
@@ -24,6 +23,7 @@ export type AccordionProps<Tag extends HTMLTag> = Omit<
 	variant?: AccordianVariant;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { variant, ...rest } = accordionOptionDefaults;
 
 export const accordionDefaults: AccordionProps<'div'> = {

@@ -55,6 +55,7 @@ function getGroup(group: string) {
 }
 
 function getOptions(group: string) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { state, ...rest } = getGroup(group);
 	return rest;
 }

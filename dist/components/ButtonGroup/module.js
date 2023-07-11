@@ -1,7 +1,7 @@
 export const buttonGroupDefaults = {
-	focused: true,
-	rounded: 'none',
-	shadowed: 'none',
-	theme: 'default',
-	variant: 'filled'
+    focused: true,
+    rounded: 'none',
+    shadowed: 'none',
+    theme: 'default',
+    variant: 'filled'
 };

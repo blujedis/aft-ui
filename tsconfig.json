@@ -9,11 +9,11 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
+		"downlevelIteration": true,
+		"target": "esnext",
 		"paths": {
 			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"],
-			"@app": ["./src/app"],
-			"@app/*": ["./src/app/*"]
+			"$lib/*": ["./src/lib/*"]
 		}
 	}
 }

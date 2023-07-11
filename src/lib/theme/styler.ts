@@ -6,7 +6,7 @@ import type {
 	ThemeConfig,
 	ThemeOption,
 	ThemeOptions
-} from './types';
+} from '../types/theme';
 
 type Primitive = boolean | string | number | undefined | Primitive[];
 
@@ -16,16 +16,16 @@ type Primitive = boolean | string | number | undefined | Primitive[];
  * @param name the name of the styler used in errors/logging.
  */
 export function styler<C extends ThemeConfig>(themeConfig: C) {
-	type Components = typeof themeConfig.components;
-	type Defaults = typeof themeConfig.defaults;
+	// type Components = typeof themeConfig.components;
+	// type Defaults = typeof themeConfig.defaults;
 	type Options = typeof themeConfig.options;
 	type Palette = typeof themeConfig.palette;
-	type Component = keyof Components;
-	type Variant<K extends Component> = keyof Components[K];
+	// type Component = keyof Components;
+	// type Variant<K extends Component> = keyof Components[K];
 
-	const _components: Components = themeConfig?.components || {};
+	// const _components: Components = themeConfig?.components || {};
 	const _options: Options = themeConfig?.options || {};
-	const _defaults: Defaults = themeConfig?.defaults || {};
+	// const _defaults: Defaults = themeConfig?.defaults || {};
 	const _palette: Palette = themeConfig?.palette || {};
 
 	function create(instanceName: string) {

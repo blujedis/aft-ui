@@ -1,6 +1,5 @@
-<script>
-	export let label = 'Option:';
-	export let checked = false;
+<script>export let label = "Option:";
+export let checked = false;
 </script>
 
 <label class="inline-flex items-center">

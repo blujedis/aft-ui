@@ -11,7 +11,7 @@
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = NotificationControllerProps & ElementNativeProps<'div'>;
 
@@ -47,8 +47,8 @@
 		{#each filtered as n (n.key)}
 			<div
 				animate:flip
-				in:fly|global={{ x: notificationPosition[position].x, duration: 350 }}
-				out:fly|global={{ x: notificationPosition[position].x, duration: 350 }}
+				in:fly={{ x: notificationPosition[position].x, duration: 350 }}
+				out:fly={{ x: notificationPosition[position].x, duration: 350 }}
 			>
 				{#if Component}
 					<svelte:component this={Component} {...n} />

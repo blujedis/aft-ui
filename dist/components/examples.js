@@ -16,6 +16,7 @@ export { default as LoaderExample } from './Loader/Example.svelte';
 export { default as ModalExample } from './Modal/Example.svelte';
 export { default as NotificationExample } from './NotificationController/Example.svelte';
 export { default as PaginationExample } from './PaginationController/Example.svelte';
+export { default as PopoverExample } from './Popover/Example.svelte';
 export { default as ProgressBarExample } from './ProgressBar/Example.svelte';
 export { default as ProgressCircleExample } from './ProgressCircle/Example.svelte';
 export { default as RadioExample } from './Radio/Example.svelte';

@@ -2,7 +2,7 @@
 	import { tweened } from 'svelte/motion';
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
 	import themeStore, { styler, themer } from '$lib';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = ProgressCircleProps & Omit<ElementNativeProps<'svg'>, 'size'>;
 

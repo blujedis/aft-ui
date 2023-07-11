@@ -1,4 +1,4 @@
-import type { ThemeDefaults } from './types';
+import type { ThemeDefaults } from '../types/theme';
 
 const component = {
 	// focused: true,

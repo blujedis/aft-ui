@@ -1,13 +1,13 @@
 const rangeTrackBackgroundBase = {
 	white: '',
-	default: 'bg-default-100',
-	primary: 'bg-default-100',
-	secondary: 'bg-default-100',
-	tertiary: 'bg-default-100',
-	danger: 'bg-default-100',
-	warning: 'bg-default-100',
-	success: 'bg-default-100',
-	info: 'bg-default-100'
+	default: 'bg-default-200',
+	primary: 'bg-default-200',
+	secondary: 'bg-default-200',
+	tertiary: 'bg-default-200',
+	danger: 'bg-default-200',
+	warning: 'bg-default-200',
+	success: 'bg-default-200',
+	info: 'bg-default-200'
 };
 
 const rangeTrackAccentBase = {

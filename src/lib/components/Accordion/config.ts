@@ -1,4 +1,4 @@
-import { placeholder } from '$lib/theme';
+import { placeholder } from '../placeholder';
 
 const baseVariant = {
 	$base: 'divide-y divide-default-200 border border-default-200',

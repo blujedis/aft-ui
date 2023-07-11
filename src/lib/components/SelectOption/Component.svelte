@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { getContext, get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import type { SelectContext } from '../Select/module';
 
 	type $$Props = SelectOptionProps & ElementNativeProps<'option'>;

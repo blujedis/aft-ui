@@ -1,3 +1,3 @@
 export const iconDefaults = {
-	size: 'md'
+    size: 'md'
 };

@@ -1,6 +1,5 @@
-<script>
-	import Select from './Select.svelte';
-	export let value = 'default';
+<script>import Select from "./Select.svelte";
+export let value = "default";
 </script>
 
 <Select

@@ -1,10 +1,16 @@
-import type { fontSizes, borderStyles, objectFit, aspectRatio, objectPosition } from './options';
-import type * as baseOptions from './options';
+import type {
+	fontSizes,
+	borderStyles,
+	objectFit,
+	aspectRatio,
+	objectPosition
+} from '../components/shared';
+import type * as sharedOptions from '../components/shared';
 import type * as componentOptions from '../components/options';
-import type defaults from './defaults';
+import type defaults from '../theme/defaults';
 import type * as configs from '../components/configs';
-import type { colors, prefixes, shades } from './constants';
-import type { palette, namedcolors, tailwindcolors } from './palettes';
+import type { colors, prefixes, shades } from '../theme/constants';
+import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
 
 /////////////////////////////////////////////////////
 
@@ -79,7 +85,7 @@ export interface ThemeConfig {
 	palette: typeof palette;
 }
 
-export type ThemeOptions = typeof baseOptions & typeof componentOptions;
+export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
 export type ThemeOption = keyof ThemeOptions;
 export type ThemeShade = 0 | ThemeColorShade;
 
@@ -89,13 +95,13 @@ export type ThemeRounded = ThemeSize | 'full' | 'none';
 export type ThemeShadowed = ThemeSize | 'inner' | 'none';
 export type ThemeFontSize = keyof typeof fontSizes;
 export type ThemeBorderStyle = keyof typeof borderStyles;
-export type ThemeTransitioned = boolean | 'colors' | 'all'; // bool = colors
+export type ThemeTransitioned = boolean; // bool = colors
 export type ThemeResize = 'x' | 'y' | 'both';
 export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
-export type ThemeFocused = 'default' | 'visible' | boolean;
+export type ThemeFocused = 'always' | 'visible' | boolean;
 
 export type Template = string | [string, string | string[], number | number[]];
 export type Templates<K extends string = string> = Record<K, Template>;

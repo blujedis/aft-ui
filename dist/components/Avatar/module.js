@@ -1,5 +1,5 @@
 export const avatarDefaults = {
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+    size: 'md',
+    theme: 'default',
+    variant: 'default'
 };

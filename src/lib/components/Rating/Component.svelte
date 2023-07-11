@@ -1,7 +1,7 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
 	import { RatingItem } from '../RatingItem';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 	import {
 		type RatingProps,
 		ratingControllerDefaults as defaults,
@@ -64,11 +64,13 @@
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleMouseover(active: number, e: MouseEvent) {
 		if (readonly || !hoverable) return;
 		store.update((s) => ({ ...s, active }));
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleMouseleave(active: number, e: MouseEvent) {
 		if (readonly || !hoverable) return;
 		store.update((s) => ({ ...s, active: -1 }));
@@ -124,8 +126,9 @@
 
 	// after navigation and if score revert back to
 	// score if no selection has been made.
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleCleanup(e: Event & { currentTarget: EventTarget & HTMLDivElement }) {
-		const currentTarget = e.currentTarget;
+		// const currentTarget = e.currentTarget;
 		// requestAnimationFrame(() => {
 		// 	// if our clean up element doesn't contain the current active
 		// 	// element then we can proceed with our cleanup.
@@ -145,6 +148,8 @@
 
 <div
 	{...$$restProps}
+	role="listbox"
+	tabindex="-1"
 	bind:this={ref}
 	class={ratingControllerClasses}
 	on:keydown={handleKeydown}

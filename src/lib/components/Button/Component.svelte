@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import themeStore, { themer } from '$lib';
+	import { forwardEventsBuilder } from '../../utils';
+	import themeStore, { themer } from '../../';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = ButtonProps<Tag> & ElementNativeProps<Tag>;
@@ -13,6 +13,7 @@
 		disabled,
 		focused,
 		full,
+		mode,
 		rounded,
 		shadowed,
 		size,
@@ -28,8 +29,9 @@
 	$: buttonClasses = unstyled
 		? th
 				.create('Button')
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+				.option('focused', theme, focused)
+				.option('focusedRingSizes', 'two', focused)
+				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
@@ -37,15 +39,18 @@
 				.option('shadows', shadowed, shadowed && variant !== 'text')
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
+				.append('font-medium', mode === 'button')
 				.append('underline', underlined)
 				.append('w-full', full)
+				.append('inline-flex items-center justify-center outline-none', true)
 				.append($$restProps.class, true)
 				.compile(true)
 		: th
 				.create('Button')
 				.variant('button', variant, theme, true)
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+				.option('focused', theme, focused)
+				.option('focusedRingSizes', 'two', focused)
+				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
@@ -53,9 +58,10 @@
 				.option('shadows', shadowed, shadowed && variant !== 'text')
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
+				.append('font-medium uppercase text-xs', mode === 'button')
 				.append('underline', underlined)
 				.append('w-full', full)
-				.append('inline-flex items-center justify-center transition-all', true)
+				.append('inline-flex items-center justify-center outline-none', true)
 				.append($$restProps.class, true)
 				.compile(true);
 
@@ -70,5 +76,11 @@
 	{disabled}
 	aria-disabled={disabled}
 >
-	<slot />
+	{#if mode === 'button'}
+		<div class="pt-0.5">
+			<slot />
+		</div>
+	{:else}
+		<slot />
+	{/if}
 </svelte:element>

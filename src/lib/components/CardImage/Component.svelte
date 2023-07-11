@@ -2,7 +2,7 @@
 	import { type CardImageProps, cardImageDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import Image from '../Image';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = CardImageProps & ElementNativeProps<'img'>;
 

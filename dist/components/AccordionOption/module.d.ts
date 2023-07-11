@@ -4,10 +4,10 @@ import type { SlideParams } from 'svelte/transition';
 import type { accordionOption } from './config';
 export type AccordianOptionVariant = keyof typeof accordionOption;
 export type AccordianOptionProps<Tag = any> = Omit<SlideParams, 'axis'> & {
-	as?: Tag;
-	name?: SelectValue;
-	size?: ThemeSize;
-	theme?: ThemeColor;
-	variant?: AccordianOptionVariant;
+    as?: Tag;
+    name?: SelectValue;
+    size?: ThemeSize;
+    theme?: ThemeColor;
+    variant?: AccordianOptionVariant;
 };
 export declare const accordionOptionDefaults: Partial<AccordianOptionProps<'div'>>;

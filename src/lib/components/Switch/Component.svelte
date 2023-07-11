@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type SwitchProps, switchDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import { get_current_component, onMount } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = SwitchProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -30,9 +30,13 @@
 	$: buttonClasses = th
 		.create('SwitchButton')
 		.option('switchButtonSizes', size, size)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-		.append('focus:ring-offset-2', focused)
+		.option(
+			focused === true || focused === 'always' ? 'focusedRingSizes' : 'focusedVisibleRingSizes',
+			size,
+			focused
+		)
+		.option(focused === true || focused === 'always' ? 'focused' : 'focusedVisible', theme, focused)
+		.option('focusedOffsetSizes', 'two', focused)
 		.append('pointer-events-none', disabled)
 		.append(
 			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full',

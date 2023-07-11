@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = TextareaProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -26,12 +26,12 @@
 	$: textareaClasses = themer($themeStore)
 		.create('Textarea')
 		.variant('textarea', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+		.option('focused', theme, focused)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.option('resizes', resize, resize)
 		.option('placeholders', theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('roundeds', rounded, rounded)

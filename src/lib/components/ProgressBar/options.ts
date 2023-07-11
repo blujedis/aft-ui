@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { roundeds } from '$lib/theme/options';
+import { roundeds } from '../shared';
 
 export const progressBarSizes = {
 	unstyled: '',

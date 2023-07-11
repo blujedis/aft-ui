@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { variantFilled, variantOutlined, variantText } from '../base';
+import { variantFilled, variantOutlined, variantText } from '../Button/config';
 
 const baseVariant = mergeConfigs(variantFilled, variantText, {
 	$base: 'text-inherit border border-transparent hover:text-white bg-default-100'

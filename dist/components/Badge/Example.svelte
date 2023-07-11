@@ -1,27 +1,26 @@
-<script>
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import Badge from '.';
-	const title = 'Badges';
-	const description = 'Simple component for displaying tags, notification counts and more.';
-	const code = `
+<script>import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+import SelectRounded from "../_Example/SelectRounded.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import Checkbox from "../_Example/Checkbox.svelte";
+import Badge, {} from ".";
+const title = "Badges";
+const description = "Simple component for displaying tags, notification counts and more.";
+const code = `
   `;
-	const props = {
-		full: false,
-		rounded: 'none',
-		shadowed: 'none',
-		size: 'md',
-		theme: 'default',
-		transitioned: false,
-		variant: 'default'
-	};
+const props = {
+  full: false,
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  transitioned: false,
+  variant: "default"
+};
 </script>
 
 <ExamplePage {title} {description} {code}>

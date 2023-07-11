@@ -125,8 +125,8 @@
 
 {#if (unmount && $store.visible) || !unmount}
 	<div
-		role="dialog"
-		aria-modal="true"
+		role="button"
+		tabindex="-1"
 		class="relative z-10"
 		style={modalStyles}
 		aria-labelledby={labelby}
@@ -136,14 +136,14 @@
 		{#if backdrop && $store.visible}
 			<div
 				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-				transition:fade|global={{ duration: 100 }}
+				transition:fade={{ duration: 100 }}
 			/>
 		{/if}
-		<div class={wrapperClasses}>
+		<div role="dialog" aria-modal="true" class={wrapperClasses}>
 			<div class={containerClasses}>
 				<div
 					bind:this={panel}
-					transition:transitioner|global={{ type: transition }}
+					transition:transitioner={{ type: transition }}
 					use:bindFocusTrap
 					class={contentClasses}
 				>

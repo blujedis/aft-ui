@@ -1,24 +1,13 @@
-<script>
-	import { emptyDefaults as defaults } from './module';
-	import themeStore, { themer } from '../..';
-	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '../../utils';
-	export let { as, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
-		...defaults
-	};
-	$: emptyClasses = themer($themeStore)
-		.create('Empty')
-		.variant('empty', variant, theme, true)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-		.option('emptySizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.append('w-full', full)
-		.append('flex items-center justify-center', true)
-		.append($$restProps.class, true)
-		.compile(true);
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
+<script>import { emptyDefaults as defaults } from "./module";
+import themeStore, { themer } from "../..";
+import { get_current_component } from "svelte/internal";
+import { forwardEventsBuilder } from "../../utils";
+export let { as, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
+  ...defaults
+};
+$:
+  emptyClasses = themer($themeStore).create("Empty").variant("empty", variant, theme, true).option("common", "transition", transitioned).remove(transitioned === "colors" ? "transition-all" : "transition-colors", transitioned).option("emptySizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 <svelte:element this={as} use:forwardedEvents {...$$restProps} class={emptyClasses}>

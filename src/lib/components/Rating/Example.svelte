@@ -2,15 +2,13 @@
 	import Rating from '.';
 	import RatingItem from '../RatingItem';
 
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
 	import SelectShadowed from '../_Example/SelectShadowed.svelte';
 	import ListOptions from '../_Example/ListOptions.svelte';
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Ratings';

@@ -1,4 +1,3 @@
-export * from './types';
 export * from './Accordion';
 export * from './AccordionButton';
 export * from './AccordionOption';

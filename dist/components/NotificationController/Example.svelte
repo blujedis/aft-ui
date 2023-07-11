@@ -1,54 +1,51 @@
-<script>
-	import NotificationController from '.';
-	import notification from '../../stores/notification';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectTransition from '../_Example/SelectTransition.svelte';
-	import SelectPosition from '../_Example/SelectPosition.svelte';
-	const title = 'Notifications';
-	const description = 'Themed alert notification components and controller.';
-	const code = `
+<script>import NotificationController, {} from ".";
+import notification from "../../stores/notification";
+import Section from "../_Example/Section.svelte";
+import SelectTheme from "../_Example/SelectTheme.svelte";
+import SelectSize from "../_Example/SelectSize.svelte";
+import SelectRounded from "../_Example/SelectRounded.svelte";
+import SelectShadowed from "../_Example/SelectShadowed.svelte";
+import ListOptions from "../_Example/ListOptions.svelte";
+import ToggleOptions from "../_Example/ToggleOptions.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import SelectPosition from "../_Example/SelectPosition.svelte";
+const title = "Notifications";
+const description = "Themed alert notification components and controller.";
+const code = `
   `;
-	let textarea;
-	const props = {
-		position: 'top-right',
-		rounded: 'none',
-		shadowed: 'none',
-		size: 'md',
-		theme: 'default',
-		variant: 'default'
-	};
-	const themes = [
-		'light',
-		'dark',
-		'smoke',
-		'primary',
-		'secondary',
-		'tertiary',
-		'danger',
-		'success',
-		'warning',
-		'info'
-	];
-	function getRandomNumber(min = 0, max = 7) {
-		return Math.floor(Math.random() * (max - min + 1) + min);
-	}
-	function getRandomTheme() {
-		return themes[getRandomNumber()] || 'smoke';
-	}
-	function notify() {
-		notification.add({
-			theme: getRandomTheme(),
-			description: textarea.value
-		});
-	}
+let textarea;
+const props = {
+  position: "top-right",
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  variant: "default"
+};
+const themes = [
+  "light",
+  "dark",
+  "smoke",
+  "primary",
+  "secondary",
+  "tertiary",
+  "danger",
+  "success",
+  "warning",
+  "info"
+];
+function getRandomNumber(min = 0, max = 7) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function getRandomTheme() {
+  return themes[getRandomNumber()] || "smoke";
+}
+function notify() {
+  notification.add({
+    theme: getRandomTheme(),
+    description: textarea.value
+  });
+}
 </script>
 
 <ExamplePage {title} {description} {code}>
@@ -74,7 +71,7 @@
 				<textarea
 					bind:this={textarea}
 					id="notification"
-					class="text-sm mt-2"
+					class="text-sm mt-2 p-4"
 					placeholder="Enter your Notification message."
 				/>
 			</label>

@@ -1,50 +1,43 @@
-<script>
-	import themeStore, { themer } from '../..';
-	import { buttonGroupItemDefaults as defaults } from './module';
-	import Button from '../Button';
-	import { getContext } from 'svelte';
-	const context = getContext('ButtonGroup');
-	export let {
-		disabled,
-		focused,
-		full,
-		rounded,
-		size,
-		theme,
-		transitioned,
-		underlined,
-		value,
-		variant
-	} = {
-		...defaults,
-		...context?.globals
-	};
-	const th = themer($themeStore);
-	const passthru = {
-		disabled,
-		focused,
-		full,
-		rounded,
-		size,
-		theme,
-		transitioned,
-		underlined,
-		variant
-	};
-	$: buttonClasses = th
-		.create('ButtonGroupItem')
-		.variant('buttonGroupItem', variant, theme, true)
-		.option('buttonPadding', size, size)
-		.append(
-			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
-			true
-		)
-		.append($$restProps.class, true)
-		.compile(true);
-	function handleSelect(value) {
-		if ($context?.selected?.includes(value)) context.unselect(value);
-		else context.select(value);
-	}
+<script>import themeStore, { themer } from "../..";
+import { buttonGroupItemDefaults as defaults } from "./module";
+import Button from "../Button";
+import { getContext } from "svelte";
+const context = getContext("ButtonGroup");
+export let {
+  disabled,
+  focused,
+  full,
+  rounded,
+  size,
+  theme,
+  transitioned,
+  underlined,
+  value,
+  variant
+} = {
+  ...defaults,
+  ...context?.globals
+};
+const th = themer($themeStore);
+const passthru = {
+  disabled,
+  focused,
+  full,
+  rounded,
+  size,
+  theme,
+  transitioned,
+  underlined,
+  variant
+};
+$:
+  buttonClasses = th.create("ButtonGroupItem").variant("buttonGroupItem", variant, theme, true).option("buttonPadding", size, size).append("relative first:ml-0 focus:z-10  -ml-px first:rounded-r-none last:rounded-l-none", true).append($$restProps.class, true).compile(true);
+function handleSelect(value2) {
+  if ($context?.selected?.includes(value2))
+    context.unselect(value2);
+  else
+    context.select(value2);
+}
 </script>
 
 <svelte:component
