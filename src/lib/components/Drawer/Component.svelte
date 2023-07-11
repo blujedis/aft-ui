@@ -15,7 +15,7 @@
 
 	type $$Props = DrawerProps & ElementNativeProps<'div'>;
 
-	export let { backdrop, content, contentProps, position, shadowed, size, speed, theme, variant } =
+	export let { backdrop, content, escapable, contentProps, position, shadowed, size, speed, theme, variant } =
 		{
 			...defaults
 		} as Required<$$Props>;
@@ -48,7 +48,16 @@
 	function handleClose() {
 		store.close();
 	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (!e.repeat && e.key === 'Escape' && escapable) {
+			e.stopPropagation();
+			handleClose();
+		}
+	}
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 {#if $store.visible}
 	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">

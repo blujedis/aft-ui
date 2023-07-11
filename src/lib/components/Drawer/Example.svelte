@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Drawer, { type DrawerVariant } from '.';
-	import type { ThemeColor, ThemeShadowed, ThemeSpeed, ThemeSimpleSize } from '$lib/theme';
+	import type { ThemeColor, ThemeShadowed, ThemeSpeed, ThemeSimpleSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
