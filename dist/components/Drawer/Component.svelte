@@ -9,7 +9,18 @@ import themeStore, { themer } from "../..";
 import { fade, fly } from "svelte/transition";
 import { useDisclosure } from "../../stores";
 import Placeholder from "./Placeholder.svelte";
-export let { backdrop, content, contentProps, position, shadowed, size, speed, theme, variant } = {
+export let {
+  backdrop,
+  content,
+  escapable,
+  contentProps,
+  position,
+  shadowed,
+  size,
+  speed,
+  theme,
+  variant
+} = {
   ...defaults
 };
 export const store = useDisclosure({ visible: false });
@@ -23,13 +34,25 @@ $:
 function handleClose() {
   store.close();
 }
+function handleKeydown(e) {
+  if (!e.repeat && e.key === "Escape" && escapable) {
+    e.stopPropagation();
+    handleClose();
+  }
+}
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 {#if $store.visible}
 	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		<div
+			role="button"
+			tabindex="-1"
 			class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
 			transition:fade={{ duration: 100 }}
+			on:click={handleClose}
+			on:keydown={handleKeydown}
 		/>
 
 		<div class="fixed inset-0 overflow-hidden">

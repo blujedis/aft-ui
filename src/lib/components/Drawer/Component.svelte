@@ -15,10 +15,20 @@
 
 	type $$Props = DrawerProps & ElementNativeProps<'div'>;
 
-	export let { backdrop, content, escapable, contentProps, position, shadowed, size, speed, theme, variant } =
-		{
-			...defaults
-		} as Required<$$Props>;
+	export let {
+		backdrop,
+		content,
+		escapable,
+		contentProps,
+		position,
+		shadowed,
+		size,
+		speed,
+		theme,
+		variant
+	} = {
+		...defaults
+	} as Required<$$Props>;
 
 	export const store = useDisclosure({ visible: false });
 
@@ -62,8 +72,12 @@
 {#if $store.visible}
 	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		<div
+			role="button"
+			tabindex="-1"
 			class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
 			transition:fade={{ duration: 100 }}
+			on:click={handleClose}
+			on:keydown={handleKeydown}
 		/>
 
 		<div class="fixed inset-0 overflow-hidden">

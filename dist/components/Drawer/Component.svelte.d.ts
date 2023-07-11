@@ -20,17 +20,19 @@ declare const __propDef: {
                 visible: false;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
+        abortable?: boolean | undefined;
         backdrop?: boolean | undefined;
+        escapable?: boolean | undefined;
         content?: {
             new (options: import("svelte").ComponentConstructorOptions<Record<string, unknown>>): import("svelte").SvelteComponent<Record<string, unknown>, any, any>;
         } | undefined;
         contentProps?: Record<string, unknown> | undefined;
         position?: "left" | "right" | undefined;
-        shadowed?: any;
-        size?: any;
-        speed?: any;
-        theme?: any;
-        variant?: string | number | symbol | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSimpleSize | undefined;
+        speed?: import("../..").ThemeSpeed | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        variant?: "default" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;

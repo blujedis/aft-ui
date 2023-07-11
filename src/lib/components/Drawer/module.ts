@@ -5,6 +5,7 @@ import type { SvelteComponent } from 'svelte';
 export type DrawerVariant = 'default';
 
 export type DrawerProps = {
+	abortable?: boolean;
 	backdrop?: boolean;
 	escapable?: boolean;
 	content?: typeof SvelteComponent<Record<string, unknown>>;
@@ -41,6 +42,8 @@ export const drawerOffsetMap = {
 } as Record<ThemeSimpleSize, { left: string | number; right: string | number }>;
 
 export const drawerDefaults: Partial<DrawerProps> = {
+	abortable: true,
+	escapable: true,
 	position: 'right',
 	shadowed: 'lg',
 	size: 'md',

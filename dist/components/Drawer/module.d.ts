@@ -1,9 +1,10 @@
-import type { ThemeColor, ThemeShadowed, ThemeSimpleSize, ThemeSpeed } from '../../theme';
+import type { ThemeColor, ThemeShadowed, ThemeSimpleSize, ThemeSpeed } from '../../types';
 import type { SvelteComponent } from 'svelte';
-import type { drawer } from './config';
-export type DrawerVariant = keyof typeof drawer;
+export type DrawerVariant = 'default';
 export type DrawerProps = {
+    abortable?: boolean;
     backdrop?: boolean;
+    escapable?: boolean;
     content?: typeof SvelteComponent<Record<string, unknown>>;
     contentProps?: Record<string, unknown>;
     position?: 'left' | 'right';

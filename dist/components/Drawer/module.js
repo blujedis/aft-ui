@@ -18,6 +18,8 @@ export const drawerOffsetMap = {
     lg: { left: -448, right: '100%' }
 };
 export const drawerDefaults = {
+    abortable: true,
+    escapable: true,
     position: 'right',
     shadowed: 'lg',
     size: 'md',
