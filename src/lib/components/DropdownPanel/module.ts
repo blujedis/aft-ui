@@ -1,15 +1,17 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/theme';
-import type { ScaleParams } from 'svelte/transition';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { dropdownPanel } from './config';
+import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
 export type DropdownPanelVariant = keyof typeof dropdownPanel;
 
-export type DropdownPanelProps = ScaleParams & {
+export type DropdownPanelProps = {
 	focustrap?: boolean;
+	origin?: 'left' | 'right' | 'center';
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor; // not really used placeholder in case of future use.
+	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
 	variant?: DropdownPanelVariant;
 	visible?: boolean;
 	unmount?: boolean;
@@ -17,12 +19,12 @@ export type DropdownPanelProps = ScaleParams & {
 };
 
 export const dropdownPanelDefaults: Partial<DropdownPanelProps> = {
-	duration: 200,
 	focustrap: true,
+	origin: 'left',
 	position: 'left',
 	shadowed: 'lg',
-	start: 0.95,
 	theme: 'default',
+	transition: { start: 0.95, type: 'scale' },
 	variant: 'default',
 	visible: false,
 	unmount: true,

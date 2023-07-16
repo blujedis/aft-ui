@@ -1,8 +1,9 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/theme';
-import type { EasingFunction, TransitionConfig } from 'svelte/types/runtime/transition';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
+// import type { EasingFunction, TransitionConfig} from 'svelte';
 import type { modal } from './config';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '$lib/stores';
+import type { EasingFunction, TransitionConfig } from 'svelte/transition';
 
 export class ModalComponent extends SvelteComponent<ModalProps> {
 	disclosure?: DisclosureMethods;
@@ -59,9 +60,9 @@ export type ModalProps = {
 
 export const transitions = {
 	fade: { duration: 200, start: 0.5 },
-	zoom: { duration: 200, start: 0.95 },
-	announce: { duration: 400, y: -600 },
-	reveal: { duration: 400, y: 600 },
+	zoom: { duration: 200, start: 0.925 },
+	announce: { duration: 400, y: -300 },
+	reveal: { duration: 400, y: 300 },
 	none: { duration: 0 }
 };
 

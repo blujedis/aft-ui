@@ -34,7 +34,8 @@
 	} as Required<DropdownButtonProps<Tag>>;
 
 	const buttonProps = {
-		as: (typeof as === 'undefined' && context.mode === 'menu' ? 'a' : as) as Tag,
+		as: (typeof as === 'undefined' && context.strategy === 'menu' ? 'a' : as) as Tag,
+		tabindex: typeof as === 'undefined' && context.strategy === 'menu' ? 0 : null,
 		disabled,
 		focused,
 		full,
@@ -95,7 +96,7 @@
 		aria-haspopup="true"
 	>
 		<slot>
-			{#if ['select', 'multiselect'].includes(context.mode)}
+			{#if ['select', 'multiselect'].includes(context.strategy)}
 				<div>
 					{label}
 				</div>

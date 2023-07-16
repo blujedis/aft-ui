@@ -47,7 +47,6 @@ export function useDisclosure<P extends Record<string, unknown> = Record<string,
 	}
 
 	function modify(values: Partial<DisclosureProps<P>>) {
-		console.log(values);
 		store.update((s) => handleUpdate({ ...s, ...values }));
 	}
 

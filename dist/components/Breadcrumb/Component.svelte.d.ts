@@ -12,7 +12,7 @@ declare const __propDef: {
         variant?: "default" | "filled" | "unfilled" | undefined;
         reversed?: boolean | null | undefined;
         start?: number | null | undefined;
-        type?: "a" | "i" | "1" | "A" | "I" | null | undefined;
+        type?: "1" | "a" | "i" | "A" | "I" | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;

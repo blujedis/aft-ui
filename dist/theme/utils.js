@@ -1,9 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 import { tailwindcolors, namedcolors } from './palettes';
-// import { getProperty } from 'dot-prop';
+import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getProperty = (...args) => '';
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *

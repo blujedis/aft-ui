@@ -1,4 +1,10 @@
-import type { ThemeColor, ThemeShadowed, ThemeSimpleSize, ThemeSize, ThemeSpeed } from '../../types';
+import type {
+	ThemeColor,
+	ThemeShadowed,
+	ThemeSimpleSize,
+	ThemeSize,
+	ThemeSpeed
+} from '../../types';
 import type { SvelteComponent } from 'svelte';
 // import type { drawer } from './config';
 
@@ -48,8 +54,7 @@ export const drawerOffsetMap = {
 	md: { left: -448, right: '100%' },
 	lg: { left: -512, right: '100%' },
 	xl: { left: -576, right: '100%' },
-	xl2: { left: -672, right: '100%' },
-
+	xl2: { left: -672, right: '100%' }
 } as Record<ThemeSize, { left: string | number; right: string | number }>;
 
 export const drawerDefaults: Partial<DrawerProps> = {

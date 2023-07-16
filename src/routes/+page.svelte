@@ -14,6 +14,7 @@
 		<a href="/breadcrumb">Breadcrumb</a>
 		<a href="/button">Buttons</a>
 		<a href="/buttongroup">Button Groups</a>
+		<a href="/disclosure">Disclosure</a>
 		<a href="/drawer">Drawer</a>
 		<a href="/input">Inputs</a>
 		<a href="/card">Card</a>

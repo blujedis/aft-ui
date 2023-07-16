@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { card } from './config';
 
 export type CardVariant = keyof typeof card;

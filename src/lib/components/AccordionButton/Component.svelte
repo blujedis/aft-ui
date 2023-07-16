@@ -4,7 +4,7 @@
 	import Icon from '../Icon';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';
-	import type { AccordionContext } from '../Accordion/module';
+	import type { AccordionContext } from '../AccordionController/module';
 	import ConditionalElement from '../ConditionalElement';
 	import {
 		type AccordianButtonProps,
@@ -18,16 +18,16 @@
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
 
-	export let { icon, htag, name, roticon, rounded, size, theme, variant } = {
+	export let { icon, htag, key, roticon, rounded, size, theme, variant } = {
 		...defaults,
-		name: panelContext.name,
+		key: panelContext.key,
 		rounded: context.globals.rounded,
 		size: context.globals.size,
 		theme: context.globals.theme,
 		variant: context.globals.variant
 	} as Required<AccordianButtonProps>;
 
-	$: isSelected = $context.selected?.includes(name);
+	$: isSelected = $context.selected?.includes(key);
 	$: icons = (Array.isArray(icon) ? icon : [icon, icon]) as [
 		AccordionButtonIcon,
 		AccordionButtonIcon
@@ -45,7 +45,7 @@
 		.compile(true);
 	$: iconClasses = th
 		.create('DropdownButtonIcon')
-		.option('iconSizes', size, true)
+		.option('iconDropdownSizes', size, true)
 		.append('transition-transform duration-300 origin-center', roticon)
 		.append(typeof roticon === 'string' ? roticon : '-rotate-180', isSelected && roticon)
 		.compile();
@@ -53,11 +53,11 @@
 
 <ConditionalElement as={htag} condition={typeof htag === 'string'}>
 	<Button
-		id={`${name}-accordion-heading`}
-		aria-controls={`${name}-accordion-option`}
+		id={`${key}-accordion-heading`}
+		aria-controls={`${key}-accordion-option`}
 		{...$$restProps}
 		unstyled
-		on:click={() => context.toggle(name)}
+		on:click={() => context.toggle(key)}
 		class={accordionButtonClasses}
 		aria-expanded={isSelected}
 		mode="text"

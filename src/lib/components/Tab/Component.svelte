@@ -60,7 +60,6 @@
 		else context.select(value);
 	}
 
-	$: console.log($$restProps);
 </script>
 
 <svelte:element

@@ -1,4 +1,4 @@
-export * from './Accordion';
+export * from './AccordionController';
 export * from './AccordionButton';
 export * from './AccordionOption';
 export * from './AccordionPanel';
@@ -16,6 +16,9 @@ export * from './CardFooter';
 export * from './CardImage';
 export * from './Checkbox';
 export * from './ConditionalElement';
+export * from './Disclosure';
+export * from './DisclosureButton';
+export * from './DisclosurePanel';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './DropdownButton';

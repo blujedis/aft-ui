@@ -2,12 +2,12 @@ import type { SelectValue } from '$lib/stores/select';
 import type { HTMLTag } from '../../types';
 
 export type AccordionPanelContext = {
-	name: SelectValue; // must be unique name for all accordions on page.
+	key: SelectValue; // must be unique name for all accordions on page.
 };
 
 export type AccordionPanelProps<Tag extends HTMLTag> = {
 	as?: Tag;
-	name: SelectValue;
+	key: SelectValue;
 };
 
 export const accordionPanelDefaults: Partial<AccordionPanelProps<'div'>> = {

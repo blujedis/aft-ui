@@ -8,6 +8,3 @@ declare namespace App {
 	// interface Platform {}
 }
 
-declare module 'svelte/internal' {
-	export const get_current_component: any;
-}

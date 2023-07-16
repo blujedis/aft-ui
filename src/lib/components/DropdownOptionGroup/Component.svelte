@@ -26,6 +26,6 @@
 		.compile(true);
 </script>
 
-{#if context.mode !== 'menu'}
+{#if context.strategy !== 'menu'}
 	<optgroup class={optionGroupClasses}>{group}</optgroup>
 {/if}

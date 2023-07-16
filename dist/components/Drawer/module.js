@@ -25,7 +25,7 @@ export const drawerOffsetMap = {
     md: { left: -448, right: '100%' },
     lg: { left: -512, right: '100%' },
     xl: { left: -576, right: '100%' },
-    xl2: { left: -672, right: '100%' },
+    xl2: { left: -672, right: '100%' }
 };
 export const drawerDefaults = {
     abortable: true,

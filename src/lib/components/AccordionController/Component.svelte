@@ -12,7 +12,7 @@
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
 
-	export let { as, full, multiple, selected, rounded, shadowed, size, theme, variant } = {
+	export let { as, full, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 
@@ -25,6 +25,7 @@
 			shadowed,
 			size,
 			theme,
+			transition,
 			variant
 		}
 	}) as AccordionContext;

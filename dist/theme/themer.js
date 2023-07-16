@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ensureArray } from './utils';
 import classnames from 'classnames';
 import { colors } from './constants';
+import { getProperty } from 'dot-prop';
 /**
  * Simply flattens array then joins by strings.
  *
@@ -175,7 +176,7 @@ export function themer(themeConfig) {
                 return api;
             if (!when)
                 return api;
-            const value = obj[key]; // getProperty(obj, key as string);
+            const value = getProperty(obj, key);
             if (!value)
                 throw new Error(`${instanceName} mapped value using property ${key} was NOT found.`);
             if (typeof value !== 'string')

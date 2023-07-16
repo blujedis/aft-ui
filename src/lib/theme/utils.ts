@@ -1,14 +1,16 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from '../types/theme';
+import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from '../types';
+
 import { tailwindcolors, namedcolors } from './palettes';
-// import { getProperty } from 'dot-prop';
+import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getProperty = (...args: any[]) => '';
+// const getProperty = (...args: any[]) => '';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
+
 
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
@@ -234,6 +236,7 @@ export function mergeConfigs<
 		return a;
 	}, target as any);
 }
+
 
 // type CompileValue = string | number | boolean;
 /**

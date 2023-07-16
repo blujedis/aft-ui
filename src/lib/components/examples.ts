@@ -1,11 +1,12 @@
 export { default as AvatarExample } from './Avatar/Example.svelte';
-export { default as AccordianExample } from './Accordion/Example.svelte';
+export { default as AccordianExample } from './AccordionController/Example.svelte';
 export { default as BadgeExample } from './Badge/Example.svelte';
 export { default as BreadcrumbExample } from './Breadcrumb/Example.svelte';
 export { default as ButtonExample } from './Button/Example.svelte';
 export { default as ButtonGroupExample } from './ButtonGroup/Example.svelte';
 export { default as CardExample } from './Card/Example.svelte';
 export { default as CheckboxExample } from './Checkbox/Example.svelte';
+export { default as DisclosureExample } from './Disclosure/Example.svelte';
 export { default as DrawerExample } from './Drawer/Example.svelte';
 export { default as DropdownExample } from './Dropdown/Example.svelte';
 export { default as EmptyExample } from './Empty/Example.svelte';

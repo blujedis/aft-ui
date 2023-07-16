@@ -7,20 +7,10 @@
 
 	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
-	export let {
-		removable,
-		full,
-		rounded,
-		shadowed,
-		size,
-		tag,
-		theme,
-		transitioned,
-		variant,
-		unstyled
-	} = {
-		...defaults
-	} as Required<BadgeProps>;
+	export let { removable, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } =
+		{
+			...defaults
+		} as Required<BadgeProps>;
 
 	const th = themer($themeStore);
 
@@ -28,25 +18,36 @@
 		? th
 				.create('Badge')
 				.option('common', 'transition', transitioned)
-				.option('badgePadding', size, size)
+				.option('focused', theme, removable)
+				.option('focusedRingSizes', 'two', removable)
+				.remove('focus:', true)
+				.option('badgePadding', size, size && !removable)
+				.option('badgeFieldPadding', size, size && removable)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.append('w-full', full)
-				.append('relative inline-flex items-center', true)
+				.append('badge', true)
+				.append('badge-removable', removable)
+				.append('relative inline-flex items-center', !removable)
 				.append($$restProps.class, true)
 				.compile(true)
 		: th
 				.create('Badge')
 				.variant('badge', variant, theme, true)
 				.option('common', 'transition', transitioned)
-				.option('badgePadding', size, size && !(removable || tag))
-				.option('badgeFieldPadding', size, size && (removable || tag))
+				.option('focused', theme, removable)
+				.option('focusedRingSizes', 'two', removable)
+				.remove('focus:', true)
+				.option('badgePadding', size, size && !removable)
+				.option('badgeFieldPadding', size, size && removable)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.append('w-full', full)
-				//	.append('ml-1', tag)
+				.append('z-20 badge', true)
+				.append('badge-removable', removable)
+				.append('relative inline-flex items-center', !removable)
 				.append($$restProps.class, true)
 				.compile(true);
 
@@ -55,7 +56,7 @@
 
 {#if removable}
 	<button use:forwardedEvents {...$$restProps} class={badgeClasses}>
-		<div class="flex flex-row items-center justify-between">
+		<div class="flex flex-row items-center justify-between pointer-events-none">
 			<slot />
 			<slot name="icon">×</slot>
 		</div>

@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeSize } from '$lib/types';
 import type { ElementNativeProps } from '../../types/components';
 import type { dropdownOptionGroup } from './config';
 

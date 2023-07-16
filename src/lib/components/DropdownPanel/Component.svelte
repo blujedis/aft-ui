@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { type DropdownPanelProps, dropdownPanelDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import themeStore, { themer, transitioner } from '$lib';
 	import { getContext } from 'svelte';
-	import { scale } from 'svelte/transition';
 	import type { DropdownContext } from '$lib/components/Dropdown/module';
 	import { useFocusTrap } from '$lib/hooks';
 	import type { ElementNativeProps } from '../../types';
@@ -12,16 +11,13 @@
 	const context = getContext<DropdownContext>('Dropdown');
 
 	export let {
-		delay,
-		duration,
-		easing,
 		focustrap,
-		opacity,
+		origin,
 		position,
 		rounded,
 		shadowed,
-		start,
 		theme,
+		transition,
 		unmount,
 		variant,
 		width
@@ -31,26 +27,18 @@
 	} as Required<$$Props>;
 
 	let ref: HTMLDivElement | undefined;
+
 	const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
-
-	$: unmounted = false;
-
-	$: panelStyles = $context.visible
-		? $$restProps.style
-		: !unmount
-		? 'display:none;'
-		: $$restProps.style;
 
 	$: panelClasses = themer($themeStore)
 		.create('DropdownPanel')
 		.variant('dropdownPanel', variant, theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.append(`dropdown-panel absolute z-20 mt-1 min-w-full focus:outline-none`, true)
+		.append(`dropdown-panel absolute z-10 mt-1 min-w-full focus:outline-none`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
-		.append(position === 'right' ? 'origin-top-right' : 'origin-top-left', !duration)
-		.append('origin-center', duration)
-		.append('invisible', !unmounted)
+		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
+		.append('origin-center', origin === 'center')
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -94,27 +82,20 @@
 			if (currentNode) currentNode.focus();
 		}
 	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function initPanel(node: HTMLElement) {
-		unmounted = unmount;
-		//	node.focus();
-	}
 </script>
 
-{#if (unmounted && $context.visible) || !unmounted}
+{#if (unmount && $context.visible) || !unmount}
 	<div
+		role={context.strategy === 'menu' ? 'menu' : 'listbox'}
+		aria-orientation="vertical"
+		tabindex="-1"
 		{...$$restProps}
 		bind:this={ref}
-		use:initPanel
 		use:bindFocusTrap
 		on:keydown={handleFocusTrap}
 		on:keydown={handleNavigation}
-		transition:scale={{ duration, start, delay, easing, opacity }}
+		transition:transitioner={transition}
 		class={panelClasses}
-		style={panelStyles}
-		role={context.mode === 'menu' ? 'menu' : 'listbox'}
-		aria-orientation="vertical"
-		tabindex="-1"
 	>
 		<div class="py-1 flex flex-col" role="none">
 			<slot items={$context.filtered} />

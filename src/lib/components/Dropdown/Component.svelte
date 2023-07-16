@@ -19,15 +19,16 @@
 		autoclose,
 		disabled,
 		escapable,
+		filter,
 		focused,
 		focustrap,
 		full,
-		mode,
+		strategy,
 		rounded,
 		selected,
 		shadowed,
 		size,
-		items,
+		items: items,
 		theme,
 		transitioned,
 		trigger,
@@ -52,15 +53,16 @@
 		add,
 		remove,
 		isSelected,
-		mode,
+		strategy,
 		select,
 		trigger,
 		unselect,
+		filter: filterItems,
 		globals: {
 			disabled,
 			focused,
 			full,
-			multiple: mode === 'multiselect',
+			multiple: strategy === 'multiselect',
 			rounded,
 			shadowed,
 			size,
@@ -105,30 +107,25 @@
 	function handleKeydown(e: KeyboardEvent) {
 		if (!e.repeat && e.key === 'Escape' && escapable) {
 			store.close();
+		} else if (!e.repeat && e.key === 'Tab' && $store.visible) {
+			store.close();
 		}
 	}
 
-	// function normalizeItem({ value, label, group }: DropdownItem) {
-	// 	if (typeof label === 'undefined') label = value + '';
-	// 	group = group || '';
-	// 	return {
-	// 		value,
-	// 		label,
-	// 		group
-	// 	} as Required<DropdownItem>;
-	// }
-
-	function add(value: DropdownKey, label?: string, group?: string) {
+	function add({ value, label, group, selected }: DropdownItem) {
 		if (typeof label === 'undefined') label = value + '';
 		group = group || '';
 		const hasValue = $store.items.find((item) => item.value === value);
 		if (!hasValue) {
 			store.update((s) => {
 				const items = [...s.items, { value, label, group } as Required<DropdownItem>];
+				const selectedItems =
+					selected && !s.selected.includes(value) ? [...s.selected, value] : s.selected;
 				return {
 					...s,
 					items,
-					filtered: [...items]
+					filtered: [...items],
+					selected: selectedItems
 				};
 			});
 		}
@@ -146,7 +143,7 @@
 		if (typeof key === 'undefined') return;
 		store.update((s) => {
 			let keys = [] as DropdownKey[];
-			if (['multiselect', 'tags'].includes(mode))
+			if (['multiselect', 'tags'].includes(strategy))
 				keys = s.selected.includes(key) ? s.selected : [key, ...s.selected];
 			else keys = [key];
 			return { ...s, selected: keys };
@@ -165,6 +162,13 @@
 		return $store.selected.includes(key);
 	}
 
+	function filterItems(query?: string) {
+		store.update(s => {
+			const newItems = !query ? [...s.items] : filter(query, s.items);
+			return { ...s, filtered: newItems };
+		});
+	}
+
 	store.subscribe((s) => {
 		if (!selref || !s.selected.length) return;
 		const options = selref.querySelectorAll('option');
@@ -175,16 +179,17 @@
 			});
 		}
 	});
+
+	if (items?.length) items.forEach((item) => add(item));
 </script>
 
 <div
+	role="presentation"
 	{...$$restProps}
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={dropdownClasses}
-	role="listbox"
-	tabindex={-1}
 >
 	<slot
 		visible={$store.visible}
@@ -199,9 +204,9 @@
 	<slot name="select">
 		<select
 			bind:this={selref}
-			{...$$restProps}
-			multiple={['multiselect'].includes(mode)}
 			class="sr-only"
+			{...$$restProps}
+			multiple={['multiselect'].includes(strategy)}
 		>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}

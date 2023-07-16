@@ -1,22 +1,23 @@
 import type { SelectValue } from '$lib/stores/select';
-import type { ThemeColor, ThemeSize } from '$lib/theme';
-import type { SlideParams } from 'svelte/transition';
+import type { ThemeColor, ThemeSize } from '$lib/types';
 import type { accordionOption } from './config';
+import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure/module';
 
 export type AccordianOptionVariant = keyof typeof accordionOption;
 
-export type AccordianOptionProps<Tag = any> = Omit<SlideParams, 'axis'> & {
+export type AccordianOptionProps<Tag = any> = {
 	as?: Tag;
-	name?: SelectValue;
+	key?: SelectValue;
 	size?: ThemeSize;
 	theme?: ThemeColor;
+	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
 	variant?: AccordianOptionVariant;
 };
 
 export const accordionOptionDefaults: Partial<AccordianOptionProps<'div'>> = {
 	as: 'div',
-	duration: 200, // set to 0 to disable.
 	size: 'md',
 	theme: 'default',
+	transition: 'expand',
 	variant: 'default'
 };

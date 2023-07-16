@@ -3,7 +3,7 @@ import { ensureArray } from './utils';
 import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { colors } from './constants';
-// import { getProperty } from 'dot-prop';
+import { getProperty } from 'dot-prop';
 
 export interface ThemerApi<C extends ThemeConfig> {
 	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
@@ -263,7 +263,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		) {
 			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
-			const value = obj[key]; // getProperty(obj, key as string);
+			const value = getProperty(obj, key as string);
 			if (!value)
 				throw new Error(
 					`${instanceName} mapped value using property ${key as string} was NOT found.`

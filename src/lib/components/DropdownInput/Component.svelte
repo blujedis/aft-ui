@@ -14,6 +14,7 @@
 	export let {
 		caret,
 		disabled,
+		filterable,
 		focused,
 		full,
 		multiple,
@@ -36,6 +37,7 @@
 
 	let div: HTMLDivElement | undefined;
 	let input: HTMLInputElement | undefined;
+	let lastFocus = null as HTMLElement | null;
 	const th = themer($themeStore);
 
 	$: selected = $context.items.filter((item) => $context.selected.includes(item.value));
@@ -96,35 +98,46 @@
 		input.style.width = width + 'px';
 	}
 
-	function handleClick(
-		e:
-			| (MouseEvent & { key?: KeyboardEvent['key'] }) // hack should check event type.
-			| (KeyboardEvent & {
-					currentTarget: EventTarget & HTMLDivElement;
-			  })
+	function removeBadge(target: EventTarget | null) {
+		if (!target) return;
+		const childNodes = (target as HTMLButtonElement).parentElement?.querySelectorAll('button');
+		if (!childNodes?.length || !removable) return;
+		const childNodesArray = Array.from(childNodes);
+		const index = childNodesArray.indexOf(target as HTMLButtonElement);
+		const item = selected[index];
+		if (item) context.remove(item.value);
+	}
+
+	function handleClick(e: MouseEvent) {
+		const target = e.target as HTMLElement;
+		const isInput = target.tagName.toLowerCase() === 'input';
+		const isButton = target.tagName.toLowerCase() === 'button';
+
+		if (!isInput && !isButton) return context.toggle();
+
+		e.stopPropagation();
+
+		if (isButton) return removeBadge(target);
+	}
+
+	function handleContainerKeydown(
+		e: KeyboardEvent & {
+			currentTarget: EventTarget & HTMLDivElement;
+		}
 	) {
 		const target = e.target as HTMLElement;
 		const isInput = target.tagName.toLowerCase() === 'input';
 		const isButton = target.tagName.toLowerCase() === 'button';
 
-		if (!isInput && !isButton) {
-			// hit icon toggle panel.
-			context.toggle();
+		if (['ArrowDown', 'ArrowUp'].includes(e.key + '')) {
+			if (e.key === 'ArrowUp' && $context.visible) context.close();
+			else if (e.key === 'ArrowDown' && !$context.visible) context.open();
 			return;
 		}
 
-		e.stopPropagation();
+		if (e.key === 'ArrowDown' && !$context.visible) return context.open();
 
-		if (isButton) {
-			const childNodes = target.parentElement?.querySelectorAll('button');
-			if (!childNodes?.length || !removable) return;
-			const childNodesArray = Array.from(childNodes);
-			const index = childNodesArray.indexOf(target as HTMLButtonElement);
-			const item = selected[index];
-			if (item) context.remove(item.value);
-		} else if (e.key === 'ArrowDown' && !$context.visible) {
-			context.open();
-		}
+		if (e.key === 'Enter') removeBadge(e.target);
 	}
 
 	function handleMouseEnter() {
@@ -135,13 +148,13 @@
 	function handleInput(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		e: Event & {
-			currentTarget: EventTarget & HTMLInputElement;
+			currentTarget: EventTarget | HTMLInputElement;
 		}
 	) {
 		updateWidth();
 	}
 
-	function handleKeydown(
+	function handleInputKeydown(
 		e: {
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
@@ -154,16 +167,21 @@
 				const last = selected.slice(-1)[0];
 				if (last && removable) context.remove(last.value);
 				input.focus();
-			} else if (e.key === 'Enter' && newable && context.mode === 'multiselect') {
+			} else if (
+				e.key === 'Enter' &&
+				newable &&
+				context.strategy === 'multiselect' &&
+				(input.value || '').length
+			) {
 				e.preventDefault();
-				context.add(input.value);
+				context.add({ value: input.value });
 				context.select(input.value);
 				input.value = '';
 				updateWidth(); // reset the width.
 				input.focus();
 			}
-		} else if (query.length) {
-			// apply filter.
+		} else if (query.length && filterable) {
+			context.filter(query);
 		}
 	}
 
@@ -172,8 +190,18 @@
 		if (!resetable) return;
 	}
 
+	function setFocus(e: Event & { target: EventTarget | null }) {
+		lastFocus = e.target as HTMLElement;
+	}
+
 	context.subscribe(() => {
-		if (div && !$context.visible) div.focus();
+		if (div && !$context.visible) {
+			if (lastFocus) {
+				lastFocus.focus();
+			} else {
+				div.focus();
+			}
+		}
 	});
 </script>
 
@@ -188,36 +216,39 @@
 		aria-disabled={disabled}
 		on:click={handleClick}
 		on:mouseenter={handleMouseEnter}
-		on:keydown={handleClick}
+		on:keydown={handleContainerKeydown}
 		class={inputWrapperClasses}
 	>
 		<div class={containerWrapper}>
-			{#if !selected.length}
+			{#if !selected.length && context.strategy !== 'tags'}
 				<div class={placeholderClasses}>{placeholder}</div>
 			{/if}
-			{#if context.mode === 'multiselect'}
+			{#if context.strategy === 'tags'}
 				{#each selected as item}
 					<Badge
 						variant={variant === 'flushed' ? 'default' : variant}
-						tag
 						{rounded}
 						{theme}
 						{size}
-						{removable}>{item.label}</Badge
+						{removable}
+						on:focus={setFocus}>{item.label}</Badge
 					>
 				{/each}
 				<input
 					bind:this={input}
 					on:input={handleInput}
-					on:keydown={handleKeydown}
+					on:keydown={handleInputKeydown}
 					on:blur={handleBlur}
+					on:focus={setFocus}
 					type="text"
 					class={inputClasses}
+					class:w-full={!selected.length}
+					placeholder={!selected.length ? 'Enter Value' : ''}
 				/>
 			{/if}
 		</div>
 		{#if caret}
-			<div class="h-full">
+			<div class="listbox-caret h-full">
 				<Icon icon={caret} class={iconClasses} />
 			</div>
 		{/if}

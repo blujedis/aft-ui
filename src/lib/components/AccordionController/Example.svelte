@@ -8,7 +8,7 @@
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
-	import Accordion, { type AccordianVariant } from '.';
+	import AccordionController, { type AccordianVariant } from '.';
 	import AccordionButton from '../AccordionButton';
 	import AccordionOption from '../AccordionOption';
 	import AccordionPanel from '../AccordionPanel';
@@ -50,8 +50,8 @@
 			<div class="text-sm">Filled:</div>
 		</label> -->
 	{#key props}
-		<Accordion {...props}>
-			<AccordionPanel name={0}>
+		<AccordionController {...props}>
+			<AccordionPanel key={0}>
 				<AccordionButton>One</AccordionButton>
 				<AccordionOption class="p-4"
 					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -62,7 +62,7 @@
 					est laborum.</AccordionOption
 				>
 			</AccordionPanel>
-			<AccordionPanel name={1}>
+			<AccordionPanel key={1}>
 				<AccordionButton>Two</AccordionButton>
 				<AccordionOption class="p-4"
 					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -73,7 +73,7 @@
 					est laborum.</AccordionOption
 				>
 			</AccordionPanel>
-		</Accordion>
+		</AccordionController>
 	{/key}
 	<!-- </div> -->
 </ExamplePage>

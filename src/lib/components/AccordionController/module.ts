@@ -32,5 +32,6 @@ export const accordionDefaults: AccordionProps<'div'> = {
 	multiple: false,
 	selected: [],
 	theme: 'default',
-	variant: 'default'
+	variant: 'default',
+	transition: 'announce'
 };

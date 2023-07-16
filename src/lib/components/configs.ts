@@ -1,4 +1,4 @@
-export * from './Accordion/config';
+export * from './AccordionController/config';
 export * from './AccordionButton/config';
 export * from './AccordionOption/config';
 export * from './Avatar/config';

@@ -5,7 +5,7 @@
 	import DropdownOption from '../DropdownOption';
 	import DropdownInput from '../DropdownInput';
 	import Icon from '../Icon';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import type { ButtonVariant } from '../Button';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
@@ -86,7 +86,7 @@
 			<label for="filled">
 				<span class="text-sm block mb-2">Select Filled Example:</span>
 				<div class="flex">
-					<Dropdown mode="select" selected={['react']} {...props}>
+					<Dropdown strategy="select" selected={['react']} {...props}>
 						<DropdownButton />
 						<DropdownPanel>
 							{#each sourceItems as item, i}
@@ -124,7 +124,7 @@
 			</label>
 			<label for="outlined">
 				<span class="text-sm block mb-2">Select Outlined Example:</span>
-				<Dropdown mode="select" {...props} variant="outlined">
+				<Dropdown strategy="select" {...props} variant="outlined">
 					<DropdownButton />
 					<DropdownPanel>
 						{#each sourceItems as item, i}
@@ -144,7 +144,7 @@
 			</label>
 			<label for="text">
 				<span class="text-sm block mb-2">Menu Example:</span>
-				<Dropdown mode="menu" {...props} variant="text">
+				<Dropdown strategy="menu" {...props} variant="text">
 					<DropdownButton>Select Language</DropdownButton>
 					<DropdownPanel>
 						{#each sourceItems as item, i}
@@ -164,7 +164,7 @@
 			</label>
 			<label for="ghost">
 				<span class="text-sm block">Select Link Example:</span>
-				<Dropdown mode="select" selected={[]} {...props} variant="ghost">
+				<Dropdown strategy="select" selected={[]} {...props} variant="ghost">
 					<DropdownButton />
 					<DropdownPanel>
 						{#each sourceItems as item, i}
@@ -189,10 +189,10 @@
 		{#key props}
 			<label for="input">
 				<span class="text-sm block mb-2">Tags Example:</span>
-				<Dropdown mode="multiselect" selected={['react']} {...props}>
-					<DropdownInput newable />
+				<Dropdown strategy="tags" selected={['react']} items={sourceItems} {...props} let:filtered>
+					<DropdownInput newable filterable />
 					<DropdownPanel>
-						{#each sourceItems as item, i}
+						{#each filtered as item, i}
 							<DropdownOption value={item.value} let:selected>
 								{item.label}
 								{#if selected}

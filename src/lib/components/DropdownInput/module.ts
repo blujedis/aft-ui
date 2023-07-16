@@ -10,20 +10,21 @@ export interface DropdownFilterHandler {
 
 export type DropdownInputProps = InputProps & {
 	caret?: null | string | IconifyIcon;
+	filterable?: boolean;
 	multiple?: boolean;
 	newable?: boolean; // allows for new items when in multiselect mode.
 	removable?: boolean; // allow remove when in multiselect mode.
 	resetable?: boolean;
 	placeholder?: string;
 	roticon?: string | boolean;
-	onFilter?: (item: DropdownItem) => boolean;
 };
 
 export const dropdownInputDefaults: DropdownInputProps = {
 	...inputDefaults,
 	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal
-	placeholder: 'Please Select',
+	filterable: false,
 	newable: false,
+	placeholder: 'Please Select',
 	removable: true,
 	resetable: true,
 	roticon: true

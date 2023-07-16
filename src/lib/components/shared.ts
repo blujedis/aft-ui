@@ -1,5 +1,6 @@
 import { mergeConfigs } from '$lib/theme';
 
+
 export const borderSizes = {
 	unstyled: '',
 	transparent: 'border-transparent',
@@ -253,6 +254,29 @@ export const focusedOffsetSizes = {
 	eight: 'focus:ring-offset-8 focus-visible:ring-offset-8'
 };
 
+export const focusedBorder = {
+	$base: 'focus:outline-none focus-visible:outline-none',
+	white: 'focus:border-default-100 focus-visible:border-default-100',
+	default: 'focus:border-default-400 focus-visible:border-default-400',
+	primary: 'focus:border-primary-600 focus-visible:border-primary-600',
+	secondary: 'focus:border-secondary-600 focus-visible:border-secondary-600',
+	tertiary: 'focus:border-tertiary-600 focus-visible:border-tertiary-600',
+	danger: 'focus:border-danger-600 focus-visible:border-danger-600',
+	warning: 'focus:border-warning-600 focus-visible:border-warning-600',
+	success: 'focus:border-success-600 focus-visible:border-success-600',
+	info: 'focus:border-info-600 focus-visible:border-info-600'
+};
+
+export const focusedBorderSizes = {
+	$base: '',
+	unstyled: '',
+	none: 'focus:border-0 focus-visible:border-0',
+	one: 'focus:border-1 focus-visible:border-1',
+	two: 'focus:border-2 focus-visible:border-2',
+	four: 'focus:border-4 focus-visible:border-4',
+	eight: 'focus:border-8 focus-visible:border-8'
+};
+
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
 	white: 'aria-disabled:text-default-300',
@@ -277,6 +301,8 @@ export const placeholders = {
 	success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
 	info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
 };
+
+
 
 export const common = {
 	active: 'active:brightness-125',

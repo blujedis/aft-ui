@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { AccordionContext } from '../Accordion/module';
-
+	import type { AccordionContext } from '../AccordionController/module';
 	import { getContext, setContext } from 'svelte';
 	import {
 		type AccordionPanelProps,
@@ -15,12 +14,12 @@
 
 	const context = getContext('Accordion') as AccordionContext;
 
-	export let { as, name } = {
+	export let { as, key } = {
 		...defaults
 	} as Required<AccordionPanelProps<Tag>>;
 
 	setContext('AccordionPanel', {
-		name
+		key
 	}) as AccordionPanelContext;
 
 	const th = themer($themeStore);
@@ -32,5 +31,5 @@
 </script>
 
 <svelte:element this={as} {...$$restProps} class={accordionPanelClasses}>
-	<slot open={() => context.select(name)} close={() => context.select(name)} />
+	<slot open={() => context.select(key)} close={() => context.select(key)} />
 </svelte:element>

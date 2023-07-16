@@ -13,15 +13,15 @@
 	const context = getContext<DropdownContext>('Dropdown');
 	const contextGroup = getContext<string>('DropdownGroup');
 
-	export let { element, focused, label, size, value, theme, variant } = {
+	export let { element, focused, label, selected, size, theme, value, variant } = {
 		...defaults,
 		...context?.globals,
-		element: context?.mode === 'menu' ? 'a' : 'button'
+		element: context?.strategy === 'menu' ? 'a' : 'button'
 	} as Required<DropdownOptionProps<Tag>>;
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 	const th = themer($themeStore);
-	context.add(value, label, contextGroup);
+	context.add({value, label, group: contextGroup, selected });
 
 	$: isSelected = $context.selected.includes(value);
 
@@ -37,7 +37,7 @@
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
-		if (['multiselect', 'tags'].includes(context.mode)) {
+		if (['multiselect', 'tags'].includes(context.strategy)) {
 			if (context.isSelected(value)) context.unselect(value);
 			else context.select(value);
 		} else {
@@ -56,6 +56,7 @@
 		aria-selected={isSelected}
 		data-value={value}
 		class={optionClasses}
+		tabindex="-1"
 	>
 		<slot selected={isSelected} />
 	</button>
@@ -67,6 +68,7 @@
 		on:click={handleClick}
 		class={optionClasses}
 		href={$$restProps.href}
+		tabindex="-1"
 	>
 		<slot selected={isSelected} />
 	</a>

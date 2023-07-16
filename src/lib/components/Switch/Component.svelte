@@ -30,18 +30,14 @@
 	$: buttonClasses = th
 		.create('SwitchButton')
 		.option('switchButtonSizes', size, size)
-		.option(
-			focused === true || focused === 'always' ? 'focusedRingSizes' : 'focusedVisibleRingSizes',
-			size,
-			focused
-		)
-		.option(focused === true || focused === 'always' ? 'focused' : 'focusedVisible', theme, focused)
-		.option('focusedOffsetSizes', 'two', focused)
 		.append('pointer-events-none', disabled)
 		.append(
 			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full',
 			true
 		)
+		.option('focused', theme, focused)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -88,9 +84,9 @@
 		class={buttonClasses}
 		role="switch"
 		aria-checked={checked}
-		{disabled}
-		aria-disabled={disabled}
 		on:click={() => (checked = !checked)}
+		aria-disabled={disabled}
+		{disabled}
 	>
 		<span class="sr-only">{srtext}</span>
 

@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import themeStore, { themer, transitioner } from '$lib';
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';
-	import type { AccordionContext } from '../Accordion/module';
+	import type { AccordionContext } from '../AccordionController/module';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordianOptionProps<Tag> & ElementNativeProps<Tag>;
@@ -13,12 +12,20 @@
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
 
-	export let { as, delay, duration, easing, name, size, theme, variant } = {
+	export let {
+		as,
+		key,
+		size,
+		theme,
+		transition,
+		variant
+	} = {
 		...defaults,
-		name: panelContext.name,
-		size: context.globals.size,
-		theme: context.globals.theme,
-		variant: context.globals.variant
+		key: panelContext?.key,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		transition: context?.globals.transition,
+		variant: context?.globals.variant
 	} as Required<AccordianOptionProps<Tag>>;
 
 	const th = themer($themeStore);
@@ -31,14 +38,14 @@
 		.compile(true);
 </script>
 
-{#if $context.selected?.includes(name)}
+{#if $context.selected?.includes(key)}
 	<svelte:element
 		this={as}
-		id={`${name}-accordion-option`}
-		aria-labelledby={`${name}-accordion-heading`}
+		id={`${key}-accordion-option`}
+		aria-labelledby={`${key}-accordion-heading`}
+		transition:transitioner={transition}
 		{...$$restProps}
 		class={accordionClasses}
-		transition:slide={{ axis: 'y', delay, duration, easing }}
 	>
 		<slot />
 	</svelte:element>
