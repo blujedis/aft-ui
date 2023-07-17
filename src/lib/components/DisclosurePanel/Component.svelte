@@ -12,7 +12,6 @@
 	export let { as, unmount } = { ...defaults } as Required<$$Props>;
 	const context = getContext<DisclosureContext>('Disclosure');
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
 </script>
 
 {#if (unmount && $context.visible) || !unmount}

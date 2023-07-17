@@ -1,7 +1,4 @@
-
 import type { ElementProps, HTMLTag } from '../../types';
-
-
 
 export type DisclosurePanelProps<T extends HTMLTag> = ElementProps<T> & {
 	as?: T;

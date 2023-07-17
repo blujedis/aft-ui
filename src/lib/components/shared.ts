@@ -1,6 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
 
-
 export const borderSizes = {
 	unstyled: '',
 	transparent: 'border-transparent',
@@ -231,7 +230,7 @@ export const focused = {
 	info: 'focus:ring-info-600 focus-visible:ring-info-600'
 };
 
-export const focusedVisible = focused;
+// export const focusedVisible = focused;
 
 export const focusedRingSizes = {
 	$base: '',
@@ -301,8 +300,6 @@ export const placeholders = {
 	success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
 	info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
 };
-
-
 
 export const common = {
 	active: 'active:brightness-125',

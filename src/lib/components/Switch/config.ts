@@ -2,7 +2,7 @@ import { placeholder } from '../placeholder';
 
 export const switchBackdrop = {
 	default: {
-		...placeholder,
+		...placeholder
 		//	$base: 'bg-white'
 	}
 };
@@ -26,6 +26,6 @@ export const switchHandle = {
 	default: {
 		...placeholder,
 		$base: 'bg-white border-default-300',
-		white: 'border-default-200',
+		white: 'border-default-200'
 	}
 };

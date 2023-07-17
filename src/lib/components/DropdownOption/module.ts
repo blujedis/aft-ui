@@ -17,7 +17,7 @@ export type DropdownOptionProps<Tag extends 'a' | 'button'> = {
 
 export const dropdownOptionDefaults: Partial<DropdownOptionProps<'button'>> = {
 	element: 'button',
-	focused: true,
+	focused: 'always',
 	size: 'sm',
 	theme: 'default',
 	variant: 'default'

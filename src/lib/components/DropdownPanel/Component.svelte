@@ -3,39 +3,28 @@
 	import themeStore, { themer, transitioner } from '$lib';
 	import { getContext } from 'svelte';
 	import type { DropdownContext } from '$lib/components/Dropdown/module';
-	import { useFocusTrap } from '$lib/hooks';
 	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = DropdownPanelProps & ElementNativeProps<'div'>;
 
 	const context = getContext<DropdownContext>('Dropdown');
 
-	export let {
-		focustrap,
-		origin,
-		position,
-		rounded,
-		shadowed,
-		theme,
-		transition,
-		unmount,
-		variant,
-		width
-	} = {
+	export let { origin, position, rounded, shadowed, theme, transition, unmount, variant, width } = {
 		...defaults,
-		...context.globals
+		rounded: context?.globals.rounded,
+		shadowed: context?.globals.shadowed,
+		theme: context?.globals.theme
 	} as Required<$$Props>;
 
 	let ref: HTMLDivElement | undefined;
-
-	const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
+	let mounted = false;
 
 	$: panelClasses = themer($themeStore)
 		.create('DropdownPanel')
 		.variant('dropdownPanel', variant, theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.append(`dropdown-panel absolute z-10 mt-1 min-w-full focus:outline-none`, true)
+		.append(`dropdown-panel absolute z-30 mt-1 min-w-full focus:outline-none`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
 		.append('origin-center', origin === 'center')
@@ -48,19 +37,42 @@
 		return [items, container] as [HTMLElement[], HTMLElement];
 	}
 
-	function handleNavigation(e: KeyboardEvent) {
-		if (e.repeat || !['ArrowUp', 'ArrowDown', ' '].includes(e.key)) return;
-		const [items, container] = getChildren();
-		if (!items.length) return;
-		const activeNode = document.activeElement as HTMLElement;
-		// user is selecting current value.
-		// must have a contained active node.
-		if (e.key === ' ' && container.contains(activeNode)) {
-			// already selected nothing to do.
-			if ($context.selected.includes(activeNode.dataset.value as any)) return;
-			context.select(activeNode.dataset.value);
+	function focusActive(items?: HTMLElement[], fallbackNode?: HTMLElement) {
+		items = items || getChildren()[0];
+		let activeNode = items.find((node) => $context.selected.includes(node.dataset.value as any));
+		if (activeNode) {
+			activeNode.focus();
+		} else if (fallbackNode) {
+			activeNode = fallbackNode;
+			fallbackNode.focus();
 		}
-		// user is navigting.
+		return activeNode;
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.repeat || !['ArrowUp', 'ArrowDown', ' ', 'Enter'].includes(e.key)) return;
+		const [items, container] = getChildren();
+		if (!items.length) return; // nothing to do aren't any option items.
+		const activeNode = document.activeElement as HTMLElement;
+		//////////////////////////////////////////////
+		// User is selecting current value.
+		//////////////////////////////////////////////
+		if ((e.key === ' ' || e.key === 'Enter') && container.contains(activeNode)) {
+			// already selected nothing to do.
+			e.preventDefault();
+			const isSelected = $context.selected.includes(activeNode.dataset.value as any);
+			if (context.globals.multiple) {
+				if (isSelected) activeNode.dataset.value && context.remove(activeNode.dataset.value);
+				else context.select(activeNode.dataset.value);
+			} else if (!$context.selected.includes(activeNode.dataset.value as any)) {
+				context.select(activeNode.dataset.value);
+				context.close();
+			}
+			// if ($context.selected.includes(activeNode.dataset.value as any) && !context.globals.multiple) return;
+		}
+		//////////////////////////////////////////////
+		// User is navigating options.
+		//////////////////////////////////////////////
 		else {
 			let currentNode: HTMLElement | undefined;
 			if (container.contains(activeNode)) {
@@ -73,29 +85,34 @@
 				currentNode = items[nextIndex];
 			} else {
 				// dropdown expanded start at first or selected node.
-				const selectedNode = items.find((node) =>
-					$context.selected.includes(node.dataset.value as any)
-				);
-				// focus selected or first node if multiple the first selected gets focus.
-				currentNode = selectedNode || items[0];
+				focusActive(items, items[0]);
 			}
 			if (currentNode) currentNode.focus();
 		}
 	}
+
+	function setPanelRef(el: HTMLDivElement) {
+		mounted = true;
+		context.update((s) => ({ ...s, panel: el }));
+		el.focus();
+	}
 </script>
 
-{#if (unmount && $context.visible) || !unmount}
+<!-- Panel is set invisible until mounded to ensure binding
+	     manually created source items
+	-->
+{#if (unmount && $context.visible) || !unmount || !mounted}
 	<div
 		role={context.strategy === 'menu' ? 'menu' : 'listbox'}
 		aria-orientation="vertical"
 		tabindex="-1"
 		{...$$restProps}
 		bind:this={ref}
-		use:bindFocusTrap
-		on:keydown={handleFocusTrap}
-		on:keydown={handleNavigation}
+		use:setPanelRef
+		on:keydown={handleKeydown}
 		transition:transitioner={transition}
 		class={panelClasses}
+		class:invisible={!mounted}
 	>
 		<div class="py-1 flex flex-col" role="none">
 			<slot items={$context.filtered} />

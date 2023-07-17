@@ -11,7 +11,6 @@ import { prefixes as colorPrefixes } from './constants';
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
 
-
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *
@@ -236,7 +235,6 @@ export function mergeConfigs<
 		return a;
 	}, target as any);
 }
-
 
 // type CompileValue = string | number | boolean;
 /**

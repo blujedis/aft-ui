@@ -5,7 +5,6 @@ import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclo
 export type DropdownPanelVariant = keyof typeof dropdownPanel;
 
 export type DropdownPanelProps = {
-	focustrap?: boolean;
 	origin?: 'left' | 'right' | 'center';
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
@@ -19,7 +18,6 @@ export type DropdownPanelProps = {
 };
 
 export const dropdownPanelDefaults: Partial<DropdownPanelProps> = {
-	focustrap: true,
 	origin: 'left',
 	position: 'left',
 	shadowed: 'lg',

@@ -1,14 +1,22 @@
-
 import type { DisclosureStore } from '../../stores';
 import type { HTMLTag, ElementProps } from '../../types';
-import type { BlurParams, FadeParams, FlyParams, ScaleParams, SlideParams } from 'svelte/transition';
+import type {
+	BlurParams,
+	FadeParams,
+	FlyParams,
+	ScaleParams,
+	SlideParams
+} from 'svelte/transition';
 import { fly, fade, scale, blur, slide } from 'svelte/transition';
 
 export type DisclosureContext = DisclosureStore & {
 	transition: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
-}
+};
 
-export type DisclosureProps<S extends DisclosureStore = DisclosureStore, T extends HTMLTag = 'div'> = {
+export type DisclosureProps<
+	S extends DisclosureStore = DisclosureStore,
+	T extends HTMLTag = 'div'
+> = {
 	as?: T;
 	autoclose?: boolean;
 	escapable?: boolean;
@@ -23,9 +31,8 @@ export const disclosureDefaults: DisclosureProps = {
 	as: 'div',
 	autoclose: true,
 	opened: false,
-	escapable: true,
+	escapable: true
 };
-
 
 export type DisclosureTransitionOption = keyof typeof disclosureTransitionOptions;
 
@@ -45,9 +52,9 @@ export const disclosureTransitionOptions = {
 	focus: { duration: 400, amount: 5, opacity: 0, type: 'blur' } as BlurParams,
 	expand: { duration: 400, axis: 'y', type: 'slide' } as SlideParams,
 	swipe: { duration: 400, axis: 'x', type: 'slide' } as SlideParams,
-	zoom: { duration: 200, start: 0.70, type: 'scale' } as ScaleParams,
+	zoom: { duration: 200, start: 0.7, type: 'scale' } as ScaleParams,
 	announce: { duration: 400, y: -300, type: 'fly' } as FlyParams,
-	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams,
+	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams
 };
 
 export function transitioner(
@@ -60,8 +67,7 @@ export function transitioner(
 		config = disclosureTransitionOptions[options] as Record<string, any> & {
 			type: DisclosureTransition;
 		};
-	else
-		config = options;
+	else config = options;
 	const { type, ...rest } = config;
 	return disclosureTransitions[type](node, rest);
 }

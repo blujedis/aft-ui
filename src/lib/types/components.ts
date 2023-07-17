@@ -1,6 +1,15 @@
 import type { SvelteComponent, ComponentProps } from 'svelte';
 import type { SvelteHTMLElements } from 'svelte/elements';
-import type { BlurParams, CrossfadeParams, DrawParams, FadeParams, FlyParams, ScaleParams, SlideParams, TransitionConfig } from 'svelte/transition';
+import type {
+	BlurParams,
+	CrossfadeParams,
+	DrawParams,
+	FadeParams,
+	FlyParams,
+	ScaleParams,
+	SlideParams,
+	TransitionConfig
+} from 'svelte/transition';
 
 export type PrimitiveValue = string | number | boolean | undefined | null;
 export type ClassArgument = PrimitiveValue | Record<string, unknown>;
@@ -44,16 +53,13 @@ export type TypedComponent<T extends Record<string, unknown> = Record<string, un
 export type Transition = 'fade' | 'blur' | 'fly' | 'slide' | 'scale' | 'draw' | 'crossfade';
 
 export interface TransitionMap {
-	fade: FadeParams,
-	blur: BlurParams,
-	fly: FlyParams,
-	slide: SlideParams,
-	scale: ScaleParams,
-	draw: DrawParams,
-	crossfade: CrossfadeParams
+	fade: FadeParams;
+	blur: BlurParams;
+	fly: FlyParams;
+	slide: SlideParams;
+	scale: ScaleParams;
+	draw: DrawParams;
+	crossfade: CrossfadeParams;
 }
 
-export type TransitionHandler = (
-	node: Element,
-	options?: Record<string, any>
-) => TransitionConfig;
+export type TransitionHandler = (node: Element, options?: Record<string, any>) => TransitionConfig;

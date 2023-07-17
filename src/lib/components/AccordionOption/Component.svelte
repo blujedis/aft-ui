@@ -12,14 +12,7 @@
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
 
-	export let {
-		as,
-		key,
-		size,
-		theme,
-		transition,
-		variant
-	} = {
+	export let { as, key, size, theme, transition, variant } = {
 		...defaults,
 		key: panelContext?.key,
 		size: context.globals?.size,

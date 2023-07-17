@@ -3,9 +3,9 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { ThemeColor } from '$lib/theme';
+	ThemeTransitioned,
+	ThemeColor
+} from '$lib/types';
 import type { button } from './config';
 
 export type ButtonVariant = keyof typeof button;
@@ -15,7 +15,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
-	mode?: 'button' | 'text';
+	strategy?: 'button' | 'text';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -29,7 +29,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	focused: 'visible',
 	full: false,
-	mode: 'button',
+	strategy: 'button',
 	size: 'md',
 	theme: 'default',
 	variant: 'default'

@@ -19,12 +19,13 @@
 		autoclose,
 		disabled,
 		escapable,
+		filterable,
 		filter,
 		focused,
-		focustrap,
 		full,
-		strategy,
+		placeholder,
 		rounded,
+		strategy,
 		selected,
 		shadowed,
 		size,
@@ -34,7 +35,6 @@
 		trigger,
 		underlined,
 		unstyled,
-		variant,
 		visible,
 		selectProps
 	} = {
@@ -45,7 +45,9 @@
 		visible,
 		selected: ensureArray(selected),
 		items: [] as Required<DropdownItem>[],
-		filtered: [] as Required<DropdownItem>[]
+		filtered: [] as Required<DropdownItem>[],
+		input: undefined as HTMLInputElement | undefined,
+		panel: undefined as HTMLDivElement | undefined
 	});
 
 	export const context = setContext<DropdownContext>('Dropdown', {
@@ -58,22 +60,21 @@
 		trigger,
 		unselect,
 		filter: filterItems,
+		reset,
 		globals: {
 			disabled,
-			focused,
 			full,
-			multiple: strategy === 'multiselect',
+			multiple: strategy === 'multiselect' || strategy === 'tags',
+			placeholder,
 			rounded,
 			shadowed,
 			size,
 			theme,
-			transitioned,
-			underlined,
-			variant,
-			unstyled
+			variant: 'outlined'
 		}
 	});
 
+	let div: HTMLDivElement | undefined;
 	let selref: HTMLSelectElement | undefined;
 	const th = themer($themeStore);
 
@@ -105,11 +106,9 @@
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
-		if (!e.repeat && e.key === 'Escape' && escapable) {
-			store.close();
-		} else if (!e.repeat && e.key === 'Tab' && $store.visible) {
-			store.close();
-		}
+		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible))
+			return store.close();
+		if (!$store.visible && e.key === 'ArrowDown') return store.open();
 	}
 
 	function add({ value, label, group, selected }: DropdownItem) {
@@ -119,8 +118,12 @@
 		if (!hasValue) {
 			store.update((s) => {
 				const items = [...s.items, { value, label, group } as Required<DropdownItem>];
-				const selectedItems =
-					selected && !s.selected.includes(value) ? [...s.selected, value] : s.selected;
+				let selectedItems = [...s.selected];
+				if (selected && !selectedItems.includes(value)) {
+					if (selected && selectedItems.length && ['multiselect', 'tags'].includes(strategy))
+						selectedItems.push(value);
+					else selectedItems = [value];
+				}
 				return {
 					...s,
 					items,
@@ -142,10 +145,12 @@
 	function select(key?: DropdownKey) {
 		if (typeof key === 'undefined') return;
 		store.update((s) => {
-			let keys = [] as DropdownKey[];
-			if (['multiselect', 'tags'].includes(strategy))
-				keys = s.selected.includes(key) ? s.selected : [key, ...s.selected];
-			else keys = [key];
+			let keys = [key] as DropdownKey[];
+			const clone = [...s.selected];
+			if (['multiselect', 'tags'].includes(strategy) && !clone.includes(key)) {
+				clone.push(key);
+				keys = clone;
+			}
 			return { ...s, selected: keys };
 		});
 	}
@@ -162,10 +167,17 @@
 		return $store.selected.includes(key);
 	}
 
-	function filterItems(query?: string) {
-		store.update(s => {
-			const newItems = !query ? [...s.items] : filter(query, s.items);
-			return { ...s, filtered: newItems };
+	function filterItems(query = '') {
+		store.update((s) => {
+			const newItems = !query?.length ? [...s.items] : filter(query, s.items);
+			if (!query) console.log(s.items);
+			return { ...s, filtered: [...newItems] };
+		});
+	}
+
+	function reset() {
+		store.update((s) => {
+			return { ...s, filtered: [...s.items] };
 		});
 	}
 
@@ -185,6 +197,7 @@
 
 <div
 	role="presentation"
+	bind:this={div}
 	{...$$restProps}
 	use:clickOutside
 	on:click_outside={handleClose}

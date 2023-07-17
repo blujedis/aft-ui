@@ -1,6 +1,7 @@
 import type { DisclosureStore } from '../../stores';
 import { buttonDefaults, type ButtonProps } from '../Button';
 import type { ElementNativeProps } from '../../types/components';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '$lib/types';
 
 // menu - typical dropdown menu.
 // select - single selection trigger button reflects selected value.
@@ -18,12 +19,27 @@ export type DropdownItem = {
 	selected?: boolean;
 };
 
+export type DropdownGlobals =  {
+	disabled: boolean;
+	full: boolean;
+	multiple: boolean;
+	placeholder: string | null;
+	rounded: ThemeRounded;
+	shadowed: ThemeShadowed;
+	size: ThemeSize;
+	theme: ThemeColor;
+	variant: 'outlined' // to override set on underlying control.
+};
+
 export type DropdownContext = DisclosureStore<{
 	selected: DropdownKey[];
 	items: Required<DropdownItem>[];
 	filtered: Required<DropdownItem>[];
+	input?: HTMLInputElement;
+	button?: HTMLButtonElement;
+	panel?: HTMLDivElement;
 }> & {
-	globals: ButtonProps<'button' | 'a'> & { multiple?: boolean };
+	globals: DropdownGlobals;
 	strategy: DropdownStrategy;
 	isSelected: (key?: DropdownKey) => boolean;
 	trigger: DropdownTrigger;
@@ -32,14 +48,14 @@ export type DropdownContext = DisclosureStore<{
 	select: (key?: DropdownKey) => void;
 	unselect: (key?: DropdownKey) => void;
 	filter: (query?: string) => void;
+	reset: () => void;
 };
 
-export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'mode'> & {
+export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'strategy' | 'variant'> & {
 	autoclose?: boolean; // when blur close panel if open.
 	escapable?: boolean; // close panel when escape is entered.
+	filterable?: boolean; // list can be filtered requires below filter.
 	filter?: (query: string, items: Required<DropdownItem>[]) => Required<DropdownItem>[];
-	focustrap?: boolean; // when true focus is trapped in the dropdown.
-	// formatter?: DropdownLabelFormatHandler;
 	items?: DropdownItem[];
 	strategy?: DropdownStrategy;
 	multiple?: boolean;
@@ -49,7 +65,7 @@ export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, '
 	selectProps?: ElementNativeProps<'select'>;
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { mode, ...rest } = buttonDefaults;
+const { strategy, ...rest } = buttonDefaults;
 
 export const dropdownDefaults: Partial<DropdownProps<'button'>> = {
 	...rest,
@@ -57,8 +73,8 @@ export const dropdownDefaults: Partial<DropdownProps<'button'>> = {
 	autoclose: true,
 	escapable: true,
 	filter: (q, i) =>
-		i.filter(v => v.label.includes(q) || (v.value + '').includes(q) || v.group?.includes(q)),
-	focustrap: true,
+		i.filter((v) => v.label.includes(q) || (v.value + '').includes(q) || v.group?.includes(q)),
 	items: [],
+	strategy: 'menu',
 	trigger: 'click'
 };

@@ -12,9 +12,10 @@
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
 
-	export let { as, full, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
-		...defaults
-	} as Required<AccordionProps<Tag>>;
+	export let { as, full, multiple, selected, rounded, shadowed, size, theme, transition, variant } =
+		{
+			...defaults
+		} as Required<AccordionProps<Tag>>;
 
 	export const store = useSelect({ multiple, selected });
 

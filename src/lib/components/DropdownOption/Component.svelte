@@ -15,20 +15,23 @@
 
 	export let { element, focused, label, selected, size, theme, value, variant } = {
 		...defaults,
-		...context?.globals,
+		size: context?.globals.size,
+		theme: context?.globals.theme,
 		element: context?.strategy === 'menu' ? 'a' : 'button'
 	} as Required<DropdownOptionProps<Tag>>;
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 	const th = themer($themeStore);
-	context.add({value, label, group: contextGroup, selected });
+	context.add({ value, label, group: contextGroup, selected });
 
 	$: isSelected = $context.selected.includes(value);
 
 	$: optionClasses = th
 		.create('DropdownOption')
 		.variant('dropdownOption', variant, theme, variant)
-		.option('focusedVisible', theme, focused)
+		.option('focused', theme, true)
+		.option('focusedRingSizes', 'two', focused)
+		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.append('inline-flex items-center justify-between text-left', true)
@@ -42,8 +45,9 @@
 			else context.select(value);
 		} else {
 			context.select(value);
-			setTimeout(() => context.close(), 50); // makes icon flicker less.
+			setTimeout(() => context.close(), 50); // helps flicker.
 		}
+		if ($context.input) $context.input.value = '';
 	}
 </script>
 
@@ -56,7 +60,6 @@
 		aria-selected={isSelected}
 		data-value={value}
 		class={optionClasses}
-		tabindex="-1"
 	>
 		<slot selected={isSelected} />
 	</button>
@@ -68,7 +71,7 @@
 		on:click={handleClick}
 		class={optionClasses}
 		href={$$restProps.href}
-		tabindex="-1"
+		tabindex="0"
 	>
 		<slot selected={isSelected} />
 	</a>

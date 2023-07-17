@@ -9,7 +9,8 @@ export type DropdownButtonProps<Tag extends 'button' | 'a'> = ButtonProps<Tag> &
 
 export const dropdownButtonDefaults: DropdownButtonProps<'button'> = {
 	...buttonDefaults,
-	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal
+	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
+	focused: 'visible',
 	placeholder: 'Please Select',
 	roticon: true
 };

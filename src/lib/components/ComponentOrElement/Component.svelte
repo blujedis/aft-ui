@@ -5,7 +5,7 @@
 	import type { HTMLTag } from '../../types';
 
 	type T = $$Generic<HTMLTag | typeof SvelteComponent<any>>;
-	type $$Props = { as: T }
+	type $$Props = { as: T };
 
 	export let as: T;
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
@@ -15,10 +15,7 @@
 </script>
 
 {#if isElement}
-	<svelte:element
-		this={element}
-		{...$$restProps}
-		use:forwardedEvents>
+	<svelte:element this={element} {...$$restProps} use:forwardedEvents>
 		<slot />
 	</svelte:element>
 {:else}

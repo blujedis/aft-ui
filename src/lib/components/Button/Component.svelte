@@ -13,7 +13,7 @@
 		disabled,
 		focused,
 		full,
-		mode,
+		strategy,
 		rounded,
 		shadowed,
 		size,
@@ -31,7 +31,7 @@
 				.create('Button')
 				.option('focused', theme, focused)
 				.option('focusedRingSizes', 'two', focused)
-				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+				.remove(focused === 'visible' || focused === true ? 'focus:' : 'focus-visible:', true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
@@ -39,7 +39,7 @@
 				.option('shadows', shadowed, shadowed && variant !== 'text')
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
-				.append('font-medium', mode === 'button')
+				.append('font-medium', strategy === 'button')
 				.append('underline', underlined)
 				.append('w-full', full)
 				.append('inline-flex items-center justify-center outline-none', true)
@@ -58,7 +58,7 @@
 				.option('shadows', shadowed, shadowed && variant !== 'text')
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
-				.append('font-medium uppercase text-xs', mode === 'button')
+				.append('font-medium uppercase text-xs', strategy === 'button')
 				.append('underline', underlined)
 				.append('w-full', full)
 				.append('inline-flex items-center justify-center outline-none', true)
@@ -76,7 +76,7 @@
 	{disabled}
 	aria-disabled={disabled}
 >
-	{#if mode === 'button'}
+	{#if strategy === 'button'}
 		<div class="pt-0.5">
 			<slot />
 		</div>

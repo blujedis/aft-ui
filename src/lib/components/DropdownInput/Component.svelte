@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { DropdownContext } from '../Dropdown/module';
+	import { getContext, setContext } from 'svelte';
+	import type { DropdownContext, DropdownItem } from '../Dropdown/module';
 	import { type DropdownInputProps, dropdownInputDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
 	import Badge from '../Badge';
 	import { Icon } from '../Icon';
+	import { writable } from 'svelte/store';
 
 	type $$Props = DropdownInputProps & ElementNativeProps<'input', 'size'>;
 
@@ -35,12 +36,16 @@
 		...context?.globals
 	} as Required<DropdownInputProps>;
 
+	let lastFocus = null as HTMLElement | null;
 	let div: HTMLDivElement | undefined;
 	let input: HTMLInputElement | undefined;
-	let lastFocus = null as HTMLElement | null;
 	const th = themer($themeStore);
 
-	$: selected = $context.items.filter((item) => $context.selected.includes(item.value));
+	$: selected = $context.selected.reduce((a, c) => {
+		const item = $context.items.find((item) => item.value === c);
+		if (item) a.push(item);
+		return a;
+	}, [] as DropdownItem[]);
 
 	$: inputWrapperClasses = th
 		.create('DropdownInputWrapper')
@@ -114,9 +119,7 @@
 		const isButton = target.tagName.toLowerCase() === 'button';
 
 		if (!isInput && !isButton) return context.toggle();
-
 		e.stopPropagation();
-
 		if (isButton) return removeBadge(target);
 	}
 
@@ -125,18 +128,9 @@
 			currentTarget: EventTarget & HTMLDivElement;
 		}
 	) {
-		const target = e.target as HTMLElement;
-		const isInput = target.tagName.toLowerCase() === 'input';
-		const isButton = target.tagName.toLowerCase() === 'button';
-
-		if (['ArrowDown', 'ArrowUp'].includes(e.key + '')) {
-			if (e.key === 'ArrowUp' && $context.visible) context.close();
-			else if (e.key === 'ArrowDown' && !$context.visible) context.open();
-			return;
-		}
-
-		if (e.key === 'ArrowDown' && !$context.visible) return context.open();
-
+		// const target = e.target as HTMLElement;
+		// const isInput = target.tagName.toLowerCase() === 'input';
+		// const isButton = target.tagName.toLowerCase() === 'button';
 		if (e.key === 'Enter') removeBadge(e.target);
 	}
 
@@ -159,14 +153,25 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-		if (!input) return;
-		const query = input.value || '';
-		if (typeof e.key !== 'undefined' && ['Backspace', 'Enter'].includes(e.key)) {
-			if (e.key === 'Backspace' && !input.value.length) {
-				e.preventDefault();
-				const last = selected.slice(-1)[0];
-				if (last && removable) context.remove(last.value);
-				input.focus();
+		if (input && ['Backspace', 'Enter'].includes(e?.key || '') && !input.value.length) {
+			if (e.key === 'Backspace') {
+				if ($context.selected.length) {
+					if (
+						confirm(
+							`Are you sure you want to delete value "${
+								$context.selected[$context.selected.length - 1]
+							}"?`
+						)
+					) {
+						e.preventDefault();
+						const last = selected.slice(-1)[0];
+						if (last && removable) context.remove(last.value);
+						input.focus();
+						context.close();
+					} else {
+						context.reset();
+					}
+				}
 			} else if (
 				e.key === 'Enter' &&
 				newable &&
@@ -180,10 +185,29 @@
 				updateWidth(); // reset the width.
 				input.focus();
 			}
-		} else if (query.length && filterable) {
+		} else if (input && filterable) {
+			let query = input.value || '';
+			if (e.key.length === 1) query += e.key;
+			else if (e.key === 'Backspace') query = query.slice(0, -1);
 			context.filter(query);
+			if (!$context.visible) {
+				// do this to ensure focus after opening dropdown.
+				context.open();
+				setTimeout(() => {
+					if (input) {
+						input.value = e.key || '';
+						input.focus();
+					}
+				});
+			}
 		}
 	}
+
+	function handleInputKeypress(
+		e: {
+			currentTarget: EventTarget & HTMLInputElement;
+		} & KeyboardEvent
+	) {}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleBlur(e: any) {
@@ -192,6 +216,10 @@
 
 	function setFocus(e: Event & { target: EventTarget | null }) {
 		lastFocus = e.target as HTMLElement;
+	}
+
+	function setInputRef(el: HTMLInputElement) {
+		context.update((s) => ({ ...s, input: el }));
 	}
 
 	context.subscribe(() => {
@@ -225,19 +253,16 @@
 			{/if}
 			{#if context.strategy === 'tags'}
 				{#each selected as item}
-					<Badge
-						variant={variant === 'flushed' ? 'default' : variant}
-						{rounded}
-						{theme}
-						{size}
-						{removable}
-						on:focus={setFocus}>{item.label}</Badge
+					<Badge variant="filled" {rounded} {theme} {size} {removable} on:focus={setFocus}
+						>{item.label}</Badge
 					>
 				{/each}
 				<input
 					bind:this={input}
+					use:setInputRef
 					on:input={handleInput}
 					on:keydown={handleInputKeydown}
+					on:keyup={handleInputKeypress}
 					on:blur={handleBlur}
 					on:focus={setFocus}
 					type="text"

@@ -11,6 +11,7 @@
 	type $$Props = DropdownButtonProps<Tag> & ElementNativeProps<Tag>;
 
 	const context = getContext<DropdownContext>('Dropdown');
+	const { multiple, ...rest } = context.globals;
 
 	export let {
 		as,
@@ -30,12 +31,12 @@
 		unstyled
 	} = {
 		...defaults,
-		...context?.globals
+		...rest
 	} as Required<DropdownButtonProps<Tag>>;
 
 	const buttonProps = {
 		as: (typeof as === 'undefined' && context.strategy === 'menu' ? 'a' : as) as Tag,
-		tabindex: typeof as === 'undefined' && context.strategy === 'menu' ? 0 : null,
+		// tabindex: typeof as === 'undefined' && context.strategy === 'menu' ? 0 : null,
 		disabled,
 		focused,
 		full,
@@ -52,9 +53,10 @@
 
 	$$restProps.class = 'justify-between ' + $$restProps.class;
 
-	let ref: HTMLButtonElement | undefined;
+	let ref: HTMLElement | undefined;
 	const th = themer($themeStore);
 
+	$: ref && context.update((s) => ({ ...s, button: ref as any }));
 	$: selected = $context.items.filter((item) => $context.selected.includes(item.value))[0];
 	$: label = selected ? selected.label : placeholder || '';
 
@@ -71,39 +73,46 @@
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
 		if (context.trigger !== 'click') return;
-		if (e.target) ref = e.target as HTMLButtonElement;
+		e.preventDefault();
+		e.stopPropagation();
+		if (e.target) {
+			ref = e.target as HTMLButtonElement;
+		}
 		context.toggle();
 	}
 
-	function handleEnter() {
+	function handleMouseEnter() {
 		if (context.trigger !== 'hover') return;
 		context.toggle();
 	}
-	context.subscribe(() => {
-		// reset focus back to button when dropdown is closed.
-		if (ref && !$context.visible) ref.focus();
-	});
+
+	function setButtonRef(el: HTMLButtonElement) {
+		context.update((s) => ({ ...s, button: el }));
+	}
 </script>
 
 <div>
 	<Button
 		{...buttonProps}
+		tabindex={0}
 		{...$$restProps}
 		on:click={handleClick}
-		on:mouseenter={handleEnter}
-		mode="text"
+		on:mouseenter={handleMouseEnter}
+		strategy="text"
 		aria-expanded={$context.visible}
 		aria-haspopup="true"
 	>
-		<slot>
-			{#if ['select', 'multiselect'].includes(context.strategy)}
-				<div>
-					{label}
-				</div>
+		<div class="flex items-center pointer-events-none">
+			<slot>
+				{#if ['select', 'multiselect'].includes(context.strategy)}
+					<div>
+						{label}
+					</div>
+				{/if}
+			</slot>
+			{#if caret}
+				<Icon icon={caret} class={iconClasses} />
 			{/if}
-		</slot>
-		{#if caret}
-			<Icon icon={caret} class={iconClasses} />
-		{/if}
+		</div>
 	</Button>
 </div>

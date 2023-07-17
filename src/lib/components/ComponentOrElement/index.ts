@@ -1,3 +1,3 @@
 import ComponentOrElement from './Component.svelte';
-export { ComponentOrElement }
+export { ComponentOrElement };
 export default ComponentOrElement;

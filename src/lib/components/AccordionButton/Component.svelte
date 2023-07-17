@@ -60,7 +60,7 @@
 		on:click={() => context.toggle(key)}
 		class={accordionButtonClasses}
 		aria-expanded={isSelected}
-		mode="text"
+		strategy="text"
 		{rounded}
 		{size}
 	>

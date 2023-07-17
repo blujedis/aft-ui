@@ -59,7 +59,6 @@
 		if ($context?.selected?.includes(value)) context.unselect(value);
 		else context.select(value);
 	}
-
 </script>
 
 <svelte:element
