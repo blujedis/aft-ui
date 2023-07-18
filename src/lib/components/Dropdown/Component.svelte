@@ -190,6 +190,7 @@
 				if (s.selected.includes(node.value)) node.selected = true;
 			});
 		}
+		if (s.visible && s.panel) s.panel.focus();
 	});
 
 	if (items?.length) items.forEach((item) => add(item));

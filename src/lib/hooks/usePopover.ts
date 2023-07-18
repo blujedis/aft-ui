@@ -9,7 +9,7 @@ import {
 import { onDestroy, SvelteComponent, type ComponentProps } from 'svelte';
 
 import Popover, { type PopoverProps } from '$lib/components/Popover';
-import type { ElementNativeProps } from '$lib/components';
+import type { ElementProps } from '$lib/types';
 
 export type { VirtualElement } from '@popperjs/core';
 export type RefNode = Element | VirtualElement;
@@ -17,7 +17,7 @@ export type ContentNode = HTMLElement | undefined;
 
 export type PopperOptions<TModifier> = Partial<OptionsGeneric<TModifier>> | undefined;
 
-export type PopoverNativeProps = ElementNativeProps<'div'>;
+export type PopoverNativeProps = ElementProps<'div'>;
 
 export type RefAction = (node: RefNode | Readable<VirtualElement>) => {
 	destroy?(): void;
@@ -285,7 +285,7 @@ export function createPopover<
  * @param node the node to apply the popover to.
  * @param options the popover options to be applied.
  */
-export function popover<TModifier extends Partial<Modifier<any, any>>>(
+export function usePopover<TModifier extends Partial<Modifier<any, any>>>(
 	node: Element & { focus: () => void },
 	options = {} as Omit<PopoverOptions<TModifier, typeof PopoverComponent>, 'component'>
 ) {
@@ -307,3 +307,5 @@ export function popover<TModifier extends Partial<Modifier<any, any>>>(
 		destroy
 	};
 }
+
+export default usePopover;

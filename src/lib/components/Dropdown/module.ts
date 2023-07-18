@@ -1,7 +1,13 @@
 import type { DisclosureStore } from '../../stores';
 import { buttonDefaults, type ButtonProps } from '../Button';
 import type { ElementNativeProps } from '../../types/components';
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '$lib/types';
+import type {
+	ThemeColor,
+	ThemeRounded,
+	ThemeShadowed,
+	ThemeSize,
+	ThemeTransitioned
+} from '$lib/types';
 
 // menu - typical dropdown menu.
 // select - single selection trigger button reflects selected value.
@@ -19,7 +25,7 @@ export type DropdownItem = {
 	selected?: boolean;
 };
 
-export type DropdownGlobals =  {
+export type DropdownGlobals = {
 	disabled: boolean;
 	full: boolean;
 	multiple: boolean;
@@ -28,7 +34,7 @@ export type DropdownGlobals =  {
 	shadowed: ThemeShadowed;
 	size: ThemeSize;
 	theme: ThemeColor;
-	variant: 'outlined' // to override set on underlying control.
+	variant: 'outlined'; // to override set on underlying control.
 };
 
 export type DropdownContext = DisclosureStore<{
@@ -51,7 +57,10 @@ export type DropdownContext = DisclosureStore<{
 	reset: () => void;
 };
 
-export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'strategy' | 'variant'> & {
+export type DropdownProps<Tag extends 'button' | 'a'> = Omit<
+	ButtonProps<Tag>,
+	'strategy' | 'variant'
+> & {
 	autoclose?: boolean; // when blur close panel if open.
 	escapable?: boolean; // close panel when escape is entered.
 	filterable?: boolean; // list can be filtered requires below filter.

@@ -19,6 +19,7 @@
 		disabled,
 		focused,
 		full,
+		href,
 		placeholder,
 		rounded,
 		roticon,
@@ -35,8 +36,7 @@
 	} as Required<DropdownButtonProps<Tag>>;
 
 	const buttonProps = {
-		as: (typeof as === 'undefined' && context.strategy === 'menu' ? 'a' : as) as Tag,
-		// tabindex: typeof as === 'undefined' && context.strategy === 'menu' ? 0 : null,
+		as: (context.strategy !== 'menu' || !href ? as : 'a') as Tag,
 		disabled,
 		focused,
 		full,
@@ -75,9 +75,7 @@
 		if (context.trigger !== 'click') return;
 		e.preventDefault();
 		e.stopPropagation();
-		if (e.target) {
-			ref = e.target as HTMLButtonElement;
-		}
+		if (e.target) ref = e.target as HTMLButtonElement;
 		context.toggle();
 	}
 
@@ -94,7 +92,6 @@
 <div>
 	<Button
 		{...buttonProps}
-		tabindex={0}
 		{...$$restProps}
 		on:click={handleClick}
 		on:mouseenter={handleMouseEnter}

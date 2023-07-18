@@ -15,6 +15,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	href?: string | null;
 	strategy?: 'button' | 'text';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;

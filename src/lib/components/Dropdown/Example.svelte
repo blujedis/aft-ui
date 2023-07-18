@@ -96,9 +96,9 @@
 						<DropdownButton variant="filled" />
 						<DropdownPanel>
 							{#each filtered as item, i}
-								<DropdownOption value={item.value} let:selected>
+								<DropdownOption value={item.value} let:isSelected>
 									{item.label}
-									{#if selected}
+									{#if isSelected}
 										<Icon
 											icon="mdi:check"
 											size="sm"
@@ -117,9 +117,9 @@
 					<DropdownButton />
 					<DropdownPanel>
 						{#each filtered as item, i}
-							<DropdownOption value={item.value} let:selected>
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -137,9 +137,9 @@
 					<DropdownButton variant="text">Select Language</DropdownButton>
 					<DropdownPanel>
 						{#each filtered as item, i}
-							<DropdownOption value={item.value} let:selected>
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -157,9 +157,9 @@
 					<DropdownButton variant="ghost" />
 					<DropdownPanel>
 						{#each filtered as item, i}
-							<DropdownOption value={item.value} let:selected>
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -176,7 +176,7 @@
 
 	<div class="mt-4 grid grid-cols-4 gap-4">
 		{#key props}
-			<label for="input">
+			<label for="tags">
 				<span class="text-sm block mb-2">Tags Example:</span>
 				<Dropdown strategy="tags" {...props} selected="react" items={sourceItems} let:filtered>
 					<DropdownInput newable filterable />
@@ -187,15 +187,47 @@
 							</div>
 						{:else}
 							{#each filtered as item, i}
-								<DropdownOption value={item.value} let:selected>
+								<DropdownOption value={item.value} let:isSelected>
 									{item.label}
-									{#if selected}
+									{#if isSelected}
 										<Icon
 											icon="mdi:check"
 											size="sm"
 											class="group-aria-selected:text-current group-hover:!text-white"
 										/>
 									{/if}
+								</DropdownOption>
+							{/each}
+						{/if}
+					</DropdownPanel>
+				</Dropdown>
+			</label>
+			<label for="combobox">
+				<span class="text-sm block mb-2">Combobox Example:</span>
+				<Dropdown {...props} strategy="combobox" selected="react" items={sourceItems} let:filtered>
+					<DropdownInput filterable />
+					<DropdownPanel class="w-32" let:selected>
+						{#if !filtered.length}
+							<div class="flex items-center justify-center pt-1 pb-2 px-4 text-sm">
+								No records found!
+							</div>
+						{:else}
+							{#each filtered as item, i}
+								<DropdownOption value={item.value} let:isSelected>
+									<div class="flex w-full items-center">
+										<div class="text-center shrink min-w-[20px]">
+											{#if isSelected}
+												<Icon
+													icon="mdi:check"
+													size="sm"
+													class="group-aria-selected:text-current group-hover:!text-white"
+												/>
+											{/if}
+										</div>
+										<div class="flex-1" class:pl-3={selected.length}>
+											{item.label}
+										</div>
+									</div>
 								</DropdownOption>
 							{/each}
 						{/if}

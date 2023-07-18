@@ -191,32 +191,6 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
-// export const focused = {
-// 	$base: 'focus:outline-none focus-visible:outline-none',
-// 	white: 'focus:ring-white',
-// 	default: 'focus:ring-default-500',
-// 	primary: 'focus:ring-primary-500',
-// 	secondary: 'focus:ring-secondary-500',
-// 	tertiary: 'focus:ring-tertiary-500',
-// 	danger: 'focus:ring-danger-500',
-// 	warning: 'focus:ring-warning-500',
-// 	success: 'focus:ring-success-500',
-// 	info: 'focus:ring-info-500'
-// };
-
-// export const focusedVisible = {
-// 	$base: 'focus:outline-none focus-visible:outline-none',
-// 	white: 'focus-visible:ring-white',
-// 	default: 'focus-visible:ring-default-500',
-// 	primary: 'focus-visible:ring-primary-500',
-// 	secondary: 'focus-visible:ring-secondary-500',
-// 	tertiary: 'focus-visible:ring-tertiary-500',
-// 	danger: 'focus-visible:ring-danger-500',
-// 	warning: 'focus-visible:ring-warning-500',
-// 	success: 'focus-visible:ring-success-500',
-// 	info: 'focus-visible:ring-info-500'
-// };
-
 export const focused = {
 	$base: 'focus:outline-none focus-visible:outline-none',
 	white: 'focus:ring-default-100 focus-visible:ring-default-100',
@@ -229,8 +203,6 @@ export const focused = {
 	success: 'focus:ring-success-600 focus-visible:ring-success-600',
 	info: 'focus:ring-info-600 focus-visible:ring-info-600'
 };
-
-// export const focusedVisible = focused;
 
 export const focusedRingSizes = {
 	$base: '',
@@ -299,6 +271,16 @@ export const placeholders = {
 	warning: 'placeholder:text-warning-400 aria-disabled:placeholder:text-warning-300',
 	success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
 	info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
+};
+
+export const iconCaretSizes = {
+	unstyled: '',
+	xs: 'h-3 w-3',
+	sm: 'h-3.5 w-3.5',
+	md: 'h-4 w-4',
+	lg: 'h-4 w-4',
+	xl: 'h-5 w-5',
+	xl2: 'h-6 w-6'
 };
 
 export const common = {

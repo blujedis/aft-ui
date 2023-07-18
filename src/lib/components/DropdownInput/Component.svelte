@@ -89,11 +89,11 @@
 		.append('px-0', selected.length || (placeholder && !selected.length))
 		.compile(true);
 
-	$: placeholderClasses = th
-		.create('DropdownPlaceholder')
-		.option('fieldPadding', size, size)
-		.append('pt-0 pb-0 pr-0 capitalize', true)
-		.compile(true);
+	// $: placeholderClasses = th
+	// 	.create('DropdownPlaceholder')
+	// 	.option('fieldPadding', size, size)
+	// 	.append('pt-0 pb-0 pr-0 capitalize', true)
+	// 	.compile(true);
 
 	function updateWidth() {
 		if (!input) return;
@@ -195,23 +195,12 @@
 				context.open();
 				setTimeout(() => {
 					if (input) {
-						input.value = e.key || '';
+						if (e.key.length === 1) input.value = e.key || '';
 						input.focus();
 					}
 				});
 			}
 		}
-	}
-
-	function handleInputKeypress(
-		e: {
-			currentTarget: EventTarget & HTMLInputElement;
-		} & KeyboardEvent
-	) {}
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function handleBlur(e: any) {
-		if (!resetable) return;
 	}
 
 	function setFocus(e: Event & { target: EventTarget | null }) {
@@ -248,22 +237,34 @@
 		class={inputWrapperClasses}
 	>
 		<div class={containerWrapper}>
-			{#if !selected.length && context.strategy !== 'tags'}
+			<!-- {#if !selected.length && context.strategy !== 'tags'}
 				<div class={placeholderClasses}>{placeholder}</div>
-			{/if}
+			{/if} -->
+
 			{#if context.strategy === 'tags'}
 				{#each selected as item}
 					<Badge variant="filled" {rounded} {theme} {size} {removable} on:focus={setFocus}
 						>{item.label}</Badge
 					>
 				{/each}
+
 				<input
 					bind:this={input}
 					use:setInputRef
 					on:input={handleInput}
 					on:keydown={handleInputKeydown}
-					on:keyup={handleInputKeypress}
-					on:blur={handleBlur}
+					on:focus={setFocus}
+					type="text"
+					class={inputClasses}
+					class:w-full={!selected.length}
+					placeholder={!selected.length ? 'Enter Value' : ''}
+				/>
+			{:else}
+				<input
+					bind:this={input}
+					use:setInputRef
+					on:input={handleInput}
+					on:keydown={handleInputKeydown}
 					on:focus={setFocus}
 					type="text"
 					class={inputClasses}
@@ -272,6 +273,7 @@
 				/>
 			{/if}
 		</div>
+
 		{#if caret}
 			<div class="listbox-caret h-full">
 				<Icon icon={caret} class={iconClasses} />

@@ -17,6 +17,7 @@ export type DropdownInputProps = InputProps & {
 	resetable?: boolean;
 	placeholder?: string;
 	roticon?: string | boolean;
+	stacked?: boolean;
 };
 
 export const dropdownInputDefaults: DropdownInputProps = {
@@ -27,5 +28,6 @@ export const dropdownInputDefaults: DropdownInputProps = {
 	placeholder: 'Please Select',
 	removable: true,
 	resetable: true,
-	roticon: true
+	roticon: true,
+	stacked: false
 };

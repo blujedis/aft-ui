@@ -39,6 +39,7 @@
 
 	function focusActive(items?: HTMLElement[], fallbackNode?: HTMLElement) {
 		items = items || getChildren()[0];
+		console.log(items);
 		let activeNode = items.find((node) => $context.selected.includes(node.dataset.value as any));
 		if (activeNode) {
 			activeNode.focus();
@@ -83,11 +84,11 @@
 				if (nextIndex < 0 || nextIndex > items.length - 1) return;
 				// Otherwise set the current node to the new index.
 				currentNode = items[nextIndex];
+				if (currentNode) currentNode.focus();
 			} else {
 				// dropdown expanded start at first or selected node.
 				focusActive(items, items[0]);
 			}
-			if (currentNode) currentNode.focus();
 		}
 	}
 
@@ -98,7 +99,7 @@
 	}
 </script>
 
-<!-- Panel is set invisible until mounded to ensure binding
+<!-- Panel is set invisible until mounted to ensure binding
 	     manually created source items
 	-->
 {#if (unmount && $context.visible) || !unmount || !mounted}
@@ -115,7 +116,7 @@
 		class:invisible={!mounted}
 	>
 		<div class="py-1 flex flex-col" role="none">
-			<slot items={$context.filtered} />
+			<slot selected={$context.selected} filtered={$context.filtered} />
 		</div>
 	</div>
 {/if}

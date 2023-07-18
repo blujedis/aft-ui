@@ -61,7 +61,7 @@
 		data-value={value}
 		class={optionClasses}
 	>
-		<slot selected={isSelected} />
+		<slot {isSelected} />
 	</button>
 {:else}
 	<a
@@ -73,6 +73,6 @@
 		href={$$restProps.href}
 		tabindex="0"
 	>
-		<slot selected={isSelected} />
+		<slot {isSelected} />
 	</a>
 {/if}
