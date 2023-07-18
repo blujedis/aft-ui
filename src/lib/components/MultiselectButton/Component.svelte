@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
+	import { type MultiselectButtonProps, multiselectButtonDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import Button from '../Button';
 	import Icon from '../Icon';
 	import type { ElementProps } from '$lib/types';
-	import type { MenuControllerContext } from '../MenuController';
+	import type { MultiselectControllerContext } from '../MultiselectController';
 	import { getContext } from 'svelte';
 
-	type $$Props = MenuButtonProps & ElementProps<'div'>;
+	type $$Props = MultiselectButtonProps & ElementProps<'div'>;
 
-	const context = getContext('MenuController') as MenuControllerContext;
+	const context = getContext('MultiselectContext') as MultiselectControllerContext;
 
-	export let { caret, roticon, size, strategy, theme, variant } = {
+	export let { caret, full, rounded, roticon, size, shadowed, strategy, theme, variant } = {
 		...defaults,
 		...context?.globals
 	} as Required<$$Props>;
@@ -30,15 +30,13 @@
 		.compile();
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
-		e.preventDefault();
-		e.stopPropagation();
 		context.toggle();
 	}
 </script>
 
 <svelte:component
 	this={Button}
-	{...{ size, theme, variant, strategy }}
+	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
 	{...$$restProps}
 	on:click={handleClick}
 	aria-expanded={$context.visible}

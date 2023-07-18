@@ -22,6 +22,7 @@
 		<a href="/dropdown">Dropdowns</a>
 		<a href="/menu">Menu</a>
 		<a href="/modal">Modals</a>
+		<a href="/multiselect">Multiselect</a>
 		<a href="/notification">Notifications</a>
 		<a href="/pagination">Pagination</a>
 		<a href="/progressbar">Progress Bar</a>

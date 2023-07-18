@@ -1,27 +1,31 @@
 <script lang="ts">
-	import { type MenuPanelProps, menuPanelDefaults as defaults } from './module';
+	import { type MultiselectPanelProps, multiselectPanelDefaults as defaults } from './module';
 	import themeStore, { themer, transitioner } from '$lib';
-	import type { MenuControllerContext } from '../MenuController';
+	import type { MultiselectControllerContext } from '../MultiselectController';
 	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
 	import { useFocusNav } from '$lib/hooks';
 	import { writable } from 'svelte/store';
 
-	type $$Props = MenuPanelProps & ElementProps<'div'>;
+	type $$Props = MultiselectPanelProps & ElementProps<'div'>;
 
-	const context = getContext('MenuController') as MenuControllerContext;
+	const context = getContext('MultiselectContext') as MultiselectControllerContext;
 
 	export let { origin, position, rounded, shadowed, theme, transition, variant } = {
 		...defaults,
 		...context?.globals
-	} as Required<MenuPanelProps>;
+	} as Required<MultiselectPanelProps>;
 
 	const th = themer($themeStore);
 	$: ref = writable<HTMLDivElement | undefined>();
 	$: nav = useFocusNav($ref?.firstChild);
 
+	nav?.onSelected(el => {
+		console.log(el);
+	});
+
 	$: panelClasses = th
-		.create('MenuPanel')
+		.create('MultiselectPanel')
 		.variant('menuPanel', variant, theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { type SelectOptionProps, selectOptionDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import { getContext, get_current_component } from 'svelte/internal';
+	import {  get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
 	import type { SelectContext } from '../Select/module';
+	import { getContext } from 'svelte';
 
 	type $$Props = SelectOptionProps & ElementNativeProps<'option'>;
 
@@ -12,7 +13,7 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const context = getContext<SelectContext>('Select');
+	const context = getContext<SelectContext>('SelectContext');
 
 	const th = themer($themeStore);
 
@@ -20,7 +21,6 @@
 		.create('SelectOption')
 		.variant('selectOption', variant, theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('disableds', theme, disabled)

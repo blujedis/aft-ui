@@ -7,17 +7,17 @@ export interface SelectProps {
 	max?: number;
 	min?: number;
 	multiple?: boolean;
-	selected?: SelectValue[];
+	selected: SelectValue[];
 }
 
 export type SelectInitProps = SelectProps & { selected?: SelectValue | SelectValue[] };
 
 export interface SelectMethods {
-	reset(...selected: SelectValue[]): void;
+	// reset(...selected: SelectValue[]): void;
 	select(value?: SelectValue): void;
 	unselect(value?: SelectValue): void;
 	toggle(value?: SelectValue): void;
-	isSelected(value?: SelectValue): void;
+	isSelected(value?: SelectValue): boolean;
 }
 
 export type SelectStore<P extends Record<string, any> = Record<string, any>> = Writable<
@@ -54,7 +54,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	function toggle(value?: SelectValue) {
+	function swap(value?: SelectValue) {
 		if (typeof value === 'undefined') return;
 		store.update((s) => {
 			let selected = [...s.selected];
@@ -65,23 +65,23 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	function reset(...selected: SelectValue[]) {
-		store.update((s) => {
-			return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
-		});
-	}
+	// function reset(...selected: SelectValue[]) {
+	// 	store.update((s) => {
+	// 		return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
+	// 	});
+	// }
 
-	function isSelected(value?: SelectValue) {
+	function isSelected(value?: SelectValue): boolean {
 		if (typeof value === 'undefined') return false;
 		return getStore().selected.includes(value);
 	}
 
 	return {
 		...store,
-		reset,
+		// reset,
 		select,
 		unselect,
-		toggle,
+		toggle: swap,
 		isSelected
 	};
 }

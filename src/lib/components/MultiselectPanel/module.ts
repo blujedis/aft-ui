@@ -1,20 +1,20 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
-import type { menuPanel } from './config';
+import type { multiselectPanel } from './config';
 
-export type MenuPanelVariant = keyof typeof menuPanel;
+export type MultiselectPanelVariant = keyof typeof multiselectPanel;
 
-export type MenuPanelProps = {
+export type MultiselectPanelProps = {
 	origin?: 'left' | 'right' | 'center';
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor; // not really used placeholder in case of future use.
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
-	variant?: MenuPanelVariant;
+	variant?: MultiselectPanelVariant;
 };
 
-export const menuPanelDefaults = {
+export const multiselectPanelDefaults = {
 	origin: 'center',
 	position: 'left',
 	shadowed: 'md',

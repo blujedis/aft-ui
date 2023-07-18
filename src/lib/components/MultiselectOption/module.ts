@@ -1,21 +1,20 @@
-import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
-import type { menuOption } from './config';
+import type { ThemeColor, ThemeSize } from '$lib/types';
+import type { multiselectOption } from './config';
 
-export type MenuOptionVariant = keyof typeof menuOption;
+export type MultiselectOptionVariant = keyof typeof multiselectOption;
 
-export type MenuOptionProps<Tag extends 'a' | 'button'> = {
-	active?: boolean;
+export type MultiselectOptionProps<Tag extends 'a' | 'button'> = {
 	as?: Tag;
-	focused?: ThemeFocused;
 	label?: string;
+	multiple?: boolean;
 	selected?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	key?: string | number;
-	variant?: MenuOptionVariant;
+	value?: string | number;
+	variant?: MultiselectOptionVariant;
 };
 
-export const menuOptionDefaults: MenuOptionProps<'a'> = {
+export const multiselectOptionDefaults: MultiselectOptionProps<'a'> = {
 	as: 'a',
 	size: 'sm',
 	theme: 'default',

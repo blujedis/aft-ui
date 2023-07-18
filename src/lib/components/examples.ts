@@ -15,6 +15,7 @@ export { default as KbdExample } from './Kbd/Example.svelte';
 export { default as LabelExample } from './Label/Example.svelte';
 export { default as LoaderExample } from './Loader/Example.svelte';
 export { default as MenuExample } from './MenuController/Example.svelte';
+export { default as MultiselectExample } from './MultiselectController/Example.svelte';
 export { default as ModalExample } from './Modal/Example.svelte';
 export { default as NotificationExample } from './NotificationController/Example.svelte';
 export { default as PaginationExample } from './PaginationController/Example.svelte';

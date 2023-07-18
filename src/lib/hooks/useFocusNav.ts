@@ -5,11 +5,11 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 	const options = {
 		findActive: (_items: HTMLElement[]) => null as HTMLElement | null | undefined,
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		onEnter: (_node: HTMLElement) => {}
+		onSelected: (_node: HTMLElement) => { }
 	};
 
-	function onEnter(fn: HandleEnter) {
-		options.onEnter = fn;
+	function onSelected(fn: HandleEnter) {
+		options.onSelected = fn;
 	}
 
 	function onFindActive(fn: FindActive) {
@@ -38,7 +38,7 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 
 		if ((e.key === ' ' || e.key === 'Enter') && (root as HTMLElement).contains(activeNode)) {
 			if (preventDefault) e.preventDefault();
-			options.onEnter(activeNode);
+			options.onSelected(activeNode);
 		}
 
 		//////////////////////////////////////////////
@@ -65,7 +65,7 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 	return {
 		getChildren,
 		focusRoot,
-		onEnter,
+		onSelected,
 		onFindActive,
 		onKeydown
 	};

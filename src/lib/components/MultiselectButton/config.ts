@@ -1,5 +1,5 @@
 import { button } from '../Button';
 
-export const menuButton = {
+export const multiselectButton = {
 	...button
 };

@@ -30,7 +30,7 @@
 
 	const store = useSelect({ multiple, selected: ensureArray(selected) });
 
-	export const context = setContext<SelectContext>('Dropdown', {
+	export const context = setContext<SelectContext>('SelectContext', {
 		...store
 	});
 

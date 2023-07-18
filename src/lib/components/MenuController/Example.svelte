@@ -62,7 +62,6 @@
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
@@ -88,17 +87,19 @@
 		<hr />
 	</Section>
 
-	<div class="grid grid-cols-8 gap-2">
-		<label for="filled">
-			<div class="text-sm">Filled:</div>
-			<MenuController>
-				<MenuButton>Button</MenuButton>
-				<MenuPanel>
-					{#each sourceItems as item}
-						<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-					{/each}
-				</MenuPanel>
-			</MenuController>
-		</label>
-	</div>
+	{#key props}
+		<div class="grid grid-cols-8 gap-2">
+			<label for="filled">
+				<div class="text-sm">Filled:</div>
+				<MenuController {...props}>
+					<MenuButton>Button</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+					</MenuPanel>
+				</MenuController>
+			</label>
+		</div>
+	{/key}
 </ExamplePage>

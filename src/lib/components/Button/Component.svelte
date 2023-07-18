@@ -77,7 +77,7 @@
 	aria-disabled={disabled}
 >
 	{#if strategy === 'button'}
-		<div class="pt-0.5">
+		<div class="pt-px">
 			<slot />
 		</div>
 	{:else}

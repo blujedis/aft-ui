@@ -11,7 +11,7 @@
 
 	const context = getContext('MenuController') as MenuControllerContext;
 
-	export let { caret, roticon, size, strategy, theme, variant } = {
+	export let { caret, full, rounded, roticon, size, shadowed, strategy, theme, variant } = {
 		...defaults,
 		...context?.globals
 	} as Required<$$Props>;
@@ -36,7 +36,7 @@
 
 <svelte:component
 	this={Button}
-	{...{ size, theme, variant, strategy }}
+	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
 	{...$$restProps}
 	on:click={handleClick}
 	aria-expanded={$context.visible}

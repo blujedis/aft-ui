@@ -1,5 +1,5 @@
 import { placeholder } from '../placeholder';
 
-export const menuController = {
+export const multiselectController = {
 	default: { ...placeholder }
 };

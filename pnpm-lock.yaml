@@ -61,6 +61,9 @@ devDependencies:
   '@semantic-release/release-notes-generator':
     specifier: ^10.0.3
     version: 10.0.3(semantic-release@19.0.5)
+  '@sveleton/config':
+    specifier: blujedis/sveleton-config
+    version: github.com/blujedis/sveleton-config/9d2264b1d565f0cf64d270ae6cb093efea7543bb(postcss@8.4.21)(ts-node@10.9.1)
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.0(@sveltejs/kit@1.22.1)
@@ -106,9 +109,6 @@ devDependencies:
   eslint-plugin-svelte:
     specifier: ^2.30.0
     version: 2.30.0(eslint@8.28.0)(svelte@4.0.5)(ts-node@10.9.1)
-  eslint-plugin-svelte3:
-    specifier: ^4.0.0
-    version: 4.0.0(eslint@8.28.0)(svelte@4.0.5)
   husky:
     specifier: ^8.0.1
     version: 8.0.1
@@ -2371,7 +2371,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       type-fest: 2.19.0
-    dev: false
 
   /duplexer2@0.1.4:
     resolution: {integrity: sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==}
@@ -2494,16 +2493,6 @@ packages:
       eslint: '>=7.0.0'
     dependencies:
       eslint: 8.28.0
-    dev: true
-
-  /eslint-plugin-svelte3@4.0.0(eslint@8.28.0)(svelte@4.0.5):
-    resolution: {integrity: sha512-OIx9lgaNzD02+MDFNLw0GEUbuovNcglg+wnd/UY0fbZmlQSz7GlQiQ1f+yX0XvC07XPcDOnFcichqI3xCwp71g==}
-    peerDependencies:
-      eslint: '>=8.0.0'
-      svelte: ^3.2.0
-    dependencies:
-      eslint: 8.28.0
-      svelte: 4.0.5
     dev: true
 
   /eslint-plugin-svelte@2.30.0(eslint@8.28.0)(svelte@4.0.5)(ts-node@10.9.1):
@@ -3374,6 +3363,10 @@ packages:
 
   /lodash.capitalize@4.2.1:
     resolution: {integrity: sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw==}
+    dev: true
+
+  /lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
     dev: true
 
   /lodash.escaperegexp@4.1.2:
@@ -4845,7 +4838,6 @@ packages:
 
   /tailwind-merge@1.11.0:
     resolution: {integrity: sha512-oG3/328Y7LrfPMfkgMNxoqEk1ZQdXBxdphf9FFrreo8q0EtVIHt3bQf2IyFhQuVt8puB57lCRBNbazGhYAyz9w==}
-    dev: false
 
   /tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1):
     resolution: {integrity: sha512-B6DLqJzc21x7wntlH/GsZwEXTBttVSl1FtCzC8WP4oBc/NKef7kaax5jeihkkCEWc831/5NDJ9gRNDK6NEioQQ==}
@@ -4925,6 +4917,10 @@ packages:
 
   /tinybench@2.4.0:
     resolution: {integrity: sha512-iyziEiyFxX4kyxSp+MtY1oCH/lvjH3PxFN8PGCDeqcZWAJ/i+9y+nL85w99PxVzrIvew/GSkSbDYtiGVa85Afg==}
+    dev: true
+
+  /tinycolor2@1.6.0:
+    resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
     dev: true
 
   /tinypool@0.3.1:
@@ -5085,7 +5081,6 @@ packages:
   /type-fest@2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
-    dev: false
 
   /typedoc@0.24.8(typescript@5.1.6):
     resolution: {integrity: sha512-ahJ6Cpcvxwaxfu4KtjA8qZNqS43wYt6JL27wYiIgl1vd38WW/KWX11YuAeZhuz9v+ttrutSsgK+XO1CjL1kA3w==}
@@ -5387,4 +5382,22 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: true
+
+  github.com/blujedis/sveleton-config/9d2264b1d565f0cf64d270ae6cb093efea7543bb(postcss@8.4.21)(ts-node@10.9.1):
+    resolution: {tarball: https://codeload.github.com/blujedis/sveleton-config/tar.gz/9d2264b1d565f0cf64d270ae6cb093efea7543bb}
+    id: github.com/blujedis/sveleton-config/9d2264b1d565f0cf64d270ae6cb093efea7543bb
+    name: '@sveleton/config'
+    version: 0.0.0-development
+    prepare: true
+    requiresBuild: true
+    dependencies:
+      dot-prop: 7.2.0
+      lodash.clonedeep: 4.5.0
+      tailwind-merge: 1.11.0
+      tailwindcss: 3.2.7(postcss@8.4.21)(ts-node@10.9.1)
+      tinycolor2: 1.6.0
+    transitivePeerDependencies:
+      - postcss
+      - ts-node
     dev: true

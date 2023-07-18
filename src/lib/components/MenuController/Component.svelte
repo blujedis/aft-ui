@@ -29,7 +29,7 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const store =
+	export const store =
 		initStore ||
 		useDisclosure({
 			visible
