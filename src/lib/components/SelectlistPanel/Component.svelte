@@ -22,12 +22,12 @@
 
 	nav?.onSelected((el) => {
 		const key = el.dataset.key as string;
-		// if (context?.globals.multiple) {
+		if (context?.globals.multiple) {
 			if ($context.selected.includes(key)) context.unselect(key);
 			else context.select(key);
-		// } else if (!$context.selected.includes(key)) {
-		// 	context.select(key);
-		// }
+		} else if (!$context.selected.includes(key)) {
+			context.select(key);
+		}
 	});
 
 	$: panelClasses = th
@@ -59,7 +59,7 @@
 		transition:transitioner={transition}
 		class={panelClasses}
 	>
-		<div class="py-1" role="none">
+		<div class="" role="none">
 			<slot />
 		</div>
 	</div>

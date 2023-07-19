@@ -13,6 +13,8 @@
 	import MultiselectOption from '../MultiselectOption';
 	import MultiselectPanel from '../MultiselectPanel';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import Input from '../Input';
+	import Button from '../Button';
 
 	const title = 'Multiselect';
 	const description = 'Dropdown menu examples.';
@@ -82,7 +84,7 @@
 
 	{#key props}
 		<div class="grid grid-cols-8 gap-2">
-			<label for="filled">
+			<label for="filled" class="flex">
 				<div class="text-sm">Filled:</div>
 				<MultiselectController {...props} items={sourceItems} let:filtered let:isSelected>
 					<MultiselectButton>Button</MultiselectButton>
@@ -94,6 +96,8 @@
 						{/each}
 					</MultiselectPanel>
 				</MultiselectController>
+				<Input placeholder="Testing" />
+					<MultiselectButton>Button</MultiselectButton>
 			</label>
 		</div>
 	{/key}

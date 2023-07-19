@@ -20,14 +20,13 @@
 	const th = themer($themeStore);
 
 	$: optionClasses = th
-		.create('DropdownOption')
-		.variant('dropdownOption', variant, theme, variant)
+		.create('MenuOption')
+		.variant('menuOption', variant, theme, variant)
 		.option('focused', theme, true)
 		.option('focusedRingSizes', 'two', true)
 		.remove('focus-visible:', true)
 		.option('fieldFontSizes', size, size)
-		.option('fieldPadding', size, size)
-		.append('inline-flex items-center justify-between text-left', true)
+		.append('block w-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -58,6 +57,7 @@
 		{...$$restProps}
 		use:forwardedEvents
 		on:click={handleClick}
+		aria-current={active}
 		class={optionClasses}
 		href={$$restProps.href}
 		data-key={key}

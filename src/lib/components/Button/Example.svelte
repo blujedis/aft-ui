@@ -10,6 +10,7 @@
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
+	import Input from '../Input';
 
 	const title = 'Buttons';
 	const description = 'Themed Buttons with multiple variants.';
@@ -51,7 +52,7 @@
 	</Section>
 
 	<div class="grid grid-cols-4 gap-4">
-		<label for="filled">
+		<label for="filled" class="flex">
 			<Button {...props}>Button</Button>
 		</label>
 		<label for="outline">

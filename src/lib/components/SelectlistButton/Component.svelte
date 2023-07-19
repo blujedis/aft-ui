@@ -7,7 +7,7 @@
 	import type { MultiselectControllerContext } from '../MultiselectController';
 	import { getContext } from 'svelte';
 
-	type $$Props = MultiselectButtonProps & ElementProps<'button'>;
+	type $$Props = MultiselectButtonProps & ElementProps<'div'>;
 
 	const context = getContext('MultiselectContext') as MultiselectControllerContext;
 
@@ -18,27 +18,16 @@
 
 	const th = themer($themeStore);
 
-	$: selected = $context.selected.map(v => $context.items.find(item => item.value === v));
-
 	$: iconClasses = th
-		.create('MultiselectButtonIcon')
+		.create('DropdownButtonIcon')
 		.option('iconDropdownSizes', size, true)
 		.append('transition-transform duration-300 origin-center', !!caret && roticon)
 		.append(
 			typeof roticon === 'string' ? roticon : '-rotate-180',
-			$context?.visible && roticon && !!caret
+			$context.visible && roticon && !!caret
 		)
 		.append('ml-2 shrink pointer-events-none pt-px', true)
 		.compile();
-
-	// $: inputClasses = th
-	// 	.create('DropdownInput')
-	// 	.option('fieldFontSizes', size, size)
-	// 	.option('fieldPadding', size, size)
-	// 	.append('background-transparent outline-none border-none w-10 ml-1', true)
-	// 	.append('invisible', disabled) // transparent background shows as light gray.
-	// 	.append('px-0', selected.length || (placeholder && !selected.length))
-	// 	.compile(true);
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
 		context.toggle();
@@ -50,18 +39,12 @@
 	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
 	{...$$restProps}
 	on:click={handleClick}
-	aria-expanded={$context?.visible}
+	aria-expanded={$context.visible}
 	aria-haspopup="true"
 >
 	<div class="flex items-center pointer-events-none">
 		<div>
-			<slot>
-				{#if !context?.globals?.placeholder}
-					{context?.globals?.placeholder || 'Please Select'}
-				{:else}
-					Here
-				{/if}
-			</slot>
+			<slot />
 		</div>
 		{#if caret}
 			<slot name="caret">

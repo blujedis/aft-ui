@@ -22,7 +22,6 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: ThemeTransitioned;
-	underlined?: boolean;
 	variant?: ButtonVariant;
 	unstyled?: boolean;
 };

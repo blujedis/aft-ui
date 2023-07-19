@@ -22,9 +22,8 @@
 	$: optionClasses = th
 		.create('MultiselectOption')
 		.variant('multiselectOption', variant, theme, variant)
-		.append('focus:outline outline-default-400 outline-2', true)
-		.option('focusedOutline', theme, true)
-		.option('focusedOutlineSizes', 'two', true)
+		.option('focused', theme, true)
+		.option('focusedRingSizes', 'two', true)
 		.remove('focus-visible:', true)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
@@ -35,14 +34,14 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
-		// if (context?.globals.multiple) {
-		if (context.isSelected(key)) context.unselect(key);
-		else context.select(key);
-		// } else {
-		// 	console.log('click with value:', key);
-		// 	context.select(key);
-		// 	setTimeout(() => context.close()); // helps flicker.
-		// }
+		if (context?.globals.multiple) {
+			if (context.isSelected(key)) context.unselect(key);
+			else context.select(key);
+		} else {
+			console.log('click with value:', key);
+			context.select(key);
+			setTimeout(() => context.close()); // helps flicker.
+		}
 	}
 </script>
 

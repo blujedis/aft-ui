@@ -54,8 +54,8 @@
 		globals
 	}) as MenuControllerContext;
 
-	$: dropdownClasses = th
-		.create()
+	$: menuControllerClasses = th
+		.create('MenuController')
 		.append('w-full', full)
 		.append('relative inline-block text-left', true)
 		.append($$restProps.class, true)
@@ -86,7 +86,7 @@
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
-	class={dropdownClasses}
+	class={menuControllerClasses}
 >
 	<slot
 		visible={$store.visible}

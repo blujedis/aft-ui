@@ -7,11 +7,11 @@ export type MultiselectControllerVariant = keyof typeof multiselectController;
 
 export type MultiselectItemKey = SelectValue;
 
-export type MultiselectItem = {
+export type MultiselectItem =  {
 	label?: string;
-	value: MultiselectItemKey;
+  value: MultiselectItemKey;
 	group?: string | number;
-	selected?: boolean;
+  selected?: boolean;
 };
 
 export type MultiselectControllerStore<T extends MultiselectItem = MultiselectItem> = {
@@ -22,11 +22,11 @@ export type MultiselectControllerStore<T extends MultiselectItem = MultiselectIt
 
 export type MultiselectControllerGlobalProps = {
 	full?: boolean;
-	placeholder?: string;
+	multiple?: boolean;
+	strategy?: 'button' | 'text';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
-	strategy?: 'button' | 'text';
 	theme?: ThemeColor;
 	underlined?: boolean;
 	variant?: MultiselectButtonVariant;

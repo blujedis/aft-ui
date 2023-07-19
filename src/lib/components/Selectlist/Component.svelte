@@ -22,7 +22,6 @@
 		filter: initFilter,
 		full,
 		multiple,
-		placeholder,
 		rounded,
 		shadowed,
 		size,
@@ -38,7 +37,7 @@
 
 	export const store = (initStore ||
 		useSelect({
-			multiple: true,
+			multiple,
 			visible,
 			selected: [],
 			items: [],
@@ -52,17 +51,16 @@
 	const globals = cleanObj({
 		full,
 		multiple,
-		placeholder,
+		strategy,
 		rounded,
 		shadowed,
 		size,
-		strategy,
 		theme,
 		underlined,
 		variant
 	});
 
-	export const context = setContext('MultiselectContext', {
+	export const context = setContext('SelectlistContext', {
 		...store,
 		open,
 		close,
@@ -186,20 +184,22 @@
 	on:keydown={handleKeydown}
 	class={dropdownClasses}
 >
-	<div class="block">
-		<slot
-			visible={$store.visible}
-			selected={$store.selected}
-			filtered={$store.filtered}
-			isSelected={context.isSelected}
-			open={context.open}
-			close={context.close}
-			toggle={store.toggle}
-		/>
-	</div>
-
+	<slot
+		visible={$store.visible}
+		selected={$store.selected}
+		filtered={$store.filtered}
+		isSelected={context.isSelected}
+		open={context.open}
+		close={context.close}
+		toggle={store.toggle}
+	/>
 	<slot name="select">
-		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
+		<select
+			bind:this={sel}
+			class="sr-only"
+			{...$$restProps}
+			multiple={['multiselect'].includes(strategy)}
+		>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>

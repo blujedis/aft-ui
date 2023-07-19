@@ -19,7 +19,7 @@
 	const th = themer($themeStore);
 
 	$: iconClasses = th
-		.create('DropdownButtonIcon')
+		.create('MenuButtonIcon')
 		.option('iconDropdownSizes', size, true)
 		.append('transition-transform duration-300 origin-center', !!caret && roticon)
 		.append(

@@ -32,6 +32,16 @@ export const fieldPaddingY = {
 	xl2: 'py-3'
 };
 
+export const fieldPaddingTightY = {
+	unstyled: '',
+	xs: 'py-px',
+	sm: 'py-0.5',
+	md: 'py-1',
+	lg: 'py-1.5',
+	xl: 'py-2',
+	xl2: 'py-2.5'
+};
+
 export const fieldUpperPaddingY = {
 	unstyled: '',
 	xs: 'py-1',
@@ -60,6 +70,16 @@ export const buttonPadding = mergeConfigs(fieldPaddingY, {
 	lg: 'px-5',
 	xl: 'px-6',
 	xl2: 'px-8'
+});
+
+export const menuPadding = mergeConfigs(fieldPaddingTightY, {
+	unstyled: '',
+	xs: 'px-2',
+	sm: 'px-2',
+	md: 'px-2.5',
+	lg: 'px-3',
+	xl: 'px-4',
+	xl2: 'px-5'
 });
 
 export const objectFit = {
@@ -207,6 +227,7 @@ export const focused = {
 export const focusedRingSizes = {
 	$base: '',
 	unstyled: '',
+	inset: 'focus:ring-inset focus-visible:ring-inset',
 	none: 'focus:ring-0 focus-visible:ring-0',
 	one: 'focus:ring-1 focus-visible:ring-1',
 	two: 'focus:ring-2 focus-visible:ring-2',
@@ -247,6 +268,40 @@ export const focusedBorderSizes = {
 	four: 'focus:border-4 focus-visible:border-4',
 	eight: 'focus:border-8 focus-visible:border-8'
 };
+
+export const focusedOutline = {
+	$base: 'focus:outline focus-visible:outline',
+	white: 'focus:outline-default-100 focus-visible:outline-default-100',
+	default: 'focus:outline-default-400 focus-visible:outline-default-400',
+	primary: 'focus:outline-primary-600 focus-visible:outline-primary-600',
+	secondary: 'focus:outline-secondary-600 focus-visible:outline-secondary-600',
+	tertiary: 'focus:outline-tertiary-600 focus-visible:outline-tertiary-600',
+	danger: 'focus:outline-danger-600 focus-visible:outline-danger-600',
+	warning: 'focus:outline-warning-600 focus-visible:outline-warning-600',
+	success: 'focus:outline-success-600 focus-visible:outline-success-600',
+	info: 'focus:outline-info-600 focus-visible:outline-info-600'
+};
+
+export const focusedOutlineSizes = {
+	$base: '',
+	unstyled: '',
+	none: 'focus:outline-0 focus-visible:outline-0',
+	one: 'focus:outline-1 focus-visible:outline-1',
+	two: 'focus:outline-2 focus-visible:outline-2',
+	four: 'focus:outline-4 focus-visible:outline-4',
+	eight: 'focus:outline-8 focus-visible:outline-8'
+};
+
+export const focusedOutlineOffsetSizes = {
+	$base: '',
+	unstyled: '',
+	none: 'focus:outline-offset-0 focus-visible:outline-offset-0',
+	one: 'focus:outline-offset-1 focus-visible:outline-offset-1',
+	two: 'focus:outline-offset-2 focus-visible:outline-offset-2',
+	four: 'focus:outline-offset-4 focus-visible:outline-offset-4',
+	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8'
+};
+
 
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',

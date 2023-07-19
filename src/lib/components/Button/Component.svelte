@@ -20,7 +20,6 @@
 		theme,
 		transitioned,
 		variant,
-		underlined,
 		unstyled
 	} = { ...defaults } as Required<ButtonProps<Tag>>;
 
@@ -40,7 +39,6 @@
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
 				.append('font-medium', strategy === 'button')
-				.append('underline', underlined)
 				.append('w-full', full)
 				.append('inline-flex items-center justify-center outline-none', true)
 				.append($$restProps.class, true)
@@ -59,7 +57,6 @@
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
 				.option('disableds', theme, disabled)
 				.append('font-medium uppercase text-xs', strategy === 'button')
-				.append('underline', underlined)
 				.append('w-full', full)
 				.append('inline-flex items-center justify-center outline-none', true)
 				.append($$restProps.class, true)
@@ -76,7 +73,7 @@
 	{disabled}
 	aria-disabled={disabled}
 >
-	{#if strategy === 'button'}
+	{#if strategy === 'button' || buttonClasses.includes('uppercase')}
 		<div class="pt-px">
 			<slot />
 		</div>
