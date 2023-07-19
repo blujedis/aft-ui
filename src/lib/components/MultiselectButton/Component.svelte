@@ -4,21 +4,38 @@
 	import Button from '../Button';
 	import Icon from '../Icon';
 	import type { ElementProps } from '$lib/types';
-	import type { MultiselectControllerContext } from '../MultiselectController';
+	import type { MultiselectControllerContext, MultiselectItem } from '../MultiselectController';
 	import { getContext } from 'svelte';
 
 	type $$Props = MultiselectButtonProps & ElementProps<'button'>;
 
 	const context = getContext('MultiselectContext') as MultiselectControllerContext;
 
-	export let { caret, full, rounded, roticon, size, shadowed, strategy, theme, variant } = {
+	export let {
+		caret,
+		full,
+		placeholder,
+		rounded,
+		roticon,
+		size,
+		shadowed,
+		strategy,
+		theme,
+		variant
+	} = {
 		...defaults,
 		...context?.globals
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: selected = $context.selected.map(v => $context.items.find(item => item.value === v));
+	$: selected = $context.selected.map((v) =>
+		$context.items.find((item) => item.value === v)
+	) as MultiselectItem[];
+	$: labels = selected.map((v) => v.label);
+	$: firstItem = $context.items[0];
+
+	$: console.log(labels);
 
 	$: iconClasses = th
 		.create('MultiselectButtonIcon')
@@ -47,7 +64,8 @@
 
 <svelte:component
 	this={Button}
-	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
+	{...{ full, rounded, shadowed, size, theme, variant }}
+	strategy="text"
 	{...$$restProps}
 	on:click={handleClick}
 	aria-expanded={$context?.visible}
@@ -56,10 +74,10 @@
 	<div class="flex items-center pointer-events-none">
 		<div>
 			<slot>
-				{#if !context?.globals?.placeholder}
-					{context?.globals?.placeholder || 'Please Select'}
+				{#if $context?.selected.length}
+					{labels.join(', ')}
 				{:else}
-					Here
+					{placeholder || firstItem.label}
 				{/if}
 			</slot>
 		</div>

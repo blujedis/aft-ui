@@ -85,7 +85,7 @@
 			<label for="filled">
 				<div class="text-sm">Filled:</div>
 				<MultiselectController {...props} items={sourceItems} let:filtered let:isSelected>
-					<MultiselectButton>Button</MultiselectButton>
+					<MultiselectButton />
 					<MultiselectPanel>
 						{#each filtered as item}
 							<MultiselectOption as="button" key={item.value}>
@@ -97,4 +97,10 @@
 			</label>
 		</div>
 	{/key}
+	<!-- <div class="mt-4">
+		<select>
+			<option value="0">Red</option>
+			<option value="1">Green</option>
+		</select>
+	</div> -->
 </ExamplePage>

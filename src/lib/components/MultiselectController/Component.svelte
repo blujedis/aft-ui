@@ -199,7 +199,7 @@
 	</div>
 
 	<slot name="select">
-		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
+		<select bind:this={sel} {...$$restProps} multiple={true}>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>
