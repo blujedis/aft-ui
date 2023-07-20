@@ -28,6 +28,7 @@
 		size,
 		store: initStore,
 		strategy,
+		tags,
 		theme,
 		underlined,
 		variant,
@@ -57,6 +58,7 @@
 		shadowed,
 		size,
 		strategy,
+		tags,
 		theme,
 		underlined,
 		variant
@@ -186,7 +188,7 @@
 	on:keydown={handleKeydown}
 	class={dropdownClasses}
 >
-	<div class="block">
+	<div class:w-full={full}>
 		<slot
 			visible={$store.visible}
 			selected={$store.selected}
@@ -199,7 +201,7 @@
 	</div>
 
 	<slot name="select">
-		<select bind:this={sel} {...$$restProps} multiple={true}>
+		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>

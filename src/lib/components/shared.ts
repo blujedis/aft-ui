@@ -52,7 +52,7 @@ export const fieldUpperPaddingY = {
 	xl2: 'py-3.5'
 };
 
-export const fieldPadding = mergeConfigs(fieldPaddingY, {
+export const fieldPaddingX = {
 	unstyled: '',
 	xs: 'px-2.5',
 	sm: 'px-2.5',
@@ -60,7 +60,9 @@ export const fieldPadding = mergeConfigs(fieldPaddingY, {
 	lg: 'px-3.5',
 	xl: 'px-5',
 	xl2: 'px-6'
-});
+};
+
+export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX);
 
 export const buttonPadding = mergeConfigs(fieldPaddingY, {
 	unstyled: '',

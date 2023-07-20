@@ -1,27 +1,23 @@
 import type { multiselectButton } from './config';
-import { type ButtonProps, buttonDefaults } from '../Button';
 import type { IconifyIcon } from '@iconify/svelte';
+import  { type InputProps, inputDefaults } from '../Input';
 
 export type MultiselectButtonVariant = keyof typeof multiselectButton;
 
-type ButtonPropsBase = Omit<ButtonProps<'button'>, 'as' | 'strategy'>;
-
-export type MultiselectButtonProps = ButtonPropsBase & {
-	caret?: null | string | IconifyIcon;
+export type MultiselectButtonProps = InputProps & {
+	caret?: string | IconifyIcon;
+	filterable?: boolean;
+	newable?: boolean;
+	removable?: boolean;
 	roticon?: boolean;
-<<<<<<< HEAD
-	strategy?: 'text' | 'counter',
-=======
-	view?: 'text' | 'counter';
->>>>>>> 688df5c (chore: before merge)
+	tags?: boolean;
 	variant?: MultiselectButtonVariant;
 };
 
 export const multiselectButtonDefaults = {
-	...buttonDefaults,
+	...inputDefaults,
 	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
 	placeholder: '',
 	roticon: true,
-	strategy: 'text',
 	variant: 'outlined'
 };

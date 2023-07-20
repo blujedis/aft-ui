@@ -40,11 +40,11 @@
 
 {#if as === 'button'}
 	<button
-		role="option"
+		role="menuitem"
 		{...$$restProps}
 		use:forwardedEvents
 		on:click={handleClick}
-		aria-selected={active}
+		aria-current={active}
 		data-key={key}
 		class={optionClasses}
 	>

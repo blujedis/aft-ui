@@ -227,8 +227,8 @@
 		bind:this={div}
 		role="combobox"
 		tabindex={0}
-		aria-expanded={$context.visible}
 		aria-controls=""
+		aria-expanded={$context.visible}
 		aria-haspopup="true"
 		aria-disabled={disabled}
 		on:click={handleClick}

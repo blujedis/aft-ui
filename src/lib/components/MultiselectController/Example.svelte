@@ -84,7 +84,13 @@
 		<div class="grid grid-cols-8 gap-2">
 			<label for="filled">
 				<div class="text-sm">Filled:</div>
-				<MultiselectController {...props} items={sourceItems} let:filtered let:isSelected>
+				<MultiselectController
+					{...props}
+					tags
+					items={sourceItems}
+					placeholder="Please Select"
+					let:filtered
+				>
 					<MultiselectButton />
 					<MultiselectPanel>
 						{#each filtered as item}
@@ -97,10 +103,4 @@
 			</label>
 		</div>
 	{/key}
-	<!-- <div class="mt-4">
-		<select>
-			<option value="0">Red</option>
-			<option value="1">Green</option>
-		</select>
-	</div> -->
 </ExamplePage>

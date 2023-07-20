@@ -1,5 +1,5 @@
-import { button } from '../Button';
+import { input } from '../Input';
 
 export const multiselectButton = {
-	...button
+	...input
 };

@@ -40,7 +40,7 @@
 				.option('focusedRingSizes', 'two', removable)
 				.remove('focus:', true)
 				.option('badgePadding', size, size && !removable)
-				.option('badgeFieldPadding', size, size && removable)
+				// .option('badgeFieldPadding', size, size && removable)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
@@ -51,18 +51,22 @@
 				.append($$restProps.class, true)
 				.compile(true);
 
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	// const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-{#if removable}
-	<button use:forwardedEvents {...$$restProps} class={badgeClasses}>
+<!-- {#if removable}
+	<span {...$$restProps} class={badgeClasses}>
+		<slot />
+		<slot name="icon">×</slot>
+	</span>
+	 <button use:forwardedEvents {...$$restProps} class={badgeClasses}>
 		<div class="flex flex-row items-center justify-between pointer-events-none">
 			<slot />
 			<slot name="icon">×</slot>
 		</div>
-	</button>
-{:else}
-	<span {...$$restProps} class={badgeClasses}>
-		<slot />
-	</span>
-{/if}
+	</button> 
+{:else} -->
+<span {...$$restProps} class={badgeClasses}>
+	<slot />
+</span>
+<!-- {/if} -->

@@ -4,7 +4,7 @@
 	import type { ElementProps } from '../../types';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
-	import type { MultiselectControllerContext } from '../MultiselectController';
+	import type { MultiselectControllerContext, MultiselectItem } from '../MultiselectController';
 	import { getContext } from 'svelte';
 
 	type Tag = $$Generic<'button' | 'a'>;
@@ -18,6 +18,10 @@
 	} as Required<MultiselectOptionProps<Tag>>;
 
 	const th = themer($themeStore);
+	$: selected = $context.selected.map((v) =>
+		$context.items.find((item) => item.value === v)
+	) as MultiselectItem[];
+	$: labels = selected.map((v) => v.label);
 
 	$: optionClasses = th
 		.create('MultiselectOption')
@@ -35,41 +39,25 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
-		// if (context?.globals.multiple) {
 		if (context.isSelected(key)) context.unselect(key);
 		else context.select(key);
-		// } else {
-		// 	console.log('click with value:', key);
-		// 	context.select(key);
-		// 	setTimeout(() => context.close()); // helps flicker.
-		// }
+		if (!context.globals.tags && $context.input) {
+			setTimeout(() => {
+				if ($context.input)
+				$context.input.value = labels.join(', ');
+			});
+		}
 	}
 </script>
 
-{#if as === 'button'}
-	<button
-		role="option"
-		{...$$restProps}
-		use:forwardedEvents
-		on:click={handleClick}
-		aria-selected={$context.selected.includes(key)}
-		data-key={key}
-		class={optionClasses}
-	>
-		<slot />
-	</button>
-{:else}
-	<a
-		role="menuitem"
-		tabindex="-1"
-		{...$$restProps}
-		use:forwardedEvents
-		on:click={handleClick}
-		aria-current={$context.selected.includes(key)}
-		class={optionClasses}
-		href={$$restProps.href}
-		data-key={key}
-	>
-		<slot />
-	</a>
-{/if}
+<button
+	role="option"
+	{...$$restProps}
+	use:forwardedEvents
+	on:click={handleClick}
+	aria-selected={$context.selected.includes(key)}
+	data-key={key}
+	class={optionClasses}
+>
+	<slot />
+</button>

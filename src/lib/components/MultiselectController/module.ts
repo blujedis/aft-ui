@@ -18,6 +18,8 @@ export type MultiselectControllerStore<T extends MultiselectItem = MultiselectIt
 	visible?: boolean;
 	items: T[];
 	filtered: T[];
+	panel?: HTMLDivElement;
+	input?: HTMLInputElement;
 };
 
 export type MultiselectControllerGlobalProps = {
@@ -27,6 +29,7 @@ export type MultiselectControllerGlobalProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	strategy?: 'button' | 'text';
+	tags?: boolean;
 	theme?: ThemeColor;
 	underlined?: boolean;
 	variant?: MultiselectButtonVariant;
@@ -42,7 +45,7 @@ export type MultiselectControllerContext = SelectStore<MultiselectControllerStor
 	remove(key: MultiselectItemKey): void;
 	remove<T extends MultiselectItem>(item: T): void;
 	filter(query?: string): void;
-	reset(selectedItems: MultiselectItemKey[]): void;
+	reset(selectedItems?: MultiselectItemKey[]): void;
 	globals: MultiselectControllerGlobalProps;
 };
 
