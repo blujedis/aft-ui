@@ -46,20 +46,25 @@ export type MultiselectControllerContext = SelectStore<MultiselectControllerStor
 	globals: MultiselectControllerGlobalProps;
 };
 
-export type MultiselectControllerProps<T extends MultiselectItem> = MultiselectControllerGlobalProps & {
-	autoclose?: boolean; // on click outside menu close.
-	escapable?: boolean; // close panel on escape key.
-	items: T[];
-	store?: SelectStore<MultiselectControllerStore>;
-	visible?: boolean;
-	filter?: (query: string, items: Required<T>[]) => Required<T>[];
-};
+export type MultiselectControllerProps<T extends MultiselectItem> =
+	MultiselectControllerGlobalProps & {
+		autoclose?: boolean; // on click outside menu close.
+		escapable?: boolean; // close panel on escape key.
+		items: T[];
+		store?: SelectStore<MultiselectControllerStore>;
+		visible?: boolean;
+		filter?: (query: string, items: Required<T>[]) => Required<T>[];
+	};
 
-export const multiselectControllerDefaults: Partial<MultiselectControllerProps<MultiselectItem> & MultiselectControllerGlobalProps> = {
+export const multiselectControllerDefaults: Partial<
+	MultiselectControllerProps<MultiselectItem> & MultiselectControllerGlobalProps
+> = {
 	autoclose: true,
 	escapable: true,
 	filter: (q, i) =>
-		i.filter((v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)),
+		i.filter(
+			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+		),
 	size: 'md',
 	strategy: 'button',
 	theme: 'default',

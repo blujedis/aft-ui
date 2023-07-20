@@ -97,7 +97,7 @@
 					</MultiselectPanel>
 				</MultiselectController>
 				<Input placeholder="Testing" />
-					<MultiselectButton>Button</MultiselectButton>
+				<MultiselectButton>Button</MultiselectButton>
 			</label>
 		</div>
 	{/key}

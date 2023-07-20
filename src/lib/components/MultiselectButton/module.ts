@@ -9,7 +9,11 @@ type ButtonPropsBase = Omit<ButtonProps<'button'>, 'as' | 'strategy'>;
 export type MultiselectButtonProps = ButtonPropsBase & {
 	caret?: null | string | IconifyIcon;
 	roticon?: boolean;
+<<<<<<< HEAD
 	strategy?: 'text' | 'counter',
+=======
+	view?: 'text' | 'counter';
+>>>>>>> 688df5c (chore: before merge)
 	variant?: MultiselectButtonVariant;
 };
 

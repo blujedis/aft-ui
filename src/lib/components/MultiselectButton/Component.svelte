@@ -29,13 +29,7 @@
 
 	const th = themer($themeStore);
 
-	$: selected = $context.selected.map((v) =>
-		$context.items.find((item) => item.value === v)
-	) as MultiselectItem[];
-	$: labels = selected.map((v) => v.label);
-	$: firstItem = $context.items[0];
-
-	$: console.log(labels);
+	$: selected = $context.selected.map((v) => $context.items.find((item) => item.value === v));
 
 	$: iconClasses = th
 		.create('MultiselectButtonIcon')

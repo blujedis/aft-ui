@@ -302,7 +302,6 @@ export const focusedOutlineOffsetSizes = {
 	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8'
 };
 
-
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
 	white: 'aria-disabled:text-default-300',
