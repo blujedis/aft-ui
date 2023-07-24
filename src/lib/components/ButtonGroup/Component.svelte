@@ -3,12 +3,12 @@
 		type ButtonGroupProps,
 		buttonGroupDefaults as defaults,
 		type ButtonGroupContext
-	} from './module';
+	} from  './module';
 	import themeStore, { themer } from '$lib';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementNativeProps, ThemeFocused } from '../../types';
 	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
-	import { ensureArray } from '$lib/utils';
+	import { cleanObj, ensureArray } from '$lib/utils';
 
 	type $$Props = ButtonGroupProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -22,7 +22,6 @@
 		size,
 		theme,
 		transitioned,
-		underlined,
 		variant
 	} = {
 		...defaults
@@ -30,18 +29,19 @@
 
 	export const store = useSelect({ selected: ensureArray(selected), multiple });
 
+	const globals = cleanObj({
+		focused,
+		full,
+		rounded,
+		size,
+		theme,
+		transitioned,
+		variant
+	});
+
 	setContext<ButtonGroupContext>('ButtonGroup', {
 		...store,
-		globals: {
-			focused,
-			full,
-			rounded,
-			size,
-			theme,
-			transitioned,
-			underlined,
-			variant
-		}
+		globals: globals as any
 	});
 
 	$: buttonGroupClasses = themer($themeStore)
@@ -52,12 +52,14 @@
 		.append('isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none', true)
 		.append($$restProps.class, true)
 		.compile(true);
+
+	function handleReset() {}
 </script>
 
 <span role="list" class={buttonGroupClasses}>
 	<slot
 		selectedItems={$store.selected}
-		reset={store.reset}
+		reset={handleReset}
 		select={store.select}
 		unselect={store.unselect}
 		isSelected={store.isSelected}

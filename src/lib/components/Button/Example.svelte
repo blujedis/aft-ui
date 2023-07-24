@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button, { type ButtonVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -10,18 +10,16 @@
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
-	import Input from '../Input';
 
 	const title = 'Buttons';
-	const description = 'Themed Buttons with multiple variants.';
+	const description = 'Themed Buttons with variants.';
 	const code = `
   `;
 
 	const props = {
 		activated: false,
 		disabled: false,
-
-		focused: true, // true: focus-visible.
+		focused: 'visible' as ThemeFocused, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,

@@ -4,7 +4,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { label } from './config';
 
 export type LabelVariant = keyof typeof label;

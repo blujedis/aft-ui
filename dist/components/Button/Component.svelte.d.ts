@@ -1,9 +1,7 @@
 import { SvelteComponentTyped } from "svelte";
 import { type ButtonProps } from './module';
 declare class __sveltets_Render<Tag extends 'button' | 'a'> {
-    props(): ButtonProps<Tag> & import("../../").ElementProps<Tag> & {
-        class?: import("../../").ClassArgument | import("../../").ClassArgument[];
-    };
+    props(): ButtonProps<Tag> & import("../../").ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

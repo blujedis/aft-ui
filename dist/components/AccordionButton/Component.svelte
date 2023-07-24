@@ -8,16 +8,16 @@ import {
 } from "./module";
 const context = getContext("Accordion");
 const panelContext = getContext("AccordionPanel");
-export let { icon, htag, name, roticon, rounded, size, theme, variant } = {
+export let { icon, htag, key, roticon, rounded, size, theme, variant } = {
   ...defaults,
-  name: panelContext.name,
+  key: panelContext.key,
   rounded: context.globals.rounded,
   size: context.globals.size,
   theme: context.globals.theme,
   variant: context.globals.variant
 };
 $:
-  isSelected = $context.selected?.includes(name);
+  isSelected = $context.selected?.includes(key);
 $:
   icons = Array.isArray(icon) ? icon : [icon, icon];
 $:
@@ -26,19 +26,19 @@ const th = themer($themeStore);
 $:
   accordionButtonClasses = th.create("Accordion").variant("accordionButton", variant, theme, true).append("inline-flex items-center justify-between w-full", true).append("mb-2", variant === "pills").append($$restProps.class, true).compile(true);
 $:
-  iconClasses = th.create("DropdownButtonIcon").option("iconSizes", size, true).append("transition-transform duration-300 origin-center", roticon).append(typeof roticon === "string" ? roticon : "-rotate-180", isSelected && roticon).compile();
+  iconClasses = th.create("DropdownButtonIcon").option("iconDropdownSizes", size, true).append("transition-transform duration-300 origin-center", roticon).append(typeof roticon === "string" ? roticon : "-rotate-180", isSelected && roticon).compile();
 </script>
 
 <ConditionalElement as={htag} condition={typeof htag === 'string'}>
 	<Button
-		id={`${name}-accordion-heading`}
-		aria-controls={`${name}-accordion-option`}
+		id={`${key}-accordion-heading`}
+		aria-controls={`${key}-accordion-option`}
 		{...$$restProps}
 		unstyled
-		on:click={() => context.toggle(name)}
+		on:click={() => context.toggle(key)}
 		class={accordionButtonClasses}
 		aria-expanded={isSelected}
-		mode="text"
+		strategy="text"
 		{rounded}
 		{size}
 	>

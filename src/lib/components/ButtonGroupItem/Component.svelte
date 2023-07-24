@@ -11,18 +11,7 @@
 
 	const context = getContext('ButtonGroup') as ButtonGroupContext;
 
-	export let {
-		disabled,
-		focused,
-		full,
-		rounded,
-		size,
-		theme,
-		transitioned,
-		underlined,
-		value,
-		variant
-	} = {
+	export let { disabled, focused, full, rounded, size, theme, transitioned, value, variant } = {
 		...defaults,
 		...context?.globals
 	} as unknown as Required<ButtonGroupItemProps>;
@@ -37,11 +26,8 @@
 		size,
 		theme,
 		transitioned,
-		underlined,
 		variant
 	};
-
-	//  first:ml-0
 
 	$: buttonClasses = th
 		.create('ButtonGroupItem')

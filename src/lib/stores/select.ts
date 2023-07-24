@@ -29,7 +29,6 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	props = {} as P & SelectInitProps
 ): SelectStore<P> {
 	props.selected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
-	const initialSelected = [...props.selected];
 	const store = writable({ multiple: false, ...props } as Required<P & SelectProps>);
 
 	function getStore() {
@@ -43,7 +42,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 			const multiple = s.multiple;
 			if (multiple) selected = s.selected.includes(value) ? s.selected : [...s.selected, value];
 			else selected = [value];
-			return { ...s, selected };
+			return { ...s, selected: [...selected] };
 		});
 	}
 

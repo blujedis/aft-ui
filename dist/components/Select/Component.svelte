@@ -23,7 +23,7 @@ export let {
   ...defaults
 };
 const store = useSelect({ multiple, selected: ensureArray(selected) });
-export const context = setContext("Dropdown", {
+export const context = setContext("SelectContext", {
   ...store
 });
 const th = themer($themeStore);

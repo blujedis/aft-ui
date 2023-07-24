@@ -273,7 +273,7 @@ declare const __propDef: {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;

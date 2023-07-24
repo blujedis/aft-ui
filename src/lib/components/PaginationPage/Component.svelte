@@ -5,7 +5,7 @@
 		HTMLButtonAttributes
 	} from 'svelte/elements';
 	import type { SelectValue } from '$lib/stores/select';
-	import type { PaginationControllerContext } from '../PaginationController';
+	import type { PaginationContext } from '../Pagination';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
@@ -21,9 +21,9 @@
 		: HTMLBaseAttributes;
 	type $$Props = PaginationPageProps<Tag> & NativeProps;
 
-	const context = getContext('PaginationController') as PaginationControllerContext;
+	const context = getContext('Pagination') as PaginationContext;
 
-	export let { as, next, previous, rounded, size, theme, transitioned, value, variant } = {
+	export let { as, focused, next, previous, rounded, size, theme, transitioned, value, variant } = {
 		...defaults,
 		...context?.globals
 	} as Required<PaginationPageProps<Tag>>;
@@ -35,7 +35,9 @@
 	$: paginationPageClasses = th
 		.create('PaginationPage')
 		.variant('paginationPage', variant, theme, true)
-		.option('focusedVisible', theme, true)
+			.option('focused', theme, focused && variant !== 'flushed')
+		.option('focusedRingSizes', 'two', focused && variant !== 'flushed')
+		.remove('focusedFilters', focused, focused)
 		.option('fieldFontSizes', size, size)
 		.option('paginationGroupedPadding', size, size && variant === 'grouped')
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')

@@ -4,7 +4,7 @@ import type {
 	ThemeRounded,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { tab } from './config';
 
 export type TabVariant = keyof typeof tab;

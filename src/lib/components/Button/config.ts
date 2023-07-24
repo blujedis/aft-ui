@@ -56,7 +56,7 @@ export const variantGhost = mergeConfigs(variantText, {
 
 export const variantFlushed = {
 	$base:
-		'text-inherit border border-l-0 border-r-0 border-t-0 focus:border-b-2 focus:outline-none focus:!ring-0 focus-visible:!ring-0',
+		'text-inherit border border-l-0 border-r-0 border-t-0',
 	white: 'text-white border-white hover:border-default-200 focus:border-default-200',
 	default: 'text-inherit border-default-300 hover:border-default-400 focus:border-default-400',
 	primary: 'text-primary-600 border-primary-500 hover:border-primary-600 focus:border-primary-600',
@@ -69,6 +69,22 @@ export const variantFlushed = {
 	success: 'text-success-600 border-success-500 hover:border-success-600 focus:border-success-600',
 	info: 'text-info-600 border-info-500 hover:border-info-600 focus:border-info-600'
 };
+
+// export const variantFlushed = {
+// 	$base:
+// 		'text-inherit border border-l-0 border-r-0 border-t-0 focus:border-b-2 focus:outline-none focus:!ring-0 focus-visible:!ring-0',
+// 	white: 'text-white border-white hover:border-default-200 focus:border-default-200',
+// 	default: 'text-inherit border-default-300 hover:border-default-400 focus:border-default-400',
+// 	primary: 'text-primary-600 border-primary-500 hover:border-primary-600 focus:border-primary-600',
+// 	secondary:
+// 		'text-secondary-600 border-secondary-500 hover:border-secondary-600 focus:border-secondary-600',
+// 	tertiary:
+// 		'text-tertiary-600 border-tertiary-500 hover:border-tertiary-600 focus:border-tertiary-600',
+// 	danger: 'text-danger-600 border-danger-500 hover:border-danger-600 focus:border-danger-600',
+// 	warning: 'text-warning-600 border-warning-500 hover:border-warning-600 focus:border-warning-600',
+// 	success: 'text-success-600 border-success-500 hover:border-success-600 focus:border-success-600',
+// 	info: 'text-info-600 border-info-500 hover:border-info-600 focus:border-info-600'
+// };
 
 export const button = {
 	default: {

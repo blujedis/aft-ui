@@ -1,4 +1,4 @@
-import type { ThemeColorKey, ThemeSize } from '$lib/theme';
+import type { ThemeColorKey, ThemeSize } from '$lib/types';
 
 export type RatingItemProps = {
 	background?: string; // transparent will show container page bg or set to white etc.

@@ -33,8 +33,6 @@ function handleSelect(value2) {
   else
     context.select(value2);
 }
-$:
-  console.log($$restProps);
 </script>
 
 <svelte:element

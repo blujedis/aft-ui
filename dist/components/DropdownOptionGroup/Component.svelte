@@ -12,6 +12,6 @@ $:
   optionGroupClasses = th.create("DropdownGroup").variant("dropdownOptionGroup", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).append($$restProps.class, true).compile(true);
 </script>
 
-{#if context.mode !== 'menu'}
+{#if context.strategy !== 'menu'}
 	<optgroup class={optionGroupClasses}>{group}</optgroup>
 {/if}

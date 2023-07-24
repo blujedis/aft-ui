@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeSize } from '../../types';
 import type { ElementNativeProps } from '../../types/components';
 import type { dropdownOptionGroup } from './config';
 export type DropdownOptionGroupVariant = keyof typeof dropdownOptionGroup;

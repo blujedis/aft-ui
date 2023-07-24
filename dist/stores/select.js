@@ -27,7 +27,7 @@ export function useSelect(props = {}) {
             return { ...s, selected: s.selected.filter((v) => v !== value) };
         });
     }
-    function toggle(value) {
+    function swap(value) {
         if (typeof value === 'undefined')
             return;
         store.update((s) => {
@@ -41,11 +41,11 @@ export function useSelect(props = {}) {
             return { ...s, selected };
         });
     }
-    function reset(...selected) {
-        store.update((s) => {
-            return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
-        });
-    }
+    // function reset(...selected: SelectValue[]) {
+    // 	store.update((s) => {
+    // 		return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
+    // 	});
+    // }
     function isSelected(value) {
         if (typeof value === 'undefined')
             return false;
@@ -53,10 +53,10 @@ export function useSelect(props = {}) {
     }
     return {
         ...store,
-        reset,
+        // reset,
         select,
         unselect,
-        toggle,
+        toggle: swap,
         isSelected
     };
 }

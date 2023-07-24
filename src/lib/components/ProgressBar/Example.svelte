@@ -9,10 +9,10 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import ProgressBar, { type ProgressBarVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Progress Bar';
-	const description = 'Progress bar with themes.';
+	const description = 'Progress bar component with animation.';
 	const code = `
   `;
 	let progress: ProgressBar;

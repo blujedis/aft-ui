@@ -9,11 +9,13 @@ export let {
   autoclose,
   disabled,
   escapable,
+  filterable,
+  filter,
   focused,
-  focustrap,
   full,
-  mode,
+  placeholder,
   rounded,
+  strategy,
   selected,
   shadowed,
   size,
@@ -23,7 +25,6 @@ export let {
   trigger,
   underlined,
   unstyled,
-  variant,
   visible,
   selectProps
 } = {
@@ -33,32 +34,34 @@ export const store = useDisclosure({
   visible,
   selected: ensureArray(selected),
   items: [],
-  filtered: []
+  filtered: [],
+  input: void 0,
+  panel: void 0
 });
 export const context = setContext("Dropdown", {
   ...store,
   add,
   remove,
   isSelected,
-  mode,
+  strategy,
   select,
   trigger,
   unselect,
+  filter: filterItems,
+  reset,
   globals: {
     disabled,
-    focused,
     full,
-    multiple: mode === "multiselect",
+    multiple: strategy === "multiselect" || strategy === "tags",
+    placeholder,
     rounded,
     shadowed,
     size,
     theme,
-    transitioned,
-    underlined,
-    variant,
-    unstyled
+    variant: "outlined"
   }
 });
+let div;
 let selref;
 const th = themer($themeStore);
 $:
@@ -80,11 +83,12 @@ function handleClose(e) {
   store.close();
 }
 function handleKeydown(e) {
-  if (!e.repeat && e.key === "Escape" && escapable) {
-    store.close();
-  }
+  if (e.key === "Escape" && escapable || e.key === "Tab" && $store.visible)
+    return store.close();
+  if (!$store.visible && e.key === "ArrowDown")
+    return store.open();
 }
-function add(value, label, group) {
+function add({ value, label, group, selected: selected2 }) {
   if (typeof label === "undefined")
     label = value + "";
   group = group || "";
@@ -92,10 +96,18 @@ function add(value, label, group) {
   if (!hasValue) {
     store.update((s) => {
       const items2 = [...s.items, { value, label, group }];
+      let selectedItems = [...s.selected];
+      if (selected2 && !selectedItems.includes(value)) {
+        if (selected2 && selectedItems.length && ["multiselect", "tags"].includes(strategy))
+          selectedItems.push(value);
+        else
+          selectedItems = [value];
+      }
       return {
         ...s,
         items: items2,
-        filtered: [...items2]
+        filtered: [...items2],
+        selected: selectedItems
       };
     });
   }
@@ -111,11 +123,12 @@ function select(key) {
   if (typeof key === "undefined")
     return;
   store.update((s) => {
-    let keys = [];
-    if (["multiselect", "tags"].includes(mode))
-      keys = s.selected.includes(key) ? s.selected : [key, ...s.selected];
-    else
-      keys = [key];
+    let keys = [key];
+    const clone = [...s.selected];
+    if (["multiselect", "tags"].includes(strategy) && !clone.includes(key)) {
+      clone.push(key);
+      keys = clone;
+    }
     return { ...s, selected: keys };
   });
 }
@@ -131,6 +144,19 @@ function isSelected(key) {
     return false;
   return $store.selected.includes(key);
 }
+function filterItems(query = "") {
+  store.update((s) => {
+    const newItems = !query?.length ? [...s.items] : filter(query, s.items);
+    if (!query)
+      console.log(s.items);
+    return { ...s, filtered: [...newItems] };
+  });
+}
+function reset() {
+  store.update((s) => {
+    return { ...s, filtered: [...s.items] };
+  });
+}
 store.subscribe((s) => {
   if (!selref || !s.selected.length)
     return;
@@ -142,17 +168,21 @@ store.subscribe((s) => {
         node.selected = true;
     });
   }
+  if (s.visible && s.panel)
+    s.panel.focus();
 });
+if (items?.length)
+  items.forEach((item) => add(item));
 </script>
 
 <div
+	role="presentation"
+	bind:this={div}
 	{...$$restProps}
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={dropdownClasses}
-	role="listbox"
-	tabindex={-1}
 >
 	<slot
 		visible={$store.visible}
@@ -167,9 +197,9 @@ store.subscribe((s) => {
 	<slot name="select">
 		<select
 			bind:this={selref}
-			{...$$restProps}
-			multiple={['multiselect'].includes(mode)}
 			class="sr-only"
+			{...$$restProps}
+			multiple={['multiselect'].includes(strategy)}
 		>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}

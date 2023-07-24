@@ -1,6 +1,5 @@
 import { SvelteComponentTyped } from "svelte";
 import { type DropdownContext, type DropdownKey, type DropdownItem } from './module';
-import type { ElementNativeProps } from '../../types';
 declare class __sveltets_Render<Tag extends 'button' | 'a'> {
     props(): {
         store?: {
@@ -12,58 +11,67 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
                 selected: (string | number)[];
                 items: Required<DropdownItem>[];
                 filtered: Required<DropdownItem>[];
+                input: HTMLInputElement | undefined;
+                panel: HTMLDivElement | undefined;
             }>>) => void;
             set(this: void, value: Required<import("../..").DisclosureProps<{
                 visible: boolean;
                 selected: (string | number)[];
                 items: Required<DropdownItem>[];
                 filtered: Required<DropdownItem>[];
+                input: HTMLInputElement | undefined;
+                panel: HTMLDivElement | undefined;
             }>>): void;
             update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureProps<{
                 visible: boolean;
                 selected: (string | number)[];
                 items: Required<DropdownItem>[];
                 filtered: Required<DropdownItem>[];
+                input: HTMLInputElement | undefined;
+                panel: HTMLDivElement | undefined;
             }>>>): void;
             subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureProps<{
                 visible: boolean;
                 selected: (string | number)[];
                 items: Required<DropdownItem>[];
                 filtered: Required<DropdownItem>[];
+                input: HTMLInputElement | undefined;
+                panel: HTMLDivElement | undefined;
             }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureProps<{
                 visible: boolean;
                 selected: (string | number)[];
                 items: Required<DropdownItem>[];
                 filtered: Required<DropdownItem>[];
+                input: HTMLInputElement | undefined;
+                panel: HTMLDivElement | undefined;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
         context?: DropdownContext | undefined;
-        focused?: any;
+        focused?: import("../..").ThemeFocused | undefined;
         unstyled?: boolean | undefined;
-        rounded?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
         full?: boolean | undefined;
-        shadowed?: any;
-        theme?: any;
-        variant?: "default" | "text" | "outlined" | "filled" | "ghost" | undefined;
-        size?: any;
-        transitioned?: any;
         as?: Tag | undefined;
         disabled?: boolean | undefined;
-        underlined?: boolean | undefined;
+        href?: string | null | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
-        focustrap?: boolean | undefined;
-        formatter?: import("../..").DropdownLabelFormatHandler | undefined;
+        filterable?: boolean | undefined;
+        filter?: ((query: string, items: Required<DropdownItem>[]) => Required<DropdownItem>[]) | undefined;
         items?: DropdownItem[] | undefined;
-        mode?: import("../..").DropdownMode | undefined;
+        strategy?: import("../..").DropdownStrategy | undefined;
         multiple?: boolean | undefined;
         selected?: DropdownKey | DropdownKey[] | undefined;
         trigger?: import("../..").DropdownTrigger | undefined;
         visible?: boolean | undefined;
-        selectProps?: ElementNativeProps<"select"> | undefined;
+        selectProps?: import("svelte/elements").HTMLSelectAttributes | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;
+        class?: string | null | undefined;
         contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
@@ -103,7 +111,7 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -127,7 +135,7 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
@@ -299,50 +307,66 @@ export default class Component<Tag extends 'button' | 'a'> extends SvelteCompone
             selected: (string | number)[];
             items: Required<DropdownItem>[];
             filtered: Required<DropdownItem>[];
+            input: HTMLInputElement | undefined;
+            panel: HTMLDivElement | undefined;
         }>>) => void;
         set(this: void, value: Required<import("../..").DisclosureProps<{
             visible: boolean;
             selected: (string | number)[];
             items: Required<DropdownItem>[];
             filtered: Required<DropdownItem>[];
+            input: HTMLInputElement | undefined;
+            panel: HTMLDivElement | undefined;
         }>>): void;
         update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureProps<{
             visible: boolean;
             selected: (string | number)[];
             items: Required<DropdownItem>[];
             filtered: Required<DropdownItem>[];
+            input: HTMLInputElement | undefined;
+            panel: HTMLDivElement | undefined;
         }>>>): void;
         subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureProps<{
             visible: boolean;
             selected: (string | number)[];
             items: Required<DropdownItem>[];
             filtered: Required<DropdownItem>[];
+            input: HTMLInputElement | undefined;
+            panel: HTMLDivElement | undefined;
         }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureProps<{
             visible: boolean;
             selected: (string | number)[];
             items: Required<DropdownItem>[];
             filtered: Required<DropdownItem>[];
+            input: HTMLInputElement | undefined;
+            panel: HTMLDivElement | undefined;
         }>>> | undefined): import("svelte/store").Unsubscriber;
     };
     get context(): import("svelte/store").Writable<import("../..").DisclosureProps<{
         selected: DropdownKey[];
         items: Required<DropdownItem>[];
         filtered: Required<DropdownItem>[];
+        input?: HTMLInputElement | undefined;
+        button?: HTMLButtonElement | undefined;
+        panel?: HTMLDivElement | undefined;
     }>> & import("../..").DisclosureMethods<{
         selected: DropdownKey[];
         items: Required<DropdownItem>[];
         filtered: Required<DropdownItem>[];
+        input?: HTMLInputElement | undefined;
+        button?: HTMLButtonElement | undefined;
+        panel?: HTMLDivElement | undefined;
     }> & {
-        add: (value: DropdownKey, label?: string | undefined, group?: string | undefined) => void;
-        remove: (value: DropdownKey, filter?: ((item: DropdownItem) => boolean) | undefined) => void;
-        mode: import("../..").DropdownMode;
+        globals: import("../..").DropdownGlobals;
+        strategy: import("../..").DropdownStrategy;
         isSelected: (key?: DropdownKey | undefined) => boolean;
-        select: (key?: DropdownKey | undefined) => void;
         trigger: import("../..").DropdownTrigger;
+        add: (item: DropdownItem) => void;
+        remove: (value: DropdownKey, filter?: ((item: DropdownItem) => boolean) | undefined) => void;
+        select: (key?: DropdownKey | undefined) => void;
         unselect: (key?: DropdownKey | undefined) => void;
-        globals: import("../..").ButtonProps<"button" | "a"> & {
-            multiple?: boolean | undefined;
-        };
+        filter: (query?: string | undefined) => void;
+        reset: () => void;
     };
 }
 export {};

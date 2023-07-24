@@ -1,5 +1,4 @@
-import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../theme';
-import type { ThemeColor } from '../../theme';
+import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeColor } from '../../types';
 import type { button } from './config';
 export type ButtonVariant = keyof typeof button;
 export type ButtonProps<Tag extends 'button' | 'a'> = {
@@ -7,13 +6,13 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
     disabled?: boolean;
     focused?: ThemeFocused;
     full?: boolean;
-    mode?: 'button' | 'text';
+    href?: string | null;
+    strategy?: 'button' | 'text';
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
     transitioned?: ThemeTransitioned;
-    underlined?: boolean;
     variant?: ButtonVariant;
     unstyled?: boolean;
 };

@@ -7,12 +7,13 @@ export interface DropdownFilterHandler {
 }
 export type DropdownInputProps = InputProps & {
     caret?: null | string | IconifyIcon;
+    filterable?: boolean;
     multiple?: boolean;
     newable?: boolean;
     removable?: boolean;
     resetable?: boolean;
     placeholder?: string;
     roticon?: string | boolean;
-    onFilter?: (item: DropdownItem) => boolean;
+    stacked?: boolean;
 };
 export declare const dropdownInputDefaults: DropdownInputProps;

@@ -4,7 +4,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { breadcrumbNav } from './config';
 
 export type BreadcrumbContext = {
@@ -23,7 +23,7 @@ export type BreadcrumbVariant = keyof typeof breadcrumbNav;
 export type BreadcrumbProps = {
 	flush?: boolean;
 	full?: boolean;
-	generated?: boolean;
+	generate?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;

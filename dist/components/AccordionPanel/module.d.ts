@@ -1,10 +1,10 @@
 import type { SelectValue } from '../../stores/select';
 import type { HTMLTag } from '../../types';
 export type AccordionPanelContext = {
-    name: SelectValue;
+    key: SelectValue;
 };
 export type AccordionPanelProps<Tag extends HTMLTag> = {
     as?: Tag;
-    name: SelectValue;
+    key: SelectValue;
 };
 export declare const accordionPanelDefaults: Partial<AccordionPanelProps<'div'>>;

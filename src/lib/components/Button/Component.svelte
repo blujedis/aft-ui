@@ -21,7 +21,10 @@
 		transitioned,
 		variant,
 		unstyled
-	} = { ...defaults } as Required<ButtonProps<Tag>>;
+	} = {
+		...defaults,
+		...$themeStore.defaults.component
+	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
 
@@ -30,7 +33,7 @@
 				.create('Button')
 				.option('focused', theme, focused)
 				.option('focusedRingSizes', 'two', focused)
-				.remove(focused === 'visible' || focused === true ? 'focus:' : 'focus-visible:', true)
+				.remove('focusedFilters', focused, focused)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
@@ -48,7 +51,7 @@
 				.variant('button', variant, theme, true)
 				.option('focused', theme, focused)
 				.option('focusedRingSizes', 'two', focused)
-				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+				.remove('focusedFilters', focused, focused)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')

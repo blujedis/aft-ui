@@ -6,7 +6,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { select } from './config';
 
 export type SelectVariant = keyof typeof select;
@@ -33,7 +33,7 @@ export type SelectProps = {
 };
 
 export const selectDefaults: Partial<SelectProps> = {
-	focused: true,
+	focused: 'always',
 	placeholder: true,
 	rounded: 'sm',
 	size: 'md',

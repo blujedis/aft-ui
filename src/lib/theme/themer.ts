@@ -32,6 +32,11 @@ export interface ThemerApi<C extends ThemeConfig> {
 	): ThemerApi<C>;
 
 	remove(classes: string | string[], when: Primitive): ThemerApi<C>;
+	remove<K extends ThemeOption>(
+	key: K,
+	prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
+	when: Primitive
+	): ThemerApi<C>;
 
 	append(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
 
@@ -120,6 +125,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		compile: mockCompile,
 		classes: mockClasses
 	} as ThemerApi<C>;
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function mockVariant(...args: any) {
 		return mockApi;
@@ -162,16 +168,16 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 	if (typeof document === 'undefined') return mockThemer;
 
 	type Components = typeof themeConfig.components;
-	type Defaults = typeof themeConfig.defaults;
 	type Options = typeof themeConfig.options;
-	type Palette = typeof themeConfig.palette;
 	type Component = keyof Components;
 	type Variant<K extends Component> = keyof Components[K];
+	// type Defaults = typeof themeConfig.defaults;
+	// type Palette = typeof themeConfig.palette;
 
 	const _components: Components = themeConfig?.components || {};
 	const _options: Options = themeConfig?.options || {};
-	const _defaults: Defaults = themeConfig?.defaults || {};
-	const _palette: Palette = themeConfig?.palette || {};
+	// const _defaults: Defaults = themeConfig?.defaults || {};
+	// const _palette: Palette = themeConfig?.palette || {};
 
 	/**
 	 * Creates a new instance for generating themes.
@@ -270,8 +276,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${
-						key as string
+					`${instanceName} mapped value using property ${key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -285,12 +290,38 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * and before Tailwind Merge if enabled.
 		 *
 		 * @param classes tailwind class strings to be removed.
+		 * @param when if the value is truth otherwise reject.
 		 */
-		function remove(classes: string | string[], when: Primitive) {
+		function remove(classes: string | string[], when: Primitive): typeof api;
+
+		function remove<K extends ThemeOption>(
+			key: K,
+			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
+			when: Primitive): typeof api;
+
+		function remove<K extends ThemeOption>(classesOrKey: string | string[], propOrWhen: Primitive | PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined, when?: Primitive) {
 			if (typeof themeConfig === 'undefined') return api;
+			const isRemoveFromOptions = arguments.length === 3;
 			if (!when) return api;
-			classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
-			removed = [...removed, ...(classes as string[])];
+			if (isRemoveFromOptions) {
+				const key = classesOrKey as K;
+				const prop = propOrWhen as PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined;
+				if (!key || typeof prop === 'undefined') return api;
+				const opt = (_options[key] || {}) as Record<string, string>;
+				if (!opt)
+					throw new Error(`${instanceName} remove option using property ${prop as string} was NOT found.`);
+				let value = opt[prop as string] || '' as any;
+				if (value) {
+					value = ensureArray(value);
+					removed = [...removed, ...value];
+				}
+			}
+			else {
+				let classes = classesOrKey as string | string[];
+				when = propOrWhen as Primitive;
+				classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
+				removed = [...removed, ...(classes as string[])];
+			}
 			return api;
 		}
 

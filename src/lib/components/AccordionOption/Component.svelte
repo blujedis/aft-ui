@@ -4,7 +4,7 @@
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';
-	import type { AccordionContext } from '../AccordionController/module';
+	import type { AccordionContext } from '../Accordion/module';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordianOptionProps<Tag> & ElementNativeProps<Tag>;

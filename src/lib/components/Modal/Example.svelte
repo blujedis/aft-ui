@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Modal, { type ModalVariant, ModalComponent, type ModalTransition } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/theme';
+	import Modal, { type ModalVariant, ModalComponent } from '.';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 	import Button from '../Button';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
@@ -11,9 +11,10 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import SelectTransition from '../_Example/SelectTransition.svelte';
+	import type { DisclosureTransitionOption } from '../Disclosure';
 
 	const title = 'Modal';
-	const description = 'Themed dialog box.';
+	const description = 'Modal dialog box with built in transitions.';
 	const code = `
   `;
 
@@ -25,7 +26,7 @@
 		rounded: 'sm' as ThemeRounded,
 		shadowed: 'xl' as ThemeShadowed,
 		theme: 'default' as ThemeColor,
-		transition: 'fade' as ModalTransition,
+		transition: 'dissolve' as DisclosureTransitionOption,
 		variant: 'default' as ModalVariant,
 		visible: false,
 		unmount: true

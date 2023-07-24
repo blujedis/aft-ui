@@ -1,15 +1,13 @@
 import { SvelteComponentTyped } from "svelte";
 import { type DropdownOptionProps } from './module';
 declare class __sveltets_Render<Tag extends 'a' | 'button'> {
-    props(): DropdownOptionProps<Tag> & import("../..").ElementProps<Tag> & {
-        class?: import("../..").ClassArgument | import("../..").ClassArgument[];
-    };
+    props(): DropdownOptionProps<Tag> & import("../..").ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
         default: {
-            selected: boolean;
+            isSelected: boolean;
         };
     };
 }

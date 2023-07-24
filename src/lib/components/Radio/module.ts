@@ -5,7 +5,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { radio } from './config';
 
 export type RadioVariant = keyof typeof radio;
@@ -24,7 +24,7 @@ export type RadioProps = {
 };
 
 export const radioDefaults: Partial<RadioProps> = {
-	focused: true,
+	focused: 'always',
 	rounded: 'full',
 	size: 'md',
 	theme: 'default',

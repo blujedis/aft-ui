@@ -1,10 +1,10 @@
-import type { ThemeColor, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeSize } from '$lib/types';
 import type { cardContent } from './config';
 
 export type CardContentVariant = keyof typeof cardContent;
 
 export type CardContentProps = {
-	mode?: 'content' | 'header' | 'footer';
+	type?: 'content' | 'header' | 'footer';
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	variant?: CardContentVariant;
@@ -12,7 +12,7 @@ export type CardContentProps = {
 };
 
 export const cardContentDefaults: Partial<CardContentProps> = {
-	mode: 'content',
+	type: 'content',
 	size: 'md',
 	theme: 'default',
 	variant: 'default'

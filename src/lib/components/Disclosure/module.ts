@@ -5,9 +5,9 @@ import type {
 	FadeParams,
 	FlyParams,
 	ScaleParams,
-	SlideParams
+	SlideParams,
 } from 'svelte/transition';
-import { fly, fade, scale, blur, slide } from 'svelte/transition';
+import { fly, fade, scale, blur, slide, crossfade } from 'svelte/transition';
 
 export type DisclosureContext = DisclosureStore & {
 	transition: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
@@ -43,18 +43,19 @@ export const disclosureTransitions = {
 	fade,
 	scale,
 	blur,
-	slide
+	slide,
+	crossfade
 };
 
 export const disclosureTransitionOptions = {
 	none: { duration: 0 } as unknown as Record<string, any>,
-	disolve: { duration: 200, start: 0.5, type: 'fade' } as FadeParams,
+	dissolve: { duration: 200, start: 0.5, type: 'fade' } as FadeParams,
 	focus: { duration: 400, amount: 5, opacity: 0, type: 'blur' } as BlurParams,
 	expand: { duration: 400, axis: 'y', type: 'slide' } as SlideParams,
 	swipe: { duration: 400, axis: 'x', type: 'slide' } as SlideParams,
 	zoom: { duration: 200, start: 0.7, type: 'scale' } as ScaleParams,
 	announce: { duration: 400, y: -300, type: 'fly' } as FlyParams,
-	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams
+	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams,
 };
 
 export function transitioner(

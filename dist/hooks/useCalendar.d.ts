@@ -1,4 +1,4 @@
-export declare function createCalendarMonth(year: number, oneBasedMonth: number): {
+export declare function useCalendar(year: number, oneBasedMonth: number): {
     dates: Date[];
     month: number;
     startDate: Date;
@@ -7,3 +7,4 @@ export declare function createCalendarMonth(year: number, oneBasedMonth: number)
     totalWeeks: number;
     totalDays: number;
 };
+export default useCalendar;

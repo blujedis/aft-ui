@@ -1,63 +1,70 @@
 import type { SelectStore, SelectValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { multiselectController } from './config';
-import type { MultiselectButtonVariant } from '../MultiselectButton';
+import type { selectList } from './config';
+import type { SelectListButtonVariant, SelectListButtonProps } from '../SelectListButton';
 
-export type MultiselectControllerVariant = keyof typeof multiselectController;
+export type SelectListVariant = keyof typeof selectList;
 
-export type MultiselectItemKey = SelectValue;
+export type SelectListItemKey = SelectValue;
 
-export type MultiselectItem = {
+export type SelectListItem = {
 	label?: string;
-	value: MultiselectItemKey;
+	value: SelectListItemKey;
 	group?: string | number;
 	selected?: boolean;
 };
 
-export type MultiselectControllerStore<T extends MultiselectItem = MultiselectItem> = {
+export type SelectListStore<T extends SelectListItem = SelectListItem> = {
 	visible?: boolean;
 	items: T[];
 	filtered: T[];
+	input?: HTMLInputElement;
+	panel?: HTMLDivElement;
 };
 
-export type MultiselectControllerGlobalProps = {
-	full?: boolean;
-	multiple?: boolean;
-	strategy?: 'button' | 'text';
-	rounded?: ThemeRounded;
-	shadowed?: ThemeShadowed;
-	size?: ThemeSize;
-	theme?: ThemeColor;
-	underlined?: boolean;
-	variant?: MultiselectButtonVariant;
-};
-
-export type MultiselectControllerContext = SelectStore<MultiselectControllerStore> & {
+export type SelectListContext<T extends SelectListItem = SelectListItem> = SelectStore<SelectListStore> & {
 	open(): void;
 	close(): void;
 	toggle(): void;
-	isSelected(key: MultiselectItemKey): boolean;
-	isSelected<T extends MultiselectItem>(item: T): boolean;
-	add<T extends MultiselectItem>({ value, label, group, selected }: T): void;
-	remove(key: MultiselectItemKey): void;
-	remove<T extends MultiselectItem>(item: T): void;
+	isSelected(key: SelectListItemKey): boolean;
+	isSelected(item: T): boolean;
+	add({ value, label, group, selected }: T): void;
+	remove(key: SelectListItemKey): void;
+	remove(item: T): void;
 	filter(query?: string): void;
-	reset(selectedItems: MultiselectItemKey[]): void;
-	globals: MultiselectControllerGlobalProps;
+	reset(selectedItems?: SelectListItemKey[]): void;
+	globals: SelectListGlobalProps;
 };
 
-export type MultiselectControllerProps<T extends MultiselectItem> =
-	MultiselectControllerGlobalProps & {
+export type SelectListGlobalProps = {
+	full?: boolean;
+	newable?: boolean;
+	placeholder?: string;
+	removable?: boolean;
+	rounded?: ThemeRounded;
+	shadowed?: ThemeShadowed;
+	size?: ThemeSize;
+	strategy?: 'button' | 'text';
+	tags?: boolean;
+	theme?: ThemeColor;
+	underlined?: boolean;
+	variant?: SelectListButtonVariant;
+	onBeforeAdd?: SelectListButtonProps['onBeforeAdd'];
+	onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
+};
+
+export type SelectListProps<T extends SelectListItem> =
+	SelectListGlobalProps & {
 		autoclose?: boolean; // on click outside menu close.
 		escapable?: boolean; // close panel on escape key.
 		items: T[];
-		store?: SelectStore<MultiselectControllerStore>;
+		store?: SelectStore<SelectListStore>;
 		visible?: boolean;
 		filter?: (query: string, items: Required<T>[]) => Required<T>[];
 	};
 
-export const multiselectControllerDefaults: Partial<
-	MultiselectControllerProps<MultiselectItem> & MultiselectControllerGlobalProps
+export const selectListDefaults: Partial<
+	SelectListProps<SelectListItem> & SelectListGlobalProps
 > = {
 	autoclose: true,
 	escapable: true,
@@ -68,5 +75,5 @@ export const multiselectControllerDefaults: Partial<
 	size: 'md',
 	strategy: 'button',
 	theme: 'default',
-	variant: 'default'
+	variant: 'filled'
 };

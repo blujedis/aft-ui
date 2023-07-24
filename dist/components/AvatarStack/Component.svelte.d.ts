@@ -18,16 +18,18 @@ declare const __propDef: {
         theme?: any;
         variant?: "default" | "stacked" | undefined;
         direction?: "up" | "down" | undefined;
-        color?: string | null | undefined;
-        hidden?: boolean | null | undefined;
-        title?: string | null | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;
+        title?: string | null | undefined;
+        color?: string | null | undefined;
+        hidden?: boolean | null | undefined;
+        contextmenu?: string | null | undefined;
+        class?: string | null | undefined;
+        radiogroup?: string | null | undefined;
+        'on:change'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;
         contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
-        contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -38,7 +40,6 @@ declare const __propDef: {
         tabindex?: number | null | undefined;
         translate?: "" | "yes" | "no" | null | undefined;
         inert?: boolean | null | undefined;
-        radiogroup?: string | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         about?: string | null | undefined;
         datatype?: string | null | undefined;
@@ -59,7 +60,7 @@ declare const __propDef: {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -77,7 +78,7 @@ declare const __propDef: {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
@@ -126,7 +127,6 @@ declare const __propDef: {
         'on:focusin'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
         'on:focusout'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
         'on:blur'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
-        'on:change'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         'on:beforeinput'?: import("svelte/elements").EventHandler<InputEvent, HTMLSpanElement> | null | undefined;
         'on:input'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         'on:reset'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;

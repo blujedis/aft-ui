@@ -2,7 +2,7 @@ import { SvelteComponentTyped } from "svelte";
 import { type TabProps } from './module';
 import type { ElementNativeProps } from '../../types';
 declare class __sveltets_Render<Tag extends 'a' | 'button'> {
-    props(): TabProps<Tag> & (Tag extends "button" ? ElementNativeProps<"button", "value" | "disabled"> : ElementNativeProps<"a">);
+    props(): TabProps<Tag> & (Tag extends "button" ? ElementNativeProps<"button", "disabled" | "value"> : import("svelte/elements").HTMLAnchorAttributes);
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

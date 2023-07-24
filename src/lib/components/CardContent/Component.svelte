@@ -9,7 +9,7 @@
 
 	const context = getContext<CardContext>('Card');
 
-	export let { mode, size, theme, variant, wide } = {
+	export let { type, size, theme, variant, wide } = {
 		...defaults,
 		...context?.globals
 	} as Required<CardContentProps>;
@@ -19,9 +19,9 @@
 	$: cardContentClasses = th
 		.create('CardContent')
 		.variant('cardContent', variant, theme, variant)
-		.option('cardPadding', size, size && mode === 'content')
-		.option('cardPaddingHeader', size, size && mode === 'header')
-		.option('cardPaddingFooter', size, size && mode === 'footer')
+		.option('cardPadding', size, size && type === 'content')
+		.option('cardPaddingHeader', size, size && type === 'header')
+		.option('cardPaddingFooter', size, size && type === 'footer')
 		.append('px-0', wide)
 		.append($$restProps.class, true)
 		.compile(true);

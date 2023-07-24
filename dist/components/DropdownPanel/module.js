@@ -1,10 +1,9 @@
 export const dropdownPanelDefaults = {
-    duration: 200,
-    focustrap: true,
+    origin: 'left',
     position: 'left',
     shadowed: 'lg',
-    start: 0.95,
     theme: 'default',
+    transition: { start: 0.95, type: 'scale' },
     variant: 'default',
     visible: false,
     unmount: true,

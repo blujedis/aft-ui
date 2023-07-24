@@ -2,9 +2,7 @@ import { SvelteComponentTyped } from "svelte";
 import { type ConditionalElementProps } from './module';
 import type { HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {
-    props(): ConditionalElementProps<Tag> & import("../../types").ElementProps<Tag> & {
-        class?: import("../../types").ClassArgument | import("../../types").ClassArgument[];
-    };
+    props(): ConditionalElementProps<Tag> & import("../../types").ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

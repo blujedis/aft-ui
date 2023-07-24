@@ -5,7 +5,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { checkbox } from './config';
 
 export type CheckboxVariant = keyof typeof checkbox;
@@ -24,7 +24,7 @@ export type CheckboxProps = {
 };
 
 export const checkboxDefaults: Partial<CheckboxProps> = {
-	focused: true,
+	focused: 'always',
 	rounded: 'full',
 	size: 'md',
 	theme: 'default',

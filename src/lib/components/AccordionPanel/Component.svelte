@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AccordionContext } from '../AccordionController/module';
+	import type { AccordionContext } from '../Accordion/module';
 	import { getContext, setContext } from 'svelte';
 	import {
 		type AccordionPanelProps,
@@ -26,6 +26,7 @@
 
 	$: accordionPanelClasses = th
 		.create('AccordionPanel')
+		.append('mb-2', context?.globals.variant === 'pills')
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

@@ -27,7 +27,25 @@ export declare const fieldPaddingY: {
     xl: string;
     xl2: string;
 };
+export declare const fieldPaddingTightY: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
 export declare const fieldUpperPaddingY: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
+export declare const fieldPaddingX: {
     unstyled: string;
     xs: string;
     sm: string;
@@ -54,6 +72,23 @@ export declare const fieldPadding: {
     xl2: string;
 } & import("../theme").StringMap;
 export declare const buttonPadding: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+} & {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+} & import("../theme").StringMap;
+export declare const menuPadding: {
     unstyled: string;
     xs: string;
     sm: string;
@@ -200,7 +235,27 @@ export declare const focused: {
     success: string;
     info: string;
 };
-export declare const focusedVisible: {
+export declare const focusedRingSizes: {
+    $base: string;
+    unstyled: string;
+    inset: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+};
+export declare const focusedOffsetSizes: {
+    $base: string;
+    unstyled: string;
+    inset: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+};
+export declare const focusedBorder: {
     $base: string;
     white: string;
     default: string;
@@ -212,7 +267,7 @@ export declare const focusedVisible: {
     success: string;
     info: string;
 };
-export declare const focusedRingSizes: {
+export declare const focusedBorderSizes: {
     $base: string;
     unstyled: string;
     none: string;
@@ -221,10 +276,30 @@ export declare const focusedRingSizes: {
     four: string;
     eight: string;
 };
-export declare const focusedOffsetSizes: {
+export declare const focusedOutline: {
+    $base: string;
+    white: string;
+    default: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const focusedOutlineSizes: {
     $base: string;
     unstyled: string;
-    inset: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+};
+export declare const focusedOutlineOffsetSizes: {
+    $base: string;
+    unstyled: string;
     none: string;
     one: string;
     two: string;
@@ -253,6 +328,15 @@ export declare const placeholders: {
     warning: string;
     success: string;
     info: string;
+};
+export declare const iconCaretSizes: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
 };
 export declare const common: {
     active: string;

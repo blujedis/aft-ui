@@ -15,7 +15,7 @@
 		ThemeShadowed,
 		ThemeSize,
 		ThemeTransitioned
-	} from '$lib/theme';
+	} from '$lib/types';
 
 	const title = 'Badges';
 	const description = 'Simple component for displaying tags, notification counts and more.';
@@ -56,14 +56,6 @@
 		<label for="outlined">
 			<div class="text-sm">Outlined:</div>
 			<Badge {...props} variant="outlined">react</Badge>
-		</label>
-		<label for="closeable">
-			<div class="text-sm">Closeable:</div>
-			<Badge {...props} removable>react</Badge>
-		</label>
-		<label for="closeable">
-			<div class="text-sm">Closeable Tag:</div>
-			<Badge {...props} removable tag>react</Badge>
 		</label>
 	</div>
 </ExamplePage>

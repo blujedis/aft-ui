@@ -11,7 +11,7 @@
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 
 	const title = 'Progress Circle';
-	const description = 'Progress circle with themes.';
+	const description = 'Progress circle with animation.';
 	const code = `
   `;
 	let progress: ProgressCircle;

@@ -12,7 +12,7 @@
 	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Ratings';
-	const description = 'Star rating component.';
+	const description = 'Rating component that supports custom icons.';
 	const code = `
   `;
 	let count = 5;

@@ -11,10 +11,9 @@
 	import Breadcrumb, { type BreadcrumbVariant } from '.';
 	import BreadcrumbOption from '../BreadcrumbOption';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-	// import DarkMode from '../_Example/DarkMode.svelte';
 
 	const title = 'Breadcrumb';
-	const description = 'Simple component for displaying tags, notification counts and more.';
+	const description = 'Component for displaying breadcrumbs as paths.';
 	const code = `
   `;
 
@@ -45,11 +44,9 @@
 		<hr />
 	</Section>
 
-	<!-- <DarkMode enabled={dark}>
-	</DarkMode> -->
 	{#key props}
 		<Section>
-			<Breadcrumb {...props} generated flush />
+			<Breadcrumb {...props} generate flush />
 		</Section>
 
 		<Section>
@@ -72,9 +69,5 @@
 			</Breadcrumb>
 		</Section>
 	{/key}
-	<!-- <Section>
-			{#key props}
-				<Breadcrumb generated {...props} variant="unfilled" />
-			{/key}
-		</Section> -->
+
 </ExamplePage>

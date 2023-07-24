@@ -1,4 +1,4 @@
-import type { Path, ThemeColor, TypeOrValue } from '../types/theme';
+import type { Path, ThemeColor, TypeOrValue } from '../types';
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
 /**

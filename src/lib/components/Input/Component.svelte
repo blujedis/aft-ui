@@ -28,9 +28,14 @@
 	$: inputClasses = unstyled
 		? th
 				.create('Input')
-				.option('focused', theme, focused)
-				.option('focusedRingSizes', 'two', focused)
+				// .option('focused', theme, focused)
+				// .option('focusedRingSizes', 'two', focused)
+				// .remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+
+				.option('focusedBorder', theme, focused)
+				.option('focusedBorderSizes', 'two', focused)
 				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -40,14 +45,16 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center motion-reduce:transition-none', true)
+				.append('flex items-center justify-center', true)
 				.append($$restProps.class, true)
 				.compile(true)
 		: th
 				.create('Input')
 				.variant('input', variant, theme, true)
-				.option('focused', theme, focused)
-				.option('focusedRingSizes', 'two', focused)
+				.option('focused', theme, focused && variant !== 'flushed')
+				.option('focusedRingSizes', 'two', focused && variant !== 'flushed')
+				.option('focusedBorder', theme, focused && variant === 'flushed')
+				.option('focusedBorderFlushSizes', 'two', focused && variant === 'flushed')
 				.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
@@ -58,7 +65,7 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center motion-reduce:transition-none', true)
+				.append('flex items-center justify-center', true)
 				.append($$restProps.class, true)
 				.compile(true);
 

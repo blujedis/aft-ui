@@ -2,12 +2,12 @@ import type { Readable } from 'svelte/store';
 import { type Instance, type OptionsGeneric, type Modifier, type VirtualElement } from '@popperjs/core';
 import { SvelteComponent, type ComponentProps } from 'svelte';
 import { type PopoverProps } from '../components/Popover';
-import type { ElementNativeProps } from '../components';
+import type { ElementProps } from '../types';
 export type { VirtualElement } from '@popperjs/core';
 export type RefNode = Element | VirtualElement;
 export type ContentNode = HTMLElement | undefined;
 export type PopperOptions<TModifier> = Partial<OptionsGeneric<TModifier>> | undefined;
-export type PopoverNativeProps = ElementNativeProps<'div'>;
+export type PopoverNativeProps = ElementProps<'div'>;
 export type RefAction = (node: RefNode | Readable<VirtualElement>) => {
     destroy?(): void;
 };
@@ -68,7 +68,7 @@ export declare function createPopover<M extends Partial<Modifier<any, any>>, C e
     node?: (Element & {
         focus: () => void;
     }) | undefined;
-    type?: "none" | "hover" | "click" | "focus" | undefined;
+    type?: "none" | "click" | "focus" | "hover" | undefined;
     escapable?: boolean | undefined;
     component?: C | undefined;
     props?: ComponentProps<InstanceType<C>> | undefined;
@@ -92,7 +92,7 @@ export declare function createPopover<M extends Partial<Modifier<any, any>>, C e
  * @param node the node to apply the popover to.
  * @param options the popover options to be applied.
  */
-export declare function popover<TModifier extends Partial<Modifier<any, any>>>(node: Element & {
+export declare function usePopover<TModifier extends Partial<Modifier<any, any>>>(node: Element & {
     focus: () => void;
 }, options?: Omit<Partial<OptionsGeneric<TModifier>> & {
     target?: string | Element | ShadowRoot | undefined;
@@ -100,10 +100,11 @@ export declare function popover<TModifier extends Partial<Modifier<any, any>>>(n
     node?: (Element & {
         focus: () => void;
     }) | undefined;
-    type?: "none" | "hover" | "click" | "focus" | undefined;
+    type?: "none" | "click" | "focus" | "hover" | undefined;
     escapable?: boolean | undefined;
     component?: typeof PopoverComponent | undefined;
-    props?: any;
+    props?: (PopoverProps & import("svelte/elements").HTMLAttributes<HTMLDivElement>) | undefined;
 }, "component">): {
     destroy: () => void;
 };
+export default usePopover;

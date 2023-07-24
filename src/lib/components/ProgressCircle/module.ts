@@ -1,5 +1,5 @@
 import { cubicOut } from 'svelte/easing';
-import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { progressCircleTrack } from './config';
 
 export type ProgressCircleVariant = keyof typeof progressCircleTrack;

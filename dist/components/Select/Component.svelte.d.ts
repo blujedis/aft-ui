@@ -10,24 +10,31 @@ declare const __propDef: {
         placeholder?: string | undefined;
         rows?: number | undefined;
         rounded?: any;
-        selected?: import("../../stores/select").SelectValue | import("../../stores/select").SelectValue[] | undefined;
+        selected?: import("../..").SelectValue | import("../..").SelectValue[] | undefined;
         shadowed?: any;
         size?: any;
         theme?: any;
         transitioned?: any;
-        variant?: "default" | "outlined" | "flushed" | "filled" | undefined;
+        variant?: "default" | "filled" | "outlined" | "flushed" | undefined;
         unstyled?: boolean | undefined;
-        color?: string | null | undefined;
-        hidden?: boolean | null | undefined;
-        title?: string | null | undefined;
         form?: string | null | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;
+        title?: string | null | undefined;
+        color?: string | null | undefined;
+        hidden?: boolean | null | undefined;
+        contextmenu?: string | null | undefined;
+        name?: string | null | undefined;
+        class?: string | null | undefined;
+        radiogroup?: string | null | undefined;
+        value?: any;
+        autocomplete?: string | null | undefined;
+        required?: boolean | null | undefined;
+        'on:change'?: import("svelte/elements").ChangeEventHandler<HTMLSelectElement> | null | undefined;
+        'bind:value'?: any;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;
         contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
-        contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -38,7 +45,6 @@ declare const __propDef: {
         tabindex?: number | null | undefined;
         translate?: "" | "yes" | "no" | null | undefined;
         inert?: boolean | null | undefined;
-        radiogroup?: string | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         about?: string | null | undefined;
         datatype?: string | null | undefined;
@@ -59,7 +65,7 @@ declare const __propDef: {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -77,7 +83,7 @@ declare const __propDef: {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
@@ -126,7 +132,6 @@ declare const __propDef: {
         'on:focusin'?: import("svelte/elements").FocusEventHandler<HTMLSelectElement> | null | undefined;
         'on:focusout'?: import("svelte/elements").FocusEventHandler<HTMLSelectElement> | null | undefined;
         'on:blur'?: import("svelte/elements").FocusEventHandler<HTMLSelectElement> | null | undefined;
-        'on:change'?: import("svelte/elements").ChangeEventHandler<HTMLSelectElement> | null | undefined;
         'on:beforeinput'?: import("svelte/elements").EventHandler<InputEvent, HTMLSelectElement> | null | undefined;
         'on:input'?: import("svelte/elements").FormEventHandler<HTMLSelectElement> | null | undefined;
         'on:reset'?: import("svelte/elements").FormEventHandler<HTMLSelectElement> | null | undefined;
@@ -219,20 +224,15 @@ declare const __propDef: {
         'on:close'?: import("svelte/elements").EventHandler<Event, HTMLSelectElement> | null | undefined;
         'on:fullscreenchange'?: import("svelte/elements").EventHandler<Event, HTMLSelectElement> | null | undefined;
         'on:fullscreenerror'?: import("svelte/elements").EventHandler<Event, HTMLSelectElement> | null | undefined;
-        name?: string | null | undefined;
-        value?: any;
-        autocomplete?: string | null | undefined;
-        required?: boolean | null | undefined;
-        'bind:value'?: any;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
         default: {
-            selectedItems: import("../../stores/select").SelectValue[] & (string | number)[];
-            select: (value?: import("../../stores/select").SelectValue | undefined) => void;
-            unselect: (value?: import("../../stores/select").SelectValue | undefined) => void;
+            selectedItems: import("../..").SelectValue[] & (string | number)[];
+            select: (value?: import("../..").SelectValue | undefined) => void;
+            unselect: (value?: import("../..").SelectValue | undefined) => void;
         };
     };
 };
@@ -240,6 +240,6 @@ export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
 export default class Component extends SvelteComponentTyped<ComponentProps, ComponentEvents, ComponentSlots> {
-    get context(): import("svelte/store").Writable<import("../../stores/select").SelectProps & Record<string, any>> & import("../../stores/select").SelectMethods;
+    get context(): import("svelte/store").Writable<import("../..").SelectProps & Record<string, any>> & import("../..").SelectMethods;
 }
 export {};

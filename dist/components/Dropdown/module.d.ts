@@ -1,8 +1,9 @@
 import type { DisclosureStore } from '../../stores';
 import { type ButtonProps } from '../Button';
 import type { ElementNativeProps } from '../../types/components';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 export type DropdownTrigger = 'hover' | 'click' | 'none';
-export type DropdownMode = 'menu' | 'select' | 'multiselect' | 'combobox';
+export type DropdownStrategy = 'menu' | 'select' | 'multiselect' | 'combobox' | 'tags';
 export type DropdownKey = string | number;
 export type DropdownItem = {
     value: string | number;
@@ -10,30 +11,43 @@ export type DropdownItem = {
     group?: string;
     selected?: boolean;
 };
-export type DropdownLabelFormatHandler = (value: DropdownKey, label?: string, group?: string) => string;
+export type DropdownGlobals = {
+    disabled: boolean;
+    full: boolean;
+    multiple: boolean;
+    placeholder: string | null;
+    rounded: ThemeRounded;
+    shadowed: ThemeShadowed;
+    size: ThemeSize;
+    theme: ThemeColor;
+    variant: 'outlined';
+};
 export type DropdownContext = DisclosureStore<{
     selected: DropdownKey[];
     items: Required<DropdownItem>[];
     filtered: Required<DropdownItem>[];
+    input?: HTMLInputElement;
+    button?: HTMLButtonElement;
+    panel?: HTMLDivElement;
 }> & {
-    add: (value: DropdownKey, label?: string, group?: string) => void;
-    remove: (value: DropdownKey, filter?: (item: DropdownItem) => boolean) => void;
-    mode: DropdownMode;
+    globals: DropdownGlobals;
+    strategy: DropdownStrategy;
     isSelected: (key?: DropdownKey) => boolean;
-    select: (key?: DropdownKey) => void;
     trigger: DropdownTrigger;
+    add: (item: DropdownItem) => void;
+    remove: (value: DropdownKey, filter?: (item: DropdownItem) => boolean) => void;
+    select: (key?: DropdownKey) => void;
     unselect: (key?: DropdownKey) => void;
-    globals: ButtonProps<'button' | 'a'> & {
-        multiple?: boolean;
-    };
+    filter: (query?: string) => void;
+    reset: () => void;
 };
-export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'mode'> & {
+export type DropdownProps<Tag extends 'button' | 'a'> = Omit<ButtonProps<Tag>, 'strategy' | 'variant'> & {
     autoclose?: boolean;
     escapable?: boolean;
-    focustrap?: boolean;
-    formatter?: DropdownLabelFormatHandler;
+    filterable?: boolean;
+    filter?: (query: string, items: Required<DropdownItem>[]) => Required<DropdownItem>[];
     items?: DropdownItem[];
-    mode?: DropdownMode;
+    strategy?: DropdownStrategy;
     multiple?: boolean;
     selected?: DropdownKey | DropdownKey[];
     trigger?: DropdownTrigger;

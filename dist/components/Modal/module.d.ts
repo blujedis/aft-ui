@@ -1,8 +1,8 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../theme';
-import type { EasingFunction, TransitionConfig } from 'svelte/types/runtime/transition';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { modal } from './config';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '../../stores';
+import type { EasingFunction, TransitionConfig } from 'svelte/transition';
 export declare class ModalComponent extends SvelteComponent<ModalProps> {
     disclosure?: DisclosureMethods;
 }

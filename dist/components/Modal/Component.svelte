@@ -91,7 +91,6 @@ function transitioner(node, { type }) {
 		tabindex="-1"
 		class="relative z-10"
 		style={modalStyles}
-		aria-labelledby={labelby}
 		on:click={handleClick}
 		on:keydown={handleKeydown}
 	>

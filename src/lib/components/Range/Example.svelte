@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Range from './';
 
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectRounded from '../_Example/SelectRounded.svelte';
@@ -13,7 +13,7 @@
 	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Range';
-	const description = 'Input range with themes.';
+	const description = 'Input range component.';
 	const code = `
   `;
 

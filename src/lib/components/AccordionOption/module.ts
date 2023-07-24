@@ -1,5 +1,5 @@
 import type { SelectValue } from '$lib/stores/select';
-import type { ThemeColor, ThemeSize } from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { accordionOption } from './config';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure/module';
 
@@ -8,6 +8,8 @@ export type AccordianOptionVariant = keyof typeof accordionOption;
 export type AccordianOptionProps<Tag = any> = {
 	as?: Tag;
 	key?: SelectValue;
+	rounded?: ThemeRounded;
+	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });

@@ -1,13 +1,13 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        size?: any;
         theme?: any;
         variant?: "default" | "filled" | "soft" | undefined;
-        size?: any;
         wide?: boolean | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | (string & Record<string, unknown>) | (string & import("../../types").ClassArgument[]) | null | undefined;
+        class?: string | null | undefined;
         contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
@@ -47,7 +47,7 @@ declare const __propDef: {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -71,7 +71,7 @@ declare const __propDef: {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;

@@ -1,4 +1,4 @@
-import type { ThemeSize } from '$lib/theme';
+import type { ThemeSize } from '$lib/types';
 import type { IconProps as IconifyIconProps } from '@iconify/svelte';
 // import IconBase from '@iconify/svelte';
 // import { SvelteComponent } from 'svelte';

@@ -13,7 +13,7 @@
 	// import { popover } from '$lib/hooks/usePopover';
 
 	const title = 'Popover';
-	const description = 'Wrapper component for displaying popovers.';
+	const description = 'Uses Popper to position tooltips and popover informational components.';
 	const code = `
   `;
 

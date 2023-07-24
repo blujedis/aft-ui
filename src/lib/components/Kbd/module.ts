@@ -4,7 +4,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { kbd } from './config';
 
 export type KbdVariant = keyof typeof kbd;

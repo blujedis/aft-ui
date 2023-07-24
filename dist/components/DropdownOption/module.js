@@ -1,6 +1,6 @@
 export const dropdownOptionDefaults = {
     element: 'button',
-    focused: true,
+    focused: 'always',
     size: 'sm',
     theme: 'default',
     variant: 'default'

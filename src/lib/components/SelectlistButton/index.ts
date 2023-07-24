@@ -1,5 +1,5 @@
-import MultiselectButton from './Component.svelte';
+import SelectListButton from './Component.svelte';
 export * from './module';
 export * from './config';
-export { MultiselectButton };
-export default MultiselectButton;
+export { SelectListButton };
+export default SelectListButton;

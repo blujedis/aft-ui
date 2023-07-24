@@ -4,9 +4,7 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
         caret?: string | import("@iconify/svelte").IconifyIcon | null | undefined;
         placeholder?: string | undefined;
         roticon?: string | boolean | undefined;
-    } & import("../..").ElementProps<Tag> & {
-        class?: import("../..").ClassArgument | import("../..").ClassArgument[];
-    };
+    } & import("../..").ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

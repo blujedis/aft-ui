@@ -1,46 +1,47 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        store?: import("../../stores/select").SelectStore<{
+        store?: import("../..").SelectStore<{
             selected: (string | number)[];
             multiple: boolean;
         }> | undefined;
-        focused?: any;
+        focused?: import("../..").ThemeFocused | undefined;
         unstyled?: boolean | undefined;
-        rounded?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
         full?: boolean | undefined;
-        shadowed?: any;
-        theme?: any;
-        size?: any;
-        transitioned?: any;
-        mode?: "text" | "button" | undefined;
-        as?: "button" | "a" | undefined;
-        underlined?: boolean | undefined;
+        strategy?: "button" | "text" | undefined;
+        as?: "a" | "button" | undefined;
+        href?: string | null | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         multiple?: boolean | undefined;
-        selected?: import("../../stores/select").SelectValue | import("../../stores/select").SelectValue[] | undefined;
-        variant?: "default" | "text" | "outlined" | "filled" | "ghost" | undefined;
-        color?: string | null | undefined;
-        hidden?: boolean | null | undefined;
-        title?: string | null | undefined;
+        selected?: import("../..").SelectValue | import("../..").SelectValue[] | undefined;
+        variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;
+        title?: string | null | undefined;
+        color?: string | null | undefined;
+        hidden?: boolean | null | undefined;
+        contextmenu?: string | null | undefined;
+        class?: string | null | undefined;
+        radiogroup?: string | null | undefined;
+        placeholder?: string | null | undefined;
+        'on:change'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | (string & Record<string, unknown>) | (string & import("../..").ClassArgument[]) | null | undefined;
         contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
-        contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
         id?: string | null | undefined;
         lang?: string | null | undefined;
         part?: string | null | undefined;
-        placeholder?: string | null | undefined;
         spellcheck?: import("svelte/elements").Booleanish | null | undefined;
         tabindex?: number | null | undefined;
         translate?: "" | "yes" | "no" | null | undefined;
         inert?: boolean | null | undefined;
-        radiogroup?: string | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         about?: string | null | undefined;
         datatype?: string | null | undefined;
@@ -61,7 +62,7 @@ declare const __propDef: {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -79,7 +80,7 @@ declare const __propDef: {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
@@ -128,7 +129,6 @@ declare const __propDef: {
         'on:focusin'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
         'on:focusout'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
         'on:blur'?: import("svelte/elements").FocusEventHandler<HTMLSpanElement> | null | undefined;
-        'on:change'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         'on:beforeinput'?: import("svelte/elements").EventHandler<InputEvent, HTMLSpanElement> | null | undefined;
         'on:input'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         'on:reset'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
@@ -227,11 +227,11 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            selectedItems: import("../../stores/select").SelectValue[] & (string | number)[];
-            reset: (...selected: import("../../stores/select").SelectValue[]) => void;
-            select: (value?: import("../../stores/select").SelectValue | undefined) => void;
-            unselect: (value?: import("../../stores/select").SelectValue | undefined) => void;
-            isSelected: (value?: import("../../stores/select").SelectValue | undefined) => void;
+            selectedItems: import("../..").SelectValue[] & (string | number)[];
+            reset: any;
+            select: (value?: import("../..").SelectValue | undefined) => void;
+            unselect: (value?: import("../..").SelectValue | undefined) => void;
+            isSelected: (value?: import("../..").SelectValue | undefined) => boolean;
         };
     };
 };
@@ -239,9 +239,9 @@ export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
 export default class Component extends SvelteComponentTyped<ComponentProps, ComponentEvents, ComponentSlots> {
-    get store(): import("svelte/store").Writable<import("../../stores/select").SelectProps & {
+    get store(): import("svelte/store").Writable<import("../..").SelectProps & {
         selected: (string | number)[];
         multiple: boolean;
-    }> & import("../../stores/select").SelectMethods;
+    }> & import("../..").SelectMethods;
 }
 export {};

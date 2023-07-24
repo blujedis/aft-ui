@@ -13,17 +13,16 @@
 		ThemeShadowed,
 		ThemeSize,
 		ThemeTransitioned
-	} from '$lib/theme';
+	} from '$lib/types';
 	import SelectRounded from '../_Example/SelectRounded.svelte';
 
 	const title = 'Checkboxes';
-	const description = 'Themed Checkboxes with multiple variants.';
+	const description = 'Themed Checkbox component.';
 	const code = `
   `;
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,

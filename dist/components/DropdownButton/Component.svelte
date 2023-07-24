@@ -4,12 +4,14 @@ import { dropdownButtonDefaults as defaults } from "./module";
 import { Icon } from "../Icon";
 import themeStore, { themer } from "../..";
 const context = getContext("Dropdown");
+const { multiple, ...rest } = context.globals;
 export let {
   as,
   caret,
   disabled,
   focused,
   full,
+  href,
   placeholder,
   rounded,
   roticon,
@@ -22,10 +24,10 @@ export let {
   unstyled
 } = {
   ...defaults,
-  ...context?.globals
+  ...rest
 };
 const buttonProps = {
-  as: typeof as === "undefined" && context.mode === "menu" ? "a" : as,
+  as: context.strategy !== "menu" || !href ? as : "a",
   disabled,
   focused,
   full,
@@ -43,6 +45,8 @@ $$restProps.class = "justify-between " + $$restProps.class;
 let ref;
 const th = themer($themeStore);
 $:
+  ref && context.update((s) => ({ ...s, button: ref }));
+$:
   selected = $context.items.filter((item) => $context.selected.includes(item.value))[0];
 $:
   label = selected ? selected.label : placeholder || "";
@@ -54,19 +58,20 @@ $:
 function handleClick(e) {
   if (context.trigger !== "click")
     return;
+  e.preventDefault();
+  e.stopPropagation();
   if (e.target)
     ref = e.target;
   context.toggle();
 }
-function handleEnter() {
+function handleMouseEnter() {
   if (context.trigger !== "hover")
     return;
   context.toggle();
 }
-context.subscribe(() => {
-  if (ref && !$context.visible)
-    ref.focus();
-});
+function setButtonRef(el) {
+  context.update((s) => ({ ...s, button: el }));
+}
 </script>
 
 <div>
@@ -74,20 +79,22 @@ context.subscribe(() => {
 		{...buttonProps}
 		{...$$restProps}
 		on:click={handleClick}
-		on:mouseenter={handleEnter}
-		mode="text"
+		on:mouseenter={handleMouseEnter}
+		strategy="text"
 		aria-expanded={$context.visible}
 		aria-haspopup="true"
 	>
-		<slot>
-			{#if ['select', 'multiselect'].includes(context.mode)}
-				<div>
-					{label}
-				</div>
+		<div class="flex items-center pointer-events-none">
+			<slot>
+				{#if ['select', 'multiselect'].includes(context.strategy)}
+					<div>
+						{label}
+					</div>
+				{/if}
+			</slot>
+			{#if caret}
+				<Icon icon={caret} class={iconClasses} />
 			{/if}
-		</slot>
-		{#if caret}
-			<Icon icon={caret} class={iconClasses} />
-		{/if}
+		</div>
 	</Button>
 </div>

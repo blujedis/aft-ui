@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { setContext } from 'svelte';
-	import { forwardEventsBuilder } from '$lib/utils';
+	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
 	import BreadcrumbOption from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
@@ -11,31 +11,26 @@
 
 	type $$Props = BreadcrumbProps & ElementNativeProps<'ol'>;
 
-	export let { flush, full, generated, rounded, shadowed, size, theme, transitioned, variant } = {
+	export let { flush, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults
 	} as Required<BreadcrumbProps>;
 
+	const globals = cleanObj({
+		rounded,
+		shadowed,
+		size,
+		theme,
+		transitioned,
+		variant
+	});
+
 	setContext('Breadcrumb', {
-		globals: {
-			rounded,
-			shadowed,
-			size,
-			theme,
-			transitioned,
-			variant
-		}
+		globals
 	});
 
 	const th = themer($themeStore);
 
 	$: items = generateBreadcrumbs();
-
-	$: breadcrumbListClasses = th
-		.create('Breadcrumb')
-		.option('fieldFontSizes', size, size)
-		.option('breadcrumbSpacings', size, size)
-		.append('inline-flex items-center', true)
-		.compile(true);
 
 	$: breadcrumbNavClasses = th
 		.create('BreadcrumbNav')
@@ -49,6 +44,13 @@
 		)
 		.append('!pl-0', flush)
 		.append($$restProps.class, true)
+		.compile(true);
+
+	$: breadcrumbListClasses = th
+		.create('Breadcrumb')
+		.option('fieldFontSizes', size, size)
+		.option('breadcrumbSpacings', size, size)
+		.append('inline-flex items-center', true)
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
@@ -85,7 +87,7 @@
 <nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
 		<slot>
-			{#if generated}
+			{#if generate}
 				{#each items as item}
 					<BreadcrumbOption {...item} />
 				{/each}

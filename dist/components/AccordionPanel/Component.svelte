@@ -4,11 +4,11 @@ import {
 } from "./module";
 import themeStore, { themer } from "../..";
 const context = getContext("Accordion");
-export let { as, name } = {
+export let { as, key } = {
   ...defaults
 };
 setContext("AccordionPanel", {
-  name
+  key
 });
 const th = themer($themeStore);
 $:
@@ -16,5 +16,5 @@ $:
 </script>
 
 <svelte:element this={as} {...$$restProps} class={accordionPanelClasses}>
-	<slot open={() => context.select(name)} close={() => context.select(name)} />
+	<slot open={() => context.select(key)} close={() => context.select(key)} />
 </svelte:element>

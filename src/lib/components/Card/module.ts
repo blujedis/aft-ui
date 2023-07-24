@@ -5,6 +5,7 @@ export type CardVariant = keyof typeof card;
 
 export type CardContext = {
 	globals: {
+	
 		size?: ThemeSize;
 		theme?: ThemeColor;
 		wide?: boolean;
@@ -12,7 +13,6 @@ export type CardContext = {
 };
 
 export type CardProps = {
-	edged?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -22,7 +22,6 @@ export type CardProps = {
 };
 
 export const cardDefaults: Partial<CardProps> = {
-	edged: true,
 	size: 'md',
 	theme: 'default',
 	variant: 'default'

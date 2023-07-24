@@ -1,9 +1,10 @@
 import { writable, type Writable, get as storeGet } from 'svelte/store';
-import type { DeepPartial, ThemeConfig } from './types/theme';
+import type { DeepPartial, ThemeConfig, ThemeDefaults } from './types/theme';
 import defaults from './theme/defaults';
 import { palette } from './theme/palettes';
 import * as options from './components/options';
 import * as components from './components/configs';
+import { cleanObj } from './utils';
 
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 	get(): T;
@@ -17,7 +18,7 @@ const defaultTheme = {
 	palette
 };
 
-let _store = createStoreInternal(defaultTheme);
+let _store: ThemeStore<typeof defaultTheme>;//  = createStoreInternal(defaultTheme);
 
 /**
  * Replaces target values with overrides, ensures all target values exist.
@@ -52,23 +53,7 @@ function createStoreInternal<T extends ThemeConfig>(
 		...rest
 	} as unknown as T;
 
-	// if (typeof document === 'undefined') {
-
-	// 	const store = {
-	// 		set: (value: T) => { },
-	// 		get: () => defaultTheme,
-	// 		update: (updater: Updater<T>) => { },
-	// 		subscribe: (run: Subscriber<T>, invalidate?: Invalidator<T> | undefined) => {
-	// 			return (() => { })
-	// 		}
-	// 	} as Writable<T>;
-
-	// 	return {
-	// 		...store,
-	// 		get,
-	// 		update,
-	// 	};
-	// }
+	normalized.defaults.component = cleanObj(normalized.defaults.component) as Required<ThemeDefaults['component']>;
 
 	const store = writable(normalized);
 
@@ -117,6 +102,6 @@ export function createStore<T extends Record<string, unknown> & DeepPartial<Them
 }
 
 export function getStore() {
-	if (!_store) _store = createStoreInternal(defaultTheme);
+	if (typeof _store === 'undefined') _store = createStoreInternal(defaultTheme);
 	return _store;
 }

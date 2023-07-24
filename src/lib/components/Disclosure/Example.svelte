@@ -13,16 +13,14 @@
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
-	import { fade, slide } from 'svelte/transition';
 
-	const title = 'Dropdown';
-	const description = 'Dropdown element which supports menus, combobox, select and tags.';
+	const title = 'Disclosure';
+	const description = 'Base component for disclosing an element or group of elements.';
 	const code = `
   `;
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
@@ -61,9 +59,6 @@
 			selected: true
 		}
 	];
-	function reveal(node: Element, options?: Record<string, any>) {
-		return {};
-	}
 </script>
 
 <ExamplePage {title} {description} {code}>

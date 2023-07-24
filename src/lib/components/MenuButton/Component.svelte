@@ -4,12 +4,12 @@
 	import Button from '../Button';
 	import Icon from '../Icon';
 	import type { ElementProps } from '$lib/types';
-	import type { MenuControllerContext } from '../MenuController';
+	import type { MenuContext } from '../Menu';
 	import { getContext } from 'svelte';
 
 	type $$Props = MenuButtonProps & ElementProps<'div'>;
 
-	const context = getContext('MenuController') as MenuControllerContext;
+	const context = getContext('Menu') as MenuContext;
 
 	export let { caret, full, rounded, roticon, size, shadowed, strategy, theme, variant } = {
 		...defaults,
@@ -18,9 +18,15 @@
 
 	const th = themer($themeStore);
 
+	$: buttonClasses = th
+		.create('MenuButton')
+		.append('h-full', true) // without h-full button won't fill parent.
+		.append($$restProps.class, true)
+		.compile(true);
+
 	$: iconClasses = th
 		.create('MenuButtonIcon')
-		.option('iconDropdownSizes', size, true)
+		.option('iconCaretSizes', size, true)
 		.append('transition-transform duration-300 origin-center', !!caret && roticon)
 		.append(
 			typeof roticon === 'string' ? roticon : '-rotate-180',
@@ -38,6 +44,7 @@
 	this={Button}
 	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
 	{...$$restProps}
+	class={buttonClasses}
 	on:click={handleClick}
 	aria-expanded={$context.visible}
 	aria-haspopup="true"

@@ -1,5 +1,5 @@
 import type { notification } from './config';
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 export type NotificationVariant = keyof typeof notification;
 export type NotificationItem = {

@@ -4,7 +4,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { tile } from './config';
 
 export type TileVariant = keyof typeof tile;

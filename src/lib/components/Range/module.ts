@@ -5,7 +5,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { rangeTrackBackground } from './config';
 
 export type RangeVariant = keyof typeof rangeTrackBackground;

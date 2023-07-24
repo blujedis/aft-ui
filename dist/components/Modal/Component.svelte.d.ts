@@ -31,9 +31,9 @@ declare const __propDef: {
         focustrap?: boolean | undefined;
         labelby?: string | undefined;
         position?: import("../..").ModalPosition | undefined;
-        rounded?: any;
-        shadowed?: any;
-        theme?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        theme?: import("../..").ThemeColor | undefined;
         transition?: ModalTransition | undefined;
         variant?: "default" | "filled" | undefined;
         visible?: boolean | undefined;

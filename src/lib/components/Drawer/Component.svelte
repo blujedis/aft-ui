@@ -38,7 +38,6 @@
 
 	$: drawerSizeClasses = th
 		.create('DrawerSize')
-		//	.variant('drawer', variant, theme, true)
 		.append(drawerSizeMap[size], size)
 		.append('pointer-events-auto w-screen', true)
 
@@ -53,7 +52,7 @@
 	$: drawerClasses = th
 		.create('DrawerWrapper')
 		.option('shadows', shadowed, shadowed)
-		.append('flex h-full flex-col overflow-y-scroll', true)
+		.append('flex h-full flex-col overflow-y-scroll z-20 bg-white', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

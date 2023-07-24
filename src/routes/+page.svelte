@@ -19,19 +19,20 @@
 		<a href="/input">Inputs</a>
 		<a href="/card">Card</a>
 		<a href="/checkbox">Checkboxes</a>
-		<a href="/dropdown">Dropdowns</a>
 		<a href="/menu">Menu</a>
 		<a href="/modal">Modals</a>
-		<a href="/multiselect">Multiselect</a>
-		<a href="/notification">Notifications</a>
+		<a href="/selectlist">Select List</a>
+		<a href="/notifications">Notifications</a>
 		<a href="/pagination">Pagination</a>
+		<a href="/popover">Popover</a>
 		<a href="/progressbar">Progress Bar</a>
 		<a href="/progresscircle">Progress Circle</a>
 		<a href="/range">Range</a>
 		<a href="/rating">Rating</a>
 		<a href="/select">Select</a>
 		<a href="/switch">Switch</a>
-		<a href="/tab">Tab</a>
+		<a href="/tabs">Tabs</a>
+		<a href="/tile">Tile</a>
 	</div>
 </div>
 

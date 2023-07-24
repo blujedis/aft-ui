@@ -1,5 +1,11 @@
 import type { SelectStore, SelectValue } from '$lib/stores/select';
-import type { ThemeColor, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../types';
+import type {
+	ThemeColor,
+	ThemeFocused,
+	ThemeRounded,
+	ThemeSize,
+	ThemeTransitioned
+} from '../../types';
 import type { ButtonProps } from '../Button/module';
 import type { ButtonGroupItemVariant } from '../ButtonGroupItem';
 
@@ -18,12 +24,11 @@ export type ButtonGroupContext = SelectStore & {
 		theme: ThemeColor;
 		transitioned: ThemeTransitioned;
 		variant: ButtonGroupItemVariant;
-		underlined: boolean;
 	};
 };
 
 export const buttonGroupDefaults: Partial<ButtonGroupProps> = {
-	focused: true,
+	focused: 'visible',
 	rounded: 'none',
 	shadowed: 'none',
 	theme: 'default',

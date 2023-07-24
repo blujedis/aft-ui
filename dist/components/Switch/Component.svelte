@@ -20,14 +20,10 @@ export let {
 let checked = false;
 const th = themer($themeStore);
 $:
-  buttonClasses = th.create("SwitchButton").option("switchButtonSizes", size, size).option(
-    focused === true || focused === "always" ? "focusedRingSizes" : "focusedVisibleRingSizes",
-    size,
-    focused
-  ).option(focused === true || focused === "always" ? "focused" : "focusedVisible", theme, focused).option("focusedOffsetSizes", "two", focused).append("pointer-events-none", disabled).append(
+  buttonClasses = th.create("SwitchButton").option("switchButtonSizes", size, size).append("pointer-events-none", disabled).append(
     "group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full",
     true
-  ).append($$restProps.class, true).compile(true);
+  ).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).append($$restProps.class, true).compile(true);
 $:
   backdropClasses = th.create("SwitchBackdrop").variant("switchBackdrop", variant, theme, true).append("pointer-events-none absolute h-full w-full rounded-md", true).append(classBackdrop, true).compile(true);
 $:
@@ -49,9 +45,9 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 		class={buttonClasses}
 		role="switch"
 		aria-checked={checked}
-		{disabled}
-		aria-disabled={disabled}
 		on:click={() => (checked = !checked)}
+		aria-disabled={disabled}
+		{disabled}
 	>
 		<span class="sr-only">{srtext}</span>
 

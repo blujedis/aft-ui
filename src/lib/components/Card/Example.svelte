@@ -16,7 +16,7 @@
 	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Card';
-	const description = 'Card Component.';
+	const description = 'Component for creating organized card content.';
 	const code = `
   `;
 
@@ -45,11 +45,9 @@
 		<hr />
 	</Section>
 
-	<div class="flex space-x-12">
+	<div class="flex space-x-6">
 		{#key props}
 			<Card
-				variant="divided"
-				class="max-w-sm ring-1 ring-black ring-opacity-5"
 				rounded={props.rounded}
 				shadowed={props.shadowed}
 				size={props.size}

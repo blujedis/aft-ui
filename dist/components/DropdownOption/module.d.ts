@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeFocused, ThemeSize } from '../../types';
 import type { DropdownKey } from '../Dropdown/module';
 import type { dropdownOption } from './config';
 export type DropdownOptionVariant = keyof typeof dropdownOption;
@@ -6,6 +6,7 @@ export type DropdownOptionProps<Tag extends 'a' | 'button'> = {
     element?: Tag;
     focused?: ThemeFocused;
     label?: string;
+    selected?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;
     value?: DropdownKey;

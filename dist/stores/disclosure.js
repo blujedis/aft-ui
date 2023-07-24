@@ -19,7 +19,6 @@ export function useDisclosure(props = {}) {
         store.update((s) => handleUpdate({ ...s, visible: !visible }));
     }
     function modify(values) {
-        console.log(values);
         store.update((s) => handleUpdate({ ...s, ...values }));
     }
     return {

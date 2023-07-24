@@ -1,7 +1,7 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
-import type { NotificationPosition } from '../NotificationController';
 import type { avatar } from './config';
+import type { NotificationPosition } from '../Notifications';
 
 export type AvatarVariant = keyof typeof avatar;
 

@@ -1,19 +1,19 @@
 <script lang="ts">
 	import {
-		type MultiselectControllerProps,
-		multiselectControllerDefaults as defaults,
-		type MultiselectControllerContext,
-		type MultiselectControllerStore,
-		type MultiselectItem,
-		type MultiselectItemKey
+		type SelectListProps,
+		selectListDefaults as defaults,
+		type SelectListContext,
+		type SelectListStore,
+		type SelectListItem,
+		type SelectListItemKey
 	} from './module';
 	import themeStore, { themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '../../types';
 	import { setContext } from 'svelte';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 
-	type Item = $$Generic<MultiselectItem>;
-	type $$Props = MultiselectControllerProps<Item> & Omit<ElementProps<'select'>, 'size'>;
+	type Item = $$Generic<SelectListItem>;
+	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size'>;
 
 	export let {
 		autoclose,
@@ -22,45 +22,57 @@
 		filter: initFilter,
 		full,
 		multiple,
+		newable,
+		placeholder,
+		removable,
 		rounded,
 		shadowed,
 		size,
 		store: initStore,
 		strategy,
+		tags,
 		theme,
 		underlined,
 		variant,
-		visible
+		visible,
+		onBeforeAdd,
+		onBeforeRemove
 	} = {
 		...(defaults as any)
 	} as Required<$$Props>;
 
 	export const store = (initStore ||
 		useSelect({
-			multiple,
+			multiple: true,
 			visible,
 			selected: [],
 			items: [],
 			filtered: []
-		})) as SelectStore<MultiselectControllerStore<Item>>;
+		})) as SelectStore<SelectListStore<Item>>;
 
 	const th = themer($themeStore);
-	let div: HTMLDivElement;
+	// let div: HTMLDivElement;
 	let sel: HTMLSelectElement;
 
 	const globals = cleanObj({
 		full,
+		newable,
 		multiple,
-		strategy,
+		placeholder,
+		removable,
 		rounded,
 		shadowed,
 		size,
+		strategy,
+		tags,
 		theme,
 		underlined,
-		variant
+		variant,
+		onBeforeAdd,
+		onBeforeRemove
 	});
 
-	export const context = setContext('SelectlistContext', {
+	export const context = setContext('SelectListContext', {
 		...store,
 		open,
 		close,
@@ -71,7 +83,7 @@
 		filter,
 		reset,
 		globals
-	}) as MultiselectControllerContext;
+	}) as SelectListContext;
 
 	$: groups = $store.items.reduce((a, c) => {
 		if (!c.group) return a;
@@ -82,8 +94,8 @@
 
 	$: groupKeys = Object.keys(groups);
 
-	$: dropdownClasses = th
-		.create('MultiselectController')
+	$: multiselectClasses = th
+		.create('SelectListController')
 		.append('w-full', full)
 		.append('relative inline-flex not-sr-only', true)
 		.append($$restProps.class, true)
@@ -130,13 +142,12 @@
 		}
 	}
 
-	function remove(itemOrKey: Item | MultiselectItemKey) {
-		let key = itemOrKey as MultiselectItemKey;
+	function remove(itemOrKey: Item | SelectListItemKey) {
+		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
 		store.update((s) => {
-			const filteredItems = s.items.filter((i) => key !== i.value);
 			const filteredSelected = s.selected.filter((v) => v !== key);
-			return { ...s, items: filteredItems, selected: filteredSelected };
+			return { ...s, selected: filteredSelected };
 		});
 	}
 
@@ -150,7 +161,7 @@
 		});
 	}
 
-	function reset(selectedItems = [] as MultiselectItemKey[]) {
+	function reset(selectedItems = [] as SelectListItemKey[]) {
 		store.update((s) => {
 			return { ...s, filtered: [...s.items], selectedItems };
 		});
@@ -166,8 +177,8 @@
 		if (!$store.visible && e.key === 'ArrowDown') return context.open();
 	}
 
-	function isSelected(itemOrKey: Item | MultiselectItemKey) {
-		let key = itemOrKey as MultiselectItemKey;
+	function isSelected(itemOrKey: Item | SelectListItemKey) {
+		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
 		return $store.selected.includes(key);
 	}
@@ -177,29 +188,26 @@
 
 <div
 	role="none"
-	bind:this={div}
 	{...$$restProps}
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
-	class={dropdownClasses}
+	class={multiselectClasses}
 >
-	<slot
-		visible={$store.visible}
-		selected={$store.selected}
-		filtered={$store.filtered}
-		isSelected={context.isSelected}
-		open={context.open}
-		close={context.close}
-		toggle={store.toggle}
-	/>
+	<div class:w-full={full}>
+		<slot
+			visible={$store.visible}
+			selected={$store.selected}
+			filtered={$store.filtered}
+			isSelected={context.isSelected}
+			open={context.open}
+			close={context.close}
+			toggle={store.toggle}
+		/>
+	</div>
+
 	<slot name="select">
-		<select
-			bind:this={sel}
-			class="sr-only"
-			{...$$restProps}
-			multiple={['multiselect'].includes(strategy)}
-		>
+		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>

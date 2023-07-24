@@ -5,7 +5,7 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 	const options = {
 		findActive: (_items: HTMLElement[]) => null as HTMLElement | null | undefined,
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		onSelected: (_node: HTMLElement) => {}
+		onSelected: (_node: HTMLElement) => { }
 	};
 
 	function onSelected(fn: HandleEnter) {
@@ -59,6 +59,7 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 				currentNode = options.findActive(items) || items[0];
 			}
 			if (currentNode) currentNode.focus();
+			e.preventDefault(); // otherwise overflow will cause scroll jumping.
 		}
 	}
 

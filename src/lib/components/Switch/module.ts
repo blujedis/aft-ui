@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { switchBackdrop } from './config';
 
 export type SwitchVariant = keyof typeof switchBackdrop;
@@ -18,7 +18,7 @@ export type SwitchProps = {
 };
 
 export const switchDefaults: Partial<SwitchProps> = {
-	focused: true,
+	focused: 'always',
 	size: 'md',
 	srtext: 'Use Switch',
 	theme: 'default',

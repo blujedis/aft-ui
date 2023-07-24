@@ -7,19 +7,18 @@ export let {
   disabled,
   focused,
   full,
-  mode,
+  strategy,
   rounded,
   shadowed,
   size,
   theme,
   transitioned,
   variant,
-  underlined,
   unstyled
 } = { ...defaults };
 const th = themer($themeStore);
 $:
-  buttonClasses = unstyled ? th.create("Button").option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed && variant !== "text").option("dropshadows", shadowed, shadowed && variant === "text").option("disableds", theme, disabled).append("font-medium", mode === "button").append("underline", underlined).append("w-full", full).append("inline-flex items-center justify-center outline-none", true).append($$restProps.class, true).compile(true) : th.create("Button").variant("button", variant, theme, true).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed && variant !== "text").option("dropshadows", shadowed, shadowed && variant === "text").option("disableds", theme, disabled).append("font-medium uppercase text-xs", mode === "button").append("underline", underlined).append("w-full", full).append("inline-flex items-center justify-center outline-none", true).append($$restProps.class, true).compile(true);
+  buttonClasses = unstyled ? th.create("Button").option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" || focused === true ? "focus:" : "focus-visible:", true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed && variant !== "text").option("dropshadows", shadowed, shadowed && variant === "text").option("disableds", theme, disabled).append("font-medium", strategy === "button").append("w-full", full).append("inline-flex items-center justify-center outline-none", true).append($$restProps.class, true).compile(true) : th.create("Button").variant("button", variant, theme, true).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed && variant !== "text").option("dropshadows", shadowed, shadowed && variant === "text").option("disableds", theme, disabled).append("font-medium uppercase text-xs", strategy === "button").append("w-full", full).append("inline-flex items-center justify-center outline-none", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
@@ -31,8 +30,8 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 	{disabled}
 	aria-disabled={disabled}
 >
-	{#if mode === 'button'}
-		<div class="pt-0.5">
+	{#if strategy === 'button' || buttonClasses.includes('uppercase')}
+		<div class="pt-px">
 			<slot />
 		</div>
 	{:else}

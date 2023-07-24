@@ -1,4 +1,4 @@
-export function createCalendarMonth(year, oneBasedMonth) {
+export function useCalendar(year, oneBasedMonth) {
     /* month given to Date() starts at 0 = January */
     const month = oneBasedMonth - 1;
     const startDate = new Date(year, month, 1);
@@ -41,3 +41,4 @@ export function createCalendarMonth(year, oneBasedMonth) {
         totalDays
     };
 }
+export default useCalendar;

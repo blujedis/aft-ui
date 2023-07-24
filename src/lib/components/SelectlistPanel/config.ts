@@ -5,10 +5,14 @@ const baseVariant = {
 	$base: 'bg-white text-inherit ring-1 ring-black ring-opacity-10'
 };
 
-export const multiselectPanel = {
+export const selectListPanel = {
 	default: { ...baseVariant },
 	filled: { ...baseVariant },
 	outlined: { ...baseVariant },
 	text: { ...baseVariant },
-	ghost: { ...baseVariant }
+	ghost: { ...baseVariant },
+	flushed: {
+		...baseVariant,
+		$base: 'ring-0'
+	}
 };

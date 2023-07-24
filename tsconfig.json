@@ -15,5 +15,6 @@
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}
-	}
+	},
+	"exclude": ["./dist/**/*"]
 }

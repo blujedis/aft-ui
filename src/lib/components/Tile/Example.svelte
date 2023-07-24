@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Tile, { type TileVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectRounded from '../_Example/SelectRounded.svelte';
@@ -17,7 +17,6 @@
   `;
 
 	const props = {
-		focused: true, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,

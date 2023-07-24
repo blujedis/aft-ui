@@ -1,18 +1,18 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
 	import { type TabProps, tabDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
-	import type { TabControllerContext } from '../TabController';
+	import type { TabsContext } from '../Tabs';
 	import type { SelectValue } from '$lib/stores/select';
 
 	type Tag = $$Generic<'a' | 'button'>;
-	type NativeProps = Tag extends 'button'
-		? ElementNativeProps<'button', 'disabled' | 'value'>
-		: ElementNativeProps<'a'>;
-	type $$Props = TabProps<Tag> & NativeProps;
+	// type NativeProps = Tag extends 'button'
+	// 	? ElementNativeProps<'button', 'disabled' | 'value'>
+	// 	: ElementNativeProps<'a'>;
+	type $$Props = TabProps<Tag> & ElementProps<Tag>;
 
-	const context = getContext('TabController') as TabControllerContext;
+	const context = getContext('Tabs') as TabsContext;
 
 	export let {
 		as,

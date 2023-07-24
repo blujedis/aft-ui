@@ -3,7 +3,7 @@
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
-	import type { TabControllerContext } from '../TabController';
+	import type { TabsContext } from '../Tabs';
 
 	type $$Props = TabPanelProps & ElementNativeProps<'div'>;
 
@@ -11,7 +11,7 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const context = getContext('TabController') as TabControllerContext;
+	const context = getContext('Tabs') as TabsContext;
 
 	$: visible = $context?.selected?.includes(value);
 

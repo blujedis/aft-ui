@@ -5,7 +5,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '$lib/theme';
+} from '$lib/types';
 import type { input } from './config';
 
 export type InputVariant = keyof typeof input;

@@ -37,7 +37,7 @@
 		)
 		.option('focused', theme, focused)
 		.option('focusedRingSizes', 'two', focused)
-		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+		.remove('focusedFilters', focused, focused)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -75,10 +75,16 @@
 		.append(classHandle, true)
 		.compile(true);
 
+	$: inputClasses = th
+		.create('SwitchInput')
+		.append('sr-only', true)
+		.append($$restProps.class, true)
+		.compile(true);
+
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<span class="flickerless">
+<span class="flickerless not-sr-only">
 	<button
 		type="button"
 		class={buttonClasses}
@@ -98,10 +104,9 @@
 
 		<!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0"  border-gray-200 bg-white  h-5 w-5  -->
 		<span aria-hidden="true" class={handleClasses} aria-disabled={disabled} />
-
-		<input use:forwardedEvents class="hidden" type="checkbox" bind:checked />
 	</button>
 </span>
+<input {...$$restProps} type="checkbox" use:forwardedEvents bind:checked class={inputClasses} {disabled} />
 
 <style>
 	.flickerless {

@@ -4,9 +4,9 @@ export class ModalComponent extends SvelteComponent {
 }
 export const transitions = {
     fade: { duration: 200, start: 0.5 },
-    zoom: { duration: 200, start: 0.95 },
-    announce: { duration: 400, y: -600 },
-    reveal: { duration: 400, y: 600 },
+    zoom: { duration: 200, start: 0.925 },
+    announce: { duration: 400, y: -300 },
+    reveal: { duration: 400, y: 300 },
     none: { duration: 0 }
 };
 export const modalDefaults = {

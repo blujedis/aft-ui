@@ -1,15 +1,8 @@
 import { SvelteComponentTyped } from "svelte";
+import { type AccordianOptionProps } from './module';
 import type { HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {
-    props(): Omit<import("svelte/transition").SlideParams, "axis"> & {
-        as?: Tag | undefined;
-        name?: import("../../stores/select").SelectValue | undefined;
-        size?: any;
-        theme?: any;
-        variant?: "default" | "outlined" | "flushed" | "pills" | undefined;
-    } & import("../..").ElementProps<Tag> & {
-        class?: import("../..").ClassArgument | import("../..").ClassArgument[];
-    };
+    props(): AccordianOptionProps<Tag> & import("../..").ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

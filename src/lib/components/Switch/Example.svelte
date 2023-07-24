@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Switch, { type SwitchVariant } from '.';
-	import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectShadowed from '../_Example/SelectShadowed.svelte';
@@ -10,14 +10,14 @@
 	import Checkbox from '../_Example/Checkbox.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
 
-	const title = 'Select';
-	const description = 'Themed select list.';
+	const title = 'Switch';
+	const description = 'Toggle switch component.';
 	const code = `
   `;
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
+		focused: 'visible' as ThemeFocused,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,

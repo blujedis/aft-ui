@@ -10,9 +10,9 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
                 transitioned: any;
                 variant: "default" | "flushed" | "grouped";
             };
-            set(this: void, value: import("../../stores/paginator").Paginator<Record<string, any>>): void;
-            update: ((this: void, updater: import("svelte/store").Updater<import("../../stores/paginator").Paginator<Record<string, any>>>) => void) & ((options: import("../../stores/paginator").PaginatorOptions<Record<string, any>>) => void);
-            subscribe(this: void, run: import("svelte/store").Subscriber<import("../../stores/paginator").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../../stores/paginator").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
+            set(this: void, value: import("../..").Paginator<Record<string, any>>): void;
+            update: ((this: void, updater: import("svelte/store").Updater<import("../..").Paginator<Record<string, any>>>) => void) & ((options: import("../..").PaginatorOptions<Record<string, any>>) => void);
+            subscribe(this: void, run: import("svelte/store").Subscriber<import("../..").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../..").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
             getRange(items?: Record<string, any>[] | undefined): Record<string, any>[] | null;
             hasPage(page: string | number): boolean;
             hasPrev(): boolean;
@@ -20,7 +20,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
             goto(page: string | number): void;
             prev(): void;
             next(): void;
-            reset(options?: import("../../stores/paginator").PaginatorOptions<Record<string, any>> | undefined): void;
+            reset(options?: import("../..").PaginatorOptions<Record<string, any>> | undefined): void;
         } | undefined;
         ellipsis?: boolean | undefined;
         rounded?: any;
@@ -75,7 +75,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
         results?: number | null | undefined;
         security?: string | null | undefined;
         unselectable?: "on" | "off" | null | undefined;
-        inputmode?: "text" | "search" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | null | undefined;
+        inputmode?: "text" | "search" | "none" | "decimal" | "tel" | "url" | "email" | "numeric" | null | undefined;
         is?: string | null | undefined;
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
@@ -99,7 +99,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
         'aria-colindex'?: number | null | undefined;
         'aria-colspan'?: number | null | undefined;
         'aria-controls'?: string | null | undefined;
-        'aria-current'?: "time" | import("svelte/elements").Booleanish | "page" | "step" | "location" | "date" | null | undefined;
+        'aria-current'?: "time" | import("svelte/elements").Booleanish | "step" | "date" | "page" | "location" | null | undefined;
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
@@ -270,9 +270,9 @@ export default class Component<Item extends Record<string, any>> extends SvelteC
             transitioned: any;
             variant: "default" | "flushed" | "grouped";
         };
-        set(this: void, value: import("../../stores/paginator").Paginator<Record<string, any>>): void;
-        update: ((this: void, updater: import("svelte/store").Updater<import("../../stores/paginator").Paginator<Record<string, any>>>) => void) & ((options: import("../../stores/paginator").PaginatorOptions<Record<string, any>>) => void);
-        subscribe(this: void, run: import("svelte/store").Subscriber<import("../../stores/paginator").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../../stores/paginator").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
+        set(this: void, value: import("../..").Paginator<Record<string, any>>): void;
+        update: ((this: void, updater: import("svelte/store").Updater<import("../..").Paginator<Record<string, any>>>) => void) & ((options: import("../..").PaginatorOptions<Record<string, any>>) => void);
+        subscribe(this: void, run: import("svelte/store").Subscriber<import("../..").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../..").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
         getRange(items?: Record<string, any>[] | undefined): Record<string, any>[] | null;
         hasPage(page: string | number): boolean;
         hasPrev(): boolean;
@@ -280,7 +280,7 @@ export default class Component<Item extends Record<string, any>> extends SvelteC
         goto(page: string | number): void;
         prev(): void;
         next(): void;
-        reset(options?: import("../../stores/paginator").PaginatorOptions<Record<string, any>> | undefined): void;
+        reset(options?: import("../..").PaginatorOptions<Record<string, any>> | undefined): void;
     };
 }
 export {};

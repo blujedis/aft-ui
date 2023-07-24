@@ -4,7 +4,7 @@ import type { IconifyIcon } from '@iconify/svelte';
 
 export type NotificationVariant = keyof typeof notification;
 
-export type NotificationItem = {
+export type Notification = {
 	key?: string;
 	group?: string;
 	icon?: string | IconifyIcon;
@@ -16,12 +16,12 @@ export type NotificationItem = {
 	variant?: NotificationVariant;
 };
 
-export interface NotificationProps extends NotificationItem {
+export interface NotificationProps extends Notification {
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 }
 
-export const notificationsDefaults: Partial<NotificationProps> = {
+export const notificationDefaults: Partial<NotificationProps> = {
 	dismissible: true,
 	duration: 3500,
 	group: 'default',

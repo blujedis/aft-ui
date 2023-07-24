@@ -9,7 +9,7 @@ export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full
     icon?: AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
     htag?: HTMLTag;
     roticon?: boolean | string;
-    name?: SelectValue;
+    key?: SelectValue;
     theme?: ThemeColor;
     variant?: AccordionButtonVariant;
 };

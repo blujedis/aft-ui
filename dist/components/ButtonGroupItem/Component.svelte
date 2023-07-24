@@ -3,18 +3,7 @@ import { buttonGroupItemDefaults as defaults } from "./module";
 import Button from "../Button";
 import { getContext } from "svelte";
 const context = getContext("ButtonGroup");
-export let {
-  disabled,
-  focused,
-  full,
-  rounded,
-  size,
-  theme,
-  transitioned,
-  underlined,
-  value,
-  variant
-} = {
+export let { disabled, focused, full, rounded, size, theme, transitioned, value, variant } = {
   ...defaults,
   ...context?.globals
 };
@@ -27,7 +16,6 @@ const passthru = {
   size,
   theme,
   transitioned,
-  underlined,
   variant
 };
 $:

@@ -211,7 +211,7 @@ export function createPopover(initOptions = {}) {
  * @param node the node to apply the popover to.
  * @param options the popover options to be applied.
  */
-export function popover(node, options = {}) {
+export function usePopover(node, options = {}) {
     options = {
         target: '#popover-container',
         selector: '.popover',
@@ -230,3 +230,4 @@ export function popover(node, options = {}) {
         destroy
     };
 }
+export default usePopover;

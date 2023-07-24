@@ -28,6 +28,15 @@ export const fieldPaddingY = {
     xl: 'py-2.5',
     xl2: 'py-3'
 };
+export const fieldPaddingTightY = {
+    unstyled: '',
+    xs: 'py-px',
+    sm: 'py-0.5',
+    md: 'py-1',
+    lg: 'py-1.5',
+    xl: 'py-2',
+    xl2: 'py-2.5'
+};
 export const fieldUpperPaddingY = {
     unstyled: '',
     xs: 'py-1',
@@ -37,7 +46,7 @@ export const fieldUpperPaddingY = {
     xl: 'py-3',
     xl2: 'py-3.5'
 };
-export const fieldPadding = mergeConfigs(fieldPaddingY, {
+export const fieldPaddingX = {
     unstyled: '',
     xs: 'px-2.5',
     sm: 'px-2.5',
@@ -45,7 +54,8 @@ export const fieldPadding = mergeConfigs(fieldPaddingY, {
     lg: 'px-3.5',
     xl: 'px-5',
     xl2: 'px-6'
-});
+};
+export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX);
 export const buttonPadding = mergeConfigs(fieldPaddingY, {
     unstyled: '',
     xs: 'px-2.5',
@@ -54,6 +64,15 @@ export const buttonPadding = mergeConfigs(fieldPaddingY, {
     lg: 'px-5',
     xl: 'px-6',
     xl2: 'px-8'
+});
+export const menuPadding = mergeConfigs(fieldPaddingTightY, {
+    unstyled: '',
+    xs: 'px-2',
+    sm: 'px-2',
+    md: 'px-2.5',
+    lg: 'px-3',
+    xl: 'px-4',
+    xl2: 'px-5'
 });
 export const objectFit = {
     unstyled: '',
@@ -173,30 +192,6 @@ export const fontLeadings = {
     relaxed: 'leading-relaxed',
     loose: 'leading-loose'
 };
-// export const focused = {
-// 	$base: 'focus:outline-none focus-visible:outline-none',
-// 	white: 'focus:ring-white',
-// 	default: 'focus:ring-default-500',
-// 	primary: 'focus:ring-primary-500',
-// 	secondary: 'focus:ring-secondary-500',
-// 	tertiary: 'focus:ring-tertiary-500',
-// 	danger: 'focus:ring-danger-500',
-// 	warning: 'focus:ring-warning-500',
-// 	success: 'focus:ring-success-500',
-// 	info: 'focus:ring-info-500'
-// };
-// export const focusedVisible = {
-// 	$base: 'focus:outline-none focus-visible:outline-none',
-// 	white: 'focus-visible:ring-white',
-// 	default: 'focus-visible:ring-default-500',
-// 	primary: 'focus-visible:ring-primary-500',
-// 	secondary: 'focus-visible:ring-secondary-500',
-// 	tertiary: 'focus-visible:ring-tertiary-500',
-// 	danger: 'focus-visible:ring-danger-500',
-// 	warning: 'focus-visible:ring-warning-500',
-// 	success: 'focus-visible:ring-success-500',
-// 	info: 'focus-visible:ring-info-500'
-// };
 export const focused = {
     $base: 'focus:outline-none focus-visible:outline-none',
     white: 'focus:ring-default-100 focus-visible:ring-default-100',
@@ -209,10 +204,10 @@ export const focused = {
     success: 'focus:ring-success-600 focus-visible:ring-success-600',
     info: 'focus:ring-info-600 focus-visible:ring-info-600'
 };
-export const focusedVisible = focused;
 export const focusedRingSizes = {
     $base: '',
     unstyled: '',
+    inset: 'focus:ring-inset focus-visible:ring-inset',
     none: 'focus:ring-0 focus-visible:ring-0',
     one: 'focus:ring-1 focus-visible:ring-1',
     two: 'focus:ring-2 focus-visible:ring-2',
@@ -228,6 +223,57 @@ export const focusedOffsetSizes = {
     two: 'focus:ring-offset-2 focus-visible:ring-offset-2',
     four: 'focus:ring-offset-4 focus-visible:ring-offset-4',
     eight: 'focus:ring-offset-8 focus-visible:ring-offset-8'
+};
+export const focusedBorder = {
+    $base: 'focus:outline-none focus-visible:outline-none',
+    white: 'focus:border-default-100 focus-visible:border-default-100',
+    default: 'focus:border-default-400 focus-visible:border-default-400',
+    primary: 'focus:border-primary-600 focus-visible:border-primary-600',
+    secondary: 'focus:border-secondary-600 focus-visible:border-secondary-600',
+    tertiary: 'focus:border-tertiary-600 focus-visible:border-tertiary-600',
+    danger: 'focus:border-danger-600 focus-visible:border-danger-600',
+    warning: 'focus:border-warning-600 focus-visible:border-warning-600',
+    success: 'focus:border-success-600 focus-visible:border-success-600',
+    info: 'focus:border-info-600 focus-visible:border-info-600'
+};
+export const focusedBorderSizes = {
+    $base: '',
+    unstyled: '',
+    none: 'focus:border-0 focus-visible:border-0',
+    one: 'focus:border-1 focus-visible:border-1',
+    two: 'focus:border-2 focus-visible:border-2',
+    four: 'focus:border-4 focus-visible:border-4',
+    eight: 'focus:border-8 focus-visible:border-8'
+};
+export const focusedOutline = {
+    $base: 'focus:outline focus-visible:outline',
+    white: 'focus:outline-default-100 focus-visible:outline-default-100',
+    default: 'focus:outline-default-400 focus-visible:outline-default-400',
+    primary: 'focus:outline-primary-600 focus-visible:outline-primary-600',
+    secondary: 'focus:outline-secondary-600 focus-visible:outline-secondary-600',
+    tertiary: 'focus:outline-tertiary-600 focus-visible:outline-tertiary-600',
+    danger: 'focus:outline-danger-600 focus-visible:outline-danger-600',
+    warning: 'focus:outline-warning-600 focus-visible:outline-warning-600',
+    success: 'focus:outline-success-600 focus-visible:outline-success-600',
+    info: 'focus:outline-info-600 focus-visible:outline-info-600'
+};
+export const focusedOutlineSizes = {
+    $base: '',
+    unstyled: '',
+    none: 'focus:outline-0 focus-visible:outline-0',
+    one: 'focus:outline-1 focus-visible:outline-1',
+    two: 'focus:outline-2 focus-visible:outline-2',
+    four: 'focus:outline-4 focus-visible:outline-4',
+    eight: 'focus:outline-8 focus-visible:outline-8'
+};
+export const focusedOutlineOffsetSizes = {
+    $base: '',
+    unstyled: '',
+    none: 'focus:outline-offset-0 focus-visible:outline-offset-0',
+    one: 'focus:outline-offset-1 focus-visible:outline-offset-1',
+    two: 'focus:outline-offset-2 focus-visible:outline-offset-2',
+    four: 'focus:outline-offset-4 focus-visible:outline-offset-4',
+    eight: 'focus:outline-offset-8 focus-visible:outline-offset-8'
 };
 export const disableds = {
     $base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
@@ -251,6 +297,15 @@ export const placeholders = {
     warning: 'placeholder:text-warning-400 aria-disabled:placeholder:text-warning-300',
     success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
     info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
+};
+export const iconCaretSizes = {
+    unstyled: '',
+    xs: 'h-3 w-3',
+    sm: 'h-3.5 w-3.5',
+    md: 'h-4 w-4',
+    lg: 'h-4 w-4',
+    xl: 'h-5 w-5',
+    xl2: 'h-6 w-6'
 };
 export const common = {
     active: 'active:brightness-125',

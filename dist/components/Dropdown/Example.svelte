@@ -17,17 +17,6 @@ const title = "Dropdown";
 const description = "Dropdown element which supports menus, combobox, select and tags.";
 const code = `
   `;
-const props = {
-  disabled: false,
-  focused: true,
-  // true: focus-visible.
-  full: false,
-  rounded: "none",
-  shadowed: "none",
-  size: "md",
-  theme: "default",
-  variant: "default"
-};
 const sourceItems = [
   {
     value: "java",
@@ -54,6 +43,17 @@ const sourceItems = [
     selected: true
   }
 ];
+const props = {
+  disabled: false,
+  focused: true,
+  // true: focus-visible.
+  full: false,
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  variant: "default"
+};
 </script>
 
 <ExamplePage {title} {description} {code}>
@@ -77,13 +77,19 @@ const sourceItems = [
 			<label for="filled">
 				<span class="text-sm block mb-2">Select Filled Example:</span>
 				<div class="flex">
-					<Dropdown mode="select" selected={['react']} {...props}>
-						<DropdownButton />
+					<Dropdown
+						strategy="select"
+						selected="javascript"
+						{...props}
+						items={sourceItems}
+						let:filtered
+					>
+						<DropdownButton variant="filled" />
 						<DropdownPanel>
-							{#each sourceItems as item, i}
-								<DropdownOption value={item.value} let:selected>
+							{#each filtered as item, i}
+								<DropdownOption value={item.value} let:isSelected>
 									{item.label}
-									{#if selected}
+									{#if isSelected}
 										<Icon
 											icon="mdi:check"
 											size="sm"
@@ -94,34 +100,17 @@ const sourceItems = [
 							{/each}
 						</DropdownPanel>
 					</Dropdown>
-					<!-- <Dropdown mode="multiselect" selected={['react']} {...props}>
-						<DropdownInput newable />
-						<DropdownPanel>
-							{#each sourceItems as item, i}
-								<DropdownOption value={item.value} let:selected>
-									{item.label}
-									{#if selected}
-										<Icon
-											icon="mdi:check"
-											size="sm"
-											class="group-aria-selected:text-current group-hover:!text-white"
-										/>
-									{/if}
-								</DropdownOption>
-							{/each}
-						</DropdownPanel>
-					</Dropdown> -->
 				</div>
 			</label>
 			<label for="outlined">
 				<span class="text-sm block mb-2">Select Outlined Example:</span>
-				<Dropdown mode="select" {...props} variant="outlined">
+				<Dropdown strategy="select" {...props} theme="danger" items={sourceItems} let:filtered>
 					<DropdownButton />
 					<DropdownPanel>
-						{#each sourceItems as item, i}
-							<DropdownOption value={item.value} let:selected>
+						{#each filtered as item, i}
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -135,13 +124,13 @@ const sourceItems = [
 			</label>
 			<label for="text">
 				<span class="text-sm block mb-2">Menu Example:</span>
-				<Dropdown mode="menu" {...props} variant="text">
-					<DropdownButton>Select Language</DropdownButton>
+				<Dropdown strategy="menu" {...props} items={sourceItems} let:filtered>
+					<DropdownButton variant="text">Select Language</DropdownButton>
 					<DropdownPanel>
-						{#each sourceItems as item, i}
-							<DropdownOption value={item.value} let:selected>
+						{#each filtered as item, i}
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -155,13 +144,13 @@ const sourceItems = [
 			</label>
 			<label for="ghost">
 				<span class="text-sm block">Select Link Example:</span>
-				<Dropdown mode="select" selected={[]} {...props} variant="ghost">
-					<DropdownButton />
+				<Dropdown strategy="select" {...props} items={sourceItems} let:filtered>
+					<DropdownButton variant="ghost" />
 					<DropdownPanel>
-						{#each sourceItems as item, i}
-							<DropdownOption value={item.value} let:selected>
+						{#each filtered as item, i}
+							<DropdownOption value={item.value} let:isSelected>
 								{item.label}
-								{#if selected}
+								{#if isSelected}
 									<Icon
 										icon="mdi:check"
 										size="sm"
@@ -178,23 +167,61 @@ const sourceItems = [
 
 	<div class="mt-4 grid grid-cols-4 gap-4">
 		{#key props}
-			<label for="input">
+			<label for="tags">
 				<span class="text-sm block mb-2">Tags Example:</span>
-				<Dropdown mode="multiselect" selected={['react']} {...props}>
-					<DropdownInput newable />
+				<Dropdown strategy="tags" {...props} selected="react" items={sourceItems} let:filtered>
+					<DropdownInput newable filterable />
 					<DropdownPanel>
-						{#each sourceItems as item, i}
-							<DropdownOption value={item.value} let:selected>
-								{item.label}
-								{#if selected}
-									<Icon
-										icon="mdi:check"
-										size="sm"
-										class="group-aria-selected:text-current group-hover:!text-white"
-									/>
-								{/if}
-							</DropdownOption>
-						{/each}
+						{#if !filtered.length}
+							<div class="flex items-center justify-center pt-1 pb-2 px-4 text-sm">
+								No records found!
+							</div>
+						{:else}
+							{#each filtered as item, i}
+								<DropdownOption value={item.value} let:isSelected>
+									{item.label}
+									{#if isSelected}
+										<Icon
+											icon="mdi:check"
+											size="sm"
+											class="group-aria-selected:text-current group-hover:!text-white"
+										/>
+									{/if}
+								</DropdownOption>
+							{/each}
+						{/if}
+					</DropdownPanel>
+				</Dropdown>
+			</label>
+			<label for="combobox">
+				<span class="text-sm block mb-2">Combobox Example:</span>
+				<Dropdown {...props} strategy="combobox" selected="react" items={sourceItems} let:filtered>
+					<DropdownInput filterable />
+					<DropdownPanel class="w-32" let:selected>
+						{#if !filtered.length}
+							<div class="flex items-center justify-center pt-1 pb-2 px-4 text-sm">
+								No records found!
+							</div>
+						{:else}
+							{#each filtered as item, i}
+								<DropdownOption value={item.value} let:isSelected>
+									<div class="flex w-full items-center">
+										<div class="text-center shrink min-w-[20px]">
+											{#if isSelected}
+												<Icon
+													icon="mdi:check"
+													size="sm"
+													class="group-aria-selected:text-current group-hover:!text-white"
+												/>
+											{/if}
+										</div>
+										<div class="flex-1" class:pl-3={selected.length}>
+											{item.label}
+										</div>
+									</div>
+								</DropdownOption>
+							{/each}
+						{/if}
 					</DropdownPanel>
 				</Dropdown>
 			</label>
