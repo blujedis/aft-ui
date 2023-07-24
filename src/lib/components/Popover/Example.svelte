@@ -10,7 +10,7 @@
 	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import Checkbox from '../_Example/Checkbox.svelte';
-	// import { popover } from '$lib/hooks/usePopover';
+	import popover from '$lib/hooks/usePopover';
 
 	const title = 'Popover';
 	const description = 'Uses Popper to position tooltips and popover informational components.';
@@ -44,9 +44,10 @@
 		<hr />
 	</Section>
 
-	<div class="grid grid-cols-3 gap-4">
+	<div class="grid grid-cols-3 gap-4 p-4">
 		<label for="filled">
-			<div class="text-sm">Outlined:</div>
+			<div class="text-sm">Default Using Title Attribute:</div>
+			<button use:popover title="Hello Tooltip">Tooltip Button</button>
 		</label>
 	</div>
 </ExamplePage>

@@ -43,7 +43,7 @@ export type PopperReturn<TModifier> = [
 	() => InstanceExt | null
 ];
 
-export class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> {}
+export class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> { }
 
 export type PopoverOptions<
 	TModifier,
@@ -290,7 +290,7 @@ export function usePopover<TModifier extends Partial<Modifier<any, any>>>(
 	options = {} as Omit<PopoverOptions<TModifier, typeof PopoverComponent>, 'component'>
 ) {
 	options = {
-		target: '#popover-container',
+		// target: '#popover-container', // default is document.body
 		selector: '.popover',
 		...options,
 		node

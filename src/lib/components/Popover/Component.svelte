@@ -1,9 +1,9 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = PopoverProps & ElementNativeProps<'div'>;
+	type $$Props = PopoverProps & ElementProps<'div'>;
 
 	export let {
 		arrowed,
@@ -25,10 +25,11 @@
 
 	$: popoverClasses = th
 		.create('Popover')
-		.variant('popover', variant, theme, true)
+		.variant('popover', variant, theme, variant)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.option('common', 'transition', transitioned)
+		.option('fontSizes', size, size)
 		.option('popoverSizes', size, size)
 		.option('fontSizes', size, size)
 		.append('popover', true)
