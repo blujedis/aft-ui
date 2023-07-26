@@ -1,4 +1,4 @@
-export declare const multiselectController: {
+export declare const selectList: {
     default: {
         $base: string;
         white: string;

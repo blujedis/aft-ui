@@ -50,9 +50,7 @@
 	aria-haspopup="true"
 >
 	<div class="flex items-center pointer-events-none">
-		<div>
-			<slot />
-		</div>
+		<slot />
 		{#if caret}
 			<slot name="caret">
 				<svelte:component this={Icon} icon={caret} class={iconClasses} />

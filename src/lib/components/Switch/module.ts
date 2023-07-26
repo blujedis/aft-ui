@@ -21,6 +21,6 @@ export const switchDefaults: Partial<SwitchProps> = {
 	focused: 'always',
 	size: 'md',
 	srtext: 'Use Switch',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

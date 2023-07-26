@@ -1,4 +1,4 @@
-import type { SelectStore, SelectValue } from '$lib/stores/select';
+import type { SelectStore, SelectStoreValue } from '$lib/stores/select';
 import type {
 	ThemeColor,
 	ThemeFocused,
@@ -11,7 +11,7 @@ import type { ButtonGroupItemVariant } from '../ButtonGroupItem';
 
 export type ButtonGroupProps = Omit<ButtonProps<'button' | 'a'>, 'disabled' | 'variant'> & {
 	multiple?: boolean;
-	selected?: SelectValue | SelectValue[];
+	selected?: SelectStoreValue | SelectStoreValue[];
 	variant?: ButtonGroupItemVariant;
 };
 
@@ -31,6 +31,6 @@ export const buttonGroupDefaults: Partial<ButtonGroupProps> = {
 	focused: 'visible',
 	rounded: 'none',
 	shadowed: 'none',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'filled'
 };

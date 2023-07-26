@@ -3,7 +3,7 @@
 </script>
 
 <div class={enabled ? 'dark relative bg-gray-900/90 p-4 -mx-4 -my-4 rounded-lg' : 'relative'}>
-	<button class="absolute top-4 right-4 text-default-400" on:click={() => (enabled = !enabled)}
+	<button class="absolute top-4 right-4 text-frame-400" on:click={() => (enabled = !enabled)}
 		>{#if enabled}
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-8 w-8"
 				><path

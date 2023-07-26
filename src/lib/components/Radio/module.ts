@@ -27,6 +27,6 @@ export const radioDefaults: Partial<RadioProps> = {
 	focused: 'always',
 	rounded: 'full',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

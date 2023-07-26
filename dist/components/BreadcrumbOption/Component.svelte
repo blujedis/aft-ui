@@ -22,20 +22,20 @@ export let {
 };
 const th = themer($themeStore);
 $:
-  breadcrumbOptionClasses = th.create("Breadcrumb").variant("breadcrumbOption", variant, theme, true).option(
-    focused === true || focused === "always" ? "focusedRingSizes" : "focusedVisibleRingSizes",
-    size,
-    focused
-  ).option(focused === true || focused === "always" ? "focused" : "focusedVisible", theme, focused).option("focusedOffsetSizes", "two", focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).append("pointer-events-none", selected).append($$restProps.class, true).compile(true);
+  breadcrumbOptionClasses = th.create("BreadcrumbOption").variant("breadcrumbOption", variant, theme, true).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove("focusedFilters", focused, focused).option("focusedOffsetSizes", "two", focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).append("pointer-events-none", selected).append($$restProps.class, true).compile(true);
+$:
+  breadcrumbOptionWrapperClasses = th.create("BreadcrumbOptionWrapper").option("breadcrumbFilledHeight", size, size).append("flex items-center", true).compile(true);
+$:
+  breadcrumbIconClasses = th.create("BreadcrumbIcon").option("breadcrumbFilledIconWidth", size, size).append("h-full flex-shrink-0 pointer-events-none", true).compile(true);
 </script>
 
 <li>
-	<div class="flex items-center">
+	<div class={breadcrumbOptionWrapperClasses}>
 		<slot>
 			{#if separator && index !== 0}
 				{#if variant === 'filled'}
 					<svg
-						class="h-full w-6 flex-shrink-0 pointer-events-none"
+						class={breadcrumbIconClasses}
 						viewBox="0 0 24 44"
 						preserveAspectRatio="none"
 						fill="currentColor"

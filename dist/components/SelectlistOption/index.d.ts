@@ -1,5 +1,5 @@
-import MultiselectOption from './Component.svelte';
+import SelectListOption from './Component.svelte';
 export * from './module';
 export * from './config';
-export { MultiselectOption };
-export default MultiselectOption;
+export { SelectListOption };
+export default SelectListOption;

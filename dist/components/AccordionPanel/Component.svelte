@@ -12,7 +12,7 @@ setContext("AccordionPanel", {
 });
 const th = themer($themeStore);
 $:
-  accordionPanelClasses = th.create("AccordionPanel").append($$restProps.class, true).compile(true);
+  accordionPanelClasses = th.create("AccordionPanel").append("mb-2", context?.globals.variant === "pills").append($$restProps.class, true).compile(true);
 </script>
 
 <svelte:element this={as} {...$$restProps} class={accordionPanelClasses}>

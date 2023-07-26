@@ -31,6 +31,6 @@ export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	full: false,
 	strategy: 'button',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

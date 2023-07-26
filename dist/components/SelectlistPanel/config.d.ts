@@ -1,4 +1,4 @@
-export declare const multiselectPanel: {
+export declare const selectListPanel: {
     default: {
         $base: string;
         white: string;
@@ -48,6 +48,18 @@ export declare const multiselectPanel: {
         info: string;
     };
     ghost: {
+        $base: string;
+        white: string;
+        default: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    flushed: {
         $base: string;
         white: string;
         default: string;

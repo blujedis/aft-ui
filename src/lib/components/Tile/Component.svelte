@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = TileProps & ElementNativeProps<'div'>;
 
@@ -12,6 +13,7 @@
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: inputClasses = th
 		.create('Tile')
@@ -26,8 +28,11 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<div {...$$restProps} use:forwardedEvents class={inputClasses}>
+<div {...$$restProps} use:forwardedEvents class={inputClasses} class:visible={mounted}>
 	<slot />
 </div>

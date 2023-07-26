@@ -6,12 +6,12 @@ declare const __propDef: {
         notification?: boolean | "top-right" | "top-left" | "bottom-right" | "bottom-left" | undefined;
         animation?: "ping" | "pulse" | undefined;
         placeholder?: string | boolean | IconifyIcon | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
         src: string;
         stacked?: "up" | "down" | undefined;
-        theme?: any;
+        theme?: import("../..").ThemeColor | undefined;
         variant?: "default" | "stacked" | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;

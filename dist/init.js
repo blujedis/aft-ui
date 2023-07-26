@@ -3,13 +3,13 @@ import defaults from './theme/defaults';
 import { palette } from './theme/palettes';
 import * as options from './components/options';
 import * as components from './components/configs';
+import { cleanObj } from './utils';
 const defaultTheme = {
     options,
     defaults,
     components,
     palette
 };
-let _store = createStoreInternal(defaultTheme);
 /**
  * Replaces target values with overrides, ensures all target values exist.
  *
@@ -40,21 +40,7 @@ function createStoreInternal({ options, defaults, components, ...rest }, baseThe
         ...ensureDefaults(baseTheme, { options, defaults, components }),
         ...rest
     };
-    // if (typeof document === 'undefined') {
-    // 	const store = {
-    // 		set: (value: T) => { },
-    // 		get: () => defaultTheme,
-    // 		update: (updater: Updater<T>) => { },
-    // 		subscribe: (run: Subscriber<T>, invalidate?: Invalidator<T> | undefined) => {
-    // 			return (() => { })
-    // 		}
-    // 	} as Writable<T>;
-    // 	return {
-    // 		...store,
-    // 		get,
-    // 		update,
-    // 	};
-    // }
+    normalized.defaults.component = cleanObj(normalized.defaults.component);
     const store = writable(normalized);
     /**
      * Sets the theme configuration.
@@ -77,7 +63,7 @@ function createStoreInternal({ options, defaults, components, ...rest }, baseThe
         update
     };
 }
-// export const themeStore = createStoreInternal(defaultTheme);
+export const themeStore = createStoreInternal(defaultTheme); //  = createStoreInternal(defaultTheme);
 /**
  * Creates a new store which updates the default store's components and options when changed.
  *
@@ -86,14 +72,9 @@ function createStoreInternal({ options, defaults, components, ...rest }, baseThe
  */
 export function createStore(extendTheme, baseTheme = { ...defaultTheme }) {
     const store = createStoreInternal(extendTheme, baseTheme);
-    store.subscribe((s) => {
+    themeStore.subscribe((s) => {
         // update default store on change.
-        _store.update({ options: s.options, defaults: s.defaults, components: s.components });
+        themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });
     });
     return store;
-}
-export function getStore() {
-    if (!_store)
-        _store = createStoreInternal(defaultTheme);
-    return _store;
 }

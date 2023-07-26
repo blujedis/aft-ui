@@ -1,8 +1,8 @@
 export const empty = {
 	default: {
 		$base: 'border-[3px] border-dashed relative',
-		white: 'border-white hover:border-default-100',
-		default: 'border-default-200 hover:border-default-300',
+		white: 'border-white hover:border-frame-100',
+		frame: 'border-frame-200 hover:border-frame-300',
 		primary: 'border-primary-500 hover:border-primary-600',
 		secondary: 'border-secondary-500 hover:border-secondary-600',
 		tertiary: 'border-tertiary-500 hover:border-tertiary-600',
@@ -13,8 +13,8 @@ export const empty = {
 	},
 	outlined: {
 		$base: 'border-[3px] border-dashed relative',
-		white: 'border-white hover:border-default-100',
-		default: 'border-default-200 hover:border-default-300',
+		white: 'border-white hover:border-frame-100',
+		frame: 'border-frame-200 hover:border-frame-300',
 		primary: 'border-primary-500 hover:border-primary-600',
 		secondary: 'border-secondary-500 hover:border-secondary-600',
 		tertiary: 'border-tertiary-500 hover:border-tertiary-600',

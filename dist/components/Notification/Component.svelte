@@ -1,4 +1,4 @@
-<script>import { notificationsDefaults as defaults } from "./module";
+<script>import { notificationDefaults as defaults } from "./module";
 import useNotifications from "../../stores/notification";
 import themeStore, { themer } from "../..";
 import Icon from "../Icon";

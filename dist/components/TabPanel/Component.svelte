@@ -4,7 +4,7 @@ import { getContext } from "svelte";
 export let { unmount, value } = {
   ...defaults
 };
-const context = getContext("TabController");
+const context = getContext("Tabs");
 $:
   visible = $context?.selected?.includes(value);
 $:

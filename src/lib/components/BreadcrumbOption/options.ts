@@ -15,15 +15,15 @@ export const breadcrumbFilledHeight = {
 	md: 'h-10',
 	lg: 'h-12',
 	xl: 'h-14',
-	xl2: 'h-16',
+	xl2: 'h-16'
 };
 
-export const breadcrumbFilledIconWidth= {
+export const breadcrumbFilledIconWidth = {
 	unstyled: '',
 	xs: 'w-4',
 	sm: 'w-5',
 	md: 'w-6',
 	lg: 'w-8',
 	xl: 'w-10',
-	xl2: 'w-12',
+	xl2: 'w-12'
 };

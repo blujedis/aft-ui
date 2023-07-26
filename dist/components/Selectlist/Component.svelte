@@ -1,5 +1,5 @@
 <script>import {
-  multiselectControllerDefaults as defaults
+  selectListDefaults as defaults
 } from "./module";
 import themeStore, { themer, useSelect } from "../..";
 import { setContext } from "svelte";
@@ -11,40 +11,51 @@ export let {
   filter: initFilter,
   full,
   multiple,
+  newable,
+  placeholder,
+  removable,
   rounded,
   shadowed,
   size,
   store: initStore,
   strategy,
+  tags,
   theme,
   underlined,
   variant,
-  visible
+  visible,
+  onBeforeAdd,
+  onBeforeRemove
 } = {
   ...defaults
 };
 export const store = initStore || useSelect({
-  multiple,
+  multiple: true,
   visible,
   selected: [],
   items: [],
   filtered: []
 });
 const th = themer($themeStore);
-let div;
 let sel;
 const globals = cleanObj({
   full,
+  newable,
   multiple,
-  strategy,
+  placeholder,
+  removable,
   rounded,
   shadowed,
   size,
+  strategy,
+  tags,
   theme,
   underlined,
-  variant
+  variant,
+  onBeforeAdd,
+  onBeforeRemove
 });
-export const context = setContext("SelectlistContext", {
+export const context = setContext("SelectListContext", {
   ...store,
   open,
   close,
@@ -67,7 +78,7 @@ $:
 $:
   groupKeys = Object.keys(groups);
 $:
-  dropdownClasses = th.create("MultiselectController").append("w-full", full).append("relative inline-flex not-sr-only", true).append($$restProps.class, true).compile(true);
+  multiselectClasses = th.create("SelectListController").append("w-full", full).append("relative inline-flex not-sr-only", true).append($$restProps.class, true).compile(true);
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
@@ -109,9 +120,8 @@ function remove(itemOrKey) {
   if (typeof itemOrKey !== "string")
     key = itemOrKey.value;
   store.update((s) => {
-    const filteredItems = s.items.filter((i) => key !== i.value);
     const filteredSelected = s.selected.filter((v) => v !== key);
-    return { ...s, items: filteredItems, selected: filteredSelected };
+    return { ...s, selected: filteredSelected };
   });
 }
 function filter(query) {
@@ -147,29 +157,26 @@ items.forEach((item) => add(item));
 
 <div
 	role="none"
-	bind:this={div}
 	{...$$restProps}
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
-	class={dropdownClasses}
+	class={multiselectClasses}
 >
-	<slot
-		visible={$store.visible}
-		selected={$store.selected}
-		filtered={$store.filtered}
-		isSelected={context.isSelected}
-		open={context.open}
-		close={context.close}
-		toggle={store.toggle}
-	/>
+	<div class:w-full={full}>
+		<slot
+			visible={$store.visible}
+			selected={$store.selected}
+			filtered={$store.filtered}
+			isSelected={context.isSelected}
+			open={context.open}
+			close={context.close}
+			toggle={store.toggle}
+		/>
+	</div>
+
 	<slot name="select">
-		<select
-			bind:this={sel}
-			class="sr-only"
-			{...$$restProps}
-			multiple={['multiselect'].includes(strategy)}
-		>
+		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>

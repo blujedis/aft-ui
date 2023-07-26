@@ -56,7 +56,7 @@ export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
-export type ThemeFocused = 'always' | 'visible' | boolean;
+export type ThemeFocused = 'always' | 'visible' | 'within' | 'alwaysWithin' | 'visibleWithin';
 export type Template = string | [string, string | string[], number | number[]];
 export type Templates<K extends string = string> = Record<K, Template>;
 export type TemplateInternal = [string, string[], number[]];
@@ -67,7 +67,7 @@ export type ThemeDefaults = {
         text: string;
     };
     component: {
-        focused: boolean;
+        focused: ThemeFocused;
         rounded: ThemeRounded;
         shadowed: ThemeShadowed;
         size: ThemeSize;

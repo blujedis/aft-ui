@@ -1,10 +1,7 @@
 import { SvelteComponent } from 'svelte';
-import Notification, {
-	type NotificationVariant,
-	type NotificationProps
-} from '../Notification';
+import Notification, { type NotificationVariant, type NotificationProps } from '../Notification';
 
-export class NotificationsComponent extends SvelteComponent<NotificationProps> { }
+export class NotificationsComponent extends SvelteComponent<NotificationProps> {}
 
 export type NotificationPosition =
 	| 'top-right'

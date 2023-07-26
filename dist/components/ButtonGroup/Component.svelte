@@ -2,9 +2,9 @@
   buttonGroupDefaults as defaults
 } from "./module";
 import themeStore, { themer } from "../..";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 import { useSelect } from "../../stores/select";
-import { ensureArray } from "../../utils";
+import { cleanObj, ensureArray } from "../../utils";
 export let {
   focused,
   full,
@@ -15,33 +15,38 @@ export let {
   size,
   theme,
   transitioned,
-  underlined,
   variant
 } = {
   ...defaults
 };
 export const store = useSelect({ selected: ensureArray(selected), multiple });
+let mounted = false;
+const globals = cleanObj({
+  focused,
+  full,
+  rounded,
+  size,
+  theme,
+  transitioned,
+  variant
+});
 setContext("ButtonGroup", {
   ...store,
-  globals: {
-    focused,
-    full,
-    rounded,
-    size,
-    theme,
-    transitioned,
-    underlined,
-    variant
-  }
+  globals
 });
 $:
   buttonGroupClasses = themer($themeStore).create("ButtonGroup").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none", true).append($$restProps.class, true).compile(true);
+function handleReset() {
+}
+onMount(() => {
+  mounted = true;
+});
 </script>
 
-<span role="list" class={buttonGroupClasses}>
+<span role="list" class={buttonGroupClasses} class:visible={mounted}>
 	<slot
 		selectedItems={$store.selected}
-		reset={store.reset}
+		reset={handleReset}
 		select={store.select}
 		unselect={store.unselect}
 		isSelected={store.isSelected}

@@ -9,7 +9,7 @@ import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
 import ProgressBar, {} from ".";
 const title = "Progress Bar";
-const description = "Progress bar with themes.";
+const description = "Progress bar component with animation.";
 const code = `
   `;
 let progress;

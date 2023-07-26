@@ -1,7 +1,7 @@
 const baseVariant = {
-    $base: 'aria-selected:text-white text-default-500 hover:text-default-800  aria-selected:text-default-900',
+    $base: 'aria-selected:text-white text-default-500 hover:text-default-800  aria-selected:text-white',
     white: 'hover:bg-default-200 aria-selected:bg-default-200 hover:text-default-200 aria-selected:text-inherit',
-    default: 'hover:bg-default-200 aria-selected:bg-default-200',
+    default: 'hover:bg-default-200 aria-selected:bg-default-200 aria-selected:text-default-900',
     primary: 'hover:bg-primary-200 aria-selected:bg-primary-600 hover:text-primary-800',
     secondary: 'hover:bg-secondary-200 aria-selected:bg-secondary-600 hover:text-secondary-800',
     tertiary: 'hover:bg-tertiary-200 aria-selected:bg-tertiary-600 hover:text-tertiary-800',

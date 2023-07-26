@@ -1,7 +1,7 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        value: import("../..").SelectValue;
+        value: import("../..").SelectStoreValue;
         unmount?: boolean | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;

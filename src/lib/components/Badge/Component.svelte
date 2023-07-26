@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -13,25 +14,26 @@
 		} as Required<BadgeProps>;
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: badgeClasses = unstyled
 		? th
 				.create('Badge')
-				.option('common', 'transition', transitioned)
-				.option('focused', theme, removable)
-				.option('focusedRingSizes', 'two', removable)
-				.remove('focus:', true)
-				.option('badgePadding', size, size && !removable)
-				.option('badgeFieldPadding', size, size && removable)
-				.option('badgeFontSizes', size, size)
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed)
-				.append('w-full', full)
-				.append('badge', true)
-				.append('badge-removable', removable)
-				.append('relative inline-flex items-center', !removable)
+				// .option('common', 'transition', transitioned)
+				// .option('focused', theme, removable)
+				// .option('focusedRingSizes', 'two', removable)
+				// .remove('focus:', true)
+				// .option('badgePadding', size, size && !removable)
+				// .option('badgeFieldPadding', size, size && removable)
+				// .option('badgeFontSizes', size, size)
+				// .option('roundeds', rounded, rounded)
+				// .option('shadows', shadowed, shadowed)
+				// .append('w-full', full)
+				// .append('badge', true)
+				// .append('badge-removable', removable)
+				// .append('relative inline-flex items-center', !removable)
 				.append($$restProps.class, true)
-				.compile(true)
+				.compile()
 		: th
 				.create('Badge')
 				.variant('badge', variant, theme, true)
@@ -51,22 +53,12 @@
 				.append($$restProps.class, true)
 				.compile(true);
 
-	// const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<!-- {#if removable}
-	<span {...$$restProps} class={badgeClasses}>
-		<slot />
-		<slot name="icon">×</slot>
-	</span>
-	 <button use:forwardedEvents {...$$restProps} class={badgeClasses}>
-		<div class="flex flex-row items-center justify-between pointer-events-none">
-			<slot />
-			<slot name="icon">×</slot>
-		</div>
-	</button> 
-{:else} -->
-<span {...$$restProps} class={badgeClasses}>
+<span {...$$restProps} class={badgeClasses} class:visible={mounted}>
 	<slot />
 </span>
-<!-- {/if} -->
+

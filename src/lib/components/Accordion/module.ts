@@ -1,4 +1,4 @@
-import type { SelectStore, SelectValue } from '$lib/stores/select';
+import type { SelectStore, SelectStoreValue } from '$lib/stores/select';
 import type { accordion } from './config';
 import type { AccordianOptionProps } from '../AccordionOption';
 import type { HTMLTag, ThemeRounded, ThemeShadowed } from '../../types';
@@ -16,7 +16,7 @@ export type AccordionProps<Tag extends HTMLTag> = Omit<
 > & {
 	as?: Tag;
 	multiple?: boolean;
-	selected?: SelectValue[];
+	selected?: SelectStoreValue[];
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	variant?: AccordianVariant;
@@ -30,6 +30,6 @@ export const accordionDefaults: AccordionProps<'div'> = {
 	as: 'div',
 	multiple: false,
 	selected: [],
-	theme: 'default',
-	variant: 'default',
+	theme: 'frame',
+	variant: 'default'
 };

@@ -1,4 +1,4 @@
-import type { ThemeSize } from '../../theme';
+import type { ThemeSize } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { IconProps } from '../Icon';
 export type LoaderProps = Omit<IconProps, 'icon'> & {

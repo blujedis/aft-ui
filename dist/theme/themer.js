@@ -100,10 +100,12 @@ export function themer(themeConfig) {
     // If no document return mock instance.
     if (typeof document === 'undefined')
         return mockThemer;
+    // type Defaults = typeof themeConfig.defaults;
+    // type Palette = typeof themeConfig.palette;
     const _components = themeConfig?.components || {};
     const _options = themeConfig?.options || {};
-    const _defaults = themeConfig?.defaults || {};
-    const _palette = themeConfig?.palette || {};
+    // const _defaults: Defaults = themeConfig?.defaults || {};
+    // const _palette: Palette = themeConfig?.palette || {};
     /**
      * Creates a new instance for generating themes.
      *
@@ -188,19 +190,32 @@ export function themer(themeConfig) {
                 themed.push(value);
             return api;
         }
-        /**
-         * Removes class strings, called ONLY after classnames() is called
-         * and before Tailwind Merge if enabled.
-         *
-         * @param classes tailwind class strings to be removed.
-         */
-        function remove(classes, when) {
+        function remove(classesOrKey, propOrWhen, when) {
             if (typeof themeConfig === 'undefined')
                 return api;
+            const isRemoveFromOptions = arguments.length === 3;
             if (!when)
                 return api;
-            classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
-            removed = [...removed, ...classes];
+            if (isRemoveFromOptions) {
+                const key = classesOrKey;
+                const prop = propOrWhen;
+                if (!key || typeof prop === 'undefined')
+                    return api;
+                const opt = (_options[key] || {});
+                if (!opt)
+                    throw new Error(`${instanceName} remove option using property ${prop} was NOT found.`);
+                let value = opt[prop] || '';
+                if (value) {
+                    value = ensureArray(value);
+                    removed = [...removed, ...value];
+                }
+            }
+            else {
+                let classes = classesOrKey;
+                when = propOrWhen;
+                classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
+                removed = [...removed, ...classes];
+            }
             return api;
         }
         /**

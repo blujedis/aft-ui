@@ -1,5 +1,5 @@
 export const selectDefaults = {
-    focused: true,
+    focused: 'always',
     placeholder: true,
     rounded: 'sm',
     size: 'md',

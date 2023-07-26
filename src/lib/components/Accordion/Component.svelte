@@ -9,7 +9,7 @@
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { useSelect } from '$lib/stores/select';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
@@ -19,6 +19,7 @@
 	} as Required<AccordionProps<Tag>>;
 
 	export const store = useSelect({ multiple, selected });
+	let mounted = false;
 
 	const globals = cleanObj({
 		rounded: variant === 'pills' ? rounded : 'none',
@@ -48,6 +49,9 @@
 		.compile(true);
 
 	function handleReset() {}
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <svelte:element
@@ -55,6 +59,7 @@
 	{...$$restProps}
 	aria-expanded={$store.selected.length > 0}
 	class={accordionClasses}
+	class:visible={mounted}
 >
 	<slot
 		select={store.select}

@@ -1,4 +1,4 @@
-import type { SelectValue, SelectStore } from '$lib/stores/select';
+import type { SelectStoreValue, SelectStore } from '$lib/stores/select';
 import type {
 	ThemeColor,
 	ThemeFocused,
@@ -23,7 +23,7 @@ export type SelectProps = {
 	placeholder?: boolean | string;
 	rows?: number; // mapped to native size attribute.
 	rounded?: ThemeRounded;
-	selected?: SelectValue | SelectValue[];
+	selected?: SelectStoreValue | SelectStoreValue[];
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
@@ -37,6 +37,6 @@ export const selectDefaults: Partial<SelectProps> = {
 	placeholder: true,
 	rounded: 'sm',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

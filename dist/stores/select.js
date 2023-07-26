@@ -2,7 +2,6 @@ import { ensureArray } from '../utils';
 import { writable, get } from 'svelte/store';
 export function useSelect(props = {}) {
     props.selected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
-    const initialSelected = [...props.selected];
     const store = writable({ multiple: false, ...props });
     function getStore() {
         return get(store);
@@ -17,7 +16,7 @@ export function useSelect(props = {}) {
                 selected = s.selected.includes(value) ? s.selected : [...s.selected, value];
             else
                 selected = [value];
-            return { ...s, selected };
+            return { ...s, selected: [...selected] };
         });
     }
     function unselect(value) {

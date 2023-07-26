@@ -1,7 +1,7 @@
 import { mergeConfigs } from '../../theme';
-import { variantFilled, variantOutlined, variantText } from '../Button/config';
-const baseVariant = mergeConfigs(variantFilled, variantText, {
-    $base: 'text-inherit border border-transparent hover:text-white bg-default-100'
+import { variantFilled, variantOutlined } from '../Button/config';
+const baseVariant = mergeConfigs(variantFilled, {
+    $base: 'text-inherit border border-transparent bg-default-100 text-white font-medium'
     // white: 'text-inherit bg-white hover:bg-default-100',
     // default: 'text-default-600 hover:text-default-800 hover:bg-default-300',
     // primary: 'text-primary-600 hover:text-primary-800 hover:bg-primary-600',
@@ -15,9 +15,8 @@ const baseVariant = mergeConfigs(variantFilled, variantText, {
 export const tile = {
     default: { ...baseVariant },
     filled: { ...baseVariant },
-    outline: {
-        ...variantOutlined,
-        $base: 'text-inherit hover:text-inherit border'
+    outline: mergeConfigs(variantOutlined, {
+        $base: 'hover:text-inherit ring-1 font-medium'
         // white: 'text-white hover:text-default-200 border-white hover:border-default-100',
         // default: 'text-default-600 hover:text-default-800 border-default-200 hover:border-default-300',
         // primary: 'text-primary-600 hover:text-primary-800 border-primary-500 hover:border-primary-600',
@@ -27,5 +26,5 @@ export const tile = {
         // warning: 'text-warning-600 hover:text-warning-800 border-warning-500 hover:border-warning-600',
         // success: 'text-success-600 hover:text-success-800 border-success-500 hover:border-success-600',
         // info: 'text-info-600 hover:text-info-800 border-info-500 hover:border-info-600'
-    }
+    })
 };

@@ -2,7 +2,7 @@
 	import { type AvatarProps, avatarDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../../types';
 	import Icon from '../Icon';
@@ -34,6 +34,7 @@
 	if (notification === true) notification = 'top-right' as any; // TS above props complains.
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: avatarClasses = th
 		.create('Avatar')
@@ -72,17 +73,20 @@
 		'';
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 {#if _placeholder}
-	<span class={avatarPlaceholderClasses}>
+	<span class={avatarPlaceholderClasses} class:visible={mounted}>
 		<Icon icon={_placeholder} class="h-full w-full" />
 		{#if notification}
 			<span class={avatarNotificationClasses} />
 		{/if}
 	</span>
 {:else if notification}
-	<span class="relative inline-block">
+	<span class="relative inline-block" class:visible={mounted}>
 		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
 		<span class={avatarNotificationClasses} />
 	</span>

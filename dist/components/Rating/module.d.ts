@@ -1,4 +1,4 @@
-import type { ThemeShadowed } from '../../theme';
+import type { ThemeShadowed } from '../../types';
 import type { Writable } from 'svelte/store';
 import type { RatingItemProps } from '../RatingItem/module';
 type OmittedRatingProps = 'index';

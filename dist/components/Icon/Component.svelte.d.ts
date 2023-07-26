@@ -14,7 +14,7 @@ declare const __propDef: {
         height?: import("@iconify/svelte").IconifyIconSize | undefined;
         inline?: boolean | undefined;
         class?: string | undefined;
-        size?: any;
+        size?: import("../..").ThemeSize | undefined;
         unstyled?: boolean | undefined;
     };
     events: {

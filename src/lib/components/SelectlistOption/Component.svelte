@@ -25,7 +25,7 @@
 	$: optionClasses = th
 		.create('SelectListOption')
 		.variant('selectListOption', variant, theme, variant)
-		.append('focus:outline outline-default-400 outline-2', true)
+		.append('focus:outline outline-frame-400 outline-2', true)
 		.option('focusedOutline', theme, true)
 		.option('focusedOutlineSizes', 'two', true)
 		.remove('focus-visible:', true)

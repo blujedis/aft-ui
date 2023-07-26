@@ -9,10 +9,10 @@ declare const __propDef: {
         animate?: boolean | undefined;
         full?: boolean | undefined;
         max?: number | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
         value?: any;
         variant?: "default" | "filled" | undefined;
         slot?: string | null | undefined;

@@ -1,13 +1,13 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        focused?: any;
+        focused?: import("../..").ThemeFocused | undefined;
         full?: boolean | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
-        transitioned?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         variant?: "default" | "filled" | undefined;
         form?: string | null | undefined;
         slot?: string | null | undefined;

@@ -4,7 +4,6 @@ export type MenuOptionVariant = keyof typeof menuOption;
 export type MenuOptionProps<Tag extends 'a' | 'button'> = {
     active?: boolean;
     as?: Tag;
-    selected?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;
     key?: string | number;

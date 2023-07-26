@@ -6,6 +6,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = ProgressBarProps & Omit<ElementNativeProps<'progress'>, 'size'>;
 
@@ -34,6 +35,8 @@
 		interpolate
 	});
 
+	let mounted = false;
+
 	$: progressClasses = themer($themeStore)
 		.create('ProgressBar')
 		.variant('progressBar', variant, theme, true)
@@ -47,8 +50,18 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<progress use:forwardedEvents {...$$restProps} class={progressClasses} value={$store} {max}>
+<progress
+	use:forwardedEvents
+	{...$$restProps}
+	class={progressClasses}
+	class:visible={mounted}
+	value={$store}
+	{max}
+>
 	<slot />
 </progress>

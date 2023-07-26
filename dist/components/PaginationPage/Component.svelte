@@ -4,8 +4,8 @@ import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";
 import { forwardEventsBuilder } from "../../utils";
 import Icon from "../Icon";
-const context = getContext("PaginationController");
-export let { as, next, previous, rounded, size, theme, transitioned, value, variant } = {
+const context = getContext("Pagination");
+export let { as, focused, next, previous, rounded, size, theme, transitioned, value, variant } = {
   ...defaults,
   ...context?.globals
 };
@@ -13,7 +13,7 @@ const th = themer($themeStore);
 $:
   selected = $context?.page === value;
 $:
-  paginationPageClasses = th.create("PaginationPage").variant("paginationPage", variant, theme, true).option("focusedVisible", theme, true).option("fieldFontSizes", size, size).option("paginationGroupedPadding", size, size && variant === "grouped").option("paginationFlushedPadding", size, size && variant === "flushed").option("roundeds", rounded, rounded && (previous || next)).append(
+  paginationPageClasses = th.create("PaginationPage").variant("paginationPage", variant, theme, true).option("focused", theme, focused && variant !== "flushed").option("focusedRingSizes", "two", focused && variant !== "flushed").remove("focusedFilters", focused, focused).option("fieldFontSizes", size, size).option("paginationGroupedPadding", size, size && variant === "grouped").option("paginationFlushedPadding", size, size && variant === "flushed").option("roundeds", rounded, rounded && (previous || next)).append(
     "relative inline-flex items-center justify-center font-semibold focus:z-20",
     variant === "grouped"
   ).append("ring-1 ring-inset ring-black ring-opacity-10", variant === "grouped").append("z-10", variant === "grouped" && selected).append("inline-flex items-center border-t-2 font-medium", variant === "flushed").append("pointer-events-none", value === "...").append("px-2", previous || next).append("rounded-r-none", previous).append("rounded-l-none", next).append($$restProps.class, true).compile(true);

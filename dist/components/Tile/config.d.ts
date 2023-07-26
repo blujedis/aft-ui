@@ -36,5 +36,18 @@ export declare const tile: {
         warning: string;
         success: string;
         info: string;
+    } & {
+        $base: string;
+        white: string;
+        default: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    } & import("../../theme").StringMap & {
+        $base: string;
     };
 };

@@ -10,7 +10,8 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Drawer';
-	const description = 'Component for revealing a drawer which can be used for menus or settings as an example';
+	const description =
+		'Component for revealing a drawer which can be used for menus or settings as an example';
 	const code = `
   `;
 
@@ -21,7 +22,7 @@
 		shadowed: 'xl' as ThemeShadowed,
 		size: 'md' as ThemeSimpleSize,
 		speed: 'medium' as ThemeSpeed,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		variant: 'default' as DrawerVariant
 	};
 

@@ -2,7 +2,7 @@ export const popover = {
     default: {
         $base: 'text-white',
         white: 'bg-white text-inherit',
-        default: 'bg-default-200',
+        default: 'bg-default-200 text-inherit',
         primary: 'bg-primary-500',
         secondary: 'bg-secondary-500',
         tertiary: 'bg-tertiary-500',

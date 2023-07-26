@@ -1,19 +1,24 @@
 import { SvelteComponentTyped } from "svelte";
-import { type MultiselectControllerContext, type MultiselectControllerStore, type MultiselectItem } from './module';
+import { type SelectListContext, type SelectListStore, type SelectListItem } from './module';
 import { type SelectStore } from '../..';
-declare class __sveltets_Render<Item extends MultiselectItem> {
+declare class __sveltets_Render<Item extends SelectListItem> {
     props(): {
-        store?: SelectStore<MultiselectControllerStore<MultiselectItem>> | undefined;
-        context?: MultiselectControllerContext | undefined;
+        store?: SelectStore<SelectListStore<SelectListItem>> | undefined;
+        context?: SelectListContext | undefined;
         full?: boolean | undefined;
-        multiple?: boolean | undefined;
-        strategy?: "button" | "text" | undefined;
+        newable?: boolean | undefined;
+        placeholder?: string | undefined;
+        removable?: boolean | undefined;
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
+        strategy?: "button" | "text" | undefined;
+        tags?: boolean | undefined;
         theme?: import("../..").ThemeColor | undefined;
         underlined?: boolean | undefined;
         variant?: "default" | "filled" | "outlined" | "flushed" | undefined;
+        onBeforeAdd?: (<T extends SelectListItem>(value: string, input: HTMLInputElement) => false | T | Promise<false | T | null | undefined> | null | undefined) | undefined;
+        onBeforeRemove?: (<T_1 extends SelectListItem>(item: T_1, input: HTMLInputElement) => boolean | Promise<boolean>) | undefined;
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
         items: Item[];
@@ -32,7 +37,7 @@ declare class __sveltets_Render<Item extends MultiselectItem> {
         radiogroup?: string | null | undefined;
         value?: any;
         autocomplete?: string | null | undefined;
-        placeholder?: string | null | undefined;
+        multiple?: boolean | null | undefined;
         required?: boolean | null | undefined;
         'on:change'?: import("svelte/elements").ChangeEventHandler<HTMLSelectElement> | null | undefined;
         'bind:value'?: any;
@@ -235,36 +240,36 @@ declare class __sveltets_Render<Item extends MultiselectItem> {
     slots(): {
         default: {
             visible: boolean | undefined;
-            selected: import("../..").SelectValue[];
+            selected: import("../..").SelectStoreValue[];
             filtered: Item[];
-            isSelected: ((value?: import("../..").SelectValue | undefined) => boolean) & {
-                (key: import("../..").SelectValue): boolean;
-                <T extends MultiselectItem>(item: T): boolean;
+            isSelected: ((value?: import("../..").SelectStoreValue | undefined) => boolean) & {
+                (key: import("../..").SelectStoreValue): boolean;
+                (item: SelectListItem): boolean;
             };
             open: () => void;
             close: () => void;
-            toggle: (value?: import("../..").SelectValue | undefined) => void;
+            toggle: (value?: import("../..").SelectStoreValue | undefined) => void;
         };
         select: {};
     };
 }
-export type ComponentProps<Item extends MultiselectItem> = ReturnType<__sveltets_Render<Item>['props']>;
-export type ComponentEvents<Item extends MultiselectItem> = ReturnType<__sveltets_Render<Item>['events']>;
-export type ComponentSlots<Item extends MultiselectItem> = ReturnType<__sveltets_Render<Item>['slots']>;
-export default class Component<Item extends MultiselectItem> extends SvelteComponentTyped<ComponentProps<Item>, ComponentEvents<Item>, ComponentSlots<Item>> {
-    get store(): import("svelte/store").Writable<import("../..").SelectProps & MultiselectControllerStore<MultiselectItem>> & import("../..").SelectMethods;
-    get context(): import("svelte/store").Writable<import("../..").SelectProps & MultiselectControllerStore<MultiselectItem>> & import("../..").SelectMethods & {
+export type ComponentProps<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['props']>;
+export type ComponentEvents<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['events']>;
+export type ComponentSlots<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['slots']>;
+export default class Component<Item extends SelectListItem> extends SvelteComponentTyped<ComponentProps<Item>, ComponentEvents<Item>, ComponentSlots<Item>> {
+    get store(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>> & import("../..").SelectStoreMethods;
+    get context(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>> & import("../..").SelectStoreMethods & {
         open(): void;
         close(): void;
         toggle(): void;
-        isSelected(key: import("../..").SelectValue): boolean;
-        isSelected<T extends MultiselectItem>(item: T): boolean;
-        add<T_1 extends MultiselectItem>({ value, label, group, selected }: T_1): void;
-        remove(key: import("../..").SelectValue): void;
-        remove<T_2 extends MultiselectItem>(item: T_2): void;
+        isSelected(key: import("../..").SelectStoreValue): boolean;
+        isSelected(item: SelectListItem): boolean;
+        add({ value, label, group, selected }: SelectListItem): void;
+        remove(key: import("../..").SelectStoreValue): void;
+        remove(item: SelectListItem): void;
         filter(query?: string | undefined): void;
-        reset(selectedItems: import("../..").SelectValue[]): void;
-        globals: import("./module").MultiselectControllerGlobalProps;
+        reset(selectedItems?: import("../..").SelectStoreValue[] | undefined): void;
+        globals: import("./module").SelectListGlobalProps;
     };
 }
 export {};

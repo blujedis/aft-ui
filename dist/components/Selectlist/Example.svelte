@@ -7,14 +7,12 @@ import ListOptions from "../_Example/ListOptions.svelte";
 import ToggleOptions from "../_Example/ToggleOptions.svelte";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
-import MultiselectController from "./";
-import MultiselectButton from "../MultiselectButton";
-import MultiselectOption from "../MultiselectOption";
-import MultiselectPanel from "../MultiselectPanel";
-import Input from "../Input";
-import Button from "../Button";
-const title = "Multiselect";
-const description = "Dropdown menu examples.";
+import SelectList from "./";
+import SelectListButton from "../SelectListButton";
+import SelectListOption from "../SelectListOption";
+import SelectListPanel from "../SelectListPanel";
+const title = "SelectList";
+const description = "Comprehensive component for single and multi selection.";
 const code = `
   `;
 const sourceItems = [
@@ -74,21 +72,26 @@ const props = {
 	</Section>
 
 	{#key props}
-		<div class="grid grid-cols-8 gap-2">
-			<label for="filled" class="flex">
+		<div class="grid grid-cols-3 gap-2">
+			<label for="filled">
 				<div class="text-sm">Filled:</div>
-				<MultiselectController {...props} items={sourceItems} let:filtered let:isSelected>
-					<MultiselectButton>Button</MultiselectButton>
-					<MultiselectPanel>
+				<SelectList
+					{...props}
+					tags
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
 						{#each filtered as item}
-							<MultiselectOption as="button" key={item.value}>
+							<SelectListOption as="button" key={item.value}>
 								{item.label}
-							</MultiselectOption>
+							</SelectListOption>
 						{/each}
-					</MultiselectPanel>
-				</MultiselectController>
-				<Input placeholder="Testing" />
-				<MultiselectButton>Button</MultiselectButton>
+					</SelectListPanel>
+				</SelectList>
 			</label>
 		</div>
 	{/key}

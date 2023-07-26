@@ -8,6 +8,8 @@ export type RefNode = Element | VirtualElement;
 export type ContentNode = HTMLElement | undefined;
 export type PopperOptions<TModifier> = Partial<OptionsGeneric<TModifier>> | undefined;
 export type PopoverNativeProps = ElementProps<'div'>;
+export type PopoverStrategy = 'click' | 'hover' | 'focus' | 'none';
+export type PopoverHookOptions<TModifier extends Partial<Modifier<any, any>> = Partial<Modifier<any, any>>> = Omit<PopoverOptions<TModifier, typeof PopoverComponent>, 'component'>;
 export type RefAction = (node: RefNode | Readable<VirtualElement>) => {
     destroy?(): void;
 };
@@ -33,7 +35,7 @@ export type PopoverOptions<TModifier, C extends typeof SvelteComponent<any>> = P
     node?: Element & {
         focus: () => void;
     };
-    type?: 'click' | 'hover' | 'focus' | 'none';
+    action?: PopoverStrategy;
     escapable?: boolean;
     component?: C;
     props?: ComponentProps<InstanceType<C>>;
@@ -68,7 +70,7 @@ export declare function createPopover<M extends Partial<Modifier<any, any>>, C e
     node?: (Element & {
         focus: () => void;
     }) | undefined;
-    type?: "none" | "click" | "focus" | "hover" | undefined;
+    action?: PopoverStrategy | undefined;
     escapable?: boolean | undefined;
     component?: C | undefined;
     props?: ComponentProps<InstanceType<C>> | undefined;
@@ -94,17 +96,7 @@ export declare function createPopover<M extends Partial<Modifier<any, any>>, C e
  */
 export declare function usePopover<TModifier extends Partial<Modifier<any, any>>>(node: Element & {
     focus: () => void;
-}, options?: Omit<Partial<OptionsGeneric<TModifier>> & {
-    target?: string | Element | ShadowRoot | undefined;
-    selector?: string | undefined;
-    node?: (Element & {
-        focus: () => void;
-    }) | undefined;
-    type?: "none" | "click" | "focus" | "hover" | undefined;
-    escapable?: boolean | undefined;
-    component?: typeof PopoverComponent | undefined;
-    props?: (PopoverProps & import("svelte/elements").HTMLAttributes<HTMLDivElement>) | undefined;
-}, "component">): {
+}, options?: PopoverHookOptions<TModifier>): {
     destroy: () => void;
 };
 export default usePopover;

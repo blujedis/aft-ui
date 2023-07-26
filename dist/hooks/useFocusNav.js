@@ -55,6 +55,7 @@ export function useFocusNav(root) {
             }
             if (currentNode)
                 currentNode.focus();
+            e.preventDefault(); // otherwise overflow will cause scroll jumping.
         }
     }
     return {

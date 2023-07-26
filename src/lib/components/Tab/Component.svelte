@@ -4,7 +4,7 @@
 	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '../Tabs';
-	import type { SelectValue } from '$lib/stores/select';
+	import type { SelectStoreValue } from '$lib/stores/select';
 
 	type Tag = $$Generic<'a' | 'button'>;
 	// type NativeProps = Tag extends 'button'
@@ -51,11 +51,10 @@
 			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
 			variant === 'grouped'
 		)
-		.append('pointer-events-none', $context?.selected?.includes(value))
 		.append($$restProps.class, true)
 		.compile(true);
 
-	function handleSelect(value: SelectValue) {
+	function handleSelect(value: SelectStoreValue) {
 		if ($context?.selected?.includes(value)) context.unselect(value);
 		else context.select(value);
 	}
@@ -63,13 +62,13 @@
 
 <svelte:element
 	this={as}
+	aria-labelledby={value + ''}
 	{...$$restProps}
 	role={as === 'a' ? 'link' : 'button'}
 	tabindex="-1"
 	class={tabClasses}
 	aria-current={$context?.selected?.includes(value)}
 	aria-selected={$context?.selected?.includes(value)}
-	aria-labelledby={value + ''}
 	on:click={() => handleSelect(value)}
 >
 	<slot />

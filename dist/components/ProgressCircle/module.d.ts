@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
 import type { progressCircleTrack } from './config';
 export type ProgressCircleVariant = keyof typeof progressCircleTrack;
 export type ProgressCircleTweenedOptions<T extends number = any> = {

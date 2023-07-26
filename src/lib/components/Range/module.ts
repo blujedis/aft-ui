@@ -23,6 +23,6 @@ export type RangeProps = {
 
 export const rangeDefaults: RangeProps = {
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

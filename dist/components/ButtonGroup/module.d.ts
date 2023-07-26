@@ -1,10 +1,10 @@
-import type { SelectStore, SelectValue } from '../../stores/select';
+import type { SelectStore, SelectStoreValue } from '../../stores/select';
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../types';
 import type { ButtonProps } from '../Button/module';
 import type { ButtonGroupItemVariant } from '../ButtonGroupItem';
 export type ButtonGroupProps = Omit<ButtonProps<'button' | 'a'>, 'disabled' | 'variant'> & {
     multiple?: boolean;
-    selected?: SelectValue | SelectValue[];
+    selected?: SelectStoreValue | SelectStoreValue[];
     variant?: ButtonGroupItemVariant;
 };
 export type ButtonGroupContext = SelectStore & {
@@ -16,7 +16,6 @@ export type ButtonGroupContext = SelectStore & {
         theme: ThemeColor;
         transitioned: ThemeTransitioned;
         variant: ButtonGroupItemVariant;
-        underlined: boolean;
     };
 };
 export declare const buttonGroupDefaults: Partial<ButtonGroupProps>;

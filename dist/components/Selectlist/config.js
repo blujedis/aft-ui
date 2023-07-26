@@ -1,4 +1,4 @@
 import { placeholder } from '../placeholder';
-export const multiselectController = {
+export const selectList = {
     default: { ...placeholder }
 };

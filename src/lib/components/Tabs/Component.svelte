@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type TabsProps, tabsDefaults as defaults, type TabsContext } from './module';
 	import themeStore, { themer } from '$lib';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
@@ -45,6 +45,7 @@
 	});
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: tabControllerlWrapperClasses = th.create('TabsWrapper').append(klass, true).compile();
 
@@ -77,9 +78,13 @@
 		.compile(true);
 
 	function handleReset() {}
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<div class={tabControllerlWrapperClasses}>
+<div class={tabControllerlWrapperClasses} class:visible={mounted}>
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
 			<slot name="mobile" />

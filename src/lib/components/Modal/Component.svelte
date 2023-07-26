@@ -1,8 +1,5 @@
 <script lang="ts">
-	import {
-		type ModalProps,
-		modalDefaults as defaults
-	} from './module';
+	import { type ModalProps, modalDefaults as defaults } from './module';
 	import themeStore, { themer, transitioner } from '$lib';
 	import { useDisclosure } from '$lib/stores';
 	import { fade } from 'svelte/transition';

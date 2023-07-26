@@ -5,7 +5,8 @@
 	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';
-	import type { SelectValue } from '$lib/stores/select';
+	import type { SelectStoreValue } from '$lib/stores/select';
+	import { cleanObj } from '$lib/utils';
 
 	type $$Props = ButtonGroupItemProps & ElementNativeProps<'button'>;
 
@@ -18,7 +19,7 @@
 
 	const th = themer($themeStore);
 
-	const passthru = {
+	const passthru = cleanObj({
 		disabled,
 		focused,
 		full,
@@ -27,7 +28,7 @@
 		theme,
 		transitioned,
 		variant
-	};
+	});
 
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
@@ -37,7 +38,7 @@
 		.append($$restProps.class, true)
 		.compile(true);
 
-	function handleSelect(value: SelectValue) {
+	function handleSelect(value: SelectStoreValue) {
 		if ($context?.selected?.includes(value)) context.unselect(value);
 		else context.select(value);
 	}

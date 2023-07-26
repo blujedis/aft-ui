@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = EmptyProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -11,11 +12,12 @@
 		...defaults
 	} as Required<$$Props>;
 
+	let mounted = false;
+
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
 		.variant('empty', variant, theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('emptySizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
@@ -25,8 +27,17 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<svelte:element this={as} use:forwardedEvents {...$$restProps} class={emptyClasses}>
+<svelte:element
+	this={as}
+	use:forwardedEvents
+	{...$$restProps}
+	class={emptyClasses}
+	class:visible={mounted}
+>
 	<slot />
 </svelte:element>

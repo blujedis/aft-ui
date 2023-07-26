@@ -1,5 +1,5 @@
 export const buttonGroupDefaults = {
-    focused: true,
+    focused: 'visible',
     rounded: 'none',
     shadowed: 'none',
     theme: 'default',

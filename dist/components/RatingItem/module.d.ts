@@ -1,4 +1,4 @@
-import type { ThemeColorKey, ThemeSize } from '../../theme';
+import type { ThemeColorKey, ThemeSize } from '../../types';
 export type RatingItemProps = {
     background?: string;
     fill?: ThemeColorKey;

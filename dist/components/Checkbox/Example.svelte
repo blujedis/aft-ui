@@ -8,13 +8,11 @@ import ToggleOptions from "../_Example/ToggleOptions.svelte";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 import SelectRounded from "../_Example/SelectRounded.svelte";
 const title = "Checkboxes";
-const description = "Themed Checkboxes with multiple variants.";
+const description = "Themed Checkbox component.";
 const code = `
   `;
 const props = {
   disabled: false,
-  focused: true,
-  // true: focus-visible.
   full: false,
   rounded: "none",
   shadowed: "none",

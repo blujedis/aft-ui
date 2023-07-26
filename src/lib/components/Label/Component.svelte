@@ -25,7 +25,6 @@
 		.create('Label')
 		.variant('label', variant, theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)

@@ -1,8 +1,8 @@
 export const selectOption = {
 	default: {
 		$base: 'text-inherit border',
-		white: 'text-white border-white hover:border-default-100',
-		default: 'text-default-600 border-default-200 hover:border-default-300',
+		white: 'text-white border-white hover:border-frame-100',
+		frame: 'text-frame-600 border-frame-200 hover:border-frame-300',
 		primary: 'text-primary-600 border-primary-500 hover:border-primary-600',
 		secondary: 'text-secondary-600 border-secondary-500 hover:border-secondary-600',
 		tertiary: 'text-tertiary-600 border-tertiary-500 hover:border-tertiary-600',
@@ -13,8 +13,8 @@ export const selectOption = {
 	},
 	outlined: {
 		$base: 'text-inherit border',
-		white: 'text-white border-white hover:border-default-100',
-		default: 'text-default-600 border-default-200 hover:border-default-300',
+		white: 'text-white border-white hover:border-frame-100',
+		frame: 'text-frame-600 border-frame-200 hover:border-frame-300',
 		primary: 'text-primary-600 border-primary-500 hover:border-primary-600',
 		secondary: 'text-secondary-600 border-secondary-500 hover:border-secondary-600',
 		tertiary: 'text-tertiary-600 border-tertiary-500 hover:border-tertiary-600',
@@ -25,8 +25,8 @@ export const selectOption = {
 	},
 	filled: {
 		$base: 'text-inherit',
-		white: 'text-white bg-white hover:bg-default-200',
-		default: 'text-default-600 bg-default-50 hover:bg-default-200',
+		white: 'text-white bg-white hover:bg-frame-200',
+		frame: 'text-frame-600 bg-frame-50 hover:bg-frame-200',
 		primary: 'text-primary-600 bg-primary-50 hover:bg-primary-200',
 		secondary: 'text-secondary-600 bg-secondary-50 hover:bg-secondary-200',
 		tertiary: 'text-tertiary-600 bg-tertiary-50 hover:bg-tertiary-200',
@@ -38,8 +38,8 @@ export const selectOption = {
 	flushed: {
 		$base:
 			'text-inherit border border-l-0 border-r-0 border-t-0 focus-visible:!ring-0 focus-visible:border-b-2',
-		white: 'text-white border-white focus:border-default-200',
-		default: 'text-default-600 border-default-200 focus:border-default-500',
+		white: 'text-white border-white focus:border-frame-200',
+		frame: 'text-frame-600 border-frame-200 focus:border-frame-500',
 		primary: 'text-primary-600 border-primary-500 focus:border-primary-600',
 		secondary: 'text-secondary-600 border-secondary-500 focus:border-secondary-600',
 		tertiary: 'text-tertiary-600 border-tertiary-500 focus:border-tertiary-600',

@@ -4,17 +4,17 @@ declare const __propDef: {
     props: {
         context?: SelectContext | undefined;
         disabled?: boolean | undefined;
-        focused?: any;
+        focused?: import("../..").ThemeFocused | undefined;
         full?: boolean | undefined;
         multiple?: boolean | undefined;
         placeholder?: string | undefined;
         rows?: number | undefined;
-        rounded?: any;
-        selected?: import("../..").SelectValue | import("../..").SelectValue[] | undefined;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
-        transitioned?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        selected?: import("../..").SelectStoreValue | import("../..").SelectStoreValue[] | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         variant?: "default" | "filled" | "outlined" | "flushed" | undefined;
         unstyled?: boolean | undefined;
         form?: string | null | undefined;
@@ -230,9 +230,9 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            selectedItems: import("../..").SelectValue[] & (string | number)[];
-            select: (value?: import("../..").SelectValue | undefined) => void;
-            unselect: (value?: import("../..").SelectValue | undefined) => void;
+            selectedItems: import("../..").SelectStoreValue[] & (string | number)[];
+            select: (value?: import("../..").SelectStoreValue | undefined) => void;
+            unselect: (value?: import("../..").SelectStoreValue | undefined) => void;
         };
     };
 };
@@ -240,6 +240,6 @@ export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
 export default class Component extends SvelteComponentTyped<ComponentProps, ComponentEvents, ComponentSlots> {
-    get context(): import("svelte/store").Writable<import("../..").SelectProps & Record<string, any>> & import("../..").SelectMethods;
+    get context(): import("svelte/store").Writable<import("../..").SelectStoreOptions & Record<string, any>> & import("../..").SelectStoreMethods;
 }
 export {};

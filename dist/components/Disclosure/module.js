@@ -1,4 +1,4 @@
-import { fly, fade, scale, blur, slide } from 'svelte/transition';
+import { fly, fade, scale, blur, slide, crossfade } from 'svelte/transition';
 export const disclosureDefaults = {
     as: 'div',
     autoclose: true,
@@ -10,11 +10,12 @@ export const disclosureTransitions = {
     fade,
     scale,
     blur,
-    slide
+    slide,
+    crossfade
 };
 export const disclosureTransitionOptions = {
     none: { duration: 0 },
-    disolve: { duration: 200, start: 0.5, type: 'fade' },
+    dissolve: { duration: 200, start: 0.5, type: 'fade' },
     focus: { duration: 400, amount: 5, opacity: 0, type: 'blur' },
     expand: { duration: 400, axis: 'y', type: 'slide' },
     swipe: { duration: 400, axis: 'x', type: 'slide' },

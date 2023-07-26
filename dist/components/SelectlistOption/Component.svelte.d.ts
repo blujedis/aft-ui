@@ -1,8 +1,8 @@
 import { SvelteComponentTyped } from "svelte";
-import { type MultiselectOptionProps } from './module';
+import { type SelectListOptionProps } from './module';
 import type { ElementProps } from '../../types';
 declare class __sveltets_Render<Tag extends 'button' | 'a'> {
-    props(): MultiselectOptionProps<Tag> & ElementProps<Tag>;
+    props(): SelectListOptionProps<Tag> & ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

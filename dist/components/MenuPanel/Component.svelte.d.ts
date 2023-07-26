@@ -6,8 +6,8 @@ declare const __propDef: {
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         theme?: import("../..").ThemeColor | undefined;
-        transition?: "none" | "focus" | "disolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
-            type: "fade" | "blur" | "fly" | "slide" | "scale";
+        transition?: "none" | "focus" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
+            type: "fade" | "blur" | "fly" | "slide" | "scale" | "crossfade";
         }) | undefined;
         variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
         accesskey?: string | null | undefined;

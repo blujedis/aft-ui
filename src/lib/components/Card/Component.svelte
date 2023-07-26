@@ -2,12 +2,12 @@
 	import { type CardProps, cardDefaults as defaults, type CardContext } from './module';
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { cleanObj } from '$lib/utils';
 
 	type $$Props = CardProps & ElementNativeProps<'div'>;
 
-	export let {  rounded, shadowed, size, theme, variant, wide } = {
+	export let { rounded, shadowed, size, theme, variant, wide } = {
 		...defaults
 	} as Required<CardProps>;
 
@@ -20,17 +20,21 @@
 	setContext('Card', { globals } as CardContext);
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: cardClasses = th
 		.create('Card')
 		.variant('card', variant, theme, true)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.append('text-sm h-full', true)
+		.append('h-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<div {...$$restProps} class={cardClasses}>
+<div {...$$restProps} class={cardClasses} class:visible={mounted}>
 	<slot />
 </div>

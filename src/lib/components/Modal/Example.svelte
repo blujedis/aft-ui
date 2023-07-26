@@ -25,7 +25,7 @@
 		focustrap: true,
 		rounded: 'sm' as ThemeRounded,
 		shadowed: 'xl' as ThemeShadowed,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transition: 'dissolve' as DisclosureTransitionOption,
 		variant: 'default' as ModalVariant,
 		visible: false,

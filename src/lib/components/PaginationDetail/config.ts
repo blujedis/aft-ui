@@ -2,7 +2,7 @@ export const paginationDetail = {
 	default: {
 		$base: 'text-white',
 		white: 'bg-white text-inherit',
-		default: 'bg-default-200',
+		frame: 'bg-frame-200',
 		primary: 'bg-primary-500',
 		secondary: 'bg-secondary-500',
 		tertiary: 'bg-tertiary-500',
@@ -15,7 +15,7 @@ export const paginationDetail = {
 	filled: {
 		$base: 'text-white',
 		white: 'bg-white text-inherit',
-		default: 'bg-default-200',
+		frame: 'bg-frame-200',
 		primary: 'bg-primary-500',
 		secondary: 'bg-secondary-500',
 		tertiary: 'bg-tertiary-500',
@@ -28,7 +28,7 @@ export const paginationDetail = {
 	outline: {
 		$base: 'text-inherit',
 		white: 'border-white text-white',
-		default: 'border-default-200 text-default-600',
+		frame: 'border-frame-200 text-frame-600',
 		primary: 'border-primary-500 text-primary-600',
 		secondary: 'border-secondary-500 text-secondary-600',
 		tertiary: 'border-tertiary-500 text-tertiary-600',

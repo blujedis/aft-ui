@@ -1,4 +1,4 @@
-import { button } from '../Button';
-export const multiselectButton = {
-    ...button
+import { input } from '../Input';
+export const selectListButton = {
+    ...input
 };

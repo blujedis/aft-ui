@@ -24,6 +24,6 @@ export type TabProps<Tag = 'a'> = {
 };
 
 export const tabDefaults: Partial<TabProps<any>> = {
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

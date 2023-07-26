@@ -22,8 +22,8 @@ export type EmptyProps = {
 };
 
 export const emptyDefaults: Partial<EmptyProps> = {
-	rounded: 'full',
+	as: 'div',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

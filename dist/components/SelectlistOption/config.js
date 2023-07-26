@@ -10,10 +10,11 @@ const baseVariant = {
     success: 'hover:text-success-600 aria-selected:text-success-600 aria-current:text-success-600',
     info: 'hover:text-info-600 aria-selected:text-info-600 aria-current:text-info-600'
 };
-export const multiselectOption = {
+export const selectListOption = {
     default: { ...baseVariant },
     filled: { ...baseVariant },
     outlined: { ...baseVariant },
     text: { ...baseVariant },
-    ghost: { ...baseVariant }
+    ghost: { ...baseVariant },
+    flushed: { ...baseVariant }
 };

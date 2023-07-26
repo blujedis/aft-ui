@@ -1,13 +1,12 @@
 <script lang="ts">
 	import type { DisclosureContext } from '../Disclosure/module';
-
 	import { SvelteComponent, getContext } from 'svelte';
 	import { forwardEventsBuilder } from '../../utils';
 	import { get_current_component } from 'svelte/internal';
 	import type { DisclosureButtonProps } from './module';
 	import type { HTMLTag } from '../../types';
 
-	type T = $$Generic<HTMLTag | typeof SvelteComponent<any>>;
+	type T = $$Generic<HTMLTag | typeof SvelteComponent>;
 	type $$Props = DisclosureButtonProps<T>;
 
 	export let as = 'button' as T;

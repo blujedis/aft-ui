@@ -3,7 +3,7 @@
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../../types';
 
@@ -43,6 +43,7 @@
 	});
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
@@ -57,6 +58,9 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <nav
@@ -64,6 +68,7 @@
 	aria-label="Pagination"
 	{...$$restProps}
 	class={paginationControllerClasses}
+	class:visible={mounted}
 >
 	<slot
 		page={$context.page}

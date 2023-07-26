@@ -1,31 +1,37 @@
-<script>import { multiselectPanelDefaults as defaults } from "./module";
+<script>import { selectListPanelDefaults as defaults } from "./module";
 import themeStore, { themer, transitioner } from "../..";
 import { getContext } from "svelte";
 import { useFocusNav } from "../../hooks";
-import { writable } from "svelte/store";
-const context = getContext("MultiselectContext");
+const context = getContext("SelectListContext");
 export let { origin, position, rounded, shadowed, theme, transition, variant } = {
   ...defaults,
   ...context?.globals
 };
 const th = themer($themeStore);
 $:
-  ref = writable();
+  nav = useFocusNav($context.panel?.firstChild);
 $:
-  nav = useFocusNav($ref?.firstChild);
+  selected = $context.selected.map(
+    (v) => $context.items.find((item) => item.value === v)
+  );
 nav?.onSelected((el) => {
   const key = el.dataset.key;
-  if (context?.globals.multiple) {
-    if ($context.selected.includes(key))
-      context.unselect(key);
-    else
-      context.select(key);
-  } else if (!$context.selected.includes(key)) {
-    context.select(key);
+  if (!context.globals.tags && $context.input) {
+    const labels = selected.map((i) => i.label).filter((l) => typeof l !== "undefined");
+    setTimeout(() => {
+      if ($context.input)
+        $context.input.value = labels.join(", ");
+    });
+  } else {
+    if (context.isSelected(key)) {
+      setTimeout(() => context.unselect(key));
+    } else if (key) {
+      setTimeout(() => context.select(key));
+    }
   }
 });
 $:
-  panelClasses = th.create("MultiselectPanel").variant("multiselectPanel", variant, theme, true).option("roundeds", rounded === "full" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed).append(`dropdown-panel absolute z-30 mt-1 min-w-full focus:outline-none`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append($$restProps.class, true).compile(true);
+  panelClasses = th.create("SelectListPanel").variant("selectListPanel", variant, theme, true).option("roundeds", rounded === "full" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed).append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append("w-full", context.globals.full).append($$restProps.class, true).compile(true);
 function setFocus(el) {
   el.focus();
 }
@@ -33,17 +39,17 @@ function setFocus(el) {
 
 {#if $context.visible}
 	<div
-		role="menu"
+		role="listbox"
 		tabindex="-1"
 		{...$$restProps}
 		aria-orientation="vertical"
-		bind:this={$ref}
+		bind:this={$context.panel}
 		use:setFocus
 		on:keydown={nav.onKeydown}
 		transition:transitioner={transition}
 		class={panelClasses}
 	>
-		<div class="" role="none">
+		<div class="py-1" role="none">
 			<slot />
 		</div>
 	</div>

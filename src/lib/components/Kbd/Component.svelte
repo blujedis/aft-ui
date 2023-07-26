@@ -4,12 +4,15 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = KbdProps & Omit<ElementNativeProps<'kbd'>, 'size'>;
 
 	export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
 		...defaults
 	} as Required<$$Props>;
+
+	let mounted = false;
 
 	$: kbdClasses = themer($themeStore)
 		.create('Kbd')
@@ -25,8 +28,12 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<kbd use:forwardedEvents {...$$restProps} class={kbdClasses}>
+<kbd use:forwardedEvents {...$$restProps} class={kbdClasses} class:visible={mounted}>
 	<slot />
 </kbd>

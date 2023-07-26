@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Badge, { type EmptyVariant } from '.';
+	import Empty, { type EmptyVariant } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
@@ -21,7 +21,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as EmptyVariant
 	};
@@ -46,7 +46,9 @@
 	<div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
-			<Badge {...props} />
+			<Empty>
+				Empty
+			</Empty>
 		</label>
 	</div>
 </ExamplePage>

@@ -1,4 +1,4 @@
-export const multiselectOptionDefaults = {
+export const selectListOptionDefaults = {
     as: 'a',
     size: 'sm',
     theme: 'default',

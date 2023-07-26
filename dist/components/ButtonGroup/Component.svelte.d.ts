@@ -1,11 +1,12 @@
 import { SvelteComponentTyped } from "svelte";
+import type { ThemeFocused } from '../../types';
 declare const __propDef: {
     props: {
         store?: import("../..").SelectStore<{
             selected: (string | number)[];
             multiple: boolean;
         }> | undefined;
-        focused?: import("../..").ThemeFocused | undefined;
+        focused?: ThemeFocused | undefined;
         unstyled?: boolean | undefined;
         rounded?: import("../..").ThemeRounded | undefined;
         full?: boolean | undefined;
@@ -17,7 +18,7 @@ declare const __propDef: {
         theme?: import("../..").ThemeColor | undefined;
         transitioned?: boolean | undefined;
         multiple?: boolean | undefined;
-        selected?: import("../..").SelectValue | import("../..").SelectValue[] | undefined;
+        selected?: import("../..").SelectStoreValue | import("../..").SelectStoreValue[] | undefined;
         variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;
@@ -227,11 +228,11 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            selectedItems: import("../..").SelectValue[] & (string | number)[];
-            reset: any;
-            select: (value?: import("../..").SelectValue | undefined) => void;
-            unselect: (value?: import("../..").SelectValue | undefined) => void;
-            isSelected: (value?: import("../..").SelectValue | undefined) => boolean;
+            selectedItems: import("../..").SelectStoreValue[] & (string | number)[];
+            reset: () => void;
+            select: (value?: import("../..").SelectStoreValue | undefined) => void;
+            unselect: (value?: import("../..").SelectStoreValue | undefined) => void;
+            isSelected: (value?: import("../..").SelectStoreValue | undefined) => boolean;
         };
     };
 };
@@ -239,9 +240,9 @@ export type ComponentProps = typeof __propDef.props;
 export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
 export default class Component extends SvelteComponentTyped<ComponentProps, ComponentEvents, ComponentSlots> {
-    get store(): import("svelte/store").Writable<import("../..").SelectProps & {
+    get store(): import("svelte/store").Writable<import("../..").SelectStoreOptions & {
         selected: (string | number)[];
         multiple: boolean;
-    }> & import("../..").SelectMethods;
+    }> & import("../..").SelectStoreMethods;
 }
 export {};

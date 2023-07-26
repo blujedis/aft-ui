@@ -22,6 +22,7 @@
 		.option('cardPadding', size, size && type === 'content')
 		.option('cardPaddingHeader', size, size && type === 'header')
 		.option('cardPaddingFooter', size, size && type === 'footer')
+		.option('cardFontSizes', size, size)
 		.append('px-0', wide)
 		.append($$restProps.class, true)
 		.compile(true);

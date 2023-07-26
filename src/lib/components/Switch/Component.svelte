@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = SwitchProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -24,6 +25,7 @@
 	} as Required<$$Props>;
 
 	let checked = false;
+	let mounted = false;
 
 	const th = themer($themeStore);
 
@@ -82,9 +84,13 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<span class="flickerless not-sr-only">
+<span class="flickerless not-sr-only" class:visible={mounted}>
 	<button
 		type="button"
 		class={buttonClasses}
@@ -106,7 +112,14 @@
 		<span aria-hidden="true" class={handleClasses} aria-disabled={disabled} />
 	</button>
 </span>
-<input {...$$restProps} type="checkbox" use:forwardedEvents bind:checked class={inputClasses} {disabled} />
+<input
+	{...$$restProps}
+	type="checkbox"
+	use:forwardedEvents
+	bind:checked
+	class={inputClasses}
+	{disabled}
+/>
 
 <style>
 	.flickerless {

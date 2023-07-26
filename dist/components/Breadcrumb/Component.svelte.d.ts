@@ -3,12 +3,12 @@ declare const __propDef: {
     props: {
         flush?: boolean | undefined;
         full?: boolean | undefined;
-        generated?: boolean | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
-        transitioned?: any;
+        generate?: boolean | undefined;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         variant?: "default" | "filled" | "unfilled" | undefined;
         reversed?: boolean | null | undefined;
         start?: number | null | undefined;

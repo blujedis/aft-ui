@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../theme';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../types';
 import type { tab } from './config';
 export type TabVariant = keyof typeof tab;
 export type TabProps<Tag = 'a'> = {

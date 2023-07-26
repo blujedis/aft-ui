@@ -1,7 +1,7 @@
 import type { DisclosureStore } from '../../stores';
 import type { HTMLTag, ElementProps } from '../../types';
 import type { BlurParams, FadeParams, FlyParams, ScaleParams, SlideParams } from 'svelte/transition';
-import { fly, fade, scale, blur, slide } from 'svelte/transition';
+import { fly, fade, scale, blur, slide, crossfade } from 'svelte/transition';
 export type DisclosureContext = DisclosureStore & {
     transition: DisclosureTransitionOption | (Record<string, any> & {
         type: DisclosureTransition;
@@ -27,10 +27,11 @@ export declare const disclosureTransitions: {
     scale: typeof scale;
     blur: typeof blur;
     slide: typeof slide;
+    crossfade: typeof crossfade;
 };
 export declare const disclosureTransitionOptions: {
     none: Record<string, any>;
-    disolve: FadeParams;
+    dissolve: FadeParams;
     focus: BlurParams;
     expand: SlideParams;
     swipe: SlideParams;

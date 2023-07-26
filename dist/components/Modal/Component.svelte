@@ -1,10 +1,7 @@
-<script>import {
-  modalDefaults as defaults,
-  transitions
-} from "./module";
-import themeStore, { themer } from "../..";
+<script>import { modalDefaults as defaults } from "./module";
+import themeStore, { themer, transitioner } from "../..";
 import { useDisclosure } from "../../stores";
-import { fly, fade, scale } from "svelte/transition";
+import { fade } from "svelte/transition";
 import Placeholder from "./Placeholder.svelte";
 import { useFocusTrap } from "../../hooks";
 export let {
@@ -55,32 +52,6 @@ function handleClick(e) {
   if (!panel?.contains(e.target) && abortable)
     handleClose();
 }
-function transitioner(node, { type }) {
-  if (typeof type === "function")
-    return type(node);
-  const options = transitions[type];
-  if (type === "none") {
-    return { duration: 0 };
-  }
-  if (type === "announce") {
-    if (position === "top") {
-      options.duration = 200;
-      options.y = -200;
-    }
-    return fly(node, options);
-  }
-  if (type === "reveal") {
-    if (position === "bottom") {
-      options.duration = 200;
-      options.y = 200;
-    }
-    return fly(node, options);
-  }
-  if (type === "zoom") {
-    return scale(node, options);
-  }
-  return fade(node, options);
-}
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />
@@ -95,16 +66,18 @@ function transitioner(node, { type }) {
 		on:keydown={handleKeydown}
 	>
 		{#if backdrop && $store.visible}
-			<div
-				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-				transition:fade={{ duration: 100 }}
-			/>
+			<slot name="backdrop">
+				<div
+					class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
+					transition:fade={{ duration: 100 }}
+				/>
+			</slot>
 		{/if}
 		<div role="dialog" aria-modal="true" class={wrapperClasses}>
 			<div class={containerClasses}>
 				<div
 					bind:this={panel}
-					transition:transitioner={{ type: transition }}
+					transition:transitioner={transition}
 					use:bindFocusTrap
 					class={contentClasses}
 				>

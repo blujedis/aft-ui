@@ -1,6 +1,12 @@
 <script lang="ts">
 	import Button, { type ButtonVariant } from '.';
-	import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type {
+		ThemeColor,
+		ThemeFocused,
+		ThemeRounded,
+		ThemeShadowed,
+		ThemeSize
+	} from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -24,7 +30,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as ButtonVariant,
 		underlined: false

@@ -1,23 +1,22 @@
 import { SvelteComponentTyped } from "svelte";
-import { type ModalTransition } from './module';
 declare const __propDef: {
     props: {
         store?: {
             open: () => void;
             close: () => void;
             toggle: () => void;
-            modify: (values: Partial<import("../..").DisclosureProps<{
+            modify: (values: Partial<import("../..").DisclosureStoreOptions<{
                 visible: boolean;
             }>>) => void;
-            set(this: void, value: Required<import("../..").DisclosureProps<{
+            set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
                 visible: boolean;
             }>>): void;
-            update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureProps<{
+            update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
                 visible: boolean;
             }>>>): void;
-            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureProps<{
+            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
                 visible: boolean;
-            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureProps<{
+            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
                 visible: boolean;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
@@ -34,7 +33,9 @@ declare const __propDef: {
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         theme?: import("../..").ThemeColor | undefined;
-        transition?: ModalTransition | undefined;
+        transition?: "none" | "focus" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
+            type: "fade" | "blur" | "fly" | "slide" | "scale" | "crossfade";
+        }) | undefined;
         variant?: "default" | "filled" | undefined;
         visible?: boolean | undefined;
         unmount?: boolean | undefined;
@@ -45,6 +46,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        backdrop: {};
         default: {
             visible: boolean;
             close: () => void;
@@ -61,18 +63,18 @@ export default class Component extends SvelteComponentTyped<ComponentProps, Comp
         open: () => void;
         close: () => void;
         toggle: () => void;
-        modify: (values: Partial<import("../..").DisclosureProps<{
+        modify: (values: Partial<import("../..").DisclosureStoreOptions<{
             visible: boolean;
         }>>) => void;
-        set(this: void, value: Required<import("../..").DisclosureProps<{
+        set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
             visible: boolean;
         }>>): void;
-        update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureProps<{
+        update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
             visible: boolean;
         }>>>): void;
-        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureProps<{
+        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
             visible: boolean;
-        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureProps<{
+        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
             visible: boolean;
         }>>> | undefined): import("svelte/store").Unsubscriber;
     };

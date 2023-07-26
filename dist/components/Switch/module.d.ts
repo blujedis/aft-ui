@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '../../types';
 import type { switchBackdrop } from './config';
 export type SwitchVariant = keyof typeof switchBackdrop;
 export type SwitchProps = {

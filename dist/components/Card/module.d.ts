@@ -9,7 +9,6 @@ export type CardContext = {
     };
 };
 export type CardProps = {
-    edged?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;

@@ -1,21 +1,21 @@
 import { type Writable } from 'svelte/store';
-export type SelectValue = string | number;
-export interface SelectProps {
+export type SelectStoreValue = string | number;
+export interface SelectStoreOptions {
     max?: number;
     min?: number;
     multiple?: boolean;
-    selected: SelectValue[];
+    selected: SelectStoreValue[];
 }
-export type SelectInitProps = SelectProps & {
-    selected?: SelectValue | SelectValue[];
+export type SelectInitProps = SelectStoreOptions & {
+    selected?: SelectStoreValue | SelectStoreValue[];
 };
-export interface SelectMethods {
-    select(value?: SelectValue): void;
-    unselect(value?: SelectValue): void;
-    toggle(value?: SelectValue): void;
-    isSelected(value?: SelectValue): boolean;
+export interface SelectStoreMethods {
+    select(value?: SelectStoreValue): void;
+    unselect(value?: SelectStoreValue): void;
+    toggle(value?: SelectStoreValue): void;
+    isSelected(value?: SelectStoreValue): boolean;
 }
-export type SelectStore<P extends Record<string, any> = Record<string, any>> = Writable<SelectProps & P> & SelectMethods;
-export declare function useSelect<P extends Record<string, any> = Record<string, any>>(props?: P & SelectProps & {
-    selected?: SelectValue | SelectValue[] | undefined;
+export type SelectStore<P extends Record<string, any> = Record<string, any>> = Writable<SelectStoreOptions & P> & SelectStoreMethods;
+export declare function useSelect<P extends Record<string, any> = Record<string, any>>(props?: P & SelectStoreOptions & {
+    selected?: SelectStoreValue | SelectStoreValue[] | undefined;
 }): SelectStore<P>;

@@ -9,7 +9,7 @@
 	} from './module';
 	import themeStore, { themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '../../types';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
@@ -51,8 +51,8 @@
 		})) as SelectStore<SelectListStore<Item>>;
 
 	const th = themer($themeStore);
-	// let div: HTMLDivElement;
 	let sel: HTMLSelectElement;
+	let mounted =false;
 
 	const globals = cleanObj({
 		full,
@@ -184,6 +184,9 @@
 	}
 
 	items.forEach((item) => add(item));
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div
@@ -193,6 +196,7 @@
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={multiselectClasses}
+	class:visible={mounted}
 >
 	<div class:w-full={full}>
 		<slot

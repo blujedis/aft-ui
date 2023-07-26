@@ -14,8 +14,14 @@ export type SelectListButtonProps = InputProps & {
 	roticon?: boolean;
 	tags?: boolean;
 	variant?: SelectListButtonVariant;
-	onBeforeAdd?: <T extends SelectListItem>(value: string, input: HTMLInputElement) => T | null | false | undefined | Promise<T | null | false | undefined>;
-	onBeforeRemove?: <T extends SelectListItem>(item: T, input: HTMLInputElement) => boolean | Promise<boolean>;
+	onBeforeAdd?: <T extends SelectListItem>(
+		value: string,
+		input: HTMLInputElement
+	) => T | null | false | undefined | Promise<T | null | false | undefined>;
+	onBeforeRemove?: <T extends SelectListItem>(
+		item: T,
+		input: HTMLInputElement
+	) => boolean | Promise<boolean>;
 };
 
 export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
@@ -25,7 +31,7 @@ export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
 	placeholder: '',
 	roticon: true,
 	variant: 'default',
-	onBeforeAdd: (value: string, input: HTMLInputElement) => ({ label: value, value, group: '', selected: false }) as any,
+	onBeforeAdd: (value: string, input: HTMLInputElement) =>
+		({ label: value, value, group: '', selected: false } as any),
 	onBeforeRemove: (item: SelectListItem, input: HTMLInputElement) => true // default just allow removal.
-
 };

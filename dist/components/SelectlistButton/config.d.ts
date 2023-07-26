@@ -1,17 +1,6 @@
-export declare const multiselectButton: {
+export declare const selectListButton: {
     default: {
-        $base: string;
-        white: string;
-        default: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
-    filled: {
+        [x: string]: string | string[];
         $base: string;
         white: string;
         default: string;
@@ -36,7 +25,7 @@ export declare const multiselectButton: {
         success: string;
         info: string;
     };
-    text: {
+    filled: {
         $base: string;
         white: string;
         default: string;
@@ -48,8 +37,7 @@ export declare const multiselectButton: {
         success: string;
         info: string;
     };
-    ghost: {
-        [x: string]: string | string[];
+    flushed: {
         $base: string;
         white: string;
         default: string;

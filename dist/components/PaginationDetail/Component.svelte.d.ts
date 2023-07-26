@@ -2,11 +2,11 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         full?: boolean | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
-        transitioned?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         variant?: "default" | "outline" | "filled" | undefined;
         unstyled?: boolean | undefined;
         slot?: string | null | undefined;

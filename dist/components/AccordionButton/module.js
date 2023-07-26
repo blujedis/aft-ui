@@ -1,6 +1,7 @@
 export const accordionButtonDefaults = {
-    icon: ['octicon:chevron-down-24', 'octicon:chevron-up-24'],
-    roticon: false,
+    focused: 'visible',
+    caret: 'octicon:chevron-down-24',
+    roticon: true,
     size: 'sm',
     theme: 'default',
     variant: 'default'

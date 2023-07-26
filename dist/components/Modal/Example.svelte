@@ -10,7 +10,7 @@ import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
 import SelectTransition from "../_Example/SelectTransition.svelte";
 const title = "Modal";
-const description = "Themed dialog box.";
+const description = "Modal dialog box with built in transitions.";
 const code = `
   `;
 const props = {
@@ -21,7 +21,7 @@ const props = {
   rounded: "sm",
   shadowed: "xl",
   theme: "default",
-  transition: "fade",
+  transition: "dissolve",
   variant: "default",
   visible: false,
   unmount: true

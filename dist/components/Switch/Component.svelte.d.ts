@@ -5,11 +5,11 @@ declare const __propDef: {
         classFill?: string | undefined;
         classBackdrop?: string | undefined;
         disabled?: boolean | undefined;
-        focused?: any;
-        shadowed?: any;
-        size?: any;
+        focused?: import("../..").ThemeFocused | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
         srtext?: string | undefined;
-        theme?: any;
+        theme?: import("../..").ThemeColor | undefined;
         variant?: "default" | undefined;
         unstyled?: boolean | undefined;
         form?: string | null | undefined;

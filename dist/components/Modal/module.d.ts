@@ -2,21 +2,13 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { modal } from './config';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '../../stores';
-import type { EasingFunction, TransitionConfig } from 'svelte/transition';
+import { type DisclosureTransitionOption, type DisclosureTransition } from '../Disclosure';
 export declare class ModalComponent extends SvelteComponent<ModalProps> {
     disclosure?: DisclosureMethods;
 }
 export type ModalVariant = keyof typeof modal;
 export type ModalPosition = 'top' | 'center' | 'bottom' | 'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | 'top-center' | 'center-center' | 'bottom-center';
-export interface TransitionParams {
-    delay?: number;
-    duration?: number;
-    easing?: EasingFunction;
-    start?: number;
-    y?: number;
-}
-export type TransitionHandler = <O extends TransitionParams>(node: Element, options?: O) => TransitionConfig;
-export type ModalTransition = 'fade' | 'announce' | 'zoom' | 'reveal' | 'none' | TransitionHandler;
+export type ModalTransition = DisclosureTransitionOption;
 export type ModalProps = {
     abortable?: boolean;
     backdrop?: string | boolean;
@@ -29,7 +21,9 @@ export type ModalProps = {
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     theme?: ThemeColor;
-    transition?: ModalTransition;
+    transition?: ModalTransition | (Record<string, any> & {
+        type: DisclosureTransition;
+    });
     variant?: ModalVariant;
     visible?: boolean;
     unmount?: boolean;
@@ -37,24 +31,26 @@ export type ModalProps = {
     onClose?: () => void;
 };
 export declare const transitions: {
-    fade: {
-        duration: number;
-        start: number;
-    };
     zoom: {
         duration: number;
         start: number;
+        type: string;
     };
-    announce: {
+    swipe: {
         duration: number;
-        y: number;
+        axis: string;
+        type: string;
     };
-    reveal: {
+    dissolve: {
         duration: number;
-        y: number;
+        start: number;
+        type: string;
     };
-    none: {
-        duration: number;
-    };
+    fly: typeof import("svelte/transition").fly;
+    fade: typeof import("svelte/transition").fade;
+    scale: typeof import("svelte/transition").scale;
+    blur: typeof import("svelte/transition").blur;
+    slide: typeof import("svelte/transition").slide;
+    crossfade: typeof import("svelte/transition").crossfade;
 };
 export declare const modalDefaults: Partial<ModalProps>;

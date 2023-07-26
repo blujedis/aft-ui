@@ -1,5 +1,5 @@
 export const checkboxDefaults = {
-    focused: true,
+    focused: 'always',
     rounded: 'full',
     size: 'md',
     theme: 'default',

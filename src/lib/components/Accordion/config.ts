@@ -1,9 +1,9 @@
 import { placeholder } from '../placeholder';
 
 const baseVariant = {
-	$base: 'divide-y divide-default-200 border border-default-200',
+	$base: 'divide-y divide-frame-200 border border-frame-200',
 	white: '',
-	default: '',
+	frame: '',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -20,7 +20,7 @@ export const accordion = {
 	pills: {
 		$base: '',
 		white: '',
-		default: '',
+		frame: '',
 		primary: '',
 		secondary: '',
 		tertiary: '',

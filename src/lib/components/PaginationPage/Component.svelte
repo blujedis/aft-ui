@@ -4,7 +4,7 @@
 		HTMLBaseAttributes,
 		HTMLButtonAttributes
 	} from 'svelte/elements';
-	import type { SelectValue } from '$lib/stores/select';
+	import type { SelectStoreValue } from '$lib/stores/select';
 	import type { PaginationContext } from '../Pagination';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
@@ -35,7 +35,7 @@
 	$: paginationPageClasses = th
 		.create('PaginationPage')
 		.variant('paginationPage', variant, theme, true)
-			.option('focused', theme, focused && variant !== 'flushed')
+		.option('focused', theme, focused && variant !== 'flushed')
 		.option('focusedRingSizes', 'two', focused && variant !== 'flushed')
 		.remove('focusedFilters', focused, focused)
 		.option('fieldFontSizes', size, size)
@@ -63,7 +63,7 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	function handleSelect(value: SelectValue) {
+	function handleSelect(value: SelectStoreValue) {
 		if (previous) context.prev();
 		else if (next) context.next();
 		else context.goto(value);

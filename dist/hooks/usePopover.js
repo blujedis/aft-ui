@@ -87,13 +87,13 @@ export function createPopper(initOptions) {
 }
 export function createPopover(initOptions = {}) {
     const options = {
-        type: 'hover',
+        strategy: 'hover',
         target: document.body,
         ...initOptions
     };
-    if (typeof options.escapable === 'undefined' && options.type === 'click')
+    if (typeof options.escapable === 'undefined' && options.action === 'click')
         options.escapable = true;
-    const { node: initNode, component: initComponent, target: initTarget, type, props, selector, escapable, ...rest } = options;
+    const { node: initNode, component: initComponent, target: initTarget, action, props, selector, escapable, ...rest } = options;
     const [createRef, createContent, getInstance] = createPopper(rest);
     const Component = initComponent || Popover;
     let visible = false;
@@ -105,16 +105,16 @@ export function createPopover(initOptions = {}) {
     function bind() {
         if (!node)
             return;
-        if (type === 'hover') {
+        if (action === 'hover') {
             node.addEventListener('mouseover', show);
             node.addEventListener('mouseout', hide);
             events = [...events, ['mouseover', show], ['mouseout', hide]];
         }
-        else if (type === 'click') {
+        else if (action === 'click') {
             node.addEventListener('click', handleClick);
             events = [...events, ['click', handleClick]];
         }
-        else if (type === 'focus') {
+        else if (action === 'focus') {
             node.addEventListener('focus', show);
             node.addEventListener('blur', hide);
             events = [...events, ['focus', show], ['blur', hide]];
@@ -124,7 +124,7 @@ export function createPopover(initOptions = {}) {
     }
     function unbind() {
         events.forEach(([event, handler]) => node?.removeEventListener(event, handler));
-        if (type === 'click')
+        if (action === 'click')
             document.removeEventListener('click', handleClickOutside);
         window.removeEventListener('keydown', handleEscape);
     }
@@ -164,7 +164,7 @@ export function createPopover(initOptions = {}) {
         content.setAttribute('data-show', '');
         createRef(node);
         createContent(content);
-        if (type === 'click')
+        if (action === 'click')
             document.addEventListener('click', handleClickOutside);
     }
     function hide() {
@@ -174,7 +174,7 @@ export function createPopover(initOptions = {}) {
         content?.removeAttribute('data-show');
         visible = false;
         reset();
-        if (type === 'click')
+        if (action === 'click')
             document.removeEventListener('click', handleClickOutside);
         node?.focus();
     }
@@ -213,7 +213,7 @@ export function createPopover(initOptions = {}) {
  */
 export function usePopover(node, options = {}) {
     options = {
-        target: '#popover-container',
+        // target: '#popover-container', // default is document.body
         selector: '.popover',
         ...options,
         node

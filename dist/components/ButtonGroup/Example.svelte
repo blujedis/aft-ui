@@ -15,7 +15,7 @@ const code = `
   `;
 const props = {
   disabled: false,
-  focused: true,
+  focused: "visible",
   full: false,
   multiple: false,
   rounded: "none",
@@ -37,7 +37,7 @@ const buttons = [
 
 <ExamplePage {title} {description} {code}>
 	<ToggleOptions>
-		<Checkbox label="Focused" bind:checked={props.focused} />
+		<!-- <Checkbox label="Focused" bind:checked={props.focused} /> -->
 		<Checkbox label="Full" bind:checked={props.full} />
 		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
 		<Checkbox label="Disabled" bind:checked={props.disabled} />

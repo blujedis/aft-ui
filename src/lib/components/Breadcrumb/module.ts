@@ -34,6 +34,6 @@ export type BreadcrumbProps = {
 
 export const breadcrumbDefaults: Partial<BreadcrumbProps> = {
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

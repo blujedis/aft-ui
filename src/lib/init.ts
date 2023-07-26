@@ -18,8 +18,6 @@ const defaultTheme = {
 	palette
 };
 
-let _store: ThemeStore<typeof defaultTheme>;//  = createStoreInternal(defaultTheme);
-
 /**
  * Replaces target values with overrides, ensures all target values exist.
  *
@@ -53,7 +51,9 @@ function createStoreInternal<T extends ThemeConfig>(
 		...rest
 	} as unknown as T;
 
-	normalized.defaults.component = cleanObj(normalized.defaults.component) as Required<ThemeDefaults['component']>;
+	normalized.defaults.component = cleanObj(normalized.defaults.component) as Required<
+		ThemeDefaults['component']
+	>;
 
 	const store = writable(normalized);
 
@@ -81,7 +81,7 @@ function createStoreInternal<T extends ThemeConfig>(
 	};
 }
 
-// export const themeStore = createStoreInternal(defaultTheme);
+export const themeStore = createStoreInternal(defaultTheme); //  = createStoreInternal(defaultTheme);
 
 /**
  * Creates a new store which updates the default store's components and options when changed.
@@ -94,14 +94,9 @@ export function createStore<T extends Record<string, unknown> & DeepPartial<Them
 	baseTheme = { ...defaultTheme }
 ) {
 	const store = createStoreInternal(extendTheme, baseTheme);
-	store.subscribe((s) => {
+	themeStore.subscribe((s) => {
 		// update default store on change.
-		_store.update({ options: s.options, defaults: s.defaults, components: s.components });
+		themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });
 	});
 	return store as ThemeStore<T & ThemeConfig>;
-}
-
-export function getStore() {
-	if (typeof _store === 'undefined') _store = createStoreInternal(defaultTheme);
-	return _store;
 }

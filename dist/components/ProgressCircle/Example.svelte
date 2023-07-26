@@ -8,7 +8,7 @@ import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
 import ProgressCircle, {} from ".";
 const title = "Progress Circle";
-const description = "Progress circle with themes.";
+const description = "Progress circle with animation.";
 const code = `
   `;
 let progress;

@@ -3,11 +3,11 @@ declare const __propDef: {
     props: {
         as?: "button" | "div" | "label" | "link" | "span" | undefined;
         full?: boolean | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
-        theme?: any;
-        transitioned?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
         variant?: "default" | "outlined" | undefined;
         unstyled?: boolean | undefined;
         slot?: string | null | undefined;

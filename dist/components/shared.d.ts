@@ -276,6 +276,15 @@ export declare const focusedBorderSizes: {
     four: string;
     eight: string;
 };
+export declare const focusedBorderFlushSizes: {
+    $base: string;
+    unstyled: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+};
 export declare const focusedOutline: {
     $base: string;
     white: string;
@@ -305,6 +314,13 @@ export declare const focusedOutlineOffsetSizes: {
     two: string;
     four: string;
     eight: string;
+};
+export declare const focusedFilters: {
+    always: string[];
+    visible: string[];
+    within: string[];
+    alwaysWithin: string[];
+    visibleWithin: string[];
 };
 export declare const disableds: {
     $base: string;
@@ -341,4 +357,5 @@ export declare const iconCaretSizes: {
 export declare const common: {
     active: string;
     transition: string;
+    untransition: string;
 };

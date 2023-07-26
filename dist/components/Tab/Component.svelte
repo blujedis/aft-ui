@@ -1,7 +1,7 @@
 <script>import themeStore, { themer } from "../..";
 import { tabDefaults as defaults } from "./module";
 import { getContext } from "svelte";
-const context = getContext("TabController");
+const context = getContext("Tabs");
 export let {
   as,
   disabled,
@@ -26,7 +26,7 @@ $:
   ).append("inline-flex items-center justify-center", true).append("whitespace-nowrap", variant === "flushed").append("w-full", full && ["grouped", "labeled"].includes(variant)).append("px-10", full && ["pills", "underlined", "default"].includes(variant)).append(
     "relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none",
     variant === "grouped"
-  ).append("pointer-events-none", $context?.selected?.includes(value)).append($$restProps.class, true).compile(true);
+  ).append($$restProps.class, true).compile(true);
 function handleSelect(value2) {
   if ($context?.selected?.includes(value2))
     context.unselect(value2);
@@ -37,13 +37,13 @@ function handleSelect(value2) {
 
 <svelte:element
 	this={as}
+	aria-labelledby={value + ''}
 	{...$$restProps}
 	role={as === 'a' ? 'link' : 'button'}
 	tabindex="-1"
 	class={tabClasses}
 	aria-current={$context?.selected?.includes(value)}
 	aria-selected={$context?.selected?.includes(value)}
-	aria-labelledby={value + ''}
 	on:click={() => handleSelect(value)}
 >
 	<slot />

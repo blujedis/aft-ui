@@ -1,6 +1,6 @@
 import { type Writable } from 'svelte/store';
 import type { NotificationItem } from '../components/Notification';
-import type { NotificationPosition } from '../components/NotificationController';
+import type { NotificationPosition } from '../components/Notification';
 export type NotificationState = 'enabled' | 'locked' | 'unlocked';
 export interface NotificationOptions {
     dismissible?: boolean;

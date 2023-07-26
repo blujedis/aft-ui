@@ -6,6 +6,7 @@ export interface ThemerApi<C extends ThemeConfig> {
     option<K extends ThemeOption>(key: K, prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined, when: Primitive): ThemerApi<C>;
     mapped<T extends Record<string, unknown>, K extends Path<T>>(obj: T, key: K, when: Primitive): ThemerApi<C>;
     remove(classes: string | string[], when: Primitive): ThemerApi<C>;
+    remove<K extends ThemeOption>(key: K, prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined, when: Primitive): ThemerApi<C>;
     append(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
     compile(withTailwindMerge?: boolean): string;
     classes(): {

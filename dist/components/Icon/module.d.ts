@@ -1,4 +1,4 @@
-import type { ThemeSize } from '../../theme';
+import type { ThemeSize } from '../../types';
 import type { IconProps as IconifyIconProps } from '@iconify/svelte';
 export type IconProps = IconifyIconProps & {
     class?: string;

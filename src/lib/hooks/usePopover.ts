@@ -14,10 +14,13 @@ import type { ElementProps } from '$lib/types';
 export type { VirtualElement } from '@popperjs/core';
 export type RefNode = Element | VirtualElement;
 export type ContentNode = HTMLElement | undefined;
-
 export type PopperOptions<TModifier> = Partial<OptionsGeneric<TModifier>> | undefined;
-
 export type PopoverNativeProps = ElementProps<'div'>;
+export type PopoverStrategy = 'click' | 'hover' | 'focus' | 'none';
+
+export type PopoverHookOptions<
+	TModifier extends Partial<Modifier<any, any>> = Partial<Modifier<any, any>>
+> = Omit<PopoverOptions<TModifier, typeof PopoverComponent>, 'component'>;
 
 export type RefAction = (node: RefNode | Readable<VirtualElement>) => {
 	destroy?(): void;
@@ -43,7 +46,7 @@ export type PopperReturn<TModifier> = [
 	() => InstanceExt | null
 ];
 
-export class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> { }
+export class PopoverComponent extends SvelteComponent<PopoverProps & PopoverNativeProps> {}
 
 export type PopoverOptions<
 	TModifier,
@@ -52,7 +55,7 @@ export type PopoverOptions<
 	target?: string | Element | ShadowRoot;
 	selector?: string;
 	node?: Element & { focus: () => void };
-	type?: 'click' | 'hover' | 'focus' | 'none';
+	action?: PopoverStrategy;
 	escapable?: boolean;
 	component?: C;
 	props?: ComponentProps<InstanceType<C>>;
@@ -154,19 +157,19 @@ export function createPopover<
 	C extends typeof SvelteComponent<any>
 >(initOptions = {} as PopoverOptions<M, C>) {
 	const options = {
-		type: 'hover',
+		strategy: 'hover',
 		target: document.body,
 		...initOptions
 	};
 
-	if (typeof options.escapable === 'undefined' && options.type === 'click')
+	if (typeof options.escapable === 'undefined' && options.action === 'click')
 		options.escapable = true;
 
 	const {
 		node: initNode,
 		component: initComponent,
 		target: initTarget,
-		type,
+		action,
 		props,
 		selector,
 		escapable,
@@ -184,14 +187,14 @@ export function createPopover<
 
 	function bind() {
 		if (!node) return;
-		if (type === 'hover') {
+		if (action === 'hover') {
 			node.addEventListener('mouseover', show);
 			node.addEventListener('mouseout', hide);
 			events = [...events, ['mouseover', show], ['mouseout', hide]];
-		} else if (type === 'click') {
+		} else if (action === 'click') {
 			node.addEventListener('click', handleClick);
 			events = [...events, ['click', handleClick]];
-		} else if (type === 'focus') {
+		} else if (action === 'focus') {
 			node.addEventListener('focus', show);
 			node.addEventListener('blur', hide);
 			events = [...events, ['focus', show], ['blur', hide]];
@@ -201,7 +204,7 @@ export function createPopover<
 
 	function unbind() {
 		events.forEach(([event, handler]) => node?.removeEventListener(event, handler));
-		if (type === 'click') document.removeEventListener('click', handleClickOutside);
+		if (action === 'click') document.removeEventListener('click', handleClickOutside);
 		window.removeEventListener('keydown', handleEscape);
 	}
 
@@ -238,7 +241,7 @@ export function createPopover<
 		content.setAttribute('data-show', '');
 		createRef(node);
 		createContent(content);
-		if (type === 'click') document.addEventListener('click', handleClickOutside);
+		if (action === 'click') document.addEventListener('click', handleClickOutside);
 	}
 
 	function hide() {
@@ -247,7 +250,7 @@ export function createPopover<
 		content?.removeAttribute('data-show');
 		visible = false;
 		reset();
-		if (type === 'click') document.removeEventListener('click', handleClickOutside);
+		if (action === 'click') document.removeEventListener('click', handleClickOutside);
 		node?.focus();
 	}
 
@@ -287,7 +290,7 @@ export function createPopover<
  */
 export function usePopover<TModifier extends Partial<Modifier<any, any>>>(
 	node: Element & { focus: () => void },
-	options = {} as Omit<PopoverOptions<TModifier, typeof PopoverComponent>, 'component'>
+	options = {} as PopoverHookOptions<TModifier>
 ) {
 	options = {
 		// target: '#popover-container', // default is document.body

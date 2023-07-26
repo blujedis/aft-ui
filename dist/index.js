@@ -1,6 +1,6 @@
-import { getStore } from './init';
+import { themeStore } from './init';
 export * from './types';
 export * from './stores';
 export * from './theme';
 export * from './components';
-export default getStore();
+export default themeStore;

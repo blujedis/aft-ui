@@ -3,7 +3,11 @@ import type { modal } from './config';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '$lib/stores';
 import type { EasingFunction, TransitionConfig } from 'svelte/transition';
-import { disclosureTransitions, type DisclosureTransitionOption, type DisclosureTransition } from '../Disclosure';
+import {
+	disclosureTransitions,
+	type DisclosureTransitionOption,
+	type DisclosureTransition
+} from '../Disclosure';
 
 export class ModalComponent extends SvelteComponent<ModalProps> {
 	disclosure?: DisclosureMethods;
@@ -76,7 +80,7 @@ export const modalDefaults: Partial<ModalProps> = {
 	labelby: 'Modal',
 	rounded: 'md',
 	shadowed: 'lg',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default',
 	unmount: true
 };

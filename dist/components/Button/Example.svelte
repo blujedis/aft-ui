@@ -8,15 +8,14 @@ import ListOptions from "../_Example/ListOptions.svelte";
 import ToggleOptions from "../_Example/ToggleOptions.svelte";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
-import Input from "../Input";
 const title = "Buttons";
-const description = "Themed Buttons with multiple variants.";
+const description = "Themed Buttons with variants.";
 const code = `
   `;
 const props = {
   activated: false,
   disabled: false,
-  focused: true,
+  focused: "visible",
   // true: focus-visible.
   full: false,
   rounded: "none",

@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { progressBar } from './config';
 export type ProgressBarVariant = keyof typeof progressBar;
 export type ProgressBarTweenedOptions<T extends number = any> = {

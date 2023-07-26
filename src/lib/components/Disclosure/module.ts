@@ -5,7 +5,7 @@ import type {
 	FadeParams,
 	FlyParams,
 	ScaleParams,
-	SlideParams,
+	SlideParams
 } from 'svelte/transition';
 import { fly, fade, scale, blur, slide, crossfade } from 'svelte/transition';
 
@@ -55,7 +55,7 @@ export const disclosureTransitionOptions = {
 	swipe: { duration: 400, axis: 'x', type: 'slide' } as SlideParams,
 	zoom: { duration: 200, start: 0.7, type: 'scale' } as ScaleParams,
 	announce: { duration: 400, y: -300, type: 'fly' } as FlyParams,
-	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams,
+	reveal: { duration: 400, y: 300, type: 'fly' } as FlyParams
 };
 
 export function transitioner(

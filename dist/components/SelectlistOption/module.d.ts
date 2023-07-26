@@ -1,12 +1,12 @@
 import type { ThemeColor, ThemeSize } from '../../types';
-import type { MultiselectItemKey } from '../MultiselectController';
-import type { multiselectOption } from './config';
-export type MultiselectOptionVariant = keyof typeof multiselectOption;
-export type MultiselectOptionProps<Tag extends 'a' | 'button'> = {
+import type { SelectListItemKey } from '../SelectList';
+import type { selectListOption } from './config';
+export type SelectListOptionVariant = keyof typeof selectListOption;
+export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
     as?: Tag;
     size?: ThemeSize;
     theme?: ThemeColor;
-    key?: MultiselectItemKey;
-    variant?: MultiselectOptionVariant;
+    key?: SelectListItemKey;
+    variant?: SelectListOptionVariant;
 };
-export declare const multiselectOptionDefaults: MultiselectOptionProps<'a'>;
+export declare const selectListOptionDefaults: SelectListOptionProps<'a'>;

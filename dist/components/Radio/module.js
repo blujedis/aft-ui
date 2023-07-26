@@ -1,5 +1,5 @@
 export const radioDefaults = {
-    focused: true,
+    focused: 'always',
     rounded: 'full',
     size: 'md',
     theme: 'default',

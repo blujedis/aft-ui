@@ -1,5 +1,5 @@
 export const switchDefaults = {
-    focused: true,
+    focused: 'always',
     size: 'md',
     srtext: 'Use Switch',
     theme: 'default',

@@ -4,7 +4,7 @@ declare const __propDef: {
         style?: string | undefined;
         color?: string | undefined;
         unstyled?: boolean | undefined;
-        size?: any;
+        size?: import("../..").ThemeSize | undefined;
         class?: string | undefined;
         height?: import("@iconify/svelte").IconifyIconSize | undefined;
         width?: import("@iconify/svelte").IconifyIconSize | undefined;

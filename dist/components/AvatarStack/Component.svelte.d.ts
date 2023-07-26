@@ -10,12 +10,12 @@ declare const __propDef: {
         notification?: boolean | "top-right" | "top-left" | "bottom-right" | "bottom-left" | undefined;
         animation?: "ping" | "pulse" | undefined;
         placeholder?: string | (import("@iconify/svelte").IconifyIcon & string) | undefined;
-        rounded?: any;
-        shadowed?: any;
-        size?: any;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: import("../..").ThemeSize | undefined;
         src?: string | undefined;
         stacked?: "up" | "down" | undefined;
-        theme?: any;
+        theme?: import("../..").ThemeColor | undefined;
         variant?: "default" | "stacked" | undefined;
         direction?: "up" | "down" | undefined;
         slot?: string | null | undefined;

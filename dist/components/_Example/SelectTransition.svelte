@@ -6,10 +6,13 @@ export let value = "";
 	bind:value
 	label="Transition"
 	items={[
-		{ label: 'Announce', value: 'announce' },
-		{ label: 'Fade', value: 'fade' },
-		{ label: 'Reveal', value: 'reveal' },
+		{ label: 'None', value: 'none' },
+		{ label: 'Disoslve', value: 'dissolve' },
+		{ label: 'Focus', value: 'focus' },
+		{ label: 'Expand', value: 'expand' },
+		{ label: 'Swipe', value: 'swipe' },
 		{ label: 'Zoom', value: 'zoom' },
-		{ label: 'None', value: 'none' }
+		{ label: 'Announce', value: 'announce' },
+		{ label: 'Reveal', value: 'reveal' }
 	]}
 />

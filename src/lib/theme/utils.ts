@@ -1,6 +1,5 @@
 import { twMerge } from 'tailwind-merge';
 import type { Path, ThemeColor, ThemeColorShade, TypeOrValue } from '../types';
-
 import { tailwindcolors, namedcolors } from './palettes';
 import { getProperty } from 'dot-prop';
 import { prefixes as colorPrefixes } from './constants';

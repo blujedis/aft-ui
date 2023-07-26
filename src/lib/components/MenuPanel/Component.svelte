@@ -25,10 +25,7 @@
 		.variant('menuPanel', variant, theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.append(
-			`dropdown-panel absolute z-30 mt-1 min-w-full`,
-			true
-		)
+		.append(`dropdown-panel absolute z-30 mt-1 min-w-max`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
 		.append('origin-center', origin === 'center')

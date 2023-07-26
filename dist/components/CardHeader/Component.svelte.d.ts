@@ -1,8 +1,8 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        size?: any;
-        theme?: any;
+        size?: import("../../types").ThemeSize | undefined;
+        theme?: import("../../types").ThemeColor | undefined;
         variant?: "default" | "filled" | "soft" | undefined;
         wide?: boolean | undefined;
         accesskey?: string | null | undefined;

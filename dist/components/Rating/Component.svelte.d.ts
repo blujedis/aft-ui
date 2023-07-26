@@ -3,15 +3,15 @@ import { type RatingStoreValue } from './module';
 declare const __propDef: {
     props: {
         store?: import("svelte/store").Writable<RatingStoreValue> | undefined;
-        fill?: any;
-        size?: any;
+        fill?: import("../..").ThemeColorKey | undefined;
+        size?: import("../..").ThemeSize | undefined;
         background?: string | undefined;
         stroked?: boolean | undefined;
         arrowable?: boolean | undefined;
         hoverable?: boolean | undefined;
         count?: number | undefined;
         readonly?: boolean | undefined;
-        shadowed?: any;
+        shadowed?: import("../..").ThemeShadowed | undefined;
         score?: number | undefined;
         updatable?: boolean | undefined;
         accesskey?: string | null | undefined;

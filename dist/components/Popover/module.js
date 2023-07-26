@@ -3,6 +3,5 @@ export const popoverDefaults = {
     shadowed: 'md',
     size: 'md',
     theme: 'default',
-    unstyled: false,
     variant: 'default'
 };

@@ -1,4 +1,4 @@
-export const multiselectPanelDefaults = {
+export const selectListPanelDefaults = {
     origin: 'center',
     position: 'left',
     shadowed: 'md',

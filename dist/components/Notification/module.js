@@ -1,4 +1,4 @@
-export const notificationsDefaults = {
+export const notificationDefaults = {
     dismissible: true,
     duration: 3500,
     group: 'default',

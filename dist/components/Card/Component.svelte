@@ -1,15 +1,25 @@
 <script>import { cardDefaults as defaults } from "./module";
 import themeStore, { themer } from "../..";
-import { setContext } from "svelte";
-export let { edged, rounded, shadowed, size, theme, variant, wide } = {
+import { onMount, setContext } from "svelte";
+import { cleanObj } from "../../utils";
+export let { rounded, shadowed, size, theme, variant, wide } = {
   ...defaults
 };
-setContext("Card", { globals: { size, theme, wide } });
+const globals = cleanObj({
+  size,
+  theme,
+  wide
+});
+setContext("Card", { globals });
 const th = themer($themeStore);
+let mounted = false;
 $:
-  cardClasses = th.create("Card").variant("card", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("ring-1 ring-black ring-opacity-5", edged).append("text-sm h-full", true).append($$restProps.class, true).compile(true);
+  cardClasses = th.create("Card").variant("card", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("h-full", true).append($$restProps.class, true).compile(true);
+onMount(() => {
+  mounted = true;
+});
 </script>
 
-<div {...$$restProps} class={cardClasses}>
+<div {...$$restProps} class={cardClasses} class:visible={mounted}>
 	<slot />
 </div>

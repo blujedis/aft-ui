@@ -2,7 +2,7 @@ export const radio = {
 	default: {
 		$base: 'border focus:outline-none ',
 		white: 'border-white text-gray-300',
-		default: 'border-default-300 text-default-300',
+		frame: 'border-frame-300 text-frame-300',
 		primary: 'border-primary-500 text-primary-500',
 		secondary: 'border-secondary-500 text-secondary-500',
 		tertiary: 'border-tertiary-500 text-tertiary-500',
@@ -14,7 +14,7 @@ export const radio = {
 	outlined: {
 		$base: 'border focus:outline-none ',
 		white: 'border-white text-gray-300',
-		default: 'border-default-300 text-default-300',
+		frame: 'border-frame-300 text-frame-300',
 		primary: 'border-primary-500 text-primary-500',
 		secondary: 'border-secondary-500 text-secondary-500',
 		tertiary: 'border-tertiary-500 text-tertiary-500',

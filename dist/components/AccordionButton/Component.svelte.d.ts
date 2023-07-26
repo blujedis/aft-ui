@@ -1,5 +1,4 @@
 import { SvelteComponentTyped } from "svelte";
-import { type AccordionButtonIcon } from './module';
 declare const __propDef: {
     props: {
         focused?: import("../..").ThemeFocused | undefined;
@@ -13,10 +12,10 @@ declare const __propDef: {
         size?: import("../..").ThemeSize | undefined;
         theme?: import("../..").ThemeColor | undefined;
         transitioned?: boolean | undefined;
-        icon?: AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon] | undefined;
+        caret?: import("../..").Iconify | undefined;
         htag?: keyof import("svelte/elements").SvelteHTMLElements | undefined;
         roticon?: string | boolean | undefined;
-        key?: import("../..").SelectValue | undefined;
+        key?: import("../..").SelectStoreValue | undefined;
         variant?: "default" | "outlined" | "flushed" | "pills" | undefined;
         form?: string | null | undefined;
         formaction?: string | null | undefined;
@@ -241,7 +240,7 @@ declare const __propDef: {
     };
     slots: {
         default: {};
-        icon: {};
+        caret: {};
     };
 };
 export type ComponentProps = typeof __propDef.props;

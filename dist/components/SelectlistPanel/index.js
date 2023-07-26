@@ -1,5 +1,5 @@
-import MenuPanel from './Component.svelte';
+import SelectListPanel from './Component.svelte';
 export * from './module';
 export * from './config';
-export { MenuPanel };
-export default MenuPanel;
+export { SelectListPanel };
+export default SelectListPanel;

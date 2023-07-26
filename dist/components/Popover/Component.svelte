@@ -17,7 +17,7 @@ export let {
 const role = $$restProps.role ?? arrowed ? "tooltip" : "region";
 const th = themer($themeStore);
 $:
-  popoverClasses = th.create("Popover").variant("popover", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "transition", transitioned).option("popoverSizes", size, size).option("fontSizes", size, size).append("popover", true).append($$restProps.class, true).compile(true);
+  popoverClasses = th.create("Popover").variant("popover", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("popoverSizes", size, size).append("popover", true).append($$restProps.class, true).compile(true);
 </script>
 
 <div {role} {...$$restProps} class={popoverClasses}>

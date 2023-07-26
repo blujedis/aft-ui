@@ -1,3 +1,4 @@
+import type { IconifyIcon } from '@iconify/svelte';
 import type { SvelteComponent, ComponentProps } from 'svelte';
 import type { SvelteHTMLElements } from 'svelte/elements';
 import type { BlurParams, CrossfadeParams, DrawParams, FadeParams, FlyParams, ScaleParams, SlideParams, TransitionConfig } from 'svelte/transition';
@@ -37,3 +38,5 @@ export interface TransitionMap {
     crossfade: CrossfadeParams;
 }
 export type TransitionHandler = (node: Element, options?: Record<string, any>) => TransitionConfig;
+export type Iconify = string | IconifyIcon | [string | IconifyIcon, (string | IconifyIcon)?];
+export type IconifyTuple = [string | IconifyIcon, string | IconifyIcon];

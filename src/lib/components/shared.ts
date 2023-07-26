@@ -215,11 +215,13 @@ export const fontLeadings = {
 
 export const focused = {
 	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
-	white: 'focus:ring-default-100 focus-visible:ring-default-100 focus-within:ring-default-100',
-	default: 'focus:ring-default-400 focus-visible:ring-default-400 focus-within:ring-default-400',
+	white: 'focus:ring-frame-100 focus-visible:ring-frame-100 focus-within:ring-frame-100',
+	frame: 'focus:ring-frame-400 focus-visible:ring-frame-400 focus-within:ring-frame-400',
 	primary: 'focus:ring-primary-600 focus-visible:ring-primary-600 focus-within:ring-primary-600',
-	secondary: 'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
-	tertiary: 'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
+	secondary:
+		'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
+	tertiary:
+		'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
 	danger: 'focus:ring-danger-600 focus-visible:ring-danger-600 focus-within:ring-danger-600',
 	warning: 'focus:ring-warning-600 focus-visible:ring-warning-600 focus-within:ring-warning-600',
 	success: 'focus:ring-success-600 focus-visible:ring-success-600  focus-within:ring-success-600',
@@ -249,15 +251,23 @@ export const focusedOffsetSizes = {
 };
 
 export const focusedBorder = {
-	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white: 'focus:border-default-100 focus-visible:border-default-100 focus-within:border-default-100',
-	default: 'focus:border-default-400 focus-visible:border-default-400 focus-within:border-default-400',
-	primary: 'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
-	secondary: 'focus:border-secondary-600 focus-visible:border-secondary-600 focus-within:border-secondary-600',
-	tertiary: 'focus:border-tertiary-600 focus-visible:border-tertiary-600 focus-within:border-tertiary-600',
+	$base:
+		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+	white:
+		'focus:border-frame-100 focus-visible:border-frame-100 focus-within:border-frame-100',
+	frame:
+		'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
+	primary:
+		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
+	secondary:
+		'focus:border-secondary-600 focus-visible:border-secondary-600 focus-within:border-secondary-600',
+	tertiary:
+		'focus:border-tertiary-600 focus-visible:border-tertiary-600 focus-within:border-tertiary-600',
 	danger: 'focus:border-danger-600 focus-visible:border-danger-600 focus-within:border-danger-600',
-	warning: 'focus:border-warning-600 focus-visible:border-warning-600 focus-within:border-warning-600',
-	success: 'focus:border-success-600 focus-visible:border-success-600 focus-within:border-success-600',
+	warning:
+		'focus:border-warning-600 focus-visible:border-warning-600 focus-within:border-warning-600',
+	success:
+		'focus:border-success-600 focus-visible:border-success-600 focus-within:border-success-600',
 	info: 'focus:border-info-600 focus-visible:border-info-600 focus-within:border-info-600'
 };
 
@@ -282,15 +292,24 @@ export const focusedBorderFlushSizes = {
 };
 
 export const focusedOutline = {
-	$base: 'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white: 'focus:outline-default-100 focus-visible:outline-default-100 focus-within:outline-default-100',
-	default: 'focus:outline-default-400 focus-visible:outline-default-400 focus-within:outline-default-400',
-	primary: 'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
-	secondary: 'focus:outline-secondary-600 focus-visible:outline-secondary-600 focus-within:outline-secondary-600',
-	tertiary: 'focus:outline-tertiary-600 focus-visible:outline-tertiary-600 focus-within:outline-tertiary-600',
-	danger: 'focus:outline-danger-600 focus-visible:outline-danger-600 focus-within:outline-danger-600',
-	warning: 'focus:outline-warning-600 focus-visible:outline-warning-600 focus-within:outline-warning-600',
-	success: 'focus:outline-success-600 focus-visible:outline-success-600 focus-within:outline-success-600',
+	$base:
+		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+	white:
+		'focus:outline-frame-100 focus-visible:outline-frame-100 focus-within:outline-frame-100',
+	frame:
+		'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
+	primary:
+		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
+	secondary:
+		'focus:outline-secondary-600 focus-visible:outline-secondary-600 focus-within:outline-secondary-600',
+	tertiary:
+		'focus:outline-tertiary-600 focus-visible:outline-tertiary-600 focus-within:outline-tertiary-600',
+	danger:
+		'focus:outline-danger-600 focus-visible:outline-danger-600 focus-within:outline-danger-600',
+	warning:
+		'focus:outline-warning-600 focus-visible:outline-warning-600 focus-within:outline-warning-600',
+	success:
+		'focus:outline-success-600 focus-visible:outline-success-600 focus-within:outline-success-600',
 	info: 'focus:outline-info-600 focus-visible:outline-info-600 focus-within:outline-info-600'
 };
 
@@ -324,8 +343,8 @@ export const focusedFilters = {
 
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
-	white: 'aria-disabled:text-default-300',
-	default: 'aria-disabled:text-default-300',
+	white: 'aria-disabled:text-frame-300',
+	frame: 'aria-disabled:text-frame-300',
 	primary: 'aria-disabled:text-primary-300',
 	secondary: 'aria-disabled:text-secondary-300',
 	tertiary: 'aria-disabled:text-tertiary-300',
@@ -337,7 +356,7 @@ export const disableds = {
 
 export const placeholders = {
 	white: 'placeholder:text-white aria-disabled:placeholder:text-white',
-	default: 'placeholder:text-default-400 aria-disabled:placeholder:text-default-200',
+	frame: 'placeholder:text-frame-400 aria-disabled:placeholder:text-frame-200',
 	primary: 'placeholder:text-primary-400 aria-disabled:placeholder:text-primary-300',
 	secondary: 'placeholder:text-secondary-400 aria-disabled:placeholder:text-secondary-300',
 	tertiary: 'placeholder:text-tertiary-400 aria-disabled:placeholder:text-tertiary-300',
@@ -366,7 +385,7 @@ export const common = {
 // export const focusedFlush = {
 // 	$base: 'focus:outline-none focus:!ring-0 focus-visible:!ring-0',
 // 	white: 'focus:border-white focus:shadow-[0_4px_6px_-6px_rgb(var(--color-white))]',
-// 	default: 'focus:border-default-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-default-500))]',
+// 	frame: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
 // 	primary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-primary-600))]',
 // 	secondary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-secondary-600))]',
 // 	tertiary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-tertiary-600))]',

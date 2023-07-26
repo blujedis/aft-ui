@@ -64,6 +64,6 @@ export const drawerDefaults: Partial<DrawerProps> = {
 	shadowed: 'lg',
 	size: 'sm',
 	speed: 'medium',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

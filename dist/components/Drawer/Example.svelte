@@ -6,8 +6,8 @@ import SelectShadowed from "../_Example/SelectShadowed.svelte";
 import ListOptions from "../_Example/ListOptions.svelte";
 import ToggleOptions from "../_Example/ToggleOptions.svelte";
 import ExamplePage from "../_Example/ExamplePage.svelte";
-const title = "Checkboxes";
-const description = "Themed Checkboxes with multiple variants.";
+const title = "Drawer";
+const description = "Component for revealing a drawer which can be used for menus or settings as an example";
 const code = `
   `;
 let drawer;

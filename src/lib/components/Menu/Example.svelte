@@ -90,7 +90,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		variant: 'default' as any
 	};
 </script>
@@ -116,12 +116,10 @@
 			<label for="filled">
 				<div class="text-sm">Filled:</div>
 				<Menu {...props}>
-					<MenuButton>Button</MenuButton>
+					<MenuButton>B</MenuButton>
 					<MenuPanel>
 						{#each sourceItems as item}
-							<MenuOption as="a" href={item.href} active={item.active}
-								>{item.label}</MenuOption
-							>
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
 						{/each}
 					</MenuPanel>
 				</Menu>

@@ -27,6 +27,6 @@ export const notificationDefaults: Partial<NotificationProps> = {
 	group: 'default',
 	rounded: 'sm',
 	shadowed: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

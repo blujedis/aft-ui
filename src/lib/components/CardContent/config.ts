@@ -5,7 +5,7 @@ export const cardContent = {
 	filled: {
 		$base: 'text-white',
 		white: 'bg-white text-inherit',
-		default: 'bg-default-200 text-inherit',
+		frame: 'bg-frame-200 text-inherit',
 		primary: 'bg-primary-500',
 		secondary: 'bg-secondary-500',
 		tertiary: 'bg-tertiary-500',
@@ -17,7 +17,7 @@ export const cardContent = {
 	soft: {
 		$base: 'text-inherit',
 		white: 'bg-white',
-		default: 'bg-default-100 text-default-600',
+		frame: 'bg-frame-100 text-frame-600',
 		primary: 'bg-primary-50 text-primary-600',
 		secondary: 'bg-secondary-50 text-secondary-600',
 		tertiary: 'bg-tertiary-50 text-tertiary-600',

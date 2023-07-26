@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
 import type { paginationDetail } from './config';
 export type PaginationDetailVariant = keyof typeof paginationDetail;
 export type PaginationDetailProps = {

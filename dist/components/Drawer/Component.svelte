@@ -31,7 +31,7 @@ $:
 $:
   drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile(true);
 $:
-  drawerClasses = th.create("DrawerWrapper").option("shadows", shadowed, shadowed).append("flex h-full flex-col overflow-y-scroll", true).append($$restProps.class, true).compile(true);
+  drawerClasses = th.create("DrawerWrapper").option("shadows", shadowed, shadowed).append("flex h-full flex-col overflow-y-scroll z-20 bg-white", true).append($$restProps.class, true).compile(true);
 function handleClose() {
   store.close();
 }

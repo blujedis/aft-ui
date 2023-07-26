@@ -1,7 +1,7 @@
 const baseVariant = {
 	$base: 'text-white font-medium border border-transparent',
 	white: 'bg-white text-inherit',
-	default: 'bg-default-200 text-inherit',
+	frame: 'bg-frame-200 text-inherit',
 	primary: 'bg-primary-500',
 	secondary: 'bg-secondary-500',
 	tertiary: 'bg-tertiary-500',
@@ -17,7 +17,7 @@ export const badge = {
 	outlined: {
 		$base: 'border font-medium',
 		white: 'border-white text-white',
-		default: 'border-default-300 text-default-600',
+		frame: 'border-frame-300 text-frame-600',
 		primary: 'border-primary-500 text-primary-600',
 		secondary: 'border-secondary-500 text-secondary-600',
 		tertiary: 'border-tertiary-500 text-tertiary-600',

@@ -1,5 +1,5 @@
 export const cardContentDefaults = {
-    mode: 'content',
+    type: 'content',
     size: 'md',
     theme: 'default',
     variant: 'default'

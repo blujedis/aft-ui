@@ -23,6 +23,6 @@ export type KbdProps = {
 export const kbdDefaults: Partial<KbdProps> = {
 	rounded: 'full',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'default'
 };

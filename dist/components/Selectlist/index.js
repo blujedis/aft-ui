@@ -1,6 +1,6 @@
-import MultiselectController from './Component.svelte';
-import MultiselectControllerExample from './Example.svelte';
+import SelectList from './Component.svelte';
+import SelectListExample from './Example.svelte';
 export * from './module';
 export * from './config';
-export { MultiselectController, MultiselectControllerExample };
-export default MultiselectController;
+export { SelectList, SelectListExample };
+export default SelectList;

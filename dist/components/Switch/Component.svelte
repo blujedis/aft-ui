@@ -23,7 +23,7 @@ $:
   buttonClasses = th.create("SwitchButton").option("switchButtonSizes", size, size).append("pointer-events-none", disabled).append(
     "group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full",
     true
-  ).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).append($$restProps.class, true).compile(true);
+  ).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove("focusedFilters", focused, focused).append($$restProps.class, true).compile(true);
 $:
   backdropClasses = th.create("SwitchBackdrop").variant("switchBackdrop", variant, theme, true).append("pointer-events-none absolute h-full w-full rounded-md", true).append(classBackdrop, true).compile(true);
 $:
@@ -36,10 +36,12 @@ $:
     "pointer-events-none absolute left-0 inline-block transform rounded-full border shadow ring-0 transition-transform duration-200 ease-in-out",
     true
   ).append(classHandle, true).compile(true);
+$:
+  inputClasses = th.create("SwitchInput").append("sr-only", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<span class="flickerless">
+<span class="flickerless not-sr-only">
 	<button
 		type="button"
 		class={buttonClasses}
@@ -59,10 +61,16 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 
 		<!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0"  border-gray-200 bg-white  h-5 w-5  -->
 		<span aria-hidden="true" class={handleClasses} aria-disabled={disabled} />
-
-		<input use:forwardedEvents class="hidden" type="checkbox" bind:checked />
 	</button>
 </span>
+<input
+	{...$$restProps}
+	type="checkbox"
+	use:forwardedEvents
+	bind:checked
+	class={inputClasses}
+	{disabled}
+/>
 
 <style>
 	.flickerless {

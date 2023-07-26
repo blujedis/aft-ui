@@ -5,6 +5,6 @@ export let { size } = {
 };
 </script>
 
-<svelte:component this={CardContent} {...$$restProps} mode="footer" {size}>
+<svelte:component this={CardContent} {...$$restProps} type="footer" {size}>
 	<slot />
 </svelte:component>

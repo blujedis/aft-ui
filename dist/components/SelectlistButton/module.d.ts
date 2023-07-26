@@ -1,28 +1,18 @@
-import type { multiselectButton } from './config';
-import { type ButtonProps } from '../Button';
+import type { selectListButton } from './config';
 import type { IconifyIcon } from '@iconify/svelte';
-export type MultiselectButtonVariant = keyof typeof multiselectButton;
-type ButtonPropsBase = Omit<ButtonProps<'button'>, 'as' | 'focused'>;
-export type MultiselectButtonProps = ButtonPropsBase & {
-    caret?: null | string | IconifyIcon;
+import { type InputProps } from '../Input';
+import type { SelectListItem } from '../SelectList';
+export type SelectListButtonVariant = keyof typeof selectListButton;
+export type SelectListButtonProps = InputProps & {
+    caret?: string | IconifyIcon;
+    filterable?: boolean;
+    newable?: boolean;
+    placeholder?: string;
+    removable?: boolean;
     roticon?: boolean;
-    variant?: MultiselectButtonVariant;
+    tags?: boolean;
+    variant?: SelectListButtonVariant;
+    onBeforeAdd?: <T extends SelectListItem>(value: string, input: HTMLInputElement) => T | null | false | undefined | Promise<T | null | false | undefined>;
+    onBeforeRemove?: <T extends SelectListItem>(item: T, input: HTMLInputElement) => boolean | Promise<boolean>;
 };
-export declare const multiselectButtonDefaults: {
-    caret: string;
-    roticon: boolean;
-    as?: "button" | undefined;
-    disabled?: boolean | undefined;
-    focused?: import("../..").ThemeFocused | undefined;
-    full?: boolean | undefined;
-    href?: string | null | undefined;
-    strategy?: "button" | "text" | undefined;
-    rounded?: import("../..").ThemeRounded | undefined;
-    shadowed?: import("../..").ThemeShadowed | undefined;
-    size?: import("../..").ThemeSize | undefined;
-    theme?: import("../..").ThemeColor | undefined;
-    transitioned?: boolean | undefined;
-    variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
-    unstyled?: boolean | undefined;
-};
-export {};
+export declare const selectListButtonDefaults: Partial<SelectListButtonProps>;

@@ -1,8 +1,8 @@
-import type { ThemeColor, ThemeSize } from '../../theme';
+import type { ThemeColor, ThemeSize } from '../../types';
 import type { cardContent } from './config';
 export type CardContentVariant = keyof typeof cardContent;
 export type CardContentProps = {
-    mode?: 'content' | 'header' | 'footer';
+    type?: 'content' | 'header' | 'footer';
     size?: ThemeSize;
     theme?: ThemeColor;
     variant?: CardContentVariant;

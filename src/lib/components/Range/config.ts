@@ -1,18 +1,18 @@
 const rangeTrackBackgroundBase = {
 	white: '',
-	default: 'bg-default-200',
-	primary: 'bg-default-200',
-	secondary: 'bg-default-200',
-	tertiary: 'bg-default-200',
-	danger: 'bg-default-200',
-	warning: 'bg-default-200',
-	success: 'bg-default-200',
-	info: 'bg-default-200'
+	frame: 'bg-frame-200',
+	primary: 'bg-frame-200',
+	secondary: 'bg-frame-200',
+	tertiary: 'bg-frame-200',
+	danger: 'bg-frame-200',
+	warning: 'bg-frame-200',
+	success: 'bg-frame-200',
+	info: 'bg-frame-200'
 };
 
 const rangeTrackAccentBase = {
 	white: '',
-	default: 'accent-default-400',
+	frame: 'accent-frame-400',
 	primary: 'accent-primary-500',
 	secondary: 'accent-secondary-500',
 	tertiary: 'accent-tertiary-500',
@@ -24,7 +24,7 @@ const rangeTrackAccentBase = {
 
 const rangeThumbBorderBase = {
 	white: '',
-	default: 'border-default-400',
+	frame: 'border-frame-400',
 	primary: 'border-primary-500',
 	secondary: 'border-secondary-500',
 	tertiary: 'border-tertiary-500',
@@ -36,7 +36,7 @@ const rangeThumbBorderBase = {
 
 const rangeThumbBackgroundBase = {
 	white: 'bg-white',
-	default: 'bg-white',
+	frame: 'bg-white',
 	primary: 'bg-white',
 	secondary: 'bg-white',
 	tertiary: 'bg-white',

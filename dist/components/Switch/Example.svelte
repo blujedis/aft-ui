@@ -7,14 +7,13 @@ import ToggleOptions from "../_Example/ToggleOptions.svelte";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
 import SelectSize from "../_Example/SelectSize.svelte";
-const title = "Select";
-const description = "Themed select list.";
+const title = "Switch";
+const description = "Toggle switch component.";
 const code = `
   `;
 const props = {
   disabled: false,
-  focused: true,
-  // true: focus-visible.
+  focused: "visible",
   shadowed: "none",
   size: "md",
   theme: "default",

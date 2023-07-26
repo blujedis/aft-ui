@@ -4,7 +4,7 @@ export const notification = {
 	default: {
 		$base: 'border-r-0 border-y-0',
 		white: 'border-white',
-		default: 'border-default-200',
+		frame: 'border-frame-200',
 		primary: 'border-primary-500',
 		secondary: 'border-secondary-500',
 		tertiary: 'border-tertiary-500',
@@ -19,7 +19,7 @@ export const notificationIcon = {
 	default: {
 		$base: 'text-inherit',
 		white: 'text-white',
-		default: 'text-default-600',
+		frame: 'text-frame-600',
 		primary: 'text-primary-600',
 		secondary: 'text-secondary-600',
 		tertiary: 'text-tertiary-600',

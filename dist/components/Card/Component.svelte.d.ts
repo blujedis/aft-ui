@@ -1,12 +1,11 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        edged?: boolean | undefined;
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
         theme?: import("../..").ThemeColor | undefined;
-        variant?: "default" | "divided" | undefined;
+        variant?: "default" | "flushed" | "divided" | undefined;
         wide?: boolean | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;

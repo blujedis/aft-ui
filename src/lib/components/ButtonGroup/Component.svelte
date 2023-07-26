@@ -3,10 +3,10 @@
 		type ButtonGroupProps,
 		buttonGroupDefaults as defaults,
 		type ButtonGroupContext
-	} from  './module';
+	} from './module';
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps, ThemeFocused } from '../../types';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray } from '$lib/utils';
 
@@ -28,6 +28,7 @@
 	} as Required<ButtonGroupProps>;
 
 	export const store = useSelect({ selected: ensureArray(selected), multiple });
+	let mounted = false;
 
 	const globals = cleanObj({
 		focused,
@@ -54,9 +55,12 @@
 		.compile(true);
 
 	function handleReset() {}
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<span role="list" class={buttonGroupClasses}>
+<span role="list" class={buttonGroupClasses} class:visible={mounted}>
 	<slot
 		selectedItems={$store.selected}
 		reset={handleReset}

@@ -9,7 +9,7 @@ import ExamplePage from "../_Example/ExamplePage.svelte";
 import Checkbox from "../_Example/Checkbox.svelte";
 import SelectSize from "../_Example/SelectSize.svelte";
 const title = "Range";
-const description = "Input range with themes.";
+const description = "Input range component.";
 const code = `
   `;
 const props = {

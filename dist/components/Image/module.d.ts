@@ -1,4 +1,4 @@
-import type { ThemeObjectFit, ThemeObjectPosition, ThemeRounded, ThemeShadowed } from '../../theme';
+import type { ThemeObjectFit, ThemeObjectPosition, ThemeRounded, ThemeShadowed } from '../../types';
 export type ImageProps = {
     fit?: ThemeObjectFit;
     full?: boolean | 'w' | 'h' | 'width' | 'height';

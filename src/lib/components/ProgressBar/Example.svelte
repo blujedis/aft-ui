@@ -23,7 +23,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		variant: 'default' as ProgressBarVariant
 	};
 </script>
@@ -52,27 +52,27 @@
 			{/key}
 			<div class="flex space-x-2">
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(0)}>0%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(25)}>25%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(35)}>35%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(55)}>55%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(75)}>75%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(100)}>100%</button
 				>
 			</div>

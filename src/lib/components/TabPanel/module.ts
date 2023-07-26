@@ -1,7 +1,7 @@
-import type { SelectValue } from '../../stores/select';
+import type { SelectStoreValue } from '../../stores/select';
 
 export type TabPanelProps = {
-	value: SelectValue;
+	value: SelectStoreValue;
 	unmount?: boolean;
 };
 

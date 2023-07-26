@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '../../utils';
 	import themeStore, { themer } from '../../';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
 	type Tag = $$Generic<'button' | 'a'>;
-	type $$Props = ButtonProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = ButtonProps<Tag> & ElementProps<Tag>;
 
 	export let {
 		as,
@@ -27,25 +28,26 @@
 	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: buttonClasses = unstyled
 		? th
 				.create('Button')
-				.option('focused', theme, focused)
-				.option('focusedRingSizes', 'two', focused)
-				.remove('focusedFilters', focused, focused)
-				.option('common', 'transition', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('buttonPadding', size, size && variant !== 'text')
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed && variant !== 'text')
-				.option('dropshadows', shadowed, shadowed && variant === 'text')
-				.option('disableds', theme, disabled)
-				.append('font-medium', strategy === 'button')
-				.append('w-full', full)
-				.append('inline-flex items-center justify-center outline-none', true)
+				// .option('focused', theme, focused)
+				// .option('focusedRingSizes', 'two', focused)
+				// .remove('focusedFilters', focused, focused)
+				// .option('common', 'transition', transitioned)
+				// .option('fieldFontSizes', size, size)
+				// .option('buttonPadding', size, size && variant !== 'text')
+				// .option('roundeds', rounded, rounded)
+				// .option('shadows', shadowed, shadowed && variant !== 'text')
+				// .option('dropshadows', shadowed, shadowed && variant === 'text')
+				// .option('disableds', theme, disabled)
+				// .append('font-medium', strategy === 'button')
+				// .append('w-full', full)
+				// .append('inline-flex items-center justify-center outline-none', true)
 				.append($$restProps.class, true)
-				.compile(true)
+				.compile()
 		: th
 				.create('Button')
 				.variant('button', variant, theme, true)
@@ -66,6 +68,9 @@
 				.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <svelte:element
@@ -73,6 +78,7 @@
 	use:forwardedEvents
 	{...$$restProps}
 	class={buttonClasses}
+	class:visible={mounted}
 	{disabled}
 	aria-disabled={disabled}
 >

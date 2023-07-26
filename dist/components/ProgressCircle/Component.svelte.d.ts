@@ -8,12 +8,12 @@ declare const __propDef: {
         interpolate?: ((a: any, b: any) => (t: number) => any) | undefined;
         animate?: boolean | undefined;
         max?: number | undefined;
-        shadowed?: any;
-        size?: any;
+        shadowed?: import("../..").ThemeShadowed | undefined;
+        size?: number | import("../..").ThemeSize | undefined;
         text?: string | boolean | undefined;
         textunit?: string | undefined;
-        theme?: any;
-        tracksize?: any;
+        theme?: import("../..").ThemeColor | undefined;
+        tracksize?: number | import("../..").ThemeSize | undefined;
         value?: any;
         variant?: "default" | "filled" | undefined;
         string?: string | number | null | undefined;

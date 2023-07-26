@@ -1,11 +1,11 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        fit?: any;
+        fit?: "fill" | "unstyled" | "none" | "contain" | "cover" | "scaled" | undefined;
         full?: boolean | "height" | "width" | "w" | "h" | undefined;
-        position?: any;
-        rounded?: any;
-        shadowed?: any;
+        position?: "unstyled" | "center" | "top" | "top-right" | "top-left" | "bottom" | "bottom-right" | "botom-left" | "left" | "right" | undefined;
+        rounded?: import("../..").ThemeRounded | undefined;
+        shadowed?: import("../..").ThemeShadowed | undefined;
         imageClasses?: string | undefined;
         alt?: string | null | undefined;
         crossorigin?: "" | "anonymous" | "use-credentials" | null | undefined;

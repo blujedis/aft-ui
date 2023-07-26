@@ -1,7 +1,13 @@
 <script lang="ts">
 	import ButtonGroup from '.';
 	import ButtonGroupItem, { type ButtonGroupItemVariant } from '../ButtonGroupItem';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type {
+		ThemeColor,
+		ThemeRounded,
+		ThemeShadowed,
+		ThemeSize,
+		ThemeFocused
+	} from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -19,13 +25,13 @@
 
 	const props = {
 		disabled: false,
-		focused: true,
+		focused: 'visible' as ThemeFocused,
 		full: false,
 		multiple: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		underlined: false,
 		variant: 'default' as ButtonGroupItemVariant
@@ -41,7 +47,7 @@
 
 <ExamplePage {title} {description} {code}>
 	<ToggleOptions>
-		<Checkbox label="Focused" bind:checked={props.focused} />
+		<!-- <Checkbox label="Focused" bind:checked={props.focused} /> -->
 		<Checkbox label="Full" bind:checked={props.full} />
 		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
 		<Checkbox label="Disabled" bind:checked={props.disabled} />

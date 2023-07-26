@@ -10,7 +10,7 @@ import Checkbox from "../_Example/Checkbox.svelte";
 import Breadcrumb, {} from ".";
 import BreadcrumbOption from "../BreadcrumbOption";
 const title = "Breadcrumb";
-const description = "Simple component for displaying tags, notification counts and more.";
+const description = "Component for displaying breadcrumbs as paths.";
 const code = `
   `;
 const props = {
@@ -40,11 +40,9 @@ const props = {
 		<hr />
 	</Section>
 
-	<!-- <DarkMode enabled={dark}>
-	</DarkMode> -->
 	{#key props}
 		<Section>
-			<Breadcrumb {...props} generated flush />
+			<Breadcrumb {...props} generate flush />
 		</Section>
 
 		<Section>
@@ -67,9 +65,4 @@ const props = {
 			</Breadcrumb>
 		</Section>
 	{/key}
-	<!-- <Section>
-			{#key props}
-				<Breadcrumb generated {...props} variant="unfilled" />
-			{/key}
-		</Section> -->
 </ExamplePage>

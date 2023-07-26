@@ -1,4 +1,4 @@
-import type { SelectStore, SelectValue } from '../../stores/select';
+import type { SelectStore, SelectStoreValue } from '../../stores/select';
 import type {
 	ThemeColor,
 	ThemeFocused,
@@ -14,7 +14,7 @@ export type TabsProps = {
 	focused?: ThemeFocused;
 	full?: boolean;
 	rounded?: ThemeRounded;
-	selected: SelectValue;
+	selected: SelectStoreValue;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
@@ -40,6 +40,7 @@ export type TabsContext = SelectStore & {
 export const tabsDefaults: Partial<TabsProps> = {
 	condensed: true,
 	focused: 'visible',
-	theme: 'default',
+	size: 'md',
+	theme: 'frame',
 	variant: 'default'
 };

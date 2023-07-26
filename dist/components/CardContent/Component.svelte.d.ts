@@ -1,9 +1,9 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        mode?: "footer" | "header" | "content" | undefined;
-        size?: any;
-        theme?: any;
+        type?: "footer" | "header" | "content" | undefined;
+        size?: import("../..").ThemeSize | undefined;
+        theme?: import("../..").ThemeColor | undefined;
         variant?: "default" | "filled" | "soft" | undefined;
         wide?: boolean | undefined;
         accesskey?: string | null | undefined;

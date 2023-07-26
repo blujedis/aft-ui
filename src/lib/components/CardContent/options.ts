@@ -1,3 +1,5 @@
+import { fontSizes } from '../shared';
+
 export const cardPadding = {
 	unstyled: '',
 	xs: 'p-2.5 px-3',
@@ -26,4 +28,14 @@ export const cardPaddingFooter = {
 	lg: 'p-6 px-5 pb-4',
 	xl: 'p-8 px-6 pb-5',
 	xl2: 'p-10 px-8 pb-6'
+};
+
+export const cardFontSizes = {
+	unstyled: '',
+	xs: fontSizes.xs,
+	sm: fontSizes.sm,
+	md: fontSizes.base,
+	lg: fontSizes.lg,
+	xl: fontSizes.xl,
+	xl2: fontSizes.xl2
 };
