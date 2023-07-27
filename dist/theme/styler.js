@@ -17,6 +17,8 @@ export function styler(themeConfig) {
         const api = {
             add,
             option,
+            color,
+            colormap,
             palette,
             mapped,
             append,
@@ -38,6 +40,45 @@ export function styler(themeConfig) {
             if (styles.some((v) => v.startsWith(key)))
                 throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
             styles.push(key + ': ' + value);
+            return api;
+        }
+        /**
+         * Adds a new key and value to the styles array.
+         *
+         * @param key the color key to be added.
+         * @param as set color as variable name.
+         * @param when if true the key/value are added.
+         */
+        function color(key, value, when) {
+            if (typeof themeConfig === 'undefined')
+                return api;
+            if (!when)
+                return api;
+            if (styles.some((v) => v.startsWith(key)))
+                throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
+            if (!['#', 'rgb', 'hsl'].some((v) => value.startsWith(v))) {
+                value = 'rgb(var(--color-' + value.replace(/^--color-/, '') + '))';
+            }
+            add(key, value, when);
+            return api;
+        }
+        /**
+         * Adds a style key/value to be compiled.
+         *
+         * @param name the option key to be add.
+         * @param path the property of the above key to be applied.
+         * @param key the style key to be added.
+         * @param when if value is truthy add value otherwise reject.
+         */
+        function colormap(obj, path, key, when) {
+            if (typeof themeConfig === 'undefined')
+                return api;
+            if (typeof path === 'undefined' || !when)
+                return api;
+            const value = (obj[path] || '');
+            if (!value)
+                throw new Error(`${instanceName} option using property ${path} was NOT found.`);
+            color(key, value, true);
             return api;
         }
         /**
@@ -95,7 +136,7 @@ export function styler(themeConfig) {
          * @param key the style key to create.
          * @param when if true the key/value are added.
          */
-        function mapped(obj, path, key, when) {
+        function mapped(obj, path, key, when, asColor) {
             if (typeof themeConfig === 'undefined')
                 return api;
             if (!when)
@@ -103,7 +144,10 @@ export function styler(themeConfig) {
             const value = getProperty(obj, path);
             if (!value)
                 throw new Error(`${instanceName} mapped value using property ${key} was NOT found.`);
-            add(key, value, true);
+            if (asColor)
+                color(key, value, true);
+            else
+                add(key, value, true);
             return api;
         }
         /**

@@ -19,7 +19,7 @@ export const modalDefaults = {
     labelby: 'Modal',
     rounded: 'md',
     shadowed: 'lg',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default',
     unmount: true
 };

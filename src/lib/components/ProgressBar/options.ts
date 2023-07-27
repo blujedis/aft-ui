@@ -3,12 +3,12 @@ import { roundeds } from '../shared';
 
 export const progressBarSizes = {
 	unstyled: '',
-	xs: 'h-1',
-	sm: 'h-2',
-	md: 'h-3',
-	lg: 'h-4',
-	xl: 'h-6',
-	xl2: 'h-8'
+	xs: 'h-0.5',
+	sm: 'h-1',
+	md: 'h-1.5',
+	lg: 'h-2.5',
+	xl: 'h-3',
+	xl2: 'h-4'
 };
 
 // Firefox requires default rounding without pseudo selector.

@@ -12,6 +12,7 @@ export * from './Card/config';
 export * from './CardContent/config';
 export * from './Checkbox/config';
 export * from './Empty/config';
+export * from './FileInput/config';
 export * from './Input/config';
 export * from './Kbd/config';
 export * from './Label/config';

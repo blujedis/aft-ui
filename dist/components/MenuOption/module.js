@@ -1,6 +1,6 @@
 export const menuOptionDefaults = {
     as: 'a',
     size: 'sm',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

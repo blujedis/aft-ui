@@ -1,6 +1,6 @@
 export const paginationDetailDefaults = {
     rounded: 'full',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

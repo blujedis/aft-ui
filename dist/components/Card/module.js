@@ -1,5 +1,5 @@
 export const cardDefaults = {
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

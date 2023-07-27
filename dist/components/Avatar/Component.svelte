@@ -1,7 +1,7 @@
 <script>import { avatarDefaults as defaults } from "./module";
 import themeStore, { themer } from "../..";
 import { get_current_component } from "svelte/internal";
-import { getContext } from "svelte";
+import { getContext, onMount } from "svelte";
 import { forwardEventsBuilder } from "../../utils";
 import Icon from "../Icon";
 const context = getContext("AvatarStack");
@@ -25,6 +25,7 @@ if (placeholder === true)
 if (notification === true)
   notification = "top-right";
 const th = themer($themeStore);
+let mounted = false;
 $:
   avatarClasses = th.create("Avatar").variant("avatar", stacked ? "stacked" : variant, theme, true).option("avatarSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("relative", stacked === "down").append($$restProps.class, true).compile(true);
 $:
@@ -35,17 +36,20 @@ $:
 $:
   avatarPlaceholderClasses = _placeholder && th.create("AvatarPlaceholder").variant("avatarPlaceholder", "default", theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("avatarSizes", size, size).append('relative inline-block overflow-hidden"', true).compile(true) || "";
 const forwardedEvents = forwardEventsBuilder(get_current_component());
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 {#if _placeholder}
-	<span class={avatarPlaceholderClasses}>
+	<span class={avatarPlaceholderClasses} class:invisible={!mounted}>
 		<Icon icon={_placeholder} class="h-full w-full" />
 		{#if notification}
 			<span class={avatarNotificationClasses} />
 		{/if}
 	</span>
 {:else if notification}
-	<span class="relative inline-block">
+	<span class="relative inline-block" class:invisible={!mounted}>
 		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
 		<span class={avatarNotificationClasses} />
 	</span>

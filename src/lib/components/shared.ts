@@ -253,10 +253,8 @@ export const focusedOffsetSizes = {
 export const focusedBorder = {
 	$base:
 		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white:
-		'focus:border-frame-100 focus-visible:border-frame-100 focus-within:border-frame-100',
-	frame:
-		'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
+	white: 'focus:border-frame-100 focus-visible:border-frame-100 focus-within:border-frame-100',
+	frame: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
 	primary:
 		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
 	secondary:
@@ -294,10 +292,8 @@ export const focusedBorderFlushSizes = {
 export const focusedOutline = {
 	$base:
 		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white:
-		'focus:outline-frame-100 focus-visible:outline-frame-100 focus-within:outline-frame-100',
-	frame:
-		'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
+	white: 'focus:outline-frame-100 focus-visible:outline-frame-100 focus-within:outline-frame-100',
+	frame: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
 	primary:
 		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
 	secondary:

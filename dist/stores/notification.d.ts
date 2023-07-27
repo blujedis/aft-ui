@@ -1,6 +1,6 @@
+import type { NotificationPosition } from '../components/Notifications';
 import { type Writable } from 'svelte/store';
-import type { NotificationItem } from '../components/Notification';
-import type { NotificationPosition } from '../components/Notification';
+import type { Notification } from '../components/Notification/module';
 export type NotificationState = 'enabled' | 'locked' | 'unlocked';
 export interface NotificationOptions {
     dismissible?: boolean;
@@ -9,9 +9,9 @@ export interface NotificationOptions {
     max?: number;
     position?: NotificationPosition;
 }
-export interface NotificationStore extends Writable<NotificationItem[]> {
-    get: (key: string) => NotificationItem | undefined;
-    add: (item: NotificationItem) => void;
+export interface NotificationStore extends Writable<Notification[]> {
+    get: (key: string) => Notification | undefined;
+    add: (item: Notification) => void;
     remove: (key: string) => void;
     lock: (group: string) => void;
     unlock: (group: string) => void;

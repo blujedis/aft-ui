@@ -1,12 +1,13 @@
 <script>import Select from "./Select.svelte";
-export let value = "default";
+export let value = "frame";
 </script>
 
 <Select
 	bind:value
 	label="Theme"
 	items={[
-		{ label: 'Default', value: 'default' },
+		// { label: 'Default', value: 'default' },
+		{ label: 'Default', value: 'frame' },
 		{ label: 'Primary', value: 'primary' },
 		{ label: 'Secondary', value: 'secondary' },
 		{ label: 'Tertiary', value: 'tertiary' },

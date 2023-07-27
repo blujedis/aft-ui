@@ -1,6 +1,7 @@
 <script>import { tweened } from "svelte/motion";
 import { progressCircleDefaults as defaults } from "./module";
 import themeStore, { styler, themer } from "../..";
+import { onMount } from "svelte";
 export let {
   animate,
   delay,
@@ -34,6 +35,7 @@ $:
   strokeOffset = strokeArray * ((100 - $store) / 100);
 const th = themer($themeStore);
 const st = styler($themeStore);
+let mounted = false;
 $:
   progressCircleStyles = st.create("ProgressCircleStyles").add("height", diameter, true).add("width", diameter, true).add("transform", "rotate(-90deg)", true).compile();
 $:
@@ -57,6 +59,9 @@ function normalizeSize() {
     ntsize = tracksize;
   return [nsize, ntsize];
 }
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <svg
@@ -64,6 +69,7 @@ function normalizeSize() {
 	viewBox={`0 0 ${diameter} ${diameter}`}
 	class={progressCircleClasses}
 	style={progressCircleStyles}
+	class:invisible={!mounted}
 >
 	<circle
 		class={progressCircleTrackClasses}

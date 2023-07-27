@@ -2,7 +2,7 @@ export declare const breadcrumbNav: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,7 +14,7 @@ export declare const breadcrumbNav: {
     unfilled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -26,7 +26,7 @@ export declare const breadcrumbNav: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

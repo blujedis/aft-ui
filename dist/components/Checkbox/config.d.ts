@@ -2,7 +2,7 @@ export declare const checkbox: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,7 +14,7 @@ export declare const checkbox: {
     outlined: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

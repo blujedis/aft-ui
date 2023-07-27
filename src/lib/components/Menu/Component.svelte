@@ -2,7 +2,7 @@
 	import { type MenuProps, menuDefaults as defaults, type MenuContext } from './module';
 	import themeStore, { themer, useDisclosure } from '$lib';
 	import type { ElementProps } from '../../types';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import type { MenuGlobalProps } from '../Menu';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 
@@ -33,6 +33,7 @@
 
 	const th = themer($themeStore);
 	let div: HTMLDivElement;
+	let mounted = false;
 
 	const globals = cleanObj({
 		full,
@@ -73,6 +74,9 @@
 			return store.close();
 		if (!$store.visible && e.key === 'ArrowDown') return store.open();
 	}
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div
@@ -83,6 +87,7 @@
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={menuClasses}
+	class:invisible={!mounted}
 >
 	<slot
 		visible={$store.visible}

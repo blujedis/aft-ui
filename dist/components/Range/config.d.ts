@@ -1,7 +1,51 @@
+export declare const rangeTrackBackgroundBase: {
+    white: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const rangeTrackAccentBase: {
+    white: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const rangeThumbBorderBase: {
+    white: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const rangeThumbBackgroundBase: {
+    white: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
 export declare const rangeTrackBackground: {
     default: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -12,7 +56,7 @@ export declare const rangeTrackBackground: {
     };
     filled: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -25,7 +69,7 @@ export declare const rangeTrackBackground: {
 export declare const rangeTrackAccent: {
     default: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -36,7 +80,7 @@ export declare const rangeTrackAccent: {
     };
     filled: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -49,7 +93,7 @@ export declare const rangeTrackAccent: {
 export declare const rangeThumbBorder: {
     default: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -60,7 +104,7 @@ export declare const rangeThumbBorder: {
     };
     filled: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -73,7 +117,7 @@ export declare const rangeThumbBorder: {
 export declare const rangeThumbBackground: {
     default: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -84,7 +128,7 @@ export declare const rangeThumbBackground: {
     };
     filled: {
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

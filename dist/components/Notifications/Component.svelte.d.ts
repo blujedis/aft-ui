@@ -219,7 +219,17 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        default: any;
+        default: {
+            key?: string | undefined;
+            group?: string | undefined;
+            icon?: string | import("@iconify/svelte").IconifyIcon | undefined;
+            description: string;
+            dismissible?: boolean | undefined;
+            duration?: number | undefined;
+            title?: string | undefined;
+            theme?: import("../..").ThemeColor | undefined;
+            variant?: "default" | undefined;
+        };
     };
 };
 export type ComponentProps = typeof __propDef.props;

@@ -1,4 +1,4 @@
-<script>import Badge, {} from ".";
+<script>import Empty, {} from ".";
 import Section from "../_Example/Section.svelte";
 import SelectTheme from "../_Example/SelectTheme.svelte";
 import SelectSize from "../_Example/SelectSize.svelte";
@@ -17,7 +17,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "default",
+  theme: "frame",
   transitioned: false,
   // ThemeTransitioned,
   variant: "default"
@@ -43,7 +43,7 @@ const props = {
 	<div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
-			<Badge {...props} />
+			<Empty>Empty</Empty>
 		</label>
 	</div>
 </ExamplePage>

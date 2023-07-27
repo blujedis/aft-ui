@@ -90,7 +90,7 @@
 	});
 </script>
 
-<span class="flickerless not-sr-only" class:visible={mounted}>
+<span class="flickerless not-sr-only" class:invisible={!mounted}>
 	<button
 		type="button"
 		class={buttonClasses}

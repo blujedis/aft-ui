@@ -34,6 +34,6 @@
 	});
 </script>
 
-<kbd use:forwardedEvents {...$$restProps} class={kbdClasses} class:visible={mounted}>
+<kbd use:forwardedEvents {...$$restProps} class={kbdClasses} class:invisible={!mounted}>
 	<slot />
 </kbd>

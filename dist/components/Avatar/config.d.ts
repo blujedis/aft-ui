@@ -10,7 +10,7 @@ export declare const avatarNotification: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -24,7 +24,7 @@ export declare const avatarPlaceholder: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

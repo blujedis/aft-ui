@@ -21,6 +21,7 @@ export * from './DisclosureButton';
 export * from './DisclosurePanel';
 export * from './Drawer';
 export * from './Empty';
+export * from './FileInput';
 export * from './Icon';
 export * from './Image';
 export * from './Input';

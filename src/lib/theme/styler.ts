@@ -35,6 +35,8 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		const api = {
 			add,
 			option,
+			color,
+			colormap,
 			palette,
 			mapped,
 			append,
@@ -55,6 +57,48 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			if (styles.some((v) => v.startsWith(key)))
 				throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
 			styles.push(key + ': ' + value);
+			return api;
+		}
+
+		/**
+		 * Adds a new key and value to the styles array.
+		 *
+		 * @param key the color key to be added.
+		 * @param as set color as variable name.
+		 * @param when if true the key/value are added.
+		 */
+		function color(key: string, value: string, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
+			if (!when) return api;
+			if (styles.some((v) => v.startsWith(key)))
+				throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
+			if (!['#', 'rgb', 'hsl'].some((v) => value.startsWith(v))) {
+				value = 'rgb(var(--color-' + value.replace(/^--color-/, '') + '))';
+			}
+			add(key, value, when);
+			return api;
+		}
+
+		/**
+		 * Adds a style key/value to be compiled.
+		 *
+		 * @param name the option key to be add.
+		 * @param path the property of the above key to be applied.
+		 * @param key the style key to be added.
+		 * @param when if value is truthy add value otherwise reject.
+		 */
+		function colormap<T extends Record<string, any>, K extends keyof T>(
+			obj: T,
+			path: K,
+			key: string,
+			when: Primitive
+		) {
+			if (typeof themeConfig === 'undefined') return api;
+			if (typeof path === 'undefined' || !when) return api;
+			const value = (obj[path] || '') as string;
+			if (!value)
+				throw new Error(`${instanceName} option using property ${path as string} was NOT found.`);
+			color(key, value, true);
 			return api;
 		}
 
@@ -125,7 +169,8 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			obj: T,
 			path: string,
 			key: string,
-			when: Primitive
+			when: Primitive,
+			asColor?: boolean
 		) {
 			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
@@ -134,7 +179,8 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 				throw new Error(
 					`${instanceName} mapped value using property ${key as string} was NOT found.`
 				);
-			add(key, value, true);
+			if (asColor) color(key, value, true);
+			else add(key, value, true);
 			return api;
 		}
 

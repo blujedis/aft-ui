@@ -3,8 +3,7 @@ import { mergeConfigs } from '$lib/theme';
 export const variantFilled = {
 	$base: 'text-white border border-transparent ring-1',
 	white: 'text-inherit bg-white hover:bg-frame-200 ring-white',
-	frame:
-		'text-inherit bg-frame-200 hover:bg-frame-300 ring-frame-200 hover:ring-frame-300',
+	frame: 'text-inherit bg-frame-200 hover:bg-frame-300 ring-frame-200 hover:ring-frame-300',
 	primary: 'bg-primary-500 hover:bg-primary-600 ring-primary-500 hover:ring-primary-600',
 	secondary: 'bg-secondary-500 hover:bg-secondary-600 ring-secondary-500 hover:ring-secondary-600',
 	tertiary: 'bg-tertiary-500 hover:bg-tertiary-600 ring-tertiary-500 hover:ring-tertiary-600',
@@ -68,7 +67,6 @@ export const variantFlushed = {
 	success: 'text-success-600 border-success-500 hover:border-success-600 focus:border-success-600',
 	info: 'text-info-600 border-info-500 hover:border-info-600 focus:border-info-600'
 };
-
 
 export const button = {
 	default: {

@@ -5,7 +5,7 @@ export const breadcrumbNav = {
     filled: {
         $base: 'text-white',
         white: 'bg-white border-white',
-        default: 'text-default-300 bg-default-100',
+        frame: 'text-frame-300 bg-frame-100',
         primary: 'bg-primary-500',
         secondary: 'bg-secondary-500',
         tertiary: 'bg-tertiary-500',

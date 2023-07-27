@@ -3,7 +3,7 @@ import { RatingItem } from "../RatingItem";
 import {
   ratingControllerDefaults as defaults
 } from "./module";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 import { writable } from "svelte/store";
 export let {
   arrowable,
@@ -21,6 +21,7 @@ export let {
   ...defaults
 };
 export const store = writable({ active: -1, readonly, score, selected: -1 });
+let mounted = false;
 setContext("Rating", {
   ...store,
   globals: {
@@ -109,6 +110,9 @@ function handleReset() {
     return;
   store.update((s) => ({ ...s, score, active: -1, selected: -1 }));
 }
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <div
@@ -119,6 +123,7 @@ function handleReset() {
 	class={ratingControllerClasses}
 	on:keydown={handleKeydown}
 	on:focusout={handleCleanup}
+	class:invisible={!mounted}
 >
 	<slot
 		score={$store.score}

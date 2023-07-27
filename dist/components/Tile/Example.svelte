@@ -17,7 +17,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "default",
+  theme: "frame",
   // transitioned: false as boolean, // ThemeTransitioned,
   variant: "default"
 };

@@ -3,7 +3,7 @@ export declare const select: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -16,7 +16,7 @@ export declare const select: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -28,7 +28,7 @@ export declare const select: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -40,7 +40,7 @@ export declare const select: {
     flushed: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

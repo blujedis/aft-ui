@@ -1,6 +1,6 @@
 export const paginationDefaults = {
     rounded: 'full',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'flushed'
 };

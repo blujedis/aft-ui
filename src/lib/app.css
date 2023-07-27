@@ -11,9 +11,9 @@
 html,
 body {
 	height: 100%;
-	@apply font-light;
+	/* @apply font-light;
 	@apply tracking-tight;
-	@apply text-frame-700;
+	@apply text-frame-700; */
 }
 
 h1,

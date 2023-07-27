@@ -33,6 +33,6 @@
 	});
 </script>
 
-<div {...$$restProps} use:forwardedEvents class={inputClasses} class:visible={mounted}>
+<div {...$$restProps} use:forwardedEvents class={inputClasses} class:invisible={!mounted}>
 	<slot />
 </div>

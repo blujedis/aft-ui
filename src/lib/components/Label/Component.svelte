@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import { onMount } from 'svelte';
 
 	type $$Props = LabelProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -21,6 +22,8 @@
 		...defaults
 	} as Required<$$Props>;
 
+	let mounted = false;
+
 	$: labelClasses = themer($themeStore)
 		.create('Label')
 		.variant('label', variant, theme, true)
@@ -35,8 +38,11 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+<label use:forwardedEvents {...$$restProps} class={labelClasses} class:invisible={!mounted}>
 	<slot />
 </label>

@@ -60,7 +60,7 @@
 	});
 </script>
 
-<span role="list" class={buttonGroupClasses} class:visible={mounted}>
+<span role="list" class={buttonGroupClasses} class:invisible={!mounted}>
 	<slot
 		selectedItems={$store.selected}
 		reset={handleReset}

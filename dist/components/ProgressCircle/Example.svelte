@@ -19,7 +19,7 @@ const props = {
   shadowed: "none",
   size: "md",
   tracksize: "md",
-  theme: "default",
+  theme: "frame",
   variant: "default"
 };
 </script>
@@ -48,27 +48,27 @@ const props = {
 			{/key}
 			<div class="flex space-x-2 mt-4">
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(0)}>0%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(25)}>25%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(35)}>35%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(55)}>55%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(75)}>75%</button
 				>
 				<button
-					class="inline-flex py-1 px-4 bg-default-100 hover:bg-default-200"
+					class="inline-flex py-1 px-4 bg-frame-100 hover:bg-frame-200"
 					on:click={() => progress.store.set(100)}>100%</button
 				>
 			</div>

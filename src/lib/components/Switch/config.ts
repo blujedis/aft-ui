@@ -1,7 +1,7 @@
 import { placeholder } from '../placeholder';
 
 export const switchBackdrop = {
-	frame: {
+	default: {
 		...placeholder
 		//	$base: 'bg-white'
 	}

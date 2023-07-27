@@ -2,7 +2,7 @@ export declare const breadcrumbOption: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,7 +14,7 @@ export declare const breadcrumbOption: {
     unfilled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -26,7 +26,7 @@ export declare const breadcrumbOption: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -40,7 +40,7 @@ export declare const breadcrumbOptionItem: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -52,7 +52,7 @@ export declare const breadcrumbOptionItem: {
     unfilled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -64,7 +64,7 @@ export declare const breadcrumbOptionItem: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

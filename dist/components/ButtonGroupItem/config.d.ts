@@ -2,7 +2,7 @@ export declare const buttonGroupItem: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,7 +14,7 @@ export declare const buttonGroupItem: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -26,7 +26,7 @@ export declare const buttonGroupItem: {
     outlined: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -38,7 +38,7 @@ export declare const buttonGroupItem: {
     text: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         secondary: string;
         tertiary: string;
         danger: string;
@@ -49,7 +49,7 @@ export declare const buttonGroupItem: {
     ghost: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

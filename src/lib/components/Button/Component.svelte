@@ -78,9 +78,9 @@
 	use:forwardedEvents
 	{...$$restProps}
 	class={buttonClasses}
-	class:visible={mounted}
 	{disabled}
 	aria-disabled={disabled}
+	class:invisible={!mounted}
 >
 	{#if strategy === 'button' || buttonClasses.includes('uppercase')}
 		<div class="pt-px">

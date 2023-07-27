@@ -1,6 +1,6 @@
 <script>import { menuDefaults as defaults } from "./module";
 import themeStore, { themer, useDisclosure } from "../..";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 import { cleanObj, createCustomEvent } from "../../utils";
 export let {
   autoclose,
@@ -23,6 +23,7 @@ export const store = initStore || useDisclosure({
 });
 const th = themer($themeStore);
 let div;
+let mounted = false;
 const globals = cleanObj({
   full,
   strategy,
@@ -51,6 +52,9 @@ function handleKeydown(e) {
   if (!$store.visible && e.key === "ArrowDown")
     return store.open();
 }
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <div
@@ -61,6 +65,7 @@ function handleKeydown(e) {
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={menuClasses}
+	class:invisible={!mounted}
 >
 	<slot
 		visible={$store.visible}

@@ -17,7 +17,7 @@ export let {
   ...defaults
 };
 $:
-  checkboxClasses = themer($themeStore).create("Radio").variant("radio", variant, theme, true).option("focused", theme, focused).remove(focused === "visible" ? "focus:" : "focus-visible:", true).option("focusedOffsetSizes", "two", focused).option("common", "transition", transitioned).option("iconSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("flex items-center justify-center form-radio", true).append($$restProps.class, true).compile(true);
+  checkboxClasses = themer($themeStore).create("Radio").variant("radio", variant, theme, true).option("focused", theme, focused).option("focusedRingSizes", "two", focused).remove("focusedFilters", focused, focused).option("common", "transition", transitioned).option("iconSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("flex items-center justify-center form-radio", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

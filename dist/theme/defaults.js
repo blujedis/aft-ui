@@ -9,7 +9,7 @@ const component = {
 const defaults = {
     global: {
         bg: 'bg-white',
-        text: 'text-default-700'
+        text: 'text-frame-700'
     },
     component
 };

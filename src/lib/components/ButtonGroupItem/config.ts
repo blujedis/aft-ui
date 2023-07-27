@@ -15,8 +15,7 @@
 const baseVariant = {
 	$base: 'text-white hover:text-white aria-checked:text-white',
 	white: 'aria-checked:bg-frame-200',
-	frame:
-		'text-frame-700 hover:text-current aria-checked:bg-frame-400 aria-checked:ring-frame-400',
+	frame: 'text-frame-700 hover:text-current aria-checked:bg-frame-400 aria-checked:ring-frame-400',
 	primary: 'aria-checked:bg-primary-600 aria-checked:ring-primary-600',
 	secondary: 'aria-checked:bg-secondary-600 aria-checked:ring-secondary-600',
 	tertiary: 'aria-checked:bg-tertiary-600 aria-checked:ring-tertiary-600',

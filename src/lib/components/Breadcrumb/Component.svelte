@@ -85,10 +85,10 @@
 	}
 	onMount(() => {
 		mounted = true;
-	})
+	});
 </script>
 
-<nav class={breadcrumbNavClasses} aria-label="Breadcrumb" class:visible={mounted}>
+<nav class={breadcrumbNavClasses} aria-label="Breadcrumb" class:invisible={!mounted}>
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
 		<slot>
 			{#if generate}

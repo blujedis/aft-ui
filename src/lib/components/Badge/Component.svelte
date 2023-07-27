@@ -58,7 +58,6 @@
 	});
 </script>
 
-<span {...$$restProps} class={badgeClasses} class:visible={mounted}>
+<span {...$$restProps} class={badgeClasses} class:invisible={!mounted}>
 	<slot />
 </span>
-

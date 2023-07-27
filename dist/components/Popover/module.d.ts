@@ -1,6 +1,6 @@
 /**
  * Global Options
- * dropshadow: (default: none)
+ * dropshadow: (frame: none)
  */
 import type { SvelteComponent } from 'svelte';
 import type { popover } from './config';

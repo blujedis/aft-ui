@@ -2,7 +2,7 @@ const sveleton = require('@sveleton/config').plugin;
 
 /** @type {import('@sveleton/config').PluginOptions} */
 const config = {
-	output: false,
+	output: true,
 	outdir: './src/lib/theme/palettes',
 	outname: 'app',
 	dynamic: true,

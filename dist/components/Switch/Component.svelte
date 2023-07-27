@@ -2,6 +2,7 @@
 import themeStore, { themer } from "../..";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
+import { onMount } from "svelte";
 export let {
   classBackdrop,
   classFill,
@@ -18,6 +19,7 @@ export let {
   ...defaults
 };
 let checked = false;
+let mounted = false;
 const th = themer($themeStore);
 $:
   buttonClasses = th.create("SwitchButton").option("switchButtonSizes", size, size).append("pointer-events-none", disabled).append(
@@ -39,9 +41,12 @@ $:
 $:
   inputClasses = th.create("SwitchInput").append("sr-only", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
+onMount(() => {
+  mounted = true;
+});
 </script>
 
-<span class="flickerless not-sr-only">
+<span class="flickerless not-sr-only" class:invisible={!mounted}>
 	<button
 		type="button"
 		class={buttonClasses}

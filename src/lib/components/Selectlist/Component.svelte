@@ -52,7 +52,7 @@
 
 	const th = themer($themeStore);
 	let sel: HTMLSelectElement;
-	let mounted =false;
+	let mounted = false;
 
 	const globals = cleanObj({
 		full,

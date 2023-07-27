@@ -4,6 +4,6 @@ export const notificationDefaults = {
     group: 'default',
     rounded: 'sm',
     shadowed: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

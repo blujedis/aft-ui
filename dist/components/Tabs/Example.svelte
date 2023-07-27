@@ -17,14 +17,12 @@ const code = `
 const props = {
   condensed: true,
   full: false,
-  multiple: false,
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "default",
+  theme: "frame",
   transitioned: false,
   // ThemeTransitioned,
-  underlined: false,
   variant: "accented"
 };
 const tabs = [

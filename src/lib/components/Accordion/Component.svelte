@@ -59,7 +59,7 @@
 	{...$$restProps}
 	aria-expanded={$store.selected.length > 0}
 	class={accordionClasses}
-	class:visible={mounted}
+	class:invisible={!mounted}
 >
 	<slot
 		select={store.select}

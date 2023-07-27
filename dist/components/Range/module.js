@@ -1,5 +1,5 @@
 export const rangeDefaults = {
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

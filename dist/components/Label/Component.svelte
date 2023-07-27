@@ -2,6 +2,7 @@
 import themeStore, { themer } from "../..";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
+import { onMount } from "svelte";
 export let {
   dropshadowed,
   full,
@@ -15,11 +16,15 @@ export let {
 } = {
   ...defaults
 };
+let mounted = false;
 $:
-  labelClasses = themer($themeStore).create("Label").variant("label", variant, theme, true).option("common", "transition", transitioned).remove(transitioned === "colors" ? "transition-all" : "transition-colors", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("dropshadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  labelClasses = themer($themeStore).create("Label").variant("label", variant, theme, true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("dropshadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
+onMount(() => {
+  mounted = true;
+});
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+<label use:forwardedEvents {...$$restProps} class={labelClasses} class:invisible={!mounted}>
 	<slot />
 </label>

@@ -37,7 +37,7 @@
 	use:forwardedEvents
 	{...$$restProps}
 	class={emptyClasses}
-	class:visible={mounted}
+	class:invisible={!mounted}
 >
 	<slot />
 </svelte:element>

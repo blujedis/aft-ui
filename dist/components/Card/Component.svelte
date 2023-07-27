@@ -20,6 +20,6 @@ onMount(() => {
 });
 </script>
 
-<div {...$$restProps} class={cardClasses} class:visible={mounted}>
+<div {...$$restProps} class={cardClasses} class:invisible={!mounted}>
 	<slot />
 </div>

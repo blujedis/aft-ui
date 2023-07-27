@@ -7,7 +7,7 @@
 		ratingControllerDefaults as defaults,
 		type RatingStoreValue
 	} from './module';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	type $$Props = RatingProps & ElementNativeProps<'div'>;
@@ -29,6 +29,7 @@
 	} as Required<RatingProps>;
 
 	export const store = writable({ active: -1, readonly, score, selected: -1 } as RatingStoreValue);
+	let mounted = false;
 
 	setContext('Rating', {
 		...store,
@@ -144,6 +145,9 @@
 		if (readonly) return;
 		store.update((s) => ({ ...s, score, active: -1, selected: -1 }));
 	}
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div
@@ -154,6 +158,7 @@
 	class={ratingControllerClasses}
 	on:keydown={handleKeydown}
 	on:focusout={handleCleanup}
+	class:invisible={!mounted}
 >
 	<slot
 		score={$store.score}

@@ -226,7 +226,7 @@ export declare const fontLeadings: {
 export declare const focused: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -258,7 +258,7 @@ export declare const focusedOffsetSizes: {
 export declare const focusedBorder: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -288,7 +288,7 @@ export declare const focusedBorderFlushSizes: {
 export declare const focusedOutline: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -325,7 +325,7 @@ export declare const focusedFilters: {
 export declare const disableds: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -336,7 +336,7 @@ export declare const disableds: {
 };
 export declare const placeholders: {
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;

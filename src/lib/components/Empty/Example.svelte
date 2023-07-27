@@ -46,9 +46,7 @@
 	<div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
-			<Empty>
-				Empty
-			</Empty>
+			<Empty>Empty</Empty>
 		</label>
 	</div>
 </ExamplePage>

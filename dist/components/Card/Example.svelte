@@ -20,7 +20,7 @@ const props = {
   rounded: "lg",
   shadowed: "lg",
   size: "md",
-  theme: "default",
+  theme: "frame",
   variant: "default",
   wide: false
 };

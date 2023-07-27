@@ -4,11 +4,12 @@ import {
 } from "./module";
 import themeStore, { themer } from "../..";
 import { useSelect } from "../../stores/select";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 export let { as, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
   ...defaults
 };
 export const store = useSelect({ multiple, selected });
+let mounted = false;
 const globals = cleanObj({
   rounded: variant === "pills" ? rounded : "none",
   shadowed,
@@ -28,6 +29,9 @@ $:
   accordionClasses = th.create("Accordion").variant("accordion", variant, theme, true).option("roundeds", rounded === "full" && variant !== "pills" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed && variant !== "pills").append($$restProps.class, true).compile(true);
 function handleReset() {
 }
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <svelte:element
@@ -35,6 +39,7 @@ function handleReset() {
 	{...$$restProps}
 	aria-expanded={$store.selected.length > 0}
 	class={accordionClasses}
+	class:invisible={!mounted}
 >
 	<slot
 		select={store.select}

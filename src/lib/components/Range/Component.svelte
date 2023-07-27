@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { themer, styler, classToColorSegments } from '$lib';
+	import themeStore, { themer, styler } from '$lib';
 	import { onMount } from 'svelte';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
 	import type { ElementNativeProps } from '../../types';
@@ -11,21 +11,19 @@
 	} as Required<RangeProps>;
 
 	let ref: HTMLInputElement;
+	let mounted = false;
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);
 
-	$: trackBg = classToColorSegments($themeStore?.components?.rangeTrackBackground[variant][theme]);
-	$: trackAccent = classToColorSegments($themeStore?.components?.rangeTrackAccent[variant][theme]);
-	$: thumbBg = classToColorSegments($themeStore?.components?.rangeThumbBackground[variant][theme]);
-	$: thumbBorder = classToColorSegments($themeStore?.components?.rangeThumbBorder[variant][theme]);
+	$: components = $themeStore?.components || {};
 
 	$: rangeStyles = st
 		.create('RangeStyles')
-		.palette(trackBg[0], trackBg[1], '--track-background-color', true)
-		.palette(trackAccent[0], trackAccent[1], '--track-accent-color', true)
-		.palette(thumbBg[0], thumbBg[1], '--thumb-background-color', true)
-		.palette(thumbBorder[0], thumbBorder[1], '--thumb-border-color', true)
+		.colormap(components.rangeTrackBackground[variant], theme, '--track-background-color', true)
+		.colormap(components.rangeTrackAccent[variant], theme, '--track-accent-color', true)
+		.colormap(components.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
+		.colormap(components.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
 		.append($$restProps.style, true)
@@ -57,6 +55,7 @@
 
 	onMount(() => {
 		handleInputChange();
+		mounted = true;
 	});
 </script>
 
@@ -67,9 +66,14 @@
 	{...$$restProps}
 	class={rangeClasses}
 	style={rangeStyles}
+	class:invisible={!mounted}
 />
 
 <style>
+	:root {
+		--color-white: 255 255 255;
+	}
+
 	input[type='range'] {
 		background-color: var(--track-background-color);
 		background-image: linear-gradient(var(--track-accent-color), var(--track-accent-color));

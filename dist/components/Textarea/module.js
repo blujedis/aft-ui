@@ -3,6 +3,6 @@ export const textareaDefaults = {
     resize: 'both',
     rounded: 'sm',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

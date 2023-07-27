@@ -52,7 +52,7 @@ onMount(() => {
 });
 </script>
 
-<div class={tabControllerlWrapperClasses} class:visible={mounted}>
+<div class={tabControllerlWrapperClasses} class:invisible={!mounted}>
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
 			<slot name="mobile" />

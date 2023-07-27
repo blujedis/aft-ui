@@ -1,7 +1,7 @@
 const baseVariant = {
-    $base: 'aria-expanded:border-b border-b-default-200 rounded-none',
+    $base: 'aria-expanded:border-b border-b-frame-200 rounded-none',
     white: 'aria-expanded:text-white',
-    default: 'aria-expanded:text-default-800',
+    frame: 'aria-expanded:text-frame-800',
     primary: 'aria-expanded:text-primary-500',
     secondary: 'aria-expanded:text-secondary-500',
     tertiary: 'aria-expanded:text-tertiary-500',
@@ -14,9 +14,9 @@ export const accordionButton = {
     default: { ...baseVariant },
     outlined: { ...baseVariant },
     flushed: {
-        $base: 'border-b border-default-200',
+        $base: 'border-b border-frame-200',
         white: 'aria-expanded:text-white',
-        default: 'aria-expanded:text-default-900',
+        frame: 'aria-expanded:text-frame-900',
         primary: 'aria-expanded:text-primary-500',
         secondary: 'aria-expanded:text-secondary-500',
         tertiary: 'aria-expanded:text-tertiary-500',
@@ -26,9 +26,9 @@ export const accordionButton = {
         info: 'aria-expanded:text-info-500'
     },
     pills: {
-        $base: 'aria-expanded:text-white bg-default-100',
-        white: 'aria-expanded:text-inherit aria-expanded:bg-default-200',
-        default: 'aria-expanded:text-inherit aria-expanded:bg-default-200',
+        $base: 'aria-expanded:text-white bg-frame-100',
+        white: 'aria-expanded:text-inherit aria-expanded:bg-frame-200',
+        frame: 'aria-expanded:text-inherit aria-expanded:bg-frame-200',
         primary: 'aria-expanded:bg-primary-500',
         secondary: 'aria-expanded:bg-secondary-500',
         tertiary: 'aria-expanded:bg-tertiary-500',

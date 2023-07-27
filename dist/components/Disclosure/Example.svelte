@@ -20,7 +20,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "default",
+  theme: "frame",
   variant: "default"
 };
 const sourceItems = [

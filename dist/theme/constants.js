@@ -1,5 +1,6 @@
 export const colors = [
-    'default',
+    // 'default',
+    'frame',
     'primary',
     'secondary',
     'tertiary',

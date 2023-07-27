@@ -1,7 +1,7 @@
 <script>import { page } from "$app/stores";
 import themeStore, { themer } from "../..";
 import { get_current_component } from "svelte/internal";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder } from "../../utils";
 import BreadcrumbOption from "../BreadcrumbOption";
 import { breadcrumbDefaults as defaults } from "./module";
@@ -20,6 +20,7 @@ setContext("Breadcrumb", {
   globals
 });
 const th = themer($themeStore);
+let mounted = false;
 $:
   items = generateBreadcrumbs();
 $:
@@ -55,9 +56,12 @@ function generateBreadcrumbs() {
   });
   return result;
 }
+onMount(() => {
+  mounted = true;
+});
 </script>
 
-<nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
+<nav class={breadcrumbNavClasses} aria-label="Breadcrumb" class:invisible={!mounted}>
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
 		<slot>
 			{#if generate}

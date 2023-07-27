@@ -69,6 +69,4 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-
-	<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
-
+<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />

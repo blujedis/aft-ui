@@ -3,6 +3,6 @@ export const selectDefaults = {
     placeholder: true,
     rounded: 'sm',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

@@ -1,6 +1,6 @@
 export const emptyDefaults = {
-    rounded: 'full',
+    as: 'div',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

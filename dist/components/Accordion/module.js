@@ -6,6 +6,6 @@ export const accordionDefaults = {
     as: 'div',
     multiple: false,
     selected: [],
-    theme: 'default',
+    theme: 'frame',
     variant: 'default'
 };

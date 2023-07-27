@@ -2,7 +2,7 @@
   selectListDefaults as defaults
 } from "./module";
 import themeStore, { themer, useSelect } from "../..";
-import { setContext } from "svelte";
+import { onMount, setContext } from "svelte";
 import { cleanObj, createCustomEvent } from "../../utils";
 export let {
   autoclose,
@@ -38,6 +38,7 @@ export const store = initStore || useSelect({
 });
 const th = themer($themeStore);
 let sel;
+let mounted = false;
 const globals = cleanObj({
   full,
   newable,
@@ -153,6 +154,9 @@ function isSelected(itemOrKey) {
   return $store.selected.includes(key);
 }
 items.forEach((item) => add(item));
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <div
@@ -162,6 +166,7 @@ items.forEach((item) => add(item));
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={multiselectClasses}
+	class:visible={mounted}
 >
 	<div class:w-full={full}>
 		<slot

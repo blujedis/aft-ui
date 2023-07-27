@@ -68,7 +68,7 @@
 	aria-label="Pagination"
 	{...$$restProps}
 	class={paginationControllerClasses}
-	class:visible={mounted}
+	class:invisible={!mounted}
 >
 	<slot
 		page={$context.page}

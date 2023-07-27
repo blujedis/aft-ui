@@ -3,7 +3,7 @@ export declare const tile: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -16,7 +16,7 @@ export declare const tile: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -28,7 +28,7 @@ export declare const tile: {
     outline: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -39,7 +39,7 @@ export declare const tile: {
     } & {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

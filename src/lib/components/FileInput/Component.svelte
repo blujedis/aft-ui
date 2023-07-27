@@ -4,7 +4,7 @@
 
 	type $$Props = FileInputProps & ElementProps<'input'>;
 
-	export let {  name, readAs, onFormData, onReadFiles } = {
+	export let { name, readAs, onFormData, onReadFiles } = {
 		...defaults
 	} as Required<FileInputProps>;
 

@@ -59,9 +59,9 @@
 	use:forwardedEvents
 	{...$$restProps}
 	class={progressClasses}
-	class:visible={mounted}
 	value={$store}
 	{max}
+	class:invisible={!mounted}
 >
 	<slot />
 </progress>

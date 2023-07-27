@@ -1,6 +1,5 @@
 const baseVariant = {
-	$base:
-		'aria-selected:text-white text-frame-500 hover:text-frame-800  aria-selected:text-white',
+	$base: 'aria-selected:text-white text-frame-500 hover:text-frame-800  aria-selected:text-white',
 	white:
 		'hover:bg-frame-200 aria-selected:bg-frame-200 hover:text-frame-200 aria-selected:text-inherit',
 	frame: 'hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-frame-900',

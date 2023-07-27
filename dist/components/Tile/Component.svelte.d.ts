@@ -7,7 +7,7 @@ declare const __propDef: {
         size?: import("../..").ThemeSize | undefined;
         theme?: import("../..").ThemeColor | undefined;
         transitioned?: boolean | undefined;
-        variant?: "default" | "outline" | "filled" | undefined;
+        variant?: "outline" | "default" | "filled" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;

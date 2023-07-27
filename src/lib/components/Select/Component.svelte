@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
 	import themeStore, { ensureArray, themer } from '$lib';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
@@ -29,6 +29,7 @@
 	} as Required<$$Props>;
 
 	const store = useSelect({ multiple, selected: ensureArray(selected) });
+	let mounted = false;
 
 	export const context = setContext<SelectContext>('SelectContext', {
 		...store
@@ -57,6 +58,9 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <select
@@ -66,6 +70,7 @@
 	size={rows}
 	class={inputClasses}
 	value={multiple ? $store.selected : $store.selected[0]}
+	class:invisible={!mounted}
 >
 	{#if placeholder}
 		<option value="" disabled selected

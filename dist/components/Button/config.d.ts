@@ -1,7 +1,7 @@
 export declare const variantFilled: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -13,7 +13,7 @@ export declare const variantFilled: {
 export declare const variantText: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -25,7 +25,7 @@ export declare const variantText: {
 export declare const variantOutlined: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -36,7 +36,7 @@ export declare const variantOutlined: {
 } & {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -48,7 +48,7 @@ export declare const variantOutlined: {
 export declare const variantGhost: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -59,7 +59,7 @@ export declare const variantGhost: {
 } & {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -71,7 +71,7 @@ export declare const variantGhost: {
 export declare const variantFlushed: {
     $base: string;
     white: string;
-    default: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -84,7 +84,7 @@ export declare const button: {
     default: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -96,7 +96,7 @@ export declare const button: {
     filled: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -109,7 +109,7 @@ export declare const button: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -121,7 +121,7 @@ export declare const button: {
     text: {
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -134,7 +134,7 @@ export declare const button: {
         [x: string]: string | string[];
         $base: string;
         white: string;
-        default: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
