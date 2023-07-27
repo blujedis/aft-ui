@@ -27,6 +27,6 @@ export const checkboxDefaults: Partial<CheckboxProps> = {
 	focused: 'always',
 	rounded: 'full',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

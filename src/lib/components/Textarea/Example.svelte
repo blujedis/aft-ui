@@ -23,7 +23,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'frame' as ThemeColor,
+		theme: 'light' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as TextareaVariant
 	};

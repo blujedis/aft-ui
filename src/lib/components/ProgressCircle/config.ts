@@ -1,7 +1,7 @@
 const baseTrackVariant = {
 	$base: 'stroke-frame-200',
-	white: 'stroke-white',
-	frame: '',
+	dark: 'stroke-white',
+	light: '',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -13,8 +13,8 @@ const baseTrackVariant = {
 
 const baseValueVariant = {
 	$base: '',
-	white: 'stroke-frame-300',
-	frame: 'stroke-frame-400',
+	dark: 'stroke-frame-300',
+	light: 'stroke-frame-400',
 	primary: 'stroke-primary-500',
 	secondary: 'stroke-secondary-500',
 	tertiary: 'stroke-tertiary-500',
@@ -26,8 +26,8 @@ const baseValueVariant = {
 
 const baseTextVariant = {
 	$base: 'text-[.85em]',
-	white: 'fill-white',
-	frame: 'fill-frame-600',
+	dark: 'fill-white',
+	light: 'fill-frame-600',
 	primary: 'fill-primary-600',
 	secondary: 'fill-secondary-600',
 	tertiary: 'fill-tertiary-600',

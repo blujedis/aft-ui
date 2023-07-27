@@ -71,7 +71,7 @@
 
 <style>
 	:root {
-		--color-white: 255 255 255;
+		--color-dark: 255 255 255;
 	}
 
 	input[type='range'] {

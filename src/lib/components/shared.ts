@@ -213,48 +213,11 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
-export const focused = {
-	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
-	white: 'focus:ring-frame-100 focus-visible:ring-frame-100 focus-within:ring-frame-100',
-	frame: 'focus:ring-frame-400 focus-visible:ring-frame-400 focus-within:ring-frame-400',
-	primary: 'focus:ring-primary-600 focus-visible:ring-primary-600 focus-within:ring-primary-600',
-	secondary:
-		'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
-	tertiary:
-		'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
-	danger: 'focus:ring-danger-600 focus-visible:ring-danger-600 focus-within:ring-danger-600',
-	warning: 'focus:ring-warning-600 focus-visible:ring-warning-600 focus-within:ring-warning-600',
-	success: 'focus:ring-success-600 focus-visible:ring-success-600  focus-within:ring-success-600',
-	info: 'focus:ring-info-600 focus-visible:ring-info-600 focus-within:ring-info-600'
-};
-
-export const focusedRingSizes = {
-	$base: '',
-	unstyled: '',
-	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-	none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
-	two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
-	four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
-	eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
-};
-
-export const focusedOffsetSizes = {
-	$base: '',
-	unstyled: '',
-	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-	none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
-	one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
-	two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
-	four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
-	eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
-};
-
 export const focusedBorder = {
 	$base:
 		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white: 'focus:border-frame-100 focus-visible:border-frame-100 focus-within:border-frame-100',
-	frame: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
+	dark: 'focus:border-frame-800 focus-visible:border-frame-800 focus-within:border-frame-800',
+	light: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
 	primary:
 		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
 	secondary:
@@ -292,8 +255,8 @@ export const focusedBorderFlushSizes = {
 export const focusedOutline = {
 	$base:
 		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	white: 'focus:outline-frame-100 focus-visible:outline-frame-100 focus-within:outline-frame-100',
-	frame: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
+	dark: 'focus:outline-frame-800 focus-visible:outline-frame-800 focus-within:outline-frame-800',
+	light: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
 	primary:
 		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
 	secondary:
@@ -329,18 +292,60 @@ export const focusedOutlineOffsetSizes = {
 	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8 focus-within:outline-offset-8'
 };
 
+export const focused = mergeConfigs(focusedOutline, focusedBorder, {
+	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+	dark: 'focus:ring-frame-800 focus-visible:ring-frame-800 focus-within:ring-frame-800',
+	light: 'focus:ring-frame-400 focus-visible:ring-frame-400 focus-within:ring-frame-400',
+	primary: 'focus:ring-primary-600 focus-visible:ring-primary-600 focus-within:ring-primary-600',
+	secondary:
+		'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
+	tertiary:
+		'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
+	danger: 'focus:ring-danger-600 focus-visible:ring-danger-600 focus-within:ring-danger-600',
+	warning: 'focus:ring-warning-600 focus-visible:ring-warning-600 focus-within:ring-warning-600',
+	success: 'focus:ring-success-600 focus-visible:ring-success-600  focus-within:ring-success-600',
+	info: 'focus:ring-info-600 focus-visible:ring-info-600 focus-within:ring-info-600'
+});
+
+export const focusedRingSizes = mergeConfigs({
+	$base: '',
+	unstyled: '',
+	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+	none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+	one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
+	two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
+	four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
+	eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
+}, focusedBorderSizes, focusedOutlineSizes);
+
+export const focusedOffsetSizes = mergeConfigs({
+	$base: '',
+	unstyled: '',
+	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+	none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
+	one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
+	two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
+	four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
+	eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
+}, focusedOutlineOffsetSizes);
+
+
 export const focusedFilters = {
-	always: ['focus-visible:', 'focus-within:'],
-	visible: ['focus:', 'focus-within:'],
-	within: ['focus:', 'focus-visible:'],
-	alwaysWithin: ['focus-visible:'],
-	visibleWithin: ['focus:']
+	always: ['!focus:outline-none', 'focus-visible:', 'focus-within:', 'focus:border', 'focus:outline'],
+	visible: ['focus:', 'focus-within:', 'focus-visible:border', 'focus-visible:outline'],
+	within: ['focus:', 'focus-visible:', 'focus-within:border', 'focus-within:outline'],
+	alwaysWithin: ['focus-visible:', 'focus:border', 'focus:outline', 'focus-within:border', 'focus-within:outline'],
+	visibleWithin: ['focus:', 'focus-visible:border', 'focus-visible:outline', 'focus-within:border', 'focus-within:outline'],
+	border: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:ring'],
+	outline: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:border'],
+	borderWithin: ['focus-visible:', 'focus:ring', 'focus:outline', 'focus-within:outline', 'focus-within:ring'],
+	outlineWithin: ['focus-visible:', 'focus:ring', 'focus:border', 'focus-within:border', 'focus-within:ring']
 };
 
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
-	white: 'aria-disabled:text-frame-300',
-	frame: 'aria-disabled:text-frame-300',
+	dark: 'aria-disabled:text-frame-700',
+	light: 'aria-disabled:text-frame-300',
 	primary: 'aria-disabled:text-primary-300',
 	secondary: 'aria-disabled:text-secondary-300',
 	tertiary: 'aria-disabled:text-tertiary-300',
@@ -351,8 +356,8 @@ export const disableds = {
 };
 
 export const placeholders = {
-	white: 'placeholder:text-white aria-disabled:placeholder:text-white',
-	frame: 'placeholder:text-frame-400 aria-disabled:placeholder:text-frame-200',
+	dark: 'placeholder:text-frame-500 aria-disabled:placeholder:text-frame-500',
+	light: 'placeholder:text-frame-400 aria-disabled:placeholder:text-frame-200',
 	primary: 'placeholder:text-primary-400 aria-disabled:placeholder:text-primary-300',
 	secondary: 'placeholder:text-secondary-400 aria-disabled:placeholder:text-secondary-300',
 	tertiary: 'placeholder:text-tertiary-400 aria-disabled:placeholder:text-tertiary-300',
@@ -380,8 +385,8 @@ export const common = {
 
 // export const focusedFlush = {
 // 	$base: 'focus:outline-none focus:!ring-0 focus-visible:!ring-0',
-// 	white: 'focus:border-white focus:shadow-[0_4px_6px_-6px_rgb(var(--color-white))]',
-// 	frame: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
+// 	dark: 'focus:border-white focus:shadow-[0_4px_6px_-6px_rgb(var(--color-white))]',
+// 	light: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
 // 	primary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-primary-600))]',
 // 	secondary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-secondary-600))]',
 // 	tertiary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-tertiary-600))]',

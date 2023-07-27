@@ -4,8 +4,8 @@ export const cardContent = {
 	default: { ...placeholder },
 	filled: {
 		$base: 'text-white',
-		white: 'bg-white text-inherit',
-		frame: 'bg-frame-200 text-inherit',
+		dark: 'bg-white text-inherit',
+		light: 'bg-frame-200 text-inherit',
 		primary: 'bg-primary-500',
 		secondary: 'bg-secondary-500',
 		tertiary: 'bg-tertiary-500',
@@ -16,8 +16,8 @@ export const cardContent = {
 	},
 	soft: {
 		$base: 'text-inherit',
-		white: 'bg-white',
-		frame: 'bg-frame-100 text-frame-600',
+		dark: 'bg-white',
+		light: 'bg-frame-100 text-frame-600',
 		primary: 'bg-primary-50 text-primary-600',
 		secondary: 'bg-secondary-50 text-secondary-600',
 		tertiary: 'bg-tertiary-50 text-tertiary-600',

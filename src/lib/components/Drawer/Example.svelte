@@ -22,7 +22,7 @@
 		shadowed: 'xl' as ThemeShadowed,
 		size: 'md' as ThemeSimpleSize,
 		speed: 'medium' as ThemeSpeed,
-		theme: 'frame' as ThemeColor,
+		theme: 'light' as ThemeColor,
 		variant: 'default' as DrawerVariant
 	};
 

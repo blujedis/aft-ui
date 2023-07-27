@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { colors } from './constants';
 import { getProperty } from 'dot-prop';
+import { isMatch } from '$lib/utils/glob';
 
 export interface ThemerApi<C extends ThemeConfig> {
 	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
@@ -276,8 +277,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${
-						key as string
+					`${instanceName} mapped value using property ${key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -351,15 +351,70 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param withTailwindMerge when true runs through Tailwind Merge deduping classes.
 		 */
 		function compile(withTailwindMerge = false) {
+
 			if (typeof themeConfig === 'undefined') return '';
-			let normalized = classnames(...base, ...themed, ...appended).trim();
-			normalized = normalized
-				.split(' ')
-				.filter((v) => {
-					return !removed.some((r) => v === r || v.startsWith(r));
+
+			let baseClone2 = base.reduce((a, c) => [...a, ...c.split(' ')], [] as string[]);
+			// let themedClone = themed.reduce((a,c) => [...a, ...c.split(' ')], [] as string[]);
+
+
+			baseClone2 = baseClone2.reduce((a, c) => {
+				const preserved = [] as string[];
+				const cleaned = [] as string[];
+				removed.forEach(r => {
+					const negated = r.charAt(0) === '!';
+					r = r.slice(1);
+					if (negated && c.startsWith(r) && !preserved.includes(c))
+						preserved.push(c);
+					else if (c.startsWith(r) && !cleaned.includes(c))
+						cleaned.push(c);
+				});
+				return [...a, ...cleaned, ...preserved];
+			}, [] as string[]);
+
+			console.log(baseClone2)
+
+
+			const baseClone = base.reduce((a, c) => {
+				const clean = c.split(' ').filter(v => {
+					return !removed.some(r => {
+						const negated = r.charAt(0) === '!';
+						if (negated)
+							r = r.slice(1);
+						const match = !!~v.indexOf(r);
+						if (match && negated) return false;
+						return match;
+					});
 				})
-				.join(' ');
+				return [...a, ...clean]
+			}, [] as string[])
+
+			const themedClone = themed.reduce((a, c) => {
+				const clean = c.split(' ').filter(v => {
+					return !removed.some(r => {
+						const negated = r.charAt(0) === '!';
+						if (negated)
+							r = r.slice(1);
+						const match = !!~v.indexOf(r);
+						if (match && negated) return false;
+						return match;
+					});
+				})
+				return [...a, ...clean]
+			}, [] as string[]);
+
+			const normalized = classnames(...baseClone, ...themedClone, ...appended).trim();
+
+			// normalized = normalized
+			// 	.split(' ')
+			// 	.filter((v) => {
+			// 		return !removed.some(r => !!~v.indexOf(r));
+			// 	})
+			// 	.join(' ');
+
 			if (!withTailwindMerge) return normalized;
+
+
 			return twMerge(normalized);
 		}
 

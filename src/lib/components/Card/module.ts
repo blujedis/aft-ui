@@ -22,6 +22,6 @@ export type CardProps = {
 
 export const cardDefaults: Partial<CardProps> = {
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

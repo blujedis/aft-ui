@@ -1,7 +1,7 @@
 // $base: 'text-white hover:text-white',
-// white:
+// dark:
 // 	'bg-white hover:bg-frame-100 border-white aria-checked:bg-frame-200 text-inherit hover:text-inherit aria-checked:text-inherit',
-// frame: 'bg-frame-200 hover:bg-frame-300 border-frame-400 aria-checked:bg-frame-200',
+// light: 'bg-frame-200 hover:bg-frame-300 border-frame-400 aria-checked:bg-frame-200',
 // primary: 'bg-primary-500 hover:bg-primary-600 border-primary-400 aria-checked:bg-primary-600',
 // secondary:
 // 	'bg-secondary-500 hover:bg-secondary-600 border-secondary-400 aria-checked:bg-secondary-600',
@@ -14,8 +14,8 @@
 
 const baseVariant = {
 	$base: 'text-white hover:text-white aria-checked:text-white',
-	white: 'aria-checked:bg-frame-200',
-	frame: 'text-frame-700 hover:text-current aria-checked:bg-frame-400 aria-checked:ring-frame-400',
+	dark: 'aria-checked:bg-frame-200',
+	light: 'text-frame-700 hover:text-current aria-checked:bg-frame-400 aria-checked:ring-frame-400',
 	primary: 'aria-checked:bg-primary-600 aria-checked:ring-primary-600',
 	secondary: 'aria-checked:bg-secondary-600 aria-checked:ring-secondary-600',
 	tertiary: 'aria-checked:bg-tertiary-600 aria-checked:ring-tertiary-600',
@@ -34,8 +34,8 @@ export const buttonGroupItem = {
 	},
 	outlined: {
 		$base: 'bg-white aria-checked:text-white',
-		white: 'aria-checked:bg-frame-200 aria-checked:ring-frame-200',
-		frame: 'aria-checked:bg-frame-400 aria-checked:ring-frame-400',
+		dark: 'aria-checked:bg-frame-200 aria-checked:ring-frame-200',
+		light: 'aria-checked:bg-frame-400 aria-checked:ring-frame-400',
 		primary: 'aria-checked:bg-primary-600 aria-checked:ring-primary-600',
 		secondary: 'aria-checked:bg-secondary-600 aria-checked:ring-secondary-600',
 		tertiary: 'aria-checked:bg-tertiary-600 aria-checked:ring-tertiary-600',
@@ -46,8 +46,8 @@ export const buttonGroupItem = {
 	},
 	text: {
 		$base: 'no-underline aria-checked:underline',
-		white: 'aria-checked:text-frame-200',
-		frame: 'aria-checked:text-frame-900',
+		dark: 'aria-checked:text-frame-200',
+		light: 'aria-checked:text-frame-900',
 		secondary: 'aria-checked:text-secondary-700',
 		tertiary: 'aria-checked:text-tertiary-700',
 		danger: 'aria-checked:text-danger-700',
@@ -57,8 +57,8 @@ export const buttonGroupItem = {
 	},
 	ghost: {
 		$base: 'aria-checked:text-white',
-		white: 'hover:bg-frame-200 aria-checked:bg-frame-200 aria-checked:text-inherit',
-		frame: 'aria-checked:bg-frame-400 aria-checked:ring-frame-400',
+		dark: 'hover:bg-frame-200 aria-checked:bg-frame-200 aria-checked:text-inherit',
+		light: 'aria-checked:bg-frame-400 aria-checked:ring-frame-400',
 		primary: 'aria-checked:bg-primary-500 aria-checked:ring-primary-500',
 		secondary: 'aria-checked:bg-secondary-500 aria-checked:ring-secondary-500',
 		tertiary: 'aria-checked:bg-tertiary-500 aria-checked:ring-tertiary-500',

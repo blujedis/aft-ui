@@ -14,6 +14,6 @@ export type CardContentProps = {
 export const cardContentDefaults: Partial<CardContentProps> = {
 	type: 'content',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

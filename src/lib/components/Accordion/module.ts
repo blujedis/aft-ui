@@ -30,6 +30,6 @@ export const accordionDefaults: AccordionProps<'div'> = {
 	as: 'div',
 	multiple: false,
 	selected: [],
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

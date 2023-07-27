@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { classToColor, styler, themer } from '$lib';
+	import themeStore, { styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
 	import type { RatingContext } from '../Rating';
@@ -17,7 +17,7 @@
 
 	// let ref: SVGElement | undefined;
 	const id = uniqid();
-	const initFill = classToColor($themeStore.palette, fill) || '#FFA41C';
+	const initFill = '#FFA41C'; // classToColor($themeStore.palette, fill) || '#FFA41C';
 	const strokeColor = stroked ? initFill : undefined;
 
 	$: percentage =

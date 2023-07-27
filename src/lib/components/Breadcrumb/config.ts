@@ -5,8 +5,8 @@ export const breadcrumbNav = {
 	unfilled: { ...placeholder },
 	filled: {
 		$base: 'text-white',
-		white: 'bg-white border-white',
-		frame: 'text-frame-300 bg-frame-100',
+		dark: 'bg-white border-white',
+		light: 'text-frame-300 bg-frame-100',
 		primary: 'bg-primary-500',
 		secondary: 'bg-secondary-500',
 		tertiary: 'bg-tertiary-500',

@@ -24,6 +24,6 @@ export type EmptyProps = {
 export const emptyDefaults: Partial<EmptyProps> = {
 	as: 'div',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

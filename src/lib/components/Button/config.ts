@@ -2,8 +2,8 @@ import { mergeConfigs } from '$lib/theme';
 
 export const variantFilled = {
 	$base: 'text-white border border-transparent ring-1',
-	white: 'text-inherit bg-white hover:bg-frame-200 ring-white',
-	frame: 'text-inherit bg-frame-200 hover:bg-frame-300 ring-frame-200 hover:ring-frame-300',
+	dark: 'text-frame-200 bg-frame-700 hover:bg-frame-800 ring-frame-700',
+	light: 'text-frame-700 bg-frame-200 hover:bg-frame-300 ring-frame-200 hover:ring-frame-300',
 	primary: 'bg-primary-500 hover:bg-primary-600 ring-primary-500 hover:ring-primary-600',
 	secondary: 'bg-secondary-500 hover:bg-secondary-600 ring-secondary-500 hover:ring-secondary-600',
 	tertiary: 'bg-tertiary-500 hover:bg-tertiary-600 ring-tertiary-500 hover:ring-tertiary-600',
@@ -15,8 +15,8 @@ export const variantFilled = {
 
 export const variantText = {
 	$base: 'text-frame-700 hover:text-frame-900 border-0 bg-transparent',
-	white: 'text-white hover:text-frame-200',
-	frame: 'text-frame-700 hover:text-frame-900',
+	dark: 'text-frame-700 hover:text-frame-900',
+	light: 'text-frame-700 hover:text-frame-900',
 	primary: 'text-primary-600 hover:text-primary-700',
 	secondary: 'text-secondary-600 hover:text-secondary-700',
 	tertiary: 'text-tertiary-600 hover:text-tertiary-700',
@@ -27,9 +27,9 @@ export const variantText = {
 };
 
 export const variantOutlined = mergeConfigs(variantText, {
-	$base: 'text-frame-700 hover:text-frame-900 bg-transparent ring-1 border border-transparent',
-	white: 'ring-white hover:ring-frame-200',
-	frame: 'ring-frame-300 hover:ring-frame-400',
+	$base: 'bg-transparent ring-1 border border-transparent',
+	dark: 'ring-frame-700 hover:ring-frame-800',
+	light: 'ring-frame-300 hover:ring-frame-400',
 	primary: 'ring-primary-500 hover:ring-primary-600',
 	secondary: 'ring-secondary-500 hover:ring-secondary-600',
 	tertiary: 'ring-tertiary-500 hover:ring-tertiary-600',
@@ -42,8 +42,8 @@ export const variantOutlined = mergeConfigs(variantText, {
 export const variantGhost = mergeConfigs(variantText, {
 	$base:
 		'text-frame-700 hover:text-frame-900 border border-transparent bg-transparent hover:ring-1',
-	white: 'hover:bg-frame-100 hover:ring-frame-100',
-	frame: 'hover:bg-frame-200 hover:ring-frame-200',
+	dark: 'hover:bg-frame-700 hover:ring-frame-700 hover:text-white',
+	light: 'hover:bg-frame-200 hover:ring-frame-200',
 	primary: 'hover:bg-primary-100 hover:ring-primary-100',
 	secondary: 'hover:bg-secondary-100 hover:ring-secondary-100',
 	tertiary: 'hover:bg-tertiary-100 hover:ring-tertiary-100',
@@ -54,9 +54,9 @@ export const variantGhost = mergeConfigs(variantText, {
 });
 
 export const variantFlushed = {
-	$base: 'text-inherit border border-l-0 border-r-0 border-t-0',
-	white: 'text-white border-white hover:border-frame-200 focus:border-frame-200',
-	frame: 'text-inherit border-frame-300 hover:border-frame-400 focus:border-frame-400',
+	$base: 'text-frame-700 border border-l-0 border-r-0 border-t-0',
+	dark: 'border-frame-700 hover:border-frame-800 focus:border-frame-800',
+	light: 'border-frame-300 hover:border-frame-400 focus:border-frame-400',
 	primary: 'text-primary-600 border-primary-500 hover:border-primary-600 focus:border-primary-600',
 	secondary:
 		'text-secondary-600 border-secondary-500 hover:border-secondary-600 focus:border-secondary-600',

@@ -24,7 +24,7 @@
 		rounded: 'lg' as ThemeRounded,
 		shadowed: 'lg' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'frame' as ThemeColor,
+		theme: 'light' as ThemeColor,
 		variant: 'default' as CardVariant,
 		wide: false
 	};

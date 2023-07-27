@@ -24,7 +24,7 @@
 	const code = `
   `;
 
-	let theme: ThemeColor = 'frame';
+	let theme: ThemeColor = 'dark';
 
 	const props = {
 		activated: false,
@@ -34,7 +34,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'frame' as ThemeColor,
+		theme: 'light' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as FileInputVariant,
 		underlined: false
@@ -48,7 +48,7 @@
 
 	function setTheme(type: 'start' | 'end') {
 		if (type === 'start') theme = 'success';
-		else theme = 'frame';
+		else theme = 'light';
 	}
 </script>
 
@@ -73,7 +73,7 @@
 	<div class="flex space-x-8">
 		<label for="Upload Button">
 			<FileInput accept="image/png, image/jpeg" onFormData={handleUpload} let:click>
-				<Button on:click={click}>Upload Files</Button>
+				<Button variant="text" theme="dark" on:click={click}>Upload Files</Button>
 			</FileInput>
 		</label>
 		<label for="Upload Drop Child Element">

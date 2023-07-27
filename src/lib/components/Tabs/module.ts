@@ -41,6 +41,6 @@ export const tabsDefaults: Partial<TabsProps> = {
 	condensed: true,
 	focused: 'visible',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

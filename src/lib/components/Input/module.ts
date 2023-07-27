@@ -27,7 +27,7 @@ export type InputProps = {
 export const inputDefaults: Partial<InputProps> = {
 	focused: 'always',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	transitioned: true,
 	variant: 'default'
 };

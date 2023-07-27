@@ -1,6 +1,6 @@
 /**
  * Global Options
- * dropshadow: (frame: none)
+ * dropshadow: (light: none)
  */
 import type { SvelteComponent } from 'svelte';
 import type { popover } from './config';
@@ -24,6 +24,6 @@ export const popoverDefaults: PopoverProps = {
 	arrowed: true,
 	shadowed: 'md',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

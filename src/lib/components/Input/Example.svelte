@@ -1,6 +1,12 @@
 <script lang="ts">
 	import Input, { type InputVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type {
+		ThemeColor,
+		ThemeFocused,
+		ThemeRounded,
+		ThemeShadowed,
+		ThemeSize
+	} from '../../types';
 	import Section from '../_Example/Section.svelte';
 	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import SelectSize from '../_Example/SelectSize.svelte';
@@ -18,12 +24,12 @@
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
+		focused: 'always' as ThemeFocused,
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'frame' as ThemeColor,
+		theme: 'light' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as InputVariant
 	};
@@ -56,13 +62,13 @@
 				<Input {...props} variant="outlined" placeholder="First Name" />
 			</div>
 		</label>
-		<label for="outline">
+		<!-- <label for="outline">
 			<div class="text-sm">Filled:</div>
 			<Input {...props} variant="filled" placeholder="Last Name" />
 		</label>
 		<label for="link">
 			<div class="text-sm">Flushed:</div>
 			<Input {...props} variant="flushed" />
-		</label>
+		</label> -->
 	</div>
 </ExamplePage>

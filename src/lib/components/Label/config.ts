@@ -1,8 +1,8 @@
 export const label = {
 	default: {
 		$base: 'text-inherit',
-		white: 'text-white',
-		frame: 'text-frame-600',
+		dark: 'text-white',
+		light: 'text-frame-600',
 		primary: 'text-primary-600',
 		secondary: 'text-secondary-600',
 		tertiary: 'text-tertiary-600',

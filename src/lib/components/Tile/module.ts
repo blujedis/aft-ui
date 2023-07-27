@@ -22,6 +22,6 @@ export type TileProps = {
 export const tileDefaults: Partial<TileProps> = {
 	rounded: 'md',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

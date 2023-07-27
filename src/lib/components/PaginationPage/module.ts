@@ -28,6 +28,6 @@ export const paginationPageDefaults: Partial<PaginationPageProps<'a'>> = {
 	focused: 'visible',
 	rounded: 'full',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'flushed'
 };

@@ -16,6 +16,6 @@ export type SelectOptionProps = {
 
 export const selectOptionDefaults: Partial<SelectOptionProps> = {
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

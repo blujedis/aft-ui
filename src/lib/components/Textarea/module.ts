@@ -30,6 +30,6 @@ export const textareaDefaults: Partial<TextareaProps> = {
 	resize: 'both',
 	rounded: 'sm',
 	size: 'md',
-	theme: 'frame',
+	theme: 'light',
 	variant: 'default'
 };

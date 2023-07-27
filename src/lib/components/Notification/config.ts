@@ -3,8 +3,8 @@ import { placeholder } from '../placeholder';
 export const notification = {
 	default: {
 		$base: 'border-r-0 border-y-0',
-		white: 'border-white',
-		frame: 'border-frame-200',
+		dark: 'border-white',
+		light: 'border-frame-200',
 		primary: 'border-primary-500',
 		secondary: 'border-secondary-500',
 		tertiary: 'border-tertiary-500',
@@ -18,8 +18,8 @@ export const notification = {
 export const notificationIcon = {
 	default: {
 		$base: 'text-inherit',
-		white: 'text-white',
-		frame: 'text-frame-600',
+		dark: 'text-white',
+		light: 'text-frame-600',
 		primary: 'text-primary-600',
 		secondary: 'text-secondary-600',
 		tertiary: 'text-tertiary-600',
