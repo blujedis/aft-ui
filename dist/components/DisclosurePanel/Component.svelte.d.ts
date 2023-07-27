@@ -7,7 +7,7 @@ declare class __sveltets_Render<Tag extends HTMLTag> {
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;

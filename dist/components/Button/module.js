@@ -3,6 +3,6 @@ export const buttonDefaults = {
     full: false,
     strategy: 'button',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

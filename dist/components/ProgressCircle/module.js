@@ -7,7 +7,7 @@ export const progressCircleDefaults = {
     size: 'md',
     text: true,
     textunit: '%',
-    theme: 'frame',
+    theme: 'light',
     value: 0,
     variant: 'default'
 };

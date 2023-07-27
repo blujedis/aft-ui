@@ -16,7 +16,7 @@ const props = {
   focused: "visible",
   shadowed: "none",
   size: "md",
-  theme: "frame",
+  theme: "light",
   transitioned: false,
   // ThemeTransitioned,
   variant: "default"

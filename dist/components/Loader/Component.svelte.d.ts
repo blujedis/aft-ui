@@ -2,13 +2,13 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         style?: string | undefined;
-        color?: string | undefined;
         unstyled?: boolean | undefined;
         size?: import("../..").ThemeSize | undefined;
         class?: string | undefined;
         height?: import("@iconify/svelte").IconifyIconSize | undefined;
         width?: import("@iconify/svelte").IconifyIconSize | undefined;
         id?: string | undefined;
+        color?: string | undefined;
         inline?: boolean | undefined;
         mode?: import("@iconify/svelte").IconifyRenderMode | undefined;
         flip?: string | undefined;

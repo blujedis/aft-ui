@@ -1,10 +1,10 @@
 export const modal = {
     default: {
         $base: 'text-inherit',
-        white: 'text-inherit'
+        dark: 'text-inherit'
     },
     filled: {
         $base: 'text-inherit',
-        white: 'text-inherit'
+        dark: 'text-inherit'
     }
 };

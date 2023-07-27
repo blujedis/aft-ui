@@ -1,8 +1,8 @@
 export declare const label: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

@@ -3,18 +3,18 @@ export const tabs = {
     default: {
         ...placeholder,
         $base: 'border-t-0 border-x-0 border-b border-frame-200',
-        white: 'border-white'
+        dark: 'border-white'
     },
     flushed: {
         ...placeholder,
         $base: 'border-t-0 border-x-0 border-b border-frame-200',
-        white: 'border-white'
+        dark: 'border-white'
     },
     pills: { ...placeholder },
     grouped: { ...placeholder },
     labeled: {
         ...placeholder,
         $base: 'border-t-0 border-x-0 border-b border-frame-200',
-        white: 'border-white'
+        dark: 'border-white'
     }
 };

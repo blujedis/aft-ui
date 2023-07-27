@@ -12,7 +12,7 @@ declare const __propDef: {
         size?: number | import("../..").ThemeSize | undefined;
         text?: string | boolean | undefined;
         textunit?: string | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         tracksize?: number | import("../..").ThemeSize | undefined;
         value?: any;
         variant?: "default" | "filled" | undefined;
@@ -23,9 +23,7 @@ declare const __propDef: {
         path?: string | null | undefined;
         scale?: string | number | null | undefined;
         fill?: string | null | undefined;
-        stroke?: string | null | undefined;
         values?: string | null | undefined;
-        color?: string | null | undefined;
         x?: string | number | null | undefined;
         y?: string | number | null | undefined;
         name?: string | null | undefined;
@@ -44,6 +42,7 @@ declare const __propDef: {
         lang?: string | null | undefined;
         tabindex?: number | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
+        color?: string | null | undefined;
         'aria-activedescendant'?: string | null | undefined;
         'aria-atomic'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-autocomplete'?: "none" | "both" | "list" | "inline" | null | undefined;
@@ -207,7 +206,7 @@ declare const __propDef: {
         'accent-height'?: string | number | null | undefined;
         accumulate?: "none" | "sum" | null | undefined;
         additive?: "replace" | "sum" | null | undefined;
-        'alignment-baseline'?: "inherit" | "auto" | "alphabetic" | "hanging" | "ideographic" | "mathematical" | "baseline" | "before-edge" | "text-before-edge" | "middle" | "central" | "after-edge" | "text-after-edge" | null | undefined;
+        'alignment-baseline'?: "auto" | "inherit" | "alphabetic" | "hanging" | "ideographic" | "mathematical" | "baseline" | "before-edge" | "text-before-edge" | "middle" | "central" | "after-edge" | "text-after-edge" | null | undefined;
         allowReorder?: "yes" | "no" | null | undefined;
         alphabetic?: string | number | null | undefined;
         amplitude?: string | number | null | undefined;
@@ -231,7 +230,7 @@ declare const __propDef: {
         clipPathUnits?: string | number | null | undefined;
         'clip-rule'?: string | number | null | undefined;
         'color-interpolation'?: string | number | null | undefined;
-        'color-interpolation-filters'?: "inherit" | "auto" | "sRGB" | "linearRGB" | null | undefined;
+        'color-interpolation-filters'?: "auto" | "inherit" | "sRGB" | "linearRGB" | null | undefined;
         'color-profile'?: string | number | null | undefined;
         'color-rendering'?: string | number | null | undefined;
         contentScriptType?: string | number | null | undefined;
@@ -364,9 +363,10 @@ declare const __propDef: {
         'stop-opacity'?: string | number | null | undefined;
         'strikethrough-position'?: string | number | null | undefined;
         'strikethrough-thickness'?: string | number | null | undefined;
+        stroke?: string | null | undefined;
         'stroke-dasharray'?: string | number | null | undefined;
         'stroke-dashoffset'?: string | number | null | undefined;
-        'stroke-linecap'?: "inherit" | "square" | "round" | "butt" | null | undefined;
+        'stroke-linecap'?: "square" | "inherit" | "round" | "butt" | null | undefined;
         'stroke-linejoin'?: "inherit" | "round" | "miter" | "bevel" | null | undefined;
         'stroke-miterlimit'?: string | null | undefined;
         'stroke-opacity'?: string | number | null | undefined;

@@ -1,7 +1,7 @@
 export const accordionOptionDefaults = {
     as: 'div',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     transition: 'expand',
     variant: 'default'
 };

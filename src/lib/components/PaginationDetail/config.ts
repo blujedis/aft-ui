@@ -9,7 +9,7 @@ export const paginationDetail = {
 		danger: 'bg-danger-500',
 		warning: 'bg-warning-500',
 		success: 'bg-success-500',
-		info: 'bg-info-500',
+		info: 'bg-info-500'
 	},
 	filled: {
 		$base: 'text-white',
@@ -21,7 +21,7 @@ export const paginationDetail = {
 		danger: 'bg-danger-500',
 		warning: 'bg-warning-500',
 		success: 'bg-success-500',
-		info: 'bg-info-500',
+		info: 'bg-info-500'
 	},
 	outline: {
 		$base: 'text-inherit',

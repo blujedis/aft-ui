@@ -6,8 +6,8 @@ export declare const notificationsPosition: Record<NotificationPosition, {
 export declare const notifications: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;

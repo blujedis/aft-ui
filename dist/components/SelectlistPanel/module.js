@@ -2,7 +2,7 @@ export const selectListPanelDefaults = {
     origin: 'center',
     position: 'left',
     shadowed: 'md',
-    theme: 'frame',
+    theme: 'light',
     transition: { start: 0.95, type: 'scale' },
     variant: 'default'
 };

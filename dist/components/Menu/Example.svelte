@@ -72,7 +72,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "frame",
+  theme: "light",
   variant: "default"
 };
 </script>

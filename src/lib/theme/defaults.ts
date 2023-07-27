@@ -1,12 +1,12 @@
 import type { ThemeDefaults } from '../types/theme';
 
 const component = {
-	// focused: true,
+	focused: 'visible',
 	// rounded: 'sm',
 	// shadowed: undefined,
-	// size: 'md',
-	// theme: 'default',
-	// transitioned: true
+	size: 'md',
+	theme: 'light',
+	transitioned: true
 } as ThemeDefaults['component'];
 
 const defaults: ThemeDefaults = {

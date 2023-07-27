@@ -351,69 +351,69 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param withTailwindMerge when true runs through Tailwind Merge deduping classes.
 		 */
 		function compile(withTailwindMerge = false) {
-
 			if (typeof themeConfig === 'undefined') return '';
 
-			let baseClone2 = base.reduce((a, c) => [...a, ...c.split(' ')], [] as string[]);
-			// let themedClone = themed.reduce((a,c) => [...a, ...c.split(' ')], [] as string[]);
+			const baseClean = base.reduce((a, c) => {
 
-
-			baseClone2 = baseClone2.reduce((a, c) => {
-				const preserved = [] as string[];
+				const preserve = [] as string[];
 				const cleaned = [] as string[];
-				removed.forEach(r => {
-					const negated = r.charAt(0) === '!';
-					r = r.slice(1);
-					if (negated && c.startsWith(r) && !preserved.includes(c))
-						preserved.push(c);
-					else if (c.startsWith(r) && !cleaned.includes(c))
-						cleaned.push(c);
+
+				console.log(removed);
+
+				const filtered = c.split(' ').filter(v => {
+
+					let preserved = false;
+					let exempt = false;
+
+					removed.forEach(r => {
+						const negated = r.charAt(0) === '!';
+						const filter = negated ? r.slice(1) : r;
+						const match = v === filter || v.startsWith(filter);
+						if (negated && match)
+							preserved = true;
+						else if (!preserved && !match)
+							exempt = true;
+					});
+
+					const invalid = 
+
+					console.log(v, preserved);
+
+					// for (const r of removed) {
+					// 	const negated = r.charAt(0) === '!';
+					// 	const filter = negated ? r.slice(1) : r;
+					// 	const match = v.startsWith(filter) || v === filter;
+					// 	if (match && negated && !preserve.includes(v)) preserve.push(v);
+					// 	else if (!match && !preserve.includes(v)) cleaned.push(v);
+					// }
+
+					return !preserved || !exempt;
+
 				});
-				return [...a, ...cleaned, ...preserved];
+
+				return [...a, ...cleaned, ...preserve];
+
 			}, [] as string[]);
 
-			console.log(baseClone2)
-
-
-			const baseClone = base.reduce((a, c) => {
-				const clean = c.split(' ').filter(v => {
-					return !removed.some(r => {
+			const themedClean = themed.reduce((a, c) => {
+				const filtered = c.split(' ').filter(v => {
+					let ignore = false;
+					for (const r of removed) {
+						if (ignore) break;
 						const negated = r.charAt(0) === '!';
-						if (negated)
-							r = r.slice(1);
-						const match = !!~v.indexOf(r);
-						if (match && negated) return false;
-						return match;
-					});
-				})
-				return [...a, ...clean]
-			}, [] as string[])
-
-			const themedClone = themed.reduce((a, c) => {
-				const clean = c.split(' ').filter(v => {
-					return !removed.some(r => {
-						const negated = r.charAt(0) === '!';
-						if (negated)
-							r = r.slice(1);
-						const match = !!~v.indexOf(r);
-						if (match && negated) return false;
-						return match;
-					});
-				})
-				return [...a, ...clean]
+						const filter = negated ? r.slice(1) : r;
+						ignore = (negated && !v.startsWith(filter)) || v.startsWith(filter);
+					}
+					return ignore;
+				});
+				return [...a, ...filtered];
 			}, [] as string[]);
 
-			const normalized = classnames(...baseClone, ...themedClone, ...appended).trim();
+			// 	console.log(...[baseClean]);
+			const normalized = classnames(...baseClean, ...themedClean, ...appended).trim();
 
-			// normalized = normalized
-			// 	.split(' ')
-			// 	.filter((v) => {
-			// 		return !removed.some(r => !!~v.indexOf(r));
-			// 	})
-			// 	.join(' ');
 
 			if (!withTailwindMerge) return normalized;
-
 
 			return twMerge(normalized);
 		}

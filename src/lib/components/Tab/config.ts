@@ -27,8 +27,7 @@ export const tab = {
 	},
 	pills: {
 		$base: 'hover:text-inherit aria-selected:text-white',
-		dark:
-			'hover:bg-frame-200 aria-selected:bg-frame-200 text-inherit hover:text-inherit aria-selected:text-inherit',
+		dark: 'hover:bg-frame-200 aria-selected:bg-frame-200 text-inherit hover:text-inherit aria-selected:text-inherit',
 		light:
 			'hover:text-frame-800 hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-frame-700',
 		primary: 'hover:text-primary-800 hover:bg-primary-200 aria-selected:bg-primary-600',
@@ -41,8 +40,7 @@ export const tab = {
 	},
 	grouped: {
 		$base: 'hover:text-inherit bg-white border aria-selected:text-white border-frame-200',
-		dark:
-			'hover:text-frame-200 hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-inherit',
+		dark: 'hover:text-frame-200 hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-inherit',
 		light:
 			'hover:text-frame-800 hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-frame-700',
 		primary: 'hover:text-primary-800 hover:bg-primary-200 aria-selected:bg-primary-600',

@@ -1,34 +1,32 @@
 export const paginationDetail = {
     default: {
         $base: 'text-white',
-        white: 'bg-white text-inherit',
-        frame: 'bg-frame-200',
+        dark: 'bg-white text-inherit',
+        light: 'bg-frame-200',
         primary: 'bg-primary-500',
         secondary: 'bg-secondary-500',
         tertiary: 'bg-tertiary-500',
         danger: 'bg-danger-500',
         warning: 'bg-warning-500',
         success: 'bg-success-500',
-        info: 'bg-info-500',
-        light: 'text-inherit'
+        info: 'bg-info-500'
     },
     filled: {
         $base: 'text-white',
-        white: 'bg-white text-inherit',
-        frame: 'bg-frame-200',
+        dark: 'bg-white text-inherit',
+        light: 'bg-frame-200',
         primary: 'bg-primary-500',
         secondary: 'bg-secondary-500',
         tertiary: 'bg-tertiary-500',
         danger: 'bg-danger-500',
         warning: 'bg-warning-500',
         success: 'bg-success-500',
-        info: 'bg-info-500',
-        light: 'text-inherit'
+        info: 'bg-info-500'
     },
     outline: {
         $base: 'text-inherit',
-        white: 'border-white text-white',
-        frame: 'border-frame-200 text-frame-600',
+        dark: 'border-white text-white',
+        light: 'border-frame-200 text-frame-600',
         primary: 'border-primary-500 text-primary-600',
         secondary: 'border-secondary-500 text-secondary-600',
         tertiary: 'border-tertiary-500 text-tertiary-600',

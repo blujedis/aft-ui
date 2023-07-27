@@ -10,7 +10,7 @@ declare const __propDef: {
         selected: import("../..").SelectStoreValue;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
         variant?: "default" | "flushed" | "pills" | "grouped" | "labeled" | undefined;
         navWrapperClasses?: string | undefined;
@@ -19,7 +19,7 @@ declare const __propDef: {
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
@@ -256,7 +256,7 @@ export default class Component extends SvelteComponentTyped<ComponentProps, Comp
             full: boolean;
             rounded: import("../..").ThemeRounded;
             size: import("../..").ThemeSize;
-            theme: import("../..").ThemeColor;
+            theme: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info";
             transitioned: boolean;
             variant: "default" | "flushed" | "pills" | "grouped" | "labeled";
         };

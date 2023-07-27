@@ -9,8 +9,8 @@ export declare const avatar: {
 export declare const avatarNotification: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -23,8 +23,8 @@ export declare const avatarNotification: {
 export declare const avatarPlaceholder: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

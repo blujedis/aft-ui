@@ -3,6 +3,6 @@ export const menuDefaults = {
     escapable: true,
     size: 'md',
     strategy: 'button',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

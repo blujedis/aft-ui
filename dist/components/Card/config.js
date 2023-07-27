@@ -6,8 +6,8 @@ export const card = {
     divided: {
         ...placeholder,
         $base: 'divide-y divide-opacity-40 ring-1 ring-black ring-opacity-5',
-        white: 'divide-white',
-        frame: 'divide-frame-200 divide-opacity-70',
+        dark: 'divide-white',
+        light: 'divide-frame-200 divide-opacity-70',
         primary: 'divide-primary-200',
         secondary: 'divide-secondary-200',
         tertiary: 'divide-tertiary-200',

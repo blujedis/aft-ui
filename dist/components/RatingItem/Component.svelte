@@ -1,4 +1,4 @@
-<script>import themeStore, { classToColor, styler, themer } from "../..";
+<script>import themeStore, { styler, themer } from "../..";
 import { getContext } from "svelte";
 import { ratingDefaults as defaults } from "./module";
 import { uniqid } from "../../utils";
@@ -8,7 +8,7 @@ export let { background, fill, index, size, stroked } = {
   ...context?.globals
 };
 const id = uniqid();
-const initFill = classToColor($themeStore.palette, fill) || "#FFA41C";
+const initFill = "#FFA41C";
 const strokeColor = stroked ? initFill : void 0;
 $:
   percentage = index > $context.score ? 0 : index < Math.trunc($context.score) ? 1 : $context.score % 1;

@@ -9,7 +9,7 @@ declare const __propDef: {
         href?: string | null | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
         variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
         caret?: string | import("@iconify/svelte").IconifyIcon | null | undefined;
@@ -17,7 +17,7 @@ declare const __propDef: {
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;

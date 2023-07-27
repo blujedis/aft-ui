@@ -10,12 +10,12 @@ declare const __propDef: {
         dismissible?: boolean | undefined;
         duration?: number | undefined;
         title?: string | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         variant?: "default" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;

@@ -1,7 +1,7 @@
 const defaultCheckbox = {
     $base: 'border',
-    white: 'border-white text-gray-300',
-    frame: 'border-frame-300 text-frame-400',
+    dark: 'border-white text-gray-300',
+    light: 'border-frame-300 text-frame-400',
     primary: 'border-primary-500 text-primary-500',
     secondary: 'border-secondary-500 text-secondary-500',
     tertiary: 'border-tertiary-500 text-tertiary-500',

@@ -1,6 +1,6 @@
 export const kbdDefaults = {
     rounded: 'full',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

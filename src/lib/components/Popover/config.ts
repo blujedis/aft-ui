@@ -9,6 +9,6 @@ export const popover = {
 		danger: 'bg-danger-500',
 		warning: 'bg-warning-500',
 		success: 'bg-success-500',
-		info: 'bg-info-500',
+		info: 'bg-info-500'
 	}
 };

@@ -1,6 +1,6 @@
 // const rangeTrackBackgroundBase = {
-// 	white: '',
-// 	frame: 'bg-frame-200',
+// 	dark: '',
+// 	light: 'bg-frame-200',
 // 	primary: 'bg-frame-200',
 // 	secondary: 'bg-frame-200',
 // 	tertiary: 'bg-frame-200',
@@ -10,8 +10,8 @@
 // 	info: 'bg-frame-200'
 // };
 // const rangeTrackAccentBase = {
-// 	white: '',
-// 	frame: 'accent-frame-400',
+// 	dark: '',
+// 	light: 'accent-frame-400',
 // 	primary: 'accent-primary-500',
 // 	secondary: 'accent-secondary-500',
 // 	tertiary: 'accent-tertiary-500',
@@ -21,8 +21,8 @@
 // 	info: 'accent-info-500'
 // };
 // const rangeThumbBorderBase = {
-// 	white: '',
-// 	frame: 'border-frame-400',
+// 	dark: '',
+// 	light: 'border-frame-400',
 // 	primary: 'border-primary-500',
 // 	secondary: 'border-secondary-500',
 // 	tertiary: 'border-tertiary-500',
@@ -32,8 +32,8 @@
 // 	info: 'border-info-500'
 // };
 // const rangeThumbBackgroundBase = {
-// 	white: 'bg-white',
-// 	frame: 'bg-white',
+// 	dark: 'bg-white',
+// 	light: 'bg-white',
 // 	primary: 'bg-white',
 // 	secondary: 'bg-white',
 // 	tertiary: 'bg-white',
@@ -43,8 +43,8 @@
 // 	info: 'bg-white'
 // };
 export const rangeTrackBackgroundBase = {
-    white: '',
-    frame: 'frame-200',
+    dark: '',
+    light: 'frame-200',
     primary: 'frame-200',
     secondary: 'frame-200',
     tertiary: 'frame-200',
@@ -54,8 +54,8 @@ export const rangeTrackBackgroundBase = {
     info: 'frame-200'
 };
 export const rangeTrackAccentBase = {
-    white: '',
-    frame: 'frame-400',
+    dark: '',
+    light: 'frame-400',
     primary: 'primary-500',
     secondary: 'secondary-500',
     tertiary: 'tertiary-500',
@@ -65,8 +65,8 @@ export const rangeTrackAccentBase = {
     info: 'info-500'
 };
 export const rangeThumbBorderBase = {
-    white: '',
-    frame: 'frame-400',
+    dark: '',
+    light: 'frame-400',
     primary: 'primary-500',
     secondary: 'secondary-500',
     tertiary: 'tertiary-500',
@@ -76,8 +76,8 @@ export const rangeThumbBorderBase = {
     info: 'info-500'
 };
 export const rangeThumbBackgroundBase = {
-    white: 'white',
-    frame: 'white',
+    dark: 'white',
+    light: 'white',
     primary: 'white',
     secondary: 'white',
     tertiary: 'white',

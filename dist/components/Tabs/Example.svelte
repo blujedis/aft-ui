@@ -20,7 +20,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "frame",
+  theme: "light",
   transitioned: false,
   // ThemeTransitioned,
   variant: "accented"

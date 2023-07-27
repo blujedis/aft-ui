@@ -14,7 +14,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         size?: import("../..").ThemeSize | undefined;
         strategy?: "button" | "text" | undefined;
         tags?: boolean | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         underlined?: boolean | undefined;
         variant?: "default" | "filled" | "outlined" | "flushed" | undefined;
         onBeforeAdd?: (<T extends SelectListItem>(value: string, input: HTMLInputElement) => false | T | Promise<false | T | null | undefined> | null | undefined) | undefined;
@@ -28,7 +28,6 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         slot?: string | null | undefined;
         style?: string | null | undefined;
         title?: string | null | undefined;
-        color?: string | null | undefined;
         hidden?: boolean | null | undefined;
         contextmenu?: string | null | undefined;
         name?: string | null | undefined;
@@ -43,7 +42,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         'bind:value'?: any;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -66,6 +65,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         autocapitalize?: string | null | undefined;
         autocorrect?: string | null | undefined;
         autosave?: string | null | undefined;
+        color?: string | null | undefined;
         itemprop?: string | null | undefined;
         itemscope?: boolean | null | undefined;
         itemtype?: string | null | undefined;

@@ -1,7 +1,7 @@
 export declare const variantFilled: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -12,8 +12,8 @@ export declare const variantFilled: {
 };
 export declare const variantText: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -24,8 +24,8 @@ export declare const variantText: {
 };
 export declare const variantOutlined: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -35,8 +35,8 @@ export declare const variantOutlined: {
     info: string;
 } & {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -47,8 +47,8 @@ export declare const variantOutlined: {
 } & import("../../theme").StringMap;
 export declare const variantGhost: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -58,8 +58,8 @@ export declare const variantGhost: {
     info: string;
 } & {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -70,8 +70,8 @@ export declare const variantGhost: {
 } & import("../../theme").StringMap;
 export declare const variantFlushed: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -83,8 +83,8 @@ export declare const variantFlushed: {
 export declare const button: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -95,8 +95,8 @@ export declare const button: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -108,8 +108,8 @@ export declare const button: {
     outlined: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -120,8 +120,8 @@ export declare const button: {
     };
     text: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -133,8 +133,8 @@ export declare const button: {
     ghost: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

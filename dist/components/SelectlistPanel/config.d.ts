@@ -1,8 +1,8 @@
 export declare const selectListPanel: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +13,8 @@ export declare const selectListPanel: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -25,8 +25,8 @@ export declare const selectListPanel: {
     };
     outlined: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -37,8 +37,8 @@ export declare const selectListPanel: {
     };
     text: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -49,8 +49,8 @@ export declare const selectListPanel: {
     };
     ghost: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -61,8 +61,8 @@ export declare const selectListPanel: {
     };
     flushed: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;

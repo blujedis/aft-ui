@@ -1,8 +1,8 @@
 export declare const accordion: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +13,8 @@ export declare const accordion: {
     };
     outlined: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -25,8 +25,8 @@ export declare const accordion: {
     };
     flushed: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -37,8 +37,8 @@ export declare const accordion: {
     };
     pills: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

@@ -1,7 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import { tailwindcolors, namedcolors } from './palettes';
 import { getProperty } from 'dot-prop';
-import { prefixes as colorPrefixes } from './constants';
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *
@@ -14,8 +12,8 @@ export function ensureArray(value) {
         return value;
     return [value];
 }
-const tailwindKeys = Object.keys(tailwindcolors);
-const namedKeys = Object.keys(namedcolors);
+// const tailwindKeys = Object.keys(tailwindcolors);
+// const namedKeys = Object.keys(namedcolors);
 /**
  * Checks if color looks like css color.
  *
@@ -30,25 +28,25 @@ export function isCssColor(color) {
  *
  * @param color the color to eval as Tailwind color.
  */
-export function isTailwindColor(color) {
-    return tailwindKeys.includes(color);
-}
+// export function isTailwindColor(color: string) {
+// 	return tailwindKeys.includes(color);
+// }
 /**
  * Checks if value is an app color from palette.
  *
  * @param color the color to eval as App color.
  */
-export function isAppColor(palette, color) {
-    return Object.keys(palette).includes(color);
-}
+// export function isAppColor(palette: Record<string, Record<string, string>>, color: string) {
+// 	return Object.keys(palette).includes(color);
+// }
 /**
  * Checks if value is a known css color.
  *
  * @param color color the color to eval as css color.
  */
-export function isNamedColor(color) {
-    return namedKeys.includes(color);
-}
+// export function isNamedColor(color: string) {
+// 	return namedKeys.includes(color);
+// }
 /**
  * Parses a Tailwind path into parts, modifiers, prefix and color.
  *
@@ -58,39 +56,37 @@ export function isNamedColor(color) {
  *
  * @param path the class path to be parsed.
  */
-export function parseClass(path) {
-    let modifiers = [];
-    if (path.includes(':')) {
-        const idx = path.lastIndexOf(':');
-        if (~idx) {
-            modifiers = path.slice(0, idx).split(':');
-            path = path.slice(idx + 1);
-        }
-    }
-    path = path.replace(/(-|\.)/g, '.');
-    let color = path.split('.');
-    let prefix = '';
-    if (colorPrefixes.includes(color[0])) {
-        prefix = (color.shift() || '');
-        if (color[1] === 'DEFAULT')
-            color[1] = 500;
-    }
-    color = color.filter((v) => !!v);
-    if (!color[1])
-        color[1] = undefined;
-    const namespace = color[1]
-        ? `${color[0]}.${color[1]}`
-        : ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
-            ? color[0]
-            : `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
-    color[2] = namespace;
-    return {
-        modifiers,
-        prefix,
-        color,
-        namespace
-    };
-}
+// export function parseClass(path: string) {
+// 	let modifiers = [] as string[];
+// 	if (path.includes(':')) {
+// 		const idx = path.lastIndexOf(':');
+// 		if (~idx) {
+// 			modifiers = path.slice(0, idx).split(':');
+// 			path = path.slice(idx + 1);
+// 		}
+// 	}
+// 	path = path.replace(/(-|\.)/g, '.');
+// 	let color = path.split('.') as [ThemeColor, ThemeColorShade | undefined, string];
+// 	let prefix = '';
+// 	if (colorPrefixes.includes(color[0] as any)) {
+// 		prefix = (color.shift() || '') as string;
+// 		if (color[1] === ('DEFAULT' as any)) color[1] = 500;
+// 	}
+// 	color = color.filter((v) => !!v) as [ThemeColor, ThemeColorShade | undefined, string];
+// 	if (!color[1]) color[1] = undefined;
+// 	const namespace = color[1]
+// 		? `${color[0]}.${color[1]}`
+// 		: ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
+// 		? color[0]
+// 		: `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
+// 	color[2] = namespace;
+// 	return {
+// 		modifiers,
+// 		prefix,
+// 		color,
+// 		namespace
+// 	};
+// }
 /**
  * Converts a Tailwind color class to a dot notation path.
  *
@@ -102,37 +98,36 @@ export function parseClass(path) {
  * @param path the path to convert to dot notation path
  * @param stripPrefix when true prefixes such as 'bg', 'text' are stripped.
  */
-export function classToColorPath(path) {
-    return parseClass(path).namespace;
-}
+// export function classToColorPath(path: string) {
+// 	return parseClass(path).namespace;
+// }
 /**
  * Returns a tuple with color name and shade if any.
  *
  * @param path the color class to be parsed.
  */
-export function classToColorSegments(path) {
-    const { color } = parseClass(path);
-    return color;
-}
+// export function classToColorSegments(path: string) {
+// 	const { color } = parseClass(path);
+// 	return color;
+// }
 /**
  * Normalizes the color value returning the normalized hex, rgb, hsl color.
  *
  * @param palette the user defined color palette.
  * @param value a tailwind color, named color, theme color or defined color.
  */
-export function classToColor(palette, value) {
-    if (isCssColor(value))
-        return value;
-    if (isNamedColor(value))
-        return namedcolors[value];
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [color, shade, namespace] = classToColorSegments(value);
-    if (isAppColor(palette, color))
-        return getProperty(palette, namespace);
-    else if (isTailwindColor(color))
-        return getProperty(tailwindcolors, namespace);
-    return value;
-}
+// export function classToColor(
+// 	palette: Record<string, Record<string, string>>,
+// 	value: string
+// ): string {
+// 	if (isCssColor(value)) return value;
+// 	if (isNamedColor(value)) return namedcolors[value as keyof typeof namedcolors];
+// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// 	const [color, shade, namespace] = classToColorSegments(value);
+// 	if (isAppColor(palette, color)) return getProperty(palette, namespace) as unknown as string;
+// 	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);
+// 	return value;
+// }
 /**
  * Picks a value using dot notation path.
  *

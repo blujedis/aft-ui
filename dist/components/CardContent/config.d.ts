@@ -1,8 +1,8 @@
 export declare const cardContent: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +13,8 @@ export declare const cardContent: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -25,8 +25,8 @@ export declare const cardContent: {
     };
     soft: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

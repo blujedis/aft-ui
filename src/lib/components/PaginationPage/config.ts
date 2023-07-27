@@ -1,7 +1,6 @@
 const baseVariant = {
 	$base: 'aria-selected:text-white text-frame-500 hover:text-frame-800  aria-selected:text-white',
-	dark:
-		'hover:bg-frame-200 aria-selected:bg-frame-200 hover:text-frame-200 aria-selected:text-inherit',
+	dark: 'hover:bg-frame-200 aria-selected:bg-frame-200 hover:text-frame-200 aria-selected:text-inherit',
 	light: 'hover:bg-frame-200 aria-selected:bg-frame-200 aria-selected:text-frame-900',
 	primary: 'hover:bg-primary-200 aria-selected:bg-primary-600 hover:text-primary-800',
 	secondary: 'hover:bg-secondary-200 aria-selected:bg-secondary-600 hover:text-secondary-800',

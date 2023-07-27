@@ -34,6 +34,6 @@ export const drawerDefaults = {
     shadowed: 'lg',
     size: 'sm',
     speed: 'medium',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

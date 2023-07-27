@@ -3,6 +3,6 @@ export const accordionButtonDefaults = {
     caret: 'octicon:chevron-down-24',
     roticon: true,
     size: 'sm',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

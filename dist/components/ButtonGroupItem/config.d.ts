@@ -1,8 +1,8 @@
 export declare const buttonGroupItem: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +13,8 @@ export declare const buttonGroupItem: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -25,8 +25,8 @@ export declare const buttonGroupItem: {
     };
     outlined: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -37,8 +37,8 @@ export declare const buttonGroupItem: {
     };
     text: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         secondary: string;
         tertiary: string;
         danger: string;
@@ -48,8 +48,8 @@ export declare const buttonGroupItem: {
     };
     ghost: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

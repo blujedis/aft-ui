@@ -1,6 +1,6 @@
 export const cardContentDefaults = {
     type: 'content',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

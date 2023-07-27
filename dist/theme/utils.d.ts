@@ -1,4 +1,4 @@
-import type { Path, ThemeColor, TypeOrValue } from '../types';
+import type { Path, TypeOrValue } from '../types';
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
 /**
@@ -18,19 +18,16 @@ export declare function isCssColor(color: string): boolean;
  *
  * @param color the color to eval as Tailwind color.
  */
-export declare function isTailwindColor(color: string): boolean;
 /**
  * Checks if value is an app color from palette.
  *
  * @param color the color to eval as App color.
  */
-export declare function isAppColor(palette: Record<string, Record<string, string>>, color: string): boolean;
 /**
  * Checks if value is a known css color.
  *
  * @param color color the color to eval as css color.
  */
-export declare function isNamedColor(color: string): boolean;
 /**
  * Parses a Tailwind path into parts, modifiers, prefix and color.
  *
@@ -40,12 +37,6 @@ export declare function isNamedColor(color: string): boolean;
  *
  * @param path the class path to be parsed.
  */
-export declare function parseClass(path: string): {
-    modifiers: string[];
-    prefix: string;
-    color: [ThemeColor, 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 | undefined, string];
-    namespace: string;
-};
 /**
  * Converts a Tailwind color class to a dot notation path.
  *
@@ -57,20 +48,17 @@ export declare function parseClass(path: string): {
  * @param path the path to convert to dot notation path
  * @param stripPrefix when true prefixes such as 'bg', 'text' are stripped.
  */
-export declare function classToColorPath(path: string): string;
 /**
  * Returns a tuple with color name and shade if any.
  *
  * @param path the color class to be parsed.
  */
-export declare function classToColorSegments(path: string): [ThemeColor, 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 | undefined, string];
 /**
  * Normalizes the color value returning the normalized hex, rgb, hsl color.
  *
  * @param palette the user defined color palette.
  * @param value a tailwind color, named color, theme color or defined color.
  */
-export declare function classToColor(palette: Record<string, Record<string, string>>, value: string): string;
 /**
  * Picks a value using dot notation path.
  *

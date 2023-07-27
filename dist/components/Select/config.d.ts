@@ -2,8 +2,8 @@ export declare const select: {
     default: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -15,8 +15,8 @@ export declare const select: {
     outlined: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -27,8 +27,8 @@ export declare const select: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -39,8 +39,8 @@ export declare const select: {
     };
     flushed: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

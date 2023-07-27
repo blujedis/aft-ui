@@ -14,7 +14,7 @@ const title = "File Input";
 const description = "Component for handling input files.";
 const code = `
   `;
-let theme = "frame";
+let theme = "dark";
 const props = {
   activated: false,
   disabled: false,
@@ -24,7 +24,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "frame",
+  theme: "light",
   transitioned: false,
   // ThemeTransitioned,
   variant: "default",
@@ -39,7 +39,7 @@ function setTheme(type) {
   if (type === "start")
     theme = "success";
   else
-    theme = "frame";
+    theme = "light";
 }
 </script>
 
@@ -64,7 +64,7 @@ function setTheme(type) {
 	<div class="flex space-x-8">
 		<label for="Upload Button">
 			<FileInput accept="image/png, image/jpeg" onFormData={handleUpload} let:click>
-				<Button on:click={click}>Upload Files</Button>
+				<Button variant="text" theme="dark" on:click={click}>Upload Files</Button>
 			</FileInput>
 		</label>
 		<label for="Upload Drop Child Element">

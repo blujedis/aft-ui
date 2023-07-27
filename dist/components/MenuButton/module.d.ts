@@ -20,7 +20,7 @@ export declare const menuButtonDefaults: {
     rounded?: import("../..").ThemeRounded | undefined;
     shadowed?: import("../..").ThemeShadowed | undefined;
     size?: import("../..").ThemeSize | undefined;
-    theme?: import("../..").ThemeColor | undefined;
+    theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
     transitioned?: boolean | undefined;
     variant?: "text" | "default" | "filled" | "outlined" | "ghost" | undefined;
     unstyled?: boolean | undefined;

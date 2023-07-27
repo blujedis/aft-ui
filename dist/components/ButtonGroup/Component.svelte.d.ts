@@ -15,7 +15,7 @@ declare const __propDef: {
         href?: string | null | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
         multiple?: boolean | undefined;
         selected?: import("../..").SelectStoreValue | import("../..").SelectStoreValue[] | undefined;
@@ -23,7 +23,6 @@ declare const __propDef: {
         slot?: string | null | undefined;
         style?: string | null | undefined;
         title?: string | null | undefined;
-        color?: string | null | undefined;
         hidden?: boolean | null | undefined;
         contextmenu?: string | null | undefined;
         class?: string | null | undefined;
@@ -32,7 +31,7 @@ declare const __propDef: {
         'on:change'?: import("svelte/elements").FormEventHandler<HTMLSpanElement> | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        contenteditable?: "inherit" | import("svelte/elements").Booleanish | null | undefined;
+        contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -55,6 +54,7 @@ declare const __propDef: {
         autocapitalize?: string | null | undefined;
         autocorrect?: string | null | undefined;
         autosave?: string | null | undefined;
+        color?: string | null | undefined;
         itemprop?: string | null | undefined;
         itemscope?: boolean | null | undefined;
         itemtype?: string | null | undefined;

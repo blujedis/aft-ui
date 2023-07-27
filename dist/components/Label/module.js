@@ -1,6 +1,6 @@
 export const labelDefaults = {
     rounded: 'full',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

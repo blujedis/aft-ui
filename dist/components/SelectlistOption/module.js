@@ -1,6 +1,6 @@
 export const selectListOptionDefaults = {
     as: 'a',
     size: 'sm',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };

@@ -1,8 +1,8 @@
 export declare const notification: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -15,8 +15,8 @@ export declare const notification: {
 export declare const notificationIcon: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -29,8 +29,8 @@ export declare const notificationIcon: {
 export declare const notificationTitle: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        light: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;

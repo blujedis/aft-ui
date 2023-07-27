@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path,  TypeOrValue } from '../types';
+import type { Path, TypeOrValue } from '../types';
 import { getProperty } from 'dot-prop';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -307,39 +307,75 @@ export const focused = mergeConfigs(focusedOutline, focusedBorder, {
 	info: 'focus:ring-info-600 focus-visible:ring-info-600 focus-within:ring-info-600'
 });
 
-export const focusedRingSizes = mergeConfigs({
-	$base: '',
-	unstyled: '',
-	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-	none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
-	two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
-	four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
-	eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
-}, focusedBorderSizes, focusedOutlineSizes);
+export const focusedRingSizes = mergeConfigs(
+	{
+		$base: '',
+		unstyled: '',
+		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+		none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+		one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
+		two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
+		four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
+		eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
+	},
+	focusedBorderSizes,
+	focusedOutlineSizes
+);
 
-export const focusedOffsetSizes = mergeConfigs({
-	$base: '',
-	unstyled: '',
-	inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-	none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
-	one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
-	two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
-	four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
-	eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
-}, focusedOutlineOffsetSizes);
-
+export const focusedOffsetSizes = mergeConfigs(
+	{
+		$base: '',
+		unstyled: '',
+		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+		none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
+		one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
+		two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
+		four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
+		eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
+	},
+	focusedOutlineOffsetSizes
+);
 
 export const focusedFilters = {
-	always: ['!focus:outline-none', 'focus-visible:', 'focus-within:', 'focus:border', 'focus:outline'],
+	always: [
+		'!focus:outline-none',
+		'focus-visible:',
+		'focus-within:',
+		'focus:border',
+		'focus:outline'
+	],
 	visible: ['focus:', 'focus-within:', 'focus-visible:border', 'focus-visible:outline'],
 	within: ['focus:', 'focus-visible:', 'focus-within:border', 'focus-within:outline'],
-	alwaysWithin: ['focus-visible:', 'focus:border', 'focus:outline', 'focus-within:border', 'focus-within:outline'],
-	visibleWithin: ['focus:', 'focus-visible:border', 'focus-visible:outline', 'focus-within:border', 'focus-within:outline'],
+	alwaysWithin: [
+		'focus-visible:',
+		'focus:border',
+		'focus:outline',
+		'focus-within:border',
+		'focus-within:outline'
+	],
+	visibleWithin: [
+		'focus:',
+		'focus-visible:border',
+		'focus-visible:outline',
+		'focus-within:border',
+		'focus-within:outline'
+	],
 	border: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:ring'],
 	outline: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:border'],
-	borderWithin: ['focus-visible:', 'focus:ring', 'focus:outline', 'focus-within:outline', 'focus-within:ring'],
-	outlineWithin: ['focus-visible:', 'focus:ring', 'focus:border', 'focus-within:border', 'focus-within:ring']
+	borderWithin: [
+		'focus-visible:',
+		'focus:ring',
+		'focus:outline',
+		'focus-within:outline',
+		'focus-within:ring'
+	],
+	outlineWithin: [
+		'focus-visible:',
+		'focus:ring',
+		'focus:border',
+		'focus-within:border',
+		'focus-within:ring'
+	]
 };
 
 export const disableds = {

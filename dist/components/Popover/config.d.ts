@@ -1,8 +1,8 @@
 export declare const popover: {
     default: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -10,6 +10,5 @@ export declare const popover: {
         warning: string;
         success: string;
         info: string;
-        light: string;
     };
 };

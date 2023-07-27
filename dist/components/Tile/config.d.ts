@@ -2,8 +2,8 @@ export declare const tile: {
     default: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -15,8 +15,8 @@ export declare const tile: {
     filled: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -27,8 +27,8 @@ export declare const tile: {
     };
     outline: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -38,8 +38,8 @@ export declare const tile: {
         info: string;
     } & {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

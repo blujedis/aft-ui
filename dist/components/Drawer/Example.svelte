@@ -16,7 +16,7 @@ const props = {
   shadowed: "xl",
   size: "md",
   speed: "medium",
-  theme: "frame",
+  theme: "light",
   variant: "default"
 };
 function show() {

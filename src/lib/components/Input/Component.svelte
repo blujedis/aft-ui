@@ -50,7 +50,7 @@
 				.variant('input', variant, theme, true)
 				.option('focused', theme, focused)
 				.option('focusedRingSizes', 'two', focused)
-			//	.option('focusedBorder', theme, focused && variant === 'flushed')
+				//	.option('focusedBorder', theme, focused && variant === 'flushed')
 				.option('focusedBorderFlushSizes', 'two', focused && variant === 'flushed')
 				.remove('focusedFilters', focused, focused)
 				.option('placeholders', theme, true)

@@ -1,8 +1,8 @@
 import { placeholder } from '../placeholder';
 const baseVariant = {
     $base: 'divide-y divide-frame-200 border border-frame-200',
-    white: '',
-    frame: '',
+    dark: '',
+    light: '',
     primary: '',
     secondary: '',
     tertiary: '',
@@ -17,8 +17,8 @@ export const accordion = {
     flushed: { ...placeholder },
     pills: {
         $base: '',
-        white: '',
-        frame: '',
+        dark: '',
+        light: '',
         primary: '',
         secondary: '',
         tertiary: '',

@@ -5,7 +5,7 @@ export const progressBarDefaults = {
     easing: cubicOut,
     max: 100,
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     value: 0,
     variant: 'default'
 };

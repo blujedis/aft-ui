@@ -2,8 +2,8 @@ export declare const selectListButton: {
     default: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -15,8 +15,8 @@ export declare const selectListButton: {
     outlined: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -27,8 +27,8 @@ export declare const selectListButton: {
     };
     filled: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -39,8 +39,8 @@ export declare const selectListButton: {
     };
     flushed: {
         $base: string;
-        white: string;
-        frame: string;
+        dark: string;
+        light: string;
         primary: string;
         secondary: string;
         tertiary: string;

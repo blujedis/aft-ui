@@ -14,13 +14,12 @@ const code = `
   `;
 const props = {
   disabled: false,
-  focused: true,
-  // true: focus-visible.
+  focused: "always",
   full: false,
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "frame",
+  theme: "light",
   transitioned: false,
   // ThemeTransitioned,
   variant: "default"
@@ -54,13 +53,13 @@ const props = {
 				<Input {...props} variant="outlined" placeholder="First Name" />
 			</div>
 		</label>
-		<label for="outline">
+		<!-- <label for="outline">
 			<div class="text-sm">Filled:</div>
 			<Input {...props} variant="filled" placeholder="Last Name" />
 		</label>
 		<label for="link">
 			<div class="text-sm">Flushed:</div>
 			<Input {...props} variant="flushed" />
-		</label>
+		</label> -->
 	</div>
 </ExamplePage>

@@ -9,8 +9,8 @@ export const avatar = {
 export const avatarNotification = {
     default: {
         $base: 'ring-white',
-        white: 'bg-white',
-        frame: 'bg-frame-300',
+        dark: 'bg-frame-800',
+        light: 'bg-frame-300',
         primary: 'bg-primary-500',
         secondary: 'bg-secondary-500',
         tertiary: 'bg-tertiary-500',
@@ -23,8 +23,8 @@ export const avatarNotification = {
 export const avatarPlaceholder = {
     default: {
         $base: 'bg-frame-200 ring-1 ring-black ring-opacity-5',
-        white: 'text-white',
-        frame: 'text-frame-600',
+        dark: 'text-frame-800',
+        light: 'text-frame-600',
         primary: 'text-primary-600',
         secondary: 'text-secondary-600',
         tertiary: 'text-tertiary-600',

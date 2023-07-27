@@ -1,7 +1,7 @@
 const defaultBreadcrumbOption = {
     $base: '',
-    white: 'text-white hover:text-white aria-selected:text-white',
-    frame: 'text-frame-700 hover:text-frame-950 aria-selected:text-frame-500',
+    dark: 'text-white hover:text-white aria-selected:text-white',
+    light: 'text-frame-700 hover:text-frame-950 aria-selected:text-frame-500',
     primary: 'text-primary-600 hover:text-primary-800 aria-selected:text-primary-400',
     secondary: 'text-secondary-600 hover:text-secondary-800 aria-selected:text-secondary-400',
     tertiary: 'text-tertiary-600 hover:text-tertiary-800 aria-selected:text-tertiary-400',
@@ -19,8 +19,8 @@ export const breadcrumbOption = {
     },
     filled: {
         $base: 'text-white',
-        white: 'text-frame-600 hover:text-white aria-selected:text-white',
-        frame: 'text-frame-700 hover:text-frame-950 aria-selected:text-frame-500/90',
+        dark: 'text-frame-600 hover:text-white aria-selected:text-white',
+        light: 'text-frame-700 hover:text-frame-950 aria-selected:text-frame-500/90',
         primary: 'hover:text-primary-100 aria-selected:text-primary-200',
         secondary: 'hover:text-secondary-100 aria-selected:text-secondary-200',
         tertiary: 'hover:text-tertiary-100 aria-selected:text-tertiary-200',
@@ -32,8 +32,8 @@ export const breadcrumbOption = {
 };
 const defaultBreadcrumbOptionItem = {
     $base: '',
-    white: 'text-white',
-    frame: 'text-frame-600',
+    dark: 'text-white',
+    light: 'text-frame-600',
     primary: 'text-primary-600',
     secondary: 'text-secondary-600',
     tertiary: 'text-tertiary-600',
@@ -51,8 +51,8 @@ export const breadcrumbOptionItem = {
     },
     filled: {
         $base: 'text-white',
-        white: 'text-frame-600',
-        frame: 'text-frame-600',
+        dark: 'text-frame-600',
+        light: 'text-frame-600',
         primary: '',
         secondary: '',
         tertiary: '',

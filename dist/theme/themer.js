@@ -3,6 +3,7 @@ import { ensureArray } from './utils';
 import classnames from 'classnames';
 import { colors } from './constants';
 import { getProperty } from 'dot-prop';
+import { isMatch } from '../utils/glob';
 /**
  * Simply flattens array then joins by strings.
  *
@@ -240,13 +241,57 @@ export function themer(themeConfig) {
         function compile(withTailwindMerge = false) {
             if (typeof themeConfig === 'undefined')
                 return '';
-            let normalized = classnames(...base, ...themed, ...appended).trim();
-            normalized = normalized
-                .split(' ')
-                .filter((v) => {
-                return !removed.some((r) => v === r || v.startsWith(r));
-            })
-                .join(' ');
+            let baseClone2 = base.reduce((a, c) => [...a, ...c.split(' ')], []);
+            // let themedClone = themed.reduce((a,c) => [...a, ...c.split(' ')], [] as string[]);
+            baseClone2 = baseClone2.reduce((a, c) => {
+                const preserved = [];
+                const cleaned = [];
+                removed.forEach((r) => {
+                    const negated = r.charAt(0) === '!';
+                    r = r.slice(1);
+                    if (negated && c.startsWith(r) && !preserved.includes(c))
+                        preserved.push(c);
+                    else if (c.startsWith(r) && !cleaned.includes(c))
+                        cleaned.push(c);
+                });
+                return [...a, ...cleaned, ...preserved];
+            }, []);
+            console.log(baseClone2);
+            const baseClone = base.reduce((a, c) => {
+                const clean = c.split(' ').filter((v) => {
+                    return !removed.some((r) => {
+                        const negated = r.charAt(0) === '!';
+                        if (negated)
+                            r = r.slice(1);
+                        const match = !!~v.indexOf(r);
+                        if (match && negated)
+                            return false;
+                        return match;
+                    });
+                });
+                return [...a, ...clean];
+            }, []);
+            const themedClone = themed.reduce((a, c) => {
+                const clean = c.split(' ').filter((v) => {
+                    return !removed.some((r) => {
+                        const negated = r.charAt(0) === '!';
+                        if (negated)
+                            r = r.slice(1);
+                        const match = !!~v.indexOf(r);
+                        if (match && negated)
+                            return false;
+                        return match;
+                    });
+                });
+                return [...a, ...clean];
+            }, []);
+            const normalized = classnames(...baseClone, ...themedClone, ...appended).trim();
+            // normalized = normalized
+            // 	.split(' ')
+            // 	.filter((v) => {
+            // 		return !removed.some(r => !!~v.indexOf(r));
+            // 	})
+            // 	.join(' ');
             if (!withTailwindMerge)
                 return normalized;
             return twMerge(normalized);

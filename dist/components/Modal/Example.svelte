@@ -20,7 +20,7 @@ const props = {
   focustrap: true,
   rounded: "sm",
   shadowed: "xl",
-  theme: "frame",
+  theme: "light",
   transition: "dissolve",
   variant: "default",
   visible: false,

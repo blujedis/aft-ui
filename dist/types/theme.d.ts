@@ -3,7 +3,7 @@ import type * as sharedOptions from '../components/shared';
 import type * as componentOptions from '../components/options';
 import type defaults from '../theme/defaults';
 import type * as configs from '../components/configs';
-import type { colors, prefixes, shades } from '../theme/constants';
+import type { colors, shades } from '../theme/constants';
 import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
 export type DeepPartial<T> = T extends object ? T extends Array<infer U> ? DeepPartial<U>[] : {
     [K in keyof T]?: DeepPartial<T[K]>;
@@ -31,10 +31,8 @@ export type TailwindColor = keyof typeof tailwindcolors;
 export type NamedColor = keyof typeof namedcolors;
 export type ThemeColorBase = typeof colors[number];
 export type ThemeColorShade = typeof shades[number];
-export type ThemeColorPrefix = typeof prefixes[number];
-export type ThemeColor = ThemeColorBase | 'white';
-export type ThemeColorKey = `${ThemeColorBase}${'.' | '-'}${ThemeColorShade}` | ThemeColor | ColorType;
-export type ThemePickKey = `${ThemeColorPrefix}${'.' | '-'}${ThemeColorKey}` | ThemeColorKey;
+export type ThemeColor = ThemeColorBase;
+export type ThemeColorKey = `${ThemeColorBase}${'.' | '-'}${ThemeColorShade}` | Exclude<ThemeColor, 'light' | 'dark'> | ColorType;
 export interface ThemeConfig {
     options: ThemeOptions;
     defaults: typeof defaults;

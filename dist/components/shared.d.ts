@@ -223,42 +223,10 @@ export declare const fontLeadings: {
     relaxed: string;
     loose: string;
 };
-export declare const focused: {
-    $base: string;
-    white: string;
-    frame: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const focusedRingSizes: {
-    $base: string;
-    unstyled: string;
-    inset: string;
-    none: string;
-    one: string;
-    two: string;
-    four: string;
-    eight: string;
-};
-export declare const focusedOffsetSizes: {
-    $base: string;
-    unstyled: string;
-    inset: string;
-    none: string;
-    one: string;
-    two: string;
-    four: string;
-    eight: string;
-};
 export declare const focusedBorder: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -287,8 +255,8 @@ export declare const focusedBorderFlushSizes: {
 };
 export declare const focusedOutline: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -315,17 +283,99 @@ export declare const focusedOutlineOffsetSizes: {
     four: string;
     eight: string;
 };
+export declare const focused: {
+    $base: string;
+    dark: string;
+    light: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+} & {
+    $base: string;
+    dark: string;
+    light: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+} & {
+    $base: string;
+    dark: string;
+    light: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+} & import("../theme").StringMap;
+export declare const focusedRingSizes: {
+    $base: string;
+    unstyled: string;
+    inset: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+} & {
+    $base: string;
+    unstyled: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+} & {
+    $base: string;
+    unstyled: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+} & import("../theme").StringMap;
+export declare const focusedOffsetSizes: {
+    $base: string;
+    unstyled: string;
+    inset: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+} & {
+    $base: string;
+    unstyled: string;
+    none: string;
+    one: string;
+    two: string;
+    four: string;
+    eight: string;
+} & import("../theme").StringMap;
 export declare const focusedFilters: {
     always: string[];
     visible: string[];
     within: string[];
     alwaysWithin: string[];
     visibleWithin: string[];
+    border: string[];
+    outline: string[];
+    borderWithin: string[];
+    outlineWithin: string[];
 };
 export declare const disableds: {
     $base: string;
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -335,8 +385,8 @@ export declare const disableds: {
     info: string;
 };
 export declare const placeholders: {
-    white: string;
-    frame: string;
+    dark: string;
+    light: string;
     primary: string;
     secondary: string;
     tertiary: string;

@@ -19,7 +19,7 @@ const props = {
   shadowed: "none",
   size: "md",
   tracksize: "md",
-  theme: "frame",
+  theme: "light",
   variant: "default"
 };
 </script>

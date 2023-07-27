@@ -32,7 +32,7 @@ declare const __propDef: {
         position?: import("../..").ModalPosition | undefined;
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
-        theme?: import("../..").ThemeColor | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transition?: "none" | "focus" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
             type: "fade" | "blur" | "fly" | "slide" | "scale" | "crossfade";
         }) | undefined;

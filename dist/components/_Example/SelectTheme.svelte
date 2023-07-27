@@ -1,5 +1,5 @@
 <script>import Select from "./Select.svelte";
-export let value = "frame";
+export let value = "light";
 </script>
 
 <Select
@@ -7,14 +7,14 @@ export let value = "frame";
 	label="Theme"
 	items={[
 		// { label: 'Default', value: 'default' },
-		{ label: 'Default', value: 'frame' },
+		{ label: 'Light', value: 'light' },
+		{ label: 'Dark', value: 'dark' },
 		{ label: 'Primary', value: 'primary' },
 		{ label: 'Secondary', value: 'secondary' },
 		{ label: 'Tertiary', value: 'tertiary' },
 		{ label: 'Danger', value: 'danger' },
 		{ label: 'Warning', value: 'warning' },
 		{ label: 'Success', value: 'success' },
-		{ label: 'Info', value: 'info' },
-		{ label: 'White', value: 'white' }
+		{ label: 'Info', value: 'info' }
 	]}
 />

@@ -1,6 +1,6 @@
 export const emptyDefaults = {
     as: 'div',
     size: 'md',
-    theme: 'frame',
+    theme: 'light',
     variant: 'default'
 };
