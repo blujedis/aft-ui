@@ -1,6 +1,7 @@
 export const placeholder = {
 	$base: '',
-	white: '',
+	light: '',
+	dark: '',
 	frame: '',
 	primary: '',
 	secondary: '',
