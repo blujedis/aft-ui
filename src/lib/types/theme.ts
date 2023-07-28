@@ -101,7 +101,14 @@ export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
-export type ThemeFocused = 'always' | 'visible' | 'within' | 'alwaysWithin' | 'visibleWithin'; // true use default for el type.
+
+
+export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
+export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin';
+export type ThemeFocusSize = 'inset' | 'none' | 'one' | 'two' | 'four' | 'eight' | 'unstyled';
+export type ThemeFocusOffset = ThemeFocusSize;
+export type ThemeFocusTuple =  [ThemeFocusStrategy,ThemeFocusState, ThemeFocusSize?, ThemeFocusOffset?];
+export type ThemeFocused = boolean | ThemeFocusState;
 
 export type Template = string | [string, string | string[], number | number[]];
 export type Templates<K extends string = string> = Record<K, Template>;

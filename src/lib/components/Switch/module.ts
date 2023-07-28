@@ -18,7 +18,7 @@ export type SwitchProps = {
 };
 
 export const switchDefaults: Partial<SwitchProps> = {
-	focused: 'always',
+	focused: true,
 	size: 'md',
 	srtext: 'Use Switch',
 	theme: 'light',

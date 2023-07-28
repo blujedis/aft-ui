@@ -29,7 +29,7 @@
 	const props = {
 		activated: false,
 		disabled: false,
-		focused: 'visible' as ThemeFocused, // true: focus-visible.
+		focused: 'focusVisible' as ThemeFocused, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,

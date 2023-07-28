@@ -1,5 +1,6 @@
 export const placeholder = {
 	$base: '',
+	white: '',
 	light: '',
 	dark: '',
 	primary: '',

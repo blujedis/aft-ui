@@ -17,7 +17,7 @@
 
 	const props = {
 		disabled: false,
-		focused: 'visible' as ThemeFocused,
+		focused: 'focusVisible' as ThemeFocused,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,

@@ -1,9 +1,8 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, TypeOrValue } from '../types';
+import type { Path, ThemeFocusTuple, ThemeFocused, TypeOrValue } from '../types';
 import { getProperty } from 'dot-prop';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// const getProperty = (...args: any[]) => '';
+import { focused, focusedBorder, focusedBorderFlush, focusedBorderFlushSizes, focusedBorderSizes, focusedBorderVisibleFlushSizes, focusedBorderWithinFlushSizes, focusedOutline, focusedOutlineOffsetSizes, focusedOutlineSizes, focusedRingSizes, focusedVisible, focusedVisibleBorderFlush, focusedVisibleBorderSizes, focusedVisibleOffsetSizes, focusedVisibleOutline, focusedVisibleOutlineOffsetSizes, focusedVisibleOutlineSizes, focusedVisibleRingSizes, focusedWithin, focusedWithinBorderFlush, focusedWithinBorderSizes, focusedWithinOffsetSizes, focusedWithinOutline, focusedWithinOutlineOffsetSizes, focusedWithinOutlineSizes, focusedWithinRingSizes } from '$lib/components/focused';
+import { placeholder } from '$lib/components/placeholder';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -19,8 +18,6 @@ export function ensureArray<T = any>(value?: null | T | T[]) {
 	return [value] as T[];
 }
 
-// const tailwindKeys = Object.keys(tailwindcolors);
-// const namedKeys = Object.keys(namedcolors);
 
 /**
  * Checks if color looks like css color.
@@ -31,6 +28,259 @@ export function isCssColor(color: string) {
 	const prefixes = ['#', 'rgb', 'rgba', 'hsl', 'hwb', 'currentColor'];
 	return prefixes.some((p) => color.startsWith(p));
 }
+
+/**
+ * Generates correct focus files based on user configuration or using defaults.
+ * 
+ * true = defaults.
+ * string = 'focus', 'focusVisible' or 'focusWithin' along with other defaults.
+ * tuple = a tuple array containing strategy, focus state, size and offset if defined.
+ * 
+ * @example
+ * const focusTuple = ['ring', 'focusVisible', 'two', 'two'];
+ * 
+ * @param config the user defined configurtation.	
+ * @param defaults default values for a given component.
+ */
+export default function getFocus(
+	config?: ThemeFocused,
+	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
+
+	if (config === false || config === null)
+		return [null, '', ''] as [Record<string, string> | null, string, string];
+
+	let normalized = defaults;
+
+	if (typeof config !== 'undefined') {
+
+
+		if (typeof config === 'string') {
+			normalized[1] = config;
+		}
+		else if (typeof config === 'boolean') {
+			normalized = [...defaults];
+		}
+		else if (Array.isArray(normalized)) {
+			normalized[0] = config[0] || defaults[0];
+			normalized[1] = config[1] || defaults[1];
+			normalized[2] = config[2] || defaults[2];
+			normalized[3] = config[3] || defaults[3];
+		}
+
+	}
+
+	normalized[2] = normalized[2] || 'two';
+	normalized[3] = normalized[3] || 'unstyled';
+
+	const [strategy, state, size, offset] = normalized as Required<ThemeFocusTuple>;
+
+
+	let focusedClasses = focused;
+	let focusedSize = focusedRingSizes[size];
+	let focusedOffsetSize = focusedOutlineOffsetSizes[offset];
+
+	if (['border', 'borderFlush'].includes(strategy)) {
+
+		focusedClasses = focusedBorder;
+		focusedSize = focusedBorderSizes[size];
+		focusedOffsetSize = '';
+
+		if (state === 'focusVisible') {
+			focusedSize = focusedVisibleBorderSizes[size];
+		}
+		else if (state === 'focusWithin') {
+			focusedSize = focusedWithinBorderSizes[size];
+		}
+
+		if (strategy === 'borderFlush') {
+			focusedSize = focusedBorderFlushSizes[size];
+			focusedClasses = focusedBorderFlush;
+			if (state === 'focusVisible') {
+				focusedSize = focusedBorderVisibleFlushSizes[size];
+				focusedClasses = focusedVisibleBorderFlush;
+			}
+			else if (state === 'focusWithin') {
+				focusedSize = focusedBorderWithinFlushSizes[size];
+				focusedClasses = focusedWithinBorderFlush;
+			}
+		}
+
+	}
+
+	else if (strategy === 'outline') {
+		focusedClasses = focusedOutline;
+		focusedSize = focusedOutlineSizes[size];
+		focusedOffsetSize = focusedOutlineOffsetSizes[offset];
+		if (state === 'focusVisible') {
+			focusedClasses = focusedVisibleOutline;
+			focusedSize = focusedVisibleOutlineSizes[size];
+			focusedOffsetSize = focusedVisibleOutlineOffsetSizes[offset];
+		}
+		else if (state === 'focusWithin') {
+			focusedClasses = focusedWithinOutline;
+			focusedSize = focusedWithinOutlineSizes[size];
+			focusedOffsetSize = focusedWithinOutlineOffsetSizes[offset];
+		}
+	}
+
+	else if (['focusVisible', 'focusWithin'].includes(state)) {
+		console.log('no hit')
+		if (state === 'focusVisible') {
+			focusedClasses = focusedVisible;
+			focusedSize = focusedVisibleRingSizes[size];
+			focusedOffsetSize = focusedVisibleOffsetSizes[size];
+		}
+		else {
+			focusedClasses = focusedWithin;
+			focusedSize = focusedWithinRingSizes[size];
+			focusedOffsetSize = focusedWithinOffsetSizes[size];
+		}
+	}
+
+
+	return [focusedClasses, focusedSize, focusedOffsetSize] as [Record<string, string>, string, string];
+
+}
+
+/**
+ * Picks a value using dot notation path.
+ *
+ * @param props an object containing properties and values.
+ * @param key the dot notation key to pick.
+ */
+export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrValue<Path<P>>) {
+	return getProperty(props, key as string) || '';
+}
+
+/**
+ * Merges theme configuration.
+ *
+ * @param target the target object to merge into.
+ * @param source the source ojbect to merge from.
+ * @param dedupe when true removes dupes using Tailwind Merge.
+ */
+export function mergeConfig<T extends StringMap, S extends StringMap>(
+	target: T,
+	source: S,
+	dedupe?: boolean
+): T & S;
+
+/**
+ * Merges theme configuration.
+ *
+ * @param target the target object to merge into.
+ * @param source the source ojbect to merge from.
+ * @param predicate an optional function for filtering results.
+ * @param dedupe when true removes dupes using Tailwind Merge.
+ */
+export function mergeConfig<T extends StringMap, S extends StringMap>(
+	target: T,
+	source: S,
+	predicate?: MergeConfigPredicate,
+	dedupe?: boolean
+): T & S;
+
+export function mergeConfig<
+	T extends Record<string, string | string[]>,
+	S extends Record<string, string | string[]>
+>(
+	target: T,
+	source = {} as S,
+	dedupeOrPredicate?: boolean | MergeConfigPredicate,
+	dedupe?: boolean
+) {
+	let predicate: MergeConfigPredicate | undefined = dedupeOrPredicate as MergeConfigPredicate;
+	if (typeof dedupeOrPredicate === 'boolean') {
+		dedupe = dedupeOrPredicate;
+		predicate = undefined;
+	}
+	const cloneTarget = { ...target } as any;
+	const cloneSource = { ...source };
+	for (const k in cloneSource) {
+		const curval = ensureArray(cloneTarget[k]).join(' ');
+		const srcval = ensureArray(cloneSource[k]).join(' ');
+		cloneTarget[k] = [curval, srcval].join(' ').trim();
+		if (dedupe) cloneTarget[k] = twMerge(cloneTarget[k]);
+		if (predicate) cloneTarget[k] = predicate(cloneTarget[k]);
+	}
+	return cloneTarget as T & S;
+}
+
+/**
+ * Merges multiple theme configuration objects.
+ *
+ * @param obj1 the initial target object to merge into.
+ * @param obj2 first object to merge from.
+ * @param obj3 second object to merge from.
+ * @param obj4 third object to merge from.
+ * @param obj5 fouth object to merge from.
+ */
+export function mergeConfigs<
+	T1 extends StringMap,
+	T2 extends StringMap,
+	T3 extends StringMap,
+	T4 extends StringMap,
+	T5 extends StringMap,
+	T6 extends StringMap
+>(obj1: T1, obj2: T2, obj3?: T3, obj4?: T4, obj5?: T5, obj6?: T6): T1 & T2 & T3 & T4 & T5 & T6 {
+	const configs = [obj1, obj2, obj3, obj4, obj5, obj6];
+	const target = configs.shift() || ({} as Record<string, string | string[]>);
+	return configs.reduce((a, c) => {
+		if (c) a = mergeConfig(a, c, true);
+		return a;
+	}, target as any);
+}
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// const getProperty = (...args: any[]) => '';
+
+// const tailwindKeys = Object.keys(tailwindcolors);
+// const namedKeys = Object.keys(namedcolors);
+
+// type CompileValue = string | number | boolean;
+/**
+ * Compiles Template String Array to reusable string with backed in formatting.
+ *
+ * @example
+ * const compiled = compileTemplate`My name is ${'name'} I'm ${'age'} years old.`;
+ * const fromObject = compiled({ name: 'Bob', age: 25 });
+ * const fromArray = compiled(['Bob', 31]);
+ * const fromString = compiled('Bob');
+ *
+ * @param template template array string using backticks.
+ * @param keys the keys contained in the template array string above.
+ */
+// export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
+//   return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
+//     const isArray = Array.isArray(data);
+//     let clone: Record<string, unknown> | CompileValue[];
+//     if (isArray)
+//       clone = [...data, ...rest];
+//     else if (typeof data !== 'object')
+//       clone = [data, ...rest];
+//     else
+//       clone = { ...data };
+//     const strArr = template.slice() as unknown as string[];
+//     keys.forEach((k, i) => {
+//       const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
+//       strArr[i] = strArr[i] + dataVal;
+//     });
+//     return strArr.join('');
+//   };
+// }
+
+// declare global {
+//   interface String {
+//     $join: (arg: string | string[], ...args: string[]) => string;
+//   }
+// }
+
+// String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
+//   args = ([this, arg, ...args].flat()) as string[];
+//   return args.join(' ').trim();
+// };
+
 
 /**
  * Checks if value is a Tailwind color.
@@ -143,135 +393,3 @@ export function isCssColor(color: string) {
 // 	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);
 // 	return value;
 // }
-
-/**
- * Picks a value using dot notation path.
- *
- * @param props an object containing properties and values.
- * @param key the dot notation key to pick.
- */
-export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrValue<Path<P>>) {
-	return getProperty(props, key as string) || '';
-}
-
-/**
- * Merges theme configuration.
- *
- * @param target the target object to merge into.
- * @param source the source ojbect to merge from.
- * @param dedupe when true removes dupes using Tailwind Merge.
- */
-export function mergeConfig<T extends StringMap, S extends StringMap>(
-	target: T,
-	source: S,
-	dedupe?: boolean
-): T & S;
-
-/**
- * Merges theme configuration.
- *
- * @param target the target object to merge into.
- * @param source the source ojbect to merge from.
- * @param predicate an optional function for filtering results.
- * @param dedupe when true removes dupes using Tailwind Merge.
- */
-export function mergeConfig<T extends StringMap, S extends StringMap>(
-	target: T,
-	source: S,
-	predicate?: MergeConfigPredicate,
-	dedupe?: boolean
-): T & S;
-
-export function mergeConfig<
-	T extends Record<string, string | string[]>,
-	S extends Record<string, string | string[]>
->(
-	target: T,
-	source = {} as S,
-	dedupeOrPredicate?: boolean | MergeConfigPredicate,
-	dedupe?: boolean
-) {
-	let predicate: MergeConfigPredicate | undefined = dedupeOrPredicate as MergeConfigPredicate;
-	if (typeof dedupeOrPredicate === 'boolean') {
-		dedupe = dedupeOrPredicate;
-		predicate = undefined;
-	}
-	const cloneTarget = { ...target } as any;
-	const cloneSource = { ...source };
-	for (const k in cloneSource) {
-		const curval = ensureArray(cloneTarget[k]).join(' ');
-		const srcval = ensureArray(cloneSource[k]).join(' ');
-		cloneTarget[k] = [curval, srcval].join(' ').trim();
-		if (dedupe) cloneTarget[k] = twMerge(cloneTarget[k]);
-		if (predicate) cloneTarget[k] = predicate(cloneTarget[k]);
-	}
-	return cloneTarget as T & S;
-}
-
-/**
- * Merges multiple theme configuration objects.
- *
- * @param obj1 the initial target object to merge into.
- * @param obj2 first object to merge from.
- * @param obj3 second object to merge from.
- * @param obj4 third object to merge from.
- * @param obj5 fouth object to merge from.
- */
-export function mergeConfigs<
-	T1 extends StringMap,
-	T2 extends StringMap,
-	T3 extends StringMap,
-	T4 extends StringMap,
-	T5 extends StringMap,
-	T6 extends StringMap
->(obj1: T1, obj2: T2, obj3?: T3, obj4?: T4, obj5?: T5, obj6?: T6): T1 & T2 & T3 & T4 & T5 & T6 {
-	const configs = [obj1, obj2, obj3, obj4, obj5, obj6];
-	const target = configs.shift() || ({} as Record<string, string | string[]>);
-	return configs.reduce((a, c) => {
-		if (c) a = mergeConfig(a, c, true);
-		return a;
-	}, target as any);
-}
-
-// type CompileValue = string | number | boolean;
-/**
- * Compiles Template String Array to reusable string with backed in formatting.
- *
- * @example
- * const compiled = compileTemplate`My name is ${'name'} I'm ${'age'} years old.`;
- * const fromObject = compiled({ name: 'Bob', age: 25 });
- * const fromArray = compiled(['Bob', 31]);
- * const fromString = compiled('Bob');
- *
- * @param template template array string using backticks.
- * @param keys the keys contained in the template array string above.
- */
-// export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
-//   return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
-//     const isArray = Array.isArray(data);
-//     let clone: Record<string, unknown> | CompileValue[];
-//     if (isArray)
-//       clone = [...data, ...rest];
-//     else if (typeof data !== 'object')
-//       clone = [data, ...rest];
-//     else
-//       clone = { ...data };
-//     const strArr = template.slice() as unknown as string[];
-//     keys.forEach((k, i) => {
-//       const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
-//       strArr[i] = strArr[i] + dataVal;
-//     });
-//     return strArr.join('');
-//   };
-// }
-
-// declare global {
-//   interface String {
-//     $join: (arg: string | string[], ...args: string[]) => string;
-//   }
-// }
-
-// String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
-//   args = ([this, arg, ...args].flat()) as string[];
-//   return args.join(' ').trim();
-// };

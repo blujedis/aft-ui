@@ -27,7 +27,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 };
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
-	focused: 'visible',
+	focused: 'focusVisible',
 	full: false,
 	strategy: 'button',
 	size: 'md',

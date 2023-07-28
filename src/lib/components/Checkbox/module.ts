@@ -24,7 +24,7 @@ export type CheckboxProps = {
 };
 
 export const checkboxDefaults: Partial<CheckboxProps> = {
-	focused: 'always',
+	focused: true,
 	rounded: 'full',
 	size: 'md',
 	theme: 'light',

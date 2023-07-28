@@ -20,7 +20,7 @@ export type BreadcrumbOptionProps = {
 };
 
 export const breadcrumbOptionDefaults: Partial<BreadcrumbOptionProps> = {
-	focused: 'visible',
+	focused: 'focusVisible',
 	size: 'md',
 	separator: 'mdi-light:chevron-right',
 	theme: 'light',

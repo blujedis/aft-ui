@@ -17,7 +17,7 @@ export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full
 };
 
 export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
-	focused: 'visible',
+	focused: 'focusVisible',
 	caret: 'octicon:chevron-down-24', // ['octicon:chevron-down-24', 'octicon:chevron-up-24'],
 	roticon: true,
 	size: 'sm',

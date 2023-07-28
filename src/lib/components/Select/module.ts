@@ -33,7 +33,7 @@ export type SelectProps = {
 };
 
 export const selectDefaults: Partial<SelectProps> = {
-	focused: 'always',
+	focused: true,
 	placeholder: true,
 	rounded: 'sm',
 	size: 'md',

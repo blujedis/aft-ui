@@ -25,7 +25,7 @@ export type PaginationPageProps<Tag> = {
 };
 
 export const paginationPageDefaults: Partial<PaginationPageProps<'a'>> = {
-	focused: 'visible',
+	focused: 'focusVisible',
 	rounded: 'full',
 	size: 'md',
 	theme: 'light',

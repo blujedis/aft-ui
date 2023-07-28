@@ -1,6 +1,4 @@
 
-export const focusedType = ['focus', 'focusVisible', 'focusWithin', 'focusOffset']
-
 export const focused = {
   $base: 'focus:outline-none',
   dark: 'focus:ring-frame-800',
@@ -104,7 +102,6 @@ export const focusedWithinOffsetSizes = {
 };
 
 
-
 export const focusedBorder = {
   $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
   dark: 'focus:border-frame-800',
@@ -144,10 +141,25 @@ export const focusedWithinBorder = {
   info: 'focus-within:border-info-600'
 };
 
+export const focusedBorderFlush = {
+  ...focusedBorder,
+  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+};
+
+export const focusedVisibleBorderFlush = {
+  ...focusedVisibleBorder,
+  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+};
+
+export const focusedWithinBorderFlush = {
+  ...focusedWithinBorder,
+  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+};
 
 
 export const focusedBorderSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus:border-0',
   one: 'focus:border-1',
   two: 'focus:border-2',
@@ -157,6 +169,7 @@ export const focusedBorderSizes = {
 
 export const focusedVisibleBorderSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-visible:border-0',
   one: 'focus-visible:border-1',
   two: 'focus-visible:border-2',
@@ -166,6 +179,7 @@ export const focusedVisibleBorderSizes = {
 
 export const focusedWithinBorderSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-within:border-0',
   one: 'focus-within:border-1',
   two: 'focus-within:border-2',
@@ -173,10 +187,9 @@ export const focusedWithinBorderSizes = {
   eight: 'focus-within:border-8'
 };
 
-
-
 export const focusedBorderFlushSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus:border-b-0',
   one: 'focus:border-b-1',
   two: 'focus:border-b-2',
@@ -186,6 +199,7 @@ export const focusedBorderFlushSizes = {
 
 export const focusedBorderVisibleFlushSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-visible:border-b-0',
   one: 'focus-visible:border-b-1',
   two: 'focus-visible:border-b-2',
@@ -195,13 +209,13 @@ export const focusedBorderVisibleFlushSizes = {
 
 export const focusedBorderWithinFlushSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-within:border-b-0',
   one: 'focus-within:border-b-1',
   two: 'focus-within:border-b-2',
   four: 'focus-within:border-b-4',
   eight: 'focus-within:border-b-8'
 };
-
 
 
 export const focusedOutline = {
@@ -247,6 +261,7 @@ export const focusedWithinOutline = {
 
 export const focusedOutlineSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus:outline-0',
   one: 'focus:outline-1',
   two: 'focus:outline-2',
@@ -256,6 +271,7 @@ export const focusedOutlineSizes = {
 
 export const focusedVisibleOutlineSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-visible:outline-00',
   one: 'focus-visible:outline-1',
   two: 'focus-visible:outline-2',
@@ -265,6 +281,7 @@ export const focusedVisibleOutlineSizes = {
 
 export const focusedWithinOutlineSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-within:outline-0',
   one: 'focus-within:outline-1',
   two: 'focus-within:outline-2',
@@ -276,6 +293,7 @@ export const focusedWithinOutlineSizes = {
 
 export const focusedOutlineOffsetSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus:outline-offset-0',
   one: 'focus:outline-offset-1',
   two: 'focus:outline-offset-2',
@@ -285,6 +303,7 @@ export const focusedOutlineOffsetSizes = {
 
 export const focusedVisibleOutlineOffsetSizes = {
   unstyled: '',
+  inset: '',
   none: 'focus-visible:outline-offset-0',
   one: 'focus-visible:outline-offset-1',
   two: 'focus-visible:outline-offset-2',
@@ -293,8 +312,8 @@ export const focusedVisibleOutlineOffsetSizes = {
 };
 
 export const focusedWithinOutlineOffsetSizes = {
-  $base: '',
   unstyled: '',
+  inset: '',
   none: 'focus-within:outline-offset-0',
   one: 'focus-within:outline-offset-1',
   two: 'focus-within:outline-offset-2',
@@ -302,70 +321,8 @@ export const focusedWithinOutlineOffsetSizes = {
   eight: 'focus-within:outline-offset-8'
 };
 
+// export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
+// export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin';
+// export type ThemeFocusSize = 'none' | 'one' | 'two' | 'four' | 'eight';
+// export type ThemeFocusOffset = ThemeFocusSize;
 
-export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
-export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin';
-export type ThemeFocusSize = 'none' | 'one' | 'two' | 'four' | 'eight';
-export type ThemeFocusOffset = ThemeFocusSize;
-
-export function getFocus(
-  strategy: ThemeFocusStrategy,
-  state: ThemeFocusState,
-  size: ThemeFocusSize,
-  offset: ThemeFocusOffset
-) {
-
-  let focusedClasses = focused;
-  let focusedSize = focusedRingSizes[size];
-  let focusedOffsetSize = focusedOutlineOffsetSizes[offset];
-
-  if (['border', 'borderFlush'].includes(strategy)) {
-    focusedClasses = focusedBorder;
-    focusedSize = focusedBorderSizes[size];
-    focusedOffsetSize = '';
-
-    if (strategy === 'borderFlush') {
-
-    }
-
-    if (state === 'focusVisible') {
-      //
-    }
-    else {
-
-    }
-
-  }
-
-  else if (strategy === 'outline') {
-    focusedClasses = focusedOutline;
-    focusedSize = focusedOutlineSizes[size];
-    focusedOffsetSize = focusedOutlineOffsetSizes[offset];
-    if (state === 'focusVisible') {
-      focusedClasses = focusedVisibleOutline;
-      focusedSize = focusedVisibleOutlineSizes[size];
-      focusedOffsetSize = focusedVisibleOutlineOffsetSizes[offset];
-    }
-    else if (state === 'focusWithin') {
-      focusedClasses = focusedWithinOutline;
-      focusedSize = focusedWithinOutlineSizes[size];
-      focusedOffsetSize = focusedWithinOutlineOffsetSizes[offset];
-    }
-  }
-
-  else {
-    if (state === 'focusVisible') {
-      focusedClasses = focusedVisible;
-      focusedSize = focusedVisibleRingSizes[size];
-      focusedOffsetSize = focusedVisibleOffsetSizes[size];
-    }
-    else {
-      focusedClasses = focusedWithin;
-      focusedSize = focusedWithinRingSizes[size];
-      focusedOffsetSize = focusedWithinOffsetSizes[size];
-    }
-  }
-
-  return [focusedClasses, focusedSize, focusedOffsetSize] as [Record<string, string>, string, string];
-
-}

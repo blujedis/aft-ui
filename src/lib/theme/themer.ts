@@ -4,7 +4,10 @@ import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
 import { colors } from './constants';
 import { getProperty } from 'dot-prop';
-import { isMatch } from '$lib/utils/glob';
+
+type PrimitiveBase = boolean | string | number | undefined | null;
+
+type Primitive = PrimitiveBase | Record<string, any> | PrimitiveBase[];
 
 export interface ThemerApi<C extends ThemeConfig> {
 	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
@@ -27,7 +30,7 @@ export interface ThemerApi<C extends ThemeConfig> {
 	): ThemerApi<C>;
 
 	mapped<T extends Record<string, unknown>, K extends Path<T>>(
-		obj: T,
+		obj: T | null,
 		key: K,
 		when: Primitive
 	): ThemerApi<C>;
@@ -64,7 +67,7 @@ import type {
 	Path
 } from '../types/theme';
 
-type Primitive = boolean | string | number | undefined | Primitive[];
+
 
 /**
  * Simply flattens array then joins by strings.
@@ -89,11 +92,11 @@ function merge(...classes: ClassNameValue[]) {
  * @param source the source value or values.
  * @param values the compare value or values.
  */
-function includes(source: Primitive | Primitive[], values: Primitive | Primitive[]) {
-	source = ensureArray(source);
-	values = ensureArray(values);
-	return source.some((v) => (values as Primitive[]).includes(v));
-}
+// function includes(source: Primitive, values: Primitive) {
+// 	source = ensureArray(source);
+// 	values = ensureArray(values);
+// 	return source.some(( v as any) => (values as Primitive[]).includes(v));
+// }
 
 /**
  * Simple string formatter that replaces values by positional order of arguments matched.
@@ -256,7 +259,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**
+		/**  
 		 * Adds an option to themed classes to be compiled.
 		 *
 		 * @param key the option key to be add.
@@ -264,13 +267,16 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param when if value is truthy add value otherwise reject.
 		 */
 		function mapped<T extends Record<string, unknown>, K extends Path<T>>(
-			obj: T,
+			obj: T | null,
 			key: K,
 			when: Primitive
 		) {
-			if (typeof themeConfig === 'undefined') return api;
+
+			if (typeof themeConfig === 'undefined' || obj === null) return api;
 			if (!when) return api;
+
 			const value = getProperty(obj, key as string);
+
 			if (!value)
 				throw new Error(
 					`${instanceName} mapped value using property ${key as string} was NOT found.`
@@ -403,4 +409,4 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 themer.join = join;
 themer.merge = merge;
 themer.format = formatter;
-themer.includes = includes;
+// themer.includes = includes;

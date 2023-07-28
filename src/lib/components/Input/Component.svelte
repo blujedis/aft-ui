@@ -4,6 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
+	import getFocus from '$lib/theme/utils';
 
 	type $$Props = InputProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -25,34 +26,20 @@
 
 	const th = themer($themeStore);
 
+	$: [focusMap, focusSize, focusOffset] = getFocus(
+		focused,
+		typeof focused === 'undefined' && variant === 'flushed'
+			? ['borderFlush', 'focus', 'two', 'unstyled']
+			: ['ring', 'focus', 'two', 'unstyled']
+	);
+
 	$: inputClasses = unstyled
-		? th
-				.create('Input')
-				// .option('focused', theme, focused)
-				// .option('focusedRingSizes', 'two', focused)
-				// .option('focusedBorder', theme, focused && variant === 'flushed')
-				// .option('focusedBorderFlushSizes', 'two', focused && variant === 'flushed')
-				// .remove('focusedFilters', focused, focused)
-				// .option('placeholders', theme, true)
-				// .option('common', 'transition', transitioned)
-				// .option('fieldFontSizes', size, size)
-				// .option('fieldPadding', size, size)
-				// .option('roundeds', rounded, rounded && variant !== 'flushed')
-				// .option('shadows', shadowed, shadowed)
-				// .option('disableds', theme, disabled)
-				// .append('w-full', full)
-				// .append('px-2', variant === 'flushed')
-				// .append('flex items-center justify-center', true)
-				.append($$restProps.class, true)
-				.compile(true)
+		? th.create('Input').append($$restProps.class, true).compile(true)
 		: th
 				.create('Input')
 				.variant('input', variant, theme, true)
-				.option('focused', theme, focused)
-				.option('focusedRingSizes', 'two', focused)
-				.option('focusedBorder', theme, focused && variant === 'flushed')
-				.option('focusedBorderFlushSizes', 'two', focused && variant === 'flushed')
-				//.remove('focusedFilters', focused, focused)
+				.mapped(focusMap, theme, focusMap)
+				.append([focusSize, focusOffset], focusMap)
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -62,7 +49,7 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center', true)
+				.append('flex items-center justify-center focus:outline-none', true)
 				.append($$restProps.class, true)
 				.compile(true);
 

@@ -24,7 +24,7 @@
 
 	const props = {
 		disabled: false,
-		focused: 'always' as ThemeFocused,
+		//focused: true as ThemeFocused,
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
@@ -53,19 +53,16 @@
 	</Section>
 
 	<div class="grid grid-cols-3 gap-0">
-		<label for="filled">
+		<!-- <label for="filled">
 			<div class="text-sm">Outlined:</div>
 			<div class="flex">
-				<!-- <Button>Test</Button>
-				<Button variant="outlined">Test</Button>
-				<Button variant="ghost">Test</Button> -->
 				<Input {...props} variant="outlined" placeholder="First Name" />
 			</div>
 		</label>
 		<label for="outline">
 			<div class="text-sm">Filled:</div>
 			<Input {...props} variant="filled" placeholder="Last Name" />
-		</label>
+		</label> -->
 		<label for="link">
 			<div class="text-sm">Flushed:</div>
 			<Input {...props} variant="flushed" />
