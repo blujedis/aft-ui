@@ -1,5 +1,7 @@
 import { mergeConfigs } from '$lib/theme';
 
+export * from './focused';
+
 export const borderSizes = {
 	unstyled: '',
 	transparent: 'border-transparent',
@@ -213,128 +215,350 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
-export const focusedBorder = {
-	$base:
-		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	dark: 'focus:border-frame-800 focus-visible:border-frame-800 focus-within:border-frame-800',
-	light: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
-	primary:
-		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
-	secondary:
-		'focus:border-secondary-600 focus-visible:border-secondary-600 focus-within:border-secondary-600',
-	tertiary:
-		'focus:border-tertiary-600 focus-visible:border-tertiary-600 focus-within:border-tertiary-600',
-	danger: 'focus:border-danger-600 focus-visible:border-danger-600 focus-within:border-danger-600',
-	warning:
-		'focus:border-warning-600 focus-visible:border-warning-600 focus-within:border-warning-600',
-	success:
-		'focus:border-success-600 focus-visible:border-success-600 focus-within:border-success-600',
-	info: 'focus:border-info-600 focus-visible:border-info-600 focus-within:border-info-600'
-};
+// export const focused = {
+// 	$base: 'focus:outline-none',
+// 	dark: 'focus:ring-frame-800',
+// 	light: 'focus:ring-frame-400',
+// 	primary: 'focus:ring-primary-600',
+// 	secondary:'focus:ring-secondary-600',
+// 	tertiary:	'focus:ring-tertiary-600',
+// 	danger: 'focus:ring-danger-600',
+// 	warning: 'focus:ring-warning-600',
+// 	success: 'focus:ring-success-600',
+// 	info: 'focus:ring-info-600'
+// };
 
-export const focusedBorderSizes = {
-	$base: '',
-	unstyled: '',
-	none: 'focus:border-0 focus-visible:border-0 focus-visible:border-0',
-	one: 'focus:border-1 focus-visible:border-1 focus-visible:border-1',
-	two: 'focus:border-2 focus-visible:border-2 focus-visible:border-2',
-	four: 'focus:border-4 focus-visible:border-4 focus-visible:border-4',
-	eight: 'focus:border-8 focus-visible:border-8 focus-visible:border-8'
-};
+// export const focusedVisible = {
+// 	$base: 'focus-visible:outline-none',
+// 	dark: 'focus-visible:ring-frame-800',
+// 	light: 'focus-visible:ring-frame-400',
+// 	primary: 'focus-visible:ring-primary-600',
+// 	secondary: 'focus-visible:ring-secondary-600',
+// 	tertiary: 'focus-visible:ring-tertiary-600',
+// 	danger: 'focus-visible:ring-danger-600',
+// 	warning: 'focus-visible:ring-warning-600',
+// 	success: 'focus-visible:ring-success-600',
+// 	info: 'focus-visible:ring-info-600'
+// };
 
-export const focusedBorderFlushSizes = {
-	$base: '',
-	unstyled: '',
-	none: 'focus:border-b-0 focus-visible:border-b-0 focus-within:border-b-0',
-	one: 'focus:border-b-1 focus-visible:border-b-1 focus-within:border-b-1',
-	two: 'focus:border-b-2 focus-visible:border-b-2 focus-within:border-b-2',
-	four: 'focus:border-b-4 focus-visible:border-b-4 focus-within:border-b-4',
-	eight: 'focus:border-b-8 focus-visible:border-b-8 focus-within:border-b-8'
-};
+// export const focusedWithin = {
+// 	$base: 'focus-within:outline-none',
+// 	dark: 'focus-within:ring-frame-800',
+// 	light: 'focus-within:ring-frame-400',
+// 	primary: 'focus-within:ring-primary-600',
+// 	secondary:'focus-within:ring-secondary-600',
+// 	tertiary:	'focus-within:ring-tertiary-600',
+// 	danger: 'focus-within:ring-danger-600',
+// 	warning: 'focus-within:ring-warning-600',
+// 	success: 'focus-within:ring-success-600',
+// 	info: 'focus-within:ring-info-600'
+// }
 
-export const focusedOutline = {
-	$base:
-		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-	dark: 'focus:outline-frame-800 focus-visible:outline-frame-800 focus-within:outline-frame-800',
-	light: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
-	primary:
-		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
-	secondary:
-		'focus:outline-secondary-600 focus-visible:outline-secondary-600 focus-within:outline-secondary-600',
-	tertiary:
-		'focus:outline-tertiary-600 focus-visible:outline-tertiary-600 focus-within:outline-tertiary-600',
-	danger:
-		'focus:outline-danger-600 focus-visible:outline-danger-600 focus-within:outline-danger-600',
-	warning:
-		'focus:outline-warning-600 focus-visible:outline-warning-600 focus-within:outline-warning-600',
-	success:
-		'focus:outline-success-600 focus-visible:outline-success-600 focus-within:outline-success-600',
-	info: 'focus:outline-info-600 focus-visible:outline-info-600 focus-within:outline-info-600'
-};
+// export const focusedRingSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus:ring-inset',
+// 	none: 'focus:ring-0 ',
+// 	one: 'focus:ring-1',
+// 	two: 'focus:ring-2',
+// 	four: 'focus:ring-4',
+// 	eight: 'focus:ring-8'
+// };
 
-export const focusedOutlineSizes = {
-	$base: '',
-	unstyled: '',
-	none: 'focus:outline-0 focus-visible:outline-0 focus-visible:outline-0',
-	one: 'focus:outline-1 focus-visible:outline-1 focus-visible:outline-1',
-	two: 'focus:outline-2 focus-visible:outline-2 focus-visible:outline-2',
-	four: 'focus:outline-4 focus-visible:outline-4 focus-visible:outline-4',
-	eight: 'focus:outline-8 focus-visible:outline-8 focus-visible:outline-8'
-};
+// export const focusedVisibleRingSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus-visible:ring-inset',
+// 	none: 'focus-visible:ring-0',
+// 	one: 'focus-visible:ring-1',
+// 	two: 'focus-visible:ring-2',
+// 	four: 'focus-visible:ring-4',
+// 	eight: 'focus-visible:ring-8'
+// };
 
-export const focusedOutlineOffsetSizes = {
-	$base: '',
-	unstyled: '',
-	none: 'focus:outline-offset-0 focus-visible:outline-offset-0 focus-within:outline-offset-0',
-	one: 'focus:outline-offset-1 focus-visible:outline-offset-1 focus-within:outline-offset-1',
-	two: 'focus:outline-offset-2 focus-visible:outline-offset-2 focus-within:outline-offset-2',
-	four: 'focus:outline-offset-4 focus-visible:outline-offset-4 focus-within:outline-offset-4',
-	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8 focus-within:outline-offset-8'
-};
+// export const focusedWithinRingSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus-within:ring-inset',
+// 	none: 'focus-within:ring-0',
+// 	one: 'focus-within:ring-1',
+// 	two: 'focus-within:ring-2',
+// 	four: 'focus-within:ring-4',
+// 	eight: 'focus-within:ring-8'
+// };
 
-export const focused = mergeConfigs(focusedOutline, focusedBorder, {
-	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
-	dark: 'focus:ring-frame-800 focus-visible:ring-frame-800 focus-within:ring-frame-800',
-	light: 'focus:ring-frame-400 focus-visible:ring-frame-400 focus-within:ring-frame-400',
-	primary: 'focus:ring-primary-600 focus-visible:ring-primary-600 focus-within:ring-primary-600',
-	secondary:
-		'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
-	tertiary:
-		'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
-	danger: 'focus:ring-danger-600 focus-visible:ring-danger-600 focus-within:ring-danger-600',
-	warning: 'focus:ring-warning-600 focus-visible:ring-warning-600 focus-within:ring-warning-600',
-	success: 'focus:ring-success-600 focus-visible:ring-success-600  focus-within:ring-success-600',
-	info: 'focus:ring-info-600 focus-visible:ring-info-600 focus-within:ring-info-600'
-});
+// export const focusedOffsetSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus:ring-inset',
+// 	none: 'focus:ring-offset-0',
+// 	one: 'focus:ring-offset-1',
+// 	two: 'focus:ring-offset-2',
+// 	four: 'focus:ring-offset-4',
+// 	eight: 'focus:ring-offset-8'
+// };
 
-export const focusedRingSizes = mergeConfigs(
-	{
-		$base: '',
-		unstyled: '',
-		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-		none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
-		one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
-		two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
-		four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
-		eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
-	},
-	focusedBorderSizes,
-	focusedOutlineSizes
-);
+// export const focusedVisibleOffsetSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus-visible:ring-inset',
+// 	none: 'focus-visible:ring-offset-0',
+// 	one: 'focus-visible:ring-offset-1',
+// 	two: 'focus-visible:ring-offset-2',
+// 	four: 'focus-visible:ring-offset-4',
+// 	eight: 'focus-visible:ring-offset-8'
+// };
 
-export const focusedOffsetSizes = mergeConfigs(
-	{
-		$base: '',
-		unstyled: '',
-		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
-		none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
-		one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
-		two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
-		four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
-		eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
-	},
-	focusedOutlineOffsetSizes
-);
+// export const focusedWithinOffsetSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	inset: 'focus-within:ring-inset',
+// 	none: 'focus-within:ring-offset-0',
+// 	one: 'focus-within:ring-offset-1',
+// 	two: 'focus-within:ring-offset-2',
+// 	four: 'focus-within:ring-offset-4',
+// 	eight: 'focus-within:ring-offset-8'
+// };
+
+
+
+// export const focusedBorder = {
+// 	$base:
+// 		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+// 	dark: 'focus:border-frame-800 focus-visible:border-frame-800 focus-within:border-frame-800',
+// 	light: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
+// 	primary:
+// 		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
+// 	secondary:
+// 		'focus:border-secondary-600 focus-visible:border-secondary-600 focus-within:border-secondary-600',
+// 	tertiary:
+// 		'focus:border-tertiary-600 focus-visible:border-tertiary-600 focus-within:border-tertiary-600',
+// 	danger: 'focus:border-danger-600 focus-visible:border-danger-600 focus-within:border-danger-600',
+// 	warning:
+// 		'focus:border-warning-600 focus-visible:border-warning-600 focus-within:border-warning-600',
+// 	success:
+// 		'focus:border-success-600 focus-visible:border-success-600 focus-within:border-success-600',
+// 	info: 'focus:border-info-600 focus-visible:border-info-600 focus-within:border-info-600'
+// };
+
+// export const focusedBorderSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:border-0 focus-visible:border-0 focus-visible:border-0',
+// 	one: 'focus:border-1 focus-visible:border-1 focus-visible:border-1',
+// 	two: 'focus:border-2 focus-visible:border-2 focus-visible:border-2',
+// 	four: 'focus:border-4 focus-visible:border-4 focus-visible:border-4',
+// 	eight: 'focus:border-8 focus-visible:border-8 focus-visible:border-8'
+// };
+
+// export const focusedBorderFlushSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:border-b-0 focus-visible:border-b-0 focus-within:border-b-0',
+// 	one: 'focus:border-b-1 focus-visible:border-b-1 focus-within:border-b-1',
+// 	two: 'focus:border-b-2 focus-visible:border-b-2 focus-within:border-b-2',
+// 	four: 'focus:border-b-4 focus-visible:border-b-4 focus-within:border-b-4',
+// 	eight: 'focus:border-b-8 focus-visible:border-b-8 focus-within:border-b-8'
+// };
+
+// export const focusedOutline = {
+// 	$base:
+// 		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+// 	dark: 'focus:outline-frame-800 focus-visible:outline-frame-800 focus-within:outline-frame-800',
+// 	light: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
+// 	primary:
+// 		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
+// 	secondary:
+// 		'focus:outline-secondary-600 focus-visible:outline-secondary-600 focus-within:outline-secondary-600',
+// 	tertiary:
+// 		'focus:outline-tertiary-600 focus-visible:outline-tertiary-600 focus-within:outline-tertiary-600',
+// 	danger:
+// 		'focus:outline-danger-600 focus-visible:outline-danger-600 focus-within:outline-danger-600',
+// 	warning:
+// 		'focus:outline-warning-600 focus-visible:outline-warning-600 focus-within:outline-warning-600',
+// 	success:
+// 		'focus:outline-success-600 focus-visible:outline-success-600 focus-within:outline-success-600',
+// 	info: 'focus:outline-info-600 focus-visible:outline-info-600 focus-within:outline-info-600'
+// };
+
+// export const focusedOutlineSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:outline-0 focus-visible:outline-0 focus-visible:outline-0',
+// 	one: 'focus:outline-1 focus-visible:outline-1 focus-visible:outline-1',
+// 	two: 'focus:outline-2 focus-visible:outline-2 focus-visible:outline-2',
+// 	four: 'focus:outline-4 focus-visible:outline-4 focus-visible:outline-4',
+// 	eight: 'focus:outline-8 focus-visible:outline-8 focus-visible:outline-8'
+// };
+
+// export const focusedOutlineOffsetSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:outline-offset-0 focus-visible:outline-offset-0 focus-within:outline-offset-0',
+// 	one: 'focus:outline-offset-1 focus-visible:outline-offset-1 focus-within:outline-offset-1',
+// 	two: 'focus:outline-offset-2 focus-visible:outline-offset-2 focus-within:outline-offset-2',
+// 	four: 'focus:outline-offset-4 focus-visible:outline-offset-4 focus-within:outline-offset-4',
+// 	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8 focus-within:outline-offset-8'
+// };
+
+// export const focusedFilters = {
+// 	always: ['focus-visible:', 'focus-within:'],
+// 	visible: ['focus:', 'focus-within:'],
+// 	within: ['focus:', 'focus-visible:'],
+// 	alwaysWithin: ['focus-visible:'],
+// 	visibleWithin: ['focus:'],
+// 	borderAlways: [],
+// 	outlineAlways: [],
+// 	borderWithin: [],
+// 	outlineWithin: [],
+// };
+
+// const focusedMap = {
+// 	focus: [
+// 		['focus-visible:', 'focus-within:'],
+// 		[]
+// 	],
+// 	focusVisible: [
+// 		['focus:', 'focus-within:'],
+// 		[]
+// 	],
+// 	focusWithin: [
+// 		['focus:', 'focus-visible:'],
+// 	],
+// 	focusVisibleWithin: [],
+// 	focusBorder: [],
+// 	focusVisibleBorder: [],
+// 	focusWithinBorder: [],
+// 	focusOutline: [],
+// 	focusVisibleOutline: [],
+// 	focusWithinOutline: [],
+// }
+
+
+
+// export const focusedBorder = {
+// 	$base:
+// 		'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+// 	dark: 'focus:border-frame-800 focus-visible:border-frame-800 focus-within:border-frame-800',
+// 	light: 'focus:border-frame-400 focus-visible:border-frame-400 focus-within:border-frame-400',
+// 	primary:
+// 		'focus:border-primary-600 focus-visible:border-primary-600 focus-within:border-primary-600',
+// 	secondary:
+// 		'focus:border-secondary-600 focus-visible:border-secondary-600 focus-within:border-secondary-600',
+// 	tertiary:
+// 		'focus:border-tertiary-600 focus-visible:border-tertiary-600 focus-within:border-tertiary-600',
+// 	danger: 'focus:border-danger-600 focus-visible:border-danger-600 focus-within:border-danger-600',
+// 	warning:
+// 		'focus:border-warning-600 focus-visible:border-warning-600 focus-within:border-warning-600',
+// 	success:
+// 		'focus:border-success-600 focus-visible:border-success-600 focus-within:border-success-600',
+// 	info: 'focus:border-info-600 focus-visible:border-info-600 focus-within:border-info-600'
+// };
+
+// export const focusedBorderSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:border-0 focus-visible:border-0 focus-visible:border-0',
+// 	one: 'focus:border-1 focus-visible:border-1 focus-visible:border-1',
+// 	two: 'focus:border-2 focus-visible:border-2 focus-visible:border-2',
+// 	four: 'focus:border-4 focus-visible:border-4 focus-visible:border-4',
+// 	eight: 'focus:border-8 focus-visible:border-8 focus-visible:border-8'
+// };
+
+// export const focusedBorderFlushSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:border-b-0 focus-visible:border-b-0 focus-within:border-b-0',
+// 	one: 'focus:border-b-1 focus-visible:border-b-1 focus-within:border-b-1',
+// 	two: 'focus:border-b-2 focus-visible:border-b-2 focus-within:border-b-2',
+// 	four: 'focus:border-b-4 focus-visible:border-b-4 focus-within:border-b-4',
+// 	eight: 'focus:border-b-8 focus-visible:border-b-8 focus-within:border-b-8'
+// };
+
+// export const focusedOutline = {
+// 	$base:
+// 		'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+// 	dark: 'focus:outline-frame-800 focus-visible:outline-frame-800 focus-within:outline-frame-800',
+// 	light: 'focus:outline-frame-400 focus-visible:outline-frame-400 focus-within:outline-frame-400',
+// 	primary:
+// 		'focus:outline-primary-600 focus-visible:outline-primary-600 focus-within:outline-primary-600',
+// 	secondary:
+// 		'focus:outline-secondary-600 focus-visible:outline-secondary-600 focus-within:outline-secondary-600',
+// 	tertiary:
+// 		'focus:outline-tertiary-600 focus-visible:outline-tertiary-600 focus-within:outline-tertiary-600',
+// 	danger:
+// 		'focus:outline-danger-600 focus-visible:outline-danger-600 focus-within:outline-danger-600',
+// 	warning:
+// 		'focus:outline-warning-600 focus-visible:outline-warning-600 focus-within:outline-warning-600',
+// 	success:
+// 		'focus:outline-success-600 focus-visible:outline-success-600 focus-within:outline-success-600',
+// 	info: 'focus:outline-info-600 focus-visible:outline-info-600 focus-within:outline-info-600'
+// };
+
+// export const focusedOutlineSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:outline-0 focus-visible:outline-0 focus-visible:outline-0',
+// 	one: 'focus:outline-1 focus-visible:outline-1 focus-visible:outline-1',
+// 	two: 'focus:outline-2 focus-visible:outline-2 focus-visible:outline-2',
+// 	four: 'focus:outline-4 focus-visible:outline-4 focus-visible:outline-4',
+// 	eight: 'focus:outline-8 focus-visible:outline-8 focus-visible:outline-8'
+// };
+
+// export const focusedOutlineOffsetSizes = {
+// 	$base: '',
+// 	unstyled: '',
+// 	none: 'focus:outline-offset-0 focus-visible:outline-offset-0 focus-within:outline-offset-0',
+// 	one: 'focus:outline-offset-1 focus-visible:outline-offset-1 focus-within:outline-offset-1',
+// 	two: 'focus:outline-offset-2 focus-visible:outline-offset-2 focus-within:outline-offset-2',
+// 	four: 'focus:outline-offset-4 focus-visible:outline-offset-4 focus-within:outline-offset-4',
+// 	eight: 'focus:outline-offset-8 focus-visible:outline-offset-8 focus-within:outline-offset-8'
+// };
+
+// export const focused = mergeConfigs(focusedOutline, focusedBorder, {
+// 	$base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+// 	dark: 'focus:ring-frame-800 focus-visible:ring-frame-800 focus-within:ring-frame-800',
+// 	light: 'focus:ring-frame-400 focus-visible:ring-frame-400 focus-within:ring-frame-400',
+// 	primary: 'focus:ring-primary-600 focus-visible:ring-primary-600 focus-within:ring-primary-600',
+// 	secondary:
+// 		'focus:ring-secondary-600 focus-visible:ring-secondary-600 focus-within:ring-secondary-600',
+// 	tertiary:
+// 		'focus:ring-tertiary-600 focus-visible:ring-tertiary-600 focus-within:ring-tertiary-600',
+// 	danger: 'focus:ring-danger-600 focus-visible:ring-danger-600 focus-within:ring-danger-600',
+// 	warning: 'focus:ring-warning-600 focus-visible:ring-warning-600 focus-within:ring-warning-600',
+// 	success: 'focus:ring-success-600 focus-visible:ring-success-600  focus-within:ring-success-600',
+// 	info: 'focus:ring-info-600 focus-visible:ring-info-600 focus-within:ring-info-600'
+// });
+
+// export const focusedRingSizes = mergeConfigs(
+// 	{
+// 		$base: '',
+// 		unstyled: '',
+// 		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+// 		none: 'focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+// 		one: 'focus:ring-1 focus-visible:ring-1 focus-within:ring-1',
+// 		two: 'focus:ring-2 focus-visible:ring-2 focus-within:ring-2',
+// 		four: 'focus:ring-4 focus-visible:ring-4 focus-within:ring-4',
+// 		eight: 'focus:ring-8 focus-visible:ring-8 focus-within:ring-8'
+// 	},
+// 	focusedBorderSizes,
+// 	focusedOutlineSizes
+// );
+
+// export const focusedOffsetSizes = mergeConfigs(
+// 	{
+// 		$base: '',
+// 		unstyled: '',
+// 		inset: 'focus:ring-inset focus-visible:ring-inset focus-within:ring-inset',
+// 		none: 'focus:ring-offset-0 focus-visible:ring-offset-0 focus-within:ring-offset-0',
+// 		one: 'focus:ring-offset-1 focus-visible:ring-offset-1 focus-within:ring-offset-1',
+// 		two: 'focus:ring-offset-2 focus-visible:ring-offset-2 focus-within:ring-offset-2',
+// 		four: 'focus:ring-offset-4 focus-visible:ring-offset-4 focus-within:ring-offset-4',
+// 		eight: 'focus:ring-offset-8 focus-visible:ring-offset-8 focus-within:ring-offset-8'
+// 	},
+// 	focusedOutlineOffsetSizes,
+// 	focusedBorderSizes
+// );
 
 export const focusedFilters = {
 	always: [
@@ -344,37 +568,46 @@ export const focusedFilters = {
 		'focus:border',
 		'focus:outline'
 	],
-	visible: ['focus:', 'focus-within:', 'focus-visible:border', 'focus-visible:outline'],
-	within: ['focus:', 'focus-visible:', 'focus-within:border', 'focus-within:outline'],
+	visible: ['focus:', 'focus-within:', 'focus-visible:border', 'focus-visible:outline', '!focus-visible:outline-none',],
+	within: ['focus:', 'focus-visible:', 'focus-within:border', 'focus-within:outline', '!focus-within:outline-none',],
 	alwaysWithin: [
 		'focus-visible:',
 		'focus:border',
 		'focus:outline',
 		'focus-within:border',
-		'focus-within:outline'
+		'focus-within:outline',
+		'!focus:outline-none',
+		'!focus-within:outline-none',
 	],
 	visibleWithin: [
 		'focus:',
 		'focus-visible:border',
 		'focus-visible:outline',
 		'focus-within:border',
-		'focus-within:outline'
+		'focus-within:outline',
+		'!focus-visible:outline-none',
+		'!focus-within:outline-none',
 	],
-	border: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:ring'],
-	outline: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:border'],
+	border: ['focus-visible:', 'focus-within:', 'focus-outline:', 'focus:ring', '!focus:border'],
+	outline: ['focus-visible:', 'focus-within:', 'focus:border', 'focus:outline-none', '!focus:outline'],
 	borderWithin: [
 		'focus-visible:',
 		'focus:ring',
 		'focus:outline',
 		'focus-within:outline',
-		'focus-within:ring'
+		'focus-within:ring',
+		'!focus:border',
+		'!focus-within:border',
 	],
 	outlineWithin: [
 		'focus-visible:',
 		'focus:ring',
 		'focus:border',
 		'focus-within:border',
-		'focus-within:ring'
+		'focus-within:ring',
+		'focus:outline',
+		'!focus:outline',
+		'!focus-within:outline',
 	]
 };
 

@@ -277,8 +277,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${
-						key as string
+					`${instanceName} mapped value using property ${key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -354,65 +353,30 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		function compile(withTailwindMerge = false) {
 			if (typeof themeConfig === 'undefined') return '';
 
+			const preserves = removed.filter(v => v.charAt(0) === '!');
+			const purge = removed.filter(v => v.charAt(0) !== '!');
+
 			const baseClean = base.reduce((a, c) => {
-
-				const preserve = [] as string[];
-				const cleaned = [] as string[];
-
-				console.log(removed);
-
-				const filtered = c.split(' ').filter(v => {
-
-					let preserved = false;
-					let exempt = false;
-
-					removed.forEach(r => {
-						const negated = r.charAt(0) === '!';
-						const filter = negated ? r.slice(1) : r;
-						const match = v === filter || v.startsWith(filter);
-						if (negated && match)
-							preserved = true;
-						else if (!preserved && !match)
-							exempt = true;
-					});
-
-					const invalid = 
-
-					console.log(v, preserved);
-
-					// for (const r of removed) {
-					// 	const negated = r.charAt(0) === '!';
-					// 	const filter = negated ? r.slice(1) : r;
-					// 	const match = v.startsWith(filter) || v === filter;
-					// 	if (match && negated && !preserve.includes(v)) preserve.push(v);
-					// 	else if (!match && !preserve.includes(v)) cleaned.push(v);
-					// }
-
-					return !preserved || !exempt;
-
-				});
-
-				return [...a, ...cleaned, ...preserve];
-
-			}, [] as string[]);
-
-			const themedClean = themed.reduce((a, c) => {
-				const filtered = c.split(' ').filter(v => {
-					let ignore = false;
-					for (const r of removed) {
-						if (ignore) break;
-						const negated = r.charAt(0) === '!';
-						const filter = negated ? r.slice(1) : r;
-						ignore = (negated && !v.startsWith(filter)) || v.startsWith(filter);
-					}
-					return ignore;
+				const filtered = c.split(' ').filter((v) => {
+					const preserve = preserves.some(p => v.startsWith(p.slice(1)));
+					if (preserve) return true;
+					const purged = purge.some(p => v.startsWith(p));
+					return preserve || !purged;
 				});
 				return [...a, ...filtered];
 			}, [] as string[]);
 
-			// 	console.log(...[baseClean]);
-			const normalized = classnames(...baseClean, ...themedClean, ...appended).trim();
+			const themedClean = themed.reduce((a, c) => {
+				const filtered = c.split(' ').filter((v) => {
+					const preserve = preserves.some(p => v.startsWith(p.slice(1)));
+					if (preserve) return true;
+					const purged = purge.some(p => v.startsWith(p));
+					return preserve || !purged;
+				});
+				return [...a, ...filtered];
+			}, [] as string[]);
 
+			const normalized = classnames(...baseClean, ...themedClean, ...appended).trim();
 
 			if (!withTailwindMerge) return normalized;
 

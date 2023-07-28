@@ -62,13 +62,13 @@
 				<Input {...props} variant="outlined" placeholder="First Name" />
 			</div>
 		</label>
-		<!-- <label for="outline">
+		<label for="outline">
 			<div class="text-sm">Filled:</div>
 			<Input {...props} variant="filled" placeholder="Last Name" />
 		</label>
 		<label for="link">
 			<div class="text-sm">Flushed:</div>
 			<Input {...props} variant="flushed" />
-		</label> -->
+		</label>
 	</div>
 </ExamplePage>
