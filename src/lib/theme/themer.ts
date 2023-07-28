@@ -277,7 +277,8 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${key as string
+					`${instanceName} mapped value using property ${
+						key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
