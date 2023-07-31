@@ -1,7 +1,7 @@
 import type { ThemeDefaults } from '../types/theme';
 
 const component = {
-	focused: 'visible',
+	focused: true,
 	// rounded: 'sm',
 	// shadowed: undefined,
 	size: 'md',
@@ -10,10 +10,6 @@ const component = {
 } as ThemeDefaults['component'];
 
 const defaults: ThemeDefaults = {
-	global: {
-		bg: 'bg-white',
-		text: 'text-frame-700'
-	},
 	component
 };
 

@@ -13,7 +13,6 @@
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
-	let mounted = false;
 
 	$: inputClasses = th
 		.create('Tile')
@@ -28,11 +27,8 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
-<div {...$$restProps} use:forwardedEvents class={inputClasses} class:invisible={!mounted}>
+<div {...$$restProps} use:forwardedEvents class={inputClasses}>
 	<slot />
 </div>

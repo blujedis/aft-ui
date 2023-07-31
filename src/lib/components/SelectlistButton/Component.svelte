@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { type SelectListButtonProps, selectListButtonDefaults as defaults } from './module';
-	import themeStore, { Badge, themer } from '$lib';
+	import themeStore, { themer } from '$lib';
+	import Badge from '../Badge';
+	import ConditionalElement from '../ConditionalElement';
+	import Flushed from '../Flushed';
 	import Icon from '../Icon';
 	import type { ElementProps, IconifyTuple } from '$lib/types';
 	import type { SelectListContext, SelectListItem } from '../SelectList';
@@ -48,18 +51,16 @@
 	$: containerClasses = th
 		.create('SelectListContainer')
 		.variant('input', variant, theme, true)
-		.option('focused', theme, focused && variant !== 'flushed')
-		.option('focusedRingSizes', 'two', focused && variant !== 'flushed')
-		.option('focusedBorder', theme, focused && variant === 'flushed')
-		.option('focusedBorderFlushSizes', 'two', focused && variant === 'flushed')
-		.remove('focusedFilters', focused, focused)
+		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded && variant !== 'flushed')
 		.option('shadows', shadowed, shadowed)
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
-		.append('inline-flex items-center justify-between relative min-w-[176px]', true)
+		.append('inline-flex items-center justify-between relative min-w-[176px] peer', true)
+		.append('outline-none focus-visible:ring-2', focused && variant !== 'flushed')
+		.append('border-0', variant === 'flushed')
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -75,27 +76,26 @@
 		.create('SelectListInput')
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.append('background-transparent outline-none border-none', true)
+		.append('bg-transparent outline-none border-none', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
 		.append('w-12 ml-1 pl-0 py-1', tags)
 		.append('caret-transparent truncate cursor-pointer', !tags)
 		.append('min-w-min', tags && !selected.length)
-		.append('group', true)
+		.append('group peer', true)
 		.compile(true);
 
 	$: buttonClasses = th
 		.create('SelectListButtonIconWrapper')
 		.option('fieldPaddingX', 'md', 'md')
-		.append('pt-px pl-0', true)
+		.option('focusedRingVisible', theme, focused)
+		.append('pt-px pl-0 outline-none focus-visible:ring-2', true)
 		.append('pl-0', tags)
 		.compile(true);
 
 	$: tagClasses = th
 		.create('SelectListButtonTag')
-		.option('focused', theme, focused)
-		.option('focusedRingSizes', 'two', focused)
-		.remove('focus:', true)
-		.append('mr-0.5', true)
+		.option('focusedRingVisible', theme, focused)
+		.append('mr-0.5 outline-none focus-visible:ring-2', true)
 		.compile(true);
 
 	$: iconClasses = th
@@ -221,46 +221,48 @@
 </script>
 
 <div>
-	<div role="button" tabindex="0" class={containerClasses}>
-		<div class={inputWrapperClasses}>
-			{#if tags}
-				<div class="my-0.5">
-					<slot name="tags" {handleRemoveTag}>
-						{#each selected as item}
-							<button on:click={() => handleRemoveTag(item)} class={tagClasses}>
-								<Badge variant="filled" {rounded} {theme} {size} class="hover:underline"
-									><span class="pointer-events-none pr-1">{item?.label}</span>
-									<slot name="icon">×</slot>
-								</Badge>
-							</button>
-						{/each}
-					</slot>
-				</div>
-			{/if}
-			<slot {handleInputUpdate} {handleInputKeydown} {handleInputClick}>
-				<input
-					aria-controls=""
-					{...$$restProps}
-					bind:this={$context.input}
-					use:setInitialValue
-					role="combobox"
-					type="text"
-					aria-expanded={$context.visible}
-					aria-haspopup="true"
-					aria-disabled={disabled}
-					{disabled}
-					class={inputClasses}
-					placeholder={!selected.length ? placeholder || '' : ''}
-					on:input={handleInputUpdate}
-					on:keydown={handleInputKeydown}
-					on:click={handleInputClick}
-				/>
+	<Flushed disabled={variant !== 'flushed'} {theme} {focused} group >
+		<div role="button" tabindex="0" class={containerClasses}>
+			<div class={inputWrapperClasses}>
+				{#if tags}
+					<div class="my-0.5">
+						<slot name="tags" {handleRemoveTag}>
+							{#each selected as item}
+								<button on:click={() => handleRemoveTag(item)} class={tagClasses}>
+									<Badge variant="filled" {rounded} {theme} {size} class="hover:underline"
+										><span class="pointer-events-none pr-1">{item?.label}</span>
+										<slot name="icon">×</slot>
+									</Badge>
+								</button>
+							{/each}
+						</slot>
+					</div>
+				{/if}
+				<slot {handleInputUpdate} {handleInputKeydown} {handleInputClick}>
+					<input
+						aria-controls=""
+						{...$$restProps}
+						bind:this={$context.input}
+						use:setInitialValue
+						role="combobox"
+						type="text"
+						aria-expanded={$context.visible}
+						aria-haspopup="true"
+						aria-disabled={disabled}
+						{disabled}
+						class={inputClasses}
+						placeholder={!selected.length ? placeholder || '' : ''}
+						on:input={handleInputUpdate}
+						on:keydown={handleInputKeydown}
+						on:click={handleInputClick}
+					/>
+				</slot>
+			</div>
+			<slot name="caret" handleCaretClick={handleClick}>
+				<button on:click={handleClick} class={buttonClasses}>
+					<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
+				</button>
 			</slot>
 		</div>
-		<slot name="caret" handleCaretClick={handleClick}>
-			<button on:click={handleClick} class={buttonClasses}>
-				<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
-			</button>
-		</slot>
-	</div>
+	</Flushed>
 </div>

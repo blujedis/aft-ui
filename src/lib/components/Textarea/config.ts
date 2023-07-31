@@ -1,4 +1,4 @@
-import { variantFilled, variantOutlined } from '../Button/config';
+import { variantFilled, variantOutlined } from '../base';
 
 export const textarea = {
 	default: {

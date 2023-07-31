@@ -1,5 +1,5 @@
 @tailwind base;
 
-/* .text-md {
-	@apply text-base;
-} */
+.text-md {
+  @apply text-base;
+}

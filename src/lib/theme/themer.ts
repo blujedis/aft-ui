@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ensureArray } from './utils';
 import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
-import { colors } from './constants';
+import { colors } from '../components/base';
 import { getProperty } from 'dot-prop';
 
 type PrimitiveBase = boolean | string | number | undefined | null;

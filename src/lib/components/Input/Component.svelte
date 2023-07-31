@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type InputProps, inputDefaults as defaults } from './module';
 	import themeStore, { Button, themer } from '$lib';
+	import { Flushed } from '../Flushed';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
-	import getFocus from '$lib/theme/utils';
 
 	type $$Props = InputProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
@@ -21,25 +21,23 @@
 		variant,
 		unstyled
 	} = {
-		...defaults
+		...defaults,
+		...$themeStore?.defaults?.component
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: [focusMap, focusSize, focusOffset] = getFocus(
-		focused,
-		typeof focused === 'undefined' && variant === 'flushed'
-			? ['borderFlush', 'focus', 'two', 'unstyled']
-			: ['ring', 'focus', 'two', 'unstyled']
-	);
+	// $: [focusMap, focusSize, focusOffset] = getFocus(
+	// 	focused,['ring', 'focus', 'two', 'unstyled']);
+					// .mapped(focusMap, theme, focusMap)
+				// .append([focusSize, focusOffset], focusMap)
 
 	$: inputClasses = unstyled
 		? th.create('Input').append($$restProps.class, true).compile(true)
 		: th
 				.create('Input')
 				.variant('input', variant, theme, true)
-				.mapped(focusMap, theme, focusMap)
-				.append([focusSize, focusOffset], focusMap)
+				.option('focusedRing', theme, focused && variant !== 'flushed')
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -48,12 +46,19 @@
 				.option('shadows', shadowed, shadowed)
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
-				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center focus:outline-none', true)
+				.append('focus:outline-none focus:ring-2', focused && variant !== 'flushed')
+				.append('px-2 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
+				.append('flex items-center justify-center', true)
 				.append($$restProps.class, true)
 				.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
+{#if variant === 'flushed'}
+	<svelte:component this={Flushed} {theme} {focused}>
+		<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
+	</svelte:component>
+{:else}
+	<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
+{/if}

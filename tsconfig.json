@@ -12,9 +12,12 @@
 		"downlevelIteration": true,
 		"target": "esnext",
 		"paths": {
-			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"]
+			"$lib": [
+				"./src/lib"
+			],
+			"$lib/*": [
+				"./src/lib/*"
+			]
 		}
-	},
-	"exclude": ["./dist/**/*"]
+	}
 }

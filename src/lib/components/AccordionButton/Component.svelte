@@ -46,16 +46,14 @@
 	$: accordionButtonClasses = th
 		.create('Accordion')
 		.variant('accordionButton', variant, theme, true)
-		.option('focused', theme, focused)
-		.option('focusedRingSizes', 'two', focused)
-		.remove('focusedFilters', focused, focused)
+		.option('focusedRingVisible', theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed && variant === 'pills')
 		.option('disableds', theme, disabled)
-		.append('inline-flex items-center justify-center outline-none', true)
+		.append('inline-flex items-center justify-center focus:outline-none focus:ring-2', true)
 		.append('inline-flex items-center justify-between w-full', true)
 		.append($$restProps.class, true)
 		.compile(true);

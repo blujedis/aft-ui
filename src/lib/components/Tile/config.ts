@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { variantFilled, variantOutlined } from '../Button/config';
+import { variantFilled, variantOutlined } from '../base';
 
 const baseVariant = mergeConfigs(variantFilled, {
 	$base: 'text-inherit border border-transparent bg-frame-100 text-white font-medium'

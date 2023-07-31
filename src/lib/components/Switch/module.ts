@@ -4,6 +4,7 @@ import type { switchBackdrop } from './config';
 export type SwitchVariant = keyof typeof switchBackdrop;
 
 export type SwitchProps = {
+	position?: 'right' | 'left' | 'top' | 'bottom'; // relative to slot element
 	classHandle?: string;
 	classFill?: string;
 	classBackdrop?: string;
@@ -22,5 +23,6 @@ export const switchDefaults: Partial<SwitchProps> = {
 	size: 'md',
 	srtext: 'Use Switch',
 	theme: 'light',
-	variant: 'default'
+	variant: 'default',
+	position: 'right'
 };

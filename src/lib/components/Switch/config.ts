@@ -10,6 +10,7 @@ export const switchBackdrop = {
 export const switchFill = {
 	default: {
 		$base: 'bg-frame-300',
+		white: '',
 		dark: 'bg-white group-aria-checked:bg-gray-200',
 		light: 'bg-frame-300 group-aria-checked:bg-frame-400',
 		primary: 'group-aria-checked:bg-primary-500',

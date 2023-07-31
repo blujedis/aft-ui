@@ -45,7 +45,7 @@
 	});
 
 	const th = themer($themeStore);
-	let mounted = false;
+
 
 	$: tabControllerlWrapperClasses = th.create('TabsWrapper').append(klass, true).compile();
 
@@ -79,12 +79,9 @@
 
 	function handleReset() {}
 
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
-<div class={tabControllerlWrapperClasses} class:invisible={!mounted}>
+<div class={tabControllerlWrapperClasses} >
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
 			<slot name="mobile" />

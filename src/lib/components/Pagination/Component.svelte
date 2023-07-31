@@ -43,7 +43,6 @@
 	});
 
 	const th = themer($themeStore);
-	let mounted = false;
 
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
@@ -58,9 +57,6 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 <nav
@@ -68,7 +64,6 @@
 	aria-label="Pagination"
 	{...$$restProps}
 	class={paginationControllerClasses}
-	class:invisible={!mounted}
 >
 	<slot
 		page={$context.page}

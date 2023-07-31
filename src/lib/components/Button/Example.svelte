@@ -1,21 +1,11 @@
 <script lang="ts">
 	import Button, { type ButtonVariant } from '.';
 	import type {
-		ThemeColor,
-		ThemeFocused,
 		ThemeRounded,
 		ThemeShadowed,
 		ThemeSize
 	} from '../../types';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 
 	const title = 'Buttons';
 	const description = 'Themed Buttons with variants.';
@@ -23,50 +13,157 @@
   `;
 
 	const props = {
-		activated: false,
 		disabled: false,
-		focused: 'focusVisible' as ThemeFocused, // true: focus-visible.
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'default' as ButtonVariant,
 		underlined: false
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Underlined" bind:checked={props.underlined} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
 
 	<div class="grid grid-cols-4 gap-4">
 		<label for="filled" class="flex">
-			<Button {...props}>Button</Button>
+			<Button {...props} theme="light">Button</Button>
 		</label>
 		<label for="outline">
-			<Button {...props} variant="outlined">Button</Button>
+			<Button {...props} variant="outlined" theme="light">Button</Button>
 		</label>
 		<label for="link">
-			<Button {...props} variant="text">Button</Button>
+			<Button {...props} variant="text" theme="light">Button</Button>
 		</label>
 		<label for="ghost">
-			<Button {...props} variant="ghost">Button</Button>
+			<Button {...props} variant="ghost" theme="light">Button</Button>
 		</label>
 	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="dark">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="dark">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="dark">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="dark">Button</Button>
+		</label>
+	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="primary">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="primary">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="primary">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="primary">Button</Button>
+		</label>
+	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="secondary">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="secondary">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="secondary">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="secondary">Button</Button>
+		</label>
+	</div>
+
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="tertiary">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="tertiary">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="tertiary">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="tertiary">Button</Button>
+		</label>
+	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="danger">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="danger">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="danger">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="danger">Button</Button>
+		</label>
+	</div>
+
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="warning">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="warning">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="warning">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="warning">Button</Button>
+		</label>
+	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="success">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="success">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="success">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="success">Button</Button>
+		</label>
+	</div>
+
+	<div class="grid grid-cols-4 gap-4 mt-4">
+		<label for="filled" class="flex">
+			<Button {...props} theme="info">Button</Button>
+		</label>
+		<label for="outline">
+			<Button {...props} variant="outlined" theme="info">Button</Button>
+		</label>
+		<label for="link">
+			<Button {...props} variant="text" theme="info">Button</Button>
+		</label>
+		<label for="ghost">
+			<Button {...props} variant="ghost" theme="info">Button</Button>
+		</label>
+	</div>
+
+
+
+
+
 </ExamplePage>

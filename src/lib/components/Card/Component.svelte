@@ -20,7 +20,7 @@
 	setContext('Card', { globals } as CardContext);
 
 	const th = themer($themeStore);
-	let mounted = false;
+
 
 	$: cardClasses = th
 		.create('Card')
@@ -30,11 +30,9 @@
 		.append('h-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
-<div {...$$restProps} class={cardClasses} class:invisible={!mounted}>
+<div {...$$restProps} class={cardClasses} >
 	<slot />
 </div>

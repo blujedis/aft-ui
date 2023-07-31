@@ -12,7 +12,6 @@
 		...defaults
 	} as Required<$$Props>;
 
-	let mounted = false;
 
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
@@ -27,9 +26,7 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
 <svelte:element
@@ -37,7 +34,6 @@
 	use:forwardedEvents
 	{...$$restProps}
 	class={emptyClasses}
-	class:invisible={!mounted}
 >
 	<slot />
 </svelte:element>

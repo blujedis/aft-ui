@@ -36,6 +36,7 @@
 	$: tabClasses = th
 		.create('Tab')
 		.variant('tab', variant, theme, true)
+		.option('focusedRingVisible', theme, focused)
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded)

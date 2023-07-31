@@ -5,15 +5,7 @@
 	import CardFooter from '../CardFooter';
 	import CardImage from '../CardImage';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Card';
 	const description = 'Component for creating organized card content.';
@@ -31,20 +23,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Wide" bind:checked={props.wide} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
 	<div class="flex space-x-6">
 		{#key props}
 			<Card

@@ -16,7 +16,6 @@
 		shadowed,
 		size,
 		store: initStore,
-		strategy,
 		theme,
 		underlined,
 		variant,
@@ -33,11 +32,9 @@
 
 	const th = themer($themeStore);
 	let div: HTMLDivElement;
-	let mounted = false;
 
 	const globals = cleanObj({
 		full,
-		strategy,
 		rounded,
 		shadowed,
 		size,
@@ -74,9 +71,7 @@
 			return store.close();
 		if (!$store.visible && e.key === 'ArrowDown') return store.open();
 	}
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
 <div
@@ -87,7 +82,6 @@
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={menuClasses}
-	class:invisible={!mounted}
 >
 	<slot
 		visible={$store.visible}

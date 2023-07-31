@@ -11,7 +11,6 @@ export type MenuStore = {
 
 export type MenuGlobalProps = {
 	full?: boolean;
-	strategy?: 'button' | 'text';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -37,7 +36,6 @@ export const menuDefaults: Partial<MenuProps & MenuGlobalProps> = {
 	autoclose: true,
 	escapable: true,
 	size: 'md',
-	strategy: 'button',
 	theme: 'light',
 	variant: 'default'
 };

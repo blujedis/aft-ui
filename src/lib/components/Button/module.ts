@@ -16,20 +16,19 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	focused?: ThemeFocused;
 	full?: boolean;
 	href?: string | null;
-	strategy?: 'button' | 'text';
+	strong?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: ThemeTransitioned;
 	variant?: ButtonVariant;
+	underlined?: boolean | 'hover'; // when hover only shown when hovering.
 	unstyled?: boolean;
 };
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
-	focused: 'focusVisible',
-	full: false,
-	strategy: 'button',
+	as: 'button',
 	size: 'md',
 	theme: 'light',
 	variant: 'default'

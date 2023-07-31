@@ -27,7 +27,6 @@ export type SelectListButtonProps = InputProps & {
 export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
 	...inputDefaults,
 	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
-	focused: 'alwaysWithin',
 	placeholder: '',
 	roticon: true,
 	variant: 'default',

@@ -11,7 +11,6 @@
 	} as Required<RangeProps>;
 
 	let ref: HTMLInputElement;
-	let mounted = false;
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);
@@ -20,10 +19,10 @@
 
 	$: rangeStyles = st
 		.create('RangeStyles')
-		.colormap(components.rangeTrackBackground[variant], theme, '--track-background-color', true)
-		.colormap(components.rangeTrackAccent[variant], theme, '--track-accent-color', true)
-		.colormap(components.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
-		.colormap(components.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
+		.colormap(components?.rangeTrackBackground[variant], theme, '--track-background-color', true)
+		.colormap(components?.rangeTrackAccent[variant], theme, '--track-accent-color', true)
+		.colormap(components?.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
+		.colormap(components?.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
 		.append($$restProps.style, true)
@@ -53,10 +52,6 @@
 		target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
 	}
 
-	onMount(() => {
-		handleInputChange();
-		mounted = true;
-	});
 </script>
 
 <input
@@ -66,7 +61,6 @@
 	{...$$restProps}
 	class={rangeClasses}
 	style={rangeStyles}
-	class:invisible={!mounted}
 />
 
 <style>

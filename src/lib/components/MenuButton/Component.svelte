@@ -11,7 +11,7 @@
 
 	const context = getContext('Menu') as MenuContext;
 
-	export let { caret, full, rounded, roticon, size, shadowed, strategy, theme, variant } = {
+	export let { caret, full, rounded, roticon, size, shadowed, theme, variant } = {
 		...defaults,
 		...context?.globals
 	} as Required<$$Props>;
@@ -42,7 +42,7 @@
 
 <svelte:component
 	this={Button}
-	{...{ full, rounded, shadowed, size, theme, variant, strategy }}
+	{...{ full, rounded, shadowed, size, theme, variant }}
 	{...$$restProps}
 	class={buttonClasses}
 	on:click={handleClick}

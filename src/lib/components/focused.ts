@@ -1,6 +1,8 @@
 
-export const focused = {
+
+export const focusedRing = {
   $base: 'focus:outline-none',
+  white: 'focus:ring-white',
   dark: 'focus:ring-frame-800',
   light: 'focus:ring-frame-400',
   primary: 'focus:ring-primary-600',
@@ -12,8 +14,9 @@ export const focused = {
   info: 'focus:ring-info-600'
 };
 
-export const focusedVisible = {
+export const focusedRingVisible = {
   $base: 'focus-visible:outline-none',
+  white: 'focus-visible:ring-white',
   dark: 'focus-visible:ring-frame-800',
   light: 'focus-visible:ring-frame-400',
   primary: 'focus-visible:ring-primary-600',
@@ -25,8 +28,9 @@ export const focusedVisible = {
   info: 'focus-visible:ring-info-600'
 };
 
-export const focusedWithin = {
+export const focusedRingWithin = {
   $base: 'focus-within:outline-none',
+  white: 'focus-within:ring-white',
   dark: 'focus-within:ring-frame-800',
   light: 'focus-within:ring-frame-400',
   primary: 'focus-within:ring-primary-600',
@@ -36,74 +40,39 @@ export const focusedWithin = {
   warning: 'focus-within:ring-warning-600',
   success: 'focus-within:ring-success-600',
   info: 'focus-within:ring-info-600'
-}
-
-
-export const focusedRingSizes = {
-  unstyled: '',
-  inset: 'focus:ring-inset',
-  none: 'focus:ring-0 ',
-  one: 'focus:ring-1',
-  two: 'focus:ring-2',
-  four: 'focus:ring-4',
-  eight: 'focus:ring-8'
 };
 
-export const focusedVisibleRingSizes = {
-  unstyled: '',
-  inset: 'focus-visible:ring-inset',
-  none: 'focus-visible:ring-0',
-  one: 'focus-visible:ring-1',
-  two: 'focus-visible:ring-2',
-  four: 'focus-visible:ring-4',
-  eight: 'focus-visible:ring-8'
+export const focusedRingPeer = {
+  $base: 'peer-focus:outline-none',
+  white: 'peer-focus:ring-white',
+  dark: 'peer-focus:ring-frame-800',
+  light: 'peer-focus:ring-frame-400',
+  primary: 'peer-focus:ring-primary-600',
+  secondary: 'peer-focus:ring-secondary-600',
+  tertiary: 'peer-focus:ring-tertiary-600',
+  danger: 'peer-focus:ring-danger-600',
+  warning: 'peer-focus:ring-warning-600',
+  success: 'peer-focus:ring-success-600',
+  info: 'peer-focus:ring-info-600'
 };
 
-export const focusedWithinRingSizes = {
-  unstyled: '',
-  inset: 'focus-within:ring-inset',
-  none: 'focus-within:ring-0',
-  one: 'focus-within:ring-1',
-  two: 'focus-within:ring-2',
-  four: 'focus-within:ring-4',
-  eight: 'focus-within:ring-8'
+export const focusedRingGroup = {
+  $base: 'group-focus:outline-none',
+  white: 'group-focus:ring-white',
+  dark: 'group-focus:ring-frame-800',
+  light: 'group-focus:ring-frame-400',
+  primary: 'group-focus:ring-primary-600',
+  secondary: 'group-focus:ring-secondary-600',
+  tertiary: 'group-focus:ring-tertiary-600',
+  danger: 'group-focus:ring-danger-600',
+  warning: 'group-focus:ring-warning-600',
+  success: 'group-focus:ring-success-600',
+  info: 'group-focus:ring-info-600'
 };
-
-
-
-export const focusedOffsetSizes = {
-  unstyled: '',
-  inset: 'focus:ring-inset',
-  none: 'focus:ring-offset-0',
-  one: 'focus:ring-offset-1',
-  two: 'focus:ring-offset-2',
-  four: 'focus:ring-offset-4',
-  eight: 'focus:ring-offset-8'
-};
-
-export const focusedVisibleOffsetSizes = {
-  unstyled: '',
-  inset: 'focus-visible:ring-inset',
-  none: 'focus-visible:ring-offset-0',
-  one: 'focus-visible:ring-offset-1',
-  two: 'focus-visible:ring-offset-2',
-  four: 'focus-visible:ring-offset-4',
-  eight: 'focus-visible:ring-offset-8'
-};
-
-export const focusedWithinOffsetSizes = {
-  unstyled: '',
-  inset: 'focus-within:ring-inset',
-  none: 'focus-within:ring-offset-0',
-  one: 'focus-within:ring-offset-1',
-  two: 'focus-within:ring-offset-2',
-  four: 'focus-within:ring-offset-4',
-  eight: 'focus-within:ring-offset-8'
-};
-
 
 export const focusedBorder = {
-  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+  $base: 'focus:outline-none',
+  white: 'focus:border-white',
   dark: 'focus:border-frame-800',
   light: 'focus:border-frame-400',
   primary: 'focus:border-primary-600',
@@ -115,8 +84,9 @@ export const focusedBorder = {
   info: 'focus:border-info-600'
 };
 
-export const focusedVisibleBorder = {
-  $base: 'focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+export const focusedBorderVisible = {
+  $base: 'focus-visible:outline-none',
+  white: 'focus-visible:border-white',
   dark: 'focus-visible:border-frame-800',
   light: 'focus-visible:border-frame-400',
   primary: 'focus-visible:border-primary-600',
@@ -128,8 +98,9 @@ export const focusedVisibleBorder = {
   info: 'focus-visible:border-info-600'
 };
 
-export const focusedWithinBorder = {
-  $base: 'focus-visible:outline-none focus-within:outline-none focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+export const focusedBorderWithin = {
+  $base: 'focus-within:outline-none',
+  white: 'focus-within:border-white',
   dark: 'focus-within:border-frame-800',
   light: 'focus-within:border-frame-400',
   primary: 'focus-within:border-primary-600',
@@ -141,85 +112,51 @@ export const focusedWithinBorder = {
   info: 'focus-within:border-info-600'
 };
 
-export const focusedBorderFlush = {
-  ...focusedBorder,
-  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+export const focusedBorderPeer = {
+  $base: 'peer-focus:outline-none',
+  white: 'peer-focus:border-white',
+  dark: 'peer-focus:border-frame-800',
+  light: 'peer-focus:border-frame-400',
+  primary: 'peer-focus:border-primary-600',
+  secondary: 'peer-focus:border-secondary-600',
+  tertiary: 'peer-focus:border-tertiary-600',
+  danger: 'peer-focus:border-danger-600',
+  warning: 'peer-focus:border-warning-600',
+  success: 'peer-focus:border-success-600',
+  info: 'peer-focus:border-info-600'
 };
 
-export const focusedVisibleBorderFlush = {
-  ...focusedVisibleBorder,
-  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+export const focusedBorderGroup = {
+  $base: 'group-focus:outline-none',
+  white: 'group-focus:border-white',
+  dark: 'group-focus:border-frame-800',
+  light: 'group-focus:border-frame-400',
+  primary: 'group-focus:border-primary-600',
+  secondary: 'group-focus:border-secondary-600',
+  tertiary: 'group-focus:border-tertiary-600',
+  danger: 'group-focus:border-danger-600',
+  warning: 'group-focus:border-warning-600',
+  success: 'group-focus:border-success-600',
+  info: 'group-focus:border-info-600'
 };
 
-export const focusedWithinBorderFlush = {
-  ...focusedWithinBorder,
-  $base: 'focus:outline-none focus-visible:outline-none focus-within:outline-none',
+export const focusedBorderGroupWithin = {
+  $base: 'group-focus-within:outline-none',
+  white: 'group-focus-within:border-white',
+  dark: 'group-focus-within:border-frame-800',
+  light: 'group-focus-within:border-frame-400',
+  primary: 'group-focus-within:border-primary-600',
+  secondary: 'group-focus-within:border-secondary-600',
+  tertiary: 'group-focus-within:border-tertiary-600',
+  danger: 'group-focus-within:border-danger-600',
+  warning: 'group-focus-within:border-warning-600',
+  success: 'group-focus-within:border-success-600',
+  info: 'group-focus-within:border-info-600'
 };
-
-
-export const focusedBorderSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus:border-0',
-  one: 'focus:border-1',
-  two: 'focus:border-2',
-  four: 'focus:border-4',
-  eight: 'focus:border-8'
-};
-
-export const focusedVisibleBorderSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-visible:border-0',
-  one: 'focus-visible:border-1',
-  two: 'focus-visible:border-2',
-  four: 'focus-visible:border-4',
-  eight: 'focus-visible:border-8'
-};
-
-export const focusedWithinBorderSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-within:border-0',
-  one: 'focus-within:border-1',
-  two: 'focus-within:border-2',
-  four: 'focus-within:border-4',
-  eight: 'focus-within:border-8'
-};
-
-export const focusedBorderFlushSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus:border-b-0',
-  one: 'focus:border-b-1',
-  two: 'focus:border-b-2',
-  four: 'focus:border-b-4',
-  eight: 'focus:border-b-8'
-};
-
-export const focusedBorderVisibleFlushSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-visible:border-b-0',
-  one: 'focus-visible:border-b-1',
-  two: 'focus-visible:border-b-2',
-  four: 'focus-visible:border-b-4',
-  eight: 'focus-visible:border-b-8'
-};
-
-export const focusedBorderWithinFlushSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-within:border-b-0',
-  one: 'focus-within:border-b-1',
-  two: 'focus-within:border-b-2',
-  four: 'focus-within:border-b-4',
-  eight: 'focus-within:border-b-8'
-};
-
 
 export const focusedOutline = {
-  $base: 'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+  $base: 'focus:outline',
+  white: 'focus:outline-white',
   dark: 'focus:outline-frame-800',
   light: 'focus:outline-frame-400',
   primary: 'focus:outline-primary-600',
@@ -231,8 +168,9 @@ export const focusedOutline = {
   info: 'focus:outline-info-600'
 };
 
-export const focusedVisibleOutline = {
-  $base: 'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+export const focusedOutlineVisible = {
+  $base: 'focus-visible:outline',
+  white: 'focus-visible:outline-white',
   dark: 'focus-visible:outline-frame-800',
   light: 'focus-visible:outline-frame-400',
   primary: 'focus-visible:outline-primary-600',
@@ -244,8 +182,9 @@ export const focusedVisibleOutline = {
   info: 'focus-visible:outline-info-600'
 };
 
-export const focusedWithinOutline = {
-  $base: 'focus:outline focus-visible:outline focus:ring-0 focus-visible:ring-0 focus-within:ring-0',
+export const focusedOutlineWithin = {
+  $base: 'focus-within:outline',
+  white: 'focus-within:outline-white',
   dark: 'focus-within:outline-frame-800',
   light: 'focus-within:outline-frame-400',
   primary: 'focus-within:outline-primary-600',
@@ -257,72 +196,31 @@ export const focusedWithinOutline = {
   info: 'focus-within:outline-info-600'
 };
 
-
-
-export const focusedOutlineSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus:outline-0',
-  one: 'focus:outline-1',
-  two: 'focus:outline-2',
-  four: 'focus:outline-4',
-  eight: 'focus:outline-8'
+export const focusedOutlinePeer = {
+  $base: 'peer-focus:outline',
+  white: 'peer-focus:outline-white',
+  dark: 'peer-focus:outline-frame-800',
+  light: 'peer-focus:outline-frame-400',
+  primary: 'peer-focus:outline-primary-600',
+  secondary: 'peer-focus:outline-secondary-600',
+  tertiary: 'peer-focus:outline-tertiary-600',
+  danger: 'peer-focus:outline-danger-600',
+  warning: 'peer-focus:outline-warning-600',
+  success: 'peer-focus:outline-success-600',
+  info: 'peer-focus:outline-info-600'
 };
 
-export const focusedVisibleOutlineSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-visible:outline-00',
-  one: 'focus-visible:outline-1',
-  two: 'focus-visible:outline-2',
-  four: 'focus-visible:outline-4',
-  eight: 'focus-visible:outline-8'
+export const focusedOutlineGroup = {
+  $base: 'group-focus:outline',
+  white: 'group-focus:outline-white',
+  dark: 'group-focus:outline-frame-800',
+  light: 'group-focus:outline-frame-400',
+  primary: 'group-focus:outline-primary-600',
+  secondary: 'group-focus:outline-secondary-600',
+  tertiary: 'group-focus:outline-tertiary-600',
+  danger: 'group-focus:outline-danger-600',
+  warning: 'group-focus:outline-warning-600',
+  success: 'group-focus:outline-success-600',
+  info: 'group-focus:outline-info-600'
 };
-
-export const focusedWithinOutlineSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-within:outline-0',
-  one: 'focus-within:outline-1',
-  two: 'focus-within:outline-2',
-  four: 'focus-within:outline-4',
-  eight: 'focus-within:outline-8'
-};
-
-
-
-export const focusedOutlineOffsetSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus:outline-offset-0',
-  one: 'focus:outline-offset-1',
-  two: 'focus:outline-offset-2',
-  four: 'focus:outline-offset-4',
-  eight: 'focus:outline-offset-8'
-};
-
-export const focusedVisibleOutlineOffsetSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-visible:outline-offset-0',
-  one: 'focus-visible:outline-offset-1',
-  two: 'focus-visible:outline-offset-2',
-  four: 'focus-visible:outline-offset-4',
-  eight: 'focus-visible:outline-offset-8'
-};
-
-export const focusedWithinOutlineOffsetSizes = {
-  unstyled: '',
-  inset: '',
-  none: 'focus-within:outline-offset-0',
-  one: 'focus-within:outline-offset-1',
-  two: 'focus-within:outline-offset-2',
-  four: 'focus-within:outline-offset-4',
-  eight: 'focus-within:outline-offset-8'
-};
-
-// export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
-// export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin';
-// export type ThemeFocusSize = 'none' | 'one' | 'two' | 'four' | 'eight';
-// export type ThemeFocusOffset = ThemeFocusSize;
 

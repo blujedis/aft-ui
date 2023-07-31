@@ -3,15 +3,7 @@
 	import Notifications, { type NotificationPosition } from '.';
 	import notification from '$lib/stores/notification';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import SelectPosition from '../_Example/SelectPosition.svelte';
 
 	const title = 'Notifications';
 	const description = 'Alert notifications with 6 optional positions.';
@@ -59,20 +51,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<span class="italic">No Toggle Options</span>
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-		<SelectPosition bind:value={props.position} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
 
 	<div class="grid grid-cols-3 gap-4">
 		<div>

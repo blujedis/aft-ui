@@ -34,7 +34,6 @@
 	if (notification === true) notification = 'top-right' as any; // TS above props complains.
 
 	const th = themer($themeStore);
-	let mounted = false;
 
 	$: avatarClasses = th
 		.create('Avatar')
@@ -73,20 +72,17 @@
 		'';
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 {#if _placeholder}
-	<span class={avatarPlaceholderClasses} class:invisible={!mounted}>
+	<span class={avatarPlaceholderClasses} >
 		<Icon icon={_placeholder} class="h-full w-full" />
 		{#if notification}
 			<span class={avatarNotificationClasses} />
 		{/if}
 	</span>
 {:else if notification}
-	<span class="relative inline-block" class:invisible={!mounted}>
+	<span class="relative inline-block" >
 		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
 		<span class={avatarNotificationClasses} />
 	</span>

@@ -19,7 +19,6 @@
 	} as Required<AccordionProps<Tag>>;
 
 	export const store = useSelect({ multiple, selected });
-	let mounted = false;
 
 	const globals = cleanObj({
 		rounded: variant === 'pills' ? rounded : 'none',
@@ -45,13 +44,12 @@
 		.variant('accordion', variant, theme, true)
 		.option('roundeds', rounded === 'full' && variant !== 'pills' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed && variant !== 'pills')
+		.append(`accordion ` + 'divide-y divide-frame-200 border border-frame-200', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
 	function handleReset() {}
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
 <svelte:element
@@ -59,7 +57,6 @@
 	{...$$restProps}
 	aria-expanded={$store.selected.length > 0}
 	class={accordionClasses}
-	class:invisible={!mounted}
 >
 	<slot
 		select={store.select}

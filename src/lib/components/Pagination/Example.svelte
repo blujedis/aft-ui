@@ -1,9 +1,5 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
 	import Pagination, { type PaginationVariant } from '.';
 	import PaginationPage from '../PaginationPage';
 	import jsondata from '$lib/components/jsondata';
@@ -14,8 +10,6 @@
 		ThemeSize,
 		ThemeTransitioned
 	} from '../../types';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import Section from '../_Example/Section.svelte';
 
 	const title = 'Pagination';
@@ -37,19 +31,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<span class="italic">No Toggle Options</span>
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
 
 	<Section>
 		{#key props}

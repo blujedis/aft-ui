@@ -24,6 +24,7 @@ export type TabProps<Tag = 'a'> = {
 };
 
 export const tabDefaults: Partial<TabProps<any>> = {
+	focused: true,
 	theme: 'light',
 	variant: 'default'
 };

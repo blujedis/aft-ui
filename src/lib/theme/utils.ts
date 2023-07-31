@@ -1,8 +1,6 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, ThemeFocusTuple, ThemeFocused, TypeOrValue } from '../types';
+import type { Path,  TypeOrValue } from '../types';
 import { getProperty } from 'dot-prop';
-import { focused, focusedBorder, focusedBorderFlush, focusedBorderFlushSizes, focusedBorderSizes, focusedBorderVisibleFlushSizes, focusedBorderWithinFlushSizes, focusedOutline, focusedOutlineOffsetSizes, focusedOutlineSizes, focusedRingSizes, focusedVisible, focusedVisibleBorderFlush, focusedVisibleBorderSizes, focusedVisibleOffsetSizes, focusedVisibleOutline, focusedVisibleOutlineOffsetSizes, focusedVisibleOutlineSizes, focusedVisibleRingSizes, focusedWithin, focusedWithinBorderFlush, focusedWithinBorderSizes, focusedWithinOffsetSizes, focusedWithinOutline, focusedWithinOutlineOffsetSizes, focusedWithinOutlineSizes, focusedWithinRingSizes } from '$lib/components/focused';
-import { placeholder } from '$lib/components/placeholder';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -30,6 +28,43 @@ export function isCssColor(color: string) {
 }
 
 /**
+ * Converts a focus config to a normalized tuple. 
+ * 
+ * @param config the focus configuration to be normalizes.
+ * @param defaults the default values when config is undefined.
+ */
+// export function toFocusTuple(
+// 	config?: ThemeFocused,
+// 	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
+
+// 	if (config === false || config === null)
+// 		return [null, '', ''] as [Record<string, string> | null, string, string];
+
+// 	if (typeof config === 'undefined' || config === true)
+// 		return [...defaults];
+
+// 	const clone = [...config];
+
+// 	clone[0] = config[0] || defaults[0];
+// 	clone[1] = config[1] || defaults[1];
+// 	clone[2] = (config[2] || defaults[2]) || '';
+// 	clone[3] = (config[3] || defaults[3]) || '';
+
+// 	return clone;
+// }
+
+// export function overrideFocusTuple(
+// 	config?: ThemeFocused,
+// 	overrides = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
+// 	const normalized = toFocusTuple(config);
+// 	normalized[0] = overrides[0] || normalized[0];
+// 	normalized[1] = overrides[1] || normalized[1];
+// 	normalized[2] = overrides[2] || normalized[2];
+// 	normalized[3] = overrides[3] || normalized[3];
+// 	return normalized as ThemeFocusTuple;
+// }
+
+/**
  * Generates correct focus files based on user configuration or using defaults.
  * 
  * true = defaults.
@@ -42,105 +77,103 @@ export function isCssColor(color: string) {
  * @param config the user defined configurtation.	
  * @param defaults default values for a given component.
  */
-export default function getFocus(
-	config?: ThemeFocused,
-	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
+// export default function getFocus(
+// 	config?: ThemeFocused,
+// 	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
 
-	if (config === false || config === null)
-		return [null, '', ''] as [Record<string, string> | null, string, string];
+// 	if (config === false || config === null)
+// 		return [null, '', ''] as [Record<string, string> | null, string, string];
 
-	let normalized = defaults;
+// 	let normalized = [...defaults];
 
-	if (typeof config !== 'undefined') {
+// 	if (typeof config !== 'undefined') {
 
+// 		if (typeof config === 'string') {
+// 			normalized[1] = config;
+// 		}
+// 		else if (typeof config === 'boolean') {
+// 			normalized = [...defaults];
+// 		}
+// 		else if (Array.isArray(normalized)) {
+// 			normalized[0] = config[0] || defaults[0];
+// 			normalized[1] = config[1] || defaults[1];
+// 			normalized[2] = config[2] || defaults[2];
+// 			normalized[3] = config[3] || defaults[3];
+// 		}
 
-		if (typeof config === 'string') {
-			normalized[1] = config;
-		}
-		else if (typeof config === 'boolean') {
-			normalized = [...defaults];
-		}
-		else if (Array.isArray(normalized)) {
-			normalized[0] = config[0] || defaults[0];
-			normalized[1] = config[1] || defaults[1];
-			normalized[2] = config[2] || defaults[2];
-			normalized[3] = config[3] || defaults[3];
-		}
+// 	}
 
-	}
+// 	normalized[2] = normalized[2] || 'two';
+// 	normalized[3] = normalized[3] || 'unstyled';
 
-	normalized[2] = normalized[2] || 'two';
-	normalized[3] = normalized[3] || 'unstyled';
+// 	const [strategy, state, size, offset] = normalized as Required<ThemeFocusTuple>;
 
-	const [strategy, state, size, offset] = normalized as Required<ThemeFocusTuple>;
+// 	let focusedClasses = focused;
+// 	let focusedSize = focusedRingSizes[size];
+// 	let focusedOffsetSize = focusedOutlineOffsetSizes[offset];
 
+// 	if (['border', 'borderFlush'].includes(strategy)) {
 
-	let focusedClasses = focused;
-	let focusedSize = focusedRingSizes[size];
-	let focusedOffsetSize = focusedOutlineOffsetSizes[offset];
+// 		focusedClasses = focusedBorder;
+// 		focusedSize = focusedBorderSizes[size];
+// 		focusedOffsetSize = '';
 
-	if (['border', 'borderFlush'].includes(strategy)) {
+// 		if (state === 'focusVisible') {
+// 			focusedSize = focusedVisibleBorderSizes[size];
+// 		}
+// 		else if (state === 'focusWithin') {
+// 			focusedSize = focusedWithinBorderSizes[size];
+// 		}
 
-		focusedClasses = focusedBorder;
-		focusedSize = focusedBorderSizes[size];
-		focusedOffsetSize = '';
+// 		else if (state === 'focusPeer') {
+// 			focusedClasses = focusedPeerBorder;
+// 			focusedSize = focusedPeerBorderSizes[size]
+// 		}
 
-		if (state === 'focusVisible') {
-			focusedSize = focusedVisibleBorderSizes[size];
-		}
-		else if (state === 'focusWithin') {
-			focusedSize = focusedWithinBorderSizes[size];
-		}
+// 	}
 
-		if (strategy === 'borderFlush') {
-			focusedSize = focusedBorderFlushSizes[size];
-			focusedClasses = focusedBorderFlush;
-			if (state === 'focusVisible') {
-				focusedSize = focusedBorderVisibleFlushSizes[size];
-				focusedClasses = focusedVisibleBorderFlush;
-			}
-			else if (state === 'focusWithin') {
-				focusedSize = focusedBorderWithinFlushSizes[size];
-				focusedClasses = focusedWithinBorderFlush;
-			}
-		}
+// 	else if (strategy === 'outline') {
+// 		focusedClasses = focusedOutline;
+// 		focusedSize = focusedOutlineSizes[size];
+// 		focusedOffsetSize = focusedOutlineOffsetSizes[offset];
+// 		if (state === 'focusVisible') {
+// 			focusedClasses = focusedVisibleOutline;
+// 			focusedSize = focusedVisibleOutlineSizes[size];
+// 			focusedOffsetSize = focusedVisibleOutlineOffsetSizes[offset];
+// 		}
+// 		else if (state === 'focusWithin') {
+// 			focusedClasses = focusedWithinOutline;
+// 			focusedSize = focusedWithinOutlineSizes[size];
+// 			focusedOffsetSize = focusedWithinOutlineOffsetSizes[offset];
+// 		}
+// 		else if (state === 'focusPeer') {
+// 			focusedClasses = focusedPeerOutline;
+// 			focusedSize = focusedPeerOutlineSizes[size];
+// 			focusedOffsetSize = focusedPeerOutlineOffsetSizes[offset];
+// 		}
+// 	}
 
-	}
+// 	else if (['focusVisible', 'focusWithin', 'focusPeer'].includes(state)) {
+// 		if (state === 'focusVisible') {
+// 			focusedClasses = focusedVisible;
+// 			focusedSize = focusedVisibleRingSizes[size];
+// 			focusedOffsetSize = focusedVisibleOffsetSizes[size];
+// 		}
+// 		else if ('focusWithin') {
+// 			focusedClasses = focusedWithin;
+// 			focusedSize = focusedWithinRingSizes[size];
+// 			focusedOffsetSize = focusedWithinOffsetSizes[size];
+// 		}
+// 		else if ('focusPeer') {
+// 			focusedClasses = focusedPeer;
+// 			focusedSize = focusedPeerRingSizes[size];
+// 			focusedOffsetSize = focusedPeerOffsetSizes[size];
+// 		}
+// 	}
 
-	else if (strategy === 'outline') {
-		focusedClasses = focusedOutline;
-		focusedSize = focusedOutlineSizes[size];
-		focusedOffsetSize = focusedOutlineOffsetSizes[offset];
-		if (state === 'focusVisible') {
-			focusedClasses = focusedVisibleOutline;
-			focusedSize = focusedVisibleOutlineSizes[size];
-			focusedOffsetSize = focusedVisibleOutlineOffsetSizes[offset];
-		}
-		else if (state === 'focusWithin') {
-			focusedClasses = focusedWithinOutline;
-			focusedSize = focusedWithinOutlineSizes[size];
-			focusedOffsetSize = focusedWithinOutlineOffsetSizes[offset];
-		}
-	}
+// 	return [focusedClasses, focusedSize, focusedOffsetSize] as [Record<string, string> | null, string, string];
 
-	else if (['focusVisible', 'focusWithin'].includes(state)) {
-		console.log('no hit')
-		if (state === 'focusVisible') {
-			focusedClasses = focusedVisible;
-			focusedSize = focusedVisibleRingSizes[size];
-			focusedOffsetSize = focusedVisibleOffsetSizes[size];
-		}
-		else {
-			focusedClasses = focusedWithin;
-			focusedSize = focusedWithinRingSizes[size];
-			focusedOffsetSize = focusedWithinOffsetSizes[size];
-		}
-	}
-
-
-	return [focusedClasses, focusedSize, focusedOffsetSize] as [Record<string, string>, string, string];
-
-}
+// }
 
 /**
  * Picks a value using dot notation path.

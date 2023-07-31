@@ -22,8 +22,6 @@
 		...defaults
 	} as Required<$$Props>;
 
-	let mounted = false;
-
 	$: labelClasses = themer($themeStore)
 		.create('Label')
 		.variant('label', variant, theme, true)
@@ -38,11 +36,9 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses} class:invisible={!mounted}>
+<label use:forwardedEvents {...$$restProps} class={labelClasses} >
 	<slot />
 </label>

@@ -35,7 +35,6 @@
 		interpolate
 	});
 
-	let mounted = false;
 
 	$: progressClasses = themer($themeStore)
 		.create('ProgressBar')
@@ -50,9 +49,6 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 <progress
@@ -61,7 +57,6 @@
 	class={progressClasses}
 	value={$store}
 	{max}
-	class:invisible={!mounted}
 >
 	<slot />
 </progress>

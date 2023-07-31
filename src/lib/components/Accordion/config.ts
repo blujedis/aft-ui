@@ -1,7 +1,7 @@
 import { placeholder } from '../placeholder';
 
 const baseVariant = {
-	$base: 'divide-y divide-frame-200 border border-frame-200',
+	$base: '',
 	dark: '',
 	light: '',
 	primary: '',

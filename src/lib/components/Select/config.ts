@@ -1,4 +1,4 @@
-import { variantOutlined, variantFilled, variantFlushed } from '../Button/config';
+import { variantOutlined, variantFilled, variantFlushed } from '../base';
 
 const defaultSelect = {
 	...variantOutlined

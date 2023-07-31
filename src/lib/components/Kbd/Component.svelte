@@ -12,7 +12,6 @@
 		...defaults
 	} as Required<$$Props>;
 
-	let mounted = false;
 
 	$: kbdClasses = themer($themeStore)
 		.create('Kbd')
@@ -29,11 +28,9 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
-<kbd use:forwardedEvents {...$$restProps} class={kbdClasses} class:invisible={!mounted}>
+<kbd use:forwardedEvents {...$$restProps} class={kbdClasses}>
 	<slot />
 </kbd>

@@ -1,8 +1,10 @@
 import { placeholder } from '../placeholder';
+import { bg } from '../base';
 
 const baseVariant = {
 	...placeholder,
-	$base: 'bg-white text-inherit ring-1 ring-black ring-opacity-10'
+	$base: 'bg-white text-inherit ring-1 ring-black ring-opacity-10',
+	dark: [bg.dark, 'text-white'].join(' ')
 };
 
 export const selectListPanel = {
@@ -11,8 +13,5 @@ export const selectListPanel = {
 	outlined: { ...baseVariant },
 	text: { ...baseVariant },
 	ghost: { ...baseVariant },
-	flushed: {
-		...baseVariant,
-		$base: 'ring-0'
-	}
+	flushed: { ...baseVariant }
 };

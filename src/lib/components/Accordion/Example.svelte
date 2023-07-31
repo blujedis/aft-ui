@@ -1,21 +1,11 @@
 <script lang="ts">
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import SelectTransition from '../_Example/SelectTransition.svelte';
-	import Select from '../_Example/Select.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 	import Accordion, { type AccordianVariant } from '.';
 	import AccordionButton from '../AccordionButton';
 	import AccordionOption from '../AccordionOption';
 	import AccordionPanel from '../AccordionPanel';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-	import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
+	import type { DisclosureTransitionOption } from '../Disclosure';
 
 	const title = 'Accordion';
 	const description =
@@ -35,27 +25,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<!-- <Checkbox label="Full" bind:checked={props.full} /> -->
-		<Checkbox label="Multiple" bind:checked={props.multiple} />
-	</ToggleOptions>
-	<ListOptions>
-		<Select
-			label="Variant"
-			bind:value={props.variant}
-			items={['default', 'outlined', 'flushed', 'pills']}
-		/>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-		<SelectTransition bind:value={props.transition} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
 	<div class="text-sm mb-4">
 		Use width on top level Accordion element to constrain from full width.
 	</div>
@@ -85,5 +54,4 @@
 			</AccordionPanel>
 		</Accordion>
 	{/key}
-	<!-- </div> -->
 </ExamplePage>

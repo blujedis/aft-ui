@@ -29,7 +29,6 @@
 	} as Required<$$Props>;
 
 	const store = useSelect({ multiple, selected: ensureArray(selected) });
-	let mounted = false;
 
 	export const context = setContext<SelectContext>('SelectContext', {
 		...store
@@ -40,9 +39,7 @@
 	$: inputClasses = th
 		.create('Select')
 		.variant('select', variant, theme, true)
-		.option('focused', theme, focused)
-		.option('focusedRingSizes', 'two', focused)
-		.remove(focused === 'visible' ? 'focus:' : 'focus-visible:', true)
+		.option('focusedRing', theme, focused)
 		.option('placeholders', theme, true)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
@@ -52,15 +49,12 @@
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
 		.append('border-0 ring-1 ring-black ring-opacity-5', variant === 'filled')
-		.append('flex items-center justify-center pr-10', true) // always pad right for caret.
+		.append('flex items-center justify-center pr-10 focus:outline-none focus:ring-2', true) // always pad right for caret.
 		.append(multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 <select
@@ -70,7 +64,6 @@
 	size={rows}
 	class={inputClasses}
 	value={multiple ? $store.selected : $store.selected[0]}
-	class:invisible={!mounted}
 >
 	{#if placeholder}
 		<option value="" disabled selected

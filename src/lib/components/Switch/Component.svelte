@@ -5,15 +5,18 @@
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
 	import { onMount } from 'svelte';
+	import classNames from 'classnames';
 
 	type $$Props = SwitchProps & Omit<ElementNativeProps<'input'>, 'size'>;
 
 	export let {
+		checked,
 		classBackdrop,
 		classFill,
 		classHandle,
 		disabled,
 		focused,
+		position,
 		shadowed,
 		size,
 		srtext,
@@ -24,23 +27,27 @@
 		...defaults
 	} as Required<$$Props>;
 
-	let checked = false;
-	let mounted = false;
+	let ref: HTMLInputElement;
 
 	const th = themer($themeStore);
 
-	$: buttonClasses = th
-		.create('SwitchButton')
+	$: wrapperClasses = th
+		.create('SwitchWrapper')
+		.append('flex items-center', true)
+		.append('flex-row-reverse', position === 'left')
+		.append('flex-col-reverse', position === 'top')
+		.append('flex-col', position === 'bottom')
+		.compile(true);
+
+	$: labelClasses = th
+		.create('SwitchLabel')
 		.option('switchButtonSizes', size, size)
 		.append('pointer-events-none', disabled)
+		.option('focusedRing', theme, focused)
 		.append(
-			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full',
+			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:ring-2 focus:outline-none',
 			true
 		)
-		.option('focused', theme, focused)
-		.option('focusedRingSizes', 'two', focused)
-		.remove('focusedFilters', focused, focused)
-		.append($$restProps.class, true)
 		.compile(true);
 
 	$: backdropClasses = th
@@ -58,7 +65,7 @@
 		.option('shadows', shadowed, shadowed)
 		.option('disableds', theme, disabled)
 		.append(
-			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out',
+			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
 			true
 		)
 		.append(classFill, true)
@@ -85,41 +92,25 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
-<span class="flickerless not-sr-only" class:invisible={!mounted}>
-	<button
-		type="button"
-		class={buttonClasses}
-		role="switch"
-		aria-checked={checked}
-		on:click={() => (checked = !checked)}
-		aria-disabled={disabled}
-		{disabled}
-	>
+<label class={classNames('flickerless not-sr-only', $$restProps.class)} >
+	<div class={labelClasses} aria-checked={checked} aria-disabled={disabled}>
 		<span class="sr-only">{srtext}</span>
-
-		<!-- bg-white otherwise there is a bleed, should be background of page.-->
 		<span aria-hidden="true" class={backdropClasses} />
-
-		<!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200"  h-4 w-9  -->
 		<span aria-hidden="true" class={fillClasses} aria-disabled={disabled} />
-
-		<!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0"  border-gray-200 bg-white  h-5 w-5  -->
 		<span aria-hidden="true" class={handleClasses} aria-disabled={disabled} />
-	</button>
-</span>
-<input
-	{...$$restProps}
-	type="checkbox"
-	use:forwardedEvents
-	bind:checked
-	class={inputClasses}
-	{disabled}
-/>
+		<input
+			{...$$restProps}
+			bind:this={ref}
+			type="checkbox"
+			use:forwardedEvents
+			bind:checked
+			class={inputClasses}
+			{disabled}
+		/>
+	</div>
+</label>
 
 <style>
 	.flickerless {

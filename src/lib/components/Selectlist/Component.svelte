@@ -29,7 +29,6 @@
 		shadowed,
 		size,
 		store: initStore,
-		strategy,
 		tags,
 		theme,
 		underlined,
@@ -52,7 +51,6 @@
 
 	const th = themer($themeStore);
 	let sel: HTMLSelectElement;
-	let mounted = false;
 
 	const globals = cleanObj({
 		full,
@@ -63,7 +61,6 @@
 		rounded,
 		shadowed,
 		size,
-		strategy,
 		tags,
 		theme,
 		underlined,
@@ -128,7 +125,7 @@
 				const items = [...s.items, { value, label, group } as Required<Item>];
 				let selectedItems = [...s.selected];
 				if (selected && !selectedItems.includes(value)) {
-					if (selected && selectedItems.length && ['multiselect', 'tags'].includes(strategy))
+					if (selected && selectedItems.length && tags)
 						selectedItems.push(value);
 					else selectedItems = [value];
 				}
@@ -184,9 +181,6 @@
 	}
 
 	items.forEach((item) => add(item));
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 <div
@@ -196,7 +190,6 @@
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
 	class={multiselectClasses}
-	class:visible={mounted}
 >
 	<div class:w-full={full}>
 		<slot

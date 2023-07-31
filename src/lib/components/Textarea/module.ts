@@ -6,7 +6,7 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned
-} from '../../theme';
+} from '../../types';
 import type { textarea } from './config';
 
 export type TextareaVariant = keyof typeof textarea;

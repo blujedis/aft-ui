@@ -42,7 +42,6 @@
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);
-	let mounted = false;
 
 	$: progressCircleStyles = st
 		.create('ProgressCircleStyles')
@@ -88,9 +87,7 @@
 		else if (typeof tracksize === 'number') ntsize = tracksize;
 		return [nsize, ntsize] as [number, number];
 	}
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
 <svg
@@ -98,7 +95,6 @@
 	viewBox={`0 0 ${diameter} ${diameter}`}
 	class={progressCircleClasses}
 	style={progressCircleStyles}
-	class:invisible={!mounted}
 >
 	<circle
 		class={progressCircleTrackClasses}

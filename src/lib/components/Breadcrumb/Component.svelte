@@ -29,7 +29,6 @@
 	});
 
 	const th = themer($themeStore);
-	let mounted = false;
 
 	$: items = generateBreadcrumbs();
 
@@ -83,12 +82,10 @@
 		});
 		return result;
 	}
-	onMount(() => {
-		mounted = true;
-	});
+
 </script>
 
-<nav class={breadcrumbNavClasses} aria-label="Breadcrumb" class:invisible={!mounted}>
+<nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
 		<slot>
 			{#if generate}

@@ -28,7 +28,6 @@
 	} as Required<ButtonGroupProps>;
 
 	export const store = useSelect({ selected: ensureArray(selected), multiple });
-	let mounted = false;
 
 	const globals = cleanObj({
 		focused,
@@ -55,12 +54,9 @@
 		.compile(true);
 
 	function handleReset() {}
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
-<span role="list" class={buttonGroupClasses} class:invisible={!mounted}>
+<span role="list" class={buttonGroupClasses}>
 	<slot
 		selectedItems={$store.selected}
 		reset={handleReset}

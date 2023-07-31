@@ -1,14 +1,6 @@
 <script lang="ts">
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectList from './';
+	import SelectList from '.';
 	import SelectListButton from '../SelectListButton';
 	import SelectListOption from '../SelectListOption';
 	import SelectListPanel from '../SelectListPanel';
@@ -65,20 +57,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<!-- <Checkbox label="Disabled" bind:checked={props.disabled} /> -->
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
 
 	{#key props}
 		<div class="grid grid-cols-3 gap-2">
@@ -86,6 +64,27 @@
 				<div class="text-sm">Filled:</div>
 				<SelectList
 					{...props}
+					tags
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value}>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					</SelectListPanel>
+				</SelectList>
+			</label>
+			<label for="flushed">
+				<div class="text-sm">Flushed:</div>
+				<SelectList
+					{...props}
+					variant="flushed"
 					tags
 					removable
 					items={sourceItems}

@@ -1,4 +1,4 @@
-import { variantFilled, variantOutlined, variantFlushed } from '../Button/config';
+import { variantFilled, variantOutlined, variantFlushed } from '../base';
 
 const baseVariant = {
 	...variantOutlined
