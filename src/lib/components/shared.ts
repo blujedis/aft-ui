@@ -225,7 +225,6 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
-
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
 	white: 'aria-disabled:text-frame-500',
@@ -247,20 +246,18 @@ export const placeholders = {
 	primary: 'placeholder:text-primary-400 aria-disabled:placeholder:text-primary-300',
 	secondary: 'placeholder:text-secondary-400 aria-disabled:placeholder:text-secondary-300',
 	tertiary: 'placeholder:text-tertiary-400 aria-disabled:placeholder:text-tertiary-300',
-	danger: 'placeholder:text-danger-400 aria-disabled:placeholder:text-danger-430',
+	danger: 'placeholder:text-danger-400 aria-disabled:placeholder:text-danger-300',
 	warning: 'placeholder:text-warning-400 aria-disabled:placeholder:text-warning-300',
 	success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
 	info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
 };
 
-export const checked = {
-
-};
+export const checked = {};
 
 export const common = {
 	active: 'active:brightness-125',
 	transition: 'transition-colors duration-125 motion-reduce:transition-none',
-	untransition: 'transition-none',
+	untransition: 'transition-none'
 };
 
 // export const focusedFlush = {

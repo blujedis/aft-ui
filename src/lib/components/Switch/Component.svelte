@@ -91,10 +91,9 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
 </script>
 
-<label class={classNames('flickerless not-sr-only', $$restProps.class)} >
+<label class={classNames('flickerless not-sr-only', $$restProps.class)}>
 	<div class={labelClasses} aria-checked={checked} aria-disabled={disabled}>
 		<span class="sr-only">{srtext}</span>
 		<span aria-hidden="true" class={backdropClasses} />

@@ -125,8 +125,7 @@
 				const items = [...s.items, { value, label, group } as Required<Item>];
 				let selectedItems = [...s.selected];
 				if (selected && !selectedItems.includes(value)) {
-					if (selected && selectedItems.length && tags)
-						selectedItems.push(value);
+					if (selected && selectedItems.length && tags) selectedItems.push(value);
 					else selectedItems = [value];
 				}
 				return {

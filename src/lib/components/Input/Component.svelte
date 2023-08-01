@@ -29,8 +29,8 @@
 
 	// $: [focusMap, focusSize, focusOffset] = getFocus(
 	// 	focused,['ring', 'focus', 'two', 'unstyled']);
-					// .mapped(focusMap, theme, focusMap)
-				// .append([focusSize, focusOffset], focusMap)
+	// .mapped(focusMap, theme, focusMap)
+	// .append([focusSize, focusOffset], focusMap)
 
 	$: inputClasses = unstyled
 		? th.create('Input').append($$restProps.class, true).compile(true)

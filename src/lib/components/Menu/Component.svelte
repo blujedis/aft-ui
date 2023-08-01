@@ -71,7 +71,6 @@
 			return store.close();
 		if (!$store.visible && e.key === 'ArrowDown') return store.open();
 	}
-
 </script>
 
 <div

@@ -51,7 +51,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-3 gap-4">
 		<div>
 			<label for="notification" class="flex flex-col"

@@ -12,7 +12,6 @@
 		...defaults
 	} as Required<$$Props>;
 
-
 	$: kbdClasses = themer($themeStore)
 		.create('Kbd')
 		.variant('kbd', variant, theme, true)
@@ -27,8 +26,6 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
-
 </script>
 
 <kbd use:forwardedEvents {...$$restProps} class={kbdClasses}>

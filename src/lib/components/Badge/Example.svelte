@@ -26,7 +26,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-8 gap-2">
 		<label for="filled">
 			<div class="text-sm">Filled:</div>

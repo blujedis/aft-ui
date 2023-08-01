@@ -18,7 +18,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-4 gap-4">
 		<label for="auto">
 			<div class="text-sm mb-1">Default:</div>

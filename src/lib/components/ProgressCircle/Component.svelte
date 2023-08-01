@@ -87,7 +87,6 @@
 		else if (typeof tracksize === 'number') ntsize = tracksize;
 		return [nsize, ntsize] as [number, number];
 	}
-
 </script>
 
 <svg

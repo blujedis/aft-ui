@@ -82,7 +82,6 @@
 		});
 		return result;
 	}
-
 </script>
 
 <nav class={breadcrumbNavClasses} aria-label="Breadcrumb">

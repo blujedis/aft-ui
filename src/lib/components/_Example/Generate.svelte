@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import type { ElementHandler, ThemeColor, ThemeShade, TypeOrKey } from '$lib/types';
+	import type { ElementHandler,  ThemeShade } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -144,7 +144,7 @@
 		store.update((s) => generators);
 		generator = '';
 	}
-	function loadGenerator(e) {
+	function loadGenerator(e: any) {
 		const template = $store[generator];
 		if (template) textarea.value = template;
 	}

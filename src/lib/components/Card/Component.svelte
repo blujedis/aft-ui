@@ -21,7 +21,6 @@
 
 	const th = themer($themeStore);
 
-
 	$: cardClasses = th
 		.create('Card')
 		.variant('card', variant, theme, true)
@@ -30,9 +29,8 @@
 		.append('h-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
-
 </script>
 
-<div {...$$restProps} class={cardClasses} >
+<div {...$$restProps} class={cardClasses}>
 	<slot />
 </div>

@@ -1,6 +1,6 @@
 const sveleton = require('./sveleton.config.cjs');
 
-// why do this? Stops VSCode from 
+// why do this? Stops VSCode from
 // complaining about unknown tailwindcss
 // theme colors.
 const colors = {

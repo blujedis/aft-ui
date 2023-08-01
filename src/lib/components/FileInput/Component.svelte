@@ -69,5 +69,12 @@
 <slot click={handleClick} drop={handleDrop} />
 
 <slot name="input">
-	<input {...$$restProps} bind:this={input} {name} on:change={handleInputChange} type="file" class="sr-only" />
+	<input
+		{...$$restProps}
+		bind:this={input}
+		{name}
+		on:change={handleInputChange}
+		type="file"
+		class="sr-only"
+	/>
 </slot>

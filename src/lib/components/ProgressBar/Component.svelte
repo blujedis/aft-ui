@@ -35,7 +35,6 @@
 		interpolate
 	});
 
-
 	$: progressClasses = themer($themeStore)
 		.create('ProgressBar')
 		.variant('progressBar', variant, theme, true)
@@ -51,12 +50,6 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<progress
-	use:forwardedEvents
-	{...$$restProps}
-	class={progressClasses}
-	value={$store}
-	{max}
->
+<progress use:forwardedEvents {...$$restProps} class={progressClasses} value={$store} {max}>
 	<slot />
 </progress>

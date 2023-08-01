@@ -15,12 +15,8 @@
 
 	const th = themer($themeStore);
 
-
 	$: badgeClasses = unstyled
-		? th
-				.create('Badge')
-				.append($$restProps.class, true)
-				.compile()
+		? th.create('Badge').append($$restProps.class, true).compile()
 		: th
 				.create('Badge')
 				.variant('badge', variant, theme, true)

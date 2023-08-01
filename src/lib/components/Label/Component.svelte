@@ -36,9 +36,8 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses} >
+<label use:forwardedEvents {...$$restProps} class={labelClasses}>
 	<slot />
 </label>

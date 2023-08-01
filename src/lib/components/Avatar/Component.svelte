@@ -75,14 +75,14 @@
 </script>
 
 {#if _placeholder}
-	<span class={avatarPlaceholderClasses} >
+	<span class={avatarPlaceholderClasses}>
 		<Icon icon={_placeholder} class="h-full w-full" />
 		{#if notification}
 			<span class={avatarNotificationClasses} />
 		{/if}
 	</span>
 {:else if notification}
-	<span class="relative inline-block" >
+	<span class="relative inline-block">
 		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
 		<span class={avatarNotificationClasses} />
 	</span>

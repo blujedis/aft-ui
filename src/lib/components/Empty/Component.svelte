@@ -12,7 +12,6 @@
 		...defaults
 	} as Required<$$Props>;
 
-
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
 		.variant('empty', variant, theme, true)
@@ -26,14 +25,8 @@
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
 </script>
 
-<svelte:element
-	this={as}
-	use:forwardedEvents
-	{...$$restProps}
-	class={emptyClasses}
->
+<svelte:element this={as} use:forwardedEvents {...$$restProps} class={emptyClasses}>
 	<slot />
 </svelte:element>

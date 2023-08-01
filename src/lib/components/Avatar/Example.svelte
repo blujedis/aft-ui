@@ -29,7 +29,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-5 gap-4 mb-4">
 		<div>
 			<Avatar src={urls[0]} alt="" {...props} />

@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path,  TypeOrValue } from '../types';
+import type { Path, TypeOrValue } from '../types';
 import { getProperty } from 'dot-prop';
 
 export type StringMap = Record<string, string | string[]>;
@@ -16,7 +16,6 @@ export function ensureArray<T = any>(value?: null | T | T[]) {
 	return [value] as T[];
 }
 
-
 /**
  * Checks if color looks like css color.
  *
@@ -27,153 +26,6 @@ export function isCssColor(color: string) {
 	return prefixes.some((p) => color.startsWith(p));
 }
 
-/**
- * Converts a focus config to a normalized tuple. 
- * 
- * @param config the focus configuration to be normalizes.
- * @param defaults the default values when config is undefined.
- */
-// export function toFocusTuple(
-// 	config?: ThemeFocused,
-// 	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
-
-// 	if (config === false || config === null)
-// 		return [null, '', ''] as [Record<string, string> | null, string, string];
-
-// 	if (typeof config === 'undefined' || config === true)
-// 		return [...defaults];
-
-// 	const clone = [...config];
-
-// 	clone[0] = config[0] || defaults[0];
-// 	clone[1] = config[1] || defaults[1];
-// 	clone[2] = (config[2] || defaults[2]) || '';
-// 	clone[3] = (config[3] || defaults[3]) || '';
-
-// 	return clone;
-// }
-
-// export function overrideFocusTuple(
-// 	config?: ThemeFocused,
-// 	overrides = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
-// 	const normalized = toFocusTuple(config);
-// 	normalized[0] = overrides[0] || normalized[0];
-// 	normalized[1] = overrides[1] || normalized[1];
-// 	normalized[2] = overrides[2] || normalized[2];
-// 	normalized[3] = overrides[3] || normalized[3];
-// 	return normalized as ThemeFocusTuple;
-// }
-
-/**
- * Generates correct focus files based on user configuration or using defaults.
- * 
- * true = defaults.
- * string = 'focus', 'focusVisible' or 'focusWithin' along with other defaults.
- * tuple = a tuple array containing strategy, focus state, size and offset if defined.
- * 
- * @example
- * const focusTuple = ['ring', 'focusVisible', 'two', 'two'];
- * 
- * @param config the user defined configurtation.	
- * @param defaults default values for a given component.
- */
-// export default function getFocus(
-// 	config?: ThemeFocused,
-// 	defaults = ['ring', 'focus', 'two', 'none'] as ThemeFocusTuple) {
-
-// 	if (config === false || config === null)
-// 		return [null, '', ''] as [Record<string, string> | null, string, string];
-
-// 	let normalized = [...defaults];
-
-// 	if (typeof config !== 'undefined') {
-
-// 		if (typeof config === 'string') {
-// 			normalized[1] = config;
-// 		}
-// 		else if (typeof config === 'boolean') {
-// 			normalized = [...defaults];
-// 		}
-// 		else if (Array.isArray(normalized)) {
-// 			normalized[0] = config[0] || defaults[0];
-// 			normalized[1] = config[1] || defaults[1];
-// 			normalized[2] = config[2] || defaults[2];
-// 			normalized[3] = config[3] || defaults[3];
-// 		}
-
-// 	}
-
-// 	normalized[2] = normalized[2] || 'two';
-// 	normalized[3] = normalized[3] || 'unstyled';
-
-// 	const [strategy, state, size, offset] = normalized as Required<ThemeFocusTuple>;
-
-// 	let focusedClasses = focused;
-// 	let focusedSize = focusedRingSizes[size];
-// 	let focusedOffsetSize = focusedOutlineOffsetSizes[offset];
-
-// 	if (['border', 'borderFlush'].includes(strategy)) {
-
-// 		focusedClasses = focusedBorder;
-// 		focusedSize = focusedBorderSizes[size];
-// 		focusedOffsetSize = '';
-
-// 		if (state === 'focusVisible') {
-// 			focusedSize = focusedVisibleBorderSizes[size];
-// 		}
-// 		else if (state === 'focusWithin') {
-// 			focusedSize = focusedWithinBorderSizes[size];
-// 		}
-
-// 		else if (state === 'focusPeer') {
-// 			focusedClasses = focusedPeerBorder;
-// 			focusedSize = focusedPeerBorderSizes[size]
-// 		}
-
-// 	}
-
-// 	else if (strategy === 'outline') {
-// 		focusedClasses = focusedOutline;
-// 		focusedSize = focusedOutlineSizes[size];
-// 		focusedOffsetSize = focusedOutlineOffsetSizes[offset];
-// 		if (state === 'focusVisible') {
-// 			focusedClasses = focusedVisibleOutline;
-// 			focusedSize = focusedVisibleOutlineSizes[size];
-// 			focusedOffsetSize = focusedVisibleOutlineOffsetSizes[offset];
-// 		}
-// 		else if (state === 'focusWithin') {
-// 			focusedClasses = focusedWithinOutline;
-// 			focusedSize = focusedWithinOutlineSizes[size];
-// 			focusedOffsetSize = focusedWithinOutlineOffsetSizes[offset];
-// 		}
-// 		else if (state === 'focusPeer') {
-// 			focusedClasses = focusedPeerOutline;
-// 			focusedSize = focusedPeerOutlineSizes[size];
-// 			focusedOffsetSize = focusedPeerOutlineOffsetSizes[offset];
-// 		}
-// 	}
-
-// 	else if (['focusVisible', 'focusWithin', 'focusPeer'].includes(state)) {
-// 		if (state === 'focusVisible') {
-// 			focusedClasses = focusedVisible;
-// 			focusedSize = focusedVisibleRingSizes[size];
-// 			focusedOffsetSize = focusedVisibleOffsetSizes[size];
-// 		}
-// 		else if ('focusWithin') {
-// 			focusedClasses = focusedWithin;
-// 			focusedSize = focusedWithinRingSizes[size];
-// 			focusedOffsetSize = focusedWithinOffsetSizes[size];
-// 		}
-// 		else if ('focusPeer') {
-// 			focusedClasses = focusedPeer;
-// 			focusedSize = focusedPeerRingSizes[size];
-// 			focusedOffsetSize = focusedPeerOffsetSizes[size];
-// 		}
-// 	}
-
-// 	return [focusedClasses, focusedSize, focusedOffsetSize] as [Record<string, string> | null, string, string];
-
-// }
 
 /**
  * Picks a value using dot notation path.
@@ -264,14 +116,28 @@ export function mergeConfigs<
 	}, target as any);
 }
 
+interface BEMString extends String {
+	state(...state: string[]): string;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// const getProperty = (...args: any[]) => '';
+/**
+ * Generate a BEM css class.
+ * 
+ * @param block the main block element.
+ * @param child optional child element.
+ */
+export function bem(block: string, child?: string) {
+  const arr = [block];
+  if (child)
+    arr.push(child);
+  const str = new String(arr.join('__')) as BEMString;
+  str.state = (...state: string[]) => str + '--' + state.join('-');
+  return str;
+}
 
-// const tailwindKeys = Object.keys(tailwindcolors);
-// const namedKeys = Object.keys(namedcolors);
 
-// type CompileValue = string | number | boolean;
+type CompileValue = string | number | boolean;
+
 /**
  * Compiles Template String Array to reusable string with backed in formatting.
  *
@@ -284,145 +150,33 @@ export function mergeConfigs<
  * @param template template array string using backticks.
  * @param keys the keys contained in the template array string above.
  */
-// export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
-//   return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
-//     const isArray = Array.isArray(data);
-//     let clone: Record<string, unknown> | CompileValue[];
-//     if (isArray)
-//       clone = [...data, ...rest];
-//     else if (typeof data !== 'object')
-//       clone = [data, ...rest];
-//     else
-//       clone = { ...data };
-//     const strArr = template.slice() as unknown as string[];
-//     keys.forEach((k, i) => {
-//       const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
-//       strArr[i] = strArr[i] + dataVal;
-//     });
-//     return strArr.join('');
-//   };
-// }
+export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
+	return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
+		const isArray = Array.isArray(data);
+		let clone: Record<string, unknown> | CompileValue[];
+		if (isArray)
+			clone = [...data, ...rest];
+		else if (typeof data !== 'object')
+			clone = [data, ...rest];
+		else
+			clone = { ...data };
+		const strArr = template.slice() as unknown as string[];
+		keys.forEach((k, i) => {
+			const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
+			strArr[i] = strArr[i] + dataVal;
+		});
+		return strArr.join('');
+	};
+}
 
-// declare global {
-//   interface String {
-//     $join: (arg: string | string[], ...args: string[]) => string;
-//   }
-// }
+declare global {
+	interface String {
+		$join: (arg: string | string[], ...args: string[]) => string;
+	}
+}
 
-// String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
-//   args = ([this, arg, ...args].flat()) as string[];
-//   return args.join(' ').trim();
-// };
+String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
+	args = ([this, arg, ...args].flat()) as string[];
+	return args.join(' ').trim();
+};
 
-
-/**
- * Checks if value is a Tailwind color.
- *
- * @param color the color to eval as Tailwind color.
- */
-// export function isTailwindColor(color: string) {
-// 	return tailwindKeys.includes(color);
-// }
-
-/**
- * Checks if value is an app color from palette.
- *
- * @param color the color to eval as App color.
- */
-// export function isAppColor(palette: Record<string, Record<string, string>>, color: string) {
-// 	return Object.keys(palette).includes(color);
-// }
-
-/**
- * Checks if value is a known css color.
- *
- * @param color color the color to eval as css color.
- */
-// export function isNamedColor(color: string) {
-// 	return namedKeys.includes(color);
-// }
-
-/**
- * Parses a Tailwind path into parts, modifiers, prefix and color.
- *
- * @example
- * const parsed = parseClass('hover:bg-primary-500');
- * parsed = { modifiers: ['hover'], prefix: 'bg', color: ['primary', '500'] };
- *
- * @param path the class path to be parsed.
- */
-// export function parseClass(path: string) {
-// 	let modifiers = [] as string[];
-// 	if (path.includes(':')) {
-// 		const idx = path.lastIndexOf(':');
-// 		if (~idx) {
-// 			modifiers = path.slice(0, idx).split(':');
-// 			path = path.slice(idx + 1);
-// 		}
-// 	}
-// 	path = path.replace(/(-|\.)/g, '.');
-// 	let color = path.split('.') as [ThemeColor, ThemeColorShade | undefined, string];
-// 	let prefix = '';
-// 	if (colorPrefixes.includes(color[0] as any)) {
-// 		prefix = (color.shift() || '') as string;
-// 		if (color[1] === ('DEFAULT' as any)) color[1] = 500;
-// 	}
-// 	color = color.filter((v) => !!v) as [ThemeColor, ThemeColorShade | undefined, string];
-// 	if (!color[1]) color[1] = undefined;
-// 	const namespace = color[1]
-// 		? `${color[0]}.${color[1]}`
-// 		: ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
-// 		? color[0]
-// 		: `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
-// 	color[2] = namespace;
-// 	return {
-// 		modifiers,
-// 		prefix,
-// 		color,
-// 		namespace
-// 	};
-// }
-
-/**
- * Converts a Tailwind color class to a dot notation path.
- *
- * @example
- * const bg = 'bg-primary-300';
- * const path = classToPath(bg); // bg.primary.300
- * const path = classToPath(bg, true); // primary.300
- *
- * @param path the path to convert to dot notation path
- * @param stripPrefix when true prefixes such as 'bg', 'text' are stripped.
- */
-// export function classToColorPath(path: string) {
-// 	return parseClass(path).namespace;
-// }
-
-/**
- * Returns a tuple with color name and shade if any.
- *
- * @param path the color class to be parsed.
- */
-// export function classToColorSegments(path: string) {
-// 	const { color } = parseClass(path);
-// 	return color;
-// }
-
-/**
- * Normalizes the color value returning the normalized hex, rgb, hsl color.
- *
- * @param palette the user defined color palette.
- * @param value a tailwind color, named color, theme color or defined color.
- */
-// export function classToColor(
-// 	palette: Record<string, Record<string, string>>,
-// 	value: string
-// ): string {
-// 	if (isCssColor(value)) return value;
-// 	if (isNamedColor(value)) return namedcolors[value as keyof typeof namedcolors];
-// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// 	const [color, shade, namespace] = classToColorSegments(value);
-// 	if (isAppColor(palette, color)) return getProperty(palette, namespace) as unknown as string;
-// 	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);
-// 	return value;
-// }

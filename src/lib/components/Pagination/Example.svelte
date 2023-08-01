@@ -31,7 +31,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<Section>
 		{#key props}
 			<Pagination

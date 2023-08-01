@@ -18,7 +18,11 @@ export type HTMLTag = keyof SvelteHTMLElements; // keyof HTMLElementTagNameMap;
 export type ElementProps<K extends HTMLTag> = SvelteHTMLElements[K];
 export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
-export type ElementHandler<T extends HTMLElement, E extends Event = Event, U extends Record<string, any> = Record<string, any>> = E & {
+export type ElementHandler<
+	T extends HTMLElement,
+	E extends Event = Event,
+	U extends Record<string, any> = Record<string, any>
+> = E & {
 	currentTarget: EventTarget & T;
 } & U;
 

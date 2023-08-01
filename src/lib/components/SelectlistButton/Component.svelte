@@ -221,7 +221,7 @@
 </script>
 
 <div>
-	<Flushed disabled={variant !== 'flushed'} {theme} {focused} group >
+	<Flushed disabled={variant !== 'flushed'} {theme} {focused} group>
 		<div role="button" tabindex="0" class={containerClasses}>
 			<div class={inputWrapperClasses}>
 				{#if tags}

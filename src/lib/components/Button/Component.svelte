@@ -57,7 +57,6 @@
 				.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-
 </script>
 
 <svelte:element

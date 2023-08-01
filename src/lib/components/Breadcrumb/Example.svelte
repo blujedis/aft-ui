@@ -22,7 +22,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	{#key props}
 		<Section>
 			<Breadcrumb {...props} generate flush />

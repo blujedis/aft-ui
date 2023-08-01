@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
 	--color-bg-light: #ffffff;
 	--color-bg-dark: theme('colors.frame.800');
-	--color-text-light: #222222;
-	--color-text-dark: #ffffff;
+	--color-text-dark: theme('colors.frame.700');
+	--color-text-light: theme('colors.frame.200');
+	--color-text-dark-hover: theme('colors.frame.900');
+	--color-text-light-hover: theme('colors.frame.300');
 }
 
 html,
@@ -16,12 +17,12 @@ body {
 	@apply font-light;
 	@apply tracking-tight;
 	background-color: var(--color-bg-light);
-	color: var(--color-text-light);
+	color: var(--color-text-dark);
 }
 
 html.dark>body {
 	background-color: var(--color-bg-dark);
-	color: var(--color-text-dark);
+	color: var(--color-text-light);
 }
 
 h1,

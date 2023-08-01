@@ -32,7 +32,10 @@
 		.option('shadows', shadowed, shadowed)
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
-		.append('flex items-center justify-center form-checkbox focus:outline-none focus:ring-2 focus:ring-offset-2', true)
+		.append(
+			'flex items-center justify-center form-checkbox focus:outline-none focus:ring-2 focus:ring-offset-2',
+			true
+		)
 		.append($$restProps.class, true)
 		.compile(true);
 

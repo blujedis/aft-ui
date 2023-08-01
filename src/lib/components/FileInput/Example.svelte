@@ -44,7 +44,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="flex space-x-8">
 		<label for="Upload Button">
 			<FileInput accept="image/png, image/jpeg" onFormData={handleUpload} let:click>

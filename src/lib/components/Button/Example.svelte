@@ -1,10 +1,6 @@
 <script lang="ts">
 	import Button, { type ButtonVariant } from '.';
-	import type {
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize
-	} from '../../types';
+	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Buttons';
@@ -24,7 +20,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-4 gap-4">
 		<label for="filled" class="flex">
 			<Button {...props} theme="light">Button</Button>
@@ -85,7 +80,6 @@
 		</label>
 	</div>
 
-
 	<div class="grid grid-cols-4 gap-4 mt-4">
 		<label for="filled" class="flex">
 			<Button {...props} theme="tertiary">Button</Button>
@@ -115,7 +109,6 @@
 			<Button {...props} variant="ghost" theme="danger">Button</Button>
 		</label>
 	</div>
-
 
 	<div class="grid grid-cols-4 gap-4 mt-4">
 		<label for="filled" class="flex">
@@ -161,9 +154,4 @@
 			<Button {...props} variant="ghost" theme="info">Button</Button>
 		</label>
 	</div>
-
-
-
-
-
 </ExamplePage>

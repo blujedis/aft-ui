@@ -28,7 +28,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	<div class="grid grid-cols-3 gap-0">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>

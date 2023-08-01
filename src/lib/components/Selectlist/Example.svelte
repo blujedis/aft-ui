@@ -57,7 +57,6 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-
 	{#key props}
 		<div class="grid grid-cols-3 gap-2">
 			<label for="filled">

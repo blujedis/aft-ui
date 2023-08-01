@@ -226,16 +226,6 @@ export const variantFilled = mergeConfigs(bg, bgHover, {
   $base: 'text-white border border-transparent ring-0',
   white: 'text-inherit',
   light: 'text-inherit'
-  // white: 'text-inherit bg-white hover:bg-frame-50 ring-white',
-  // light: 'text-frame-700 bg-frame-50 hover:bg-frame-100 ring-frame-200',
-  // dark: 'text-frame-200 bg-frame-700 hover:bg-frame-800 ring-frame-700',
-  // primary: 'bg-primary-500 hover:bg-primary-600 ring-primary-500 hover:ring-primary-600',
-  // secondary: 'bg-secondary-500 hover:bg-secondary-600 ring-secondary-500 hover:ring-secondary-600',
-  // tertiary: 'bg-tertiary-500 hover:bg-tertiary-600 ring-tertiary-500 hover:ring-tertiary-600',
-  // danger: 'bg-danger-500 hover:bg-danger-600 ring-danger-500 hover:ring-danger-600',
-  // warning: 'bg-warning-500 hover:bg-warning-600 ring-warning-500 hover:ring-warning-600',
-  // success: 'bg-success-500 hover:bg-success-600 ring-success-500 hover:ring-success-600',
-  // info: 'bg-info-500 hover:bg-info-600 ring-info-500 hover:ring-info-600'
 });
 
 export const variantOutlined = mergeConfigs(variantText, ring, ringHover, {

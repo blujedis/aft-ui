@@ -16,8 +16,8 @@ import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
 
 export type DeepPartial<T> = T extends object
 	? T extends Array<infer U>
-	? DeepPartial<U>[]
-	: { [K in keyof T]?: DeepPartial<T[K]> }
+		? DeepPartial<U>[]
+		: { [K in keyof T]?: DeepPartial<T[K]> }
 	: T;
 
 /**
@@ -34,10 +34,10 @@ export type PropsWithPrefix<T, P extends string> = T extends `${P}${infer Rest}`
 
 export type ParsePath<T, Key extends keyof T> = Key extends string
 	? T[Key] extends Record<string, any>
-	?
-	| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
-	| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
-	: never
+		?
+				| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+				| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+		: never
 	: never;
 
 export type ParsePathKey<T> = ParsePath<T, keyof T> | keyof T;
@@ -46,10 +46,10 @@ export type Path<T> = ParsePathKey<T> extends string | keyof T ? ParsePathKey<T>
 
 export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Rest}`
 	? Key extends keyof T
-	? Rest extends Path<T[Key]>
-	? PathValue<T[Key], Rest>
-	: never
-	: never
+		? Rest extends Path<T[Key]>
+			? PathValue<T[Key], Rest>
+			: never
+		: never
 	: P extends keyof T
 	? T[P]
 	: never;
@@ -105,12 +105,16 @@ export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
 
-
 export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
 export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin' | 'focusPeer';
 export type ThemeFocusSize = 'inset' | 'none' | 'one' | 'two' | 'four' | 'eight' | 'unstyled';
 export type ThemeFocusOffset = ThemeFocusSize;
-export type ThemeFocusTuple = [ThemeFocusStrategy, ThemeFocusState, ThemeFocusSize?, ThemeFocusOffset?];
+export type ThemeFocusTuple = [
+	ThemeFocusStrategy,
+	ThemeFocusState,
+	ThemeFocusSize?,
+	ThemeFocusOffset?
+];
 export type ThemeFocused = boolean | ThemeColor;
 
 export type Template = string | [string, string | string[], number | number[]];

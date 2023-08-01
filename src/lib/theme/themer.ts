@@ -67,8 +67,6 @@ import type {
 	Path
 } from '../types/theme';
 
-
-
 /**
  * Simply flattens array then joins by strings.
  *
@@ -259,7 +257,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**  
+		/**
 		 * Adds an option to themed classes to be compiled.
 		 *
 		 * @param key the option key to be add.
@@ -271,7 +269,6 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			key: K,
 			when: Primitive
 		) {
-
 			if (typeof themeConfig === 'undefined' || obj === null) return api;
 			if (!when) return api;
 
@@ -283,7 +280,8 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${key as string
+					`${instanceName} mapped value using property ${
+						key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -359,14 +357,14 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		function compile(withTailwindMerge = false) {
 			if (typeof themeConfig === 'undefined') return '';
 
-			const preserves = removed.filter(v => v.charAt(0) === '!');
-			const purge = removed.filter(v => v.charAt(0) !== '!');
+			const preserves = removed.filter((v) => v.charAt(0) === '!');
+			const purge = removed.filter((v) => v.charAt(0) !== '!');
 
 			const baseClean = base.reduce((a, c) => {
 				const filtered = c.split(' ').filter((v) => {
-					const preserve = preserves.some(p => v.startsWith(p.slice(1)));
+					const preserve = preserves.some((p) => v.startsWith(p.slice(1)));
 					if (preserve) return true;
-					const purged = purge.some(p => v.startsWith(p));
+					const purged = purge.some((p) => v.startsWith(p));
 					return preserve || !purged;
 				});
 				return [...a, ...filtered];
@@ -374,9 +372,9 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 
 			const themedClean = themed.reduce((a, c) => {
 				const filtered = c.split(' ').filter((v) => {
-					const preserve = preserves.some(p => v.startsWith(p.slice(1)));
+					const preserve = preserves.some((p) => v.startsWith(p.slice(1)));
 					if (preserve) return true;
-					const purged = purge.some(p => v.startsWith(p));
+					const purged = purge.some((p) => v.startsWith(p));
 					return preserve || !purged;
 				});
 				return [...a, ...filtered];

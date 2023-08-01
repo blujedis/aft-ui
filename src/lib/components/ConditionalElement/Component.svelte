@@ -1,9 +1,13 @@
 <script lang="ts">
-	import type{ SvelteComponent} from 'svelte';
-	import { type ConditionalElementProps, type ConditionalElementTypeProps, conditionalElementDefaults as defaults } from './module';
+	import type { SvelteComponent } from 'svelte';
+	import {
+		type ConditionalElementProps,
+		type ConditionalElementTypeProps,
+		conditionalElementDefaults as defaults
+	} from './module';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type {  HTMLTag } from '../../types';
+	import type { HTMLTag } from '../../types';
 
 	type Tag = $$Generic<HTMLTag | typeof SvelteComponent>;
 	type $$Props = ConditionalElementProps<Tag> & ConditionalElementTypeProps<Tag>;
@@ -34,7 +38,7 @@
 			<slot />
 		</svelte:element>
 	{:else}
-		<svelte:component this={component} >
+		<svelte:component this={component}>
 			<slot />
 		</svelte:component>
 	{/if}

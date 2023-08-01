@@ -51,7 +51,6 @@
 		const val = parseFloat(target.value);
 		target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
 	}
-
 </script>
 
 <input

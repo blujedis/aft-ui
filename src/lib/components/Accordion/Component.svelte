@@ -49,7 +49,6 @@
 		.compile(true);
 
 	function handleReset() {}
-
 </script>
 
 <svelte:element

@@ -46,7 +46,6 @@
 
 	const th = themer($themeStore);
 
-
 	$: tabControllerlWrapperClasses = th.create('TabsWrapper').append(klass, true).compile();
 
 	$: tabControllerNavWrapperClasses = th
@@ -78,10 +77,9 @@
 		.compile(true);
 
 	function handleReset() {}
-
 </script>
 
-<div class={tabControllerlWrapperClasses} >
+<div class={tabControllerlWrapperClasses}>
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
 			<slot name="mobile" />
