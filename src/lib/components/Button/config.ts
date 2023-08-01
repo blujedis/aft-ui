@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { variantFilled, variantGhost, variantOutlined, variantText } from '../base';
+import { variantFilled, variantGhost, variantOutlined, variantText } from '../../constants/base';
 
 const baseVariant = mergeConfigs(variantFilled, {
 	light: 'bg-frame-100 hover:bg-frame-200'

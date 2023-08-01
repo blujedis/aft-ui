@@ -1,4 +1,4 @@
-import { variantFlushed } from '../base';
+import { variantFlushed } from '../../constants/base';
 
 export const flushed = {
 	default: {

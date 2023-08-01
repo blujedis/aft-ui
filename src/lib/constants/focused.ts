@@ -1,0 +1,223 @@
+export const focusedRing = {
+	$base: 'focus:outline-none',
+	white: 'focus:ring-white',
+	dark: 'focus:ring-frame-800',
+	light: 'focus:ring-frame-400',
+	primary: 'focus:ring-primary-600',
+	secondary: 'focus:ring-secondary-600',
+	tertiary: 'focus:ring-tertiary-600',
+	danger: 'focus:ring-danger-600',
+	warning: 'focus:ring-warning-600',
+	success: 'focus:ring-success-600',
+	info: 'focus:ring-info-600'
+};
+
+export const focusedRingVisible = {
+	$base: 'focus:outline-none focus-visible:outline-none',
+	white: 'focus-visible:ring-white',
+	dark: 'focus-visible:ring-frame-800',
+	light: 'focus-visible:ring-frame-400',
+	primary: 'focus-visible:ring-primary-600',
+	secondary: 'focus-visible:ring-secondary-600',
+	tertiary: 'focus-visible:ring-tertiary-600',
+	danger: 'focus-visible:ring-danger-600',
+	warning: 'focus-visible:ring-warning-600',
+	success: 'focus-visible:ring-success-600',
+	info: 'focus-visible:ring-info-600'
+};
+
+export const focusedRingWithin = {
+	$base: 'focus-within:outline-none',
+	white: 'focus-within:ring-white',
+	dark: 'focus-within:ring-frame-800',
+	light: 'focus-within:ring-frame-400',
+	primary: 'focus-within:ring-primary-600',
+	secondary: 'focus-within:ring-secondary-600',
+	tertiary: 'focus-within:ring-tertiary-600',
+	danger: 'focus-within:ring-danger-600',
+	warning: 'focus-within:ring-warning-600',
+	success: 'focus-within:ring-success-600',
+	info: 'focus-within:ring-info-600'
+};
+
+export const focusedRingPeer = {
+	$base: 'peer-focus:outline-none',
+	white: 'peer-focus:ring-white',
+	dark: 'peer-focus:ring-frame-800',
+	light: 'peer-focus:ring-frame-400',
+	primary: 'peer-focus:ring-primary-600',
+	secondary: 'peer-focus:ring-secondary-600',
+	tertiary: 'peer-focus:ring-tertiary-600',
+	danger: 'peer-focus:ring-danger-600',
+	warning: 'peer-focus:ring-warning-600',
+	success: 'peer-focus:ring-success-600',
+	info: 'peer-focus:ring-info-600'
+};
+
+export const focusedRingGroup = {
+	$base: 'group-focus:outline-none',
+	white: 'group-focus:ring-white',
+	dark: 'group-focus:ring-frame-800',
+	light: 'group-focus:ring-frame-400',
+	primary: 'group-focus:ring-primary-600',
+	secondary: 'group-focus:ring-secondary-600',
+	tertiary: 'group-focus:ring-tertiary-600',
+	danger: 'group-focus:ring-danger-600',
+	warning: 'group-focus:ring-warning-600',
+	success: 'group-focus:ring-success-600',
+	info: 'group-focus:ring-info-600'
+};
+
+export const focusedBorder = {
+	$base: 'focus:outline-none',
+	white: 'focus:border-white',
+	dark: 'focus:border-frame-800',
+	light: 'focus:border-frame-400',
+	primary: 'focus:border-primary-600',
+	secondary: 'focus:border-secondary-600',
+	tertiary: 'focus:border-tertiary-600',
+	danger: 'focus:border-danger-600',
+	warning: 'focus:border-warning-600',
+	success: 'focus:border-success-600',
+	info: 'focus:border-info-600'
+};
+
+export const focusedBorderVisible = {
+	$base: 'focus-visible:outline-none',
+	white: 'focus-visible:border-white',
+	dark: 'focus-visible:border-frame-800',
+	light: 'focus-visible:border-frame-400',
+	primary: 'focus-visible:border-primary-600',
+	secondary: 'focus-visible:border-secondary-600',
+	tertiary: 'focus-visible:border-tertiary-600',
+	danger: 'focus-visible:border-danger-600',
+	warning: 'focus-visible:border-warning-600',
+	success: 'focus-visible:border-success-600',
+	info: 'focus-visible:border-info-600'
+};
+
+export const focusedBorderWithin = {
+	$base: 'focus-within:outline-none',
+	white: 'focus-within:border-white',
+	dark: 'focus-within:border-frame-800',
+	light: 'focus-within:border-frame-400',
+	primary: 'focus-within:border-primary-600',
+	secondary: 'focus-within:border-secondary-600',
+	tertiary: 'focus-within:border-tertiary-600',
+	danger: 'focus-within:border-danger-600',
+	warning: 'focus-within:border-warning-600',
+	success: 'focus-within:border-success-600',
+	info: 'focus-within:border-info-600'
+};
+
+export const focusedBorderPeer = {
+	$base: 'peer-focus:outline-none',
+	white: 'peer-focus:border-white',
+	dark: 'peer-focus:border-frame-800',
+	light: 'peer-focus:border-frame-400',
+	primary: 'peer-focus:border-primary-600',
+	secondary: 'peer-focus:border-secondary-600',
+	tertiary: 'peer-focus:border-tertiary-600',
+	danger: 'peer-focus:border-danger-600',
+	warning: 'peer-focus:border-warning-600',
+	success: 'peer-focus:border-success-600',
+	info: 'peer-focus:border-info-600'
+};
+
+export const focusedBorderGroup = {
+	$base: 'group-focus:outline-none',
+	white: 'group-focus:border-white',
+	dark: 'group-focus:border-frame-800',
+	light: 'group-focus:border-frame-400',
+	primary: 'group-focus:border-primary-600',
+	secondary: 'group-focus:border-secondary-600',
+	tertiary: 'group-focus:border-tertiary-600',
+	danger: 'group-focus:border-danger-600',
+	warning: 'group-focus:border-warning-600',
+	success: 'group-focus:border-success-600',
+	info: 'group-focus:border-info-600'
+};
+
+export const focusedBorderGroupWithin = {
+	$base: 'group-focus-within:outline-none',
+	white: 'group-focus-within:border-white',
+	dark: 'group-focus-within:border-frame-800',
+	light: 'group-focus-within:border-frame-400',
+	primary: 'group-focus-within:border-primary-600',
+	secondary: 'group-focus-within:border-secondary-600',
+	tertiary: 'group-focus-within:border-tertiary-600',
+	danger: 'group-focus-within:border-danger-600',
+	warning: 'group-focus-within:border-warning-600',
+	success: 'group-focus-within:border-success-600',
+	info: 'group-focus-within:border-info-600'
+};
+
+export const focusedOutline = {
+	$base: 'focus:outline',
+	white: 'focus:outline-white',
+	dark: 'focus:outline-frame-800',
+	light: 'focus:outline-frame-400',
+	primary: 'focus:outline-primary-600',
+	secondary: 'focus:outline-secondary-600',
+	tertiary: 'focus:outline-tertiary-600',
+	danger: 'focus:outline-danger-600',
+	warning: 'focus:outline-warning-600',
+	success: 'focus:outline-success-600',
+	info: 'focus:outline-info-600'
+};
+
+export const focusedOutlineVisible = {
+	$base: 'focus-visible:outline',
+	white: 'focus-visible:outline-white',
+	dark: 'focus-visible:outline-frame-800',
+	light: 'focus-visible:outline-frame-400',
+	primary: 'focus-visible:outline-primary-600',
+	secondary: 'focus-visible:outline-secondary-600',
+	tertiary: 'focus-visible:outline-tertiary-600',
+	danger: 'focus-visible:outline-danger-600',
+	warning: 'focus-visible:outline-warning-600',
+	success: 'focus-visible:outline-success-600',
+	info: 'focus-visible:outline-info-600'
+};
+
+export const focusedOutlineWithin = {
+	$base: 'focus-within:outline',
+	white: 'focus-within:outline-white',
+	dark: 'focus-within:outline-frame-800',
+	light: 'focus-within:outline-frame-400',
+	primary: 'focus-within:outline-primary-600',
+	secondary: 'focus-within:outline-secondary-600',
+	tertiary: 'focus-within:outline-tertiary-600',
+	danger: 'focus-within:outline-danger-600',
+	warning: 'focus-within:outline-warning-600',
+	success: 'focus-within:outline-success-600',
+	info: 'focus-within:outline-info-600'
+};
+
+export const focusedOutlinePeer = {
+	$base: 'peer-focus:outline',
+	white: 'peer-focus:outline-white',
+	dark: 'peer-focus:outline-frame-800',
+	light: 'peer-focus:outline-frame-400',
+	primary: 'peer-focus:outline-primary-600',
+	secondary: 'peer-focus:outline-secondary-600',
+	tertiary: 'peer-focus:outline-tertiary-600',
+	danger: 'peer-focus:outline-danger-600',
+	warning: 'peer-focus:outline-warning-600',
+	success: 'peer-focus:outline-success-600',
+	info: 'peer-focus:outline-info-600'
+};
+
+export const focusedOutlineGroup = {
+	$base: 'group-focus:outline',
+	white: 'group-focus:outline-white',
+	dark: 'group-focus:outline-frame-800',
+	light: 'group-focus:outline-frame-400',
+	primary: 'group-focus:outline-primary-600',
+	secondary: 'group-focus:outline-secondary-600',
+	tertiary: 'group-focus:outline-tertiary-600',
+	danger: 'group-focus:outline-danger-600',
+	warning: 'group-focus:outline-warning-600',
+	success: 'group-focus:outline-success-600',
+	info: 'group-focus:outline-info-600'
+};

@@ -1,5 +1,5 @@
-import { placeholder } from '../placeholder';
-import { bg } from '../base';
+import { placeholder } from '../../constants/placeholder';
+import { bg } from '../../constants/base';
 
 const baseVariant = {
 	...placeholder,

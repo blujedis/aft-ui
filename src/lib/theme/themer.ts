@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ensureArray } from './utils';
 import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
-import { colors } from '../components/base';
+import { colors } from '../constants/base';
 import { getProperty } from 'dot-prop';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
@@ -280,8 +280,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${
-						key as string
+					`${instanceName} mapped value using property ${key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';

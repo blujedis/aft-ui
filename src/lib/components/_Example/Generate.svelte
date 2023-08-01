@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import type { ElementHandler,  ThemeShade } from '$lib/types';
+	import type { ElementHandler, ThemeShade } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import Preview from './Preview.svelte';
 
 	type ShadeConfig = ThemeShade | 'default' | [ThemeShade, (ThemeShade | null)?, string?];
 	type ShadeConfigInternal = [ThemeShade | 'default', (ThemeShade | null)?, string?];
@@ -231,79 +232,84 @@
 		</Section>
 	{/if}
 	<Section class={!mounted ? 'invisible' : ''}>
-		<div class="w-3/4">
-			<div class="mb-2 w-full">
-				<label
-					for="location"
-					class="block text-sm font-medium leading-6 text-gray-900 dark:text-frame-100"
-					>Generator Templates</label
-				>
-				<select
-					bind:value={generator}
-					class="form-select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-					on:change={(e) => loadGenerator(e)}
-				>
-					<option value="" selected disabled>Please Select</option>
-					{#each Object.entries($store) as [gKey, gVal]}
-						<option value={gKey}>{gKey}</option>
-					{/each}
-				</select>
+		<div class="grid grid-cols-2 gap-2">
+			<div>
+				<Preview />
 			</div>
-			<textarea
-				bind:this={textarea}
-				class="p-4 w-full border border-frame-100 dark:border-frame-600 dark:bg-transparent dark:text-white"
-				rows={16}
-				{placeholder}
-				value={placeholder}
-			/>
-			<div class="mt-2">
-				<div class="flex space-x-4 w-full">
-					<div class="flex">
-						<button
-							class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
-							on:click={() => removeGenerator(generator)}>Remove Generator</button
+			<div class="flex-col">
+				<div class="w-full">
+					<div class="mb-2 w-full">
+						<label
+							for="location"
+							class="block text-sm font-medium leading-6 text-gray-900 dark:text-frame-100"
+							>Generator Templates</label
 						>
-					</div>
-					<div class="flex">
-						<button
-							class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
-							on:click={handleReset}>Reset</button
+						<select
+							bind:value={generator}
+							class="form-select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+							on:change={(e) => loadGenerator(e)}
 						>
+							<option value="" selected disabled>Please Select</option>
+							{#each Object.entries($store) as [gKey, gVal]}
+								<option value={gKey}>{gKey}</option>
+							{/each}
+						</select>
 					</div>
+					<textarea
+						bind:this={textarea}
+						class="p-4 w-full border border-frame-100 dark:border-frame-600 dark:bg-transparent dark:text-white"
+						rows={16}
+						{placeholder}
+						value={placeholder}
+					/>
+					<div class="mt-2">
+						<div class="flex space-x-4 w-full">
+							<div class="flex">
+								<button
+									class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
+									on:click={() => removeGenerator(generator)}>Remove Generator</button
+								>
+							</div>
+							<div class="flex">
+								<button
+									class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
+									on:click={handleReset}>Reset</button
+								>
+							</div>
 
-					<div class="flex flex-1">
-						<div class="relative w-full">
-							<label
-								for="name"
-								class="absolute -top-2 left-2 inline-block bg-white dark:bg-frame-800 px-1 text-xs font-medium text-gray-900 dark:text-frame-100"
-								>Save as:</label
-							>
-							<input
-								bind:value={savename}
-								type="text"
-								name="name"
-								id="name"
-								class="form-input block w-full rounded-sm border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-frame-800 dark:ring-frame-600 dark:text-frame-100 dark:placeholder:text-frame-500 rounded-r-none"
-								placeholder="Jane Smith"
-							/>
+							<div class="flex flex-1">
+								<div class="relative w-full">
+									<label
+										for="name"
+										class="absolute -top-2 left-2 inline-block bg-white dark:bg-frame-800 px-1 text-xs font-medium text-gray-900 dark:text-frame-100"
+										>Save as:</label
+									>
+									<input
+										bind:value={savename}
+										type="text"
+										name="name"
+										id="name"
+										class="form-input block w-full rounded-sm border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-frame-800 dark:ring-frame-600 dark:text-frame-100 dark:placeholder:text-frame-500 rounded-r-none"
+										placeholder="Jane Smith"
+									/>
+								</div>
+
+								<button
+									class="rounded-l-none inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 font-medium uppercase text-sm"
+									on:click={handleClick}>Generate</button
+								>
+							</div>
 						</div>
-
-						<button
-							class="rounded-l-none inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 font-medium uppercase text-sm"
-							on:click={handleClick}>Generate</button
-						>
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<div class="mt-4">
-			<div class="w-3/4">
-				<pre class="overflow-x-auto whitespace-pre-wrap">
-				<code>
-					{generated}
-				</code>
-			</pre>
+				<div class="mt-4 w-full">
+					<pre class="overflow-x-auto whitespace-pre-wrap">
+					<code>
+						{generated}
+					</code>
+				</pre>
+				</div>
 			</div>
 		</div>
 	</Section>

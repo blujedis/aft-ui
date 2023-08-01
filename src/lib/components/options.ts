@@ -1,4 +1,4 @@
-export * from './shared';
+export * from '../constants/options';
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';

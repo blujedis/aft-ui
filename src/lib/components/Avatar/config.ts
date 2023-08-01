@@ -1,3 +1,5 @@
+
+
 export const avatar = {
 	default: {
 		$base: 'ring-1 ring-black ring-opacity-5'
@@ -24,7 +26,7 @@ export const avatarNotification = {
 
 export const avatarPlaceholder = {
 	default: {
-		$base: 'bg-frame-200 ring-1 ring-black ring-opacity-5',
+		$base: 'bg-frame-100 ring-1 ring-black ring-opacity-5',
 		dark: 'text-frame-800',
 		light: 'text-frame-600',
 		primary: 'text-primary-600',

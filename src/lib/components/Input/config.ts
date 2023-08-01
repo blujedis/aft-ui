@@ -1,4 +1,4 @@
-import { variantFilled, variantOutlined, variantFlushed } from '../base';
+import { variantFilled, variantOutlined, variantFlushed } from '../../constants/base';
 
 const baseVariant = {
 	...variantOutlined

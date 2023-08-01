@@ -28,8 +28,9 @@
 	<div class="text-sm mb-4">
 		Use width on top level Accordion element to constrain from full width.
 	</div>
-	{#key props}
-		<Accordion {...props} class="w-48">
+
+	<div class="grid grid-cols-3 gap-4 items-start">
+		<Accordion {...props}>
 			<AccordionPanel key={0}>
 				<AccordionButton>One</AccordionButton>
 				<AccordionOption class="p-4"
@@ -53,5 +54,55 @@
 				>
 			</AccordionPanel>
 		</Accordion>
-	{/key}
+
+		<Accordion {...props} variant="outlined">
+			<AccordionPanel key={0}>
+				<AccordionButton>One</AccordionButton>
+				<AccordionOption class="p-4"
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+					est laborum.</AccordionOption
+				>
+			</AccordionPanel>
+			<AccordionPanel key={1}>
+				<AccordionButton>Two</AccordionButton>
+				<AccordionOption class="p-4"
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+					est laborum.</AccordionOption
+				>
+			</AccordionPanel>
+		</Accordion>
+
+		<Accordion {...props} variant="flushed">
+			<AccordionPanel key={0}>
+				<AccordionButton>One</AccordionButton>
+				<AccordionOption class="p-4"
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+					est laborum.</AccordionOption
+				>
+			</AccordionPanel>
+			<AccordionPanel key={1}>
+				<AccordionButton>Two</AccordionButton>
+				<AccordionOption class="p-4"
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+					est laborum.</AccordionOption
+				>
+			</AccordionPanel>
+		</Accordion>
+	</div>
 </ExamplePage>

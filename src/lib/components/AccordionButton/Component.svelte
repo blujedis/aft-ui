@@ -53,8 +53,7 @@
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed && variant === 'pills')
 		.option('disableds', theme, disabled)
-		.append('inline-flex items-center justify-center focus:outline-none focus:ring-2', true)
-		.append('inline-flex items-center justify-between w-full', true)
+		.append('inline-flex items-center justify-between focus:outline-none focus:ring-2 w-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

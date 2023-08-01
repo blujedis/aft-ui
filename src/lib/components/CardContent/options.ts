@@ -1,4 +1,4 @@
-import { fontSizes } from '../shared';
+import { fontSizes } from '../../constants/options';
 
 export const cardPadding = {
 	unstyled: '',

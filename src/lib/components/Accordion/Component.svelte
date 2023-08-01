@@ -44,7 +44,10 @@
 		.variant('accordion', variant, theme, true)
 		.option('roundeds', rounded === 'full' && variant !== 'pills' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed && variant !== 'pills')
-		.append(`accordion ` + 'divide-y divide-frame-200 border border-frame-200', true)
+		.append(
+			'divide-y divide-frame-200 border border-frame-200 shrink',
+			variant === 'outlined'
+		)
 		.append($$restProps.class, true)
 		.compile(true);
 

@@ -18,6 +18,7 @@ export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full
 
 export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
 	caret: 'octicon:chevron-down-24', // ['octicon:chevron-down-24', 'octicon:chevron-up-24'],
+	focused: true,
 	roticon: true,
 	size: 'sm',
 	theme: 'light',

@@ -1,4 +1,4 @@
-import { variantOutlined, variantFilled, variantFlushed } from '../base';
+import { variantOutlined, variantFilled, variantFlushed } from '../../constants/base';
 
 const defaultSelect = {
 	...variantOutlined
