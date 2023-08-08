@@ -1,24 +1,14 @@
 <script lang="ts">
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
 	import type { ElementProps } from '../../types';
 
 	type $$Props = PopoverProps & ElementProps<'div'>;
 
-	export let {
-		arrowed,
-		content,
-		id,
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transitioned,
-		unstyled,
-		variant
-	} = {
-		...defaults
-	} as Required<$$Props>;
+	export let { arrowed, content, hide, rounded, shadowed, size, theme, transitioned, unstyled, variant } =
+		{
+			...defaults
+		} as Required<$$Props>;
 
 	const role = $$restProps.role ?? arrowed ? 'tooltip' : 'region';
 	const th = themer($themeStore);
@@ -31,58 +21,30 @@
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('popoverSizes', size, size)
-		.append('popover', true)
+		.append('popover absolute', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
 
 <div {role} {...$$restProps} class={popoverClasses}>
-	<slot>
+	<slot {hide} >
 		{#if typeof content === 'string'}
 			{content}
 		{:else}
-			<svelte:component this={content} />
+			<svelte:component this={content} {hide} />
 		{/if}
 	</slot>
 	{#if arrowed}
-		<div id="arrow" data-popper-arrow />
+		<div id="arrow" class="popover__arrow" />
 	{/if}
 </div>
 
 <style>
-	#arrow,
-	#arrow::before {
+	#arrow {
 		position: absolute;
+		background: inherit;
 		width: 8px;
 		height: 8px;
-		z-index: -1;
-		background: inherit;
-	}
-
-	#arrow {
-		visibility: hidden;
-	}
-
-	#arrow::before {
-		visibility: visible;
-		content: '';
 		transform: rotate(45deg);
-		background: inherit;
-	}
-
-	:global(.popover[data-popper-placement^='bottom'] > #arrow) {
-		top: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='top'] > #arrow) {
-		bottom: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='left'] > #arrow) {
-		right: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='right'] > #arrow) {
-		left: -4px;
 	}
 </style>

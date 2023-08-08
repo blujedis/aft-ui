@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { getColor, styler, themer } from '$lib';
+	import { themeStore, getColor, styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
 	import type { RatingContext } from '../Rating';

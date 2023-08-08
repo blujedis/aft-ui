@@ -51,7 +51,7 @@ export type ElementNativeProps<
 	A extends keyof ElementProps<T> | undefined = undefined
 > = PickNativeProps<T, A>;
 
-export type SvelteConstructorProps<T extends typeof SvelteComponent<any>> = ComponentProps<
+export type SvelteConstructorProps<T extends typeof SvelteComponent> = ComponentProps<
 	InstanceType<T>
 >;
 

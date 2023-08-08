@@ -7,7 +7,7 @@
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import type { PaginationContext } from '../Pagination';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';

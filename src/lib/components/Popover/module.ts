@@ -9,8 +9,9 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../t
 export type PopoverVariant = keyof typeof popover;
 
 export type PopoverProps = {
+	hide?: () => void;
 	arrowed?: boolean;
-	content?: string | typeof SvelteComponent<any> | null;
+	content?: string | typeof SvelteComponent;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;

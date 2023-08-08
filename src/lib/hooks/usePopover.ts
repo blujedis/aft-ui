@@ -1,22 +1,27 @@
-import type { SvelteConstructorProps } from '$lib/types';
 import { computePosition, flip, shift, offset, arrow as arrowMiddleware, type ComputePositionConfig, type ComputePositionReturn, type Coords } from '@floating-ui/dom';
 import type { SvelteComponent } from 'svelte';
 import { browser } from '$app/environment';
-import { FloatingElement } from '../components/FloatingElement';
+import { Popover } from '../components/Popover';
 import { ensureArray } from '$lib/utils';
+import type { SvelteConstructorProps } from '$lib/types';
 
-export type FloatingElementEvent = 'hover' | 'click' | 'focus';
-export type FloatingElementEventTuple = [keyof HTMLElementEventMap, (...args: any[]) => void]
+export type PopoverEvent = 'hover' | 'click' | 'focus';
+export type PopoverEventTuple = [keyof HTMLElementEventMap, (...args: any[]) => void];
 
-export type FloatingElementOptions = Partial<ComputePositionConfig> & {
+export type PopoverBaseProps<C extends typeof SvelteComponent> = SvelteConstructorProps<C> & {
+  hide?: () => void;
+}
+
+export type PopoverHookOptions<C extends typeof SvelteComponent> = Partial<ComputePositionConfig> & {
+  abortable?: boolean;
   arrowed?: string;
-  Component?: typeof SvelteComponent;
+  Component?: C;
   element?: HTMLElement;
   escapable?: boolean;
-  props?: SvelteConstructorProps<any>;
+  props?: PopoverBaseProps<C>;
   target?: HTMLElement;
   selector?: string;
-  events?: FloatingElementEvent | FloatingElementEvent[];
+  events?: PopoverEvent | PopoverEvent[];
 }
 
 // Reasonable defaults for most use cases. 
@@ -36,13 +41,42 @@ const ARROW_POSITION = {
   left: 'right',
 };
 
-export function usePopover(
-  ref: HTMLElement,
-  options: FloatingElementOptions
+function normalizeOptions<C extends typeof SvelteComponent<any> = typeof Popover>(options?: PopoverHookOptions<C>) {
+
+  options = {
+    target: document.body,
+    events: ['hover'],
+    Component: Popover as C,
+    ...DEFAULTS,
+    ...options
+  };
+
+  options.events = ensureArray(options.events);
+
+  const {
+    abortable, arrowed, Component, escapable, events: initEvents,
+    element: initElement, props, selector,
+    target, ...rest } = options as Required<PopoverHookOptions<C>>;
+
+  return {
+    internal: {
+      abortable, arrowed, Component,
+      escapable, initEvents,
+      initElement, props, selector,
+      target
+    },
+    floating: rest
+  };
+
+}
+
+export function usePopover<C extends typeof SvelteComponent<any>>(
+  initRef?: HTMLElement,
+  options?: PopoverHookOptions<C>
 ) {
 
-  if (!browser) return {
-    ref,
+  if (!initRef || !browser) return {
+    initRef,
     element: undefined,
     arrow: unbind,
     bind,
@@ -53,28 +87,23 @@ export function usePopover(
     destroy
   };
 
-  options = {
-    target: document.body,
-    events: ['hover'],
-    ...DEFAULTS,
-    ...options
-  };
-
-  options.events = ensureArray(options.events);
-
-  const {
-    arrowed, Component, escapable, events: initEvents,
-    element: initElement, props, selector,
-    target, ...rest } = options as Required<FloatingElementOptions>;
-
   const events = {
     hover: [['mouseenter', show], ['mouseleave', hide]],
     focus: [['focus', show], ['blur', hide]],
     click: [['click', show]]
-  } as Record<FloatingElementEvent, FloatingElementEventTuple[]>
+  } as Record<PopoverEvent, PopoverEventTuple[]>;
+
+  const normalized = normalizeOptions(options);
+  const rest = normalized.floating;
+
+  const {
+    abortable, arrowed, Component, escapable, initEvents,
+    initElement, props, selector, target
+  } = normalized.internal;
 
   let FloatingComponent: typeof SvelteComponent | undefined;
 
+  const ref = initRef as HTMLElement;
   let element: HTMLElement | undefined;
   let component = undefined as SvelteComponent | undefined;
   let arrow: HTMLElement | undefined;
@@ -85,6 +114,18 @@ export function usePopover(
   else
     FloatingComponent = Component;
 
+  const api = {
+    ref,
+    element,
+    arrow,
+    bind,
+    unbind,
+    show,
+    hide,
+    update,
+    destroy
+  };
+
   function findElement(selector: string, root = document.body as HTMLElement) {
     const el = root.querySelector(selector);
     if (!el) {
@@ -94,31 +135,41 @@ export function usePopover(
     return el as HTMLElement;
   }
 
-  function handleClickOutside(event: any) {
+  function handleClickOutside(event: MouseEvent) {
     if (!ref || event.target === ref) return;
-    if (element && !element.contains(event.target) && visible) hide();
+    if (element && !element.contains((event.target as Node) || null) && visible) {
+      event.preventDefault();
+      hide();
+    }
   }
 
   function handleEscape(event: KeyboardEvent) {
-    if (event.key === 'Escape' && visible) hide();
+    if (event.key === 'Escape' && visible) {
+      event.preventDefault();
+      hide();
+    }
   }
 
   function bind() {
-    (initEvents as FloatingElementEvent[]).forEach(ev => {
+    (initEvents as PopoverEvent[]).forEach(ev => {
       events[ev].forEach(([event, listener]) => {
         ref.addEventListener(event, listener);
       });
     });
-    if (escapable) window.addEventListener('keydown', handleEscape);
+    if (abortable && escapable) window.addEventListener('keydown', handleEscape);
   }
 
   function unbind() {
-    (initEvents as FloatingElementEvent[]).forEach(ev => {
+    (initEvents as PopoverEvent[]).forEach(ev => {
       events[ev].forEach(([event, listener]) => {
         ref.removeEventListener(event, listener);
       });
     });
-    if (escapable) window.addEventListener('keydown', handleEscape);
+    if (abortable && escapable) window.addEventListener('keydown', handleEscape);
+  }
+
+  function register(el: HTMLElement) {
+    //
   }
 
   function assignElement({ x, y }: ComputePositionReturn) {
@@ -144,23 +195,33 @@ export function usePopover(
   }
 
   function update(updateOptions?: Partial<ComputePositionConfig>) {
+
     if (!element) return;
+
     updateOptions = {
       ...rest,
       ...updateOptions
     };
+
     if (arrowed && arrow) // add the arrow if user defined.
       updateOptions.middleware?.push(arrowMiddleware({ element: arrow, padding: 4 }))
+
     return computePosition(ref, element, updateOptions)
       .then((response) => {
         assignElement(response);
         if (arrowed)
           assignArrow(response);
       });
+
   }
 
   function show() {
     if (FloatingComponent) {
+      // pass along the hide prop for use with popovers.
+      // you will need to create the appropriate type
+      // readonly hide?: () => void;" in your component's 
+      // exported options.
+      props.hide = api.hide.bind(api);
       component = new FloatingComponent({ target, props });
       const foundEl = findElement(selector, target);
       if (foundEl)
@@ -175,7 +236,8 @@ export function usePopover(
       element.style.display = 'block';
       update();
     }
-    if (initEvents.includes('click'))
+    visible = true;
+    if (initEvents.includes('click') && abortable)
       document.addEventListener('click', handleClickOutside);
   }
 
@@ -186,7 +248,7 @@ export function usePopover(
     else
       element.style.display = '';
     visible = false;
-    if (initEvents.includes('click'))
+    if (initEvents.includes('click') && abortable)
       document.removeEventListener('click', handleClickOutside);
   }
 
@@ -195,42 +257,28 @@ export function usePopover(
     unbind();
   }
 
-  return {
-    ref,
-    element,
-    arrow,
-    bind,
-    unbind,
-    show,
-    hide,
-    update,
-    destroy
-  };
+  return api;
 
 }
 
-export type FloatingTooltipOptions = Omit<FloatingElementOptions, 'Component' | 'props'> & {
-  props?: SvelteConstructorProps<typeof FloatingElement>
-}
-
-export function popover(
+export function popover<C extends typeof SvelteComponent<any>>(
   ref: HTMLElement,
-  options: FloatingTooltipOptions) {
-
+  options: PopoverHookOptions<C>) {
 
   const content = ref.getAttribute('title');
   ref.setAttribute('title', '');
+
+  options.props = {
+    content,
+    ...options.props
+  } as unknown as PopoverHookOptions<C>['props'];
 
   const { bind, destroy } = usePopover(ref, {
     escapable: true,
     selector: '.popover',
     arrowed: '#arrow',
-    props: {
-      content,
-      ...options.props
-    },
+    Component: Popover as C,
     ...options,
-    Component: FloatingElement as typeof SvelteComponent,
   });
 
   bind();

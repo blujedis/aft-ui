@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { themer, type ElementProps } from '$lib';
+	import { themeStore, themer, type ElementProps } from '$lib';
 	import { type FlushedProps, flushedDefaults as defaults } from './module';
 
 	type $$Props = FlushedProps & ElementProps<'div'>;

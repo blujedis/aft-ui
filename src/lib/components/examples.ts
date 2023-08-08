@@ -11,9 +11,6 @@ export { default as DisclosureExample } from './Disclosure/Example.svelte';
 export { default as DrawerExample } from './Drawer/Example.svelte';
 export { default as EmptyExample } from './Empty/Example.svelte';
 export { default as FileInputExample } from './FileInput/Example.svelte';
-
-export { default as FloatingElementExample } from './FloatingElement/Example.svelte';
-
 export { default as InputExample } from './Input/Example.svelte';
 export { default as KbdExample } from './Kbd/Example.svelte';
 export { default as LabelExample } from './Label/Example.svelte';

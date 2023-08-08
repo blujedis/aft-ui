@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { Button } from '../Button';
 	import { Icon } from '../Icon';
 	import type { ElementProps } from '$lib/types';

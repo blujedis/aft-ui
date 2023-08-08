@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type MenuProps, menuDefaults as defaults, type MenuContext } from './module';
-	import themeStore, { themer, useDisclosure } from '$lib';
+	import { themeStore, themer, useDisclosure } from '$lib';
 	import type { ElementProps } from '../../types';
 	import { setContext } from 'svelte';
 	import type { MenuGlobalProps } from '../Menu';

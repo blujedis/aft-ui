@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
-	import themeStore, { themer, transitioner } from '$lib';
+	import { themeStore, themer, transitioner } from '$lib';
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type CardElementProps, cardElementDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { CardContext } from '../Card/module';

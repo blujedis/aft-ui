@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { type TabProps, tabDefaults as defaults } from './module';
 	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';

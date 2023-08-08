@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cleanObj, type SortAccessor } from '$lib/utils';
 	import { setContext } from 'svelte';
-	import themeStore, { themer, useSelect } from '$lib';
+	import { themeStore, themer, useSelect } from '$lib';
 	import {
 		type DataGridProps,
 		gridDefaults as defaults,

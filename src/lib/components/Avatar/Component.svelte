@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type AvatarProps, avatarDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';

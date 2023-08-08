@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { type DataGridCellProps, gridCellDefaults as defaults } from './module';
-	import themeStore, { pickCleanProps, themer, type DataGridContext } from '$lib';
+	import { themeStore, pickCleanProps, themer, type DataGridContext } from '$lib';
 	import type { ElementProps } from '../../types';
 
 	type Data = $$Generic<DataGridDataItem>;

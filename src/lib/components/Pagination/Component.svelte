@@ -1,7 +1,7 @@
 <script lang="ts">
 	import usePaginator from '$lib/stores/paginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
 	import { setContext } from 'svelte';
 	import { cleanObj, forwardEventsBuilder } from '$lib/utils';

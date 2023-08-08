@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { type ButtonGroupItemProps, buttonGroupItemDefaults as defaults } from './module';
 	import { Button } from '../Button';
 	import type { ElementNativeProps } from '../../types';

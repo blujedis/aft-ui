@@ -10,16 +10,16 @@
 	<script>
 		let darkMode = false;
 		let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		if (localStorage.darkMode === 'dark' || (!('darkMode' in localStorage) && prefersDark)) {
+		if (localStorage.dark === 'dark' || (!('dark' in localStorage) && prefersDark)) {
 			darkMode = true;
 		} else {
-			const currentDark = JSON.parse(localStorage.darkMode);
+			const currentDark = JSON.parse(localStorage.dark);
 			if (currentDark) darkMode = true;
 		}
 		if (darkMode) document.documentElement.classList.add('dark');
 		else document.documentElement.classList.remove('dark');
-		localStorage.setItem('prefersDark', prefersDark);
-		localStorage.setItem('darkMode', darkMode);
+		localStorage.setItem('preferdark', prefersDark);
+		localStorage.setItem('dark', darkMode);
 	</script>
 	%sveltekit.head%
 </head>

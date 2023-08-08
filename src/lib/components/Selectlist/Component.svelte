@@ -7,7 +7,7 @@
 		type SelectListItem,
 		type SelectListItemKey
 	} from './module';
-	import themeStore, { themer, useSelect, type SelectStore } from '$lib';
+	import { themeStore, themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '../../types';
 	import { setContext } from 'svelte';
 	import { cleanObj, createCustomEvent } from '$lib/utils';

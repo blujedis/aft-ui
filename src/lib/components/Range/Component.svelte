@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { themer, styler } from '$lib';
+	import { themeStore, themer, styler } from '$lib';
 	import { onMount } from 'svelte';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
 	import type { ElementNativeProps } from '../../types';

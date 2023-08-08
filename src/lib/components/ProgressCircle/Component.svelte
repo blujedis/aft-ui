@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
-	import themeStore, { styler, themer } from '$lib';
+	import { themeStore, styler, themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
 	import { onMount } from 'svelte';
 

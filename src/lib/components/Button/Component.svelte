@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '../../utils';
-	import themeStore, { themer } from '../../';
+	import { themeStore, themer } from '../../';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
 	import type { ElementProps } from '../../types';
 

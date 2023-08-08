@@ -6,7 +6,7 @@
 		accordionPanelDefaults as defaults,
 		type AccordionPanelContext
 	} from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 
 	type Tag = $$Generic<HTMLTag>;

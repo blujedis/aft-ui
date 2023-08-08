@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
-	import themeStore, { ConditionalElement, Flushed, ensureArray, flushed, themer } from '$lib';
+	import { themeStore, ConditionalElement, Flushed, ensureArray, flushed, themer } from '$lib';
 	import { onMount, setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';

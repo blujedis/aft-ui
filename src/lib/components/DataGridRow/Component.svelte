@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type DataGridRowProps, gridRowDefaults as defaults } from './module';
-	import themeStore, { pickCleanProps, styler, themer } from '$lib';
+	import { themeStore, pickCleanProps, styler, themer } from '$lib';
 	import type { ElementProps } from '../../types';
 	import type { DataGridContext } from '../DataGrid';
 	import { getContext } from 'svelte';

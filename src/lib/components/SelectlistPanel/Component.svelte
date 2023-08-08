@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SelectListPanelProps, selectListPanelDefaults as defaults } from './module';
-	import themeStore, { themer, transitioner } from '$lib';
+	import { themeStore, themer, transitioner } from '$lib';
 	import type { SelectListContext, SelectListItem } from '../SelectList';
 	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';

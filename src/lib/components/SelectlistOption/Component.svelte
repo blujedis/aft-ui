@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SelectListOptionProps, selectListOptionDefaults as defaults } from './module';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import type { ElementProps } from '../../types';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';

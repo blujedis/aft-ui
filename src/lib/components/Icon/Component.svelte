@@ -7,7 +7,7 @@
 
 	import { type IconProps, iconDefaults as defaults } from './module';
 	import IconBase from '@iconify/svelte';
-	import themeStore, { themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	type $$Props = IconProps;
 	export let { icon, size, unstyled } = { ...defaults } as Required<$$Props>;
 
