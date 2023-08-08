@@ -1,7 +1,7 @@
-
+import { solid, text } from '$lib/constants';
 
 export const avatar = {
-	default: {
+	single: {
 		$base: 'ring-1 ring-black ring-opacity-5'
 	},
 	stacked: {
@@ -10,31 +10,15 @@ export const avatar = {
 };
 
 export const avatarNotification = {
-	default: {
-		$base: 'ring-white',
-		dark: 'bg-frame-800',
-		light: 'bg-frame-300',
-		primary: 'bg-primary-500',
-		secondary: 'bg-secondary-500',
-		tertiary: 'bg-tertiary-500',
-		danger: 'bg-danger-500',
-		warning: 'bg-warning-500',
-		success: 'bg-success-500',
-		info: 'bg-info-500'
+	filled: {
+		...solid,
+		$base: 'ring-white'
 	}
 };
 
 export const avatarPlaceholder = {
-	default: {
-		$base: 'bg-frame-100 ring-1 ring-black ring-opacity-5',
-		dark: 'text-frame-800',
-		light: 'text-frame-600',
-		primary: 'text-primary-600',
-		secondary: 'text-secondary-600',
-		tertiary: 'text-tertiary-600',
-		danger: 'text-danger-600',
-		warning: 'text-warning-600',
-		success: 'text-success-600',
-		info: 'text-info-600'
+	text: {
+		...text,
+		$base: 'bg-frame-100 ring-1 ring-black ring-opacity-5'
 	}
 };

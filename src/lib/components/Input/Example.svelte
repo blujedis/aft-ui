@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input, { type InputVariant } from '.';
+	import { Input } from '.';
 	import type {
 		ThemeColor,
 		ThemeFocused,
@@ -7,6 +7,7 @@
 		ThemeShadowed,
 		ThemeSize
 	} from '../../types';
+	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Input';
@@ -22,26 +23,28 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as InputVariant
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-0">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<div class="flex">
-				<Input {...props} variant="outlined" placeholder="First Name" />
-			</div>
-		</label>
-		<label for="outline">
-			<div class="text-sm">Filled:</div>
-			<Input {...props} variant="filled" placeholder="Last Name" />
-		</label>
-		<label for="link">
-			<div class="text-sm">Flushed:</div>
-			<Input {...props} variant="flushed" />
-		</label>
-	</div>
+	{#each colors as color}
+		<div class="grid grid-cols-4 gap-4 mb-4">
+			<label for="filled">
+				<Input {...props} variant="outlined" theme={color} placeholder="First Name" />
+			</label>
+
+			<label for="outline">
+				<Input {...props} variant="filled" theme={color} placeholder="Last Name" />
+			</label>
+
+			<label for="glass">
+				<Input {...props} variant="glass" theme={color} placeholder="First Name" />
+			</label>
+
+			<label for="link">
+				<Input {...props} variant="flushed" theme={color} placeholder="DOB" />
+			</label>
+		</div>
+	{/each}
 </ExamplePage>

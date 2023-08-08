@@ -1,24 +1,24 @@
+import {
+	variantText,
+	variantFilledHover,
+	variantOutlinedHover,
+	variantGhostHover,
+	variantGlassHover
+} from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
-import { variantFilled, variantGhost, variantOutlined, variantText } from '../../constants/base';
-
-const baseVariant = mergeConfigs(variantFilled, {
-	light: 'bg-frame-100 hover:bg-frame-200'
-});
 
 export const button = {
-	default: {
-		...baseVariant
-	},
 	filled: {
-		...baseVariant
+		...variantFilledHover
 	},
 	outlined: {
-		...variantOutlined
+		...variantOutlinedHover
 	},
 	text: {
 		...variantText
 	},
 	ghost: {
-		...variantGhost
-	}
+		...variantGhostHover
+	},
+	glass: mergeConfigs(variantGlassHover, {})
 };

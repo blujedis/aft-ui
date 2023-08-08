@@ -1,11 +1,11 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
-	import Button from '../Button';
-	import Icon from '../Icon';
+	import { Button } from '../Button';
+	import { Icon } from '../Icon';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';
 	import type { AccordionContext } from '../Accordion/module';
-	import ConditionalElement from '../ConditionalElement';
+	import { ConditionalElement } from '../ConditionalElement';
 	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
 	import type { ElementNativeProps, IconifyTuple } from '../../types';
 
@@ -50,10 +50,10 @@
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed && variant === 'pills')
+		.option('roundeds', rounded, rounded && ['filled', 'glass'].includes(variant))
+		.option('shadows', shadowed, shadowed && variant !== 'flushed')
 		.option('disableds', theme, disabled)
-		.append('inline-flex items-center justify-between focus:outline-none focus:ring-2 w-full', true)
+		.append('inline-flex items-center justify-between focus:outline-none  w-full', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

@@ -4,7 +4,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { onMount, setContext } from 'svelte';
 	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
-	import BreadcrumbOption from '../BreadcrumbOption';
+	import { BreadcrumbOption } from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
 	import type { ElementNativeProps } from '../../types';

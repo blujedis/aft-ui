@@ -24,5 +24,5 @@ export type BadgeProps = {
 export const badgeDefaults: Partial<BadgeProps> = {
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

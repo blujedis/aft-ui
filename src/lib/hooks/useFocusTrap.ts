@@ -88,5 +88,3 @@ export function useFocusTrap(enabledOrOptions?: boolean | FocusTrapOptions) {
 
 	return [bindFocusTrap, handleFocusTrap] as [FocusTrapHook, FocusTrapHandler];
 }
-
-export default useFocusTrap;

@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-	import type { ButtonVariant } from '../Button';
-	import Disclosure from './';
-	import DisclosureButton from '../DisclosureButton';
-	import DisclosurePanel from '../DisclosurePanel';
+	import { Disclosure } from './';
+	import { DisclosureButton } from '../DisclosureButton';
+	import { DisclosurePanel } from '../DisclosurePanel';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Disclosure';
@@ -17,8 +16,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
-		variant: 'default' as ButtonVariant
+		theme: 'light' as ThemeColor
 	};
 
 	const sourceItems = [

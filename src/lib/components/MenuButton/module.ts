@@ -1,8 +1,7 @@
-import type { menuButton } from './config';
 import { type ButtonProps, buttonDefaults } from '../Button';
 import type { IconifyIcon } from '@iconify/svelte';
 
-export type MenuButtonVariant = keyof typeof menuButton;
+export type MenuButtonVariant = ButtonProps<any>['variant'];
 
 type ButtonPropsBase = Omit<ButtonProps<'button'>, 'as' | 'focused'>;
 

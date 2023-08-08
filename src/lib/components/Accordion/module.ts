@@ -7,7 +7,7 @@ import { accordionOptionDefaults } from '../AccordionOption';
 export type AccordianVariant = keyof typeof accordion;
 
 export type AccordionContext = SelectStore & {
-	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded };
+	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded; variant: AccordianVariant };
 };
 
 export type AccordionProps<Tag extends HTMLTag> = Omit<
@@ -22,14 +22,11 @@ export type AccordionProps<Tag extends HTMLTag> = Omit<
 	variant?: AccordianVariant;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { variant, ...rest } = accordionOptionDefaults;
-
 export const accordionDefaults: AccordionProps<'div'> = {
-	...rest,
+	...accordionOptionDefaults,
 	as: 'div',
 	multiple: false,
 	selected: [],
 	theme: 'light',
-	variant: 'default'
+	variant: 'outlined'
 };

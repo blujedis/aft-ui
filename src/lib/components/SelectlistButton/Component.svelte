@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { type SelectListButtonProps, selectListButtonDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import Badge from '../Badge';
-	import ConditionalElement from '../ConditionalElement';
-	import Flushed from '../Flushed';
-	import Icon from '../Icon';
+	import { Badge } from '../Badge';
+	import { Flushed } from '../Flushed';
+	import { Icon } from '../Icon';
 	import type { ElementProps, IconifyTuple } from '$lib/types';
 	import type { SelectListContext, SelectListItem } from '../SelectList';
 	import { getContext, onMount } from 'svelte';
@@ -31,6 +30,7 @@
 		theme,
 		transitioned,
 		variant,
+		badgeVariant,
 		onBeforeAdd,
 		onBeforeRemove
 	} = {
@@ -78,7 +78,7 @@
 		.option('fieldPadding', size, size)
 		.append('bg-transparent outline-none border-none', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
-		.append('w-12 ml-1 pl-0 py-1', tags)
+		.append('w-12 ml-1 pl-0', tags)
 		.append('caret-transparent truncate cursor-pointer', !tags)
 		.append('min-w-min', tags && !selected.length)
 		.append('group peer', true)
@@ -229,7 +229,7 @@
 						<slot name="tags" {handleRemoveTag}>
 							{#each selected as item}
 								<button on:click={() => handleRemoveTag(item)} class={tagClasses}>
-									<Badge variant="filled" {rounded} {theme} {size} class="hover:underline"
+									<Badge variant={badgeVariant} {rounded} {theme} {size} class="hover:underline"
 										><span class="pointer-events-none pr-1">{item?.label}</span>
 										<slot name="icon">×</slot>
 									</Badge>

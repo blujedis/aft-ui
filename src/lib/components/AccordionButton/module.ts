@@ -22,5 +22,5 @@ export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
 	roticon: true,
 	size: 'sm',
 	theme: 'light',
-	variant: 'default'
+	variant: 'outlined'
 };

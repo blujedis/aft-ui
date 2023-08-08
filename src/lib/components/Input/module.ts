@@ -28,5 +28,5 @@ export const inputDefaults: Partial<InputProps> = {
 	size: 'md',
 	theme: 'light',
 	transitioned: true,
-	variant: 'default'
+	variant: 'outlined'
 };

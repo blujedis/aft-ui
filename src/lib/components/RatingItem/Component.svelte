@@ -1,5 +1,5 @@
 <script lang="ts">
-	import themeStore, { styler, themer } from '$lib';
+	import themeStore, { getColor, styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
 	import type { RatingContext } from '../Rating';
@@ -17,7 +17,7 @@
 
 	// let ref: SVGElement | undefined;
 	const id = uniqid();
-	const initFill = '#FFA41C'; // classToColor($themeStore.palette, fill) || '#FFA41C';
+	const initFill = getColor(fill, '#FFA41C'); // accepts color or theme color ex: danger-600
 	const strokeColor = stroked ? initFill : undefined;
 
 	$: percentage =
@@ -32,7 +32,7 @@
 		? initFill
 		: percentage === 0
 		? 'currentColor'
-		: `url(#${id})`;
+		: `url(#${id})`; // SVG Pattern references Linear Gradient by ID
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);

@@ -1,41 +1,35 @@
-const baseVariant = {
-	$base: 'aria-expanded:border-b border-b-frame-200 rounded-none',
-	dark: 'aria-expanded:text-frame-200',
-	light: 'aria-expanded:text-frame-800',
-	primary: 'aria-expanded:text-primary-500',
-	secondary: 'aria-expanded:text-secondary-500',
-	tertiary: 'aria-expanded:text-tertiary-500',
-	danger: 'aria-expanded:text-danger-500',
-	warning: 'aria-expanded:text-warning-500',
-	success: 'aria-expanded:text-success-500',
-	info: 'aria-expanded:text-info-500'
-};
+import { mergeConfigs } from '$lib/theme';
+import {
+	bgAriaExpanded,
+	bgAriaGlassExpanded,
+	borderAriaExpanded,
+	textAriaExpanded
+} from '../options';
+import { common } from '../options';
+
+const bordered = common.bordered;
+
+// dark:border-black dark:border-opacity-40 border-b-frame-200
+const baseVariant = mergeConfigs(textAriaExpanded, {
+	$base: 'aria-expanded:border-b aria-expanded:text-white aria-expanded:font-medium ' + bordered,
+	white: 'dark:aria-expanded:text-[color:var(--text-light)]',
+	light: 'dark:aria-expanded:text-[color:var(--text-light)]',
+	dark: 'dark:aria-expanded:text-[color:var(--text-light)]'
+});
 
 export const accordionButton = {
-	default: { ...baseVariant },
 	outlined: { ...baseVariant },
-	flushed: {
-		$base: 'border-b border-frame-200',
-		dark: 'aria-expanded:text-white',
-		light: 'aria-expanded:text-frame-900',
-		primary: 'aria-expanded:text-primary-500',
-		secondary: 'aria-expanded:text-secondary-500',
-		tertiary: 'aria-expanded:text-tertiary-500',
-		danger: 'aria-expanded:text-danger-500',
-		warning: 'aria-expanded:text-warning-500',
-		success: 'aria-expanded:text-success-500',
-		info: 'aria-expanded:text-info-500'
-	},
-	pills: {
-		$base: 'aria-expanded:text-white bg-frame-100',
-		dark: 'aria-expanded:text-inherit aria-expanded:bg-frame-200',
-		light: 'aria-expanded:text-inherit aria-expanded:bg-frame-200',
-		primary: 'aria-expanded:bg-primary-500',
-		secondary: 'aria-expanded:bg-secondary-500',
-		tertiary: 'aria-expanded:bg-tertiary-500',
-		danger: 'aria-expanded:bg-danger-500',
-		warning: 'aria-expanded:bg-warning-500',
-		success: 'aria-expanded:bg-success-500',
-		info: 'aria-expanded:bg-info-500'
-	}
+	// dark:border-black dark:border-opacity-40 border-b-frame-200
+	flushed: mergeConfigs(textAriaExpanded, borderAriaExpanded, {
+		$base: 'border-0 border-b rounded-none aria-expanded:font-medium ' + bordered
+	}),
+	filled: mergeConfigs(textAriaExpanded, bgAriaExpanded, {
+		$base:
+			'bg-frame-100 dark:bg-frame-500/30 aria-expanded:bg-frame-200 mb-1 aria-expanded:text-white dark:aria-expanded:text-white',
+		dark: 'dark:aria-expanded:text-white dark:aria-expanded:bg-frame-900/80'
+	}),
+	glass: mergeConfigs(textAriaExpanded, bgAriaGlassExpanded, {
+		$base: 'bg-frame-100 dark:bg-frame-500/10 mb-1 dark:aria-expanded:text-white',
+		dark: 'dark:aria-expanded:text-white'
+	})
 };

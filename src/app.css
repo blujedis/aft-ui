@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-	--color-bg-light: #ffffff;
-	--color-bg-dark: theme('colors.frame.800');
-	--color-text-dark: theme('colors.frame.700');
-	--color-text-light: theme('colors.frame.200');
-	--color-text-dark-hover: theme('colors.frame.900');
-	--color-text-light-hover: theme('colors.frame.300');
+	--bg-light: #ffffff;
+	--bg-dark: theme('colors.frame.800');
+	--text-dark: theme('colors.frame.700');
+	--text-light: theme('colors.frame.200');
+	--text-dark-hover: theme('colors.frame.900');
+	--text-light-hover: theme('colors.frame.50');
 }
 
 html,
@@ -16,13 +16,33 @@ body {
 	height: 100%;
 	@apply font-light;
 	@apply tracking-tight;
-	background-color: var(--color-bg-light);
-	color: var(--color-text-dark);
+	background-color: var(--bg-light);
+	color: var(--text-dark);
 }
 
-html.dark>body {
-	background-color: var(--color-bg-dark);
-	color: var(--color-text-light);
+html.dark,
+html.dark > body {
+	background-color: var(--bg-dark);
+	color: var(--text-light);
+}
+
+.dark & [type='text'],
+input:where(:not([type])),
+[type='email'],
+[type='url'],
+[type='password'],
+[type='number'],
+[type='date'],
+[type='datetime-local'],
+[type='month'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='week'],
+[multiple],
+textarea,
+select {
+	color: var(--text-dark);
 }
 
 h1,

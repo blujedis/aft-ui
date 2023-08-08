@@ -24,5 +24,5 @@ export const paginationDetailDefaults: Partial<PaginationDetailProps> = {
 	rounded: 'full',
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

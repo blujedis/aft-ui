@@ -3,7 +3,7 @@
 	import useNotifications from '$lib/stores/notification';
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
-	import Icon from '../Icon';
+	import { Icon } from '../Icon';
 
 	type $$Props = NotificationProps & ElementNativeProps<'div'>;
 
@@ -30,7 +30,7 @@
 		.variant('notification', variant, theme, true)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.append('pointer-events-auto w-full max-w-sm overflow-hidden bg-white border-l-4 w-80', true)
+		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

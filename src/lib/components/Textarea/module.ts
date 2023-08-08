@@ -31,5 +31,5 @@ export const textareaDefaults: Partial<TextareaProps> = {
 	rounded: 'sm',
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'outlined'
 };

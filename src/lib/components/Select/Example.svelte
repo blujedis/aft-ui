@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Select, { type SelectVariant } from '.';
-	import SelectOption from '../SelectOption';
+	import { Select, type SelectVariant } from '.';
+	import { SelectOption } from '../SelectOption';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Select';
 	const description = 'Themed select list.';
@@ -18,7 +19,7 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as SelectVariant
+		variant: 'outlined' as SelectVariant
 	};
 
 	const items = [
@@ -31,30 +32,39 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Select {...props} variant="outlined" selected="react">
-				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
-				{/each}
-			</Select>
-		</label>
-		<label for="outline">
-			<div class="text-sm">Filled:</div>
-			<Select {...props} variant="filled" selected="java">
-				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
-				{/each}
-			</Select>
-		</label>
-		<label for="link">
-			<div class="text-sm">Flushed:</div>
-			<Select {...props} variant="flushed" selected="rust">
-				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
-				{/each}
-			</Select>
-		</label>
-	</div>
+	{#each colors as color}
+		<div class="grid grid-cols-4 gap-4 mb-4">
+			<label for="filled">
+				<Select {...props} variant="outlined" selected="react" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+
+			<label for="glass">
+				<Select {...props} variant="glass" selected="rust" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+
+			<label for="outline">
+				<Select {...props} variant="filled" selected="java" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+
+			<label for="link">
+				<Select {...props} variant="flushed" selected="rust" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+		</div>
+	{/each}
 </ExamplePage>

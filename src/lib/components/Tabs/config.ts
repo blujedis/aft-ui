@@ -1,21 +1,19 @@
 import { placeholder } from '../../constants/placeholder';
 
 export const tabs = {
-	default: {
-		...placeholder,
-		$base: 'border-t-0 border-x-0 border-b border-frame-200',
-		dark: 'border-white'
-	},
 	flushed: {
 		...placeholder,
-		$base: 'border-t-0 border-x-0 border-b border-frame-200',
-		dark: 'border-white'
+		$base:
+			'border-t-0 border-x-0 border-b border-frame-200 dark:border-black dark:border-opacity-40'
 	},
-	pills: { ...placeholder },
+	filled: { ...placeholder },
 	grouped: { ...placeholder },
 	labeled: {
 		...placeholder,
-		$base: 'border-t-0 border-x-0 border-b border-frame-200',
-		dark: 'border-white'
+		$base:
+			'border-t-0 border-x-0 border-b border-frame-200 dark:border-black dark:border-opacity-40'
+	},
+	glass: {
+		...placeholder
 	}
 };

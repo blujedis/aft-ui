@@ -1,5 +1,5 @@
 import { SvelteComponent } from 'svelte';
-import Notification, { type NotificationVariant, type NotificationProps } from '../Notification';
+import { Notification, type NotificationVariant, type NotificationProps } from '../Notification';
 
 export class NotificationsComponent extends SvelteComponent<NotificationProps> {}
 
@@ -23,6 +23,5 @@ export const notificationsDefaults: NotificationsProps = {
 	Component: Notification,
 	group: 'default',
 	duration: 3500,
-	position: 'top-right',
-	variant: 'default'
+	position: 'top-right'
 };

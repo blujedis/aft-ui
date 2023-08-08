@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Avatar, { type AvatarVariant } from '.';
-	import AvatarStack from '../AvatarStack';
+	import { Avatar, type AvatarVariant } from '.';
+	import { AvatarStack } from '../AvatarStack';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -16,7 +16,7 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		variant: 'default' as AvatarVariant,
+		variant: 'single' as AvatarVariant,
 		direction: 'up' as 'up' | 'down'
 	};
 

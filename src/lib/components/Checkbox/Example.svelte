@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Checkbox, { type CheckboxVariant } from '.';
+	import { Checkbox, type CheckboxVariant } from '.';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import type {
 		ThemeColor,
@@ -22,7 +22,7 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		transitioned: false as ThemeTransitioned,
-		variant: 'default' as CheckboxVariant
+		variant: 'outlined' as CheckboxVariant
 	};
 </script>
 

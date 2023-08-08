@@ -1,9 +1,10 @@
 <script lang="ts">
-	import Tabs from '.';
-	import Tab, { type TabVariant } from '../Tab';
+	import { Tabs } from '.';
+	import { Tab } from '../Tab';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-	import TabPanel from '../TabPanel';
+	import { TabPanel } from '../TabPanel';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Tabs';
 	const description = 'Themed Tabs and Tab controller component.';
@@ -17,17 +18,17 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'accented' as TabVariant
+		transitioned: false as boolean // ThemeTransitioned,
+		//variant: 'accented' as TabVariant
 	};
 
 	const tabs = [
-		{
-			value: 'java',
-			label: 'Java',
-			description:
-				'Java is a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself. It is a fast, secure, reliable programming language for coding everything from mobile apps and enterprise software to big data applications and server-side technologies.'
-		},
+		// {
+		// 	value: 'java',
+		// 	label: 'Java',
+		// 	description:
+		// 		'Java is a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself. It is a fast, secure, reliable programming language for coding everything from mobile apps and enterprise software to big data applications and server-side technologies.'
+		// },
 		{
 			value: 'javascript',
 			label: 'JavaScript',
@@ -50,10 +51,9 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="mb-4">
-		<div class="text-sm mb-4">Flushed:</div>
-		{#key props}
-			<Tabs {...props} variant="flushed" selected="python">
+	<div class="grid grid-cols-4 mb-4">
+		{#each colors as color}
+			<Tabs {...props} variant="flushed" selected="python" theme={color}>
 				<svelte:fragment slot="tabs">
 					{#each tabs as tab}
 						<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -65,12 +65,8 @@
 					{/each}
 				</svelte:fragment>
 			</Tabs>
-		{/key}
-	</div>
-	<div class="mb-4">
-		<div class="text-sm mb-4">Grouped:</div>
-		{#key props}
-			<Tabs {...props} variant="grouped" selected="react">
+
+			<Tabs {...props} variant="grouped" selected="react" theme={color}>
 				<svelte:fragment slot="tabs">
 					{#each tabs as tab}
 						<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -82,12 +78,8 @@
 					{/each}
 				</svelte:fragment>
 			</Tabs>
-		{/key}
-	</div>
-	<div class="mb-4">
-		<div class="text-sm mb-4">Pills:</div>
-		{#key props}
-			<Tabs {...props} variant="pills" selected="java">
+
+			<Tabs {...props} variant="filled" selected="python" theme={color}>
 				<svelte:fragment slot="tabs">
 					{#each tabs as tab}
 						<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -99,12 +91,8 @@
 					{/each}
 				</svelte:fragment>
 			</Tabs>
-		{/key}
-	</div>
-	<div class="mb-4">
-		<div class="text-sm mb-4">Labeled:</div>
-		{#key props}
-			<Tabs {...props} variant="labeled" selected="javascript">
+
+			<Tabs {...props} variant="labeled" selected="javascript" theme={color}>
 				<svelte:fragment slot="tabs">
 					{#each tabs as tab}
 						<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -116,6 +104,6 @@
 					{/each}
 				</svelte:fragment>
 			</Tabs>
-		{/key}
+		{/each}
 	</div>
 </ExamplePage>

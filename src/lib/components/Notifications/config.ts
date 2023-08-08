@@ -1,4 +1,3 @@
-import { placeholder } from '../../constants/placeholder';
 import type { NotificationPosition } from './module';
 
 export const notificationsPosition = {
@@ -9,7 +8,3 @@ export const notificationsPosition = {
 	'bottom-center': { x: 0, y: 0 },
 	'top-center': { x: 0, y: 0 }
 } as Record<NotificationPosition, { x: number; y: number }>;
-
-export const notifications = {
-	default: { ...placeholder }
-};

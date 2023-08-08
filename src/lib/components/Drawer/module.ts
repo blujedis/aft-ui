@@ -1,14 +1,5 @@
-import type {
-	ThemeColor,
-	ThemeShadowed,
-	ThemeSimpleSize,
-	ThemeSize,
-	ThemeSpeed
-} from '../../types';
+import type { ThemeColor, ThemeShadowed, ThemeSize, ThemeSpeed } from '../../types';
 import type { SvelteComponent } from 'svelte';
-// import type { drawer } from './config';
-
-export type DrawerVariant = 'default';
 
 export type DrawerProps = {
 	abortable?: boolean;
@@ -21,7 +12,6 @@ export type DrawerProps = {
 	size?: ThemeSize;
 	speed?: ThemeSpeed;
 	theme?: ThemeColor;
-	variant?: DrawerVariant;
 };
 
 export const drawerPositionMap = {
@@ -64,6 +54,5 @@ export const drawerDefaults: Partial<DrawerProps> = {
 	shadowed: 'lg',
 	size: 'sm',
 	speed: 'medium',
-	theme: 'light',
-	variant: 'default'
+	theme: 'light'
 };

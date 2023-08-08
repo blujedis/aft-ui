@@ -26,7 +26,6 @@
 
 	$: accordionPanelClasses = th
 		.create('AccordionPanel')
-		.append('mb-2', context?.globals.variant === 'pills')
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

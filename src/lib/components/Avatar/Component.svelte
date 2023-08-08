@@ -2,10 +2,10 @@
 	import { type AvatarProps, avatarDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../../types';
-	import Icon from '../Icon';
+	import { Icon } from '../Icon';
 	import type { AvatarStackContext } from '../AvatarStack';
 	import type { IconifyIcon } from '@iconify/svelte';
 
@@ -49,7 +49,7 @@
 		(notification &&
 			th
 				.create('AvatarNotification')
-				.variant('avatarNotification', 'default', theme, true)
+				.variant('avatarNotification', 'filled', theme, true)
 				.option('avatarNotificationSizes', size, size)
 				.append('absolute right-0 top-0 block rounded-full ring-2', true)
 				.append(
@@ -63,7 +63,7 @@
 		(_placeholder &&
 			th
 				.create('AvatarPlaceholder')
-				.variant('avatarPlaceholder', 'default', theme, true)
+				.variant('avatarPlaceholder', 'text', theme, true)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.option('avatarSizes', size, size)

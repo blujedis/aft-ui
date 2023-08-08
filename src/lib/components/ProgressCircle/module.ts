@@ -34,5 +34,5 @@ export const progressCircleDefaults: ProgressCircleProps<any> = {
 	textunit: '%',
 	theme: 'light',
 	value: 0,
-	variant: 'default'
+	variant: 'filled'
 };

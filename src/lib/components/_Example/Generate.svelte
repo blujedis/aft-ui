@@ -289,7 +289,11 @@
 										type="text"
 										name="name"
 										id="name"
-										class="form-input block w-full rounded-sm border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-frame-800 dark:ring-frame-600 dark:text-frame-100 dark:placeholder:text-frame-500 rounded-r-none"
+										class="form-input block w-full rounded-sm border-0 py-1.5 px-4 rounded-r-none shadow-sm text-sm
+
+										text-gray-900 dark:bg-frame-800 dark:text-frame-100
+										placeholder:text-gray-400 dark:placeholder:text-frame-500
+										ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 										placeholder="Jane Smith"
 									/>
 								</div>

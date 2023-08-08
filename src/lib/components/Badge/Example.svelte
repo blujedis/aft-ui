@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Badge, { type BadgeVariant } from '.';
+	import { Badge, type BadgeVariant } from '.';
+	import { colors } from '$lib/constants';
 	import type {
 		ThemeColor,
 		ThemeRounded,
@@ -21,19 +22,24 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		transitioned: false as ThemeTransitioned,
-		variant: 'default' as BadgeVariant
+		variant: 'filled' as BadgeVariant
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-8 gap-2">
-		<label for="filled">
-			<div class="text-sm">Filled:</div>
-			<Badge {...props}>React</Badge>
-		</label>
-		<label for="outlined">
-			<div class="text-sm">Outlined:</div>
-			<Badge {...props} variant="outlined">react</Badge>
-		</label>
-	</div>
+	{#each colors as color}
+		<div class="grid grid-cols-8 gap-2 mb-4">
+			<label for="filled">
+				<Badge {...props} theme={color}>React</Badge>
+			</label>
+
+			<label for="outlined">
+				<Badge {...props} variant="outlined" theme={color}>react</Badge>
+			</label>
+
+			<label for="glass">
+				<Badge {...props} variant="glass" theme={color}>React</Badge>
+			</label>
+		</div>
+	{/each}
 </ExamplePage>

@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { type ColormodeProps, colormodDefaults as defaults } from './module';
 	import type { ElementProps } from '../../types';
-	import { writable } from 'svelte/store';
+	import { useColorMode, type ColorModeHook } from '../../hooks';
+	import type { Unsubscriber } from 'svelte/store';
+	// import { writable } from 'svelte/store';
+	// import { onMount } from 'svelte';
 
 	type $$Props = ColormodeProps & ElementProps<'input'>;
 
@@ -9,40 +12,52 @@
 		...defaults
 	} as Required<ColormodeProps>;
 
-	const store = writable<boolean>(getValue(modeKey));
+	const store = useColorMode();
+	const { toggle, reset } = store;
 
-	function getRoot() {
-		if (typeof document === 'undefined') return null;
-		return document.documentElement;
+	function subscribe(fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) {
+		return store.subscribe((s) => fn(s, store));
 	}
 
-	function getValue(key: string): boolean {
-		if (typeof localStorage === 'undefined') return false;
-		return JSON.parse(localStorage.getItem(key) + '');
-	}
+	// const store = writable<boolean>();
 
-	function setValue(key: string, value: any) {
-		if (typeof localStorage === 'undefined') return;
-		localStorage.setItem(key, JSON.stringify(value));
-	}
+	// function getRoot() {
+	// 	if (typeof document === 'undefined') return null;
+	// 	return document.documentElement;
+	// }
 
-	function toggle() {
-		const root = getRoot();
-		if (!root) return;
-		if (!$store) {
-			root.classList.add('dark');
-			setValue(modeKey, true);
-		} else {
-			root.classList.remove('dark');
-			setValue(modeKey, false);
-		}
-		store.update((s) => !$store);
-	}
+	// function getValue(key: string): boolean {
+	// 	if (typeof localStorage === 'undefined') return false;
+	// 	return JSON.parse(localStorage.getItem(key) + '');
+	// }
 
-	function reset() {
-		localStorage.removeItem(modeKey);
-		store.update((s) => false);
-	}
+	// function setValue(key: string, value: any) {
+	// 	if (typeof localStorage === 'undefined') return;
+	// 	localStorage.setItem(key, JSON.stringify(value));
+	// }
+
+	// function toggle() {
+	// 	const root = getRoot();
+	// 	if (!root) return null;
+	// 	if (!$store) {
+	// 		root.classList.add('dark');
+	// 		setValue(modeKey, true);
+	// 	} else {
+	// 		root.classList.remove('dark');
+	// 		setValue(modeKey, false);
+	// 	}
+	// 	store.update((s) => !$store);
+	// }
+
+	// function reset() {
+	// 	localStorage.removeItem(modeKey);
+	// 	store.update((s) => false);
+	// }
+
+	// onMount(() => {
+	// 	const currentMode = getValue(modeKey);
+	// 	store.set(currentMode);
+	// });
 </script>
 
-<slot checked={$store} {toggle} {reset} />
+<slot {store} checked={$store} {toggle} {reset} {subscribe} />

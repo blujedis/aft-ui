@@ -31,13 +31,13 @@
 
 	const th = themer($themeStore);
 
-	$: wrapperClasses = th
-		.create('SwitchWrapper')
-		.append('flex items-center', true)
-		.append('flex-row-reverse', position === 'left')
-		.append('flex-col-reverse', position === 'top')
-		.append('flex-col', position === 'bottom')
-		.compile(true);
+	// $: wrapperClasses = th
+	// 	.create('SwitchWrapper')
+	// 	.append('flex items-center', true)
+	// 	.append('flex-row-reverse', position === 'left')
+	// 	.append('flex-col-reverse', position === 'top')
+	// 	.append('flex-col', position === 'bottom')
+	// 	.compile(true);
 
 	$: labelClasses = th
 		.create('SwitchLabel')

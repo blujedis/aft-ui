@@ -2,8 +2,7 @@
 	import type { PopoverVariant } from './';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-
-	import popover from '$lib/hooks/usePopover';
+	import { popover } from '$lib/hooks';
 
 	const title = 'Popover';
 	const description = 'Uses Popper to position tooltips and popover informational components.';
@@ -17,7 +16,7 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		transitioned: false as boolean,
-		variant: 'default' as PopoverVariant
+		variant: 'filled' as PopoverVariant
 	};
 </script>
 

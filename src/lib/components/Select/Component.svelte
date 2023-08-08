@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
-	import themeStore, { ensureArray, themer } from '$lib';
+	import themeStore, { ConditionalElement, Flushed, ensureArray, flushed, themer } from '$lib';
 	import { onMount, setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
@@ -39,36 +39,61 @@
 	$: inputClasses = th
 		.create('Select')
 		.variant('select', variant, theme, true)
-		.option('focusedRing', theme, focused)
-		.option('placeholders', theme, true)
+		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
+		.option('placeholders', theme, true)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('roundeds', rounded, rounded && variant !== 'flushed')
 		.option('shadows', shadowed, shadowed)
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
-		.append('border-0 ring-1 ring-black ring-opacity-5', variant === 'filled')
-		.append('flex items-center justify-center pr-10 focus:outline-none focus:ring-2', true) // always pad right for caret.
+		.append('border-0 ring-0', variant !== 'outlined')
+		.append('flex items-center justify-center pr-10 outline-none', true) // always pad right for caret.
 		.append(multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	const component = Flushed as any; // TODO: Fix types in Conditional Element
+
+	$: console.log(theme);
 </script>
 
-<select
-	{...$$restProps}
-	use:forwardedEvents
-	{multiple}
-	size={rows}
-	class={inputClasses}
-	value={multiple ? $store.selected : $store.selected[0]}
->
-	{#if placeholder}
-		<option value="" disabled selected
-			>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
+<ConditionalElement as={component} {theme} condition={variant === 'flushed'} />
+
+{#if variant === 'flushed'}
+	<Flushed {theme}>
+		<select
+			{...$$restProps}
+			use:forwardedEvents
+			{multiple}
+			size={rows}
+			class={inputClasses}
+			value={multiple ? $store.selected : $store.selected[0]}
 		>
-	{/if}
-	<slot selectedItems={$store.selected} select={context.select} unselect={context.unselect} />
-</select>
+			{#if placeholder}
+				<option value="" disabled selected
+					>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
+				>
+			{/if}
+			<slot selectedItems={$store.selected} select={context.select} unselect={context.unselect} />
+		</select>
+	</Flushed>
+{:else}
+	<select
+		{...$$restProps}
+		use:forwardedEvents
+		{multiple}
+		size={rows}
+		class={inputClasses}
+		value={multiple ? $store.selected : $store.selected[0]}
+	>
+		{#if placeholder}
+			<option value="" disabled selected
+				>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
+			>
+		{/if}
+		<slot selectedItems={$store.selected} select={context.select} unselect={context.unselect} />
+	</select>
+{/if}

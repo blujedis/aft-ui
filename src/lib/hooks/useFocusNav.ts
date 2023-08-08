@@ -71,14 +71,3 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 		onKeydown
 	};
 }
-export default useFocusNav;
-
-// const isSelected = $context.selected.includes(activeNode.dataset.value as any);
-// if (context.globals.multiple) {
-//   if (isSelected) activeNode.dataset.value && context.remove(activeNode.dataset.value);
-//   else context.select(activeNode.dataset.value);
-// } else if (!$context.selected.includes(activeNode.dataset.value as any)) {
-//   context.select(activeNode.dataset.value);
-//   context.close();
-// }
-// if ($context.selected.includes(activeNode.dataset.value as any) && !context.globals.multiple) return;

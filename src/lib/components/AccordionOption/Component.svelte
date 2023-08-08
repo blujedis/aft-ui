@@ -12,20 +12,18 @@
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
 
-	export let { as, key, size, theme, transition, variant } = {
+	export let { as, key, rounded, size, theme, transition } = {
 		...defaults,
 		key: panelContext?.key,
 		size: context.globals?.size,
 		theme: context.globals?.theme,
-		transition: context?.globals.transition,
-		variant: context?.globals.variant
+		transition: context?.globals.transition
 	} as Required<AccordianOptionProps<Tag>>;
 
 	const th = themer($themeStore);
 
 	$: accordionClasses = th
 		.create('AccordianOption')
-		.variant('accordionOption', variant, theme, true)
 		.option('fieldFontSizes', size, size)
 		.append($$restProps.class, true)
 		.compile(true);

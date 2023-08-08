@@ -1,6 +1,5 @@
 <script lang="ts">
 	import themeStore, { themer, type ElementProps } from '$lib';
-	import { border } from '../../constants/base';
 	import { type FlushedProps, flushedDefaults as defaults } from './module';
 
 	type $$Props = FlushedProps & ElementProps<'div'>;

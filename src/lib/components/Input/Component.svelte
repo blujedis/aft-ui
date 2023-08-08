@@ -27,11 +27,6 @@
 
 	const th = themer($themeStore);
 
-	// $: [focusMap, focusSize, focusOffset] = getFocus(
-	// 	focused,['ring', 'focus', 'two', 'unstyled']);
-	// .mapped(focusMap, theme, focusMap)
-	// .append([focusSize, focusOffset], focusMap)
-
 	$: inputClasses = unstyled
 		? th.create('Input').append($$restProps.class, true).compile(true)
 		: th
@@ -47,7 +42,7 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('focus:outline-none focus:ring-2', focused && variant !== 'flushed')
-				.append('px-2 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
+				// .append('px-2 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
 				.append('flex items-center justify-center', true)
 				.append($$restProps.class, true)
 				.compile(true);

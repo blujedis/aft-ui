@@ -8,7 +8,11 @@ const config = {
 	// preprocess: preprocess({
 	// 	postcss: true
 	// }),
-	preprocess: vitePreprocess(),
+	preprocess: [
+		vitePreprocess({
+			postcss: true
+		})
+	],
 
 	kit: {
 		adapter: adapter()

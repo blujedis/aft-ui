@@ -31,5 +31,5 @@ export const progressBarDefaults: ProgressBarProps<any> = {
 	size: 'md',
 	theme: 'light',
 	value: 0,
-	variant: 'default'
+	variant: 'filled'
 };

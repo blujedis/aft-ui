@@ -28,5 +28,5 @@ export const notificationDefaults: Partial<NotificationProps> = {
 	rounded: 'sm',
 	shadowed: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

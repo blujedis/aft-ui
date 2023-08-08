@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import SelectList from '.';
-	import SelectListButton from '../SelectListButton';
-	import SelectListOption from '../SelectListOption';
-	import SelectListPanel from '../SelectListPanel';
+	import { SelectList } from '.';
+	import { SelectListButton } from '../SelectListButton';
+	import { SelectListOption } from '../SelectListOption';
+	import { SelectListPanel } from '../SelectListPanel';
+	import { colors } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'SelectList';
@@ -52,21 +53,22 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		variant: 'default' as any
+		variant: 'outlined' as any
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	{#key props}
-		<div class="grid grid-cols-3 gap-2">
+	{#each colors as color}
+		<div class="grid grid-cols-4 gap-2 mb-4">
 			<label for="filled">
-				<div class="text-sm">Filled:</div>
 				<SelectList
 					{...props}
 					tags
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
+					theme={color}
+					variant="filled"
 					let:filtered
 				>
 					<SelectListButton />
@@ -79,8 +81,52 @@
 					</SelectListPanel>
 				</SelectList>
 			</label>
+
+			<label for="glass">
+				<SelectList
+					{...props}
+					variant="glass"
+					tags
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					theme={color}
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value}>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					</SelectListPanel>
+				</SelectList>
+			</label>
+
+			<label for="outlined">
+				<SelectList
+					{...props}
+					variant="outlined"
+					tags
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					theme={color}
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value}>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					</SelectListPanel>
+				</SelectList>
+			</label>
+
 			<label for="flushed">
-				<div class="text-sm">Flushed:</div>
 				<SelectList
 					{...props}
 					variant="flushed"
@@ -88,6 +134,7 @@
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
+					theme={color}
 					let:filtered
 				>
 					<SelectListButton />
@@ -101,5 +148,5 @@
 				</SelectList>
 			</label>
 		</div>
-	{/key}
+	{/each}
 </ExamplePage>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import themeStore, { themer } from '$lib';
 	import { type ButtonGroupItemProps, buttonGroupItemDefaults as defaults } from './module';
-	import Button from '../Button';
+	import { Button } from '../Button';
 	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';

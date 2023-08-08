@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Loader from '.';
+	import { Loader } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 

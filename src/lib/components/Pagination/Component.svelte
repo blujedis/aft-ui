@@ -3,7 +3,7 @@
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '../../types';
 
@@ -52,7 +52,7 @@
 		// [ln] justify-between border-t border-gray-200
 		.append('inline-flex items-center', variant === 'flushed')
 		// [gp] rounded-md shadow-sm
-		.append('isolate inline-flex -space-x-px', variant === 'grouped')
+		.append('isolate inline-flex -space-x-px', variant === 'filled')
 		.append($$restProps.class, true)
 		.compile(true);
 

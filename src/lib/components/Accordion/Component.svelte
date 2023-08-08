@@ -9,7 +9,7 @@
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps, HTMLTag } from '../../types';
 	import { useSelect } from '$lib/stores/select';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
@@ -21,7 +21,7 @@
 	export const store = useSelect({ multiple, selected });
 
 	const globals = cleanObj({
-		rounded: variant === 'pills' ? rounded : 'none',
+		rounded,
 		shadowed,
 		size,
 		theme,
@@ -36,18 +36,18 @@
 
 	const th = themer($themeStore);
 
-	if (rounded === 'full' && variant !== 'pills')
+	if (rounded === 'full' && variant !== 'filled')
 		console.warn(`Rounded downgraded to "xl2", full not supported by variant "${variant}".`);
 
 	$: accordionClasses = th
 		.create('Accordion')
 		.variant('accordion', variant, theme, true)
-		.option('roundeds', rounded === 'full' && variant !== 'pills' ? 'xl2' : rounded, rounded)
-		.option('shadows', shadowed, shadowed && variant !== 'pills')
-		.append(
-			'divide-y divide-frame-200 border border-frame-200 shrink',
-			variant === 'outlined'
+		.option(
+			'roundeds',
+			rounded === 'full' && variant !== 'filled' ? 'xl2' : rounded,
+			rounded && variant !== 'flushed'
 		)
+		.option('shadows', shadowed, shadowed && variant !== 'filled')
 		.append($$restProps.class, true)
 		.compile(true);
 

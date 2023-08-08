@@ -9,7 +9,7 @@
 	} from './module';
 	import themeStore, { themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '../../types';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
@@ -40,6 +40,8 @@
 		...(defaults as any)
 	} as Required<$$Props>;
 
+	let sel: HTMLSelectElement;
+
 	export const store = (initStore ||
 		useSelect({
 			multiple: true,
@@ -48,9 +50,6 @@
 			items: [],
 			filtered: []
 		})) as SelectStore<SelectListStore<Item>>;
-
-	const th = themer($themeStore);
-	let sel: HTMLSelectElement;
 
 	const globals = cleanObj({
 		full,
@@ -69,8 +68,7 @@
 		onBeforeRemove
 	});
 
-	export const context = setContext('SelectListContext', {
-		...store,
+	export const api = {
 		open,
 		close,
 		isSelected,
@@ -78,9 +76,16 @@
 		toggle,
 		remove,
 		filter,
-		reset,
+		reset
+	};
+
+	export const context = setContext('SelectListContext', {
+		...store,
+		...api,
 		globals
 	}) as SelectListContext;
+
+	const th = themer($themeStore);
 
 	$: groups = $store.items.reduce((a, c) => {
 		if (!c.group) return a;
@@ -179,7 +184,13 @@
 		return $store.selected.includes(key);
 	}
 
-	items.forEach((item) => add(item));
+	Promise.resolve(items)
+		.then((arr) => {
+			arr.forEach((i) => add(i));
+		})
+		.catch((ex) => {
+			console.warn((ex as Error).message);
+		});
 </script>
 
 <div

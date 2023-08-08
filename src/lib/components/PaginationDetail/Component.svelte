@@ -13,7 +13,6 @@
 		.create('PaginationDetail')
 		.variant('paginationDetail', variant, theme, true)
 		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('badgePadding', size, size)
 		.option('badgeFontSizes', size, size)
 		.option('roundeds', rounded, rounded)
@@ -35,7 +34,3 @@
 		results
 	</p>
 </div>
-
-<!-- <span use:forwardedEvents {...$$restProps} class={badgeClasses}>
-	<slot />
-</span> -->

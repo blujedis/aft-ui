@@ -1,28 +1,31 @@
 <script lang="ts">
-	import Colormode from '../Colormode';
-	import Switch from '../Switch';
-	// import Highlight from 'svelte-highlight';
-	// import typescript from 'svelte-highlight/languages/typescript';
-	// import github from 'svelte-highlight/styles/github';
+	import { Colormode } from '../Colormode';
+	import { Switch } from '../Switch';
+	import Highlight from 'svelte-highlight';
+	import typescript from 'svelte-highlight/languages/typescript';
+	import github from 'svelte-highlight/styles/github';
+	import githubDark from 'svelte-highlight/styles/github-dark-dimmed';
+	import { beforeUpdate } from 'svelte';
 
 	export let title = 'Example';
 	export let description = '';
 	export let code = '';
 	export let visible = false;
 
-	code = '';
-	function toggle() {
+	let mode = github;
+
+	function switchMode() {
 		visible = !visible;
 	}
 </script>
 
-<!-- <svelte:head>
+<svelte:head>
 	{@html github}
-</svelte:head> -->
+</svelte:head>
 
-<!-- <Colormode let:checked let:toggle let:reset>
-	<Switch {checked} on:change={toggle} class="absolute bottom-4 right-6" />
-</Colormode> -->
+<Colormode let:checked let:toggle>
+	<Switch {checked} on:change={toggle} shadowed="lg" class="fixed bottom-4 right-6 z-30" />
+</Colormode>
 
 <div>
 	<div class="flex mb-4">
@@ -36,12 +39,12 @@
 				<button
 					class={'rounded-sm px-4 py-1 border border-transparent text-sm ' +
 						(visible ? '' : 'bg-white dark:bg-frame-700')}
-					on:click={toggle}>Preview</button
+					on:click={switchMode}>Preview</button
 				>
 				<button
 					class={'rounded-sm px-4 py-1 border border-transparent text-sm ' +
 						(visible ? 'bg-white dark:bg-frame-700' : '')}
-					on:click={toggle}>Code</button
+					on:click={switchMode}>Code</button
 				>
 			</div>
 		</div>
@@ -57,8 +60,7 @@
 	</div>
 	<div>
 		{#if visible}
-			<span>Todo add syntax highlighting</span>
-			<!-- <Highlight language={typescript} {code} /> -->
+			<Highlight language={typescript} {code} class="ring-1 ring-black ring-opacity-5" />
 		{:else}
 			<slot />
 		{/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Radio, { type RadioVariant } from '.';
+	import { Radio, type RadioVariant } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -17,7 +17,7 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as RadioVariant
+		variant: 'outlined' as RadioVariant
 	};
 </script>
 

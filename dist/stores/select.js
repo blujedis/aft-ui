@@ -1,0 +1,61 @@
+import { ensureArray } from '../utils';
+import { writable, get } from 'svelte/store';
+export function useSelect(props = {}) {
+    const initialSelected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
+    const store = writable({ multiple: false, ...props, selected: [...initialSelected] });
+    function getStore() {
+        return get(store);
+    }
+    function select(value) {
+        if (typeof value === 'undefined')
+            return;
+        store.update((s) => {
+            let selected = [];
+            const multiple = s.multiple;
+            if (multiple)
+                selected = s.selected.includes(value) ? s.selected : [...s.selected, value];
+            else
+                selected = [value];
+            return { ...s, selected: [...selected] };
+        });
+    }
+    function unselect(value) {
+        if (typeof value === 'undefined')
+            return;
+        store.update((s) => {
+            return { ...s, selected: s.selected.filter((v) => v !== value) };
+        });
+    }
+    function swap(value) {
+        if (typeof value === 'undefined')
+            return;
+        store.update((s) => {
+            let selected = [...s.selected];
+            if (selected.includes(value))
+                selected = selected.filter((v) => v !== value);
+            else if (s.multiple || !selected.length)
+                selected = [...selected, value];
+            else if (!s.multiple)
+                selected = [value];
+            return { ...s, selected };
+        });
+    }
+    function resetSelected(...selected) {
+        store.update((s) => {
+            return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
+        });
+    }
+    function isSelected(value) {
+        if (typeof value === 'undefined')
+            return false;
+        return getStore().selected.includes(value);
+    }
+    return {
+        ...store,
+        resetSelected,
+        select,
+        unselect,
+        toggle: swap,
+        isSelected
+    };
+}

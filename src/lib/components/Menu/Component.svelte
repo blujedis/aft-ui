@@ -2,7 +2,7 @@
 	import { type MenuProps, menuDefaults as defaults, type MenuContext } from './module';
 	import themeStore, { themer, useDisclosure } from '$lib';
 	import type { ElementProps } from '../../types';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import type { MenuGlobalProps } from '../Menu';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 

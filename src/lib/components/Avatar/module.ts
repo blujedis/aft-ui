@@ -22,5 +22,5 @@ export type AvatarProps = {
 export const avatarDefaults: Partial<AvatarProps> = {
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'single'
 };

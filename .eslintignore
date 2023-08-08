@@ -13,4 +13,4 @@ package-lock.json
 yarn.lock
 /dist
 tailwind.config.cjs
-sveleton.config.cjs
+aft.config.cjs

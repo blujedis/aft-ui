@@ -1,7 +1,11 @@
+import { fill, stroke } from '$lib/constants';
+import { mergeConfigs } from '$lib/theme';
+
 const baseTrackVariant = {
-	$base: 'stroke-frame-200',
-	dark: 'stroke-white',
+	$base: 'stroke-frame-100 dark:stroke-frame-600',
+	white: '',
 	light: '',
+	dark: '',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -11,43 +15,22 @@ const baseTrackVariant = {
 	info: ''
 };
 
-const baseValueVariant = {
-	$base: '',
-	dark: 'stroke-frame-300',
-	light: 'stroke-frame-400',
-	primary: 'stroke-primary-500',
-	secondary: 'stroke-secondary-500',
-	tertiary: 'stroke-tertiary-500',
-	danger: 'stroke-danger-500',
-	warning: 'stroke-warning-500',
-	success: 'stroke-success-500',
-	info: 'stroke-info-500'
-};
+const baseValueVariant = mergeConfigs(stroke, {
+	dark: 'dark:stroke-frame-700'
+});
 
-const baseTextVariant = {
-	$base: 'text-[.85em]',
-	dark: 'fill-white',
-	light: 'fill-frame-600',
-	primary: 'fill-primary-600',
-	secondary: 'fill-secondary-600',
-	tertiary: 'fill-tertiary-600',
-	danger: 'fill-danger-600',
-	warning: 'fill-warning-600',
-	success: 'fill-success-600',
-	info: 'fill-info-600'
-};
+const baseTextVariant = mergeConfigs(fill, {
+	$base: 'text-[.85em]'
+});
 
 export const progressCircleTrack = {
-	default: { ...baseTrackVariant },
 	filled: { ...baseTrackVariant }
 };
 
 export const progressCircleValue = {
-	default: { ...baseValueVariant },
 	filled: { ...baseValueVariant }
 };
 
 export const progressCircleText = {
-	default: { ...baseTextVariant },
 	filled: { ...baseTextVariant }
 };

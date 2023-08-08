@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Switch, { type SwitchVariant } from '.';
+	import { Switch } from '.';
 	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Switch';
 	const description = 'Toggle switch component.';
@@ -15,17 +16,17 @@
 		focused: 'focusVisible' as ThemeFocused,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as SwitchVariant
+		theme: 'dark' as ThemeColor,
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
 	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Switch {...props} bind:checked />
-		</label>
+		{#each colors as color}
+			<label for={color}>
+				<Switch {...props} bind:checked theme={color} />
+			</label>
+		{/each}
 	</div>
 </ExamplePage>

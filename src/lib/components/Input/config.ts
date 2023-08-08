@@ -1,20 +1,22 @@
-import { variantFilled, variantOutlined, variantFlushed } from '../../constants/base';
-
-const baseVariant = {
-	...variantOutlined
-};
+import {
+	variantFilledHover,
+	variantOutlinedHover,
+	variantFlushed,
+	variantGlassHover
+} from '$lib/constants';
+import { mergeConfigs } from '$lib/theme';
 
 export const input = {
-	default: {
-		...baseVariant
-	},
 	outlined: {
-		...baseVariant
+		...variantOutlinedHover
 	},
 	filled: {
-		...variantFilled
+		...variantFilledHover
 	},
-	flushed: {
-		...variantFlushed
+	flushed: mergeConfigs(variantFlushed, {
+		$base: 'px-1 peer focus:ring-0 focus:outline-none border-0'
+	}),
+	glass: {
+		...variantGlassHover
 	}
 };

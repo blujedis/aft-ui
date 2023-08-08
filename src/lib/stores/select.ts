@@ -15,7 +15,7 @@ export type SelectInitProps = SelectStoreOptions & {
 };
 
 export interface SelectStoreMethods {
-	// reset(...selected: SelectValue[]): void;
+	resetSelected(...selected: SelectStoreValue[]): void;
 	select(value?: SelectStoreValue): void;
 	unselect(value?: SelectStoreValue): void;
 	toggle(value?: SelectStoreValue): void;
@@ -30,8 +30,10 @@ export type SelectStore<P extends Record<string, any> = Record<string, any>> = W
 export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	props = {} as P & SelectInitProps
 ): SelectStore<P> {
-	props.selected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
-	const store = writable({ multiple: false, ...props } as Required<P & SelectStoreOptions>);
+	const initialSelected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
+	const store = writable({ multiple: false, ...props, selected: [...initialSelected] } as Required<
+		P & SelectStoreOptions
+	>);
 
 	function getStore() {
 		return get(store);
@@ -66,11 +68,11 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	// function reset(...selected: SelectValue[]) {
-	// 	store.update((s) => {
-	// 		return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
-	// 	});
-	// }
+	function resetSelected(...selected: SelectStoreValue[]) {
+		store.update((s) => {
+			return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
+		});
+	}
 
 	function isSelected(value?: SelectStoreValue): boolean {
 		if (typeof value === 'undefined') return false;
@@ -79,7 +81,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 
 	return {
 		...store,
-		// reset,
+		resetSelected,
 		select,
 		unselect,
 		toggle: swap,

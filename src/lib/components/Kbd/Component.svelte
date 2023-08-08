@@ -4,7 +4,6 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
-	import { onMount } from 'svelte';
 
 	type $$Props = KbdProps & Omit<ElementNativeProps<'kbd'>, 'size'>;
 
@@ -21,7 +20,7 @@
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
-		.append('flex items-center justify-center', true)
+		.append('inline-flex items-center justify-center', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

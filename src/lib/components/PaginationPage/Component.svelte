@@ -11,7 +11,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import Icon from '../Icon';
+	import { Icon } from '../Icon';
 
 	type Tag = $$Generic<'a' | 'button' | 'span'>;
 	type NativeProps = Tag extends 'button'
@@ -35,20 +35,18 @@
 	$: paginationPageClasses = th
 		.create('PaginationPage')
 		.variant('paginationPage', variant, theme, true)
-		.option('focused', theme, focused && variant !== 'flushed')
-		.option('focusedRingSizes', 'two', focused && variant !== 'flushed')
-		.remove('focusedFilters', focused, focused)
+		.option('focusedRingVisible', theme, focused)
 		.option('fieldFontSizes', size, size)
-		.option('paginationGroupedPadding', size, size && variant === 'grouped')
+		.option('paginationGroupedPadding', size, size && variant === 'filled')
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
 		.option('roundeds', rounded, rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
-			variant === 'grouped'
+			variant === 'filled'
 		)
-		.append('ring-1 ring-inset ring-black ring-opacity-10', variant === 'grouped')
-		.append('z-10', variant === 'grouped' && selected)
-		.append('inline-flex items-center border-t-2 font-medium', variant === 'flushed')
+		// .append('ring-1 ring-inset ring-black ring-opacity-10', variant === 'filled')
+		.append('z-10', variant === 'filled' && selected)
+		// .append('inline-flex items-center border-t-2 font-medium', variant === 'flushed')
 		.append('pointer-events-none', value === '...')
 		.append('px-2', (previous || next) as any)
 		.append('rounded-r-none', previous as any)

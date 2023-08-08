@@ -2,8 +2,8 @@
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
 	import type { ElementNativeProps } from '../../types';
-	import Icon from '../Icon';
-	import { getContext } from 'svelte';
+	import { Icon } from '../Icon';
+	import { getContext, onMount } from 'svelte';
 	import type { BreadcrumbContext } from '../Breadcrumb/module';
 
 	type $$Props = BreadcrumbOptionProps & ElementNativeProps<'a'>;
@@ -29,15 +29,12 @@
 	} as Required<BreadcrumbOptionProps>;
 
 	const th = themer($themeStore);
+	let mounted = false;
 
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
 		.variant('breadcrumbOption', variant, theme, true)
 		.option('focusedRingVisible', theme, focused)
-		// .option('focused', theme, focused)
-		// .option('focusedRingSizes', 'two', focused)
-		// .remove('focusedFilters', focused, focused)
-		// .option('focusedOffsetSizes', 'two', focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
@@ -56,6 +53,10 @@
 		.option('breadcrumbFilledIconWidth', size, size)
 		.append('h-full flex-shrink-0 pointer-events-none', true)
 		.compile(true);
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <li>
@@ -64,6 +65,7 @@
 			{#if separator && index !== 0}
 				{#if variant === 'filled'}
 					<svg
+						class:invisible={!mounted}
 						class={breadcrumbIconClasses}
 						viewBox="0 0 24 44"
 						preserveAspectRatio="none"

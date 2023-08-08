@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Drawer, { type DrawerVariant } from '.';
+	import { Drawer } from '.';
 	import type { ThemeColor, ThemeShadowed, ThemeSpeed, ThemeSimpleSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -16,8 +16,7 @@
 		shadowed: 'xl' as ThemeShadowed,
 		size: 'md' as ThemeSimpleSize,
 		speed: 'medium' as ThemeSpeed,
-		theme: 'light' as ThemeColor,
-		variant: 'default' as DrawerVariant
+		theme: 'light' as ThemeColor
 	};
 
 	function show() {

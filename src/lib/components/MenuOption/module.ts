@@ -16,5 +16,5 @@ export const menuOptionDefaults: MenuOptionProps<'a'> = {
 	as: 'a',
 	size: 'sm',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

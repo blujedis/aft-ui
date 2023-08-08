@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Rating from '.';
-	import RatingItem from '../RatingItem';
+	import { Rating } from '.';
+	import { RatingItem } from '../RatingItem';
 	import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -11,7 +11,7 @@
 	let count = 5;
 
 	const props = {
-		fill: 'warning' as ThemeColor,
+		fill: 'success-200' as ThemeColor,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'sm' as ThemeSize
 	};
@@ -47,7 +47,7 @@
 
 		<label for="custom-icon">
 			<div class="text-sm mb-1">Custom Icon:</div>
-			<Rating let:mouseover let:mouseleave let:select fill="danger.600" score={2.7}>
+			<Rating let:mouseover let:mouseleave let:select fill="darkred" score={2.7}>
 				{#each Array(count) as r, index}
 					<RatingItem {index} let:uid let:stops let:classes let:styles let:fill let:stroke>
 						<!-- svelte-ignore a11y-mouse-events-have-key-events -->

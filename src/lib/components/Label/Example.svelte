@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Label, { type LabelVariant } from '.';
+	import Label from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -14,8 +14,7 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as LabelVariant
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 

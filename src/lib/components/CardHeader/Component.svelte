@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CardContent from '../CardContent';
+	import { CardElement } from '../CardElement';
 	import type { ElementNativeProps } from '../../types';
 	import { type CardHeaderProps, cardHeaderDefaults as defaults } from './module';
 	type $$Props = CardHeaderProps & ElementNativeProps<'div'>;
@@ -9,6 +9,6 @@
 	} as Required<CardHeaderProps>;
 </script>
 
-<svelte:component this={CardContent} {...$$restProps} type="header" {size}>
+<svelte:component this={CardElement} {...$$restProps} type="header" {size}>
 	<slot />
 </svelte:component>

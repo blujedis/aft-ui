@@ -1,10 +1,10 @@
 import { writable, type Writable, get as storeGet } from 'svelte/store';
 import type { DeepPartial, ThemeConfig, ThemeDefaults } from './types/theme';
-import defaults from './theme/defaults';
-import { palette } from './theme/palettes';
-import * as options from './components/options';
-import * as components from './components/configs';
+import defaultDefaults from './theme/defaults';
+import * as defaultOptions from './components/options';
+import * as defaultComponents from './components/configs';
 import { cleanObj } from './utils';
+// import { palette } from './theme/palettes';
 
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 	get(): T;
@@ -12,10 +12,10 @@ export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 };
 
 const defaultTheme = {
-	options,
-	defaults,
-	components,
-	palette
+	options: defaultOptions,
+	defaults: defaultDefaults,
+	components: defaultComponents,
+	//	palette
 };
 
 /**
@@ -46,8 +46,22 @@ function createStoreInternal<T extends ThemeConfig>(
 	{ options, defaults, components, ...rest }: DeepPartial<T>,
 	baseTheme = { ...defaultTheme }
 ): ThemeStore<T> {
+
+
 	const normalized = {
-		...ensureDefaults(baseTheme, { options, defaults, components }),
+		components: {
+			...baseTheme.components,
+			...components
+		},
+		options: {
+			...baseTheme.options,
+			...options
+		},
+		defaults: {
+			...baseTheme.defaults,
+			...defaults
+		},
+		// ...ensureDefaults(baseTheme, { options, defaults, components }),
 		...rest
 	} as unknown as T;
 
@@ -100,3 +114,9 @@ export function createStore<T extends Record<string, unknown> & DeepPartial<Them
 	});
 	return store as ThemeStore<T & ThemeConfig>;
 }
+
+// var calls = 0;
+// function iSuspectToBeLoopingInfititely() {
+// 	calls += 1;
+// 	if (calls > 100) { debugger; }
+// }

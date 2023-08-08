@@ -39,8 +39,8 @@ export type TabsContext = SelectStore & {
 
 export const tabsDefaults: Partial<TabsProps> = {
 	condensed: true,
-	focused: 'focusVisible',
+	focused: true,
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'flushed'
 };

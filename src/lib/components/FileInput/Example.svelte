@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FileInput, { type FileInputVariant } from '.';
+	import { FileInput } from '.';
 	import type {
 		ThemeColor,
 		ThemeFocused,
@@ -8,8 +8,8 @@
 		ThemeSize
 	} from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Button from '../Button';
-	import Empty from '../Empty';
+	import { Button } from '../Button';
+	import { Empty } from '../Empty';
 
 	const title = 'File Input';
 	const description = 'Component for handling input files.';
@@ -26,9 +26,7 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as FileInputVariant,
-		underlined: false
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 
 	function handleUpload(data: FormData | null, files: FileList | null) {
@@ -50,6 +48,7 @@
 				<Button variant="text" theme="dark" on:click={click}>Upload Files</Button>
 			</FileInput>
 		</label>
+
 		<label for="Upload Drop Child Element">
 			<form id="upload">
 				<FileInput accept="image/png, image/jpeg" onFormData={handleUpload} let:click let:drop>

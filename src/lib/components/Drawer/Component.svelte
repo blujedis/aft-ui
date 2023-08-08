@@ -24,8 +24,7 @@
 		shadowed,
 		size,
 		speed,
-		theme,
-		variant
+		theme
 	} = {
 		...defaults
 	} as Required<$$Props>;

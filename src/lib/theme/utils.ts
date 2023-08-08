@@ -1,6 +1,8 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, TypeOrValue } from '../types';
 import { getProperty } from 'dot-prop';
+import type { Path, ThemeColor, ThemeShade, TypeOrValue } from '../types';
+import { colors, shades } from '../constants/colors';
+import { cleanObj } from '$lib/utils';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -26,15 +28,83 @@ export function isCssColor(color: string) {
 	return prefixes.some((p) => color.startsWith(p));
 }
 
+/**
+ * Verifies that value is a known theme color.
+ *
+ * @param color the color to verify as theme color.
+ */
+export function isThemeColor(color: string) {
+	const [name, shade] = (color || '').replace(/^(--|--color)/, '').split('-');
+	const normalizedShade = typeof shade === 'undefined' ? 500 : parseInt(shade);
+	const hasColor = colors.includes(name.toLowerCase() as ThemeColor);
+	const hasShade = shades.includes(normalizedShade as ThemeShade);
+	if (hasShade && hasColor) return color;
+	return null;
+}
+
+/**
+ * Gets a normalized color value.
+ *
+ * @param color the color to normalize.
+ * @param def a default fallback value.
+ * @param opacity optional opacity to be applied when theme color is used.
+ */
+export function getColor(color: string, def?: string, opacity?: string) {
+	const themeColor = isThemeColor(color);
+	if (themeColor)
+		return opacity
+			? `rgb(var(--color-${themeColor})/${opacity})`
+			: `rgb(var(--color-${themeColor}))`;
+	if (color === null || typeof color === 'undefined' || typeof color !== 'string') return def || '';
+	return color; // we get here it's some string perhaps a named color?
+}
 
 /**
  * Picks a value using dot notation path.
  *
- * @param props an object containing properties and values.
+ * @param obj an object containing properties and values.
  * @param key the dot notation key to pick.
  */
-export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrValue<Path<P>>) {
-	return getProperty(props, key as string) || '';
+export function pickProp<O extends Record<string, any>>(obj: O, key: TypeOrValue<Path<O>>) {
+	obj = obj || {};
+	return getProperty(obj, key as string);
+}
+
+/**
+ * Picks values from an object.
+ *
+ * @param obj the object to pick values from.
+ * @param keys the keys to pick.
+ */
+export function pickProps<O extends Record<string, any>, R = Partial<O>>(
+	obj: O,
+	key: TypeOrValue<Path<O>>,
+	...keys: TypeOrValue<Path<O>>[]
+) {
+	keys = [key, ...keys];
+	return (keys || []).reduce((a, c) => {
+		a[c] = pickProp(obj, c);
+		return a;
+	}, {} as Partial<O>) as R;
+}
+
+/**
+ * Picks values from an object.
+ *
+ * @param obj the object to pick values from.
+ * @param keys the keys to pick.
+ */
+export function pickCleanProps<O extends Record<string, any>, R = Partial<O>>(
+	obj: O,
+	key: TypeOrValue<Path<O>>,
+	...keys: TypeOrValue<Path<O>>[]
+) {
+	keys = [key, ...keys];
+	return (keys || []).reduce((a, c) => {
+		const val = pickProp(obj, c);
+		if (typeof val !== 'undefined') a[c] = val;
+		return a;
+	}, {} as Partial<O>) as R;
 }
 
 /**
@@ -122,19 +192,17 @@ interface BEMString extends String {
 
 /**
  * Generate a BEM css class.
- * 
+ *
  * @param block the main block element.
  * @param child optional child element.
  */
 export function bem(block: string, child?: string) {
-  const arr = [block];
-  if (child)
-    arr.push(child);
-  const str = new String(arr.join('__')) as BEMString;
-  str.state = (...state: string[]) => str + '--' + state.join('-');
-  return str;
+	const arr = [block];
+	if (child) arr.push(child);
+	const str = new String(arr.join('__')) as BEMString;
+	str.state = (...state: string[]) => str + '--' + state.join('-');
+	return str;
 }
-
 
 type CompileValue = string | number | boolean;
 
@@ -154,12 +222,9 @@ export function compileTemplate(template: TemplateStringsArray, ...keys: string[
 	return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
 		const isArray = Array.isArray(data);
 		let clone: Record<string, unknown> | CompileValue[];
-		if (isArray)
-			clone = [...data, ...rest];
-		else if (typeof data !== 'object')
-			clone = [data, ...rest];
-		else
-			clone = { ...data };
+		if (isArray) clone = [...data, ...rest];
+		else if (typeof data !== 'object') clone = [data, ...rest];
+		else clone = { ...data };
 		const strArr = template.slice() as unknown as string[];
 		keys.forEach((k, i) => {
 			const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
@@ -176,7 +241,6 @@ declare global {
 }
 
 String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
-	args = ([this, arg, ...args].flat()) as string[];
+	args = [this, arg, ...args].flat() as string[];
 	return args.join(' ').trim();
 };
-

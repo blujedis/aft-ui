@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Menu from './';
-	import MenuButton from '../MenuButton';
-	import MenuOption from '../MenuOption';
-	import MenuPanel from '../MenuPanel';
+	import { Menu } from './';
+	import { MenuButton } from '../MenuButton';
+	import { MenuOption } from '../MenuOption';
+	import { MenuPanel } from '../MenuPanel';
+	import { colors } from '$lib/constants';
 	import type {
 		ThemeColor,
 		ThemeRounded,
@@ -83,24 +84,114 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		variant: 'default' as any
+		variant: 'filled' as any
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
 	{#key props}
-		<div class="grid grid-cols-8 gap-2">
-			<label for="filled">
-				<div class="text-sm">Filled:</div>
-				<Menu {...props}>
-					<MenuButton>Languages</MenuButton>
-					<MenuPanel>
-						{#each sourceItems as item}
-							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-						{/each}
-					</MenuPanel>
-				</Menu>
-			</label>
+		{#each colors as color}
+			<div class="grid grid-cols-5 gap-2 mb-4">
+				<label for={color}>
+					<Menu {...props} theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+				<label for={color}>
+					<Menu {...props} variant="outlined" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+				<label for={color}>
+					<Menu {...props} variant="text" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+				<label for={color}>
+					<Menu {...props} variant="ghost" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+
+				<label for={color}>
+					<Menu {...props} variant="glass" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+			</div>
+		{/each}
+
+		<!-- <div class="grid grid-cols-8 gap-2 mt-8">
+			{#each colors as color}
+				<label for={color}>
+					<div class="text-sm">Filled:</div>
+					<Menu {...props} variant="outlined" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+			{/each}
 		</div>
+
+		<div class="grid grid-cols-8 gap-2 mt-8">
+			{#each colors as color}
+				<label for={color}>
+					<div class="text-sm">Filled:</div>
+					<Menu {...props} variant="text" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+			{/each}
+		</div> -->
+
+		<!-- <div class="grid grid-cols-8 gap-2 mt-8">
+			{#each colors as color}
+				<label for={color}>
+					<div class="text-sm">Filled:</div>
+					<Menu {...props} variant="ghost" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+			{/each}
+		</div> -->
 	{/key}
 </ExamplePage>

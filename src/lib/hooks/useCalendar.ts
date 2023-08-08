@@ -48,5 +48,3 @@ export function useCalendar(year: number, oneBasedMonth: number) {
 		totalDays
 	};
 }
-
-export default useCalendar;

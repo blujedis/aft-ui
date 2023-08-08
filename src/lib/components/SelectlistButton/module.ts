@@ -2,6 +2,7 @@ import type { selectListButton } from './config';
 import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
+import type { BadgeVariant } from '../Badge';
 
 export type SelectListButtonVariant = keyof typeof selectListButton;
 
@@ -14,6 +15,7 @@ export type SelectListButtonProps = InputProps & {
 	roticon?: boolean;
 	tags?: boolean;
 	variant?: SelectListButtonVariant;
+	badgeVariant?: BadgeVariant;
 	onBeforeAdd?: <T extends SelectListItem>(
 		value: string,
 		input: HTMLInputElement
@@ -29,8 +31,9 @@ export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
 	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
 	placeholder: '',
 	roticon: true,
-	variant: 'default',
-	onBeforeAdd: (value: string, input: HTMLInputElement) =>
+	variant: 'outlined',
+	badgeVariant: 'filled',
+	onBeforeAdd: (value: string, _input: HTMLInputElement) =>
 		({ label: value, value, group: '', selected: false } as any),
-	onBeforeRemove: (item: SelectListItem, input: HTMLInputElement) => true // default just allow removal.
+	onBeforeRemove: (_item: SelectListItem, _input: HTMLInputElement) => true // default just allow removal.
 };

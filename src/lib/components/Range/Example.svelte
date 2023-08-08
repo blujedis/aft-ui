@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Range from './';
+	import { Range } from './';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 

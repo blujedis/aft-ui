@@ -15,5 +15,5 @@ export type FlushedProps = {
 export const flushedDefaults: Partial<FlushedProps> = {
 	peer: true,
 	theme: 'light',
-	variant: 'default'
+	variant: 'flushed'
 };

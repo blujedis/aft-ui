@@ -21,7 +21,6 @@
 		shadowed,
 		theme,
 		transition,
-		variant,
 		visible,
 		unmount,
 		unstyled
@@ -42,7 +41,6 @@
 
 	$: wrapperClasses = th
 		.create('ModalWrapper')
-		.variant('modal', variant, theme, true)
 		.append('fixed inset-0 z-10 overflow-y-auto', true)
 		.append($$restProps.class, true)
 		.compile(true);
@@ -84,35 +82,6 @@
 	function handleClick(e: any) {
 		if (!panel?.contains(e.target) && abortable) handleClose();
 	}
-
-	// function transitioner(node: HTMLElement, { type }: { type: ModalTransition }) {
-	// 	if (typeof type === 'function') return type(node);
-
-	// 	const options = transitions[type] as TransitionParams;
-
-	// 	if (type === 'none') {
-	// 		return { duration: 0 };
-	// 	}
-
-	// 	if (type === 'announce') {
-	// 		if (position === 'top') {
-	// 			options.duration = 200;
-	// 			options.y = -200;
-	// 		}
-	// 		return fly(node, options);
-	// 	}
-	// 	if (type === 'reveal') {
-	// 		if (position === 'bottom') {
-	// 			options.duration = 200;
-	// 			options.y = 200;
-	// 		}
-	// 		return fly(node, options);
-	// 	}
-	// 	if (type === 'zoom') {
-	// 		return scale(node, options);
-	// 	}
-	// 	return fade(node, options);
-	// }
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />

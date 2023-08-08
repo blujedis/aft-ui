@@ -15,14 +15,15 @@
 		<a href="/buttongroup">Button Groups</a>
 		<a href="/card">Card</a>
 		<a href="/checkbox">Checkboxes</a>
+		<a href="/datagrid">DataGrid</a>
 		<a href="/disclosure">Disclosure</a>
 		<a href="/drawer">Drawer</a>
 		<a href="/empty">Empty</a>
 		<a href="/fileinput">File Input</a>
 		<a href="/input">Inputs</a>
+		<a href="/kbd">Kbd</a>
 		<a href="/menu">Menu</a>
 		<a href="/modal">Modals</a>
-		<a href="/selectlist">Select List</a>
 		<a href="/notifications">Notifications</a>
 		<a href="/pagination">Pagination</a>
 		<a href="/popover">Popover</a>
@@ -31,8 +32,10 @@
 		<a href="/range">Range</a>
 		<a href="/rating">Rating</a>
 		<a href="/select">Select</a>
+		<a href="/selectlist">Select List</a>
 		<a href="/switch">Switch</a>
 		<a href="/tabs">Tabs</a>
+		<a href="/textarea">Textarea</a>
 		<a href="/tile">Tile</a>
 	</div>
 </div>
@@ -48,4 +51,3 @@
 		>Generator</a
 	>
 </div>
-

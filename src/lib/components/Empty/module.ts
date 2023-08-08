@@ -25,5 +25,5 @@ export const emptyDefaults: Partial<EmptyProps> = {
 	as: 'div',
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'outlined'
 };

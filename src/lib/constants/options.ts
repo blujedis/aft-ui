@@ -1,6 +1,7 @@
 import { mergeConfigs } from '$lib/theme';
 
 export * from './focused';
+export * from './states';
 
 export const borderSizes = {
 	unstyled: '',
@@ -225,50 +226,52 @@ export const fontLeadings = {
 	loose: 'leading-loose'
 };
 
-export const disableds = {
-	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
-	white: 'aria-disabled:text-frame-500',
-	dark: 'aria-disabled:text-frame-700',
-	light: 'aria-disabled:text-frame-300',
-	primary: 'aria-disabled:text-primary-300',
-	secondary: 'aria-disabled:text-secondary-300',
-	tertiary: 'aria-disabled:text-tertiary-300',
-	danger: 'aria-disabled:text-danger-300',
-	warning: 'aria-disabled:text-warning-300',
-	success: 'aria-disabled:text-success-300',
-	info: 'aria-disabled:text-info-300'
+export const gridgaps = {
+	unstyled: '',
+	none: 'gap-0',
+	xs: 'gap-2',
+	sm: 'gap-4',
+	md: 'gap-6',
+	lg: 'gap-12',
+	xl: 'gap-16',
+	xl2: 'gap-24'
 };
 
-export const placeholders = {
-	white: 'placeholder:text-frame-500 aria-disabled:placeholder:text-frame-500',
-	dark: 'placeholder:text-frame-500 aria-disabled:placeholder:text-frame-500',
-	light: 'placeholder:text-frame-400 aria-disabled:placeholder:text-frame-200',
-	primary: 'placeholder:text-primary-400 aria-disabled:placeholder:text-primary-300',
-	secondary: 'placeholder:text-secondary-400 aria-disabled:placeholder:text-secondary-300',
-	tertiary: 'placeholder:text-tertiary-400 aria-disabled:placeholder:text-tertiary-300',
-	danger: 'placeholder:text-danger-400 aria-disabled:placeholder:text-danger-300',
-	warning: 'placeholder:text-warning-400 aria-disabled:placeholder:text-warning-300',
-	success: 'placeholder:text-success-400 aria-disabled:placeholder:text-success-300',
-	info: 'placeholder:text-info-400 aria-disabled:placeholder:text-info-300'
+// ring-1 ring-inset ring-black ring-opacity-10 dark:ring-opacity-40
+// border border-frame-200 dark:border-black dark:border-opacity-40
+// divide-y divide-frame-200 dark:divide-black dark:divide-opacity-40
+
+export const divideds = {
+	white: 'divide-white',
+	light: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
+	dark: 'divide-frame-500',
+	primary: 'divide-primary-100 dark:divide-primary-600',
+	secondary: 'divide-secondary-100 dark:divide-secondary-600',
+	tertiary: 'divide-tertiary-100 dark:divide-tertiary-600',
+	danger: 'divide-danger-100 dark:divide-danger-600',
+	warning: 'divide-warning-100 dark:divide-warning-600',
+	success: 'divide-success-100 dark:divide-success-600',
+	info: 'divide-info-100 dark:divide-info-600'
 };
 
-export const checked = {};
+export const stripes = {
+	white: 'even:bg-white',
+	light: 'even:bg-frame-50',
+	dark: 'even:bg-frame-100/90',
+	primary: 'even:bg-primary-50',
+	secondary: 'even:bg-secondary-50',
+	tertiary: 'even:bg-tertiary-50',
+	danger: 'even:bg-danger-50',
+	warning: 'even:bg-warning-50',
+	success: 'even:bg-success-50',
+	info: 'even:bg-info-50'
+};
 
 export const common = {
 	active: 'active:brightness-125',
+	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
+	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
+	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
 	transition: 'transition-colors duration-125 motion-reduce:transition-none',
 	untransition: 'transition-none'
 };
-
-// export const focusedFlush = {
-// 	$base: 'focus:outline-none focus:!ring-0 focus-visible:!ring-0',
-// 	dark: 'focus:border-white focus:shadow-[0_4px_6px_-6px_rgb(var(--color-white))]',
-// 	light: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
-// 	primary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-primary-600))]',
-// 	secondary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-secondary-600))]',
-// 	tertiary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-tertiary-600))]',
-// 	danger: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-danger-600))]',
-// 	warning: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-warning-600))]',
-// 	success: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-success-600))]',
-// 	info: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-info-600))]'
-// };

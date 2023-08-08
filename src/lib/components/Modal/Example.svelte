@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Modal, { type ModalVariant, ModalComponent } from '.';
+	import { Modal, ModalComponent } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
-	import Button from '../Button';
+	import { Button } from '../Button';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import type { DisclosureTransitionOption } from '../Disclosure';
 
@@ -19,7 +19,6 @@
 		shadowed: 'xl' as ThemeShadowed,
 		theme: 'light' as ThemeColor,
 		transition: 'dissolve' as DisclosureTransitionOption,
-		variant: 'default' as ModalVariant,
 		visible: false,
 		unmount: true
 	};

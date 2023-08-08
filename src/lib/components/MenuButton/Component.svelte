@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
 	import themeStore, { themer } from '$lib';
-	import Button from '../Button';
-	import Icon from '../Icon';
+	import { Button } from '../Button';
+	import { Icon } from '../Icon';
 	import type { ElementProps } from '$lib/types';
 	import type { MenuContext } from '../Menu';
 	import { getContext } from 'svelte';

@@ -1,13 +1,13 @@
-import { variantFilled, variantOutlined } from '../../constants/base';
+import { variantFilledHover, variantGlassHover, variantOutlinedHover } from '$lib/constants';
 
 export const textarea = {
-	default: {
-		...variantOutlined
-	},
 	outlined: {
-		...variantOutlined
+		...variantOutlinedHover
 	},
 	filled: {
-		...variantFilled
+		...variantFilledHover
+	},
+	glass: {
+		...variantGlassHover
 	}
 };

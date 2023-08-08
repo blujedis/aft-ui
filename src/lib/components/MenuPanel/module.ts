@@ -20,5 +20,5 @@ export const menuPanelDefaults = {
 	shadowed: 'md',
 	theme: 'light',
 	transition: { start: 0.95, type: 'scale' },
-	variant: 'default'
+	variant: 'outlined'
 };

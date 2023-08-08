@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { NotificationVariant } from '../Notification';
-	import Notifications, { type NotificationPosition } from '.';
+	import { Notifications, type NotificationPosition } from '.';
 	import notification from '$lib/stores/notification';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
@@ -18,7 +18,7 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
-		variant: 'default' as NotificationVariant
+		variant: 'filled' as NotificationVariant
 	};
 
 	const themes = [

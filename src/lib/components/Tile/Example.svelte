@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Tile, { type TileVariant } from '.';
+	import { Tile, type TileVariant } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Tile';
 	const description = 'Basic tiles that can be used for button or anchor content for navigation.';
@@ -15,24 +16,26 @@
 		size: 'md' as ThemeSize,
 		theme: 'light' as ThemeColor,
 		// transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as TileVariant
+		variant: 'filled' as TileVariant
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	{#key props}
-		<div class="grid grid-cols-3 gap-4">
+	{#each colors as color}
+		<div class="grid grid-cols-3 gap-4 mb-4">
 			<label for="filled">
-				<div class="text-sm">Filled:</div>
-				<Tile {...props}>My Profile</Tile>
+				<Tile {...props} theme={color}>My Profile</Tile>
 			</label>
 			<label for="filled">
-				<div class="text-sm">Outlined:</div>
-				<Tile {...props} variant="outline">Some content</Tile>
+				<Tile {...props} full theme={color} variant="glass">Some content</Tile>
+			</label>
+			<label for="filled">
+				<Tile {...props} variant="outline" theme={color}>Some content</Tile>
 			</label>
 		</div>
-	{/key}
-	<div class="mt-4">
+	{/each}
+
+	<!-- <div class="mt-4">
 		<label>Using Grid w/ Full</label>
 		<div class="grid grid-cols-8 gap-1 h-48">
 			<button>
@@ -57,5 +60,5 @@
 				<Tile {...props} full>Settings</Tile>
 			</button>
 		</div>
-	</div>
+	</div> -->
 </ExamplePage>

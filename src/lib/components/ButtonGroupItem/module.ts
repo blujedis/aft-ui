@@ -9,5 +9,5 @@ export type ButtonGroupItemProps = Omit<ButtonProps<'button' | 'a'>, 'shadowed'>
 
 export const buttonGroupItemDefaults: Partial<ButtonGroupItemProps> = {
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

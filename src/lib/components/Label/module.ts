@@ -25,5 +25,5 @@ export const labelDefaults: Partial<LabelProps> = {
 	rounded: 'full',
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'text'
 };

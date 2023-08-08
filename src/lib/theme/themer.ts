@@ -2,8 +2,9 @@ import { twMerge } from 'tailwind-merge';
 import { ensureArray } from './utils';
 import classnames from 'classnames';
 import type { ClassNameValue } from 'tailwind-merge/dist/lib/tw-join';
-import { colors } from '../constants/base';
+import { colors } from '../constants/colors';
 import { getProperty } from 'dot-prop';
+import { browser } from '$app/environment';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
 
@@ -12,13 +13,13 @@ type Primitive = PrimitiveBase | Record<string, any> | PrimitiveBase[];
 export interface ThemerApi<C extends ThemeConfig> {
 	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
 		name: N,
-		variant?: V,
+		variant: V,
 		when?: Primitive
 	): ThemerApi<C>;
 
 	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
 		name: N,
-		variant?: V,
+		variant: V,
 		theme?: ThemeColor,
 		when?: Primitive
 	): ThemerApi<C>;
@@ -42,6 +43,8 @@ export interface ThemerApi<C extends ThemeConfig> {
 		when: Primitive
 	): ThemerApi<C>;
 
+	prepend(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
+
 	append(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
 
 	compile(withTailwindMerge?: boolean): string;
@@ -50,6 +53,7 @@ export interface ThemerApi<C extends ThemeConfig> {
 		base: string[];
 		themed: string[];
 		removed: string[];
+		prepended: classnames.ArgumentArray;
 		appended: classnames.ArgumentArray;
 	};
 }
@@ -85,18 +89,6 @@ function merge(...classes: ClassNameValue[]) {
 }
 
 /**
- * Checks if source includes compare value(s).
- *
- * @param source the source value or values.
- * @param values the compare value or values.
- */
-// function includes(source: Primitive, values: Primitive) {
-// 	source = ensureArray(source);
-// 	values = ensureArray(values);
-// 	return source.some(( v as any) => (values as Primitive[]).includes(v));
-// }
-
-/**
  * Simple string formatter that replaces values by positional order of arguments matched.
  *
  * @param template the template to be formatted
@@ -123,6 +115,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		option: mockOption,
 		mapped: mockMapped,
 		remove: mockRemove,
+		prepend: mockPrepend,
 		append: mockAppend,
 		compile: mockCompile,
 		classes: mockClasses
@@ -145,6 +138,10 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		return mockApi;
 	}
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	function mockPrepend(...args: any) {
+		return mockApi;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function mockAppend(...args: any) {
 		return mockApi;
 	}
@@ -158,6 +155,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			base: [],
 			themed: [],
 			removed: [],
+			prepended: [],
 			appended: []
 		};
 	}
@@ -167,7 +165,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 	};
 
 	// If no document return mock instance.
-	if (typeof document === 'undefined') return mockThemer;
+	if (!browser) return mockThemer;
 
 	type Components = typeof themeConfig.components;
 	type Options = typeof themeConfig.options;
@@ -190,6 +188,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		const base = [] as string[];
 		const themed = [] as string[];
 		let removed = [] as string[];
+		let prepended = [] as classnames.ArgumentArray;
 		let appended = [] as classnames.ArgumentArray;
 
 		const api = {
@@ -197,6 +196,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			option,
 			mapped,
 			remove,
+			prepend,
 			append,
 			compile,
 			classes
@@ -204,23 +204,14 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 
 		function getVariant<N extends Component, V extends Variant<N>>(
 			name: N,
-			variant?: V,
-			when?: Primitive
-		): typeof api;
-		function getVariant<N extends Component, V extends Variant<N>>(
-			name: N,
-			variant?: V,
-			theme?: ThemeColor,
-			when?: Primitive
-		): typeof api;
-		function getVariant<N extends Component, V extends Variant<N>>(
-			name: N,
-			variant?: V,
+			variant: V,
 			theme?: ThemeColor | Primitive,
 			when?: Primitive
 		) {
 			if (typeof themeConfig === 'undefined') return api;
-			const conf = _components[name][variant || ('default' as V)] as Record<string, string>;
+			const comp = _components[name] || {};
+			if (!comp || !variant) return api;
+			const conf = comp[variant] as Record<string, string>;
 			if (!colors.includes(theme as any) && !['white'].includes(theme as any)) {
 				when = theme as Primitive;
 				theme = '';
@@ -296,13 +287,6 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param classes tailwind class strings to be removed.
 		 * @param when if the value is truth otherwise reject.
 		 */
-		function remove(classes: string | string[], when: Primitive): typeof api;
-
-		function remove<K extends ThemeOption>(
-			key: K,
-			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-			when: Primitive
-		): typeof api;
 
 		function remove<K extends ThemeOption>(
 			classesOrKey: string | string[],
@@ -332,6 +316,19 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
 				removed = [...removed, ...(classes as string[])];
 			}
+			return api;
+		}
+
+		/**
+		 * Appends value after options base, andy themed colors.
+		 *
+		 * @param arg the value to be appended.
+		 * @param when if value is truthy add value otherwise reject.
+		 */
+		function prepend(arg: ClassNameValue, when: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
+			arg = arg || '';
+			if (when && arg) prepended = [...prepended, ...ensureArray(arg)];
 			return api;
 		}
 
@@ -379,7 +376,9 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				return [...a, ...filtered];
 			}, [] as string[]);
 
-			const normalized = classnames(...baseClean, ...themedClean, ...appended).trim();
+			const normalizedPrepended = classnames(...prepended);
+			let normalized = classnames(...baseClean, ...themedClean, ...appended).trim();
+			normalized = [normalizedPrepended, normalized].join(' ');
 
 			if (!withTailwindMerge) return normalized;
 
@@ -391,6 +390,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				base,
 				themed,
 				removed,
+				prepended,
 				appended
 			};
 		}
@@ -406,4 +406,3 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 themer.join = join;
 themer.merge = merge;
 themer.format = formatter;
-// themer.includes = includes;

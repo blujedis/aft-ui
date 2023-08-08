@@ -1,11 +1,11 @@
-const sveleton = require('./sveleton.config.cjs');
+const aft = require('./aft.config.cjs');
 
 // why do this? Stops VSCode from
 // complaining about unknown tailwindcss
 // theme colors.
 const colors = {
-	...sveleton.defaultColors,
-	...sveleton.generateTailwindVars(sveleton.defaultColors)
+	...aft.defaultColors,
+	...aft.generateTailwindVars(aft.defaultColors)
 };
 
 /** @type {import('tailwindcss').Config} */
@@ -21,6 +21,6 @@ module.exports = {
 		require('@tailwindcss/forms')({
 			strategy: 'class'
 		}),
-		sveleton.plugin()
+		aft.plugin()
 	]
 };

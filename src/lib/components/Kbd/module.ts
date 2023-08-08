@@ -24,5 +24,5 @@ export const kbdDefaults: Partial<KbdProps> = {
 	rounded: 'full',
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

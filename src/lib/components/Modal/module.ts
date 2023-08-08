@@ -1,8 +1,6 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
-import type { modal } from './config';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '$lib/stores';
-import type { EasingFunction, TransitionConfig } from 'svelte/transition';
 import {
 	disclosureTransitions,
 	type DisclosureTransitionOption,
@@ -12,8 +10,6 @@ import {
 export class ModalComponent extends SvelteComponent<ModalProps> {
 	disclosure?: DisclosureMethods;
 }
-
-export type ModalVariant = keyof typeof modal;
 
 export type ModalPosition =
 	| 'top'
@@ -27,20 +23,6 @@ export type ModalPosition =
 	| 'center-center'
 	| 'bottom-center';
 
-// export interface TransitionParams {
-// 	delay?: number;
-// 	duration?: number;
-// 	easing?: EasingFunction;
-// 	start?: number;
-// 	y?: number;
-// }
-
-// export type TransitionHandler = <O extends TransitionParams>(
-// 	node: Element,
-// 	options?: O
-// ) => TransitionConfig;
-
-// export type ModalTransition = 'fade' | 'announce' | 'zoom' | 'reveal' | 'none' | TransitionHandler;
 export type ModalTransition = DisclosureTransitionOption;
 
 export type ModalProps = {
@@ -56,7 +38,6 @@ export type ModalProps = {
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor;
 	transition?: ModalTransition | (Record<string, any> & { type: DisclosureTransition });
-	variant?: ModalVariant;
 	visible?: boolean;
 	unmount?: boolean;
 	unstyled?: boolean;
@@ -81,6 +62,5 @@ export const modalDefaults: Partial<ModalProps> = {
 	rounded: 'md',
 	shadowed: 'lg',
 	theme: 'light',
-	variant: 'default',
 	unmount: true
 };

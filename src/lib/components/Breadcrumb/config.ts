@@ -1,18 +1,12 @@
-import { placeholder } from '../../constants/placeholder';
+import { filledTextSoft, placeholder, solid, solidGlass, text } from '$lib/constants';
+import { mergeConfigs } from '$lib/theme';
 
 export const breadcrumbNav = {
-	default: { ...placeholder },
-	unfilled: { ...placeholder },
-	filled: {
-		$base: 'text-white',
-		dark: 'bg-white border-white',
-		light: 'text-frame-300 bg-frame-100',
-		primary: 'bg-primary-500',
-		secondary: 'bg-secondary-500',
-		tertiary: 'bg-tertiary-500',
-		danger: 'bg-danger-500',
-		warning: 'bg-warning-500',
-		success: 'bg-success-500',
-		info: 'bg-info-500'
-	}
+	text: { ...placeholder },
+	filled: mergeConfigs(solid, filledTextSoft, {
+		white: 'text-frame-200',
+		light: 'text-frame-200',
+		dark: 'text-frame-400'
+	}),
+	glass: mergeConfigs(solidGlass, text, {})
 };

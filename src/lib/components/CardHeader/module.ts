@@ -1,5 +1,5 @@
-import type { CardContentProps } from '../CardContent';
+import type { CardElementProps } from '../CardElement';
 
-export type CardHeaderProps = Omit<CardContentProps, 'type'>;
+export type CardHeaderProps = Omit<CardElementProps, 'type'>;
 
 export const cardHeaderDefaults = {};

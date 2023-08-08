@@ -1,7 +1,7 @@
-import { variantFlushed } from '../../constants/base';
+import { variantFlushed } from '$lib/constants';
 
 export const flushed = {
-	default: {
+	flushed: {
 		...variantFlushed
 	}
 };

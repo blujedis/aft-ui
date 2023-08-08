@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { buttonPadding } from '../options';
+
 	import { onMount } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '../../utils';
@@ -47,7 +49,6 @@
 				.option('disableds', theme, disabled)
 				.append('underline', underlined && underlined !== 'hover')
 				.append('hover:underline', underlined === 'hover')
-				.append('font-medium uppercase text-xs', isStrong)
 				.append('w-full', full)
 				.append(
 					'inline-flex items-center justify-center focus:outline-none focus:ring-2 cursor-pointer',
@@ -55,6 +56,8 @@
 				)
 				.append($$restProps.class, true)
 				.compile(true);
+
+	$: console.log(buttonPadding, size);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

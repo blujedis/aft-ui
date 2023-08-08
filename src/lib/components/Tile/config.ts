@@ -1,14 +1,16 @@
 import { mergeConfigs } from '$lib/theme';
-import { variantFilled, variantOutlined } from '../../constants/base';
+import { variantFilledHover, variantGlass, variantOutlinedHover } from '$lib/constants';
 
-const baseVariant = mergeConfigs(variantFilled, {
-	$base: 'text-inherit border border-transparent bg-frame-100 text-white font-medium'
+const baseVariant = mergeConfigs(variantFilledHover, {
+	$base: 'border border-transparent font-medium'
 });
 
 export const tile = {
-	default: { ...baseVariant },
 	filled: { ...baseVariant },
-	outline: mergeConfigs(variantOutlined, {
-		$base: 'hover:text-inherit ring-1 font-medium'
-	})
+	outline: mergeConfigs(variantOutlinedHover, {
+		$base: 'ring-1 font-medium'
+	}),
+	glass: {
+		...variantGlass
+	}
 };

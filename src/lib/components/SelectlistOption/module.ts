@@ -16,5 +16,5 @@ export const selectListOptionDefaults: SelectListOptionProps<'a'> = {
 	as: 'a',
 	size: 'sm',
 	theme: 'light',
-	variant: 'default'
+	variant: 'outlined'
 };

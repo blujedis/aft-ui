@@ -1,20 +1,17 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
-	import {
-		type ConditionalElementProps,
-		type ConditionalElementTypeProps,
-		conditionalElementDefaults as defaults
-	} from './module';
+	import { type ConditionalElementProps, conditionalElementDefaults as defaults } from './module';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag } from '../../types';
 
 	type Tag = $$Generic<HTMLTag | typeof SvelteComponent>;
-	type $$Props = ConditionalElementProps<Tag> & ConditionalElementTypeProps<Tag>;
+	type AdditionalProps = Tag extends HTMLTag ? ElementProps<Tag> : never;
+	type $$Props = ConditionalElementProps<Tag> & AdditionalProps;
 
-	export let { as, events, condition } = {
+	export let { as, condition, props } = {
 		...defaults
-	} as ConditionalElementProps<Tag> & ConditionalElementTypeProps<Tag>;
+	} as ConditionalElementProps<Tag>;
 
 	$: wrap = typeof condition === 'function' ? condition() : condition;
 
@@ -27,18 +24,19 @@
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		return { destroy() {} };
 	};
-	const forwardedEvents = events
-		? forwardEventsBuilder(get_current_component())
-		: forwardEventsNoop;
+	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	// const forwardedEvents = withevents
+	// 	? forwardEventsBuilder(get_current_component())
+	// 	: forwardEventsNoop;
 </script>
 
 {#if wrap}
 	{#if isElement}
-		<svelte:element this={element} use:forwardedEvents {...$$restProps}>
+		<svelte:element this={element} use:forwardedEvents {...$$restProps} {...props}>
 			<slot />
 		</svelte:element>
 	{:else}
-		<svelte:component this={component}>
+		<svelte:component this={component} {...props}>
 			<slot />
 		</svelte:component>
 	{/if}

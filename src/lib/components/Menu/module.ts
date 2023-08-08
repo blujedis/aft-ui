@@ -1,9 +1,6 @@
 import type { DisclosureStore } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { menu } from './config';
 import type { MenuButtonVariant } from '../MenuButton';
-
-export type MenuVariant = keyof typeof menu;
 
 export type MenuStore = {
 	//
@@ -28,7 +25,7 @@ export type MenuProps = {
 	escapable?: boolean; // close panel on escape key.
 	store?: DisclosureStore;
 	theme?: ThemeColor;
-	variant?: MenuVariant;
+	variant?: MenuButtonVariant;
 	visible?: boolean;
 };
 
@@ -37,5 +34,5 @@ export const menuDefaults: Partial<MenuProps & MenuGlobalProps> = {
 	escapable: true,
 	size: 'md',
 	theme: 'light',
-	variant: 'default'
+	variant: 'filled'
 };

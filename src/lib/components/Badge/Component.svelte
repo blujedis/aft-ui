@@ -24,7 +24,6 @@
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)
 				.option('badgePadding', size, size && !removable)
-				// .option('badgeFieldPadding', size, size && removable)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)

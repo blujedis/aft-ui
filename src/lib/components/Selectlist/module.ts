@@ -1,9 +1,6 @@
 import type { SelectStore, SelectStoreValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { selectList } from './config';
 import type { SelectListButtonVariant, SelectListButtonProps } from '../SelectListButton';
-
-export type SelectListVariant = keyof typeof selectList;
 
 export type SelectListItemKey = SelectStoreValue;
 
@@ -34,10 +31,10 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 		remove(item: T): void;
 		filter(query?: string): void;
 		reset(selectedItems?: SelectListItemKey[]): void;
-		globals: SelectListGlobalProps;
+		globals: SelectListContextProps;
 	};
 
-export type SelectListGlobalProps = {
+export type SelectListContextProps = {
 	full?: boolean;
 	newable?: boolean;
 	placeholder?: string;
@@ -53,16 +50,16 @@ export type SelectListGlobalProps = {
 	onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
 };
 
-export type SelectListProps<T extends SelectListItem> = SelectListGlobalProps & {
+export type SelectListProps<T extends SelectListItem> = SelectListContextProps & {
 	autoclose?: boolean; // on click outside menu close.
 	escapable?: boolean; // close panel on escape key.
-	items: T[];
+	items: T[] | Promise<T[]>;
 	store?: SelectStore<SelectListStore>;
 	visible?: boolean;
 	filter?: (query: string, items: Required<T>[]) => Required<T>[];
 };
 
-export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListGlobalProps> =
+export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
 	{
 		autoclose: true,
 		escapable: true,
@@ -72,5 +69,5 @@ export const selectListDefaults: Partial<SelectListProps<SelectListItem> & Selec
 			),
 		size: 'md',
 		theme: 'light',
-		variant: 'filled'
+		variant: 'outlined'
 	};
