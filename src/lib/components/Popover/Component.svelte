@@ -5,8 +5,9 @@
 
 	type $$Props = PopoverProps & ElementProps<'div'>;
 
-	export let { arrowed, content, hide, rounded, shadowed, size, theme, transitioned, unstyled, variant } =
+	export let { arrowed, content, hide, id, rounded, shadowed, size, theme, transitioned, unstyled, variant } =
 		{
+			id: 'popover',
 			...defaults
 		} as Required<$$Props>;
 
@@ -26,7 +27,7 @@
 		.compile(true);
 </script>
 
-<div {role} {...$$restProps} class={popoverClasses}>
+<div {role} {...$$restProps} {id} class={popoverClasses}>
 	<slot {hide} >
 		{#if typeof content === 'string'}
 			{content}
