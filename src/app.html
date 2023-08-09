@@ -13,7 +13,7 @@
 		if (localStorage.dark === 'dark' || (!('dark' in localStorage) && prefersDark)) {
 			darkMode = true;
 		} else {
-			const currentDark = JSON.parse(localStorage.dark);
+			const currentDark = JSON.parse(localStorage.dark || 'false');
 			if (currentDark) darkMode = true;
 		}
 		if (darkMode) document.documentElement.classList.add('dark');

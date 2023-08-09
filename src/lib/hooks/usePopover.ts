@@ -5,7 +5,6 @@
 import { computePosition, flip, shift, offset, arrow as arrowMiddleware, type ComputePositionConfig, type ComputePositionReturn, type Coords, type Middleware, autoUpdate, autoPlacement, type VirtualElement } from '@floating-ui/dom';
 import { type SvelteComponent, onDestroy } from 'svelte';
 import type { Readable } from 'svelte/store';
-import { browser } from '$app/environment';
 import { Popover } from '../components/Popover';
 import type { SvelteConstructorProps } from '$lib/types';
 
@@ -18,7 +17,6 @@ export type PopoverConstructorProps<C extends typeof SvelteComponent> = SvelteCo
 }
 
 export type PopoverBaseOptions<C extends typeof SvelteComponent> = {
-  abortable?: boolean;
   anchored?: boolean;
   arrowed?: string;
   autoplaced?: boolean;
@@ -26,26 +24,21 @@ export type PopoverBaseOptions<C extends typeof SvelteComponent> = {
   Component?: C;
   popover?: string | HTMLElement;
   escapable?: boolean;
-  events?: PopoverEvent | PopoverEvent[];
+  events?: PopoverEvent | PopoverEvent[] | null;
   props?: PopoverConstructorProps<C>;
 }
 
 export type PopoverOptions<C extends typeof SvelteComponent> = Partial<ComputePositionConfig> & PopoverBaseOptions<C>;
-
-export type PopoverRegisterOptions<C extends typeof SvelteComponent> = PopoverOptions<C> & {
-  events: PopoverEvent[];
-  popover: string | HTMLElement;
-  props: PopoverConstructorProps<C>;
-}
 
 export type PopoverUpdateHandler = (updateOptions?: Partial<ComputePositionConfig>) => void;
 
 export type PopoverCreateHook = [PopoverUpdateHandler, Partial<ComputePositionConfig>];
 
 export type PopoverUIOptions = Partial<ComputePositionConfig> & {
+  anchored?: boolean;
   arrow?: HTMLElement | null;
   popover: HTMLElement;
-  anchored?: boolean;
+  trigger: HTMLElement | VirtualElement,
 };
 
 export interface PopoverInstance {
@@ -61,6 +54,7 @@ export interface PopoverInstance {
 
 // Reasonable defaults for most use cases. 
 const DEFAULTS: Partial<ComputePositionConfig> = {
+  strategy: 'absolute',
   middleware: [
     offset(4), // offset should be at start.
     flip(),
@@ -76,7 +70,9 @@ const ARROW_POSITION = {
   left: 'right',
 };
 
-function ensureArray<T>(value?: null | T | T[], def = [] as T[]) {
+function ensureArray<T>(value?: null | T | T[], def = [] as T[], ignoreNull = true) {
+  if (value === null && ignoreNull)
+    return def;
   if (typeof value === 'undefined' || Array.isArray(value))
     return (value || def) as T[];
   return [value] as T[];
@@ -108,20 +104,25 @@ function mergeMiddleware(target?: any, source?: any) {
   return [...target, ...source] as Middleware[];
 }
 
-export function composePopover(
-  trigger: HTMLElement,
-  options?: PopoverUIOptions
-) {
+function mergeProps(target?: Record<string, any>, source?: Record<string, any>) {
+  return {
+    ...target,
+    ...source
+  };
+}
+export function computePopover(options: PopoverUIOptions) {
+
+  console.log('computing')
 
   const middleware = mergeMiddleware(DEFAULTS.middleware, options?.middleware);
 
-  const { arrow, popover, anchored, ...rest } = {
+  const { trigger, popover, arrow, anchored, ...rest } = {
     ...DEFAULTS,
     ...options,
     middleware
   } as Required<PopoverUIOptions>;
 
-  function assignElement({ x, y }: ComputePositionReturn) {
+  const assignElement = ({ x, y }: ComputePositionReturn) => {
     if (!popover) return;
     Object.assign(popover.style, {
       left: `${x}px`,
@@ -129,7 +130,7 @@ export function composePopover(
     });
   }
 
-  function assignArrow({ placement, middlewareData }: ComputePositionReturn) {
+  const assignArrow = ({ placement, middlewareData }: ComputePositionReturn) => {
     if (!arrow) return;
     const { x, y } = middlewareData.arrow as Coords & { centerOffset: number };
     const key = placement.split('-')[0] as keyof typeof ARROW_POSITION;
@@ -143,12 +144,11 @@ export function composePopover(
     });
   }
 
-  async function update(updateOptions?: Partial<ComputePositionConfig>) {
+  const compose = (updateOptions?: Partial<ComputePositionConfig>) => {
     updateOptions = {
       ...rest,
       ...updateOptions
     };
-
     if (anchored) {
       autoUpdate(trigger, popover, () => {
         computePosition(trigger, popover, updateOptions)
@@ -175,27 +175,49 @@ export function composePopover(
     }
   }
 
-  return [update, rest] as PopoverCreateHook;
+  return [compose, rest] as PopoverCreateHook;
 
 }
 
 export function createPopover<C extends typeof SvelteComponent<any>>(
-  options: PopoverRegisterOptions<C>) {
+  initOptions = {} as PopoverOptions<C>) {
 
-  const {
-    abortable, arrowed, Component, container: initContainer, autoplaced,
-    escapable, events, popover: initPopover, props, anchored, ...rest
-  } = options;
+  let options: PopoverOptions<C> & { events: PopoverEvent[] }
+  let container: HTMLElement | undefined | null;
 
-  const container = findContainer(initContainer);
-
-  let visible = false;
-  let trigger: HTMLElement | VirtualElement | undefined;
+  let trigger: HTMLElement | VirtualElement | undefined | null;
   let popover = null as HTMLElement | null;
   let arrow = null as HTMLElement | null;
   let component = undefined as SvelteComponent | undefined;
   let updater = undefined as PopoverUpdateHandler | undefined;
 
+  let visible = false;
+
+  const getComputeOptions = <T>(extend: T) => {
+    const { anchored, middleware, placement, platform, strategy } = options;
+    return {
+      anchored,
+      middleware,
+      placement,
+      platform,
+      strategy,
+      ...extend,
+    } as ComputePositionConfig & T;
+  };
+
+  const mergeOptions = (mergeOptions = {} as PopoverOptions<C>) => {
+    const clone = { ...mergeOptions };
+    const middleware = mergeMiddleware((options || {}).middleware, clone.middleware);
+    const events = ensureArray(clone.events);
+    options = {
+      ...options,
+      ...clone,
+      middleware,
+      events
+    };
+  };
+
+  mergeOptions(initOptions);
 
   const handleEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape' && visible) {
@@ -224,51 +246,59 @@ export function createPopover<C extends typeof SvelteComponent<any>>(
     else
       popover.style.display = '';
     visible = false;
-    if (events.includes('click') && abortable)
+    if (options.events.includes('click') && options.escapable)
       document.removeEventListener('click', handleClickOutside);
   };
 
-  const initElements = () => {
-    if (Component) {
+  const bindElements = () => {
+    container = findContainer(options.container);
+    if (options.Component) {
       const componentProps = {
-        ...props,
+        ...options.props,
         //  hide: api.hide.bind(api)
       };
-      component = new Component({ target: container, props: componentProps });
-      popover = findElement(initPopover, container); // must be called AFTER above "new Component"
+      component = new (options.Component)({ target: container, props: componentProps });
+      popover = findElement(options.popover, container); // must be called AFTER above "new Component"
     }
     else if (typeof popover === 'string') {
-      popover = findElement(initPopover, container);
+      popover = findElement(options.popover, container);
     }
     // Component and didn't find contained popover element or popover 
     // selector not found, or neither Component nor popover selector/element passed.
     if (typeof popover !== 'object')
       throw new Error(`Popover failed...missing or invalid popover element.`);
-    if (arrowed && popover)
-      arrow = findElement(arrowed, popover);
+    if (options.arrowed && popover)
+      arrow = findElement(options.arrowed, popover);
   };
 
-  const show = (updateOptions?: Partial<ComputePositionConfig>) => {
-    initElements();
+  const prepareOptions = (initOptions = {} as PopoverOptions<C>) => {
+    let middleware = mergeMiddleware(options.middleware, initOptions.middleware);
+    if (arrow)
+      middleware.push(arrowMiddleware({ element: arrow, padding: 4 }))
+    if (options.autoplaced) // flip cannot be present when autoPlacement middleware is use.
+      middleware = mergeMiddleware(middleware, autoPlacement()).filter(m => m.name !== 'flip');
+    options.middleware = middleware;
+    console.log(options.middleware)
+    bind();
+  };
+
+  const show = () => {
+    bindElements();
+    if (!trigger || !popover) return;
+    if (!updater) {
+      [updater] =
+        computePopover(getComputeOptions({ trigger, arrow, popover, anchored: options.anchored }));
+      console.log('updater', trigger, popover)
+    }
+    if (!trigger) {
+      console.warn(`Poppover failed...attempted to show without valid trigger element.`);
+      return;
+    }
     if (popover) {
-      let middleware = mergeMiddleware(rest.middleware, updateOptions?.middleware);
-      if (arrow)
-        middleware.push(arrowMiddleware({ element: arrow, padding: 4 }))
-      if (autoplaced) // flip cannot be present when autoPlacement middleware is use.
-        middleware = mergeMiddleware(middleware, autoPlacement()).filter(m => m.name !== 'flip')
-      updateOptions = {
-        ...rest,
-        ...updateOptions,
-        middleware,
-      };
-      const [popoverUpdater] = composePopover(trigger, { arrow, popover, anchored, ...updateOptions });
-      updater = popoverUpdater;
-      if (!updater) return;
-      updater(); // update the tooltip to apply middleware and position.
       if (!component)
         popover.style.display === 'block';
       visible = true;
-      if (events.includes('click') && abortable)
+      if (options.events.includes('click') && options.escapable)
         document.addEventListener('click', handleClickOutside);
     }
     else {
@@ -289,152 +319,147 @@ export function createPopover<C extends typeof SvelteComponent<any>>(
   } as Record<PopoverEvent, PopoverEventTuple[]>;
 
   const unbind = () => {
-    (events as PopoverEvent[]).forEach(ev => {
+    options.events.forEach(ev => {
       eventMap[ev].forEach(([event, listener]) => {
-        trigger.removeEventListener(event, listener);
+        if (trigger instanceof HTMLElement)
+          trigger.removeEventListener(event, listener);
       });
     });
-    if (abortable && escapable) window.addEventListener('keydown', handleEscape);
+    if (options.escapable) window.addEventListener('keydown', handleEscape);
   };
 
   const bind = () => {
+    if (!trigger) return;
     unbind();
-    (events as PopoverEvent[]).forEach(ev => {
+    options.events.forEach(ev => {
       eventMap[ev].forEach(([event, listener]) => {
-        trigger.addEventListener(event, listener);
+        if (trigger instanceof HTMLElement) {
+          trigger?.addEventListener(event, listener);
+        }
       });
     });
-    if (abortable && escapable) window.addEventListener('keydown', handleEscape);
+    if (options.escapable) window.addEventListener('keydown', handleEscape);
   };
 
-  let referenceNode: any;
-  const initVirtualObserver = (triggerRef: Readable<VirtualElement>) => {
+  const initVirtualSubscriber = (triggerRef: Readable<VirtualElement>) => {
     const unsubscribe = triggerRef.subscribe(($triggerRef) => {
-
-      if (trigger === undefined) {
+      if (trigger === undefined || trigger === null) {
         trigger = $triggerRef;
-        // create the popover.
-        // initPopper();
+        prepareOptions();
       } else {
-        // Preserve the reference to the virtual element.
-        Object.assign(trigger, $triggerRef);
-        // call update
-        // popperInstance?.update();
+        Object.assign(trigger, $triggerRef) // add ref to trigger element.
+        if (updater)
+          updater();
       }
-
     });
     onDestroy(unsubscribe);
   };
 
-  const registerTrigger = (triggerRef: Element | VirtualElement | Readable<VirtualElement>, registerOptions = {} as PopoverOptions<C>) => {
-    const middleware = mergeMiddleware(options.middleware, registerOptions?.middleware)
-    registerOptions = {
-      ...options,
-      ...registerOptions,
-      middleware,
-      props: {
-        ...options.props,
-        ...registerOptions.props
-      } as any
-    };
-    registerOptions.events = ensureArray(registerOptions.events);
+  const registerTrigger = (triggerRef: HTMLElement | Readable<VirtualElement>) => {
     if ('subscribe' in triggerRef) {
-      initVirtualObserver(triggerRef);
+      initVirtualSubscriber(triggerRef);
+      return {}; // dummy object.
     }
     else {
       trigger = triggerRef;
-      // create popover.
+      prepareOptions();
       return {
         destroy
       };
     }
   };
 
-  const registerPopover = (popoverRef: HTMLElement, registerOptions = {} as PopoverOptions<C>) => {
-    const middleware = mergeMiddleware(options.middleware, registerOptions?.middleware)
-    registerOptions = {
-      ...options,
-      ...registerOptions,
-      middleware,
-      props: {
-        ...options.props,
-        ...registerOptions.props
-      } as any
-    };
-    registerOptions.events = ensureArray(registerOptions.events);
-
+  const registerContent = (contentRef: HTMLElement) => {
+    popover = contentRef;
+    prepareOptions();
     return {
-      update() {
-        // update popover options here.
+      update(updateOptions: Partial<ComputePositionConfig>) {
+        if (updater)
+          updater(updateOptions);
       },
       destroy
     };
-
   };
-
-}
-
-export function usePopover<C extends typeof SvelteComponent<any> = typeof Popover>(options = {} as PopoverOptions<C>) {
-
-  // These are global options that
-  // can be applied to all that call
-  // the register hook below.
-  const initOptions = {
-    // Component: Popover as C, // Component used when popover is NOT an element.
-    abortable: true,
-    escapable: true,
-    popover: '#popover', // when string finds element in body or Component
-    events: ['hover'],
-    middleware: [],
-    ...options,
-    props: {
-      ...options.props
-    }
-  } as PopoverOptions<C>;
-
-
-  function trigger(initRef: HTMLElement, registerOptions = {} as PopoverOptions<C>) {
-    // unless we add a merge object function, need
-    // to manually merge the middleware array.
-    const middleware = mergeMiddleware(initOptions.middleware, registerOptions?.middleware)
-    registerOptions = {
-      ...initOptions,
-      ...registerOptions,
-      middleware,
-      props: {
-        ...initOptions.props,
-        ...registerOptions.props
-      } as any
-    };
-    registerOptions.events = ensureArray(registerOptions.events);
-    return createPopover(initRef, registerOptions as PopoverRegisterOptions<C>);
-  }
 
   return {
-    trigger,
-
+    registerTrigger,
+    registerContent
   };
 
 }
 
-export function tooltip<C extends typeof SvelteComponent<any> = typeof Popover>(
-  ref: HTMLElement,
-  options = {} as PopoverOptions<C>) {
-  const title = ref.getAttribute('title');
-  ref.setAttribute('title', '');
-  options = {
-    Component: Popover as C, // Component used when popover is NOT an element.
-    arrowed: '#arrow',
-    middleware: [],
-    ...options,
-    props: {
-      content: title,
-      ...options.props
-    } as any,
-  }
-  // const { register } = usePopover();
-  // const { destroy } = register(ref, options);
-  // return {
-  //   destroy
-  // };
+export function usePopover<C extends typeof SvelteComponent<any> = typeof Popover>(rootOptions = {} as PopoverOptions<C>) {
+
+  rootOptions = {
+    Component: Popover as C,
+    ...rootOptions
+  };
+
+  const tooltip = (ref: HTMLElement, options = {} as Omit<PopoverOptions<C>, 'Component'>) => {
+    const props = mergeProps(rootOptions.props, options.props) as SvelteConstructorProps<C>;
+    const middleware = mergeMiddleware(rootOptions.middleware, options.middleware);
+    // Allows us to use title for simple tooltips.
+    const title = ref.getAttribute('title');
+    if (title) {
+      ref.setAttribute('title', '');
+      props.content = props.content || title;
+    };
+    options = {
+      popover: '#popover',
+      arrowed: '#arrow',
+      events: ['hover', 'focus'],
+      ...options,
+      props,
+      middleware
+    };
+    return createPopover(options).registerTrigger(ref);
+  };
+
+  const popup = (ref: HTMLElement, options = {} as Omit<PopoverOptions<C>, 'Component'>) => {
+    const props = mergeProps(rootOptions.props, options.props) as SvelteConstructorProps<C>;
+    const middleware = mergeMiddleware(rootOptions.middleware, options.middleware);
+    options = {
+      popover: '#popover',
+      arrowed: '#arrow',
+      events: ['click'],
+      ...options,
+      props,
+      middleware
+    };
+    return createPopover(options).registerTrigger(ref);
+  };
+
+  const trigger = (ref: HTMLElement, options = {} as Omit<PopoverOptions<C>, 'Component' | 'events' | 'popover'>) => {
+    const props = mergeProps(rootOptions.props, options.props) as SvelteConstructorProps<C>;
+    const middleware = mergeMiddleware(rootOptions.middleware, options.middleware);
+    const _options = {
+      ...options,
+      props,
+      middleware
+    } as PopoverOptions<C>;
+    delete _options.Component; // not used when manual trigger & content.
+    return createPopover(options).registerTrigger(ref);
+  };
+
+  const content = (ref: HTMLElement, options = {} as Omit<PopoverOptions<C>, 'Component' | 'events' | 'popover'>) => {
+    const props = mergeProps(rootOptions.props, options.props) as SvelteConstructorProps<C>;
+    const middleware = mergeMiddleware(rootOptions.middleware, options.middleware);
+    const _options = {
+      popover: ref,
+      arrowed: '#arrow',
+      ...options,
+      props,
+      middleware
+    } as PopoverOptions<C> & { popover: HTMLElement | string; };
+    delete _options.Component;  // not used when manual trigger & content.
+    return createPopover(options).registerContent(ref);
+  };
+
+  return {
+    popup,
+    tooltip,
+    trigger,
+    content
+  };
 }
+

@@ -5,11 +5,23 @@
 
 	type $$Props = PopoverProps & ElementProps<'div'>;
 
-	export let { arrowed, content, hide, id, rounded, shadowed, size, theme, transitioned, unstyled, variant } =
-		{
-			id: 'popover',
-			...defaults
-		} as Required<$$Props>;
+	export let {
+		arrowed,
+		content,
+		hide,
+		id,
+		rounded,
+		sanitizer,
+		shadowed,
+		size,
+		theme,
+		transitioned,
+		unstyled,
+		variant
+	} = {
+		id: 'popover',
+		...defaults
+	} as Required<$$Props>;
 
 	const role = $$restProps.role ?? arrowed ? 'tooltip' : 'region';
 	const th = themer($themeStore);
@@ -22,15 +34,19 @@
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('popoverSizes', size, size)
-		.append('popover absolute', true)
+		.append('absolute', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
 
 <div {role} {...$$restProps} {id} class={popoverClasses}>
-	<slot {hide} >
+	<slot {hide}>
 		{#if typeof content === 'string'}
-			{content}
+			{#if !!sanitizer}
+				{@html sanitizer(content)}
+			{:else}
+				{content}
+			{/if}
 		{:else}
 			<svelte:component this={content} {hide} />
 		{/if}

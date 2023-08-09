@@ -28,13 +28,14 @@ export function useColorMode(key = 'dark') {
 	}
 
 	function getLocalValue(key: string): boolean {
-		if (typeof localStorage === 'undefined') return false;
-		return JSON.parse(localStorage.getItem(key) + '');
+		if (typeof localStorage === 'undefined' || !key) return false;
+		return JSON.parse(localStorage.getItem(key) || '');
 	}
 
 	function setLocalValue(key: string, value: any) {
 		if (typeof localStorage === 'undefined') return;
-		localStorage.setItem(key, JSON.stringify(value));
+		if (value)
+			localStorage.setItem(key, JSON.stringify(value));
 	}
 
 	function enable(mode: 'light' | 'dark') {

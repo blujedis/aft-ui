@@ -13,6 +13,7 @@ export type PopoverProps = {
 	arrowed?: boolean;
 	content?: string | typeof SvelteComponent;
 	rounded?: ThemeRounded;
+	sanitizer?: (value: string) => string; // only allow @html when sanitized.
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
