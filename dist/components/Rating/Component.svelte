@@ -1,4 +1,4 @@
-<script>import themeStore, { themer } from "../..";
+<script>import { themeStore, themer } from "../..";
 import { RatingItem } from "../RatingItem";
 import {
   ratingControllerDefaults as defaults

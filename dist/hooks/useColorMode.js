@@ -18,14 +18,15 @@ export function useColorMode(key = 'dark') {
         return document.documentElement;
     }
     function getLocalValue(key) {
-        if (typeof localStorage === 'undefined')
+        if (typeof localStorage === 'undefined' || !key)
             return false;
-        return JSON.parse(localStorage.getItem(key) + '');
+        return JSON.parse(localStorage.getItem(key) || '');
     }
     function setLocalValue(key, value) {
         if (typeof localStorage === 'undefined')
             return;
-        localStorage.setItem(key, JSON.stringify(value));
+        if (value)
+            localStorage.setItem(key, JSON.stringify(value));
     }
     function enable(mode) {
         store.update((_s) => (mode === 'light' ? false : true));

@@ -3,7 +3,8 @@ import {
 	bgAriaSelected,
 	borderAriaSelected,
 	textAriaSelected,
-	solidGlassHover
+	solidGlassHover,
+	bgAriaGlassSelected
 } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
 
@@ -22,5 +23,10 @@ export const paginationPage = {
 		$base:
 			'inline-flex items-center border-t-2 font-medium border-x-0 border-b-0 dark:border-black dark:border-opacity-40 aria-selected:border-opacity-100',
 		dark: 'aria-selected:border-frame-600'
+	}),
+
+	glass: mergeConfigs(bgAriaGlassSelected, solidGlassHover, {
+		$base:
+			'ring-1 ring-inset ring-black ring-opacity-10 dark:ring-opacity-40 text-frame-500 aria-selected:text-white'
 	})
 };

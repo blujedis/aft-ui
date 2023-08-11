@@ -1,5 +1,5 @@
 <script>import { menuDefaults as defaults } from "./module";
-import themeStore, { themer, useDisclosure } from "../..";
+import { themeStore, themer, useDisclosure } from "../..";
 import { setContext } from "svelte";
 import { cleanObj, createCustomEvent } from "../../utils";
 export let {

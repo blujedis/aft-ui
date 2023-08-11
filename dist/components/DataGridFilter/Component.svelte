@@ -1,5 +1,5 @@
 <script>import { gridFilterDefaults as defaults } from "./module";
-import themeStore, { bem, pickCleanProps, styler, themer } from "../..";
+import { themeStore, bem, pickCleanProps, styler, themer } from "../..";
 import { getContext } from "svelte";
 import { DataGridCell } from "../DataGridCell";
 import { debounce } from "../../utils";

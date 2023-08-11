@@ -1,5 +1,5 @@
 import type { IconifyIcon } from '@iconify/svelte';
-import type { SvelteComponent, ComponentProps } from 'svelte';
+import type { SvelteComponent, ComponentProps, SvelteComponent_1 } from 'svelte';
 import type { SvelteHTMLElements } from 'svelte/elements';
 import type {
 	BlurParams,
@@ -51,7 +51,7 @@ export type ElementNativeProps<
 	A extends keyof ElementProps<T> | undefined = undefined
 > = PickNativeProps<T, A>;
 
-export type SvelteConstructorProps<T extends typeof SvelteComponent> = ComponentProps<
+export type SvelteConstructorProps<T extends typeof SvelteComponent<any, any>> = ComponentProps<
 	InstanceType<T>
 >;
 

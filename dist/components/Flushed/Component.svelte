@@ -1,4 +1,4 @@
-<script>import themeStore, { themer } from "../..";
+<script>import { themeStore, themer } from "../..";
 import { flushedDefaults as defaults } from "./module";
 export let { disabled, focused, group, peer, theme, variant } = {
   ...defaults

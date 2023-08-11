@@ -1,5 +1,5 @@
 <script>import { menuButtonDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { getContext } from "svelte";

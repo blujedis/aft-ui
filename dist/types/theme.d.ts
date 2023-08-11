@@ -4,7 +4,7 @@ import type * as componentOptions from '../components/options';
 import type defaults from '../theme/defaults';
 import type * as configs from '../components/configs';
 import type { colors, shades } from '../constants/colors';
-import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
+import type { namedcolors, tailwindcolors } from '../theme/palettes';
 export type DeepPartial<T> = T extends object ? T extends Array<infer U> ? DeepPartial<U>[] : {
     [K in keyof T]?: DeepPartial<T[K]>;
 } : T;
@@ -36,7 +36,6 @@ export interface ThemeConfig {
     options: ThemeOptions;
     defaults: typeof defaults;
     components: typeof configs;
-    palette: typeof palette;
 }
 export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
 export type ThemeOption = keyof ThemeOptions;

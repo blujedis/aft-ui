@@ -1,4 +1,4 @@
-<script>import themeStore, { themer } from "../..";
+<script>import { themeStore, themer } from "../..";
 import { tabDefaults as defaults } from "./module";
 import { getContext } from "svelte";
 const context = getContext("Tabs");

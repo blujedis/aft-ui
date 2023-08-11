@@ -1,15 +1,12 @@
-/**
- * Global Options
- * dropshadow: (light: none)
- */
-import type { SvelteComponent } from 'svelte';
 import type { popover } from './config';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 export type PopoverVariant = keyof typeof popover;
 export type PopoverProps = {
+    close?: () => void;
     arrowed?: boolean;
-    content?: string | typeof SvelteComponent<any> | null;
+    content?: string;
     rounded?: ThemeRounded;
+    sanitizer?: (value: string) => string;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;

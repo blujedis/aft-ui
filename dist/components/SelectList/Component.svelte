@@ -1,7 +1,7 @@
 <script>import {
   selectListDefaults as defaults
 } from "./module";
-import themeStore, { themer, useSelect } from "../..";
+import { themeStore, themer, useSelect } from "../..";
 import { setContext } from "svelte";
 import { cleanObj, createCustomEvent } from "../../utils";
 export let {

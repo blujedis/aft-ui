@@ -1,6 +1,9 @@
-import { solid } from '../../constants';
+import { solid, variantFilled } from '../../constants';
 export const popover = {
     filled: {
-        ...solid
+        ...variantFilled,
+        $base: 'text-white',
+        light: 'text-[color:var(--text-dark)]',
+        white: 'text-[color:var(--text-dark)]'
     }
 };

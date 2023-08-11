@@ -1,4 +1,4 @@
-<script>import themeStore, { themer } from "../..";
+<script>import { themeStore, themer } from "../..";
 import { buttonGroupItemDefaults as defaults } from "./module";
 import { Button } from "../Button";
 import { getContext } from "svelte";

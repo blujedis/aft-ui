@@ -1,5 +1,5 @@
 <script>import { selectDefaults as defaults } from "./module";
-import themeStore, { ConditionalElement, Flushed, ensureArray, flushed, themer } from "../..";
+import { themeStore, ConditionalElement, Flushed, ensureArray, flushed, themer } from "../..";
 import { onMount, setContext } from "svelte";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";

@@ -1,10 +1,13 @@
-<script>import themeStore, { themer } from "../..";
+<script>import { themeStore, themer } from "../..";
 import { popoverDefaults as defaults } from "./module";
+import { fade } from "svelte/transition";
 export let {
   arrowed,
   content,
+  close,
   id,
   rounded,
+  sanitizer,
   shadowed,
   size,
   theme,
@@ -12,61 +15,40 @@ export let {
   unstyled,
   variant
 } = {
+  id: "popover",
   ...defaults
 };
 const role = $$restProps.role ?? arrowed ? "tooltip" : "region";
 const th = themer($themeStore);
 $:
-  popoverClasses = th.create("Popover").variant("popover", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("popoverSizes", size, size).append("popover", true).append($$restProps.class, true).compile(true);
+  popoverClasses = th.create("Popover").variant("popover", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("popoverSizes", size, size).append("absolute animate-fade-in-down", true).append($$restProps.class, true).compile(true);
 </script>
 
-<div {role} {...$$restProps} class={popoverClasses}>
-	<slot>
-		{#if typeof content === 'string'}
-			{content}
+<div
+	{role}
+	{...$$restProps}
+	{id}
+	class={popoverClasses}
+	transition:fade={{ delay: 250, duration: 500 }}
+>
+	<slot {close}>
+		{#if !!sanitizer}
+			{@html sanitizer(content)}
 		{:else}
-			<svelte:component this={content} />
+			{content || 'Hello Tooltip!'}
 		{/if}
 	</slot>
 	{#if arrowed}
-		<div id="arrow" data-popper-arrow />
+		<div id="arrow" class="popover__arrow" />
 	{/if}
 </div>
 
 <style>
-	#arrow,
-	#arrow::before {
+	#arrow {
 		position: absolute;
+		background: inherit;
 		width: 8px;
 		height: 8px;
-		z-index: -1;
-		background: inherit;
-	}
-
-	#arrow {
-		visibility: hidden;
-	}
-
-	#arrow::before {
-		visibility: visible;
-		content: '';
 		transform: rotate(45deg);
-		background: inherit;
-	}
-
-	:global(.popover[data-popper-placement^='bottom'] > #arrow) {
-		top: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='top'] > #arrow) {
-		bottom: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='left'] > #arrow) {
-		right: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='right'] > #arrow) {
-		left: -4px;
 	}
 </style>

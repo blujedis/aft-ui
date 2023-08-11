@@ -1,4 +1,4 @@
-<script>import themeStore, { getColor, styler, themer } from "../..";
+<script>import { themeStore, getColor, styler, themer } from "../..";
 import { getContext } from "svelte";
 import { ratingDefaults as defaults } from "./module";
 import { uniqid } from "../../utils";

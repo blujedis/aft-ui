@@ -1,6 +1,6 @@
-<script>import usePaginator from "../../stores/paginator";
+<script>import { getPaginator } from "../../stores/paginator";
 import { paginationDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { get_current_component } from "svelte/internal";
 import { setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder } from "../../utils";
@@ -19,7 +19,13 @@ export let {
 } = {
   ...defaults
 };
-const store = usePaginator({ items, page, pageSize, pages, ellipsis });
+const pg = getPaginator({
+  page,
+  pages,
+  pageSize,
+  ellipsis,
+  items
+});
 const globals = cleanObj({
   rounded,
   shadowed,
@@ -29,12 +35,11 @@ const globals = cleanObj({
   variant
 });
 export const context = setContext("Pagination", {
-  ...store,
   globals
 });
 const th = themer($themeStore);
 $:
-  paginationControllerClasses = th.create("PagerControllerNav").option("common", "transition", transitioned).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("inline-flex items-center", variant === "flushed").append("isolate inline-flex -space-x-px", variant === "filled").append($$restProps.class, true).compile(true);
+  paginationControllerClasses = th.create("PagerControllerNav").option("common", "transition", transitioned).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("inline-flex items-center", ["filled", "glass"].includes(variant)).append("isolate inline-flex -space-x-px", variant === "filled").append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
@@ -45,12 +50,12 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 	class={paginationControllerClasses}
 >
 	<slot
-		page={$context.page}
-		startPage={$context.startPage}
-		endPage={$context.endPage}
-		rangeStart={$context.startRecord}
-		rangeEnd={$context.endRecord}
-		activePages={$context.activePages}
-		totalPages={$context.totalPages}
+		page={pg.page}
+		startPage={pg.startPage}
+		endPage={pg.endPage}
+		rangeStart={pg.startRecord}
+		rangeEnd={pg.endRecord}
+		activePages={pg.activePages}
+		totalPages={pg.totalPages}
 	/>
 </nav>

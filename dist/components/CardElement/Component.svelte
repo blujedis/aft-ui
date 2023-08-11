@@ -1,5 +1,5 @@
 <script>import { cardElementDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { getContext } from "svelte";
 const context = getContext("Card");
 export let { horizontal, size, theme, type, variant } = {

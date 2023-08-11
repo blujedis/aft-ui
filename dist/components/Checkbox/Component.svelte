@@ -1,5 +1,5 @@
 <script>import { checkboxDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
 export let {

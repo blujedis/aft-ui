@@ -2,7 +2,7 @@ import { get, writable, type Writable } from 'svelte/store';
 
 export interface PaginatorOptions<T = any> {
 	items?: string | number | T[]; // the number of items in the collection or a collection itself.
-	page?: string | number; // the current page selected.
+	page?: string | number; // the start page that is selected selected.
 	pageSize?: string | number; // the number of items per page ex: 10, 25, 50.
 	pages?: string | number; // number of pages shown, your button count.
 	ellipsis?: boolean; // when true include ellipsis in active pages collection.
@@ -23,37 +23,13 @@ export interface Paginator<T = any> extends PaginatorOptions<T> {
 	activePages: (string | number)[];
 }
 
-// function getPaginator<T = any>(options: PaginatorOptions<T>): Paginator<T>;
-// function getPaginator<T = any>(
-//   items?: string | number | T[],
-//   page?: string | number,
-//   size?: string | number,
-//   pages?: string | number
-// ): Paginator<T>;
-// function getPaginator<T = any>(
-//   itemsOrOptions?: string | number | T[] | PaginatorOptions<T>,
-//   page?: string | number,
-//   pageSize?: string | number,
-//   pages?: string | number
-// ) {
-
 function getPaginator<T = any>(options = {} as PaginatorOptions<T>) {
-	// let items = itemsOrOptions as string | number | T[];
-
-	// if (!Array.isArray(itemsOrOptions) && typeof itemsOrOptions === 'object') {
-	//   const { items: initItems, page: initPage, pageSize: initDisplayed, pages: initButtons } = itemsOrOptions;
-	//   items = initItems as string | number | T[];
-	//   page = initPage as string | number;
-	//   pageSize = initDisplayed as string | number;
-	//   pages = initButtons as string | number;
-	// }
-
 	// eslint-disable-next-line prefer-const
 	let { items, page, pageSize, pages, ellipsis } = {
 		items: 0,
 		page: 1,
 		pageSize: 10,
-		pages: 3,
+		pages: 10,
 		ellipsis: false,
 		...options
 	} as Required<PaginatorOptions<T>>;
@@ -245,7 +221,9 @@ function usePaginator<T = any>(options: PaginatorOptions<T>): PaginatorStore<T> 
 	 * Reset the store with initial options merged with new options provided if any.
 	 */
 	function reset(options?: PaginatorOptions<T>) {
-		store.set(getPaginator({ ...initialOptions, ...options }));
+		store.update((s) => {
+			return getPaginator({ ...initialOptions, ...options });
+		});
 	}
 
 	return {

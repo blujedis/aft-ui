@@ -1,5 +1,5 @@
 <script>import { inputDefaults as defaults } from "./module";
-import themeStore, { Button, themer } from "../..";
+import { themeStore, Button, themer } from "../..";
 import { Flushed } from "../Flushed";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";

@@ -1,6 +1,6 @@
 <script>import { getContext } from "svelte";
 import { gridHeaderCellDefaults as defaults } from "./module";
-import themeStore, { pickCleanProps, themer } from "../..";
+import { themeStore, pickCleanProps, themer } from "../..";
 const context = getContext("DataGrid");
 $:
   sortkey = $context?.sort.find((v) => [accessor, "-" + accessor].includes(v));

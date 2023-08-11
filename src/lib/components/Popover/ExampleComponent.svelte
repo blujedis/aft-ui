@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let hide = () => {};
+	export let close = () => {};
 </script>
 
 <div
@@ -8,7 +8,7 @@
 >
 	<div class="mb-4">Hello I'm a custom element passed to the popover hook.</div>
 	<button
-		on:click={hide}
+		on:click={close}
 		class="px-6 py-2 text-sm bg-indigo-500 hover:bg-indigo-600 rounded shadow-sm">Close</button
 	>
 </div>

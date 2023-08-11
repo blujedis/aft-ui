@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { themeStore, themer } from '$lib';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
+	import { fade } from 'svelte/transition';
 	import type { ElementProps } from '../../types';
 
 	type $$Props = PopoverProps & ElementProps<'div'>;
@@ -8,7 +9,7 @@
 	export let {
 		arrowed,
 		content,
-		hide,
+		close,
 		id,
 		rounded,
 		sanitizer,
@@ -34,21 +35,23 @@
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('popoverSizes', size, size)
-		.append('absolute', true)
+		.append('absolute animate-fade-in-down', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
 
-<div {role} {...$$restProps} {id} class={popoverClasses}>
-	<slot {hide}>
-		{#if typeof content === 'string'}
-			{#if !!sanitizer}
-				{@html sanitizer(content)}
-			{:else}
-				{content}
-			{/if}
+<div
+	{role}
+	{...$$restProps}
+	{id}
+	class={popoverClasses}
+	transition:fade={{ delay: 250, duration: 500 }}
+>
+	<slot {close}>
+		{#if !!sanitizer}
+			{@html sanitizer(content)}
 		{:else}
-			<svelte:component this={content} {hide} />
+			{content || 'Hello Tooltip!'}
 		{/if}
 	</slot>
 	{#if arrowed}

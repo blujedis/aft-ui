@@ -12,7 +12,7 @@ import type { paginationPage } from './config';
 export type PaginationPageVariant = keyof typeof paginationPage;
 
 export type PaginationPageProps<Tag> = {
-	as: Tag;
+	as?: Tag;
 	focused?: ThemeFocused;
 	next?: boolean | string | IconifyIcon;
 	previous?: boolean | string | IconifyIcon;
@@ -24,9 +24,9 @@ export type PaginationPageProps<Tag> = {
 	variant?: PaginationPageVariant;
 };
 
-export const paginationPageDefaults: Partial<PaginationPageProps<'a'>> = {
+export const paginationPageDefaults: Partial<PaginationPageProps<'button'>> = {
+	as: 'button',
 	focused: true,
-	rounded: 'full',
 	size: 'md',
 	theme: 'light',
 	variant: 'flushed'

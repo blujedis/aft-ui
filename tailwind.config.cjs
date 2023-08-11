@@ -1,12 +1,14 @@
-const aft = require('./aft.config.cjs');
+import { plugin, generateTailwindVars, defaultColors } from '@aft/config';
 
 // why do this? Stops VSCode from
 // complaining about unknown tailwindcss
 // theme colors.
-const colors = {
-	...aft.defaultColors,
-	...aft.generateTailwindVars(aft.defaultColors)
-};
+// const colors = {
+// 	...defaultColors,
+// 	...aft.generateTailwindVars(aft.defaultColors)
+// };
+
+const colors = generateTailwindVars(defaultColors);
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,13 +16,28 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
-			colors
+			colors,
+			keyframes: {
+				'fade-in-down': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(-10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				}
+			},
+			animation: {
+				'fade-in-down': 'fade-in-down 0.3s ease-out'
+			}
 		}
 	},
 	plugins: [
 		require('@tailwindcss/forms')({
 			strategy: 'class'
 		}),
-		aft.plugin()
+		plugin(defaultColors)
 	]
 };

@@ -1,5 +1,5 @@
 <script>import { selectListButtonDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { Badge } from "../Badge";
 import { Flushed } from "../Flushed";
 import { Icon } from "../Icon";

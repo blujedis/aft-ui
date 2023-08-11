@@ -1,6 +1,6 @@
 <script>import { cleanObj } from "../../utils";
 import { setContext } from "svelte";
-import themeStore, { themer, useSelect } from "../..";
+import { themeStore, themer, useSelect } from "../..";
 import {
   gridDefaults as defaults
 } from "./module";

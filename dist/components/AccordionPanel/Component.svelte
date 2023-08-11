@@ -2,7 +2,7 @@
 import {
   accordionPanelDefaults as defaults
 } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 const context = getContext("Accordion");
 export let { as, key } = {
   ...defaults

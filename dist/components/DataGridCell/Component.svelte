@@ -1,6 +1,6 @@
 <script>import { getContext } from "svelte";
 import { gridCellDefaults as defaults } from "./module";
-import themeStore, { pickCleanProps, themer } from "../..";
+import { themeStore, pickCleanProps, themer } from "../..";
 const context = getContext("DataGrid");
 export let { accessor, size, stacked, theme, variant } = {
   ...defaults,

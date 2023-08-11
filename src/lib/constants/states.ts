@@ -108,7 +108,7 @@ export const bgAriaExpanded = {
 export const bgAriaGlassExpanded = {
 	white: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
 	light: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
-	dark: 'aria-expanded:bg-frame-900/30 dark:aria-expanded:bg-frame-900/30',
+	dark: 'aria-expanded:bg-frame-900/30 dark:aria-expanded:bg-frame-900/40',
 	primary: 'aria-expanded:bg-primary-500/20 dark:aria-expanded:bg-primary-500/20',
 	secondary: 'aria-expanded:bg-secondary-500/20 dark:aria-expanded:bg-secondary-500/20',
 	tertiary: 'aria-expanded:bg-tertiary-500/20 dark:aria-expanded:bg-tertiary-500/20',
@@ -121,7 +121,7 @@ export const bgAriaGlassExpanded = {
 export const bgAriaGlassSelected = {
 	white: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
 	light: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
-	dark: 'aria-selected:bg-frame-900/30 dark:aria-selected:bg-frame-900/30',
+	dark: 'aria-selected:bg-frame-900/30 dark:aria-selected:bg-frame-900/40',
 	primary: 'aria-selected:bg-primary-500/20 dark:aria-selected:bg-primary-500/20',
 	secondary: 'aria-selected:bg-secondary-500/20 dark:aria-selected:bg-secondary-500/20',
 	tertiary: 'aria-selected:bg-tertiary-500/20 dark:aria-selected:bg-tertiary-500/20',
@@ -187,16 +187,16 @@ export const textAriaCurrent = {
 
 export const borderAriaSelected = {
 	$base: 'border',
-	white: 'aria-selected:border-frame-50',
-	light: 'aria-selected:border-frame-300',
-	dark: 'aria-selected:border-frame-700',
-	primary: 'aria-selected:border-primary-600',
-	secondary: 'aria-selected:border-secondary-600',
-	tertiary: 'aria-selected:border-tertiary-600',
-	danger: 'aria-selected:border-danger-600',
-	warning: 'aria-selected:border-warning-600',
-	success: 'aria-selected:border-success-600',
-	info: 'aria-selected:border-info-600'
+	white: 'aria-selected:border-frame-50  dark:aria-selected:border-frame-50',
+	light: 'aria-selected:border-frame-300 dark:aria-selected:border-frame-300',
+	dark: 'aria-selected:border-frame-700 dark:aria-selected:border-frame-600',
+	primary: 'aria-selected:border-primary-600 dark:aria-selected:border-primary-600',
+	secondary: 'aria-selected:border-secondary-600  dark:aria-selected:border-secondary-600',
+	tertiary: 'aria-selected:border-tertiary-600  dark:aria-selected:border-tertiary-600',
+	danger: 'aria-selected:border-danger-600 dark:aria-selected:border-danger-600',
+	warning: 'aria-selected:border-warning-600  dark:aria-selected:border-warning-600',
+	success: 'aria-selected:border-success-600  dark:aria-selected:border-success-600',
+	info: 'aria-selected:border-info-600  dark:aria-selected:border-info-600'
 };
 
 export const borderAriaExpanded = {

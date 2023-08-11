@@ -37,16 +37,14 @@
 		.variant('paginationPage', variant, theme, true)
 		.option('focusedRingVisible', theme, focused)
 		.option('fieldFontSizes', size, size)
-		.option('paginationGroupedPadding', size, size && variant === 'filled')
+		.option('paginationGroupedPadding', size, size && ['filled', 'glass'].includes(variant))
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
 		.option('roundeds', rounded, rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
-			variant === 'filled'
+			['filled', 'glass'].includes(variant)
 		)
-		// .append('ring-1 ring-inset ring-black ring-opacity-10', variant === 'filled')
-		.append('z-10', variant === 'filled' && selected)
-		// .append('inline-flex items-center border-t-2 font-medium', variant === 'flushed')
+		.append('z-10', ['filled', 'glass'].includes(variant) && selected)
 		.append('pointer-events-none', value === '...')
 		.append('px-2', (previous || next) as any)
 		.append('rounded-r-none', previous as any)

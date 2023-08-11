@@ -1,5 +1,5 @@
 <script lang="ts">
-	import usePaginator from '$lib/stores/paginator';
+	import { getPaginator } from '$lib/stores/paginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib';
 	import { get_current_component } from 'svelte/internal';
@@ -26,7 +26,13 @@
 		...defaults
 	} as Required<PaginationProps>;
 
-	const store = usePaginator({ items, page, pageSize, pages, ellipsis });
+	const pg = getPaginator({
+		page,
+		pages,
+		pageSize,
+		ellipsis,
+		items
+	});
 
 	const globals = cleanObj({
 		rounded,
@@ -38,7 +44,6 @@
 	});
 
 	export const context = setContext('Pagination', {
-		...store,
 		globals
 	});
 
@@ -49,9 +54,7 @@
 		.option('common', 'transition', transitioned)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		// [ln] justify-between border-t border-gray-200
-		.append('inline-flex items-center', variant === 'flushed')
-		// [gp] rounded-md shadow-sm
+		.append('inline-flex items-center', ['filled', 'glass'].includes(variant))
 		.append('isolate inline-flex -space-x-px', variant === 'filled')
 		.append($$restProps.class, true)
 		.compile(true);
@@ -66,12 +69,12 @@
 	class={paginationControllerClasses}
 >
 	<slot
-		page={$context.page}
-		startPage={$context.startPage}
-		endPage={$context.endPage}
-		rangeStart={$context.startRecord}
-		rangeEnd={$context.endRecord}
-		activePages={$context.activePages}
-		totalPages={$context.totalPages}
+		page={pg.page}
+		startPage={pg.startPage}
+		endPage={pg.endPage}
+		rangeStart={pg.startRecord}
+		rangeEnd={pg.endRecord}
+		activePages={pg.activePages}
+		totalPages={pg.totalPages}
 	/>
 </nav>

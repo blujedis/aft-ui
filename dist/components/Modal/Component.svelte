@@ -1,5 +1,5 @@
 <script>import { modalDefaults as defaults } from "./module";
-import themeStore, { themer, transitioner } from "../..";
+import { themeStore, themer, transitioner } from "../..";
 import { useDisclosure } from "../../stores";
 import { fade } from "svelte/transition";
 import Placeholder from "./Placeholder.svelte";

@@ -201,6 +201,7 @@ declare const __propDef: {
         offset?: string | number | null | undefined;
         preserveAspectRatio?: string | null | undefined;
         viewBox?: string | null | undefined;
+        end?: string | number | null | undefined;
         className?: string | null | undefined;
         method?: string | null | undefined;
         'accent-height'?: string | number | null | undefined;
@@ -251,7 +252,6 @@ declare const __propDef: {
         edgeMode?: string | number | null | undefined;
         elevation?: string | number | null | undefined;
         'enable-background'?: string | number | null | undefined;
-        end?: string | number | null | undefined;
         exponent?: string | number | null | undefined;
         externalResourcesRequired?: string | number | null | undefined;
         'fill-opacity'?: string | number | null | undefined;

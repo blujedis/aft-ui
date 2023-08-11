@@ -1,5 +1,5 @@
 <script>import { menuPanelDefaults as defaults } from "./module";
-import themeStore, { themer, transitioner } from "../..";
+import { themeStore, themer, transitioner } from "../..";
 import { getContext } from "svelte";
 import { useFocusNav } from "../../hooks";
 import { writable } from "svelte/store";

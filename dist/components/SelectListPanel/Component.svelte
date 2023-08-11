@@ -1,5 +1,5 @@
 <script>import { selectListPanelDefaults as defaults } from "./module";
-import themeStore, { themer, transitioner } from "../..";
+import { themeStore, themer, transitioner } from "../..";
 import { getContext } from "svelte";
 import { useFocusNav } from "../../hooks";
 const context = getContext("SelectListContext");

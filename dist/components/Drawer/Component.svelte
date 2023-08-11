@@ -5,7 +5,7 @@
   drawerSpeedMap,
   drawerOffsetMap
 } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { fade, fly } from "svelte/transition";
 import { useDisclosure } from "../../stores";
 import Placeholder from "./Placeholder.svelte";

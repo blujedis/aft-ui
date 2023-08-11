@@ -1,32 +1,11 @@
 import { get, writable } from 'svelte/store';
-// function getPaginator<T = any>(options: PaginatorOptions<T>): Paginator<T>;
-// function getPaginator<T = any>(
-//   items?: string | number | T[],
-//   page?: string | number,
-//   size?: string | number,
-//   pages?: string | number
-// ): Paginator<T>;
-// function getPaginator<T = any>(
-//   itemsOrOptions?: string | number | T[] | PaginatorOptions<T>,
-//   page?: string | number,
-//   pageSize?: string | number,
-//   pages?: string | number
-// ) {
 function getPaginator(options = {}) {
-    // let items = itemsOrOptions as string | number | T[];
-    // if (!Array.isArray(itemsOrOptions) && typeof itemsOrOptions === 'object') {
-    //   const { items: initItems, page: initPage, pageSize: initDisplayed, pages: initButtons } = itemsOrOptions;
-    //   items = initItems as string | number | T[];
-    //   page = initPage as string | number;
-    //   pageSize = initDisplayed as string | number;
-    //   pages = initButtons as string | number;
-    // }
     // eslint-disable-next-line prefer-const
     let { items, page, pageSize, pages, ellipsis } = {
         items: 0,
         page: 1,
         pageSize: 10,
-        pages: 3,
+        pages: 10,
         ellipsis: false,
         ...options
     };
@@ -182,7 +161,9 @@ function usePaginator(options) {
      * Reset the store with initial options merged with new options provided if any.
      */
     function reset(options) {
-        store.set(getPaginator({ ...initialOptions, ...options }));
+        store.update((s) => {
+            return getPaginator({ ...initialOptions, ...options });
+        });
     }
     return {
         ...store,

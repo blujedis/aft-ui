@@ -34,8 +34,7 @@ export function useColorMode(key = 'dark') {
 
 	function setLocalValue(key: string, value: any) {
 		if (typeof localStorage === 'undefined') return;
-		if (value)
-			localStorage.setItem(key, JSON.stringify(value));
+		if (value) localStorage.setItem(key, JSON.stringify(value));
 	}
 
 	function enable(mode: 'light' | 'dark') {

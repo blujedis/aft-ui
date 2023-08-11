@@ -1,14 +1,13 @@
 import { writable, get as storeGet } from 'svelte/store';
-import defaults from './theme/defaults';
-import { palette } from './theme/palettes';
-import * as options from './components/options';
-import * as components from './components/configs';
+import defaultDefaults from './theme/defaults';
+import * as defaultOptions from './components/options';
+import * as defaultComponents from './components/configs';
 import { cleanObj } from './utils';
 const defaultTheme = {
-    options,
-    defaults,
-    components,
-    palette
+    options: defaultOptions,
+    defaults: defaultDefaults,
+    components: defaultComponents
+    //	palette
 };
 /**
  * Replaces target values with overrides, ensures all target values exist.
@@ -37,7 +36,19 @@ function ensureDefaults(target, overrides) {
  */
 function createStoreInternal({ options, defaults, components, ...rest }, baseTheme = { ...defaultTheme }) {
     const normalized = {
-        ...ensureDefaults(baseTheme, { options, defaults, components }),
+        components: {
+            ...baseTheme.components,
+            ...components
+        },
+        options: {
+            ...baseTheme.options,
+            ...options
+        },
+        defaults: {
+            ...baseTheme.defaults,
+            ...defaults
+        },
+        // ...ensureDefaults(baseTheme, { options, defaults, components }),
         ...rest
     };
     normalized.defaults.component = cleanObj(normalized.defaults.component);

@@ -16,7 +16,6 @@
 	function subscribe(fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) {
 		return store.subscribe((s) => fn(s, store));
 	}
-
 </script>
 
 <slot {store} checked={$store} {toggle} {reset} {subscribe} />

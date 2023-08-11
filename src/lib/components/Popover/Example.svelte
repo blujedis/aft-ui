@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import ExampleComponent from './ExampleComponent.svelte';
-	import { usePopover } from '$lib/hooks';
+	import { usePopover, useTooltip } from '$lib/hooks';
 
 	const title = 'Popover';
 	const description = 'Uses Popper to position tooltips and popover informational components.';
@@ -13,12 +13,18 @@
 
 	let visible = false;
 
-	const { tooltip } = usePopover();
+	const [tooltip] = useTooltip();
+
+	const [customTooltip] = useTooltip({
+		Component: ExampleComponent,
+		events: 'click',
+		offset: 12
+	});
+
+	const [trigger, content] = usePopover();
 
 	function handleClick() {
-		// if (visible) hide();
-		// else show();
-		// visible = !visible;
+		visible = !visible;
 	}
 </script>
 
@@ -28,18 +34,14 @@
 			<div class="text-sm mb-4">Default Using Title Attribute (Trigger: hover)</div>
 			<button
 				class={classes}
-				use:tooltip={{ props: { variant: 'filled', theme: 'primary' } }}
+				use:tooltip={{ theme: 'dark', content: 'Hello My Tooltip' }}
 				title="Hello Tooltip">Basic Tooltip</button
 			>
 		</label>
-		<!-- 
+
 		<label>
 			<div class="text-sm mb-4">Passing Custom Component (Trigger: click)</div>
-			<button
-				class={classes}
-				use:tooltip={{ events: 'click', Component: ExampleComponent }}
-				title="Hello Tooltip">Custom Component</button
-			>
+			<button class={classes} use:customTooltip title="Hello Tooltip">Custom Component</button>
 		</label>
 
 		<label>
@@ -48,7 +50,12 @@
 		</label>
 
 		{#if visible}
-			<div use:content>Hello World</div>
-		{/if} -->
+			<div
+				use:content={{ offset: 6 }}
+				class="px-4 py-1 bg-violet-600 text-white shadow-sm rounded-md text-sm"
+			>
+				Hello World
+			</div>
+		{/if}
 	</div>
 </ExamplePage>

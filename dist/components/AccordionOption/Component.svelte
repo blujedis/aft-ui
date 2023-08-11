@@ -1,5 +1,5 @@
 <script>import { accordionOptionDefaults as defaults } from "./module";
-import themeStore, { themer, transitioner } from "../..";
+import { themeStore, themer, transitioner } from "../..";
 import { getContext } from "svelte";
 const context = getContext("Accordion");
 const panelContext = getContext("AccordionPanel");

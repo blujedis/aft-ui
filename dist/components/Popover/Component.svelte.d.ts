@@ -1,11 +1,11 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
+        close?: (() => void) | undefined;
         arrowed?: boolean | undefined;
-        content?: string | {
-            new (options: import("svelte").ComponentConstructorOptions<any>): SvelteComponent<any, any, any>;
-        } | null | undefined;
+        content?: string | undefined;
         rounded?: import("../..").ThemeRounded | undefined;
+        sanitizer?: ((value: string) => string) | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
         theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
@@ -225,7 +225,9 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        default: {};
+        default: {
+            close: () => void;
+        };
     };
 };
 export type ComponentProps = typeof __propDef.props;

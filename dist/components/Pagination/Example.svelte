@@ -34,7 +34,7 @@ let pagination = null;
 					let:activePages
 				>
 					{#each activePages as page}
-						<PaginationPage as="a" value={page}>{page}</PaginationPage>
+						<PaginationPage value={page}>{page}</PaginationPage>
 					{/each}
 				</Pagination>
 			</div>
@@ -44,6 +44,31 @@ let pagination = null;
 					{...props}
 					bind:this={pagination}
 					variant="filled"
+					items={jsondata.length}
+					page={1}
+					pageSize={5}
+					pages={3}
+					ellipsis
+					theme={color}
+					let:activePages
+					let:page
+					let:totalPages
+					let:startPage
+					let:endPage
+				>
+					<PaginationPage as="a" previous />
+					{#each activePages as page}
+						<PaginationPage as="a" value={page} />
+					{/each}
+					<PaginationPage as="a" next />
+				</Pagination>
+			</div>
+
+			<div>
+				<Pagination
+					{...props}
+					bind:this={pagination}
+					variant="glass"
 					items={jsondata.length}
 					page={1}
 					pageSize={5}

@@ -14,7 +14,7 @@ export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 const defaultTheme = {
 	options: defaultOptions,
 	defaults: defaultDefaults,
-	components: defaultComponents,
+	components: defaultComponents
 	//	palette
 };
 
@@ -46,8 +46,6 @@ function createStoreInternal<T extends ThemeConfig>(
 	{ options, defaults, components, ...rest }: DeepPartial<T>,
 	baseTheme = { ...defaultTheme }
 ): ThemeStore<T> {
-
-
 	const normalized = {
 		components: {
 			...baseTheme.components,

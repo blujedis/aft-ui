@@ -4,7 +4,7 @@ import type { IconifyIcon } from '@iconify/svelte';
 import type { paginationPage } from './config';
 export type PaginationPageVariant = keyof typeof paginationPage;
 export type PaginationPageProps<Tag> = {
-    as: Tag;
+    as?: Tag;
     focused?: ThemeFocused;
     next?: boolean | string | IconifyIcon;
     previous?: boolean | string | IconifyIcon;
@@ -15,4 +15,4 @@ export type PaginationPageProps<Tag> = {
     value?: SelectStoreValue;
     variant?: PaginationPageVariant;
 };
-export declare const paginationPageDefaults: Partial<PaginationPageProps<'a'>>;
+export declare const paginationPageDefaults: Partial<PaginationPageProps<'button'>>;

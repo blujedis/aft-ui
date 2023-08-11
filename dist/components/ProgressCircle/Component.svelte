@@ -1,6 +1,6 @@
 <script>import { tweened } from "svelte/motion";
 import { progressCircleDefaults as defaults } from "./module";
-import themeStore, { styler, themer } from "../..";
+import { themeStore, styler, themer } from "../..";
 import { onMount } from "svelte";
 export let {
   animate,

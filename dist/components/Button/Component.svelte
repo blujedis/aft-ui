@@ -2,7 +2,7 @@
 import { onMount } from "svelte";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
-import themeStore, { themer } from "../../";
+import { themeStore, themer } from "../../";
 import { buttonDefaults as defaults } from "./module";
 export let {
   as,

@@ -1,5 +1,5 @@
 <script>import { breadcrumbOptionDefaults as defaults } from "./module";
-import themeStore, { themer } from "../..";
+import { themeStore, themer } from "../..";
 import { Icon } from "../Icon";
 import { getContext, onMount } from "svelte";
 const context = getContext("Breadcrumb");

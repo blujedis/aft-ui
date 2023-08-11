@@ -3,6 +3,7 @@ import { ensureArray } from './utils';
 import classnames from 'classnames';
 import { colors } from '../constants/colors';
 import { getProperty } from 'dot-prop';
+import { browser } from '$app/environment';
 /**
  * Simply flattens array then joins by strings.
  *
@@ -93,7 +94,7 @@ export function themer(themeConfig) {
         create: (instanceName = '') => mockApi
     };
     // If no document return mock instance.
-    if (typeof document === 'undefined')
+    if (!browser)
         return mockThemer;
     // type Defaults = typeof themeConfig.defaults;
     // type Palette = typeof themeConfig.palette;
