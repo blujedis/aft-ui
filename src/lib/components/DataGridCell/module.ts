@@ -3,6 +3,7 @@ import type { DataGridDataItem, DataGridVariant } from '../DataGrid/module';
 
 export type DataGridCellProps<D = DataGridDataItem> = {
 	accessor?: Extract<keyof D, string>;
+	full?: boolean;
 	size?: ThemeSize;
 	stacked?: boolean;
 	theme?: ThemeColor;

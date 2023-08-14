@@ -14,6 +14,7 @@ export * from './DataGrid/config';
 export * from './DataGridFilter/config';
 export * from './DataGridHeader/config';
 export * from './DataGridRow/config';
+export * from './DataGridSearch/config';
 export * from './Input/config';
 export * from './Kbd/config';
 export * from './Label/config';
