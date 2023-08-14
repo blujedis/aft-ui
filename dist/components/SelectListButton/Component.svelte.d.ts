@@ -3,11 +3,11 @@ import type { SelectListItem } from '../SelectList';
 declare const __propDef: {
     props: {
         disabled?: boolean | undefined;
-        focused?: import("../..").ThemeFocused | undefined;
+        focused?: import("../../types").ThemeFocused | undefined;
         full?: boolean | undefined;
         chars?: number | undefined;
-        rounded?: import("../..").ThemeRounded | undefined;
-        shadowed?: import("../..").ThemeShadowed | undefined;
+        rounded?: import("../../types").ThemeRounded | undefined;
+        shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: undefined;
         theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
         transitioned?: boolean | undefined;
@@ -55,7 +55,7 @@ declare const __propDef: {
         'bind:checked'?: boolean | null | undefined;
         'bind:value'?: any;
         'bind:group'?: any;
-        'bind:files'?: FileList | null | undefined;
+        'bind:files'?: any;
         'bind:indeterminate'?: boolean | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
@@ -103,7 +103,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -126,7 +126,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

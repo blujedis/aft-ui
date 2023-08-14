@@ -14,7 +14,6 @@ declare const __propDef: {
         style?: string | null | undefined;
         title?: string | null | undefined;
         pattern?: string | null | undefined;
-        contextmenu?: string | null | undefined;
         name?: string | null | undefined;
         capture?: boolean | "user" | "environment" | null | undefined;
         hidden?: boolean | null | undefined;
@@ -22,6 +21,7 @@ declare const __propDef: {
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
         contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
+        contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -60,7 +60,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -77,7 +77,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;
@@ -243,7 +243,7 @@ declare const __propDef: {
         'bind:checked'?: boolean | null | undefined;
         'bind:value'?: any;
         'bind:group'?: any;
-        'bind:files'?: FileList | null | undefined;
+        'bind:files'?: any;
         'bind:indeterminate'?: boolean | null | undefined;
     };
     events: {

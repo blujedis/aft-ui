@@ -1,5 +1,5 @@
 <script>import { get_current_component } from "svelte/internal";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { forwardEventsBuilder } from "../../utils";
 import { imageDefaults as defaults } from "./module";
 export let { fit, full, position, rounded, shadowed } = {

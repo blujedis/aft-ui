@@ -1,5 +1,5 @@
 <script>import { cardImageDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { Image } from "../Image";
 export let { fit, full, imageClasses } = {
   ...defaults

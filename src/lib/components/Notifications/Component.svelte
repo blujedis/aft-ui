@@ -4,7 +4,7 @@
 	 */
 	import { type NotificationsProps, notificationsDefaults as defaults } from './module';
 	import { notificationsPosition } from './config';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';

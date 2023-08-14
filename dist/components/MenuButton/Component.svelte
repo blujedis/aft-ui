@@ -1,5 +1,5 @@
 <script>import { menuButtonDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { getContext } from "svelte";
@@ -17,6 +17,7 @@ $:
     $context.visible && roticon && !!caret
   ).append("ml-2 shrink pointer-events-none pt-px", true).compile();
 function handleClick(e) {
+  console.log("clicked");
   context.toggle();
 }
 </script>
@@ -29,6 +30,7 @@ function handleClick(e) {
 	on:click={handleClick}
 	aria-expanded={$context.visible}
 	aria-haspopup="true"
+	as="button"
 >
 	<div class="flex items-center pointer-events-none">
 		<slot />

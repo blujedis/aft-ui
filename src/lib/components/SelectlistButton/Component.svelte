@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SelectListButtonProps, selectListButtonDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { Badge } from '../Badge';
 	import { Flushed } from '../Flushed';
 	import { Icon } from '../Icon';

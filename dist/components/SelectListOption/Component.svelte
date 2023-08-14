@@ -1,5 +1,5 @@
 <script>import { selectListOptionDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { forwardEventsBuilder } from "../../utils";
 import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { Button } from '../Button';
 	import { Icon } from '../Icon';
 	import { getContext } from 'svelte';

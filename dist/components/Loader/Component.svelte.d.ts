@@ -3,6 +3,7 @@ declare const __propDef: {
     props: {
         style?: string | undefined;
         unstyled?: boolean | undefined;
+        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
         size?: import("../..").ThemeSize | undefined;
         class?: string | undefined;
         id?: string | undefined;

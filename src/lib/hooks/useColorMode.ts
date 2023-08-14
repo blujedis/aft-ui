@@ -1,4 +1,4 @@
-import { writable, type Writable } from 'svelte/store';
+import { writable, type Writable, get as getStore } from 'svelte/store';
 import { browser } from '$app/environment';
 
 export type ColorModeHook = ReturnType<typeof useColorMode>;
@@ -7,13 +7,18 @@ export interface UseColorModeOptions {
 	key?: string;
 }
 
-export function useColorMode(key = 'dark') {
-	const store = writable<boolean>(browser && JSON.parse(localStorage.getItem(key) || 'false'));
+let _instance: any = null;
 
-	let dark = false;
+export function useColorMode(key = 'dark') {
+
+	type ColorModeInstance = Writable<boolean> & typeof methods;
+
+	if (_instance)
+		return _instance as ColorModeInstance;
+
+	const store = writable<boolean>(getMountedValue());
 
 	const methods = {
-		dark,
 		getRoot,
 		getLocalValue,
 		setLocalValue,
@@ -22,17 +27,22 @@ export function useColorMode(key = 'dark') {
 		reset
 	};
 
+	function getMountedValue() {
+		if (!browser) return false;
+		return JSON.parse(localStorage.getItem(key) || 'false');
+	}
+
 	function getRoot() {
 		if (typeof document === 'undefined') return null;
 		return document.documentElement;
 	}
 
-	function getLocalValue(key: string): boolean {
+	function getLocalValue(): boolean {
 		if (typeof localStorage === 'undefined' || !key) return false;
 		return JSON.parse(localStorage.getItem(key) || '');
 	}
 
-	function setLocalValue(key: string, value: any) {
+	function setLocalValue(value: any) {
 		if (typeof localStorage === 'undefined') return;
 		if (value) localStorage.setItem(key, JSON.stringify(value));
 	}
@@ -44,14 +54,15 @@ export function useColorMode(key = 'dark') {
 	function toggle() {
 		const root = getRoot();
 		if (!root) return;
-		if (!dark) {
+		const isDark = getStore(store);
+		if (!isDark) {
 			root.classList.add('dark');
-			setLocalValue(key, true);
+			setLocalValue(true);
 		} else {
 			root.classList.remove('dark');
-			setLocalValue(key, false);
+			setLocalValue(false);
 		}
-		store.update((_s) => !dark);
+		store.update((_s) => !isDark);
 	}
 
 	function reset() {
@@ -59,12 +70,15 @@ export function useColorMode(key = 'dark') {
 		store.update((_s) => false);
 	}
 
-	store.subscribe((s) => (dark = s));
-
 	const api = {
 		...methods,
 		...store
 	};
 
-	return api as Writable<boolean> & typeof methods;
+	if (!_instance)
+		_instance = api;
+
+	return _instance as ColorModeInstance;
 }
+
+

@@ -80,7 +80,10 @@ export const variantFlushed = mergeConfigs(text, borderGroupHover, {
 });
 
 export const panel = mergeConfigs(placeholder, {
-	$base: 'ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700'
+	$base: 'ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit',
+	white: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
+	light: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
+	dark: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]'
 });
 
 export const row = mergeConfigs(placeholder, {

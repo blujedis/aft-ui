@@ -8,7 +8,9 @@ export const buttonGroupItem = {
         ...baseVariant
     },
     outlined: mergeConfigs(bgAriaChecked, {
-        $base: 'bg-transparent aria-checked:text-white hover:z-10'
+        $base: 'bg-transparent aria-checked:text-white hover:z-10',
+        white: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]',
+        light: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
     }),
     text: {
         ...placeholder,
@@ -19,8 +21,8 @@ export const buttonGroupItem = {
     },
     ghost: mergeConfigs(bgAriaChecked, {
         $base: 'aria-checked:text-white',
-        white: 'aria-checked:text-[color:var(--text-dark)]',
-        light: 'aria-checked:text-[color:var(--text-dark)]'
+        white: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]',
+        light: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
     }),
     glass: {
         ...placeholder // TODO: add glass styles.

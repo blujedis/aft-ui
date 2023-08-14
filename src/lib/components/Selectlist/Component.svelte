@@ -157,7 +157,6 @@
 			const newItems = !query?.length
 				? [...s.items]
 				: initFilter(query, s.items as Required<Item>[]);
-			if (!query) console.log(s.items);
 			return { ...s, filtered: [...newItems] };
 		});
 	}

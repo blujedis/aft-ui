@@ -1,5 +1,5 @@
 <script>import { avatarStackDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { onMount, setContext } from "svelte";
 export let { direction } = {
   ...defaults

@@ -1,4 +1,4 @@
-import { mergeConfigs } from '$lib/theme';
+import { mergeConfigs } from '../theme';
 
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',

@@ -298,6 +298,9 @@ export declare const panel: {
     info: string;
 } & {
     $base: string;
+    white: string;
+    light: string;
+    dark: string;
 } & import("../theme/utils").StringMap;
 export declare const row: {
     $base: string;

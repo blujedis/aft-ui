@@ -1,31 +1,32 @@
 <script lang="ts">
-	import { Colormode } from '../Colormode';
+	import { ColorMode } from '../ColorMode';
 	import { Switch } from '../Switch';
-	import Highlight from 'svelte-highlight';
-	import typescript from 'svelte-highlight/languages/typescript';
-	import github from 'svelte-highlight/styles/github';
-	import githubDark from 'svelte-highlight/styles/github-dark-dimmed';
+	// import Highlight from 'svelte-highlight';
+	// import typescript from 'svelte-highlight/languages/typescript';
+	// import github from 'svelte-highlight/styles/github';
+	// import githubDark from 'svelte-highlight/styles/github-dark-dimmed';
 	import { beforeUpdate } from 'svelte';
 
 	export let title = 'Example';
 	export let description = '';
-	export let code = '';
+	export let code = 'Coming soon';
 	export let visible = false;
 
-	let mode = github;
+	// let mode = github;
 
 	function switchMode() {
 		visible = !visible;
 	}
 </script>
 
+<!-- 
 <svelte:head>
 	{@html github}
-</svelte:head>
+</svelte:head> -->
 
-<Colormode let:checked let:toggle>
+<ColorMode let:checked let:toggle>
 	<Switch {checked} on:change={toggle} shadowed="lg" class="fixed bottom-4 right-6 z-30" />
-</Colormode>
+</ColorMode>
 
 <div>
 	<div class="flex mb-4">
@@ -60,7 +61,8 @@
 	</div>
 	<div>
 		{#if visible}
-			<Highlight language={typescript} {code} class="ring-1 ring-black ring-opacity-5" />
+			{code}
+			<!-- <Highlight language={typescript} {code} class="ring-1 ring-black ring-opacity-5" /> -->
 		{:else}
 			<slot />
 		{/if}

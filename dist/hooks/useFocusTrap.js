@@ -51,7 +51,6 @@ export function useFocusTrap(enabledOrOptions) {
         let node = initNode;
         if (child) {
             node = node.querySelector(child);
-            console.log(node);
         }
         if (!node)
             console.warn(`UseFocusTrap cannot trap focus using node of null or undefined.`);

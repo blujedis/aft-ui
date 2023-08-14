@@ -277,7 +277,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;
@@ -417,10 +417,10 @@ declare const __propDef: {
         'on:fullscreenerror'?: import("svelte/elements").EventHandler<Event, SVGSVGElement> | null | undefined;
     };
     events: {
-        mouseover: MouseEvent;
-        mouseleave: MouseEvent;
-        click: MouseEvent;
-        focus: FocusEvent;
+        mouseover: HTMLElementEventMap;
+        mouseleave: HTMLElementEventMap;
+        click: HTMLElementEventMap;
+        focus: HTMLElementEventMap;
     } & {
         [evt: string]: CustomEvent<any>;
     };

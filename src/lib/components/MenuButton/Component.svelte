@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { Button } from '../Button';
 	import { Icon } from '../Icon';
 	import type { ElementProps } from '$lib/types';
@@ -36,6 +36,7 @@
 		.compile();
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
+		console.log('clicked');
 		context.toggle();
 	}
 </script>
@@ -48,6 +49,7 @@
 	on:click={handleClick}
 	aria-expanded={$context.visible}
 	aria-haspopup="true"
+	as="button"
 >
 	<div class="flex items-center pointer-events-none">
 		<slot />

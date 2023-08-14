@@ -56,8 +56,6 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 	const component = Flushed as any; // TODO: Fix types in Conditional Element
-
-	$: console.log(theme);
 </script>
 
 <ConditionalElement as={component} {theme} condition={variant === 'flushed'} />

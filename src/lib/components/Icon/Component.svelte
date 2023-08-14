@@ -6,12 +6,11 @@
 	 */
 
 	import { type IconProps, iconDefaults as defaults } from './module';
-	import IconBase from '@iconify/svelte';
-	import { themeStore, themer } from '$lib';
+	import Icon from '@iconify/svelte';
+	import { themer, themeStore } from '../../theme';
 	type $$Props = IconProps;
 	export let { icon, size, unstyled } = { ...defaults } as Required<$$Props>;
 
-	const Icon = IconBase as any; // need to override iconify types.
 	const th = themer($themeStore);
 
 	$: iconClasses = unstyled
@@ -23,4 +22,4 @@
 				.compile(true);
 </script>
 
-<Icon {...$$restProps} {icon} class={iconClasses} aria-hidden={true} />
+<Icon {icon} class={iconClasses} aria-hidden={true} />

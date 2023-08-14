@@ -1,7 +1,7 @@
 <script>import {
   buttonGroupDefaults as defaults
 } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { onMount, setContext } from "svelte";
 import { useSelect } from "../../stores/select";
 import { cleanObj, ensureArray } from "../../utils";

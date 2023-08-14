@@ -1,5 +1,5 @@
 <script>import { tabPanelDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { getContext } from "svelte";
 export let { unmount, value } = {
   ...defaults

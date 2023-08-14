@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
 	import { type ImageProps, imageDefaults as defaults } from './module';

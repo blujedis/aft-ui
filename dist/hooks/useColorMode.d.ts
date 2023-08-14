@@ -4,10 +4,9 @@ export interface UseColorModeOptions {
     key?: string;
 }
 export declare function useColorMode(key?: string): Writable<boolean> & {
-    dark: boolean;
-    getRoot: () => HTMLElement | null;
-    getLocalValue: (key: string) => boolean;
-    setLocalValue: (key: string, value: any) => void;
+    getRoot: () => any;
+    getLocalValue: () => boolean;
+    setLocalValue: (value: any) => void;
     enable: (mode: 'light' | 'dark') => void;
     toggle: () => void;
     reset: () => void;

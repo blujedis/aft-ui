@@ -4,8 +4,8 @@ declare const __propDef: {
         fit?: "fill" | "unstyled" | "none" | "contain" | "cover" | "scaled" | undefined;
         full?: boolean | "width" | "height" | "w" | "h" | undefined;
         position?: "top-right" | "bottom-right" | "top-left" | "unstyled" | "center" | "top" | "bottom" | "botom-left" | "left" | "right" | undefined;
-        rounded?: import("../..").ThemeRounded | undefined;
-        shadowed?: import("../..").ThemeShadowed | undefined;
+        rounded?: import("../../types").ThemeRounded | undefined;
+        shadowed?: import("../../types").ThemeShadowed | undefined;
         imageClasses?: string | undefined;
         alt?: string | null | undefined;
         crossorigin?: "" | "anonymous" | "use-credentials" | null | undefined;
@@ -13,7 +13,7 @@ declare const __propDef: {
         height?: string | number | null | undefined;
         ismap?: boolean | null | undefined;
         loading?: "eager" | "lazy" | null | undefined;
-        referrerpolicy?: ReferrerPolicy | null | undefined;
+        referrerpolicy?: any;
         sizes?: string | null | undefined;
         src?: string | null | undefined;
         srcset?: string | null | undefined;
@@ -68,7 +68,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -91,7 +91,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

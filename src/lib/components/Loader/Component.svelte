@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { Icon } from '../Icon';
 	import { loaderDefaults as defaults, type LoaderProps } from './module';
 

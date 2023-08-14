@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type TabsProps, tabsDefaults as defaults, type TabsContext } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray } from '$lib/utils';

@@ -1,8 +1,8 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        rounded?: import("../..").ThemeRounded | undefined;
-        shadowed?: import("../..").ThemeShadowed | undefined;
+        rounded?: import("../../types").ThemeRounded | undefined;
+        shadowed?: import("../../types").ThemeShadowed | undefined;
         key?: string | undefined;
         group?: string | undefined;
         icon?: string | import("@iconify/svelte").IconifyIcon | undefined;
@@ -58,7 +58,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -81,7 +81,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

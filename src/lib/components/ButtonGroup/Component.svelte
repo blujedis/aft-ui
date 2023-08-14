@@ -4,7 +4,7 @@
 		buttonGroupDefaults as defaults,
 		type ButtonGroupContext
 	} from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import type { ElementNativeProps, ThemeFocused } from '../../types';
 	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';

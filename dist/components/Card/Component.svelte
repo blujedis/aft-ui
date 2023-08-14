@@ -1,5 +1,5 @@
 <script>import { cardDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { setContext } from "svelte";
 import { cleanObj } from "../../utils";
 export let { divided, full, horizontal, maxwidth, rounded, shadowed, size, theme, variant } = {

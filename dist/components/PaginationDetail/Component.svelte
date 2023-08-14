@@ -1,5 +1,5 @@
 <script>import { paginationDetailDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
   ...defaults
 };

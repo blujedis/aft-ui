@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type TabPanelProps, tabPanelDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import type { ElementNativeProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '../Tabs';

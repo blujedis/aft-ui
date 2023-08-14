@@ -1,4 +1,4 @@
-import { mergeConfigs } from '$lib/theme';
+import { mergeConfigs } from '../theme';
 
 export * from './focused';
 export * from './states';

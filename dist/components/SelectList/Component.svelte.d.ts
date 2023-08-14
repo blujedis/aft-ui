@@ -37,13 +37,13 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         slot?: string | null | undefined;
         style?: string | null | undefined;
         title?: string | null | undefined;
-        contextmenu?: string | null | undefined;
         name?: string | null | undefined;
         hidden?: boolean | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;
         contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
+        contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
@@ -81,7 +81,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -98,7 +98,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

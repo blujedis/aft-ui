@@ -3,7 +3,7 @@ declare const __propDef: {
     props: {
         name?: string | undefined;
         readAs?: import("./module").FileInputReaderType | undefined;
-        onFormData?: ((data: FormData | null, files: FileList) => void) | undefined;
+        onFormData?: ((data: any, files: FileList) => void) | undefined;
         onReadFiles?: ((err: Error | null, result: (string | ArrayBuffer | null)[] | null, files: FileList) => void) | undefined;
         accept?: string | null | undefined;
         alt?: string | null | undefined;
@@ -39,7 +39,7 @@ declare const __propDef: {
         'bind:checked'?: boolean | null | undefined;
         'bind:value'?: any;
         'bind:group'?: any;
-        'bind:files'?: FileList | null | undefined;
+        'bind:files'?: any;
         'bind:indeterminate'?: boolean | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
@@ -87,7 +87,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -110,7 +110,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

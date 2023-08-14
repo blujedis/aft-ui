@@ -13,4 +13,4 @@ package-lock.json
 yarn.lock
 /dist
 tailwind.config.cjs
-aft.config.cjs
+postbuild.cjs

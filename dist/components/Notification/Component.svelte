@@ -1,6 +1,6 @@
 <script>import { notificationDefaults as defaults } from "./module";
 import useNotifications from "../../stores/notification";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { Icon } from "../Icon";
 export let {
   key,

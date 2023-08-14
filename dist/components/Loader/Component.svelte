@@ -1,4 +1,4 @@
-<script>import { themeStore, themer } from "../..";
+<script>import { themer, themeStore } from "../../theme";
 import { Icon } from "../Icon";
 import { loaderDefaults as defaults } from "./module";
 export let { icon, visible, size } = { ...defaults };

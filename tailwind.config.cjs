@@ -1,13 +1,5 @@
 import { plugin, generateTailwindVars, defaultColors } from '@aft/config';
 
-// why do this? Stops VSCode from
-// complaining about unknown tailwindcss
-// theme colors.
-// const colors = {
-// 	...defaultColors,
-// 	...aft.generateTailwindVars(aft.defaultColors)
-// };
-
 const colors = generateTailwindVars(defaultColors);
 
 /** @type {import('tailwindcss').Config} */

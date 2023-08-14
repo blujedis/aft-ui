@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type SwitchProps, switchDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
@@ -30,14 +30,6 @@
 	let ref: HTMLInputElement;
 
 	const th = themer($themeStore);
-
-	// $: wrapperClasses = th
-	// 	.create('SwitchWrapper')
-	// 	.append('flex items-center', true)
-	// 	.append('flex-row-reverse', position === 'left')
-	// 	.append('flex-col-reverse', position === 'top')
-	// 	.append('flex-col', position === 'bottom')
-	// 	.compile(true);
 
 	$: labelClasses = th
 		.create('SwitchLabel')

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type PaginationDetailProps, paginationDetailDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import type { ElementNativeProps } from '../../types';
 
 	type $$Props = PaginationDetailProps & Omit<ElementNativeProps<'span'>, 'size'>;

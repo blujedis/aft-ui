@@ -33,7 +33,7 @@ declare const __propDef: {
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
-        transition?: "focus" | "none" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
+        transition?: "none" | "focus" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
             type: "fade" | "blur" | "fly" | "slide" | "scale" | "crossfade";
         }) | undefined;
         visible?: boolean | undefined;

@@ -1,5 +1,5 @@
 <script>import { page } from "$app/stores";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { onMount, setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder } from "../../utils";

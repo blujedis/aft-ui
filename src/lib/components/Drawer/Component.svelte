@@ -7,7 +7,7 @@
 		drawerSpeedMap,
 		drawerOffsetMap
 	} from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import type { ElementNativeProps } from '../../types';
 	import { fade, fly } from 'svelte/transition';
 	import { useDisclosure } from '$lib/stores';

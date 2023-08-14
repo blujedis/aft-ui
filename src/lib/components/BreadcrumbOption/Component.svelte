@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import type { ElementNativeProps } from '../../types';
 	import { Icon } from '../Icon';
 	import { getContext, onMount } from 'svelte';

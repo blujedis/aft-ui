@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type CardImageProps, cardImageDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { Image } from '../Image';
 	import type { ElementNativeProps } from '../../types';
 

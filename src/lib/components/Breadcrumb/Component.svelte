@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { onMount, setContext } from 'svelte';
 	import { cleanObj, forwardEventsBuilder } from '$lib/utils';

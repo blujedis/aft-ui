@@ -1,5 +1,5 @@
 <script>import { avatarDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";
 import { forwardEventsBuilder } from "../../utils";

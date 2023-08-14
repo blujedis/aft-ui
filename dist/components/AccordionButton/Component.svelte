@@ -1,4 +1,4 @@
-<script>import { themeStore, themer } from "../..";
+<script>import { themer, themeStore } from "../../theme";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { getContext } from "svelte";

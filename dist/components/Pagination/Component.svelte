@@ -1,6 +1,6 @@
 <script>import { getPaginator } from "../../stores/paginator";
 import { paginationDefaults as defaults } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder } from "../../utils";

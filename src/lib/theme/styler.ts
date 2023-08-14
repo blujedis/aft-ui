@@ -1,8 +1,8 @@
 import { getProperty } from 'dot-prop';
 import type {
 	PropsWithoutPrefix,
-	ThemeColor,
-	ThemeColorShade,
+	// ThemeColor,
+	// ThemeColorShade,
 	ThemeConfig,
 	ThemeOption,
 	ThemeOptions
@@ -19,14 +19,14 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 	// type Components = typeof themeConfig.components;
 	// type Defaults = typeof themeConfig.defaults;
 	type Options = typeof themeConfig.options;
-	type Palette = typeof themeConfig.palette;
+	// type Palette = typeof themeConfig.palette;
 	// type Component = keyof Components;
 	// type Variant<K extends Component> = keyof Components[K];
 
 	// const _components: Components = themeConfig?.components || {};
 	const _options: Options = themeConfig?.options || {};
 	// const _defaults: Defaults = themeConfig?.defaults || {};
-	const _palette: Palette = themeConfig?.palette || {};
+	// const _palette: Palette = themeConfig?.palette || {};
 
 	function create(instanceName: string) {
 		let styles = [] as string[];
@@ -37,7 +37,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			option,
 			color,
 			colormap,
-			palette,
+			// palette,
 			mapped,
 			append,
 			remove,
@@ -136,26 +136,26 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		 * @param key the key name of the style to be added.
 		 * @param when if value is truthy add value otherwise reject.
 		 */
-		function palette(
-			theme: ThemeColor,
-			shade: ThemeColorShade | 'DEFAULT' | null | undefined,
-			key: string,
-			when: Primitive
-		) {
-			if (typeof themeConfig === 'undefined') return api;
-			if (!when) return api;
-			if (theme === 'white') return add(key, '#fff', true);
-			const shades = (_palette[theme as keyof typeof _palette] || {}) as Record<
-				ThemeColorShade | 'DEFAULT',
-				string
-			>;
-			if (!shades || shade === null)
-				throw new Error(`${instanceName} color palette using theme ${theme} was NOT found.`);
-			const value = shades[shade as ThemeColorShade] || '';
-			if (!value) throw new Error(`${instanceName} color using shade ${shade} was NOT found.`);
-			add(key, value, true);
-			return api;
-		}
+		// function palette(
+		// 	theme: ThemeColor,
+		// 	shade: ThemeColorShade | 'DEFAULT' | null | undefined,
+		// 	key: string,
+		// 	when: Primitive
+		// ) {
+		// 	if (typeof themeConfig === 'undefined') return api;
+		// 	if (!when) return api;
+		// 	if (theme === 'white') return add(key, '#fff', true);
+		// 	const shades = (_palette[theme as keyof typeof _palette] || {}) as Record<
+		// 		ThemeColorShade | 'DEFAULT',
+		// 		string
+		// 	>;
+		// 	if (!shades || shade === null)
+		// 		throw new Error(`${instanceName} color palette using theme ${theme} was NOT found.`);
+		// 	const value = shades[shade as ThemeColorShade] || '';
+		// 	if (!value) throw new Error(`${instanceName} color using shade ${shade} was NOT found.`);
+		// 	add(key, value, true);
+		// 	return api;
+		// }
 
 		/**
 		 * Creates style key/value using value picked from map.

@@ -46,7 +46,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;
@@ -194,14 +194,12 @@ declare const __propDef: {
         href?: string | null | undefined;
         media?: string | null | undefined;
         target?: string | null | undefined;
-        origin?: string | number | null | undefined;
         direction?: string | number | null | undefined;
+        offset?: string | number | null | undefined;
+        end?: string | number | null | undefined;
         speed?: string | number | null | undefined;
         opacity?: string | number | null | undefined;
-        offset?: string | number | null | undefined;
-        preserveAspectRatio?: string | null | undefined;
-        viewBox?: string | null | undefined;
-        end?: string | number | null | undefined;
+        origin?: string | number | null | undefined;
         className?: string | null | undefined;
         method?: string | null | undefined;
         'accent-height'?: string | number | null | undefined;
@@ -333,6 +331,7 @@ declare const __propDef: {
         pointsAtY?: string | number | null | undefined;
         pointsAtZ?: string | number | null | undefined;
         preserveAlpha?: string | number | null | undefined;
+        preserveAspectRatio?: string | null | undefined;
         primitiveUnits?: string | number | null | undefined;
         r?: string | number | null | undefined;
         radius?: string | number | null | undefined;
@@ -398,6 +397,7 @@ declare const __propDef: {
         'vert-origin-y'?: string | number | null | undefined;
         'v-hanging'?: string | number | null | undefined;
         'v-ideographic'?: string | number | null | undefined;
+        viewBox?: string | null | undefined;
         viewTarget?: string | number | null | undefined;
         visibility?: string | number | null | undefined;
         'v-mathematical'?: string | number | null | undefined;

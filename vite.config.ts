@@ -5,7 +5,7 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
 	plugins: [sveltekit()],
 	server: {
-		port: 5173
+		port: 5174
 	},
 	clearScreen: false,
 	build: {

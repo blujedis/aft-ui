@@ -1,10 +1,11 @@
-import { writable } from 'svelte/store';
+import { writable, get as getStore } from 'svelte/store';
 import { browser } from '$app/environment';
+let _instance = null;
 export function useColorMode(key = 'dark') {
-    const store = writable(browser && JSON.parse(localStorage.getItem(key) || 'false'));
-    let dark = false;
+    if (_instance)
+        return _instance;
+    const store = writable(getMountedValue());
     const methods = {
-        dark,
         getRoot,
         getLocalValue,
         setLocalValue,
@@ -12,17 +13,22 @@ export function useColorMode(key = 'dark') {
         toggle,
         reset
     };
+    function getMountedValue() {
+        if (!browser)
+            return false;
+        return JSON.parse(localStorage.getItem(key) || 'false');
+    }
     function getRoot() {
         if (typeof document === 'undefined')
             return null;
         return document.documentElement;
     }
-    function getLocalValue(key) {
+    function getLocalValue() {
         if (typeof localStorage === 'undefined' || !key)
             return false;
         return JSON.parse(localStorage.getItem(key) || '');
     }
-    function setLocalValue(key, value) {
+    function setLocalValue(value) {
         if (typeof localStorage === 'undefined')
             return;
         if (value)
@@ -35,24 +41,26 @@ export function useColorMode(key = 'dark') {
         const root = getRoot();
         if (!root)
             return;
-        if (!dark) {
+        const isDark = getStore(store);
+        if (!isDark) {
             root.classList.add('dark');
-            setLocalValue(key, true);
+            setLocalValue(true);
         }
         else {
             root.classList.remove('dark');
-            setLocalValue(key, false);
+            setLocalValue(false);
         }
-        store.update((_s) => !dark);
+        store.update((_s) => !isDark);
     }
     function reset() {
         localStorage.removeItem(key);
         store.update((_s) => false);
     }
-    store.subscribe((s) => (dark = s));
     const api = {
         ...methods,
         ...store
     };
-    return api;
+    if (!_instance)
+        _instance = api;
+    return _instance;
 }

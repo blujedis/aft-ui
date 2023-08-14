@@ -26,6 +26,8 @@ export declare const buttonGroupItem: {
         info: string;
     } & {
         $base: string;
+        white: string;
+        light: string;
     } & import("../../theme").StringMap;
     text: {
         $base: string;

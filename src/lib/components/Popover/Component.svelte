@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
 	import { fade } from 'svelte/transition';
 	import type { ElementProps } from '../../types';

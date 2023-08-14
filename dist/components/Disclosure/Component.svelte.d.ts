@@ -8,7 +8,7 @@ declare class __sveltets_Render<Tag extends HTMLTag, Store extends DisclosureSto
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
         opened?: boolean | undefined;
-        transition?: "focus" | "none" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
+        transition?: "none" | "focus" | "dissolve" | "expand" | "swipe" | "zoom" | "announce" | "reveal" | (Record<string, any> & {
             type: "fade" | "blur" | "fly" | "slide" | "scale" | "crossfade";
         }) | undefined;
     };

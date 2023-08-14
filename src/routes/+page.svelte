@@ -20,6 +20,7 @@
 		<a href="/drawer">Drawer</a>
 		<a href="/empty">Empty</a>
 		<a href="/fileinput">File Input</a>
+		<a href="/icon">Icon</a>
 		<a href="/input">Inputs</a>
 		<a href="/kbd">Kbd</a>
 		<a href="/menu">Menu</a>

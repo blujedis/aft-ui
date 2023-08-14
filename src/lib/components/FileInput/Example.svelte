@@ -30,8 +30,8 @@
 	};
 
 	function handleUpload(data: FormData | null, files: FileList | null) {
-		console.log(data?.get('file'));
-		console.log(files);
+		// console.log(data?.get('file'));
+		// console.log(files);
 		setTheme('end');
 	}
 

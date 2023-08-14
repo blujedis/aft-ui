@@ -1,3 +1,3 @@
-import Colormode from './Component.svelte';
+import ColorMode from './Component.svelte';
 export * from './module';
-export { Colormode };
+export { ColorMode };

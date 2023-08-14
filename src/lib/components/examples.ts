@@ -12,6 +12,7 @@ export { default as DrawerExample } from './Drawer/Example.svelte';
 export { default as EmptyExample } from './Empty/Example.svelte';
 export { default as FileInputExample } from './FileInput/Example.svelte';
 export { default as InputExample } from './Input/Example.svelte';
+export { default as IconExample } from './Icon/Example.svelte';
 export { default as KbdExample } from './Kbd/Example.svelte';
 export { default as LabelExample } from './Label/Example.svelte';
 export { default as LoaderExample } from './Loader/Example.svelte';

@@ -2,14 +2,14 @@ import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         label?: string | undefined;
-        focused?: import("../..").ThemeFocused | undefined;
+        focused?: import("../../types").ThemeFocused | undefined;
         href?: string | undefined;
         index?: number | undefined;
         icon?: string | import("@iconify/svelte").IconifyIcon | undefined;
         sronly?: string | undefined;
         selected?: boolean | undefined;
         separator?: string | import("@iconify/svelte").IconifyIcon | undefined;
-        size?: import("../..").ThemeSize | undefined;
+        size?: import("../../types").ThemeSize | undefined;
         theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
         transitioned?: boolean | undefined;
         variant?: "text" | "filled" | "glass" | undefined;
@@ -20,7 +20,7 @@ declare const __propDef: {
         rel?: string | null | undefined;
         target?: import("svelte/elements").HTMLAttributeAnchorTarget | null | undefined;
         type?: string | null | undefined;
-        referrerpolicy?: ReferrerPolicy | null | undefined;
+        referrerpolicy?: any;
         'sapper:noscroll'?: true | null | undefined;
         'sapper:prefetch'?: true | null | undefined;
         accesskey?: string | null | undefined;
@@ -70,7 +70,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -93,7 +93,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;

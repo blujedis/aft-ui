@@ -132,32 +132,6 @@ export const solidGhost = {
 	info: 'bg-info-50'
 };
 
-// export const solidGhostHoverDark = {
-//   white: 'dark:hover:bg-frame-500/10',
-//   light: 'dark:hover:bg-frame-500/10',
-//   dark: 'hover:text-white dark:hover:bg-frame-900/30',
-//   primary: 'dark:hover:bg-primary-500/10',
-//   secondary: 'dark:hover:bg-secondary-500/10',
-//   tertiary: 'dark:hover:bg-tertiary-500/10',
-//   danger: 'dark:hover:bg-danger-500/10',
-//   warning: 'dark:hover:bg-warning-500/10',
-//   success: 'hover:bg-success-50 dark:hover:bg-success-500/10',
-//   info: 'dark:hover:bg-info-500/10',
-// };
-
-// export const solidGhostHover = mergeConfigs(solidGhostHoverDark, {
-//   white: 'hover:bg-frame-100/75',
-//   light: 'hover:bg-frame-100/75',
-//   dark: 'hover:text-white hover:bg-frame-600',
-//   primary: 'hover:bg-primary-50',
-//   secondary: 'hover:bg-secondary-50',
-//   tertiary: 'hover:bg-tertiary-50',
-//   danger: 'hover:bg-danger-50',
-//   warning: 'hover:bg-warning-50',
-//   success: 'hover:bg-success-50',
-//   info: 'hover:bg-info-50',
-// });
-
 export const fill = {
 	$base: '',
 	white: 'fill-white',

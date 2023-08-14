@@ -1,4 +1,4 @@
-<script>import { themeStore, themer } from "../..";
+<script>import { themer, themeStore } from "../../theme";
 import { popoverDefaults as defaults } from "./module";
 import { fade } from "svelte/transition";
 export let {

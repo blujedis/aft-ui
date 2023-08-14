@@ -128,8 +128,6 @@ function remove(itemOrKey) {
 function filter(query) {
   store.update((s) => {
     const newItems = !query?.length ? [...s.items] : initFilter(query, s.items);
-    if (!query)
-      console.log(s.items);
     return { ...s, filtered: [...newItems] };
   });
 }

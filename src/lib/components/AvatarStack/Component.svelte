@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type AvatarStackProps, avatarStackDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib';
+	import { themer, themeStore } from '../../theme';
 	import { onMount, setContext } from 'svelte';
 	import type { ElementNativeProps } from '../../types';
 

@@ -5,18 +5,18 @@ declare const __propDef: {
             open: () => void;
             close: () => void;
             toggle: () => void;
-            modify: (values: Partial<import("../..").DisclosureStoreOptions<{
+            modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
                 visible: false;
             }>>) => void;
-            set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
+            set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
                 visible: false;
             }>>): void;
-            update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
+            update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: false;
             }>>>): void;
-            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
+            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: false;
-            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
+            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: false;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
@@ -28,9 +28,9 @@ declare const __propDef: {
         } | undefined;
         contentProps?: Record<string, unknown> | undefined;
         position?: "left" | "right" | undefined;
-        shadowed?: import("../..").ThemeShadowed | undefined;
-        size?: import("../..").ThemeSize | undefined;
-        speed?: import("../..").ThemeSpeed | undefined;
+        shadowed?: import("../../types").ThemeShadowed | undefined;
+        size?: import("../../types").ThemeSize | undefined;
+        speed?: import("../../types").ThemeSpeed | undefined;
         theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
@@ -79,7 +79,7 @@ declare const __propDef: {
         'bind:innerHTML'?: string | null | undefined;
         'bind:textContent'?: string | null | undefined;
         'bind:innerText'?: string | null | undefined;
-        'bind:contentRect'?: DOMRectReadOnly | null | undefined;
+        'bind:contentRect'?: any;
         'bind:contentBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:borderBoxSize'?: ResizeObserverSize[] | null | undefined;
         'bind:devicePixelContentBoxSize'?: ResizeObserverSize[] | null | undefined;
@@ -102,7 +102,7 @@ declare const __propDef: {
         'aria-describedby'?: string | null | undefined;
         'aria-details'?: string | null | undefined;
         'aria-disabled'?: import("svelte/elements").Booleanish | null | undefined;
-        'aria-dropeffect'?: "link" | "copy" | "none" | "execute" | "move" | "popup" | null | undefined;
+        'aria-dropeffect'?: "link" | "none" | "copy" | "execute" | "move" | "popup" | null | undefined;
         'aria-errormessage'?: string | null | undefined;
         'aria-expanded'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-flowto'?: string | null | undefined;
@@ -261,18 +261,18 @@ export default class Component extends SvelteComponent<ComponentProps, Component
         open: () => void;
         close: () => void;
         toggle: () => void;
-        modify: (values: Partial<import("../..").DisclosureStoreOptions<{
+        modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
             visible: false;
         }>>) => void;
-        set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
+        set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
             visible: false;
         }>>): void;
-        update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
+        update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
             visible: false;
         }>>>): void;
-        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
+        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
             visible: false;
-        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
+        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
             visible: false;
         }>>> | undefined): import("svelte/store").Unsubscriber;
     };

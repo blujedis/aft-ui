@@ -2,7 +2,7 @@
 import {
   accordionDefaults as defaults
 } from "./module";
-import { themeStore, themer } from "../..";
+import { themer, themeStore } from "../../theme";
 import { useSelect } from "../../stores/select";
 import { setContext } from "svelte";
 export let { as, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
