@@ -44,7 +44,7 @@
 
 	$: filterInputCellClasses = th
 		.create('DataGridFilterInput')
-		.option('focusedRingWithin', theme, focused)
+		.option('focusedRingWithin', typeof focused === 'string' ? focused : theme, focused)
 		.append('focus:outline-none', true)
 		.compile(true);
 

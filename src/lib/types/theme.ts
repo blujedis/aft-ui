@@ -7,7 +7,6 @@ import type {
 } from '../constants/options';
 import type * as sharedOptions from '../constants/options';
 import type * as componentOptions from '../components/options';
-import type defaults from '../theme/defaults';
 import type * as configs from '../components/configs';
 import type { colors, shades } from '../constants/colors';
 import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
@@ -16,8 +15,8 @@ import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
 
 export type DeepPartial<T> = T extends object
 	? T extends Array<infer U>
-		? DeepPartial<U>[]
-		: { [K in keyof T]?: DeepPartial<T[K]> }
+	? DeepPartial<U>[]
+	: { [K in keyof T]?: DeepPartial<T[K]> }
 	: T;
 
 /**
@@ -34,10 +33,10 @@ export type PropsWithPrefix<T, P extends string> = T extends `${P}${infer Rest}`
 
 export type ParsePath<T, Key extends keyof T> = Key extends string
 	? T[Key] extends Record<string, any>
-		?
-				| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
-				| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
-		: never
+	?
+	| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+	| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+	: never
 	: never;
 
 export type ParsePathKey<T> = ParsePath<T, keyof T> | keyof T;
@@ -46,10 +45,10 @@ export type Path<T> = ParsePathKey<T> extends string | keyof T ? ParsePathKey<T>
 
 export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Rest}`
 	? Key extends keyof T
-		? Rest extends Path<T[Key]>
-			? PathValue<T[Key], Rest>
-			: never
-		: never
+	? Rest extends Path<T[Key]>
+	? PathValue<T[Key], Rest>
+	: never
+	: never
 	: P extends keyof T
 	? T[P]
 	: never;
@@ -68,30 +67,32 @@ export type ColorType =
 
 export type TailwindColor = keyof typeof tailwindcolors;
 export type NamedColor = keyof typeof namedcolors;
-
 export type ThemeColorBase = typeof colors[number];
 export type ThemeColorShade = typeof shades[number];
 export type ThemeColor = ThemeColorBase;
 
-// export type ThemeColorPrefix = typeof prefixes[number];
-
-// export type ThemeColorKey =
-// 	| `${ThemeColorBase}${'.' | '-'}${ThemeColorShade}`
-// 	| Exclude<ThemeColor, 'light' | 'dark'>
-// 	| ColorType;
-// export type ThemePickKey = `${ThemeColorPrefix}${'.' | '-'}${ThemeColorKey}` | ThemeColorKey;
-
 export interface ThemeConfig {
 	options: ThemeOptions;
-	defaults: typeof defaults;
-	components: typeof configs;
-	// palette: typeof palette;
+	defaults: ThemeDefaults;
+	components: ThemeComponents;
 }
 
 export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
 export type ThemeOption = keyof ThemeOptions;
-export type ThemeShade = ThemeColorShade;
+export type ThemeDefaults = {
+	component: {
+		focused: ThemeFocused; // elements that should receive focus either always or only focus-visible.
+		rounded: ThemeRounded;
+		shadowed: ThemeShadowed;
+		size: ThemeSize;
+		theme: ThemeColor; // default theme color.
+		transitioned: boolean;
+	};
+};
+export type ThemeComponents = typeof configs;
+export type ThemeComponent = keyof ThemeComponents;
 
+export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
 export type ThemeSimpleSize = 'sm' | 'md' | 'lg';
 export type ThemeRounded = ThemeSize | 'full' | 'none';
@@ -122,19 +123,10 @@ export type Templates<K extends string = string> = Record<K, Template>;
 export type TemplateInternal = [string, string[], number[]];
 export type TemplatesInternal<K extends string = string> = Record<K, TemplateInternal>;
 
-/////////////////////////////////////////////////////
+// export type ThemeColorPrefix = typeof prefixes[number];
 
-export type ThemeDefaults = {
-	// global: {
-	// 	bg: string;
-	// 	text: string;
-	// };
-	component: {
-		focused: ThemeFocused; // elements that should receive focus either always or only focus-visible.
-		rounded: ThemeRounded;
-		shadowed: ThemeShadowed;
-		size: ThemeSize;
-		theme: ThemeColor; // default theme color.
-		transitioned: boolean;
-	};
-};
+// export type ThemeColorKey =
+// 	| `${ThemeColorBase}${'.' | '-'}${ThemeColorShade}`
+// 	| Exclude<ThemeColor, 'light' | 'dark'>
+// 	| ColorType;
+// export type ThemePickKey = `${ThemeColorPrefix}${'.' | '-'}${ThemeColorKey}` | ThemeColorKey;

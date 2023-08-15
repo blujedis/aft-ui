@@ -77,7 +77,7 @@ declare const __propDef: {
         exponent?: string | number | null | undefined;
         externalResourcesRequired?: string | number | null | undefined;
         'fill-opacity'?: string | number | null | undefined;
-        'fill-rule'?: "inherit" | "nonzero" | "evenodd" | null | undefined;
+        'fill-rule'?: "inherit" | "evenodd" | "nonzero" | null | undefined;
         filter?: string | null | undefined;
         filterRes?: string | number | null | undefined;
         filterUnits?: string | number | null | undefined;

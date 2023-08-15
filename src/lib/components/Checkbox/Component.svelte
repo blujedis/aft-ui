@@ -25,7 +25,7 @@
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
 		.variant('checkbox', variant, theme, true)
-		.option('focusedRing', theme, focused)
+		.option('focusedRing', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('checkboxSizes', size, size)
 		.option('roundeds', rounded, rounded)

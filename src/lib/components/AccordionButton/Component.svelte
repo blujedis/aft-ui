@@ -46,7 +46,7 @@
 	$: accordionButtonClasses = th
 		.create('Accordion')
 		.variant('accordionButton', variant, theme, true)
-		.option('focusedRingVisible', theme, focused)
+		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)

@@ -1,22 +1,19 @@
 import { writable, get as storeGet } from 'svelte/store';
-import defaultDefaults from './defaults';
-import * as defaultOptions from '../components/options';
-import * as defaultComponents from '../components/configs';
 import { cleanObj } from '../utils';
 let _themeStore;
-const defaultTheme = {
-    options: defaultOptions,
-    defaults: defaultDefaults,
-    components: defaultComponents
-    //	palette
-};
+// const defaultTheme = {
+// 	options: defaultOptions,
+// 	defaults: defaultDefaults,
+// 	components: defaultComponents
+// 	//	palette
+// };
 /**
  * Internal store creator.
  *
  * @param initTheme the initial them to be applied.
  * @param baseTheme the base them so we can ensure all properties.
  */
-function createStoreInternal({ options, defaults, components, ...rest }, baseTheme = { ...defaultTheme }) {
+export function createStoreInternal({ options, defaults, components, ...rest }, baseTheme = {}) {
     if (_themeStore)
         return _themeStore;
     const normalized = {
@@ -55,20 +52,21 @@ function createStoreInternal({ options, defaults, components, ...rest }, baseThe
     const themeStoreInternal = {
         ...store,
         get,
-        update
+        update,
+        defaultTheme: baseTheme
     };
     if (!_themeStore)
         _themeStore = themeStoreInternal;
     return _themeStore;
 }
-export const themeStore = createStoreInternal(defaultTheme);
+// export const themeStore = createStoreInternal(defaultTheme);
 /**
  * Creates a new store which updates the default store's components and options when changed.
  *
  * @param initTheme the initial them to be applied.
  * @param baseTheme the base them so we can ensure all properties.
  */
-export function createStore(extendTheme, baseTheme = { ...defaultTheme }) {
+export function createStore(extendTheme, baseTheme = { ..._themeStore.defaultTheme }) {
     const store = createStoreInternal(extendTheme, baseTheme);
     _themeStore.subscribe((s) => {
         // update default store on change.

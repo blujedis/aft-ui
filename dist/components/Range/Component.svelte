@@ -10,7 +10,7 @@ const st = styler($themeStore);
 $:
   components = $themeStore?.components || {};
 $:
-  rangeStyles = st.create("RangeStyles").colormap(components?.rangeTrackBackground[variant], theme, "--track-background-color", true).colormap(components?.rangeTrackAccent[variant], theme, "--track-accent-color", true).colormap(components?.rangeThumbBackground[variant], theme, "--thumb-background-color", true).colormap(components?.rangeThumbBorder[variant], theme, "--thumb-border-color", true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
+  rangeStyles = st.create("RangeStyles").colormap(components?.rangeTrackBackground[variant], theme, "--track-background-color", true).colormap(components?.rangeTrackAccent[variant], theme, "--track-accent-color", true).colormap(components?.rangeThumbBorder[variant], theme, "--thumb-border-color", true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append("--thumb-background-color:#ffffff", true).append($$restProps.style, true).compile();
 $:
   rangeClasses = th.create("RangeClasses").option("common", "transition", transitioned).option("rangeTrackSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile(true);
 $$restProps.min = $$restProps.min || 0;

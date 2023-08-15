@@ -1,237 +1,65 @@
 {
   "options": {
-    "focusedRing": {
-      "$base": "focus:outline-none focus:ring-2",
-      "white": "focus:ring-white",
-      "light": "focus:ring-frame-400",
-      "dark": "focus:ring-frame-900",
-      "primary": "focus:ring-primary-600",
-      "secondary": "focus:ring-secondary-600",
-      "tertiary": "focus:ring-tertiary-600",
-      "danger": "focus:ring-danger-600",
-      "warning": "focus:ring-warning-600",
-      "success": "focus:ring-success-600",
-      "info": "focus:ring-info-600"
+    "aspectRatio": {
+      "unstyled": "",
+      "auto": "aspect-auto",
+      "square": "aspect-square",
+      "video": "aspect-video"
     },
-    "focusedRingVisible": {
-      "$base": "focus:outline-none focus-visible:outline-none focus-visible:ring-2",
-      "white": "focus-visible:ring-white",
-      "light": "focus-visible:ring-frame-400",
-      "dark": "focus-visible:ring-frame-900",
-      "primary": "focus-visible:ring-primary-600",
-      "secondary": "focus-visible:ring-secondary-600",
-      "tertiary": "focus-visible:ring-tertiary-600",
-      "danger": "focus-visible:ring-danger-600",
-      "warning": "focus-visible:ring-warning-600",
-      "success": "focus-visible:ring-success-600",
-      "info": "focus-visible:ring-info-600"
+    "avatarNotificationSizes": {
+      "unstyled": "",
+      "xs": "h-1.5 w-1.5",
+      "sm": "h-2 w-2",
+      "md": "h-2.5 w-2.5",
+      "lg": "h-3 w-3",
+      "xl": "h-3.5 w-3.5",
+      "xl2": "h-4 w-4"
     },
-    "focusedRingWithin": {
-      "$base": "focus-within:outline-none focus-within:ring-2",
-      "white": "focus-within:ring-white",
-      "light": "focus-within:ring-frame-400",
-      "dark": "focus-within:ring-frame-900",
-      "primary": "focus-within:ring-primary-600",
-      "secondary": "focus-within:ring-secondary-600",
-      "tertiary": "focus-within:ring-tertiary-600",
-      "danger": "focus-within:ring-danger-600",
-      "warning": "focus-within:ring-warning-600",
-      "success": "focus-within:ring-success-600",
-      "info": "focus-within:ring-info-600"
+    "avatarSizes": {
+      "unstyled": "",
+      "xs": "h-6 w-6",
+      "sm": "h-8 w-8",
+      "md": "h-10 w-10",
+      "lg": "h-12 w-12",
+      "xl": "h-14 w-14",
+      "xl2": "h-16 w-16"
     },
-    "focusedRingPeer": {
-      "$base": "peer-focus:outline-none peer-focus:ring-2",
-      "white": "peer-focus:ring-white",
-      "light": "peer-focus:ring-frame-400",
-      "dark": "peer-focus:ring-frame-900",
-      "primary": "peer-focus:ring-primary-600",
-      "secondary": "peer-focus:ring-secondary-600",
-      "tertiary": "peer-focus:ring-tertiary-600",
-      "danger": "peer-focus:ring-danger-600",
-      "warning": "peer-focus:ring-warning-600",
-      "success": "peer-focus:ring-success-600",
-      "info": "peer-focus:ring-info-600"
+    "badgeFieldPadding": {
+      "$base": "border-0 m-0.5",
+      "unstyled": "",
+      "xs": "px-1.5 py-0.5",
+      "sm": "px-2 py-1",
+      "md": "px-3 py-1",
+      "lg": "px-3 py-1.5",
+      "xl": "px-4 py-2",
+      "xl2": "px-5 py-2.5"
     },
-    "focusedRingGroup": {
-      "$base": "group-focus:outline-none group-focus:ring-2",
-      "white": "group-focus:ring-white",
-      "light": "group-focus:ring-frame-400",
-      "dark": "group-focus:ring-frame-900",
-      "primary": "group-focus:ring-primary-600",
-      "secondary": "group-focus:ring-secondary-600",
-      "tertiary": "group-focus:ring-tertiary-600",
-      "danger": "group-focus:ring-danger-600",
-      "warning": "group-focus:ring-warning-600",
-      "success": "group-focus:ring-success-600",
-      "info": "group-focus:ring-info-600"
+    "badgeFontSizes": {
+      "unstyled": "",
+      "xs": "text-[10px] leading-3",
+      "sm": "text-xs",
+      "md": "text-sm",
+      "lg": "text-md",
+      "xl": "text-lg",
+      "xl2": "text-xl"
     },
-    "focusedBorder": {
-      "$base": "focus:outline-none",
-      "white": "focus:border-white",
-      "light": "focus:border-frame-400",
-      "dark": "focus:border-frame-900",
-      "primary": "focus:border-primary-600",
-      "secondary": "focus:border-secondary-600",
-      "tertiary": "focus:border-tertiary-600",
-      "danger": "focus:border-danger-600",
-      "warning": "focus:border-warning-600",
-      "success": "focus:border-success-600",
-      "info": "focus:border-info-600"
+    "badgeIconSizes": {
+      "unstyled": "",
+      "xs": "h-2.5 w-2.5",
+      "sm": "h-3 w-3",
+      "md": "h-3.5 w-3.5",
+      "lg": "h-4 w-4",
+      "xl": "h-4.5 w-4.5",
+      "xl2": "h-5 w-5"
     },
-    "focusedBorderVisible": {
-      "$base": "focus-visible:outline-none",
-      "white": "focus-visible:border-white",
-      "light": "focus-visible:border-frame-400",
-      "dark": "focus-visible:border-frame-900",
-      "primary": "focus-visible:border-primary-600",
-      "secondary": "focus-visible:border-secondary-600",
-      "tertiary": "focus-visible:border-tertiary-600",
-      "danger": "focus-visible:border-danger-600",
-      "warning": "focus-visible:border-warning-600",
-      "success": "focus-visible:border-success-600",
-      "info": "focus-visible:border-info-600"
-    },
-    "focusedBorderWithin": {
-      "$base": "focus-within:outline-none",
-      "white": "focus-within:border-white",
-      "light": "focus-within:border-frame-400",
-      "dark": "focus-within:border-frame-900",
-      "primary": "focus-within:border-primary-600",
-      "secondary": "focus-within:border-secondary-600",
-      "tertiary": "focus-within:border-tertiary-600",
-      "danger": "focus-within:border-danger-600",
-      "warning": "focus-within:border-warning-600",
-      "success": "focus-within:border-success-600",
-      "info": "focus-within:border-info-600"
-    },
-    "focusedBorderPeer": {
-      "$base": "peer-focus:outline-none",
-      "white": "peer-focus:border-white",
-      "light": "peer-focus:border-frame-400",
-      "dark": "peer-focus:border-frame-900",
-      "primary": "peer-focus:border-primary-600",
-      "secondary": "peer-focus:border-secondary-600",
-      "tertiary": "peer-focus:border-tertiary-600",
-      "danger": "peer-focus:border-danger-600",
-      "warning": "peer-focus:border-warning-600",
-      "success": "peer-focus:border-success-600",
-      "info": "peer-focus:border-info-600"
-    },
-    "focusedBorderGroup": {
-      "$base": "group-focus:outline-none",
-      "white": "group-focus:border-white",
-      "light": "group-focus:border-frame-400",
-      "dark": "group-focus:border-frame-900",
-      "primary": "group-focus:border-primary-600",
-      "secondary": "group-focus:border-secondary-600",
-      "tertiary": "group-focus:border-tertiary-600",
-      "danger": "group-focus:border-danger-600",
-      "warning": "group-focus:border-warning-600",
-      "success": "group-focus:border-success-600",
-      "info": "group-focus:border-info-600"
-    },
-    "focusedBorderGroupWithin": {
-      "$base": "group-focus-within:outline-none",
-      "white": "group-focus-within:border-white",
-      "light": "group-focus-within:border-frame-400",
-      "dark": "group-focus-within:border-frame-900",
-      "primary": "group-focus-within:border-primary-600",
-      "secondary": "group-focus-within:border-secondary-600",
-      "tertiary": "group-focus-within:border-tertiary-600",
-      "danger": "group-focus-within:border-danger-600",
-      "warning": "group-focus-within:border-warning-600",
-      "success": "group-focus-within:border-success-600",
-      "info": "group-focus-within:border-info-600"
-    },
-    "focusedOutline": {
-      "$base": "focus:outline",
-      "white": "focus:outline-white",
-      "light": "focus:outline-frame-400",
-      "dark": "focus:outline-frame-900",
-      "primary": "focus:outline-primary-600",
-      "secondary": "focus:outline-secondary-600",
-      "tertiary": "focus:outline-tertiary-600",
-      "danger": "focus:outline-danger-600",
-      "warning": "focus:outline-warning-600",
-      "success": "focus:outline-success-600",
-      "info": "focus:outline-info-600"
-    },
-    "focusedOutlineVisible": {
-      "$base": "focus-visible:outline",
-      "white": "focus-visible:outline-white",
-      "light": "focus-visible:outline-frame-400",
-      "dark": "focus-visible:outline-frame-900",
-      "primary": "focus-visible:outline-primary-600",
-      "secondary": "focus-visible:outline-secondary-600",
-      "tertiary": "focus-visible:outline-tertiary-600",
-      "danger": "focus-visible:outline-danger-600",
-      "warning": "focus-visible:outline-warning-600",
-      "success": "focus-visible:outline-success-600",
-      "info": "focus-visible:outline-info-600"
-    },
-    "focusedOutlineWithin": {
-      "$base": "focus-within:outline",
-      "white": "focus-within:outline-white",
-      "light": "focus-within:outline-frame-400",
-      "dark": "focus-within:outline-frame-900",
-      "primary": "focus-within:outline-primary-600",
-      "secondary": "focus-within:outline-secondary-600",
-      "tertiary": "focus-within:outline-tertiary-600",
-      "danger": "focus-within:outline-danger-600",
-      "warning": "focus-within:outline-warning-600",
-      "success": "focus-within:outline-success-600",
-      "info": "focus-within:outline-info-600"
-    },
-    "focusedOutlinePeer": {
-      "$base": "peer-focus:outline",
-      "white": "peer-focus:outline-white",
-      "light": "peer-focus:outline-frame-400",
-      "dark": "peer-focus:outline-frame-900",
-      "primary": "peer-focus:outline-primary-600",
-      "secondary": "peer-focus:outline-secondary-600",
-      "tertiary": "peer-focus:outline-tertiary-600",
-      "danger": "peer-focus:outline-danger-600",
-      "warning": "peer-focus:outline-warning-600",
-      "success": "peer-focus:outline-success-600",
-      "info": "peer-focus:outline-info-600"
-    },
-    "focusedOutlineGroup": {
-      "$base": "group-focus:outline",
-      "white": "group-focus:outline-white",
-      "light": "group-focus:outline-frame-400",
-      "dark": "group-focus:outline-frame-900",
-      "primary": "group-focus:outline-primary-600",
-      "secondary": "group-focus:outline-secondary-600",
-      "tertiary": "group-focus:outline-tertiary-600",
-      "danger": "group-focus:outline-danger-600",
-      "warning": "group-focus:outline-warning-600",
-      "success": "group-focus:outline-success-600",
-      "info": "group-focus:outline-info-600"
-    },
-    "disableds": {
-      "$base": "aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none",
-      "white": "aria-disabled:text-frame-500",
-      "dark": "aria-disabled:text-frame-700",
-      "light": "aria-disabled:text-frame-300",
-      "primary": "aria-disabled:text-primary-300",
-      "secondary": "aria-disabled:text-secondary-300",
-      "tertiary": "aria-disabled:text-tertiary-300",
-      "danger": "aria-disabled:text-danger-300",
-      "warning": "aria-disabled:text-warning-300",
-      "success": "aria-disabled:text-success-300",
-      "info": "aria-disabled:text-info-300"
-    },
-    "placeholders": {
-      "white": "dark:placeholder:text-frame-500 aria-disabled:placeholder:text-frame-500 placeholder:text-frame-400",
-      "light": "dark:placeholder:text-frame-500 aria-disabled:placeholder:text-frame-200 placeholder:text-frame-400",
-      "dark": "dark:placeholder:text-frame-400 aria-disabled:placeholder:text-frame-500 placeholder:text-frame-400",
-      "primary": "dark:placeholder:text-primary-700 aria-disabled:placeholder:text-primary-300 placeholder:text-primary-300",
-      "secondary": "dark:placeholder:text-secondary-700 aria-disabled:placeholder:text-secondary-300 placeholder:text-secondary-300",
-      "tertiary": "dark:placeholder:text-tertiary-700 aria-disabled:placeholder:text-tertiary-300 placeholder:text-tertiary-300",
-      "danger": "dark:placeholder:text-danger-700 aria-disabled:placeholder:text-danger-300 placeholder:text-danger-300",
-      "warning": "dark:placeholder:text-warning-700 aria-disabled:placeholder:text-warning-300 placeholder:text-warning-300",
-      "success": "dark:placeholder:text-success-700 aria-disabled:placeholder:text-success-300 placeholder:text-success-300",
-      "info": "dark:placeholder:text-info-700 aria-disabled:placeholder:text-info-300 placeholder:text-info-300"
+    "badgePadding": {
+      "unstyled": "",
+      "xs": "px-1.5 py-0.5",
+      "sm": "px-2 py-0.5",
+      "md": "px-2.5 py-0.5 ",
+      "lg": "px-3 py-0.5",
+      "xl": "px-4 py-1",
+      "xl2": "px-5 py-1.5"
     },
     "bgAriaChecked": {
       "white": "aria-checked:bg-frame-100",
@@ -244,30 +72,6 @@
       "warning": "aria-checked:bg-warning-600",
       "success": "aria-checked:bg-success-600",
       "info": "aria-checked:bg-info-600"
-    },
-    "bgGroupAriaChecked": {
-      "white": "group-aria-checked:bg-frame-100",
-      "light": "group-aria-checked:bg-frame-200",
-      "dark": "group-aria-checked:bg-frame-700",
-      "primary": "group-aria-checked:bg-primary-600",
-      "secondary": "group-aria-checked:bg-secondary-600",
-      "tertiary": "group-aria-checked:bg-tertiary-600",
-      "danger": "group-aria-checked:bg-danger-600",
-      "warning": "group-aria-checked:bg-warning-600",
-      "success": "group-aria-checked:bg-success-600",
-      "info": "group-aria-checked:bg-info-600"
-    },
-    "bgAriaSelected": {
-      "white": "aria-selected:bg-frame-100",
-      "light": "aria-selected:bg-frame-200",
-      "dark": "aria-selected:bg-frame-600",
-      "primary": "aria-selected:bg-primary-500",
-      "secondary": "aria-selected:bg-secondary-500",
-      "tertiary": "aria-selected:bg-tertiary-500",
-      "danger": "aria-selected:bg-danger-500",
-      "warning": "aria-selected:bg-warning-500",
-      "success": "aria-selected:bg-success-500",
-      "info": "aria-selected:bg-info-500"
     },
     "bgAriaExpanded": {
       "white": "aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-100",
@@ -305,66 +109,29 @@
       "success": "aria-selected:bg-success-500/20 dark:aria-selected:bg-success-500/20",
       "info": "aria-selected:bg-info-500/20 dark:aria-selected:bg-info-500/20"
     },
-    "textAriaExpanded": {
-      "white": "aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
-      "light": "aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
-      "dark": "aria-expanded:text-[color:var(--text-light-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
-      "primary": "aria-expanded:text-primary-700",
-      "secondary": "aria-expanded:text-secondary-700",
-      "tertiary": "aria-expanded:text-tertiary-700",
-      "danger": "aria-expanded:text-danger-700",
-      "warning": "aria-expanded:text-warning-700",
-      "success": "aria-expanded:text-success-700",
-      "info": "aria-expanded:text-info-700"
+    "bgAriaSelected": {
+      "white": "aria-selected:bg-frame-100",
+      "light": "aria-selected:bg-frame-200",
+      "dark": "aria-selected:bg-frame-600",
+      "primary": "aria-selected:bg-primary-500",
+      "secondary": "aria-selected:bg-secondary-500",
+      "tertiary": "aria-selected:bg-tertiary-500",
+      "danger": "aria-selected:bg-danger-500",
+      "warning": "aria-selected:bg-warning-500",
+      "success": "aria-selected:bg-success-500",
+      "info": "aria-selected:bg-info-500"
     },
-    "textAriaSelected": {
-      "white": "aria-selected:text-[color:var(--text-dark-hover)]",
-      "light": "aria-selected:text-[color:var(--text-dark-hover)]",
-      "dark": "aria-selected:text-[color:var(--text-light-hover)]",
-      "primary": "aria-selected:text-primary-700 dark:aria-selected:text-primary-500",
-      "secondary": "aria-selected:text-secondary-700 dark:aria-selected:text-secondary-500",
-      "tertiary": "aria-selected:text-tertiary-700 dark:aria-selected:text-tertiary-500",
-      "danger": "aria-selected:text-danger-700 dark:aria-selected:text-danger-500",
-      "warning": "aria-selected:text-warning-700 dark:aria-selected:text-warning-500",
-      "success": "aria-selected:text-success-700 dark:aria-selected:text-success-500",
-      "info": "aria-selected:text-info-700 dark:aria-selected:text-info-500"
-    },
-    "textAriaSelectedSoft": {
-      "white": "aria-selected:text-frame-300 dark:aria-selected:text-frame-400",
-      "light": "aria-selected:text-frame-300  dark:aria-selected:text-frame-500",
-      "dark": "aria-selected:text-frame-300 dark:aria-selected:text-frame-600",
-      "primary": "aria-selected:text-primary-300 dark:aria-selected:text-primary-700",
-      "secondary": "aria-selected:text-secondary-300 dark:aria-selected:text-secondary-700",
-      "tertiary": "aria-selected:text-tertiary-300 dark:aria-selected:text-tertiary-700",
-      "danger": "aria-selected:text-danger-300 dark:aria-selected:text-danger-700",
-      "warning": "aria-selected:text-warning-300 dark:aria-selected:text-warning-700",
-      "success": "aria-selected:text-success-300 dark:aria-selected:text-success-700",
-      "info": "aria-selected:text-info-300 dark:aria-selected:text-info-700"
-    },
-    "textAriaCurrent": {
-      "white": "aria-current:text-[color:var(--text-dark-hover)]",
-      "light": "aria-current:text-[color:var(--text-dark-hover)]",
-      "dark": "aria-current:text-[color:var(--text-light-hover)]",
-      "primary": "aria-current:text-primary-700 dark:aria-current:text-primary-500",
-      "secondary": "aria-current:text-secondary-700 dark:aria-current:text-secondary-500",
-      "tertiary": "aria-current:text-tertiary-700 dark:aria-current:text-tertiary-500",
-      "danger": "aria-current:text-danger-700 dark:aria-current:text-danger-500",
-      "warning": "aria-current:text-warning-700 dark:aria-current:text-warning-500",
-      "success": "aria-current:text-success-700 dark:aria-current:text-success-500",
-      "info": "aria-current:text-info-700  dark:aria-current:text-info-500"
-    },
-    "borderAriaSelected": {
-      "$base": "border",
-      "white": "aria-selected:border-frame-50  dark:aria-selected:border-frame-50",
-      "light": "aria-selected:border-frame-300 dark:aria-selected:border-frame-300",
-      "dark": "aria-selected:border-frame-700 dark:aria-selected:border-frame-600",
-      "primary": "aria-selected:border-primary-600 dark:aria-selected:border-primary-600",
-      "secondary": "aria-selected:border-secondary-600  dark:aria-selected:border-secondary-600",
-      "tertiary": "aria-selected:border-tertiary-600  dark:aria-selected:border-tertiary-600",
-      "danger": "aria-selected:border-danger-600 dark:aria-selected:border-danger-600",
-      "warning": "aria-selected:border-warning-600  dark:aria-selected:border-warning-600",
-      "success": "aria-selected:border-success-600  dark:aria-selected:border-success-600",
-      "info": "aria-selected:border-info-600  dark:aria-selected:border-info-600"
+    "bgGroupAriaChecked": {
+      "white": "group-aria-checked:bg-frame-100",
+      "light": "group-aria-checked:bg-frame-200",
+      "dark": "group-aria-checked:bg-frame-700",
+      "primary": "group-aria-checked:bg-primary-600",
+      "secondary": "group-aria-checked:bg-secondary-600",
+      "tertiary": "group-aria-checked:bg-tertiary-600",
+      "danger": "group-aria-checked:bg-danger-600",
+      "warning": "group-aria-checked:bg-warning-600",
+      "success": "group-aria-checked:bg-success-600",
+      "info": "group-aria-checked:bg-info-600"
     },
     "borderAriaExpanded": {
       "$base": "border",
@@ -378,6 +145,19 @@
       "warning": "aria-expanded:border-warning-600",
       "success": "aria-expanded:border-success-600",
       "info": "aria-expanded:border-info-600"
+    },
+    "borderAriaSelected": {
+      "$base": "border",
+      "white": "aria-selected:border-frame-50  dark:aria-selected:border-frame-50",
+      "light": "aria-selected:border-frame-300 dark:aria-selected:border-frame-300",
+      "dark": "aria-selected:border-frame-700 dark:aria-selected:border-frame-600",
+      "primary": "aria-selected:border-primary-600 dark:aria-selected:border-primary-600",
+      "secondary": "aria-selected:border-secondary-600  dark:aria-selected:border-secondary-600",
+      "tertiary": "aria-selected:border-tertiary-600  dark:aria-selected:border-tertiary-600",
+      "danger": "aria-selected:border-danger-600 dark:aria-selected:border-danger-600",
+      "warning": "aria-selected:border-warning-600  dark:aria-selected:border-warning-600",
+      "success": "aria-selected:border-success-600  dark:aria-selected:border-success-600",
+      "info": "aria-selected:border-info-600  dark:aria-selected:border-info-600"
     },
     "borderSizes": {
       "unstyled": "",
@@ -399,50 +179,50 @@
       "double": "border-double",
       "hidden": "border-hidden"
     },
-    "fieldPaddingY": {
+    "boxPadding": {
       "unstyled": "",
-      "xs": "py-0.5",
-      "sm": "py-1",
-      "md": "py-1.5",
-      "lg": "py-2",
-      "xl": "py-2.5",
-      "xl2": "py-3"
+      "xs": "p-3",
+      "sm": "p-4",
+      "md": "p-6",
+      "lg": "p-8",
+      "xl": "p-10",
+      "xl2": "px-12"
     },
-    "fieldPaddingTightY": {
+    "breadcrumbFilledHeight": {
       "unstyled": "",
-      "xs": "py-px",
-      "sm": "py-0.5",
-      "md": "py-1",
-      "lg": "py-1.5",
-      "xl": "py-2",
-      "xl2": "py-2.5"
+      "xs": "h-6",
+      "sm": "h-8",
+      "md": "h-10",
+      "lg": "h-12",
+      "xl": "h-14",
+      "xl2": "h-16"
     },
-    "fieldUpperPaddingY": {
+    "breadcrumbFilledIconWidth": {
       "unstyled": "",
-      "xs": "py-1",
-      "sm": "py-1.5",
-      "md": "pt-2.5 pb-1.5",
-      "lg": "py-2.5",
-      "xl": "py-3",
-      "xl2": "py-3.5"
+      "xs": "w-4",
+      "sm": "w-5",
+      "md": "w-6",
+      "lg": "w-8",
+      "xl": "w-10",
+      "xl2": "w-12"
     },
-    "fieldPaddingX": {
+    "breadcrumbMargins": {
       "unstyled": "",
-      "xs": "px-2.5",
-      "sm": "px-2.5",
-      "md": "px-3",
-      "lg": "px-3.5",
-      "xl": "px-5",
-      "xl2": "px-6"
+      "xs": "ml-1",
+      "sm": "ml-2",
+      "md": "ml-4",
+      "lg": "ml-6",
+      "xl": "ml-8",
+      "xl2": "ml-10"
     },
-    "fieldPadding": {
+    "breadcrumbSpacings": {
       "unstyled": "",
-      "xs": "py-0.5 px-2.5",
-      "sm": "py-1 px-2.5",
-      "md": "py-1.5 px-3",
-      "lg": "py-2 px-3.5",
-      "xl": "py-2.5 px-5",
-      "xl2": "py-3 px-6"
+      "xs": "space-x-1",
+      "sm": "space-x-2",
+      "md": "space-x-4",
+      "lg": "space-x-6",
+      "xl": "space-x-8",
+      "xl2": "space-x-10"
     },
     "buttonPadding": {
       "unstyled": "",
@@ -453,14 +233,428 @@
       "xl": "py-2.5 px-6",
       "xl2": "py-3 px-8"
     },
-    "menuPadding": {
+    "cardFontSizes": {
       "unstyled": "",
-      "xs": "py-px px-2",
-      "sm": "py-0.5 px-2",
-      "md": "py-1 px-2.5",
-      "lg": "py-1.5 px-3",
-      "xl": "py-2 px-4",
-      "xl2": "py-2.5 px-5"
+      "xs": "text-xs",
+      "sm": "text-sm",
+      "md": "text-base",
+      "lg": "text-lg",
+      "xl": "text-xl",
+      "xl2": "text-2xl"
+    },
+    "cardPadding": {
+      "unstyled": "",
+      "xs": "p-2.5 px-3",
+      "sm": "p-3 px-3.5",
+      "md": "p-4",
+      "lg": "p-6 px-5",
+      "xl": "p-8 px-6",
+      "xl2": "p-10 px-8"
+    },
+    "cardPaddingFooter": {
+      "unstyled": "",
+      "xs": "p-2.5 px-3 pb-2",
+      "sm": "p-3 px-3.5 pb-2.5",
+      "md": "p-4 pb-3",
+      "lg": "p-6 px-5 pb-4",
+      "xl": "p-8 px-6 pb-5",
+      "xl2": "p-10 px-8 pb-6"
+    },
+    "cardPaddingHeader": {
+      "unstyled": "",
+      "xs": "p-2.5 px-3 pt-2",
+      "sm": "p-3 px-3.5 pt-2.5",
+      "md": "p-4 pt-3",
+      "lg": "p-6 px-5 pt-4",
+      "xl": "p-8 px-6 pt-5",
+      "xl2": "p-10 px-8 pt-6"
+    },
+    "cardSizes": {
+      "unstyled": "",
+      "none": "max-w-none",
+      "xs": "max-w-xs",
+      "sm": "max-w-sm",
+      "md": "max-w-md",
+      "lg": "max-w-lg",
+      "xl": "max-w-xl",
+      "xl2": "max-w-2xl"
+    },
+    "checkboxSizes": {
+      "unstyled": "",
+      "xs": "h-2.5 w-2.5",
+      "sm": "h-3 w-3",
+      "md": "h-4 w-4",
+      "lg": "h-5 w-5",
+      "xl": "h-6 w-6",
+      "xl2": "h-8 w-8"
+    },
+    "common": {
+      "active": "active:brightness-125",
+      "ringed": "ring-1 ring-black ring-opacity-10 dark:ring-opacity-40",
+      "bordered": "border-frame-200 dark:border-black dark:border-opacity-40",
+      "divided": "divide-frame-200 dark:divide-black dark:divide-opacity-40",
+      "transition": "transition-colors duration-125 motion-reduce:transition-none",
+      "untransition": "transition-none"
+    },
+    "disableds": {
+      "$base": "aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none",
+      "white": "aria-disabled:text-frame-500",
+      "dark": "aria-disabled:text-frame-700",
+      "light": "aria-disabled:text-frame-300",
+      "primary": "aria-disabled:text-primary-300",
+      "secondary": "aria-disabled:text-secondary-300",
+      "tertiary": "aria-disabled:text-tertiary-300",
+      "danger": "aria-disabled:text-danger-300",
+      "warning": "aria-disabled:text-warning-300",
+      "success": "aria-disabled:text-success-300",
+      "info": "aria-disabled:text-info-300"
+    },
+    "divideds": {
+      "white": "divide-white",
+      "light": "divide-frame-200 dark:divide-black dark:divide-opacity-40",
+      "dark": "divide-frame-500",
+      "primary": "divide-primary-100 dark:divide-primary-600",
+      "secondary": "divide-secondary-100 dark:divide-secondary-600",
+      "tertiary": "divide-tertiary-100 dark:divide-tertiary-600",
+      "danger": "divide-danger-100 dark:divide-danger-600",
+      "warning": "divide-warning-100 dark:divide-warning-600",
+      "success": "divide-success-100 dark:divide-success-600",
+      "info": "divide-info-100 dark:divide-info-600"
+    },
+    "dropshadows": {
+      "unstyled": "",
+      "inner": "",
+      "none": "drop-shadow-none",
+      "xs": "drop-shadow-xs",
+      "sm": "drop-shadow-sm",
+      "md": "drop-shadow-md",
+      "lg": "drop-shadow-lg",
+      "xl": "drop-shadow-xl",
+      "xl2": "drop-shadow-2xl"
+    },
+    "emptySizes": {
+      "unstyled": "",
+      "xs": "p-6",
+      "sm": "p-8",
+      "md": "p-12",
+      "lg": "p-16",
+      "xl": "p-20",
+      "xl2": "p-24"
+    },
+    "fieldFontSizes": {
+      "unstyled": "",
+      "xs": "text-xs",
+      "sm": "text-sm",
+      "md": "text-sm",
+      "lg": "text-base",
+      "xl": "text-lg",
+      "xl2": "text-xl"
+    },
+    "fieldPadding": {
+      "unstyled": "",
+      "xs": "py-0.5 px-2.5",
+      "sm": "py-1 px-2.5",
+      "md": "py-1.5 px-3",
+      "lg": "py-2 px-3.5",
+      "xl": "py-2.5 px-5",
+      "xl2": "py-3 px-6"
+    },
+    "fieldPaddingTightY": {
+      "unstyled": "",
+      "xs": "py-px",
+      "sm": "py-0.5",
+      "md": "py-1",
+      "lg": "py-1.5",
+      "xl": "py-2",
+      "xl2": "py-2.5"
+    },
+    "fieldPaddingX": {
+      "unstyled": "",
+      "xs": "px-2.5",
+      "sm": "px-2.5",
+      "md": "px-3",
+      "lg": "px-3.5",
+      "xl": "px-5",
+      "xl2": "px-6"
+    },
+    "fieldPaddingY": {
+      "unstyled": "",
+      "xs": "py-0.5",
+      "sm": "py-1",
+      "md": "py-1.5",
+      "lg": "py-2",
+      "xl": "py-2.5",
+      "xl2": "py-3"
+    },
+    "fieldUpperPaddingY": {
+      "unstyled": "",
+      "xs": "py-1",
+      "sm": "py-1.5",
+      "md": "pt-2.5 pb-1.5",
+      "lg": "py-2.5",
+      "xl": "py-3",
+      "xl2": "py-3.5"
+    },
+    "focusedBorder": {
+      "$base": "focus:outline-none",
+      "white": "focus:border-white",
+      "light": "focus:border-frame-400",
+      "dark": "focus:border-frame-900",
+      "primary": "focus:border-primary-600",
+      "secondary": "focus:border-secondary-600",
+      "tertiary": "focus:border-tertiary-600",
+      "danger": "focus:border-danger-600",
+      "warning": "focus:border-warning-600",
+      "success": "focus:border-success-600",
+      "info": "focus:border-info-600"
+    },
+    "focusedBorderGroup": {
+      "$base": "group-focus:outline-none",
+      "white": "group-focus:border-white",
+      "light": "group-focus:border-frame-400",
+      "dark": "group-focus:border-frame-900",
+      "primary": "group-focus:border-primary-600",
+      "secondary": "group-focus:border-secondary-600",
+      "tertiary": "group-focus:border-tertiary-600",
+      "danger": "group-focus:border-danger-600",
+      "warning": "group-focus:border-warning-600",
+      "success": "group-focus:border-success-600",
+      "info": "group-focus:border-info-600"
+    },
+    "focusedBorderGroupWithin": {
+      "$base": "group-focus-within:outline-none",
+      "white": "group-focus-within:border-white",
+      "light": "group-focus-within:border-frame-400",
+      "dark": "group-focus-within:border-frame-900",
+      "primary": "group-focus-within:border-primary-600",
+      "secondary": "group-focus-within:border-secondary-600",
+      "tertiary": "group-focus-within:border-tertiary-600",
+      "danger": "group-focus-within:border-danger-600",
+      "warning": "group-focus-within:border-warning-600",
+      "success": "group-focus-within:border-success-600",
+      "info": "group-focus-within:border-info-600"
+    },
+    "focusedBorderPeer": {
+      "$base": "peer-focus:outline-none",
+      "white": "peer-focus:border-white",
+      "light": "peer-focus:border-frame-400",
+      "dark": "peer-focus:border-frame-900",
+      "primary": "peer-focus:border-primary-600",
+      "secondary": "peer-focus:border-secondary-600",
+      "tertiary": "peer-focus:border-tertiary-600",
+      "danger": "peer-focus:border-danger-600",
+      "warning": "peer-focus:border-warning-600",
+      "success": "peer-focus:border-success-600",
+      "info": "peer-focus:border-info-600"
+    },
+    "focusedBorderVisible": {
+      "$base": "focus-visible:outline-none",
+      "white": "focus-visible:border-white",
+      "light": "focus-visible:border-frame-400",
+      "dark": "focus-visible:border-frame-900",
+      "primary": "focus-visible:border-primary-600",
+      "secondary": "focus-visible:border-secondary-600",
+      "tertiary": "focus-visible:border-tertiary-600",
+      "danger": "focus-visible:border-danger-600",
+      "warning": "focus-visible:border-warning-600",
+      "success": "focus-visible:border-success-600",
+      "info": "focus-visible:border-info-600"
+    },
+    "focusedBorderWithin": {
+      "$base": "focus-within:outline-none",
+      "white": "focus-within:border-white",
+      "light": "focus-within:border-frame-400",
+      "dark": "focus-within:border-frame-900",
+      "primary": "focus-within:border-primary-600",
+      "secondary": "focus-within:border-secondary-600",
+      "tertiary": "focus-within:border-tertiary-600",
+      "danger": "focus-within:border-danger-600",
+      "warning": "focus-within:border-warning-600",
+      "success": "focus-within:border-success-600",
+      "info": "focus-within:border-info-600"
+    },
+    "focusedOutline": {
+      "$base": "focus:outline",
+      "white": "focus:outline-white",
+      "light": "focus:outline-frame-400",
+      "dark": "focus:outline-frame-900",
+      "primary": "focus:outline-primary-600",
+      "secondary": "focus:outline-secondary-600",
+      "tertiary": "focus:outline-tertiary-600",
+      "danger": "focus:outline-danger-600",
+      "warning": "focus:outline-warning-600",
+      "success": "focus:outline-success-600",
+      "info": "focus:outline-info-600"
+    },
+    "focusedOutlineGroup": {
+      "$base": "group-focus:outline",
+      "white": "group-focus:outline-white",
+      "light": "group-focus:outline-frame-400",
+      "dark": "group-focus:outline-frame-900",
+      "primary": "group-focus:outline-primary-600",
+      "secondary": "group-focus:outline-secondary-600",
+      "tertiary": "group-focus:outline-tertiary-600",
+      "danger": "group-focus:outline-danger-600",
+      "warning": "group-focus:outline-warning-600",
+      "success": "group-focus:outline-success-600",
+      "info": "group-focus:outline-info-600"
+    },
+    "focusedOutlinePeer": {
+      "$base": "peer-focus:outline",
+      "white": "peer-focus:outline-white",
+      "light": "peer-focus:outline-frame-400",
+      "dark": "peer-focus:outline-frame-900",
+      "primary": "peer-focus:outline-primary-600",
+      "secondary": "peer-focus:outline-secondary-600",
+      "tertiary": "peer-focus:outline-tertiary-600",
+      "danger": "peer-focus:outline-danger-600",
+      "warning": "peer-focus:outline-warning-600",
+      "success": "peer-focus:outline-success-600",
+      "info": "peer-focus:outline-info-600"
+    },
+    "focusedOutlineVisible": {
+      "$base": "focus-visible:outline",
+      "white": "focus-visible:outline-white",
+      "light": "focus-visible:outline-frame-400",
+      "dark": "focus-visible:outline-frame-900",
+      "primary": "focus-visible:outline-primary-600",
+      "secondary": "focus-visible:outline-secondary-600",
+      "tertiary": "focus-visible:outline-tertiary-600",
+      "danger": "focus-visible:outline-danger-600",
+      "warning": "focus-visible:outline-warning-600",
+      "success": "focus-visible:outline-success-600",
+      "info": "focus-visible:outline-info-600"
+    },
+    "focusedOutlineWithin": {
+      "$base": "focus-within:outline",
+      "white": "focus-within:outline-white",
+      "light": "focus-within:outline-frame-400",
+      "dark": "focus-within:outline-frame-900",
+      "primary": "focus-within:outline-primary-600",
+      "secondary": "focus-within:outline-secondary-600",
+      "tertiary": "focus-within:outline-tertiary-600",
+      "danger": "focus-within:outline-danger-600",
+      "warning": "focus-within:outline-warning-600",
+      "success": "focus-within:outline-success-600",
+      "info": "focus-within:outline-info-600"
+    },
+    "focusedRing": {
+      "$base": "focus:outline-none focus:ring-2",
+      "white": "focus:ring-white",
+      "light": "focus:ring-frame-400",
+      "dark": "focus:ring-frame-900",
+      "primary": "focus:ring-primary-600",
+      "secondary": "focus:ring-secondary-600",
+      "tertiary": "focus:ring-tertiary-600",
+      "danger": "focus:ring-danger-600",
+      "warning": "focus:ring-warning-600",
+      "success": "focus:ring-success-600",
+      "info": "focus:ring-info-600"
+    },
+    "focusedRingGroup": {
+      "$base": "group-focus:outline-none group-focus:ring-2",
+      "white": "group-focus:ring-white",
+      "light": "group-focus:ring-frame-400",
+      "dark": "group-focus:ring-frame-900",
+      "primary": "group-focus:ring-primary-600",
+      "secondary": "group-focus:ring-secondary-600",
+      "tertiary": "group-focus:ring-tertiary-600",
+      "danger": "group-focus:ring-danger-600",
+      "warning": "group-focus:ring-warning-600",
+      "success": "group-focus:ring-success-600",
+      "info": "group-focus:ring-info-600"
+    },
+    "focusedRingPeer": {
+      "$base": "peer-focus:outline-none peer-focus:ring-2",
+      "white": "peer-focus:ring-white",
+      "light": "peer-focus:ring-frame-400",
+      "dark": "peer-focus:ring-frame-900",
+      "primary": "peer-focus:ring-primary-600",
+      "secondary": "peer-focus:ring-secondary-600",
+      "tertiary": "peer-focus:ring-tertiary-600",
+      "danger": "peer-focus:ring-danger-600",
+      "warning": "peer-focus:ring-warning-600",
+      "success": "peer-focus:ring-success-600",
+      "info": "peer-focus:ring-info-600"
+    },
+    "focusedRingVisible": {
+      "$base": "focus:outline-none focus-visible:outline-none focus-visible:ring-2",
+      "white": "focus-visible:ring-white",
+      "light": "focus-visible:ring-frame-400",
+      "dark": "focus-visible:ring-frame-900",
+      "primary": "focus-visible:ring-primary-600",
+      "secondary": "focus-visible:ring-secondary-600",
+      "tertiary": "focus-visible:ring-tertiary-600",
+      "danger": "focus-visible:ring-danger-600",
+      "warning": "focus-visible:ring-warning-600",
+      "success": "focus-visible:ring-success-600",
+      "info": "focus-visible:ring-info-600"
+    },
+    "focusedRingWithin": {
+      "$base": "focus-within:outline-none focus-within:ring-2",
+      "white": "focus-within:ring-white",
+      "light": "focus-within:ring-frame-400",
+      "dark": "focus-within:ring-frame-900",
+      "primary": "focus-within:ring-primary-600",
+      "secondary": "focus-within:ring-secondary-600",
+      "tertiary": "focus-within:ring-tertiary-600",
+      "danger": "focus-within:ring-danger-600",
+      "warning": "focus-within:ring-warning-600",
+      "success": "focus-within:ring-success-600",
+      "info": "focus-within:ring-info-600"
+    },
+    "fontLeadings": {
+      "unstyled": "",
+      "none": "leading-none",
+      "xs": "leading-3",
+      "sm": "leading-4",
+      "md": "leading-5",
+      "lg": "leading-6",
+      "xl": "leading-7",
+      "xl2": "leading-8",
+      "xl3": "leading-9",
+      "xl4": "leading-10",
+      "tight": "leading-tight",
+      "snug": "leading-snug",
+      "normal": "leading-normal",
+      "relaxed": "leading-relaxed",
+      "loose": "leading-loose"
+    },
+    "fontSizes": {
+      "unstyled": "",
+      "base": "text-base",
+      "xs": "text-xs",
+      "sm": "text-sm",
+      "md": "text-base",
+      "lg": "text-lg",
+      "xl": "text-xl",
+      "xl2": "text-2xl",
+      "xl3": "text-3xl",
+      "xl4": "text-4xl",
+      "xl5": "text-5xl",
+      "xl6": "text-6xl",
+      "xl7": "text-7xl",
+      "xl8": "text-8xl",
+      "xl9": "text-9xl"
+    },
+    "gridHeaderPadding": {
+      "unstyled": "",
+      "xs": "px-2.5 py-1",
+      "sm": "px-2.5 py-1.5",
+      "md": "px-3 py-2",
+      "lg": "px-3.5 py-2.5",
+      "xl": "px-5 py-3",
+      "xl2": "px-6 py-3.5"
+    },
+    "gridgaps": {
+      "unstyled": "",
+      "none": "gap-0",
+      "xs": "gap-2",
+      "sm": "gap-4",
+      "md": "gap-6",
+      "lg": "gap-12",
+      "xl": "gap-16",
+      "xl2": "gap-24"
     },
     "iconCaretSizes": {
       "unstyled": "",
@@ -470,6 +664,24 @@
       "lg": "h-4 w-4",
       "xl": "h-5 w-5",
       "xl2": "h-6 w-6"
+    },
+    "iconSizes": {
+      "unstyled": "",
+      "xs": "h-4 w-4",
+      "sm": "h-5 w-5",
+      "md": "h-6 w-6",
+      "lg": "h-8 w-8",
+      "xl": "h-10 w-10",
+      "xl2": "h-12 w-12"
+    },
+    "menuPadding": {
+      "unstyled": "",
+      "xs": "py-px px-2",
+      "sm": "py-0.5 px-2",
+      "md": "py-1 px-2.5",
+      "lg": "py-1.5 px-3",
+      "xl": "py-2 px-4",
+      "xl2": "py-2.5 px-5"
     },
     "objectFit": {
       "unstyled": "",
@@ -491,327 +703,14 @@
       "left": "object-left",
       "right": "object-right"
     },
-    "aspectRatio": {
+    "paginationFlushedPadding": {
       "unstyled": "",
-      "auto": "aspect-auto",
-      "square": "aspect-square",
-      "video": "aspect-video"
-    },
-    "roundeds": {
-      "unstyled": "",
-      "none": "rounded-none",
-      "xs": "rounded-sm",
-      "sm": "rounded",
-      "md": "rounded-md",
-      "lg": "rounded-lg",
-      "xl": "rounded-xl",
-      "xl2": "rounded-2xl",
-      "full": "rounded-full"
-    },
-    "fontSizes": {
-      "unstyled": "",
-      "base": "text-base",
-      "xs": "text-xs",
-      "sm": "text-sm",
-      "md": "text-base",
-      "lg": "text-lg",
-      "xl": "text-xl",
-      "xl2": "text-2xl",
-      "xl3": "text-3xl",
-      "xl4": "text-4xl",
-      "xl5": "text-5xl",
-      "xl6": "text-6xl",
-      "xl7": "text-7xl",
-      "xl8": "text-8xl",
-      "xl9": "text-9xl"
-    },
-    "fieldFontSizes": {
-      "unstyled": "",
-      "xs": "text-xs",
-      "sm": "text-sm",
-      "md": "text-sm",
-      "lg": "text-base",
-      "xl": "text-lg",
-      "xl2": "text-xl"
-    },
-    "boxPadding": {
-      "unstyled": "",
-      "xs": "p-3",
-      "sm": "p-4",
-      "md": "p-6",
-      "lg": "p-8",
-      "xl": "p-10",
-      "xl2": "px-12"
-    },
-    "shadows": {
-      "unstyled": "",
-      "inner": "shadow-inner",
-      "none": "shadow-none",
-      "xs": "shadow-sm",
-      "sm": "shadow",
-      "md": "shadow-md",
-      "lg": "shadow-lg",
-      "xl": "shadow-xl",
-      "xl2": "shadow-2xl"
-    },
-    "dropshadows": {
-      "unstyled": "",
-      "inner": "",
-      "none": "drop-shadow-none",
-      "xs": "drop-shadow-xs",
-      "sm": "drop-shadow-sm",
-      "md": "drop-shadow-md",
-      "lg": "drop-shadow-lg",
-      "xl": "drop-shadow-xl",
-      "xl2": "drop-shadow-2xl"
-    },
-    "resizes": {
-      "unstyled": "",
-      "none": "resize-none",
-      "x": "resize-x",
-      "y": "resize-y",
-      "both": "resize-both"
-    },
-    "fontLeadings": {
-      "unstyled": "",
-      "none": "leading-none",
-      "xs": "leading-3",
-      "sm": "leading-4",
-      "md": "leading-5",
-      "lg": "leading-6",
-      "xl": "leading-7",
-      "xl2": "leading-8",
-      "xl3": "leading-9",
-      "xl4": "leading-10",
-      "tight": "leading-tight",
-      "snug": "leading-snug",
-      "normal": "leading-normal",
-      "relaxed": "leading-relaxed",
-      "loose": "leading-loose"
-    },
-    "gridgaps": {
-      "unstyled": "",
-      "none": "gap-0",
-      "xs": "gap-2",
-      "sm": "gap-4",
-      "md": "gap-6",
-      "lg": "gap-12",
-      "xl": "gap-16",
-      "xl2": "gap-24"
-    },
-    "divideds": {
-      "white": "divide-white",
-      "light": "divide-frame-200 dark:divide-black dark:divide-opacity-40",
-      "dark": "divide-frame-500",
-      "primary": "divide-primary-100 dark:divide-primary-600",
-      "secondary": "divide-secondary-100 dark:divide-secondary-600",
-      "tertiary": "divide-tertiary-100 dark:divide-tertiary-600",
-      "danger": "divide-danger-100 dark:divide-danger-600",
-      "warning": "divide-warning-100 dark:divide-warning-600",
-      "success": "divide-success-100 dark:divide-success-600",
-      "info": "divide-info-100 dark:divide-info-600"
-    },
-    "stripes": {
-      "white": "even:bg-white",
-      "light": "even:bg-frame-50",
-      "dark": "even:bg-frame-100/90",
-      "primary": "even:bg-primary-50",
-      "secondary": "even:bg-secondary-50",
-      "tertiary": "even:bg-tertiary-50",
-      "danger": "even:bg-danger-50",
-      "warning": "even:bg-warning-50",
-      "success": "even:bg-success-50",
-      "info": "even:bg-info-50"
-    },
-    "common": {
-      "active": "active:brightness-125",
-      "ringed": "ring-1 ring-black ring-opacity-10 dark:ring-opacity-40",
-      "bordered": "border-frame-200 dark:border-black dark:border-opacity-40",
-      "divided": "divide-frame-200 dark:divide-black dark:divide-opacity-40",
-      "transition": "transition-colors duration-125 motion-reduce:transition-none",
-      "untransition": "transition-none"
-    },
-    "avatarSizes": {
-      "unstyled": "",
-      "xs": "h-6 w-6",
-      "sm": "h-8 w-8",
-      "md": "h-10 w-10",
-      "lg": "h-12 w-12",
-      "xl": "h-14 w-14",
-      "xl2": "h-16 w-16"
-    },
-    "avatarNotificationSizes": {
-      "unstyled": "",
-      "xs": "h-1.5 w-1.5",
-      "sm": "h-2 w-2",
-      "md": "h-2.5 w-2.5",
-      "lg": "h-3 w-3",
-      "xl": "h-3.5 w-3.5",
-      "xl2": "h-4 w-4"
-    },
-    "badgeFontSizes": {
-      "unstyled": "",
-      "xs": "text-[10px] leading-3",
-      "sm": "text-xs",
-      "md": "text-sm",
-      "lg": "text-md",
-      "xl": "text-lg",
-      "xl2": "text-xl"
-    },
-    "badgePadding": {
-      "unstyled": "",
-      "xs": "px-1.5 py-0.5",
-      "sm": "px-2 py-0.5",
-      "md": "px-2.5 py-0.5 ",
-      "lg": "px-3 py-0.5",
-      "xl": "px-4 py-1",
-      "xl2": "px-5 py-1.5"
-    },
-    "badgeFieldPadding": {
-      "$base": "border-0 m-0.5",
-      "unstyled": "",
-      "xs": "px-1.5 py-0.5",
-      "sm": "px-2 py-1",
-      "md": "px-3 py-1",
-      "lg": "px-3 py-1.5",
-      "xl": "px-4 py-2",
-      "xl2": "px-5 py-2.5"
-    },
-    "badgeIconSizes": {
-      "unstyled": "",
-      "xs": "h-2.5 w-2.5",
-      "sm": "h-3 w-3",
-      "md": "h-3.5 w-3.5",
-      "lg": "h-4 w-4",
-      "xl": "h-4.5 w-4.5",
-      "xl2": "h-5 w-5"
-    },
-    "breadcrumbSpacings": {
-      "unstyled": "",
-      "xs": "space-x-1",
-      "sm": "space-x-2",
-      "md": "space-x-4",
-      "lg": "space-x-6",
-      "xl": "space-x-8",
-      "xl2": "space-x-10"
-    },
-    "breadcrumbMargins": {
-      "unstyled": "",
-      "xs": "ml-1",
-      "sm": "ml-2",
-      "md": "ml-4",
-      "lg": "ml-6",
-      "xl": "ml-8",
-      "xl2": "ml-10"
-    },
-    "breadcrumbFilledHeight": {
-      "unstyled": "",
-      "xs": "h-6",
-      "sm": "h-8",
-      "md": "h-10",
-      "lg": "h-12",
-      "xl": "h-14",
-      "xl2": "h-16"
-    },
-    "breadcrumbFilledIconWidth": {
-      "unstyled": "",
-      "xs": "w-4",
-      "sm": "w-5",
-      "md": "w-6",
-      "lg": "w-8",
-      "xl": "w-10",
-      "xl2": "w-12"
-    },
-    "checkboxSizes": {
-      "unstyled": "",
-      "xs": "h-2.5 w-2.5",
-      "sm": "h-3 w-3",
-      "md": "h-4 w-4",
-      "lg": "h-5 w-5",
-      "xl": "h-6 w-6",
-      "xl2": "h-8 w-8"
-    },
-    "cardSizes": {
-      "unstyled": "",
-      "none": "max-w-none",
-      "xs": "max-w-xs",
-      "sm": "max-w-sm",
-      "md": "max-w-md",
-      "lg": "max-w-lg",
-      "xl": "max-w-xl",
-      "xl2": "max-w-2xl"
-    },
-    "cardPadding": {
-      "unstyled": "",
-      "xs": "p-2.5 px-3",
-      "sm": "p-3 px-3.5",
-      "md": "p-4",
-      "lg": "p-6 px-5",
-      "xl": "p-8 px-6",
-      "xl2": "p-10 px-8"
-    },
-    "cardPaddingHeader": {
-      "unstyled": "",
-      "xs": "p-2.5 px-3 pt-2",
-      "sm": "p-3 px-3.5 pt-2.5",
-      "md": "p-4 pt-3",
-      "lg": "p-6 px-5 pt-4",
-      "xl": "p-8 px-6 pt-5",
-      "xl2": "p-10 px-8 pt-6"
-    },
-    "cardPaddingFooter": {
-      "unstyled": "",
-      "xs": "p-2.5 px-3 pb-2",
-      "sm": "p-3 px-3.5 pb-2.5",
-      "md": "p-4 pb-3",
-      "lg": "p-6 px-5 pb-4",
-      "xl": "p-8 px-6 pb-5",
-      "xl2": "p-10 px-8 pb-6"
-    },
-    "cardFontSizes": {
-      "unstyled": "",
-      "xs": "text-xs",
-      "sm": "text-sm",
-      "md": "text-base",
-      "lg": "text-lg",
-      "xl": "text-xl",
-      "xl2": "text-2xl"
-    },
-    "emptySizes": {
-      "unstyled": "",
-      "xs": "p-6",
-      "sm": "p-8",
-      "md": "p-12",
-      "lg": "p-16",
-      "xl": "p-20",
-      "xl2": "p-24"
-    },
-    "gridHeaderPadding": {
-      "unstyled": "",
-      "xs": "px-2.5 py-1",
-      "sm": "px-2.5 py-1.5",
-      "md": "px-3 py-2",
-      "lg": "px-3.5 py-2.5",
-      "xl": "px-5 py-3",
-      "xl2": "px-6 py-3.5"
-    },
-    "iconSizes": {
-      "unstyled": "",
-      "xs": "h-4 w-4",
-      "sm": "h-5 w-5",
-      "md": "h-6 w-6",
-      "lg": "h-8 w-8",
-      "xl": "h-10 w-10",
-      "xl2": "h-12 w-12"
-    },
-    "ratingSizes": {
-      "unstyled": "",
-      "xs": "h-3 w-3",
-      "sm": "h-4 w-4",
-      "md": "h-5 w-5",
-      "lg": "h-6 w-6",
-      "xl": "h-8 w-8",
-      "xl2": "h-10 w-10"
+      "xs": "px-2.5 pt-2",
+      "sm": "px-3.5 pt-2.5",
+      "md": "px-4 pt-3",
+      "lg": "px-5 pt-3.5",
+      "xl": "px-6 pt-4",
+      "xl2": "px-7 pt-5"
     },
     "paginationGroupedPadding": {
       "unstyled": "",
@@ -822,15 +721,6 @@
       "xl": "px-6 py-3",
       "xl2": "px-7 py-3.5"
     },
-    "paginationFlushedPadding": {
-      "unstyled": "",
-      "xs": "px-2.5 pt-2",
-      "sm": "px-3.5 pt-2.5",
-      "md": "px-4 pt-3",
-      "lg": "px-5 pt-3.5",
-      "xl": "px-6 pt-4",
-      "xl2": "px-7 pt-5"
-    },
     "paginationIconSizes": {
       "unstyled": "",
       "xs": "h-3 w-3",
@@ -840,6 +730,18 @@
       "xl": "h-7 w-7",
       "xl2": "h-8 w-8"
     },
+    "placeholders": {
+      "white": "dark:placeholder:text-frame-500 aria-disabled:placeholder:text-frame-500 placeholder:text-frame-400",
+      "light": "dark:placeholder:text-frame-500 aria-disabled:placeholder:text-frame-200 placeholder:text-frame-400",
+      "dark": "dark:placeholder:text-frame-400 aria-disabled:placeholder:text-frame-500 placeholder:text-frame-400",
+      "primary": "dark:placeholder:text-primary-700 aria-disabled:placeholder:text-primary-300 placeholder:text-primary-300",
+      "secondary": "dark:placeholder:text-secondary-700 aria-disabled:placeholder:text-secondary-300 placeholder:text-secondary-300",
+      "tertiary": "dark:placeholder:text-tertiary-700 aria-disabled:placeholder:text-tertiary-300 placeholder:text-tertiary-300",
+      "danger": "dark:placeholder:text-danger-700 aria-disabled:placeholder:text-danger-300 placeholder:text-danger-300",
+      "warning": "dark:placeholder:text-warning-700 aria-disabled:placeholder:text-warning-300 placeholder:text-warning-300",
+      "success": "dark:placeholder:text-success-700 aria-disabled:placeholder:text-success-300 placeholder:text-success-300",
+      "info": "dark:placeholder:text-info-700 aria-disabled:placeholder:text-info-300 placeholder:text-info-300"
+    },
     "popoverSizes": {
       "unstyled": "",
       "xs": "px-1.5 text-[10px]",
@@ -848,15 +750,6 @@
       "lg": "px-3 py-2",
       "xl": "px-3.5 py-2.5",
       "xl2": "px-4 py-3"
-    },
-    "progressBarSizes": {
-      "unstyled": "",
-      "xs": "h-0.5",
-      "sm": "h-1",
-      "md": "h-1.5",
-      "lg": "h-2.5",
-      "xl": "h-3",
-      "xl2": "h-4"
     },
     "progressBarRoundedBar": {
       "unstyled": "",
@@ -879,6 +772,15 @@
       "xl": "[&::-webkit-progress-value]:rounded-xl",
       "xl2": "[&::-webkit-progress-value]:rounded-2xl",
       "full": "[&::-webkit-progress-value]:rounded-full"
+    },
+    "progressBarSizes": {
+      "unstyled": "",
+      "xs": "h-0.5",
+      "sm": "h-1",
+      "md": "h-1.5",
+      "lg": "h-2.5",
+      "xl": "h-3",
+      "xl2": "h-4"
     },
     "progressCircleSizes": {
       "unstyled": 0,
@@ -907,14 +809,14 @@
       "xl": 12,
       "xl2": 14
     },
-    "rangeTrackSizes": {
+    "rangeBorderSizes": {
       "unstyled": "",
-      "xs": "h-0.5",
-      "sm": "h-1",
-      "md": "h-2",
-      "lg": "h-3",
-      "xl": "h-4",
-      "xl2": "h-5"
+      "xs": "2px",
+      "sm": "2px",
+      "md": "3px",
+      "lg": "3px",
+      "xl": "4px",
+      "xl2": "4px"
     },
     "rangeThumbSizes": {
       "unstyled": "",
@@ -925,14 +827,64 @@
       "xl": "32px",
       "xl2": "38px"
     },
-    "rangeBorderSizes": {
+    "rangeTrackSizes": {
       "unstyled": "",
-      "xs": "2px",
-      "sm": "2px",
-      "md": "3px",
-      "lg": "3px",
-      "xl": "4px",
-      "xl2": "4px"
+      "xs": "h-0.5",
+      "sm": "h-1",
+      "md": "h-2",
+      "lg": "h-3",
+      "xl": "h-4",
+      "xl2": "h-5"
+    },
+    "ratingSizes": {
+      "unstyled": "",
+      "xs": "h-3 w-3",
+      "sm": "h-4 w-4",
+      "md": "h-5 w-5",
+      "lg": "h-6 w-6",
+      "xl": "h-8 w-8",
+      "xl2": "h-10 w-10"
+    },
+    "resizes": {
+      "unstyled": "",
+      "none": "resize-none",
+      "x": "resize-x",
+      "y": "resize-y",
+      "both": "resize-both"
+    },
+    "roundeds": {
+      "unstyled": "",
+      "none": "rounded-none",
+      "xs": "rounded-sm",
+      "sm": "rounded",
+      "md": "rounded-md",
+      "lg": "rounded-lg",
+      "xl": "rounded-xl",
+      "xl2": "rounded-2xl",
+      "full": "rounded-full"
+    },
+    "shadows": {
+      "unstyled": "",
+      "inner": "shadow-inner",
+      "none": "shadow-none",
+      "xs": "shadow-sm",
+      "sm": "shadow",
+      "md": "shadow-md",
+      "lg": "shadow-lg",
+      "xl": "shadow-xl",
+      "xl2": "shadow-2xl"
+    },
+    "stripes": {
+      "white": "even:bg-white",
+      "light": "even:bg-frame-50",
+      "dark": "even:bg-frame-100/90",
+      "primary": "even:bg-primary-50",
+      "secondary": "even:bg-secondary-50",
+      "tertiary": "even:bg-tertiary-50",
+      "danger": "even:bg-danger-50",
+      "warning": "even:bg-warning-50",
+      "success": "even:bg-success-50",
+      "info": "even:bg-info-50"
     },
     "switchButtonSizes": {
       "unstyled": "",
@@ -969,6 +921,54 @@
       "lg": "translate-x-0",
       "xl": "translate-x-0",
       "xl2": "translate-x-0"
+    },
+    "textAriaCurrent": {
+      "white": "aria-current:text-[color:var(--text-dark-hover)]",
+      "light": "aria-current:text-[color:var(--text-dark-hover)]",
+      "dark": "aria-current:text-[color:var(--text-light-hover)]",
+      "primary": "aria-current:text-primary-700 dark:aria-current:text-primary-500",
+      "secondary": "aria-current:text-secondary-700 dark:aria-current:text-secondary-500",
+      "tertiary": "aria-current:text-tertiary-700 dark:aria-current:text-tertiary-500",
+      "danger": "aria-current:text-danger-700 dark:aria-current:text-danger-500",
+      "warning": "aria-current:text-warning-700 dark:aria-current:text-warning-500",
+      "success": "aria-current:text-success-700 dark:aria-current:text-success-500",
+      "info": "aria-current:text-info-700  dark:aria-current:text-info-500"
+    },
+    "textAriaExpanded": {
+      "white": "aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
+      "light": "aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
+      "dark": "aria-expanded:text-[color:var(--text-light-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]",
+      "primary": "aria-expanded:text-primary-700",
+      "secondary": "aria-expanded:text-secondary-700",
+      "tertiary": "aria-expanded:text-tertiary-700",
+      "danger": "aria-expanded:text-danger-700",
+      "warning": "aria-expanded:text-warning-700",
+      "success": "aria-expanded:text-success-700",
+      "info": "aria-expanded:text-info-700"
+    },
+    "textAriaSelected": {
+      "white": "aria-selected:text-[color:var(--text-dark-hover)]",
+      "light": "aria-selected:text-[color:var(--text-dark-hover)]",
+      "dark": "aria-selected:text-[color:var(--text-light-hover)]",
+      "primary": "aria-selected:text-primary-700 dark:aria-selected:text-primary-500",
+      "secondary": "aria-selected:text-secondary-700 dark:aria-selected:text-secondary-500",
+      "tertiary": "aria-selected:text-tertiary-700 dark:aria-selected:text-tertiary-500",
+      "danger": "aria-selected:text-danger-700 dark:aria-selected:text-danger-500",
+      "warning": "aria-selected:text-warning-700 dark:aria-selected:text-warning-500",
+      "success": "aria-selected:text-success-700 dark:aria-selected:text-success-500",
+      "info": "aria-selected:text-info-700 dark:aria-selected:text-info-500"
+    },
+    "textAriaSelectedSoft": {
+      "white": "aria-selected:text-frame-300 dark:aria-selected:text-frame-400",
+      "light": "aria-selected:text-frame-300  dark:aria-selected:text-frame-500",
+      "dark": "aria-selected:text-frame-300 dark:aria-selected:text-frame-600",
+      "primary": "aria-selected:text-primary-300 dark:aria-selected:text-primary-700",
+      "secondary": "aria-selected:text-secondary-300 dark:aria-selected:text-secondary-700",
+      "tertiary": "aria-selected:text-tertiary-300 dark:aria-selected:text-tertiary-700",
+      "danger": "aria-selected:text-danger-300 dark:aria-selected:text-danger-700",
+      "warning": "aria-selected:text-warning-300 dark:aria-selected:text-warning-700",
+      "success": "aria-selected:text-success-300 dark:aria-selected:text-success-700",
+      "info": "aria-selected:text-info-300 dark:aria-selected:text-info-700"
     }
   },
   "defaults": {
@@ -1697,6 +1697,60 @@
         "info": ""
       }
     },
+    "gridSearch": {
+      "filled": {
+        "$base": "",
+        "white": "",
+        "light": "",
+        "dark": "",
+        "primary": "",
+        "secondary": "",
+        "tertiary": "",
+        "danger": "",
+        "warning": "",
+        "success": "",
+        "info": ""
+      },
+      "outlined": {
+        "$base": "",
+        "white": "",
+        "light": "",
+        "dark": "",
+        "primary": "",
+        "secondary": "",
+        "tertiary": "",
+        "danger": "",
+        "warning": "",
+        "success": "",
+        "info": ""
+      },
+      "glass": {
+        "$base": "",
+        "white": "",
+        "light": "",
+        "dark": "",
+        "primary": "",
+        "secondary": "",
+        "tertiary": "",
+        "danger": "",
+        "warning": "",
+        "success": "",
+        "info": ""
+      },
+      "ghost": {
+        "$base": "",
+        "white": "",
+        "light": "",
+        "dark": "",
+        "primary": "",
+        "secondary": "",
+        "tertiary": "",
+        "danger": "",
+        "warning": "",
+        "success": "",
+        "info": ""
+      }
+    },
     "input": {
       "outlined": {
         "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] ring-white hover:ring-frame-200",
@@ -1858,10 +1912,10 @@
     },
     "menuPanel": {
       "filled": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -1871,10 +1925,10 @@
         "info": ""
       },
       "outlined": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -1884,10 +1938,10 @@
         "info": ""
       },
       "text": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -1897,10 +1951,10 @@
         "info": ""
       },
       "ghost": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -1910,10 +1964,10 @@
         "info": ""
       },
       "glass": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -1921,32 +1975,6 @@
         "warning": "",
         "success": "",
         "info": ""
-      }
-    },
-    "notificationsPosition": {
-      "bottom-right": {
-        "x": 400,
-        "y": 0
-      },
-      "top-right": {
-        "x": 400,
-        "y": 0
-      },
-      "bottom-left": {
-        "x": -400,
-        "y": 0
-      },
-      "top-left": {
-        "x": -400,
-        "y": 0
-      },
-      "bottom-center": {
-        "x": 0,
-        "y": 0
-      },
-      "top-center": {
-        "x": 0,
-        "y": 0
       }
     },
     "notification": {
@@ -1992,6 +2020,32 @@
         "warning": "",
         "success": "",
         "info": ""
+      }
+    },
+    "notificationsPosition": {
+      "bottom-right": {
+        "x": 400,
+        "y": 0
+      },
+      "top-right": {
+        "x": 400,
+        "y": 0
+      },
+      "bottom-left": {
+        "x": -400,
+        "y": 0
+      },
+      "top-left": {
+        "x": -400,
+        "y": 0
+      },
+      "bottom-center": {
+        "x": 0,
+        "y": 0
+      },
+      "top-center": {
+        "x": 0,
+        "y": 0
       }
     },
     "paginationDetail": {
@@ -2093,6 +2147,21 @@
         "info": "[&::-webkit-progress-value]:bg-info-500 [&::-moz-progress-bar]:bg-info-500"
       }
     },
+    "progressCircleText": {
+      "filled": {
+        "$base": "text-[.85em]",
+        "white": "fill-white",
+        "light": "fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]",
+        "dark": "fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]",
+        "primary": "fill-primary-500",
+        "secondary": "fill-secondary-500",
+        "tertiary": "fill-tertiary-500",
+        "danger": "fill-danger-500",
+        "warning": "fill-warning-500",
+        "success": "fill-success-500",
+        "info": "fill-info-500"
+      }
+    },
     "progressCircleTrack": {
       "filled": {
         "$base": "stroke-frame-100 dark:stroke-frame-600",
@@ -2123,21 +2192,6 @@
         "info": "stroke-info-500"
       }
     },
-    "progressCircleText": {
-      "filled": {
-        "$base": "text-[.85em]",
-        "white": "fill-white",
-        "light": "fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]",
-        "dark": "fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]",
-        "primary": "fill-primary-500",
-        "secondary": "fill-secondary-500",
-        "tertiary": "fill-tertiary-500",
-        "danger": "fill-danger-500",
-        "warning": "fill-warning-500",
-        "success": "fill-success-500",
-        "info": "fill-info-500"
-      }
-    },
     "radio": {
       "outlined": {
         "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-white hover:border-frame-50",
@@ -2153,41 +2207,19 @@
         "$base": "border"
       }
     },
-    "rangeTrackBackgroundBase": {
-      "white": "",
-      "light": "frame-200",
-      "dark": "",
-      "primary": "frame-200",
-      "secondary": "frame-200",
-      "tertiary": "frame-200",
-      "danger": "frame-200",
-      "warning": "frame-200",
-      "success": "frame-200",
-      "info": "frame-200"
-    },
-    "rangeTrackAccentBase": {
-      "white": "",
-      "light": "frame-400",
-      "dark": "",
-      "primary": "primary-500",
-      "secondary": "secondary-500",
-      "tertiary": "tertiary-500",
-      "danger": "danger-500",
-      "warning": "warning-500",
-      "success": "success-500",
-      "info": "info-500"
-    },
-    "rangeThumbBorderBase": {
-      "white": "",
-      "light": "frame-400",
-      "dark": "",
-      "primary": "primary-500",
-      "secondary": "secondary-500",
-      "tertiary": "tertiary-500",
-      "danger": "danger-500",
-      "warning": "warning-500",
-      "success": "success-500",
-      "info": "info-500"
+    "rangeThumbBackground": {
+      "filled": {
+        "white": "",
+        "light": "white",
+        "dark": "white",
+        "primary": "white",
+        "secondary": "white",
+        "tertiary": "white",
+        "danger": "white",
+        "warning": "white",
+        "success": "white",
+        "info": "white"
+      }
     },
     "rangeThumbBackgroundBase": {
       "white": "",
@@ -2200,34 +2232,6 @@
       "warning": "white",
       "success": "white",
       "info": "white"
-    },
-    "rangeTrackBackground": {
-      "filled": {
-        "white": "",
-        "light": "frame-200",
-        "dark": "",
-        "primary": "frame-200",
-        "secondary": "frame-200",
-        "tertiary": "frame-200",
-        "danger": "frame-200",
-        "warning": "frame-200",
-        "success": "frame-200",
-        "info": "frame-200"
-      }
-    },
-    "rangeTrackAccent": {
-      "filled": {
-        "white": "",
-        "light": "frame-400",
-        "dark": "",
-        "primary": "primary-500",
-        "secondary": "secondary-500",
-        "tertiary": "tertiary-500",
-        "danger": "danger-500",
-        "warning": "warning-500",
-        "success": "success-500",
-        "info": "info-500"
-      }
     },
     "rangeThumbBorder": {
       "filled": {
@@ -2243,19 +2247,69 @@
         "info": "info-500"
       }
     },
-    "rangeThumbBackground": {
+    "rangeThumbBorderBase": {
+      "white": "",
+      "light": "frame-400",
+      "dark": "",
+      "primary": "primary-500",
+      "secondary": "secondary-500",
+      "tertiary": "tertiary-500",
+      "danger": "danger-500",
+      "warning": "warning-500",
+      "success": "success-500",
+      "info": "info-500"
+    },
+    "rangeTrackAccent": {
       "filled": {
         "white": "",
-        "light": "white",
-        "dark": "white",
-        "primary": "white",
-        "secondary": "white",
-        "tertiary": "white",
-        "danger": "white",
-        "warning": "white",
-        "success": "white",
-        "info": "white"
+        "light": "frame-400",
+        "dark": "",
+        "primary": "primary-500",
+        "secondary": "secondary-500",
+        "tertiary": "tertiary-500",
+        "danger": "danger-500",
+        "warning": "warning-500",
+        "success": "success-500",
+        "info": "info-500"
       }
+    },
+    "rangeTrackAccentBase": {
+      "white": "",
+      "light": "frame-400",
+      "dark": "",
+      "primary": "primary-500",
+      "secondary": "secondary-500",
+      "tertiary": "tertiary-500",
+      "danger": "danger-500",
+      "warning": "warning-500",
+      "success": "success-500",
+      "info": "info-500"
+    },
+    "rangeTrackBackground": {
+      "filled": {
+        "white": "",
+        "light": "frame-200",
+        "dark": "",
+        "primary": "frame-200",
+        "secondary": "frame-200",
+        "tertiary": "frame-200",
+        "danger": "frame-200",
+        "warning": "frame-200",
+        "success": "frame-200",
+        "info": "frame-200"
+      }
+    },
+    "rangeTrackBackgroundBase": {
+      "white": "",
+      "light": "frame-200",
+      "dark": "",
+      "primary": "frame-200",
+      "secondary": "frame-200",
+      "tertiary": "frame-200",
+      "danger": "frame-200",
+      "warning": "frame-200",
+      "success": "frame-200",
+      "info": "frame-200"
     },
     "select": {
       "outlined": {
@@ -2310,21 +2364,6 @@
         "success": "text-success-500 bg-success-500/10",
         "info": "text-info-500 bg-info-500/10",
         "$base": "text-[color:var(--text-dark)]"
-      }
-    },
-    "selectOption": {
-      "outlined": {
-        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-white hover:border-frame-50",
-        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-frame-200 hover:border-frame-300",
-        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-frame-600 hover:border-frame-700",
-        "primary": "text-primary-500 border-primary-500 hover:border-primary-600",
-        "secondary": "text-secondary-500 border-secondary-500 hover:border-secondary-600",
-        "tertiary": "text-tertiary-500 border-tertiary-500 hover:border-tertiary-600",
-        "danger": "text-danger-500 border-danger-500 hover:border-danger-600",
-        "warning": "text-warning-500 border-warning-500 hover:border-warning-600",
-        "success": "text-success-500 border-success-500 hover:border-success-600",
-        "info": "text-info-500 border-info-500 hover:border-info-600",
-        "$base": "border"
       }
     },
     "selectListButton": {
@@ -2451,10 +2490,10 @@
     },
     "selectListPanel": {
       "filled": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -2464,10 +2503,10 @@
         "info": ""
       },
       "outlined": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -2477,10 +2516,10 @@
         "info": ""
       },
       "text": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -2490,10 +2529,10 @@
         "info": ""
       },
       "ghost": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -2503,10 +2542,10 @@
         "info": ""
       },
       "flushed": {
-        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-40 bg-white dark:bg-frame-700",
-        "white": "",
-        "light": "",
-        "dark": "",
+        "$base": "ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit",
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]",
         "primary": "",
         "secondary": "",
         "tertiary": "",
@@ -2514,6 +2553,21 @@
         "warning": "",
         "success": "",
         "info": ""
+      }
+    },
+    "selectOption": {
+      "outlined": {
+        "white": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-white hover:border-frame-50",
+        "light": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-frame-200 hover:border-frame-300",
+        "dark": "text-[color:var(--text-dark)] dark:text-[color:var(--text-light)] border-frame-600 hover:border-frame-700",
+        "primary": "text-primary-500 border-primary-500 hover:border-primary-600",
+        "secondary": "text-secondary-500 border-secondary-500 hover:border-secondary-600",
+        "tertiary": "text-tertiary-500 border-tertiary-500 hover:border-tertiary-600",
+        "danger": "text-danger-500 border-danger-500 hover:border-danger-600",
+        "warning": "text-warning-500 border-warning-500 hover:border-warning-600",
+        "success": "text-success-500 border-success-500 hover:border-success-600",
+        "info": "text-info-500 border-info-500 hover:border-info-600",
+        "$base": "border"
       }
     },
     "switchBackdrop": {

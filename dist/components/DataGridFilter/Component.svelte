@@ -23,9 +23,9 @@ $:
 $:
   gridFilterStyles = st.create("DataGridHeader").add("--template-columns", context.getDataGridTemplate(), autocols).compile();
 $:
-  gridFilterClasses = th.create("DataGridFilter").variant("gridFilter", variant, theme, variant).append("auto-cols-fr", autocols).prepend("datagrid__filter grid grid-flow-col w-full", true).compile(true);
+  gridFilterClasses = th.create("DataGridFilter").variant("gridFilter", variant, theme, variant).append("auto-cols-fr", autocols).prepend("datagrid__filter grid grid-flow-col w-full", true).append($$restProps.class, true).compile(true);
 $:
-  filterInputCellClasses = th.create("DataGridFilterInput").option("focusedRingWithin", theme, focused).append("focus:outline-none", true).compile(true);
+  filterInputCellClasses = th.create("DataGridFilterInput").option("focusedRingWithin", typeof focused === "string" ? focused : theme, focused).append("focus:outline-none", true).compile(true);
 function handleFilterColumn(e, accessor) {
   const input = e.target;
   if (input)

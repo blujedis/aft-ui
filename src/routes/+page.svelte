@@ -51,4 +51,9 @@
 		class="inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 font-medium uppercase text-sm"
 		>Generator</a
 	>
+	<a
+		href="/util/download"
+		class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
+		>Download Theme</a
+	>
 </div>

@@ -199,9 +199,9 @@ declare const __propDef: {
         end?: string | number | null | undefined;
         speed?: string | number | null | undefined;
         opacity?: string | number | null | undefined;
+        method?: string | null | undefined;
         origin?: string | number | null | undefined;
         className?: string | null | undefined;
-        method?: string | null | undefined;
         'accent-height'?: string | number | null | undefined;
         accumulate?: "none" | "sum" | null | undefined;
         additive?: "replace" | "sum" | null | undefined;
@@ -253,7 +253,7 @@ declare const __propDef: {
         exponent?: string | number | null | undefined;
         externalResourcesRequired?: string | number | null | undefined;
         'fill-opacity'?: string | number | null | undefined;
-        'fill-rule'?: "inherit" | "nonzero" | "evenodd" | null | undefined;
+        'fill-rule'?: "inherit" | "evenodd" | "nonzero" | null | undefined;
         filterRes?: string | number | null | undefined;
         filterUnits?: string | number | null | undefined;
         'flood-color'?: string | number | null | undefined;

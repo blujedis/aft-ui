@@ -32,6 +32,7 @@ export * from './DataGridFilter';
 export * from './DataGridHeader';
 export * from './DataGridHeaderCell';
 export * from './DataGridRow';
+export * from './DataGridSearch';
 export * from './Icon';
 export * from './Image';
 export * from './Input';

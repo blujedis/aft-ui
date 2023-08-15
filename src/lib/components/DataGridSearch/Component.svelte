@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type DataGridSearchProps, gridSearchDefaults as defaults } from './module';
-	import { themeStore, bem, pickCleanProps, styler, themer, Button } from '$lib';
+	import { themeStore, bem, pickCleanProps, themer } from '$lib';
 	import type { ElementProps } from '../../types';
 	import type { DataGridContext } from '../DataGrid';
 	import { getContext } from 'svelte';
@@ -11,13 +11,14 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { action, focused, method, size, strategy, theme, variant } = {
+	export let { action, focused, method, rounded, size, strategy, theme, variant } = {
 		...defaults,
 		...pickCleanProps(
 			context?.globals,
 			'autocols',
 			'columns',
 			'focused',
+			'rounded',
 			'size',
 			'theme',
 			'variant'
@@ -29,7 +30,7 @@
 	$: gridSearchClasses = th
 		.create('DataGridSearch')
 		.prepend('datagrid__search', true)
-		.append('py-2 px-4', true)
+		//.append('py-2 px-4', true)
 		.compile(true);
 
 	$: gridSearchInputClasses = th
@@ -37,8 +38,10 @@
 		.variant('gridSearch', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
+		.option('focusedOutline', typeof focused === 'string' ? focused : theme, focused)
+		.option('roundeds', rounded, rounded)
 		.prepend('datagrid__search_input', true)
-		.append('pl-8 focus:outline-none w-full bg-transparent', true)
+		.append('pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none', true)
 		.compile();
 
 	function handleSearchSubmit(
@@ -48,6 +51,7 @@
 			currentTarget: EventTarget & HTMLFormElement;
 		}
 	): void {
+		if (strategy !== 'submit' || method || action) return;
 		e.preventDefault();
 		const form = e.target as HTMLFormElement;
 		if (form) {
@@ -71,13 +75,13 @@
 	}
 </script>
 
-<DataGridCell class={gridSearchClasses} full>
+<DataGridCell size="unstyled" class={gridSearchClasses} full>
 	<slot search={context.filter}>
-		<form id="search_form" name="search_form" {action} {method}>
+		<form id="search_form" name="search_form" {action} {method} on:submit={handleSearchSubmit}>
 			<div class="flex items-center">
-				<div class="flex-1 relative">
+				<div class="flex-1 relative p-1">
 					<svg
-						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400"
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-4"
 						viewBox="0 0 20 20"
 						fill="currentColor"
 						aria-hidden="true"

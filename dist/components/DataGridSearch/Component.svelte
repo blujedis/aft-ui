@@ -1,0 +1,81 @@
+<script>import { gridSearchDefaults as defaults } from "./module";
+import { themeStore, bem, pickCleanProps, themer } from "../..";
+import { getContext } from "svelte";
+import { DataGridCell } from "../DataGridCell";
+import { debounce } from "../../utils";
+const context = getContext("DataGrid");
+export let { action, focused, method, size, strategy, theme, variant } = {
+  ...defaults,
+  ...pickCleanProps(
+    context?.globals,
+    "autocols",
+    "columns",
+    "focused",
+    "size",
+    "theme",
+    "variant"
+  )
+};
+const th = themer($themeStore);
+$:
+  gridSearchClasses = th.create("DataGridSearch").prepend("datagrid__search", true).append("py-2 px-4", true).compile(true);
+$:
+  gridSearchInputClasses = th.create("DataGridSearchInput").variant("gridSearch", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("focusedRing", typeof focused === "string" ? focused : theme, focused).prepend("datagrid__search_input", true).append("pl-8 focus:outline-none w-full bg-transparent", true).compile();
+function handleSearchSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  if (form) {
+    debounce(() => {
+      const data = new FormData(form);
+      context.filter(data.get("search")?.toString() || "");
+    })();
+  }
+}
+function handleSearchInput(e) {
+  e.preventDefault();
+  const input = e.target;
+  if (input)
+    debounce(() => {
+      context.filter(input.value || "");
+    })();
+}
+</script>
+
+<DataGridCell class={gridSearchClasses} full>
+	<slot search={context.filter}>
+		<form id="search_form" name="search_form" {action} {method}>
+			<div class="flex items-center">
+				<div class="flex-1 relative">
+					<svg
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+					{#if strategy === 'input'}
+						<input
+							type="search"
+							name="search"
+							placeholder="filter"
+							class={gridSearchInputClasses}
+							on:input={handleSearchInput}
+						/>
+					{:else}
+						<input
+							type="search"
+							name="search"
+							placeholder="filter"
+							class={gridSearchInputClasses}
+						/>
+					{/if}
+				</div>
+			</div>
+		</form>
+	</slot>
+</DataGridCell>

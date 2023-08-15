@@ -10,11 +10,9 @@ export interface UseColorModeOptions {
 let _instance: any = null;
 
 export function useColorMode(key = 'dark') {
-
 	type ColorModeInstance = Writable<boolean> & typeof methods;
 
-	if (_instance)
-		return _instance as ColorModeInstance;
+	if (_instance) return _instance as ColorModeInstance;
 
 	const store = writable<boolean>(getMountedValue());
 
@@ -75,10 +73,7 @@ export function useColorMode(key = 'dark') {
 		...store
 	};
 
-	if (!_instance)
-		_instance = api;
+	if (!_instance) _instance = api;
 
 	return _instance as ColorModeInstance;
 }
-
-

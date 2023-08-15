@@ -34,7 +34,7 @@
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
 		.variant('breadcrumbOption', variant, theme, true)
-		.option('focusedRingVisible', theme, focused)
+		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)

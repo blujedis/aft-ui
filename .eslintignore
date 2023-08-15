@@ -14,3 +14,4 @@ yarn.lock
 /dist
 tailwind.config.cjs
 postbuild.cjs
+src/lib/theme/init.prod.ts

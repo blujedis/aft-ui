@@ -5,8 +5,9 @@ export type DataGridSearchProps = {
 	action?: string;
 	focused?: ThemeFocused;
 	method?: string;
+	rounded?: ThemeSize;
 	size?: ThemeSize;
-	strategy?: 'input' | 'enter';
+	strategy?: 'input' | 'submit';
 	theme?: ThemeColor;
 	variant?: DataGridVariant;
 };

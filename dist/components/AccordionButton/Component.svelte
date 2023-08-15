@@ -36,7 +36,7 @@ $:
   activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 const th = themer($themeStore);
 $:
-  accordionButtonClasses = th.create("Accordion").variant("accordionButton", variant, theme, true).option("focusedRingVisible", theme, focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("roundeds", rounded, rounded && ["filled", "glass"].includes(variant)).option("shadows", shadowed, shadowed && variant !== "flushed").option("disableds", theme, disabled).append("inline-flex items-center justify-between focus:outline-none  w-full", true).append($$restProps.class, true).compile(true);
+  accordionButtonClasses = th.create("Accordion").variant("accordionButton", variant, theme, true).option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("roundeds", rounded, rounded && ["filled", "glass"].includes(variant)).option("shadows", shadowed, shadowed && variant !== "flushed").option("disableds", theme, disabled).append("inline-flex items-center justify-between focus:outline-none  w-full", true).append($$restProps.class, true).compile(true);
 $:
   iconClasses = th.create("DropdownButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", roticon).append(typeof roticon === "string" ? roticon : "-rotate-180", isSelected && roticon).compile();
 </script>

@@ -36,7 +36,7 @@
 		: th
 				.create('Button')
 				.variant('button', variant, theme, true)
-				.option('focusedRingVisible', theme, focused)
+				.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
