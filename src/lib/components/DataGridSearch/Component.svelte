@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type DataGridSearchProps, gridSearchDefaults as defaults } from './module';
-	import { themeStore, bem, pickCleanProps, styler, themer } from '$lib';
+	import { themeStore, bem, pickCleanProps, styler, themer, Button } from '$lib';
 	import type { ElementProps } from '../../types';
 	import type { DataGridContext } from '../DataGrid';
 	import { getContext } from 'svelte';
@@ -11,7 +11,7 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { autocols, columns, focused, size, theme, variant } = {
+	export let { action, focused, method, size, strategy, theme, variant } = {
 		...defaults,
 		...pickCleanProps(
 			context?.globals,
@@ -24,64 +24,88 @@
 		)
 	} as Required<$$Props>;
 
-	const st = styler($themeStore);
 	const th = themer($themeStore);
-
-	$: hasSearchs = columns.some((c) => c.filterable);
-
-	$: gridSearchStyles = st
-		.create('DataGridHeader')
-		.add('--template-columns', context.getDataGridTemplate(), autocols)
-		.compile();
 
 	$: gridSearchClasses = th
 		.create('DataGridSearch')
-		.variant('gridSearch', variant, theme, variant)
-		.append('auto-cols-fr', autocols)
-		.prepend('datagrid__filter grid grid-flow-col w-full', true)
+		.prepend('datagrid__search', true)
+		.append('py-2 px-4', true)
 		.compile(true);
 
-	$: filterInputCellClasses = th
+	$: gridSearchInputClasses = th
 		.create('DataGridSearchInput')
-		.option('focusedRingWithin', theme, focused)
-		.append('focus:outline-none', true)
-		.compile(true);
+		.variant('gridSearch', variant, theme, variant)
+		.option('fieldFontSizes', size, size)
+		.option('fieldPadding', size, size)
+		.prepend('datagrid__search_input', true)
+		.append('pl-8 focus:outline-none w-full bg-transparent', true)
+		.compile();
 
-	function handleSearchColumn(
+	function handleSearchSubmit(
+		e: Event & {
+			readonly submitter: HTMLElement | null;
+		} & {
+			currentTarget: EventTarget & HTMLFormElement;
+		}
+	): void {
+		e.preventDefault();
+		const form = e.target as HTMLFormElement;
+		if (form) {
+			debounce(() => {
+				const data = new FormData(form);
+				context.filter(data.get('search')?.toString() || '');
+			})();
+		}
+	}
+	function handleSearchInput(
 		e: Event & {
 			currentTarget: EventTarget & HTMLInputElement;
-		},
-		accessor: string
-	): void {
+		}
+	) {
+		e.preventDefault();
 		const input = e.target as HTMLInputElement;
 		if (input)
 			debounce(() => {
-				context.filter(input.value, accessor);
+				context.filter(input.value || '');
 			})();
 	}
 </script>
 
-<slot>
-	{#if hasSearchs}
-		<div class={gridSearchClasses} style={gridSearchStyles}>
-			{#each columns as col, i}
-				<DataGridCell class={filterInputCellClasses}>
-					{#if col.filterable}
+<DataGridCell class={gridSearchClasses} full>
+	<slot search={context.filter}>
+		<form id="search_form" name="search_form" {action} {method}>
+			<div class="flex items-center">
+				<div class="flex-1 relative">
+					<svg
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+					{#if strategy === 'input'}
 						<input
-							type="text"
+							type="search"
+							name="search"
 							placeholder="filter"
-							class="datagrid__filter_input focus:outline-none w-full bg-transparent"
-							on:input={(e) => handleSearchColumn(e, col.accessor)}
+							class={gridSearchInputClasses}
+							on:input={handleSearchInput}
+						/>
+					{:else}
+						<input
+							type="search"
+							name="search"
+							placeholder="filter"
+							class={gridSearchInputClasses}
 						/>
 					{/if}
-				</DataGridCell>
-			{/each}
-		</div>
-	{/if}
-</slot>
-
-<style>
-	.grid__filter {
-		grid-template-columns: var(--template-columns);
-	}
-</style>
+				</div>
+			</div>
+		</form>
+	</slot>
+</DataGridCell>

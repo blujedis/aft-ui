@@ -21,10 +21,11 @@
 		.create('RangeStyles')
 		.colormap(components?.rangeTrackBackground[variant], theme, '--track-background-color', true)
 		.colormap(components?.rangeTrackAccent[variant], theme, '--track-accent-color', true)
-		.colormap(components?.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
+		// .colormap(components?.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
 		.colormap(components?.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
+		.append('--thumb-background-color:#ffffff', true)
 		.append($$restProps.style, true)
 		.compile();
 

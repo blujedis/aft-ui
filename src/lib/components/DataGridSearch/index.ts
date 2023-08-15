@@ -1,3 +1,3 @@
-import DataGridFilter from './Component.svelte';
+import DataGridSearch from './Component.svelte';
 export * from './module';
-export { DataGridFilter };
+export { DataGridSearch };

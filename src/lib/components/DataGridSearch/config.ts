@@ -1,8 +1,8 @@
 import { placeholder, variantFilled, variantGhost, variantGlass } from '$lib/constants';
 
 export const gridSearch = {
-	filled: { ...variantFilled },
+	filled: { ...placeholder },
 	outlined: { ...placeholder },
-	glass: { ...variantGlass },
-	ghost: { ...variantGhost }
+	glass: { ...placeholder },
+	ghost: { ...placeholder }
 };

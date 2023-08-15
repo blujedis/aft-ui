@@ -9,6 +9,7 @@
 	import { DataGridBody } from '../DataGridBody';
 	import { DataGridFilter } from '../DataGridFilter';
 	import { DataGridHeaderCell } from '../DataGridHeaderCell';
+	import { DataGridSearch } from '../DataGridSearch';
 	import Section from '../_Example/Section.svelte';
 
 	const title = 'DataGrid';
@@ -72,14 +73,15 @@
 	</Section>
 
 	<DataGrid variant="filled" rounded="lg" size="sm" {columns} items={jsondata} let:rows let:columns>
-		<DataGridHeader>
+		<DataGridSearch />
+		<DataGridHeader class="dark:bg-frame-900/20 dark:text-white">
 			{#each columns as { accessor, label }}
 				<DataGridHeaderCell {accessor} let:sort let:sortdir>
 					<button on:click={sort}>{label} ({sortdir})</button>
 				</DataGridHeaderCell>
 			{/each}
 			<svelte:fragment slot="filter">
-				<DataGridFilter />
+				<DataGridFilter class="dark:bg-frame-900/20 dark:text-white" />
 			</svelte:fragment>
 		</DataGridHeader>
 

@@ -1,17 +1,18 @@
 import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
-import type { DataGridColumnConfig, DataGridVariant } from '../DataGrid/module';
+import type { DataGridVariant } from '../DataGrid/module';
 
 export type DataGridSearchProps = {
-	autocols?: boolean;
-	columns?: DataGridColumnConfig[];
+	action?: string;
 	focused?: ThemeFocused;
+	method?: string;
 	size?: ThemeSize;
+	strategy?: 'input' | 'enter';
 	theme?: ThemeColor;
 	variant?: DataGridVariant;
 };
 
 export const gridSearchDefaults: Partial<DataGridSearchProps> = {
-	autocols: true,
 	focused: true,
+	strategy: 'input',
 	variant: 'outlined'
 };

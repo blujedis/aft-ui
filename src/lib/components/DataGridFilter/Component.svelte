@@ -39,6 +39,7 @@
 		.variant('gridFilter', variant, theme, variant)
 		.append('auto-cols-fr', autocols)
 		.prepend('datagrid__filter grid grid-flow-col w-full', true)
+		.append($$restProps.class, true)
 		.compile(true);
 
 	$: filterInputCellClasses = th
