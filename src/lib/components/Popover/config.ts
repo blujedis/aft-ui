@@ -5,6 +5,5 @@ export const popover = {
 		...variantFilled,
 		$base: 'text-white',
 		light: 'text-[color:var(--text-dark)]',
-		white: 'text-[color:var(--text-dark)]'
 	}
 };

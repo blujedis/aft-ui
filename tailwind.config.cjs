@@ -1,6 +1,12 @@
 import { plugin, generateTailwindVars, defaultColors } from '@aft/config';
 
-const colors = generateTailwindVars(defaultColors);
+const themeColors = {
+	...defaultColors,
+	white: '#ffffff',
+	black: '#000000'
+};
+
+const colors = generateTailwindVars(themeColors);
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -30,6 +36,6 @@ module.exports = {
 		require('@tailwindcss/forms')({
 			strategy: 'class'
 		}),
-		plugin(defaultColors)
+		plugin(themeColors)
 	]
 };

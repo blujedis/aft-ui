@@ -21,25 +21,21 @@ import { placeholder } from './placeholder';
 
 export const variantFilled = mergeConfigs(solid, {
 	$base: 'text-white',
-	white: 'text-[color:var(--text-dark)]',
-	light: 'text-[color:var(--text-dark)]'
+	light: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]'
 });
 
 export const variantFilledHover = mergeConfigs(solid, solidHover, {
 	$base: 'text-white',
-	white: 'text-[color:var(--text-dark)]',
 	light: 'text-[color:var(--text-dark)]'
 });
 
 export const variantGlass = mergeConfigs(text, solidGlass, {
 	$base: 'text-[color:var(--text-dark)]',
-	white: 'text-[color:var(--text-dark)]',
 	light: 'text-[color:var(--text-dark)]'
 });
 
 export const variantGlassHover = mergeConfigs(text, solidGlass, solidGlassHover, {
 	$base: 'text-[color:var(--text-dark)]',
-	white: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-dark)]',
 	light: 'text-[color:var(--text-dark)]'
 });
 
@@ -57,18 +53,15 @@ export const variantText = mergeConfigs(text, textHover, {
 
 export const variantGhost = mergeConfigs(text, solidGhost, {
 	$base: 'border border-transparent bg-transparent',
-	white: 'dark:hover:text-[color:var(--text-dark)]'
 });
 
 export const variantGhostHover = mergeConfigs(text, solidGlassHover, {
 	$base: 'border border-transparent bg-transparent',
-	white: 'dark:hover:text-[color:var(--text-dark)]'
 });
 
 export const variantFlushed = mergeConfigs(text, borderGroupHover, {
 	$base: 'border border-x-0 border-b-0 dark:bg-transparent',
-	white: 'bg-white border-white',
-	light: 'border-frame-200',
+	light: 'border-frame-200 dark:border-frame-400',
 	dark: 'border-frame-600',
 	primary: 'border-primary-400',
 	secondary: 'border-secondary-400',
@@ -82,7 +75,6 @@ export const variantFlushed = mergeConfigs(text, borderGroupHover, {
 export const panel = mergeConfigs(placeholder, {
 	$base:
 		'ring-1 ring-black ring-opacity-5 dark:ring-opacity-20 bg-white dark:bg-frame-700 text-inherit',
-	white: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
 	light: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
 	dark: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]'
 });
@@ -92,7 +84,6 @@ export const row = mergeConfigs(placeholder, {
 });
 
 export const tile = mergeConfigs(border, borderHover, {
-	light: 'border-frame-200 hover:border-frame-300'
 });
 
 export const checkradio = mergeConfigs(text, tile);

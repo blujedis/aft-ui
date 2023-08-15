@@ -242,7 +242,7 @@ export const gridgaps = {
 // divide-y divide-frame-200 dark:divide-black dark:divide-opacity-40
 
 export const divideds = {
-	white: 'divide-white',
+	
 	light: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
 	dark: 'divide-frame-500',
 	primary: 'divide-primary-100 dark:divide-primary-600',
@@ -255,7 +255,7 @@ export const divideds = {
 };
 
 export const stripes = {
-	white: 'even:bg-white',
+	
 	light: 'even:bg-frame-50',
 	dark: 'even:bg-frame-100/90',
 	primary: 'even:bg-primary-50',

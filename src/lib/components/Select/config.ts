@@ -17,7 +17,6 @@ export const select = {
 		$base: 'px-2 peer focus:ring-0 outline-none border-0'
 	}),
 	glass: mergeConfigs(variantGlass, {
-		white: 'dark:text-[color:var(--text-dark)]',
 		light: 'dark:text-[color:var(--text-dark)]'
 	})
 };

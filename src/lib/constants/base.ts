@@ -1,5 +1,5 @@
 export const text = {
-	white: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
+
 	light: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
 	dark: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
 	primary: 'text-primary-500',
@@ -12,8 +12,6 @@ export const text = {
 };
 
 export const textHover = {
-	white:
-		'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
 	light:
 		'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
 	dark: 'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
@@ -27,7 +25,7 @@ export const textHover = {
 };
 
 export const filledText = {
-	white: 'text-[color:var(--text-dark)]',
+
 	light: 'text-[color:var(--text-dark)]',
 	dark: 'dark:text-[color:var(--text-light)]',
 	primary: 'text-white',
@@ -40,7 +38,7 @@ export const filledText = {
 };
 
 export const filledTextSoft = {
-	white: 'text-frame-300',
+
 	light: 'text-frame-300',
 	dark: 'text-frame-300',
 	primary: 'text-primary-300',
@@ -53,7 +51,7 @@ export const filledTextSoft = {
 };
 
 export const filledTextHover = {
-	white: 'hover:text-[color:var(--text-dark-hover)]',
+
 	light: 'hover:text-[color:var(--text-dark-hover)]',
 	dark: 'hover:text-[color:var(--text-light-hover)]',
 	primary: 'hover:text-primary-100',
@@ -67,8 +65,7 @@ export const filledTextHover = {
 
 export const solid = {
 	$base: '',
-	white: 'bg-white',
-	light: 'bg-frame-100',
+	light: 'bg-frame-100 bg-frame-900/50',
 	dark: 'bg-frame-600',
 	primary: 'bg-primary-500',
 	secondary: 'bg-secondary-500',
@@ -81,7 +78,7 @@ export const solid = {
 
 export const solidHover = {
 	$base: '',
-	white: 'hover:bg-frame-100',
+
 	light: 'hover:bg-frame-200/70',
 	dark: 'hover:bg-frame-700',
 	primary: 'hover:bg-primary-600',
@@ -94,7 +91,7 @@ export const solidHover = {
 };
 
 export const solidGlass = {
-	white: 'bg-white',
+	$base: '',
 	light: 'bg-frame-500/10',
 	dark: 'bg-frame-900/20 dark:bg-frame-900/30',
 	primary: 'bg-primary-500/10',
@@ -107,8 +104,8 @@ export const solidGlass = {
 };
 
 export const solidGlassHover = {
-	white: 'hover:bg-frame-100',
-	light: 'hover:bg-frame-500/20',
+	$base: '',
+	light: 'hover:bg-frame-500/20 dark:hover:bg-frame-900/70',
 	dark: 'hover:bg-frame-900/30 dark:hover:bg-frame-900/50',
 	primary: 'hover:bg-primary-500/20',
 	secondary: 'hover:bg-secondary-500/20',
@@ -120,8 +117,8 @@ export const solidGlassHover = {
 };
 
 export const solidGhost = {
-	white: 'bg-white',
-	light: 'bg-frame-50',
+	$base: '',
+	light: 'bg-frame-50 dark:bg-frame-500/20',
 	dark: 'bg-frame-600/20',
 	primary: 'bg-primary-50',
 	secondary: 'bg-secondary-50',
@@ -134,7 +131,6 @@ export const solidGhost = {
 
 export const fill = {
 	$base: '',
-	white: 'fill-white',
 	light: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
 	dark: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
 	primary: 'fill-primary-500',
@@ -148,8 +144,7 @@ export const fill = {
 
 export const stroke = {
 	$base: '',
-	white: 'stroke-white',
-	light: 'stroke-frame-200',
+	light: 'stroke-frame-200 dark:stroke-frame-400',
 	dark: 'stroke-frame-600',
 	primary: 'stroke-primary-500',
 	secondary: 'stroke-secondary-500',
@@ -162,7 +157,6 @@ export const stroke = {
 
 export const ring = {
 	base: 'ring-offset-0',
-	white: 'ring-white',
 	light: 'ring-frame-200 dark:ring-frame-400',
 	dark: 'ring-frame-600',
 	primary: 'ring-primary-500 dark:ring-primary-700',
@@ -175,9 +169,8 @@ export const ring = {
 };
 
 export const ringHover = {
-	white: 'hover:ring-frame-200',
 	light: 'hover:ring-frame-300 dark:hover:ring-frame-200',
-	dark: 'hover:ring-frame-700 dark:hover:ring-frame-400',
+	dark: 'hover:ring-frame-500',
 	primary: 'hover:ring-primary-600 dark:hover:ring-primary-400',
 	secondary: 'hover:ring-secondary-600 dark:hover:ring-secondary-500',
 	tertiary: 'hover:ring-tertiary-600 dark:hover:ring-tertiary-400',
@@ -189,8 +182,7 @@ export const ringHover = {
 
 export const border = {
 	$base: 'border',
-	white: 'border-white',
-	light: 'border-frame-200',
+	light: 'border-frame-200 dark:border-frame-400',
 	dark: 'border-frame-600',
 	primary: 'border-primary-500',
 	secondary: 'border-secondary-500',
@@ -203,9 +195,8 @@ export const border = {
 
 export const borderHover = {
 	$base: 'border',
-	white: 'hover:border-frame-50',
-	light: 'hover:border-frame-300',
-	dark: 'hover:border-frame-700',
+	light: 'hover:border-frame-300 dark:hover:border-frame-500',
+	dark: 'hover:border-frame-500',
 	primary: 'hover:border-primary-600',
 	secondary: 'hover:border-secondary-600',
 	tertiary: 'hover:border-tertiary-600',
@@ -216,9 +207,8 @@ export const borderHover = {
 };
 
 export const borderGroupHover = {
-	white: 'group-hover:border-frame-50',
-	light: 'group-hover:border-frame-300',
-	dark: 'group-hover:border-frame-400',
+	light: 'group-hover:border-frame-300 dark:group-hover:border-frame-400',
+	dark: 'group-hover:border-frame-500',
 	primary: 'group-hover:border-primary-600',
 	secondary: 'group-hover:border-secondary-600',
 	tertiary: 'group-hover:border-tertiary-600',

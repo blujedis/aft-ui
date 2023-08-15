@@ -11,7 +11,6 @@ import { mergeConfigs } from '$lib/theme';
 const baseVariant = mergeConfigs(solidGlassHover, bgAriaSelected, {
 	$base:
 		'ring-1 ring-inset ring-black ring-opacity-10 dark:ring-opacity-40 text-frame-500 aria-selected:text-white',
-	white: 'aria-selected:text-[color:var(--text-dark)]',
 	light: 'aria-selected:text-[color:var(--text-dark)]'
 });
 

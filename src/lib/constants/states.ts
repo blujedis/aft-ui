@@ -2,7 +2,7 @@ import { mergeConfigs } from '../theme';
 
 export const disableds = {
 	$base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
-	white: 'aria-disabled:text-frame-500',
+	
 	dark: 'aria-disabled:text-frame-700',
 	light: 'aria-disabled:text-frame-300',
 	primary: 'aria-disabled:text-primary-300',
@@ -15,7 +15,7 @@ export const disableds = {
 };
 
 const placeholdersDark = {
-	white: 'dark:placeholder:text-frame-500',
+	
 	light: 'dark:placeholder:text-frame-500',
 	dark: 'dark:placeholder:text-frame-400',
 	primary: 'dark:placeholder:text-primary-700',
@@ -28,7 +28,7 @@ const placeholdersDark = {
 };
 
 const placeholdersDisabled = {
-	white: 'aria-disabled:placeholder:text-frame-500',
+	
 	light: 'aria-disabled:placeholder:text-frame-200',
 	dark: 'aria-disabled:placeholder:text-frame-500',
 	primary: 'aria-disabled:placeholder:text-primary-300',
@@ -41,7 +41,7 @@ const placeholdersDisabled = {
 };
 
 export const placeholders = mergeConfigs(placeholdersDark, placeholdersDisabled, {
-	white: 'placeholder:text-frame-400',
+	
 	light: 'placeholder:text-frame-400',
 	dark: 'placeholder:text-frame-400',
 	primary: 'placeholder:text-primary-300',
@@ -54,7 +54,7 @@ export const placeholders = mergeConfigs(placeholdersDark, placeholdersDisabled,
 });
 
 export const bgAriaChecked = {
-	white: 'aria-checked:bg-frame-100',
+	
 	light: 'aria-checked:bg-frame-200',
 	dark: 'aria-checked:bg-frame-700',
 	primary: 'aria-checked:bg-primary-600',
@@ -67,7 +67,7 @@ export const bgAriaChecked = {
 };
 
 export const bgGroupAriaChecked = {
-	white: 'group-aria-checked:bg-frame-100',
+	
 	light: 'group-aria-checked:bg-frame-200',
 	dark: 'group-aria-checked:bg-frame-700',
 	primary: 'group-aria-checked:bg-primary-600',
@@ -80,7 +80,7 @@ export const bgGroupAriaChecked = {
 };
 
 export const bgAriaSelected = {
-	white: 'aria-selected:bg-frame-100',
+	
 	light: 'aria-selected:bg-frame-200',
 	dark: 'aria-selected:bg-frame-600',
 	primary: 'aria-selected:bg-primary-500',
@@ -93,7 +93,7 @@ export const bgAriaSelected = {
 };
 
 export const bgAriaExpanded = {
-	white: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-100',
+	
 	light: 'aria-expanded:bg-frame-200 dark:aria-expanded:bg-frame-200',
 	dark: 'aria-expanded:bg-frame-600 dark:aria-expanded:bg-frame-600',
 	primary: 'aria-expanded:bg-primary-500 dark:aria-expanded:bg-primary-500',
@@ -106,7 +106,7 @@ export const bgAriaExpanded = {
 };
 
 export const bgAriaGlassExpanded = {
-	white: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
+	
 	light: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
 	dark: 'aria-expanded:bg-frame-900/30 dark:aria-expanded:bg-frame-900/40',
 	primary: 'aria-expanded:bg-primary-500/20 dark:aria-expanded:bg-primary-500/20',
@@ -119,7 +119,7 @@ export const bgAriaGlassExpanded = {
 };
 
 export const bgAriaGlassSelected = {
-	white: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
+	
 	light: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
 	dark: 'aria-selected:bg-frame-900/30 dark:aria-selected:bg-frame-900/40',
 	primary: 'aria-selected:bg-primary-500/20 dark:aria-selected:bg-primary-500/20',
@@ -132,8 +132,6 @@ export const bgAriaGlassSelected = {
 };
 
 export const textAriaExpanded = {
-	white:
-		'aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
 	light:
 		'aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
 	dark: 'aria-expanded:text-[color:var(--text-light-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
@@ -147,7 +145,7 @@ export const textAriaExpanded = {
 };
 
 export const textAriaSelected = {
-	white: 'aria-selected:text-[color:var(--text-dark-hover)]',
+	
 	light: 'aria-selected:text-[color:var(--text-dark-hover)]',
 	dark: 'aria-selected:text-[color:var(--text-light-hover)]',
 	primary: 'aria-selected:text-primary-700 dark:aria-selected:text-primary-500',
@@ -160,7 +158,7 @@ export const textAriaSelected = {
 };
 
 export const textAriaSelectedSoft = {
-	white: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-400',
+	
 	light: 'aria-selected:text-frame-300  dark:aria-selected:text-frame-500',
 	dark: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-600',
 	primary: 'aria-selected:text-primary-300 dark:aria-selected:text-primary-700',
@@ -173,7 +171,7 @@ export const textAriaSelectedSoft = {
 };
 
 export const textAriaCurrent = {
-	white: 'aria-current:text-[color:var(--text-dark-hover)]',
+	
 	light: 'aria-current:text-[color:var(--text-dark-hover)]',
 	dark: 'aria-current:text-[color:var(--text-light-hover)]',
 	primary: 'aria-current:text-primary-700 dark:aria-current:text-primary-500',
@@ -187,7 +185,7 @@ export const textAriaCurrent = {
 
 export const borderAriaSelected = {
 	$base: 'border',
-	white: 'aria-selected:border-frame-50  dark:aria-selected:border-frame-50',
+	
 	light: 'aria-selected:border-frame-300 dark:aria-selected:border-frame-300',
 	dark: 'aria-selected:border-frame-700 dark:aria-selected:border-frame-600',
 	primary: 'aria-selected:border-primary-600 dark:aria-selected:border-primary-600',
@@ -201,7 +199,7 @@ export const borderAriaSelected = {
 
 export const borderAriaExpanded = {
 	$base: 'border',
-	white: 'aria-expanded:border-frame-50',
+	
 	light: 'aria-expanded:border-frame-300',
 	dark: 'aria-expanded:border-frame-700',
 	primary: 'aria-expanded:border-primary-600',

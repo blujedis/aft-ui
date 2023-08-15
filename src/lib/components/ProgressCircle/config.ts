@@ -3,7 +3,6 @@ import { mergeConfigs } from '$lib/theme';
 
 const baseTrackVariant = {
 	$base: 'stroke-frame-100 dark:stroke-frame-600',
-	white: '',
 	light: '',
 	dark: '',
 	primary: '',

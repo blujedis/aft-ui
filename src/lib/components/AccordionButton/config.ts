@@ -12,7 +12,6 @@ const bordered = common.bordered;
 // dark:border-black dark:border-opacity-40 border-b-frame-200
 const baseVariant = mergeConfigs(textAriaExpanded, {
 	$base: 'aria-expanded:border-b aria-expanded:text-white aria-expanded:font-medium ' + bordered,
-	white: 'dark:aria-expanded:text-[color:var(--text-light)]',
 	light: 'dark:aria-expanded:text-[color:var(--text-light)]',
 	dark: 'dark:aria-expanded:text-[color:var(--text-light)]'
 });

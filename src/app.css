@@ -21,7 +21,7 @@ body {
 }
 
 html.dark,
-html.dark > body {
+html.dark>body {
 	background-color: var(--bg-dark);
 	color: var(--text-light);
 }
@@ -45,15 +45,15 @@ select {
 	color: var(--text-dark);
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	/* font-weight: 400;
-	letter-spacing: -0.025em; */
-}
+	font-weight: 400;
+	letter-spacing: -0.025em; 
+}*/
 
 /* html {
 	transition: ease-in background-color 0.1s;

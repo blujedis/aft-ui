@@ -160,8 +160,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		};
 	}
 	const mockThemer: ThemerInstance<C> = {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		create: (instanceName = '') => mockApi
+		create: (_instanceName = '') => mockApi
 	};
 
 	// If no document return mock instance.
@@ -212,7 +211,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			const comp = _components[name] || {};
 			if (!comp || !variant) return api;
 			const conf = comp[variant] as Record<string, string>;
-			if (!colors.includes(theme as any) && !['white'].includes(theme as any)) {
+			if (!colors.includes(theme as any)) {
 				when = theme as Primitive;
 				theme = '';
 			}

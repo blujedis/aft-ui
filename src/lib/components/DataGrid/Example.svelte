@@ -74,14 +74,14 @@
 
 	<DataGrid variant="filled" rounded="lg" size="sm" {columns} items={jsondata} let:rows let:columns>
 		<DataGridSearch />
-		<DataGridHeader class="dark:bg-frame-900/20 dark:text-white">
+		<DataGridHeader>
 			{#each columns as { accessor, label }}
 				<DataGridHeaderCell {accessor} let:sort let:sortdir>
 					<button on:click={sort}>{label} ({sortdir})</button>
 				</DataGridHeaderCell>
 			{/each}
 			<svelte:fragment slot="filter">
-				<DataGridFilter class="dark:bg-frame-900/20 dark:text-white" />
+				<DataGridFilter />
 			</svelte:fragment>
 		</DataGridHeader>
 

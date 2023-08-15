@@ -40,9 +40,10 @@
 		// .option('roundeds', rounded, rounded)
 		.append('sticky top-0 z-10', sticky) // add overflow-clip & "rounded" to keep top rounding
 		.append('rounded-b-none', rounded)
-		.append('bg-[color:var(--bg-dark)] dark:bg-[color:var(--bg-dark)]', true)
 		.prepend('datagrid__header shadow-sm', true)
 		.compile(true);
+
+	$: console.log(variant, theme);
 
 	$: gridHeaderClasses = th
 		.create('DataGridHeader')

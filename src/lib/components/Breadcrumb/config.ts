@@ -4,7 +4,6 @@ import { mergeConfigs } from '$lib/theme';
 export const breadcrumbNav = {
 	text: { ...placeholder },
 	filled: mergeConfigs(solid, filledTextSoft, {
-		white: 'text-frame-200',
 		light: 'text-frame-200',
 		dark: 'text-frame-400'
 	}),

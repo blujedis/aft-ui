@@ -4,8 +4,7 @@ import { mergeConfigs } from '$lib/theme';
 export const paginationDetail = {
 	filled: {
 		...solid,
-		$base: 'text-white'
-	},
+		$base: 'text-inherit'},
 	outlined: mergeConfigs(border, text, {
 		$base: 'text-inherit'
 	})
