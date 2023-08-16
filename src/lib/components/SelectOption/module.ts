@@ -1,7 +1,7 @@
 import type { ThemeColor, ThemeSize, ThemeTransitioned } from '../../types';
-import type { selectOption } from './config';
+// import type { selectOption } from './config';
 
-export type SelectOptionVariant = keyof typeof selectOption;
+export type SelectOptionVariant = 'outlined'; // keyof typeof selectOption;
 
 export type SelectOptionProps = {
 	disabled?: boolean;

@@ -7,10 +7,10 @@
 		type AccordionPanelContext
 	} from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps, HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag } from '../../types';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = AccordionPanelProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = AccordionPanelProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Accordion') as AccordionContext;
 

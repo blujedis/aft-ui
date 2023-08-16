@@ -35,7 +35,7 @@
 		? th.create('Button').append($$restProps.class, true).compile()
 		: th
 				.create('Button')
-				.variant('button', variant, theme, true)
+				.variant('globals', variant, theme, variant)
 				.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)

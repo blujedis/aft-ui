@@ -7,9 +7,9 @@
 	import type { AccordionContext } from '../Accordion/module';
 	import { ConditionalElement } from '../ConditionalElement';
 	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
-	import type { ElementNativeProps, IconifyTuple } from '../../types';
+	import type { ElementProps, IconifyTuple } from '../../types';
 
-	type $$Props = AccordianButtonProps & ElementNativeProps<'button'>;
+	type $$Props = AccordianButtonProps & ElementProps<'button'>;
 
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;

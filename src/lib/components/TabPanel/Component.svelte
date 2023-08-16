@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type TabPanelProps, tabPanelDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '../Tabs';
 
-	type $$Props = TabPanelProps & ElementNativeProps<'div'>;
+	type $$Props = TabPanelProps & ElementProps<'div'>;
 
 	export let { unmount, value } = {
 		...defaults

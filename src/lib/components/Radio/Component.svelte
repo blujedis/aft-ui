@@ -3,9 +3,9 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = RadioProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = RadioProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		disabled,
@@ -24,7 +24,8 @@
 
 	$: checkboxClasses = themer($themeStore)
 		.create('Radio')
-		.variant('radio', variant, theme, true)
+		// variant called outlined for consistency but we use bordered variant here.
+		.variant('globals', 'borderedHover', theme, variant)
 		.option('focusedRing', theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('iconSizes', size, size)

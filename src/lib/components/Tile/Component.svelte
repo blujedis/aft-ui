@@ -3,10 +3,10 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { onMount } from 'svelte';
 
-	type $$Props = TileProps & ElementNativeProps<'div'>;
+	type $$Props = TileProps & ElementProps<'div'>;
 
 	export let { full, rounded, shadowed, size, theme, variant } = {
 		...defaults

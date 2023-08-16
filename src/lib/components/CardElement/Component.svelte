@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type CardElementProps, cardElementDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { CardContext } from '../Card/module';
 
-	type $$Props = CardElementProps & ElementNativeProps<'div'>;
+	type $$Props = CardElementProps & ElementProps<'div'>;
 
 	const context = getContext<CardContext>('Card');
 
@@ -18,7 +18,7 @@
 
 	$: cardElementClasses = th
 		.create('CardContent')
-		.variant('cardElement', variant, theme, variant)
+		.variant('globals', variant, theme, variant)
 		.option('cardPadding', size, size && type === 'content')
 		.option('cardPaddingHeader', size, size && type === 'header')
 		.option('cardPaddingFooter', size, size && type === 'footer')

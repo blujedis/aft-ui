@@ -3,10 +3,10 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { onMount } from 'svelte';
 
-	type $$Props = LabelProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = LabelProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let {
 		dropshadowed,
@@ -24,7 +24,7 @@
 
 	$: labelClasses = themer($themeStore)
 		.create('Label')
-		.variant('label', variant, theme, true)
+		.variant('globals', variant, theme, true)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded)

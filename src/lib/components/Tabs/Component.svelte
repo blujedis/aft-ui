@@ -4,9 +4,9 @@
 	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = TabsProps & ElementNativeProps<'div'>;
+	type $$Props = TabsProps & ElementProps<'div'>;
 
 	export let {
 		condensed,

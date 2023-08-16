@@ -6,9 +6,9 @@ import type {
 	ThemeSize,
 	ThemeTransitioned
 } from '$lib/types';
-import type { radio } from './config';
+// import type { radio } from './config';
 
-export type RadioVariant = keyof typeof radio;
+export type RadioVariant = 'outlined';
 
 export type RadioProps = {
 	disabled?: boolean;

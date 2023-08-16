@@ -5,12 +5,12 @@
 		type ButtonGroupContext
 	} from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps, ThemeFocused } from '../../types';
+	import type { ElementProps, ThemeFocused } from '../../types';
 	import { onMount, setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray } from '$lib/utils';
 
-	type $$Props = ButtonGroupProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = ButtonGroupProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let {
 		focused,

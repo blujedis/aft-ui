@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type PaginationDetailProps, paginationDetailDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = PaginationDetailProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = PaginationDetailProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
 		...defaults

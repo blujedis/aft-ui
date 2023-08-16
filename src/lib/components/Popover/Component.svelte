@@ -29,7 +29,7 @@
 
 	$: popoverClasses = th
 		.create('Popover')
-		.variant('popover', variant, theme, variant)
+		.variant('globals', variant, theme, variant)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.option('common', 'transition', transitioned)

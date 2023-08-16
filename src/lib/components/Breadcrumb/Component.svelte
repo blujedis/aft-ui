@@ -7,9 +7,9 @@
 	import { BreadcrumbOption } from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = BreadcrumbProps & ElementNativeProps<'ol'>;
+	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 
 	export let { flush, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults

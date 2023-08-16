@@ -3,11 +3,12 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
+	ThemeTransitioned,
+	ThemeVariant
 } from '$lib/types';
-import type { kbd } from './config';
+// import type { kbd } from './config';
 
-export type KbdVariant = keyof typeof kbd;
+export type KbdVariant = Exclude<ThemeVariant, 'flushed' | 'text'> // keyof typeof kbd;
 
 export type KbdProps = {
 	full?: boolean;

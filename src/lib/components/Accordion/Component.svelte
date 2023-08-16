@@ -7,12 +7,12 @@
 		type AccordionContext
 	} from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps, HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag } from '../../types';
 	import { useSelect } from '$lib/stores/select';
 	import { setContext } from 'svelte';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = AccordionProps<Tag> & ElementProps<Tag>;
 
 	export let { as, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
 		...defaults

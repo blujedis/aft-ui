@@ -3,11 +3,11 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import type { SelectContext } from '../Select/module';
 	import { getContext } from 'svelte';
 
-	type $$Props = SelectOptionProps & ElementNativeProps<'option'>;
+	type $$Props = SelectOptionProps & ElementProps<'option'>;
 
 	export let { disabled, size, theme, transitioned, value, variant, unstyled } = {
 		...defaults
@@ -19,7 +19,7 @@
 
 	$: inputClasses = th
 		.create('SelectOption')
-		.variant('selectOption', variant, theme, true)
+		.variant('globals', 'outlinedHover', theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)

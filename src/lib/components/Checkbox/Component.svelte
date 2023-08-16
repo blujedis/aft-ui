@@ -3,9 +3,9 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = CheckboxProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = CheckboxProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		disabled,
@@ -24,7 +24,8 @@
 
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
-		.variant('checkbox', variant, theme, true)
+		// variant called outlined for consistency but we use bordered variant here.
+		.variant('globals', 'borderedHover', theme, variant)
 		.option('focusedRing', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('checkboxSizes', size, size)

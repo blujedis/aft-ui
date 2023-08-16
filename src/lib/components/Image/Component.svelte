@@ -2,9 +2,9 @@
 	import { get_current_component } from 'svelte/internal';
 	import { themer, themeStore } from '../../theme';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { type ImageProps, imageDefaults as defaults } from './module';
-	type $$Props = ImageProps & ElementNativeProps<'img'>;
+	type $$Props = ImageProps & ElementProps<'img'>;
 
 	export let { fit, full, position, rounded, shadowed } = {
 		...defaults

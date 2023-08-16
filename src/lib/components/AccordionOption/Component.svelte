@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
 	import { themeStore, themer, transitioner } from '$lib';
-	import type { ElementNativeProps, HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag } from '../../types';
 	import { getContext } from 'svelte';
 	import type { AccordionPanelContext } from '../AccordionPanel/module';
 	import type { AccordionContext } from '../Accordion/module';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = AccordianOptionProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = AccordianOptionProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Accordion') as AccordionContext;
 	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;

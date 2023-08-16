@@ -5,11 +5,11 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
+	ThemeTransitioned,
+	ThemeVariant
 } from '$lib/types';
-import type { select } from './config';
 
-export type SelectVariant = keyof typeof select;
+export type SelectVariant = Exclude<ThemeVariant, 'text'>; // keyof typeof select;
 
 export type SelectContext = SelectStore & {
 	//

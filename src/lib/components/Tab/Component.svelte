@@ -8,8 +8,8 @@
 
 	type Tag = $$Generic<'a' | 'button'>;
 	// type NativeProps = Tag extends 'button'
-	// 	? ElementNativeProps<'button', 'disabled' | 'value'>
-	// 	: ElementNativeProps<'a'>;
+	// 	? ElementProps<'button', 'disabled' | 'value'>
+	// 	: ElementProps<'a'>;
 	type $$Props = TabProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Tabs') as TabsContext;

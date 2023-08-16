@@ -39,11 +39,13 @@
 		.option('fieldFontSizes', size, size)
 		.option('paginationGroupedPadding', size, size && ['filled', 'glass'].includes(variant))
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
+		.option('common', 'ringed',  ['filled', 'glass'].includes(variant))
 		.option('roundeds', rounded, rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
 			['filled', 'glass'].includes(variant)
 		)
+		.append('inline-flex items-center border-t-2 font-medium border-x-0 border-b-0', variant === 'flushed')
 		.append('z-10', ['filled', 'glass'].includes(variant) && selected)
 		.append('pointer-events-none', value === '...')
 		.append('px-2', (previous || next) as any)

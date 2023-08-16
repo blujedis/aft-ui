@@ -4,9 +4,9 @@
 	import { Flushed } from '../Flushed';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = InputProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = InputProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		chars,
@@ -31,7 +31,7 @@
 		? th.create('Input').append($$restProps.class, true).compile(true)
 		: th
 				.create('Input')
-				.variant('input', variant, theme, true)
+				.variant('globals', variant, theme, true)
 				.option('focusedRing', theme, focused && variant !== 'flushed')
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)
@@ -42,7 +42,7 @@
 				.option('disableds', theme, disabled)
 				.append('w-full', full)
 				.append('focus:outline-none focus:ring-2', focused && variant !== 'flushed')
-				// .append('px-2 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
+				.append('px-1 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
 				.append('flex items-center justify-center', true)
 				.append($$restProps.class, true)
 				.compile(true);

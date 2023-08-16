@@ -3,9 +3,9 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = KbdProps & Omit<ElementNativeProps<'kbd'>, 'size'>;
+	type $$Props = KbdProps & Omit<ElementProps<'kbd'>, 'size'>;
 
 	export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
 		...defaults
@@ -13,7 +13,7 @@
 
 	$: kbdClasses = themer($themeStore)
 		.create('Kbd')
-		.variant('kbd', variant, theme, true)
+		.variant('globals', variant, theme, true)
 		.option('common', 'transition', transitioned)
 		.option('badgePadding', size, size)
 		.option('badgeFontSizes', size, size)

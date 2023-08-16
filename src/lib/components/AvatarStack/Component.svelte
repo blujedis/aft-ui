@@ -2,9 +2,9 @@
 	import { type AvatarStackProps, avatarStackDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
 	import { onMount, setContext } from 'svelte';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = AvatarStackProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = AvatarStackProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let { direction } = {
 		...defaults
@@ -30,7 +30,7 @@
 	// Avatar with a z-index, should we do this?
 	onMount(() => {
 		if (direction !== 'down') return;
-		const nodes = [...stack.children];
+		const nodes = [...stack.children as any];
 		nodes.reverse().forEach((n, i) => {
 			const node = n as HTMLElement;
 			node.style.zIndex = i + '';

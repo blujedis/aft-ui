@@ -6,9 +6,9 @@ import type {
 	ThemeSize,
 	ThemeTransitioned
 } from '$lib/types';
-import type { checkbox } from './config';
+// import type { checkbox } from './config';
 
-export type CheckboxVariant = keyof typeof checkbox;
+export type CheckboxVariant = 'outlined';
 
 export type CheckboxProps = {
 	disabled?: boolean;

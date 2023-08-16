@@ -3,11 +3,11 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { onMount } from 'svelte';
 	import classNames from 'classnames';
 
-	type $$Props = SwitchProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = SwitchProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		checked,

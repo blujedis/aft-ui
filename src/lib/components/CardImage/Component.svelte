@@ -2,9 +2,9 @@
 	import { type CardImageProps, cardImageDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
 	import { Image } from '../Image';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = CardImageProps & ElementNativeProps<'img'>;
+	type $$Props = CardImageProps & ElementProps<'img'>;
 
 	export let { fit, full, imageClasses } = {
 		...defaults

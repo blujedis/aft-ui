@@ -8,9 +8,9 @@
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = NotificationsProps & ElementNativeProps<'div'>;
+	type $$Props = NotificationsProps & ElementProps<'div'>;
 
 	export let { Component, duration, group, position, variant } = {
 		...defaults
@@ -20,7 +20,6 @@
 
 	$: notificationContainerClasses = th
 		.create('NotificationContainer')
-		// .variant('notifications', variant, true)
 		.append('sm:items-start items-start', position.startsWith('top'))
 		.append('sm:items-end items-end', position.startsWith('bottom'))
 		.append('pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-20', true)

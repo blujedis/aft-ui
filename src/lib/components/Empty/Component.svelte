@@ -3,10 +3,9 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
-	import { onMount } from 'svelte';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = EmptyProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = EmptyProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let { as, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
 		...defaults
@@ -14,13 +13,14 @@
 
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
-		.variant('empty', variant, theme, true)
+		// variant called outlined for consistency but we use bordered variant here.
+		.variant('globals', 'bordered', theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('emptySizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
-		.append('flex items-center justify-center', true)
+		.append('flex items-center justify-center border-[3px] border-dashed relative', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

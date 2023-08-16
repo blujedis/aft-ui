@@ -2,13 +2,13 @@
 	import { themer, themeStore } from '../../theme';
 	import { type ButtonGroupItemProps, buttonGroupItemDefaults as defaults } from './module';
 	import { Button } from '../Button';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { getContext } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import { cleanObj } from '$lib/utils';
 
-	type $$Props = ButtonGroupItemProps & ElementNativeProps<'button'>;
+	type $$Props = ButtonGroupItemProps & ElementProps<'button'>;
 
 	const context = getContext('ButtonGroup') as ButtonGroupContext;
 

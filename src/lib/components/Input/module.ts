@@ -4,11 +4,12 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
+	ThemeTransitioned,
+	ThemeVariant
 } from '$lib/types';
-import type { input } from './config';
 
-export type InputVariant = keyof typeof input;
+
+export type InputVariant = Exclude<ThemeVariant, 'text'>
 
 export type InputProps = {
 	disabled?: boolean;

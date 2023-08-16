@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { CardElement } from '../CardElement';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { type CardHeaderProps, cardHeaderDefaults as defaults } from './module';
-	type $$Props = CardHeaderProps & ElementNativeProps<'div'>;
+	type $$Props = CardHeaderProps & ElementProps<'div'>;
 
 	export let { size } = {
 		...defaults

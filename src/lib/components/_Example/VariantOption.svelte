@@ -17,7 +17,7 @@
 	import classNames from 'classnames';
 	import { Flushed } from '../Flushed';
 
-	const title = 'Variants';
+	const title = 'Option/Item Variants';
 	const description = 'Page for testing various variants and their themes.';
 
 	// const th = themer($themeStore);

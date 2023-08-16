@@ -4,11 +4,11 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned,
-	ThemeColor
+	ThemeColor,
+	ThemeVariant
 } from '$lib/types';
-import type { button } from './config';
 
-export type ButtonVariant = keyof typeof button;
+export type ButtonVariant = Exclude<ThemeVariant, 'flushed'>;
 
 export type ButtonProps<Tag extends 'button' | 'a'> = {
 	as?: Tag;

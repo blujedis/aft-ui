@@ -1,7 +1,7 @@
-import type { ThemeColor, ThemeSize } from '$lib/types';
-import type { cardElement } from './config';
+import type { ThemeColor, ThemeSize, ThemeVariant } from '$lib/types';
+// import type { cardElement } from './config';
 
-export type CardElementVariant = keyof typeof cardElement;
+export type CardElementVariant = Exclude<ThemeVariant, 'text' | 'flushed'>; // keyof typeof cardElement;
 
 export type CardElementProps = {
 	horizontal?: boolean;

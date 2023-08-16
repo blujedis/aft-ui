@@ -2,10 +2,10 @@
 	import { type NotificationProps, notificationDefaults as defaults } from './module';
 	import useNotifications from '$lib/stores/notification';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { Icon } from '../Icon';
 
-	type $$Props = NotificationProps & ElementNativeProps<'div'>;
+	type $$Props = NotificationProps & ElementProps<'div'>;
 
 	export let {
 		key,

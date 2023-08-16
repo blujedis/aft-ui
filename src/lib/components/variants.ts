@@ -1,4 +1,4 @@
-import { variantFilled, variantFlushed, variantFlushedHover, variantFilledHover, variantGhost, variantGhostHover, variantGlass, variantGlassHover, variantOutlined, variantOutlinedHover, variantText, variantTextHover, variantPanel } from '../constants/base';
+import { variantFilled, variantFlushed, variantFlushedHover, variantFilledHover, variantGhost, variantGhostHover, variantGlass, variantGlassHover, variantOutlined, variantOutlinedHover, variantText, variantTextHover, variantPanel, variantBorder, variantBorderHover, variantBorderHoverGroup } from '../constants/base';
 
 export const globals = {
   text: { ...variantText },
@@ -7,6 +7,9 @@ export const globals = {
   filledHover: { ...variantFilledHover },
   outlined: { ...variantOutlined },
   outlinedHover: { ...variantOutlinedHover },
+  bordered: { ...variantBorder },
+  borderedHover: { ...variantBorderHover },
+  borderedHoverGroup: { ...variantBorderHoverGroup },
   ghost: { ...variantGhost },
   ghostHover: { ...variantGhostHover },
   glass: { ...variantGlass },

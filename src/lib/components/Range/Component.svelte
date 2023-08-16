@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { themeStore, themer, styler } from '$lib';
-	import { onMount } from 'svelte';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = RangeProps & ElementNativeProps<'input', 'size'>;
+	type $$Props = RangeProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let { focused, full, rounded, transitioned, shadowed, size, theme, variant } = {
 		...defaults

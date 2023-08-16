@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { Icon } from '../Icon';
 	import { getContext, onMount } from 'svelte';
 	import type { BreadcrumbContext } from '../Breadcrumb/module';
 
-	type $$Props = BreadcrumbOptionProps & ElementNativeProps<'a'>;
+	type $$Props = BreadcrumbOptionProps & ElementProps<'a'>;
 
 	const context = getContext<BreadcrumbContext>('Breadcrumb');
 

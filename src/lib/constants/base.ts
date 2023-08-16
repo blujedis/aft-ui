@@ -57,7 +57,7 @@ export const textOutlined = {
 };
 
 export const ring = {
-	$base: 'ring-inset ring-1 bg-transparent',
+	$base: 'ring-inset ring-1',
 	default: 'ring-frame-200 dark:ring-frame-600',
 	dark: 'ring-frame-600 dark:ring-frame-700',
 	primary: 'ring-primary-500',
@@ -70,7 +70,7 @@ export const ring = {
 };
 
 export const ringHover = {
-	$base: 'ring-inset ring-1 bg-transparent',
+	$base: 'ring-inset ring-1',
 	default: 'hover:ring-frame-300 dark:hover:ring-frame-700',
 	dark: 'hover:ring-frame-700 dark:hover:ring-frame-900',
 	primary: 'hover:ring-primary-700 dark:hover:ring-primary-700',
@@ -85,6 +85,53 @@ export const ringHover = {
 export const variantOutlined = mergeConfigs(textOutlined, ring);
 
 export const variantOutlinedHover = mergeConfigs(variantOutlined, ringHover);
+
+////////////////////////////////////////////////
+
+export const border = {
+	$base: 'border',
+	default: 'border-frame-200 dark:border-frame-600',
+	dark: 'border-frame-600 dark:border-frame-700',
+	primary: 'border-primary-500',
+	secondary: 'border-secondary-500',
+	tertiary: 'border-tertiary-500',
+	danger: 'border-danger-500',
+	warning: 'border-warning-500',
+	success: 'border-success-500',
+	info: 'border-info-500'
+};
+
+export const borderHover = {
+	$base: 'border',
+	default: 'hover:border-frame-300 dark:hover:border-frame-700',
+	dark: 'hover:border-frame-700 dark:hover:border-frame-900',
+	primary: 'hover:border-primary-700 dark:hover:border-primary-700',
+	secondary: 'hover:border-secondary-700 dark:hover:border-secondary-700',
+	tertiary: 'hover:border-tertiary-700 dark:hover:border-tertiary-700',
+	danger: 'hover:border-danger-700 dark:hover:border-danger-700',
+	warning: 'hover:border-warning-700 dark:hover:border-warning-700',
+	success: 'hover:border-success-700 dark:hover:border-success-700',
+	info: 'hover:border-info-700 dark:hover:border-info-700'
+};
+
+export const borderHoverGroup = {
+	$base: 'group',
+	default: 'group-hover:border-frame-300 dark:group-hover:border-frame-700',
+	dark: 'group-hover:border-frame-700 dark:group-hover:border-dark-700',
+	primary: 'group-hover:border-primary-700 dark:group-hover:border-primary-700',
+	secondary: 'group-hover:border-secondary-700 dark:group-hover:border-secondary-700',
+	tertiary: 'group-hover:border-tertiary-700 dark:group-hover:border-tertiary-700',
+	danger: 'group-hover:border-danger-700 dark:group-hover:border-danger-700',
+	warning: 'group-hover:border-warning-700 dark:group-hover:border-warning-700',
+	success: 'group-hover:border-success-700 dark:group-hover:border-success-700',
+	info: 'group-hover:border-info-700 dark:group-hover:border-info-700'
+};
+
+export const variantBorder = mergeConfigs(textOutlined, border);
+
+export const variantBorderHover = mergeConfigs(variantBorder, borderHover);
+
+export const variantBorderHoverGroup = mergeConfigs(variantBorder, borderHoverGroup);
 
 ////////////////////////////////////////////////
 
@@ -237,34 +284,6 @@ export const variantTextHover = mergeConfigs(variantText, textHover);
 
 ////////////////////////////////////////////////
 
-export const textSoft = {
-	$base: '',
-	default: 'text-frame-300',
-	dark: 'text-frame-300',
-	primary: 'text-primary-300',
-	secondary: 'text-secondary-300',
-	tertiary: 'text-tertiary-300',
-	danger: 'text-danger-300',
-	warning: 'text-warning-300',
-	success: 'text-success-300',
-	info: 'text-info-300'
-};
-
-export const filledTextHover = {
-	$base: '',
-	default: 'hover:text-[color:var(--text-dark-hover)]',
-	dark: 'hover:text-[color:var(--text-light-hover)]',
-	primary: 'hover:text-primary-100',
-	secondary: 'hover:text-secondary-100',
-	tertiary: 'hover:text-tertiary-100',
-	danger: 'hover:text-danger-100',
-	warning: 'hover:text-warning-100',
-	success: 'hover:text-success-100',
-	info: 'hover:text-info-100'
-};
-
-////////////////////////////////////////////////
-
 export const textPanel = {
 	$base: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
 	default: '',
@@ -282,9 +301,83 @@ export const variantPanel = mergeConfigs(textPanel, {
 	$base: ['bg-white dark:bg-frame-700', common.ringed].join(' '),
 });
 
-
 ////////////////////////////////////////////////
 
+export const optionHoverFilled = {
+	$base: '',
+	default: 'hover:bg-frame-100 dark:hover:bg-frame-500/50',
+	dark: 'hover:bg-frame-600/60 dark:hover:bg-frame-600/10',
+	primary: 'hover:bg-primary-100 dark:hover:bg-primary-500/50',
+	secondary: 'hover:bg-secondary-100 dark:hover:bg-secondary-500/50',
+	tertiary: 'hover:bg-tertiary-100 dark:hover:bg-tertiary-500/50',
+	danger: 'hover:bg-danger-100 dark:hover:bg-danger-500/50',
+	warning: 'hover:bg-warning-100 dark:hover:bg-warning-500/50',
+	success: 'hover:bg-success-100 dark:hover:bg-success-500/50',
+	info: 'hover:bg-info-100 dark:hover:bg-info-500/50'
+};
+
+export const optionSelectedFilled = {
+	$base: '',
+	default: 'bg-frame-200 dark:bg-frame-500',
+	dark: 'bg-frame-600 dark:bg-frame-700',
+	primary: 'bg-primary-500 ',
+	secondary: 'bg-secondary-500',
+	tertiary: 'bg-tertiary-500',
+	danger: 'bg-danger-500',
+	warning: 'bg-warning-500',
+	success: 'bg-success-500',
+	info: 'bg-info-500'
+};
+
+export const optionCheckedFilled = {
+	default: 'aria-checked:bg-frame-200',
+	dark: 'aria-checked:bg-frame-700',
+	primary: 'aria-checked:bg-primary-600',
+	secondary: 'aria-checked:bg-secondary-600',
+	tertiary: 'aria-checked:bg-tertiary-600',
+	danger: 'aria-checked:bg-danger-600',
+	warning: 'aria-checked:bg-warning-600',
+	success: 'aria-checked:bg-success-600',
+	info: 'aria-checked:bg-info-600'
+};
+
+export const optionCheckedFilledGroup = {
+	default: 'group-aria-checked:bg-frame-200',
+	dark: 'group-aria-checked:bg-frame-700',
+	primary: 'group-aria-checked:bg-primary-600',
+	secondary: 'group-aria-checked:bg-secondary-600',
+	tertiary: 'group-aria-checked:bg-tertiary-600',
+	danger: 'group-aria-checked:bg-danger-600',
+	warning: 'group-aria-checked:bg-warning-600',
+	success: 'group-aria-checked:bg-success-600',
+	info: 'group-aria-checked:bg-info-600'
+};
+
+export const optionExpandedFilled = {
+	default: 'aria-expanded:bg-frame-200 dark:aria-expanded:bg-frame-500',
+	dark: 'aria-expanded:bg-frame-600 dark:aria-expanded:bg-frame-600',
+	primary: 'aria-expanded:bg-primary-500 dark:aria-expanded:bg-primary-500',
+	secondary: 'aria-expanded:bg-secondary-500 dark:aria-expanded:bg-secondary-500',
+	tertiary: 'aria-expanded:bg-tertiary-500 dark:aria-expanded:bg-tertiary-500',
+	danger: 'aria-expanded:bg-danger-500 dark:aria-expanded:bg-danger-500',
+	warning: 'aria-expanded:bg-warning-500 dark:aria-expanded:bg-warning-500',
+	success: 'aria-expanded:bg-success-500 dark:aria-expanded:bg-success-500',
+	info: 'aria-expanded:bg-info-500 dark:aria-expanded:bg-info-500'
+};
+
+export const optionExpandedGlass = {
+	default: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/40',
+	dark: 'aria-expanded:bg-frame-900/30 dark:aria-expanded:bg-frame-900/40',
+	primary: 'aria-expanded:bg-primary-500/20 dark:aria-expanded:bg-primary-500/20',
+	secondary: 'aria-expanded:bg-secondary-500/20 dark:aria-expanded:bg-secondary-500/20',
+	tertiary: 'aria-expanded:bg-tertiary-500/20 dark:aria-expanded:bg-tertiary-500/20',
+	danger: 'aria-expanded:bg-danger-500/20 dark:aria-expanded:bg-danger-500/20',
+	warning: 'aria-expanded:bg-warning-500/20 dark:aria-expanded:bg-warning-500/20',
+	success: 'aria-expanded:bg-success-500/20 dark:aria-expanded:bg-success-500/20',
+	info: 'aria-expanded:bg-info-500/20 dark:aria-expanded:bg-info-500/20'
+};
+
+////////////////////////////////////////////////
 
 export const solid = {
 	$base: '',
@@ -352,64 +445,3 @@ export const solidGhost = {
 	info: 'bg-info-50'
 };
 
-export const fill = {
-	$base: '',
-	default: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
-	dark: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
-	primary: 'fill-primary-500',
-	secondary: 'fill-secondary-500',
-	tertiary: 'fill-tertiary-500',
-	danger: 'fill-danger-500',
-	warning: 'fill-warning-500',
-	success: 'fill-success-500',
-	info: 'fill-info-500'
-};
-
-export const stroke = {
-	$base: '',
-	dark: 'stroke-frame-600',
-	primary: 'stroke-primary-500', secondary: 'stroke-secondary-500',
-	tertiary: 'stroke-tertiary-500',
-	danger: 'stroke-danger-500',
-	warning: 'stroke-warning-500',
-	success: 'stroke-success-500',
-	info: 'stroke-info-500'
-};
-
-export const border = {
-	$base: 'border',
-	default: 'border-frame-200 dark:border-frame-400',
-	dark: 'border-frame-600',
-	primary: 'border-primary-500',
-	secondary: 'border-secondary-500',
-	tertiary: 'border-tertiary-500',
-	danger: 'border-danger-500',
-	warning: 'border-warning-500',
-	success: 'border-success-500',
-	info: 'border-info-500'
-};
-
-export const borderHover = {
-	$base: 'border',
-	default: 'hover:border-frame-300 dark:hover:border-frame-500',
-	dark: 'hover:border-frame-500',
-	primary: 'hover:border-primary-600',
-	secondary: 'hover:border-secondary-600',
-	tertiary: 'hover:border-tertiary-600',
-	danger: 'hover:border-danger-600',
-	warning: 'hover:border-warning-600',
-	success: 'hover:border-success-600',
-	info: 'hover:border-info-600'
-};
-
-export const borderGroupHover = {
-	default: 'group-hover:border-frame-300 dark:group-hover:border-frame-400',
-	dark: 'group-hover:border-frame-500',
-	primary: 'group-hover:border-primary-600',
-	secondary: 'group-hover:border-secondary-600',
-	tertiary: 'group-hover:border-tertiary-600',
-	danger: 'group-hover:border-danger-600',
-	warning: 'group-hover:border-warning-600',
-	success: 'group-hover:border-success-600',
-	info: 'group-hover:border-info-600'
-};

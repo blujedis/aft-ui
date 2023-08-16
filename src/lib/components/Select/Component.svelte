@@ -4,10 +4,10 @@
 	import { onMount, setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { useSelect } from '$lib/stores/select';
 
-	type $$Props = SelectProps & Omit<ElementNativeProps<'select'>, 'size'>;
+	type $$Props = SelectProps & Omit<ElementProps<'select'>, 'size'>;
 
 	export let {
 		disabled,
@@ -38,7 +38,7 @@
 
 	$: inputClasses = th
 		.create('Select')
-		.variant('select', variant, theme, true)
+		.variant('globals', variant, theme, true)
 		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
 		.option('placeholders', theme, true)
@@ -49,6 +49,7 @@
 		.option('disableds', theme, disabled)
 		.append('w-full', full)
 		.append('border-0 ring-0', variant !== 'outlined')
+		.append('px-2 peer focus:ring-0 outline-none border-0', variant === 'flushed')
 		.append('flex items-center justify-center pr-10 outline-none', true) // always pad right for caret.
 		.append(multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)

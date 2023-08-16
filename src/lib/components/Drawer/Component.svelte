@@ -8,12 +8,12 @@
 		drawerOffsetMap
 	} from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { fade, fly } from 'svelte/transition';
 	import { useDisclosure } from '$lib/stores';
 	import Placeholder from './Placeholder.svelte';
 
-	type $$Props = DrawerProps & ElementNativeProps<'div'>;
+	type $$Props = DrawerProps & ElementProps<'div'>;
 
 	export let {
 		backdrop,

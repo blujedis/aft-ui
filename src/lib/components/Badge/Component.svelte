@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type BadgeProps, badgeDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 
-	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = BadgeProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let { removable, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } =
 		{
@@ -16,7 +16,7 @@
 		? th.create('Badge').append($$restProps.class, true).compile()
 		: th
 				.create('Badge')
-				.variant('globals', variant, theme, true)
+				.variant('globals', variant, theme, variant)
 				.option('common', 'transition', transitioned)
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)
@@ -25,7 +25,7 @@
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.append('w-full', full)
-				.append('z-20 badge', true)
+				.append('z-20 badge font-medium', true)
 				.append('badge-removable', removable)
 				.append('relative inline-flex items-center', !removable)
 				.append($$restProps.class, true)

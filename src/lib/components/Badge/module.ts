@@ -6,9 +6,8 @@ import type {
 	ThemeTransitioned,
 	ThemeVariant
 } from '$lib/types';
-// import type { badge } from './config';
 
-// export type BadgeVariant = keyof typeof badge;
+export type BadgeVariant = Exclude<ThemeVariant, 'text' | 'flushed'>
 
 export type BadgeProps = {
 	full?: boolean;
@@ -18,7 +17,7 @@ export type BadgeProps = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: ThemeTransitioned;
-	variant?: Exclude<ThemeVariant, 'text' | 'flushed'>;
+	variant?: BadgeVariant;
 	unstyled?: boolean;
 };
 

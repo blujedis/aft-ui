@@ -5,10 +5,10 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import { onMount } from 'svelte';
 
-	type $$Props = ProgressBarProps & Omit<ElementNativeProps<'progress'>, 'size'>;
+	type $$Props = ProgressBarProps & Omit<ElementProps<'progress'>, 'size'>;
 
 	export let {
 		animate,

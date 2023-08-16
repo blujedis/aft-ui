@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { themer, themeStore } from '../../theme';
 	import { RatingItem } from '../RatingItem';
-	import type { ElementNativeProps } from '../../types';
+	import type { ElementProps } from '../../types';
 	import {
 		type RatingProps,
 		ratingControllerDefaults as defaults,
@@ -10,7 +10,7 @@
 	import { onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	type $$Props = RatingProps & ElementNativeProps<'div'>;
+	type $$Props = RatingProps & ElementProps<'div'>;
 
 	export let {
 		arrowable,

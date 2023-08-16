@@ -3,9 +3,9 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps, ThemeVariantHover } from '../../types';
+	import type { ElementProps, ThemeVariantHover } from '../../types';
 
-	type $$Props = TextareaProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = TextareaProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		disabled,
