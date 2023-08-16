@@ -30,6 +30,6 @@ export type ButtonGroupContext = SelectStore & {
 export const buttonGroupDefaults: Partial<ButtonGroupProps> = {
 	rounded: 'none',
 	shadowed: 'none',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

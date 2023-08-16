@@ -1,8 +1,5 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeVariant } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
-import type { menuPanel } from './config';
-
-export type MenuPanelVariant = keyof typeof menuPanel;
 
 export type MenuPanelProps = {
 	origin?: 'left' | 'right' | 'center';
@@ -11,14 +8,14 @@ export type MenuPanelProps = {
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor; // not really used placeholder in case of future use.
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
-	variant?: MenuPanelVariant;
+	variant?: Exclude<ThemeVariant, 'flushed'>;
 };
 
 export const menuPanelDefaults = {
 	origin: 'center',
 	position: 'left',
 	shadowed: 'md',
-	theme: 'light',
+	theme: 'default',
 	transition: { start: 0.95, type: 'scale' },
 	variant: 'outlined'
 };

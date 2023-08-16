@@ -33,6 +33,6 @@ export const menuDefaults: Partial<MenuProps & MenuGlobalProps> = {
 	autoclose: true,
 	escapable: true,
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

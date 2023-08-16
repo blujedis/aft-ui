@@ -20,6 +20,6 @@ export type PopoverProps = {
 export const popoverDefaults: PopoverProps = {
 	shadowed: 'md',
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

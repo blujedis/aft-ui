@@ -23,6 +23,6 @@ export const breadcrumbOptionDefaults: Partial<BreadcrumbOptionProps> = {
 	focused: true,
 	size: 'md',
 	separator: 'mdi-light:chevron-right',
-	theme: 'light',
+	theme: 'default',
 	variant: 'text'
 };

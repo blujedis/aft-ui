@@ -15,6 +15,6 @@ export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
 export const selectListOptionDefaults: SelectListOptionProps<'a'> = {
 	as: 'a',
 	size: 'sm',
-	theme: 'light',
+	theme: 'default',
 	variant: 'outlined'
 };

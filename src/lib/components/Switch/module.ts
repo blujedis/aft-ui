@@ -22,7 +22,7 @@ export const switchDefaults: Partial<SwitchProps> = {
 	focused: true,
 	size: 'md',
 	srtext: 'Use Switch',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled',
 	position: 'right'
 };

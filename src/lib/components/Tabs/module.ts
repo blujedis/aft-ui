@@ -41,6 +41,6 @@ export const tabsDefaults: Partial<TabsProps> = {
 	condensed: true,
 	focused: true,
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'flushed'
 };

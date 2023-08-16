@@ -5,7 +5,7 @@ const component = {
 	// rounded: 'sm',
 	// shadowed: undefined,
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	transitioned: true
 } as ThemeDefaults['component'];
 

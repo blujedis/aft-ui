@@ -14,7 +14,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
+		theme: 'default' as ThemeColor,
 		// transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'filled' as TileVariant
 	};
@@ -22,15 +22,18 @@
 
 <ExamplePage {title} {description} {code}>
 	{#each colors as color}
-		<div class="grid grid-cols-3 gap-4 mb-4">
+		<div class="grid grid-cols-4 gap-4 mb-4">
 			<label for="filled">
 				<Tile {...props} theme={color}>My Profile</Tile>
 			</label>
 			<label for="filled">
-				<Tile {...props} full theme={color} variant="glass">Some content</Tile>
+				<Tile {...props} theme={color} variant="ghost">My Profile</Tile>
 			</label>
 			<label for="filled">
-				<Tile {...props} variant="outline" theme={color}>Some content</Tile>
+				<Tile {...props} theme={color} variant="glass">Some content</Tile>
+			</label>
+			<label for="filled">
+				<Tile {...props} variant="outlined" theme={color}>Some content</Tile>
 			</label>
 		</div>
 	{/each}

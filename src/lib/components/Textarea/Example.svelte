@@ -16,17 +16,20 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
+		theme: 'default' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		variant: 'outlined' as TextareaVariant
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
+	<div class="grid grid-cols-4 gap-4">
 		{#each colors as color}
 			<label for="filled">
 				<Textarea {...props} variant="filled" theme={color} />
+			</label>
+			<label for="filled">
+				<Textarea {...props} variant="ghost" theme={color} />
 			</label>
 			<label for="glass">
 				<Textarea {...props} variant="glass" theme={color} />

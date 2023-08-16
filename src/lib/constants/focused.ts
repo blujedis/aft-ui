@@ -1,7 +1,7 @@
 export const focusedRing = {
 	$base: 'focus:outline-none focus:ring-2',
 	
-	light: 'focus:ring-frame-400',
+	default: 'focus:ring-frame-400',
 	dark: 'focus:ring-frame-900',
 	primary: 'focus:ring-primary-600',
 	secondary: 'focus:ring-secondary-600',
@@ -15,7 +15,7 @@ export const focusedRing = {
 export const focusedRingVisible = {
 	$base: 'focus:outline-none focus-visible:outline-none focus-visible:ring-2',
 	
-	light: 'focus-visible:ring-frame-400',
+	default: 'focus-visible:ring-frame-400',
 	dark: 'focus-visible:ring-frame-900',
 	primary: 'focus-visible:ring-primary-600',
 	secondary: 'focus-visible:ring-secondary-600',
@@ -29,7 +29,7 @@ export const focusedRingVisible = {
 export const focusedRingWithin = {
 	$base: 'focus-within:outline-none focus-within:ring-2',
 	
-	light: 'focus-within:ring-frame-400',
+	default: 'focus-within:ring-frame-400',
 	dark: 'focus-within:ring-frame-900',
 	primary: 'focus-within:ring-primary-600',
 	secondary: 'focus-within:ring-secondary-600',
@@ -43,7 +43,7 @@ export const focusedRingWithin = {
 export const focusedRingPeer = {
 	$base: 'peer-focus:outline-none peer-focus:ring-2',
 	
-	light: 'peer-focus:ring-frame-400',
+	default: 'peer-focus:ring-frame-400',
 	dark: 'peer-focus:ring-frame-900',
 	primary: 'peer-focus:ring-primary-600',
 	secondary: 'peer-focus:ring-secondary-600',
@@ -57,7 +57,7 @@ export const focusedRingPeer = {
 export const focusedRingGroup = {
 	$base: 'group-focus:outline-none group-focus:ring-2',
 	
-	light: 'group-focus:ring-frame-400',
+	default: 'group-focus:ring-frame-400',
 	dark: 'group-focus:ring-frame-900',
 	primary: 'group-focus:ring-primary-600',
 	secondary: 'group-focus:ring-secondary-600',
@@ -71,7 +71,7 @@ export const focusedRingGroup = {
 export const focusedBorder = {
 	$base: 'focus:outline-none',
 	
-	light: 'focus:border-frame-400',
+	default: 'focus:border-frame-400',
 	dark: 'focus:border-frame-900',
 	primary: 'focus:border-primary-600',
 	secondary: 'focus:border-secondary-600',
@@ -85,7 +85,7 @@ export const focusedBorder = {
 export const focusedBorderVisible = {
 	$base: 'focus-visible:outline-none',
 	
-	light: 'focus-visible:border-frame-400',
+	default: 'focus-visible:border-frame-400',
 	dark: 'focus-visible:border-frame-900',
 	primary: 'focus-visible:border-primary-600',
 	secondary: 'focus-visible:border-secondary-600',
@@ -99,7 +99,7 @@ export const focusedBorderVisible = {
 export const focusedBorderWithin = {
 	$base: 'focus-within:outline-none',
 	
-	light: 'focus-within:border-frame-400',
+	default: 'focus-within:border-frame-400',
 	dark: 'focus-within:border-frame-900',
 	primary: 'focus-within:border-primary-600',
 	secondary: 'focus-within:border-secondary-600',
@@ -113,7 +113,7 @@ export const focusedBorderWithin = {
 export const focusedBorderPeer = {
 	$base: 'peer-focus:outline-none',
 	
-	light: 'peer-focus:border-frame-400',
+	default: 'peer-focus:border-frame-400',
 	dark: 'peer-focus:border-frame-900',
 	primary: 'peer-focus:border-primary-600',
 	secondary: 'peer-focus:border-secondary-600',
@@ -127,7 +127,7 @@ export const focusedBorderPeer = {
 export const focusedBorderGroup = {
 	$base: 'group-focus:outline-none',
 	
-	light: 'group-focus:border-frame-400',
+	default: 'group-focus:border-frame-400',
 	dark: 'group-focus:border-frame-900',
 	primary: 'group-focus:border-primary-600',
 	secondary: 'group-focus:border-secondary-600',
@@ -141,7 +141,7 @@ export const focusedBorderGroup = {
 export const focusedBorderGroupWithin = {
 	$base: 'group-focus-within:outline-none',
 	
-	light: 'group-focus-within:border-frame-400',
+	default: 'group-focus-within:border-frame-400',
 	dark: 'group-focus-within:border-frame-900',
 	primary: 'group-focus-within:border-primary-600',
 	secondary: 'group-focus-within:border-secondary-600',
@@ -155,7 +155,7 @@ export const focusedBorderGroupWithin = {
 export const focusedOutline = {
 	$base: 'focus:outline',
 	
-	light: 'focus:outline-frame-400',
+	default: 'focus:outline-frame-400',
 	dark: 'focus:outline-frame-900',
 	primary: 'focus:outline-primary-600',
 	secondary: 'focus:outline-secondary-600',
@@ -169,7 +169,7 @@ export const focusedOutline = {
 export const focusedOutlineVisible = {
 	$base: 'focus-visible:outline',
 	
-	light: 'focus-visible:outline-frame-400',
+	default: 'focus-visible:outline-frame-400',
 	dark: 'focus-visible:outline-frame-900',
 	primary: 'focus-visible:outline-primary-600',
 	secondary: 'focus-visible:outline-secondary-600',
@@ -183,7 +183,7 @@ export const focusedOutlineVisible = {
 export const focusedOutlineWithin = {
 	$base: 'focus-within:outline',
 	
-	light: 'focus-within:outline-frame-400',
+	default: 'focus-within:outline-frame-400',
 	dark: 'focus-within:outline-frame-900',
 	primary: 'focus-within:outline-primary-600',
 	secondary: 'focus-within:outline-secondary-600',
@@ -197,7 +197,7 @@ export const focusedOutlineWithin = {
 export const focusedOutlinePeer = {
 	$base: 'peer-focus:outline',
 	
-	light: 'peer-focus:outline-frame-400',
+	default: 'peer-focus:outline-frame-400',
 	dark: 'peer-focus:outline-frame-900',
 	primary: 'peer-focus:outline-primary-600',
 	secondary: 'peer-focus:outline-secondary-600',
@@ -211,7 +211,7 @@ export const focusedOutlinePeer = {
 export const focusedOutlineGroup = {
 	$base: 'group-focus:outline',
 	
-	light: 'group-focus:outline-frame-400',
+	default: 'group-focus:outline-frame-400',
 	dark: 'group-focus:outline-frame-900',
 	primary: 'group-focus:outline-primary-600',
 	secondary: 'group-focus:outline-secondary-600',
@@ -225,7 +225,7 @@ export const focusedOutlineGroup = {
 // export const focusedFlush = {
 // 	$base: 'focus:outline-none focus:!ring-0 focus-visible:!ring-0',
 // 	dark: 'focus:border-white focus:shadow-[0_4px_6px_-6px_rgb(var(--color-white))]',
-// 	light: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
+// 	default: 'focus:border-frame-500 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-frame-500))]',
 // 	primary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-primary-600))]',
 // 	secondary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-secondary-600))]',
 // 	tertiary: 'focus:border-primary-600 focus:shadow-[0_4px_6px_-6px_rgb(var(--color-tertiary-600))]',

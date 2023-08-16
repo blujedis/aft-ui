@@ -18,7 +18,7 @@
 		shadowed: 'lg' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		width: 'sm' as ThemeSize,
-		theme: 'light' as ThemeColor
+		theme: 'default' as ThemeColor
 	};
 </script>
 

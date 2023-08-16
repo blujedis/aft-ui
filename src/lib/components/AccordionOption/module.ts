@@ -15,6 +15,6 @@ export type AccordianOptionProps<Tag = any> = {
 export const accordionOptionDefaults: Partial<AccordianOptionProps<'div'>> = {
 	as: 'div',
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	transition: 'expand'
 };

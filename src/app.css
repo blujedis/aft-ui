@@ -6,7 +6,7 @@
 	--bg-light: #ffffff;
 	--bg-dark: theme('colors.frame.800');
 	--text-dark: theme('colors.frame.700');
-	--text-light: theme('colors.frame.200');
+	--text-light: theme('colors.frame.100');
 	--text-dark-hover: theme('colors.frame.900');
 	--text-light-hover: theme('colors.frame.50');
 }

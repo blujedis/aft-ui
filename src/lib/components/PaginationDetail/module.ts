@@ -23,6 +23,6 @@ export type PaginationDetailProps = {
 export const paginationDetailDefaults: Partial<PaginationDetailProps> = {
 	rounded: 'full',
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

@@ -35,6 +35,6 @@ export interface PaginationProps<T extends Record<string, any> = Record<string, 
 
 export const paginationDefaults: Partial<PaginationProps> = {
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

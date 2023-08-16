@@ -37,6 +37,6 @@ export const selectDefaults: Partial<SelectProps> = {
 	placeholder: true,
 	rounded: 'sm',
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'outlined'
 };

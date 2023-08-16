@@ -14,5 +14,5 @@ export type CardElementProps = {
 export const cardElementDefaults: Partial<CardElementProps> = {
 	type: 'content',
 	size: 'md',
-	theme: 'light'
+	theme: 'default'
 };

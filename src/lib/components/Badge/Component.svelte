@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { type BadgeProps, badgeDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
-	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementNativeProps } from '../../types';
-	import { onMount } from 'svelte';
 
 	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
 
@@ -19,7 +16,7 @@
 		? th.create('Badge').append($$restProps.class, true).compile()
 		: th
 				.create('Badge')
-				.variant('badge', variant, theme, true)
+				.variant('globals', variant, theme, true)
 				.option('common', 'transition', transitioned)
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)

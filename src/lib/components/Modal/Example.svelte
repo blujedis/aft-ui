@@ -17,7 +17,7 @@
 		focustrap: true,
 		rounded: 'sm' as ThemeRounded,
 		shadowed: 'xl' as ThemeShadowed,
-		theme: 'light' as ThemeColor,
+		theme: 'default' as ThemeColor,
 		transition: 'dissolve' as DisclosureTransitionOption,
 		visible: false,
 		unmount: true

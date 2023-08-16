@@ -3,11 +3,12 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
+	ThemeTransitioned,
+	ThemeVariant
 } from '$lib/types';
-import type { badge } from './config';
+// import type { badge } from './config';
 
-export type BadgeVariant = keyof typeof badge;
+// export type BadgeVariant = keyof typeof badge;
 
 export type BadgeProps = {
 	full?: boolean;
@@ -17,12 +18,12 @@ export type BadgeProps = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: ThemeTransitioned;
-	variant?: BadgeVariant;
+	variant?: Exclude<ThemeVariant, 'text' | 'flushed'>;
 	unstyled?: boolean;
 };
 
 export const badgeDefaults: Partial<BadgeProps> = {
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

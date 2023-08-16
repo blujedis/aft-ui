@@ -1,7 +1,7 @@
-import { bgAriaChecked, filledText, placeholder } from '$lib/constants';
+import { bgAriaChecked, textFilled, placeholder } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
 
-const baseVariant = mergeConfigs(filledText, bgAriaChecked, {
+const baseVariant = mergeConfigs(textFilled, bgAriaChecked, {
 	$base: 'border border-transparent'
 });
 

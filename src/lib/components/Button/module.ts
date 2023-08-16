@@ -29,6 +29,6 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'filled'
 };

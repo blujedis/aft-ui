@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type InputProps, inputDefaults as defaults } from './module';
-	import { themeStore, Button, themer } from '$lib';
+	import { themeStore, themer } from '$lib';
 	import { Flushed } from '../Flushed';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';

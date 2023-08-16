@@ -61,6 +61,6 @@ export const modalDefaults: Partial<ModalProps> = {
 	labelby: 'Modal',
 	rounded: 'md',
 	shadowed: 'lg',
-	theme: 'light',
+	theme: 'default',
 	unmount: true
 };

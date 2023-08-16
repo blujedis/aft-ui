@@ -21,7 +21,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
+		theme: 'default' as ThemeColor,
 		transitioned: false as ThemeTransitioned,
 		variant: 'grouped' as PaginationVariant
 	};

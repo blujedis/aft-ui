@@ -16,7 +16,7 @@
 		shadowed: 'xl' as ThemeShadowed,
 		size: 'md' as ThemeSimpleSize,
 		speed: 'medium' as ThemeSpeed,
-		theme: 'light' as ThemeColor
+		theme: 'default' as ThemeColor
 	};
 
 	function show() {

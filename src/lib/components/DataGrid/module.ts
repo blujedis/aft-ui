@@ -77,7 +77,7 @@ export const gridDefaults: Partial<DataGridProps<DataGridColumnConfig, DataGridD
 	divided: true,
 	size: 'md',
 	sticky: true,
-	theme: 'light',
+	theme: 'default',
 	variant: 'outlined',
 	filter: searchArray,
 	sorter: sortArray,

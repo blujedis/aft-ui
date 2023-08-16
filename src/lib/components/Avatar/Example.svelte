@@ -15,7 +15,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'light' as ThemeColor,
+		theme: 'default' as ThemeColor,
 		variant: 'single' as AvatarVariant,
 		direction: 'up' as 'up' | 'down'
 	};

@@ -28,6 +28,6 @@ export const paginationPageDefaults: Partial<PaginationPageProps<'button'>> = {
 	as: 'button',
 	focused: true,
 	size: 'md',
-	theme: 'light',
+	theme: 'default',
 	variant: 'flushed'
 };

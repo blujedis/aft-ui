@@ -9,7 +9,7 @@ import type * as sharedOptions from '../constants/options';
 import type * as componentOptions from '../components/options';
 import type * as configs from '../components/configs';
 import type { colors, shades } from '../constants/colors';
-import type { palette, namedcolors, tailwindcolors } from '../theme/palettes';
+import type { namedcolors, tailwindcolors } from '../theme/palettes';
 
 /////////////////////////////////////////////////////
 
@@ -92,6 +92,8 @@ export type ThemeDefaults = {
 export type ThemeComponents = typeof configs;
 export type ThemeComponent = keyof ThemeComponents;
 
+export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost' | 'glass';
+export type ThemeVariantHover<V extends ThemeVariant> = `${V}Hover`;
 export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
 export type ThemeSimpleSize = 'sm' | 'md' | 'lg';
