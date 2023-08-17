@@ -1,10 +1,11 @@
-import type { selectListButton } from './config';
+
 import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
 import type { BadgeVariant } from '../Badge';
+import type { ThemeVariant } from '$lib/types';
 
-export type SelectListButtonVariant = keyof typeof selectListButton;
+export type SelectListButtonVariant = Exclude<ThemeVariant, 'text'>; 
 
 export type SelectListButtonProps = InputProps & {
 	caret?: string | IconifyIcon;

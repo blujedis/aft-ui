@@ -50,7 +50,7 @@
 
 	$: containerClasses = th
 		.create('SelectListContainer')
-		.variant('input', variant, theme, true)
+		.variant('globals', variant, theme, true)
 		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)

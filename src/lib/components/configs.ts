@@ -17,7 +17,6 @@ export * from './PaginationPage/config';
 export * from './ProgressBar/config';
 export * from './ProgressCircle/config';
 export * from './Range/config';
-export * from './SelectListButton/config';
 export * from './SelectListOption/config';
 export * from './Switch/config';
 export * from './DataGrid/config';

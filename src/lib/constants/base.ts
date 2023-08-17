@@ -82,7 +82,7 @@ export const ringHover = {
 	info: 'hover:ring-info-700 dark:hover:ring-info-700'
 };
 
-export const variantOutlined = mergeConfigs(textOutlined, ring);
+export const variantOutlined = mergeConfigs(textOutlined, ring, { $base: 'bg-transparent' });
 
 export const variantOutlinedHover = mergeConfigs(variantOutlined, ringHover);
 
