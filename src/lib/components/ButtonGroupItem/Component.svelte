@@ -7,6 +7,8 @@
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import { cleanObj } from '$lib/utils';
+	import { ConditionalElement } from '../ConditionalElement';
+	import { Flushed } from '../Flushed';
 
 	type $$Props = ButtonGroupItemProps & ElementProps<'button'>;
 
@@ -30,11 +32,21 @@
 		variant
 	});
 
+	$: console.log(variant);
+
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
-		.variant('buttonGroupItem', variant, theme, true)
+		//	.variant('buttonGroupItem', variant, theme, true)
+		.variant('globals', 'itemChecked', theme, variant === 'outlined')
+		.variant('globals', 'itemCheckedGhost', theme, variant === 'ghost')
+		.variant('globals', 'itemCheckedFilled', theme, variant === 'filled')
+		.variant('globals', 'outlinedHoverless', theme, variant === 'outlined')
 		.option('buttonPadding', size, size)
-		.append('relative first:ml-0 focus:z-10  -ml-px first:rounded-r-none last:rounded-l-none', true)
+		.append('px-1', variant === 'text')
+		.append(
+			'relative first:ml-0 focus:z-10  -ml-px first:rounded-r-none last:rounded-l-none aria-checked:pointer-events-none',
+			true
+		)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -44,15 +56,21 @@
 	}
 </script>
 
-<svelte:component
-	this={Button}
-	{...$$restProps}
-	{...passthru}
-	role="listitem"
-	class={buttonClasses}
-	aria-checked={$context?.selected?.includes(value)}
-	aria-labelledby={value + ''}
-	on:click={() => handleSelect(value)}
+<ConditionalElement
+	as={Flushed}
+	condition={variant === 'text'}
+	props={{ disabled: !$context?.selected?.includes(value), theme }}
 >
-	<slot />
-</svelte:component>
+	<svelte:component
+		this={Button}
+		{...$$restProps}
+		{...passthru}
+		role="listitem"
+		class={buttonClasses}
+		aria-checked={$context?.selected?.includes(value)}
+		aria-labelledby={value + ''}
+		on:click={() => handleSelect(value)}
+	>
+		<slot />
+	</svelte:component>
+</ConditionalElement>

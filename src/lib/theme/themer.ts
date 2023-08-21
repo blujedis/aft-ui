@@ -270,7 +270,8 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${key as string
+					`${instanceName} mapped value using property ${
+						key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -294,6 +295,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		) {
 			if (typeof themeConfig === 'undefined') return api;
 			const isRemoveFromOptions = arguments.length === 3;
+			if (!isRemoveFromOptions) when = propOrWhen as boolean;
 			if (!when) return api;
 			if (isRemoveFromOptions) {
 				const key = classesOrKey as K;

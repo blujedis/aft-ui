@@ -49,7 +49,7 @@
 		variant: 'outlined' as DataGridVariant
 	};
 
-	type Data = typeof jsondata[number];
+	type Data = (typeof jsondata)[number];
 	const data = jsondata;
 	// const columns = ['id', 'title', 'description', 'category', 'price'] as (keyof Item)[];
 	const columns = [

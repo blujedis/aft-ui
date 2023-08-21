@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {

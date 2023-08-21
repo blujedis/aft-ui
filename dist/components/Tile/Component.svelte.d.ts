@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -5,9 +6,9 @@ declare const __propDef: {
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
-        variant?: "filled" | "glass" | "outline" | undefined;
+        variant?: import("./module").TileVariant | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;

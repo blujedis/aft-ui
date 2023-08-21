@@ -1,8 +1,9 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
-        variant?: "filled" | "outlined" | "ghost" | "glass" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
+        variant?: import("../CardElement").CardElementVariant | undefined;
         size?: import("../../types").ThemeSize | undefined;
         horizontal?: boolean | undefined;
         accesskey?: string | null | undefined;

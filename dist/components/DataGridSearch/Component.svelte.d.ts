@@ -1,13 +1,15 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         action?: string | undefined;
         focused?: import("../..").ThemeFocused | undefined;
         method?: string | undefined;
+        rounded?: import("../..").ThemeSize | undefined;
         size?: import("../..").ThemeSize | undefined;
-        strategy?: "input" | "enter" | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
-        variant?: "filled" | "outlined" | "ghost" | "glass" | undefined;
+        strategy?: "input" | "submit" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
+        variant?: "outlined" | "filled" | "glass" | "ghost" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;

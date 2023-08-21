@@ -8,7 +8,7 @@ export let { full, rounded, shadowed, size, theme, variant } = {
 };
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("Tile").variant("tile", variant, theme, true).option("fieldFontSizes", size, size).option("boxPadding", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full h-full", full).append("inline-flex flex-col items-center justify-center", true).append($$restProps.class, true).compile(true);
+  inputClasses = th.create("Tile").variant("globals", variant, theme, true).option("fieldFontSizes", size, size).option("boxPadding", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full h-full", full).append("inline-flex flex-col items-center justify-center font-semibold", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

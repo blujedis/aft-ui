@@ -1,8 +1,8 @@
 export declare const tab: {
     flushed: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -11,12 +11,11 @@ export declare const tab: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
     };
     filled: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -25,12 +24,12 @@ export declare const tab: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
+        light: string;
     };
     grouped: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -39,12 +38,11 @@ export declare const tab: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
+        light: string;
     };
     labeled: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -54,5 +52,6 @@ export declare const tab: {
         success: string;
         info: string;
         $base: string;
+        light: string;
     };
 };

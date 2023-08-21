@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare class __sveltets_Render<Item extends Record<string, any>> {
     props(): {
@@ -6,7 +7,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
                 rounded: import("../../types").ThemeRounded;
                 shadowed: import("../../types").ThemeShadowed;
                 size: import("../../types").ThemeSize;
-                theme: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white";
+                theme: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info";
                 transitioned: boolean;
                 variant: "flushed" | "filled" | "glass";
             }>;
@@ -15,7 +16,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
         variant?: "flushed" | "filled" | "glass" | undefined;
         items?: string | number | Item[] | undefined;
@@ -255,7 +256,7 @@ export default class Component<Item extends Record<string, any>> extends SvelteC
             rounded: import("../../types").ThemeRounded;
             shadowed: import("../../types").ThemeShadowed;
             size: import("../../types").ThemeSize;
-            theme: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white";
+            theme: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info";
             transitioned: boolean;
             variant: "flushed" | "filled" | "glass";
         }>;

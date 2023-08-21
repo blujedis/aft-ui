@@ -1,14 +1,14 @@
 import { SvelteComponent } from "svelte";
-import type { HTMLTag } from '../../types';
+import type { ElementProps, HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {
-    props(): Omit<import("..").AccordianOptionProps, "variant" | "value" | "as"> & {
+    props(): Omit<import("..").AccordianOptionProps, "variant" | "as" | "value"> & {
         as?: Tag | undefined;
         multiple?: boolean | undefined;
         selected?: import("../../stores/select").SelectStoreValue[] | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
-        variant?: "flushed" | "filled" | "outlined" | "glass" | undefined;
-    } & import("../../types").ElementProps<Tag> & {
+        variant?: import("./module").AccordianVariant | undefined;
+    } & ElementProps<Tag> & {
         store?: import("../../stores/select").SelectStore<{
             multiple: boolean;
             selected: import("../../stores/select").SelectStoreValue[];

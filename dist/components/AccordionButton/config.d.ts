@@ -1,8 +1,7 @@
 export declare const accordionButton: {
     outlined: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -12,10 +11,10 @@ export declare const accordionButton: {
         success: string;
         info: string;
         $base: string;
+        light: string;
     };
     flushed: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -26,8 +25,7 @@ export declare const accordionButton: {
         info: string;
     } & {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -38,10 +36,11 @@ export declare const accordionButton: {
         info: string;
     } & {
         $base: string;
+        light: string;
+        dark: string;
     } & import("../../theme").StringMap;
     filled: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -51,8 +50,7 @@ export declare const accordionButton: {
         success: string;
         info: string;
     } & {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -63,11 +61,11 @@ export declare const accordionButton: {
         info: string;
     } & {
         $base: string;
+        light: string;
         dark: string;
     } & import("../../theme").StringMap;
     glass: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -77,8 +75,7 @@ export declare const accordionButton: {
         success: string;
         info: string;
     } & {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -89,6 +86,7 @@ export declare const accordionButton: {
         info: string;
     } & {
         $base: string;
+        light: string;
         dark: string;
     } & import("../../theme").StringMap;
 };

@@ -15,7 +15,7 @@ declare const __propDef: {
         inline?: boolean | undefined;
         class?: string | undefined;
         size?: import("../..").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         unstyled?: boolean | undefined;
     };
     events: {

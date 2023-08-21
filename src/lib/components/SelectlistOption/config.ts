@@ -1,7 +1,8 @@
 import { mergeConfigs } from '$lib/theme';
-import { textAriaCurrent, textAriaSelected } from '../options';
+import { } from '../options';
 
-const baseVariant = mergeConfigs(textAriaSelected, textAriaCurrent, {
+// textAriaCurrent, textAriaSelected
+const baseVariant = mergeConfigs({}, {
 	$base:
 		'hover:bg-frame-100/70 dark:hover:bg-frame-800 aria-selected:font-medium aria-current:font-medium'
 });

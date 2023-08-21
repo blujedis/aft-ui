@@ -3,7 +3,8 @@ import type {
 	borderStyles,
 	objectFit,
 	aspectRatio,
-	objectPosition
+	objectPosition,
+	animate
 } from '../constants/options';
 import type * as sharedOptions from '../constants/options';
 import type * as componentOptions from '../components/options';
@@ -67,8 +68,8 @@ export type ColorType =
 
 export type TailwindColor = keyof typeof tailwindcolors;
 export type NamedColor = keyof typeof namedcolors;
-export type ThemeColorBase = typeof colors[number];
-export type ThemeColorShade = typeof shades[number];
+export type ThemeColorBase = (typeof colors)[number];
+export type ThemeColorShade = (typeof shades)[number];
 export type ThemeColor = ThemeColorBase;
 
 export interface ThemeConfig {
@@ -92,8 +93,10 @@ export type ThemeDefaults = {
 export type ThemeComponents = typeof configs;
 export type ThemeComponent = keyof ThemeComponents;
 
-export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost' | 'glass';
-export type ThemeVariantHover<V extends ThemeVariant> = `${V}Hover`;
+export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost';
+export type ThemeVariantExt = ThemeVariant | 'panel' | 'bordered' | 'activated'
+export type ThemeVariantAppend<V extends ThemeVariant> = `${V}${'Hover' | 'HoverGroup' | 'Activated' }`;
+
 export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
 export type ThemeSimpleSize = 'sm' | 'md' | 'lg';
@@ -107,6 +110,7 @@ export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
+export type ThemeAnimation = keyof typeof animate;
 
 export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
 export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin' | 'focusPeer';

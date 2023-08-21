@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import type { HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {

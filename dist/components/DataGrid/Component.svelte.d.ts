@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import { type SortAccessor } from '../../utils';
 import { type DataGridColumnConfig, type DataGridStore, type DataGridDataItem } from './module';
@@ -24,9 +25,9 @@ declare class __sveltets_Render<Column extends DataGridColumnConfig, Data extend
         stacked?: boolean | undefined;
         sticky?: boolean | undefined;
         striped?: boolean | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
-        variant?: "filled" | "outlined" | "ghost" | "glass" | undefined;
+        variant?: "outlined" | "filled" | "glass" | "ghost" | undefined;
         filter?(query: string, items: Data[], ...accessors: (keyof Data)[]): Data[] | Promise<Data[]>;
         sorter?: ((items: Data[], accessors: (keyof Data)[], primer?: import("../../utils").Primer | undefined) => Data[] | Promise<Data[]>) | undefined;
         items?: Data[] | Promise<Data[]> | undefined;

@@ -41,7 +41,7 @@ $:
 $:
   activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
 $:
-  containerClasses = th.create("SelectListContainer").variant("input", variant, theme, true).option("focusedRing", theme, focused && variant !== "flushed").option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded && variant !== "flushed").option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("inline-flex items-center justify-between relative min-w-[176px] peer", true).append("outline-none focus-visible:ring-2", focused && variant !== "flushed").append("border-0", variant === "flushed").append($$restProps.class, true).compile(true);
+  containerClasses = th.create("SelectListContainer").variant("globals", variant, theme, true).option("focusedRing", theme, focused && variant !== "flushed").option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded && variant !== "flushed").option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("inline-flex items-center justify-between relative min-w-[176px] peer", true).append("outline-none focus-visible:ring-2", focused && variant !== "flushed").append("border-0", variant === "flushed").append($$restProps.class, true).compile(true);
 $:
   inputWrapperClasses = th.create("SelectListInputWrapper").append("flex items-center", true).append("w-full", full).append("min-w-fit", tags && !selected.length).append("flex-wrap pl-1 overflow-clip", tags).compile();
 $:

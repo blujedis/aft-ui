@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -10,7 +11,7 @@ declare const __propDef: {
         dismissible?: boolean | undefined;
         duration?: number | undefined;
         title?: string | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         variant?: "filled" | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;

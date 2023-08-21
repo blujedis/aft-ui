@@ -1,10 +1,8 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import { colors } from '$lib/constants';
-	import { themer } from '$lib/theme';
-	import { themeStore } from '$lib/theme';
 	import {
+		colors,
 		variantFilled,
 		variantFilledHover,
 		variantGhost,
@@ -13,7 +11,10 @@
 		variantGlassHover,
 		variantOutlined,
 		variantOutlinedHover
-	} from '$lib/constants/base';
+	} from '$lib/constants';
+	import { themer } from '$lib/theme';
+	import { themeStore } from '$lib/theme';
+
 	import classNames from 'classnames';
 	import { Flushed } from '../Flushed';
 

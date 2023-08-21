@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -8,9 +9,9 @@ declare const __propDef: {
         rounded?: import("../..").ThemeRounded | undefined;
         shadowed?: import("../..").ThemeShadowed | undefined;
         size?: import("../..").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
-        variant?: "flushed" | "filled" | "outlined" | "glass" | undefined;
+        variant?: import("../..").InputVariant | undefined;
         unstyled?: boolean | undefined;
         form?: string | null | undefined;
         slot?: string | null | undefined;
@@ -20,15 +21,23 @@ declare const __propDef: {
         name?: string | null | undefined;
         capture?: boolean | "user" | "environment" | null | undefined;
         hidden?: boolean | null | undefined;
+        class?: string | null | undefined;
+        max?: string | number | null | undefined;
+        list?: string | null | undefined;
+        radiogroup?: string | null | undefined;
+        step?: string | number | null | undefined;
+        id?: string | null | undefined;
+        color?: string | null | undefined;
+        width?: string | number | null | undefined;
+        height?: string | number | null | undefined;
+        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | null | undefined;
         contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
-        id?: string | null | undefined;
         lang?: string | null | undefined;
         part?: string | null | undefined;
         placeholder?: string | null | undefined;
@@ -36,7 +45,6 @@ declare const __propDef: {
         tabindex?: number | null | undefined;
         translate?: "" | "yes" | "no" | null | undefined;
         inert?: boolean | null | undefined;
-        radiogroup?: string | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         about?: string | null | undefined;
         datatype?: string | null | undefined;
@@ -49,7 +57,6 @@ declare const __propDef: {
         autocapitalize?: string | null | undefined;
         autocorrect?: string | null | undefined;
         autosave?: string | null | undefined;
-        color?: string | null | undefined;
         itemprop?: string | null | undefined;
         itemscope?: boolean | null | undefined;
         itemtype?: string | null | undefined;
@@ -86,7 +93,6 @@ declare const __propDef: {
         'aria-flowto'?: string | null | undefined;
         'aria-grabbed'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-haspopup'?: "dialog" | "menu" | "grid" | import("svelte/elements").Booleanish | "listbox" | "tree" | null | undefined;
-        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-invalid'?: import("svelte/elements").Booleanish | "grammar" | "spelling" | null | undefined;
         'aria-keyshortcuts'?: string | null | undefined;
         'aria-label'?: string | null | undefined;
@@ -218,30 +224,25 @@ declare const __propDef: {
         'on:close'?: import("svelte/elements").EventHandler<Event, HTMLInputElement> | null | undefined;
         'on:fullscreenchange'?: import("svelte/elements").EventHandler<Event, HTMLInputElement> | null | undefined;
         'on:fullscreenerror'?: import("svelte/elements").EventHandler<Event, HTMLInputElement> | null | undefined;
-        max?: string | number | null | undefined;
-        list?: string | null | undefined;
-        step?: string | number | null | undefined;
-        width?: string | number | null | undefined;
-        height?: string | number | null | undefined;
-        accept?: string | null | undefined;
-        alt?: string | null | undefined;
-        autocomplete?: string | null | undefined;
-        checked?: boolean | null | undefined;
-        crossorigin?: string | null | undefined;
+        min?: string | number | null | undefined;
+        multiple?: boolean | null | undefined;
+        type?: import("svelte/elements").HTMLInputTypeAttribute | null | undefined;
+        value?: any;
         formaction?: string | null | undefined;
         formenctype?: string | null | undefined;
         formmethod?: string | null | undefined;
         formnovalidate?: boolean | null | undefined;
         formtarget?: string | null | undefined;
+        alt?: string | null | undefined;
+        src?: string | null | undefined;
+        crossorigin?: string | null | undefined;
+        accept?: string | null | undefined;
+        autocomplete?: string | null | undefined;
+        checked?: boolean | null | undefined;
         maxlength?: number | null | undefined;
-        min?: string | number | null | undefined;
         minlength?: number | null | undefined;
-        multiple?: boolean | null | undefined;
         readonly?: boolean | null | undefined;
         required?: boolean | null | undefined;
-        src?: string | null | undefined;
-        type?: import("svelte/elements").HTMLInputTypeAttribute | null | undefined;
-        value?: any;
         'bind:checked'?: boolean | null | undefined;
         'bind:value'?: any;
         'bind:group'?: any;

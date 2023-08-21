@@ -1,5 +1,4 @@
 <script>import { themeStore, themer, styler } from "../..";
-import { onMount } from "svelte";
 import { rangeDefaults as defaults } from "./module";
 export let { focused, full, rounded, transitioned, shadowed, size, theme, variant } = {
   ...defaults

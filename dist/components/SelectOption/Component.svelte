@@ -9,7 +9,7 @@ export let { disabled, size, theme, transitioned, value, variant, unstyled } = {
 const context = getContext("SelectContext");
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("SelectOption").variant("selectOption", variant, theme, true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("disableds", theme, disabled).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  inputClasses = th.create("SelectOption").variant("globals", "outlinedHover", theme, variant).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("disableds", theme, disabled).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

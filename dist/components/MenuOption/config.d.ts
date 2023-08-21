@@ -1,8 +1,7 @@
 export declare const menuOption: {
     filled: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -14,8 +13,7 @@ export declare const menuOption: {
     };
     outlined: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -27,8 +25,7 @@ export declare const menuOption: {
     };
     text: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -40,8 +37,7 @@ export declare const menuOption: {
     };
     ghost: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

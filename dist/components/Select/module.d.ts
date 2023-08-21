@@ -1,7 +1,6 @@
 import type { SelectStoreValue, SelectStore } from '../../stores/select';
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { select } from './config';
-export type SelectVariant = keyof typeof select;
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+export type SelectVariant = Exclude<ThemeVariant, 'text'>;
 export type SelectContext = SelectStore & {};
 export type SelectProps = {
     disabled?: boolean;

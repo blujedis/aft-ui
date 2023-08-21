@@ -1,4 +1,6 @@
-<script>import { avatarDefaults as defaults } from "./module";
+<script>import {
+  avatarDefaults as defaults
+} from "./module";
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";
@@ -6,7 +8,7 @@ import { forwardEventsBuilder } from "../../utils";
 import { Icon } from "../Icon";
 const context = getContext("AvatarStack");
 export let {
-  animation,
+  animate,
   notification,
   placeholder,
   rounded,
@@ -22,18 +24,19 @@ export let {
 let _placeholder = placeholder;
 if (placeholder === true)
   _placeholder = "mdi:account";
+let _notification = notification;
 if (notification === true)
-  notification = "top-right";
+  _notification = "top-right";
 const th = themer($themeStore);
 $:
-  avatarClasses = th.create("Avatar").variant("avatar", stacked ? "stacked" : variant, theme, true).option("avatarSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("relative", stacked === "down").append($$restProps.class, true).compile(true);
+  avatarClasses = th.create("Avatar").option("avatarSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]", stacked).append("relative", stacked === "down").append($$restProps.class, true).compile(true);
 $:
-  avatarNotificationClasses = notification && th.create("AvatarNotification").variant("avatarNotification", "filled", theme, true).option("avatarNotificationSizes", size, size).append("absolute right-0 top-0 block rounded-full ring-2", true).append(
-    animation === "ping" ? "animate-ping" : animation === "pulse" ? "animate-pulse" : "",
-    animation
+  avatarNotificationClasses = notification && th.create("AvatarNotification").variant("globals", variant, theme, true).option("avatarNotificationSizes", size, size).option("animate", animate, animate).remove("ring-inset", variant === "outlined").append(
+    "absolute -right-1 -top-1 block rounded-full ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]",
+    true
   ).compile(true) || "";
 $:
-  avatarPlaceholderClasses = _placeholder && th.create("AvatarPlaceholder").variant("avatarPlaceholder", "text", theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("avatarSizes", size, size).append('relative inline-block overflow-hidden"', true).compile(true) || "";
+  avatarPlaceholderClasses = _placeholder && th.create("AvatarPlaceholder").variant("globals", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("avatarSizes", size, size).option("common", "ringed", typeof variant === "undefined").append('relative inline-flex overflow-hidden"', true).compile(true) || "";
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
@@ -45,7 +48,7 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 		{/if}
 	</span>
 {:else if notification}
-	<span class="relative inline-block">
+	<span class="relative inline-flex max-w-fit">
 		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
 		<span class={avatarNotificationClasses} />
 	</span>

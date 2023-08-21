@@ -1,11 +1,12 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         horizontal?: boolean | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         type?: "footer" | "header" | "content" | undefined;
-        variant?: "filled" | "outlined" | "ghost" | "glass" | undefined;
+        variant?: import("./module").CardElementVariant | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
         class?: string | null | undefined;

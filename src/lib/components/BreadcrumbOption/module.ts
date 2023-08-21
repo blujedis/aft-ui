@@ -1,6 +1,7 @@
-import type { ThemeColor, ThemeFocused, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
+import type { globals } from '../configs';
 
 export type BreadcrumbOptionVariant = keyof typeof breadcrumbOption;
 
@@ -26,3 +27,10 @@ export const breadcrumbOptionDefaults: Partial<BreadcrumbOptionProps> = {
 	theme: 'default',
 	variant: 'text'
 };
+
+export const variantMap = {
+	text: 'textHover',
+	ghost: 'textHover',
+	glass: 'textHover',
+	filled: 'textHover',
+} as Record<Exclude<ThemeVariant, 'flushed' | 'outlined'>, keyof typeof globals>;

@@ -1,8 +1,7 @@
 export declare const tabs: {
     flushed: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -14,8 +13,7 @@ export declare const tabs: {
     };
     filled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -27,8 +25,7 @@ export declare const tabs: {
     };
     grouped: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -40,8 +37,7 @@ export declare const tabs: {
     };
     labeled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -53,8 +49,7 @@ export declare const tabs: {
     };
     glass: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

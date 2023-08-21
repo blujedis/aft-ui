@@ -2,6 +2,6 @@ export const menuDefaults = {
     autoclose: true,
     escapable: true,
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };

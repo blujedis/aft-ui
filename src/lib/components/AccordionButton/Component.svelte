@@ -1,24 +1,26 @@
 <script lang="ts">
 	import { themer, themeStore } from '../../theme';
-	import { Button } from '../Button';
 	import { Icon } from '../Icon';
 	import { getContext } from 'svelte';
-	import type { AccordionPanelContext } from '../AccordionPanel/module';
+	import type { AccordionOptionContext } from '../AccordionOption/module';
 	import type { AccordionContext } from '../Accordion/module';
-	import { ConditionalElement } from '../ConditionalElement';
-	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
-	import type { ElementProps, IconifyTuple } from '../../types';
+	// import { ConditionalElement } from '../ConditionalElement';
+	import {
+		type AccordianButtonProps,
+		variantMap,
+		accordionButtonDefaults as defaults
+	} from './module';
+	import type { ElementProps, IconifyTuple, ThemeVariantAppend } from '../../types';
 
 	type $$Props = AccordianButtonProps & ElementProps<'button'>;
 
 	const context = getContext('Accordion') as AccordionContext;
-	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
+	const optionContext = getContext('AccordionOption') as AccordionOptionContext;
 
 	export let {
 		caret,
 		disabled,
 		focused,
-		htag,
 		key,
 		roticon,
 		rounded,
@@ -29,7 +31,7 @@
 		variant
 	} = {
 		...defaults,
-		key: panelContext.key,
+		key: optionContext.key,
 		rounded: context.globals.rounded,
 		shadowed: context.globals.shadowed,
 		size: context.globals.size,
@@ -45,15 +47,23 @@
 
 	$: accordionButtonClasses = th
 		.create('Accordion')
-		.variant('accordionButton', variant, theme, true)
+		.variant('globals', 'textExpanded', theme, variant !== 'filled')
+		.variant('globals', 'filledActive', theme, variant === 'filled')
+		.variant('globals', 'itemExpanded', theme, variant === 'filled')
+		.variant('globals', 'borderExpanded', theme, variant === 'flushed')
 		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
+		.option('common', 'bordered', ['outlined', 'flushed'].includes(variant))
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
-		.option('roundeds', rounded, rounded && ['filled', 'glass'].includes(variant))
 		.option('shadows', shadowed, shadowed && variant !== 'flushed')
 		.option('disableds', theme, disabled)
-		.append('inline-flex items-center justify-between focus:outline-none  w-full', true)
+		.append('rounded-none border-0 border-b ', variant === 'flushed')
+		.append('aria-expanded:border-b', variant === 'outlined')
+		.append(
+			'inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium',
+			true
+		)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -65,22 +75,20 @@
 		.compile();
 </script>
 
-<ConditionalElement as={htag} condition={typeof htag === 'string'}>
-	<button
-		id={`${key}-accordion-heading`}
-		aria-controls={`${key}-accordion-option`}
-		{...$$restProps}
-		on:click={() => context.toggle(key)}
-		class={accordionButtonClasses}
-		aria-expanded={isSelected}
-	>
-		<div>
-			<slot />
-		</div>
-		{#if activeIcon}
-			<slot name="caret">
-				<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
-			</slot>
-		{/if}
-	</button>
-</ConditionalElement>
+<button
+	id={`${key}-accordion-heading`}
+	aria-controls={`${key}-accordion-option`}
+	{...$$restProps}
+	on:click={() => context.toggle(key)}
+	class={accordionButtonClasses}
+	aria-expanded={isSelected}
+>
+	<div>
+		<slot />
+	</div>
+	{#if activeIcon}
+		<slot name="caret">
+			<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
+		</slot>
+	{/if}
+</button>

@@ -17,7 +17,7 @@ export let {
   ...defaults
 };
 $:
-  labelClasses = themer($themeStore).create("Label").variant("label", variant, theme, true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("dropshadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  labelClasses = themer($themeStore).create("Label").variant("globals", variant, theme, true).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("dropshadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

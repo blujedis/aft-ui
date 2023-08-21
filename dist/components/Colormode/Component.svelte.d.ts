@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import { type ColorModeHook } from '../../hooks';
 import type { Unsubscriber } from 'svelte/store';
@@ -258,7 +259,7 @@ declare const __propDef: {
                 getRoot: () => any;
                 getLocalValue: () => boolean;
                 setLocalValue: (value: any) => void;
-                enable: (mode: "light" | "dark") => void;
+                enable: (mode: "dark" | "light") => void;
                 toggle: () => void;
                 reset: () => void;
             };

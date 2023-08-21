@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import type { SelectListItem } from '../SelectList';
 declare const __propDef: {
@@ -9,9 +10,9 @@ declare const __propDef: {
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
-        variant?: "flushed" | "filled" | "outlined" | "glass" | undefined;
+        variant?: "outlined" | "flushed" | "filled" | "glass" | "ghost" | undefined;
         unstyled?: boolean | undefined;
         caret?: string | import("@iconify/svelte").IconifyIcon | undefined;
         filterable?: boolean | undefined;
@@ -20,7 +21,7 @@ declare const __propDef: {
         removable?: boolean | undefined;
         roticon?: boolean | undefined;
         tags?: boolean | undefined;
-        badgeVariant?: "filled" | "outlined" | "glass" | undefined;
+        badgeVariant?: import("../Badge").BadgeVariant | undefined;
         onBeforeAdd?: (<T extends SelectListItem>(value: string, input: HTMLInputElement) => false | T | Promise<false | T | null | undefined> | null | undefined) | undefined;
         onBeforeRemove?: (<T_1 extends SelectListItem>(item: T_1, input: HTMLInputElement) => boolean | Promise<boolean>) | undefined;
         accept?: string | null | undefined;

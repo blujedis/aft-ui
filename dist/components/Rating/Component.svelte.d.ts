@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import { type RatingStoreValue } from './module';
 declare const __propDef: {

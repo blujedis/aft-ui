@@ -1,6 +1,5 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { input } from './config';
-export type InputVariant = keyof typeof input;
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+export type InputVariant = Exclude<ThemeVariant, 'text'>;
 export type InputProps = {
     disabled?: boolean;
     focused?: ThemeFocused;

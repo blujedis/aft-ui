@@ -1,7 +1,6 @@
 export declare const progressCircleTrack: {
     filled: {
         $base: string;
-        white: string;
         light: string;
         dark: string;
         primary: string;
@@ -17,8 +16,6 @@ export declare const progressCircleValue: {
     filled: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        light: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -33,8 +30,7 @@ export declare const progressCircleText: {
     filled: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

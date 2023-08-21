@@ -1,4 +1,4 @@
 export const cardDefaults = {
     size: 'md',
-    theme: 'light'
+    theme: 'default'
 };

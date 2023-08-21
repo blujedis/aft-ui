@@ -37,8 +37,7 @@
 	];
 
 	const themes = [
-		'white',
-		'light',
+		'default',
 		'dark',
 		'primary',
 		'secondary',

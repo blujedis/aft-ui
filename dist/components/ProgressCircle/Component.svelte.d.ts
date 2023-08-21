@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -12,7 +13,7 @@ declare const __propDef: {
         size?: number | import("../..").ThemeSize | undefined;
         text?: string | boolean | undefined;
         textunit?: string | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         tracksize?: number | import("../..").ThemeSize | undefined;
         value?: any;
         variant?: "filled" | undefined;
@@ -25,14 +26,20 @@ declare const __propDef: {
         name?: string | null | undefined;
         fill?: string | null | undefined;
         values?: string | null | undefined;
+        stroke?: string | null | undefined;
         x?: string | number | null | undefined;
         y?: string | number | null | undefined;
         class?: string | null | undefined;
         id?: string | null | undefined;
+        mode?: string | number | null | undefined;
+        color?: string | null | undefined;
+        rotate?: string | number | null | undefined;
+        width?: string | number | null | undefined;
+        height?: string | number | null | undefined;
+        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         lang?: string | null | undefined;
         tabindex?: number | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
-        color?: string | null | undefined;
         'aria-activedescendant'?: string | null | undefined;
         'aria-atomic'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-autocomplete'?: "none" | "both" | "list" | "inline" | null | undefined;
@@ -52,7 +59,6 @@ declare const __propDef: {
         'aria-flowto'?: string | null | undefined;
         'aria-grabbed'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-haspopup'?: "dialog" | "menu" | "grid" | import("svelte/elements").Booleanish | "listbox" | "tree" | null | undefined;
-        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-invalid'?: import("svelte/elements").Booleanish | "grammar" | "spelling" | null | undefined;
         'aria-keyshortcuts'?: string | null | undefined;
         'aria-label'?: string | null | undefined;
@@ -184,17 +190,13 @@ declare const __propDef: {
         'on:close'?: import("svelte/elements").EventHandler<Event, SVGSVGElement> | null | undefined;
         'on:fullscreenchange'?: import("svelte/elements").EventHandler<Event, SVGSVGElement> | null | undefined;
         'on:fullscreenerror'?: import("svelte/elements").EventHandler<Event, SVGSVGElement> | null | undefined;
-        mode?: string | number | null | undefined;
-        rotate?: string | number | null | undefined;
-        width?: string | number | null | undefined;
-        height?: string | number | null | undefined;
-        crossorigin?: "" | "anonymous" | "use-credentials" | null | undefined;
         min?: string | number | null | undefined;
         type?: string | null | undefined;
         href?: string | null | undefined;
         media?: string | null | undefined;
         target?: string | null | undefined;
         direction?: string | number | null | undefined;
+        crossorigin?: "" | "anonymous" | "use-credentials" | null | undefined;
         offset?: string | number | null | undefined;
         end?: string | number | null | undefined;
         speed?: string | number | null | undefined;
@@ -362,7 +364,6 @@ declare const __propDef: {
         'stop-opacity'?: string | number | null | undefined;
         'strikethrough-position'?: string | number | null | undefined;
         'strikethrough-thickness'?: string | number | null | undefined;
-        stroke?: string | null | undefined;
         'stroke-dasharray'?: string | number | null | undefined;
         'stroke-dashoffset'?: string | number | null | undefined;
         'stroke-linecap'?: "square" | "inherit" | "round" | "butt" | null | undefined;

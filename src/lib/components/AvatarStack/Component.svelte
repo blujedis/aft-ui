@@ -30,7 +30,7 @@
 	// Avatar with a z-index, should we do this?
 	onMount(() => {
 		if (direction !== 'down') return;
-		const nodes = [...stack.children as any];
+		const nodes = [...(stack.children as any)];
 		nodes.reverse().forEach((n, i) => {
 			const node = n as HTMLElement;
 			node.style.zIndex = i + '';

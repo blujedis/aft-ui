@@ -1,9 +1,8 @@
 import { mergeConfigs } from '../theme';
 export const disableds = {
     $base: 'aria-disabled:saturate-50 aria-disabled:brightness-95 aria-disabled:pointer-events-none',
-    white: 'aria-disabled:text-frame-500',
+    default: 'aria-disabled:text-frame-300',
     dark: 'aria-disabled:text-frame-700',
-    light: 'aria-disabled:text-frame-300',
     primary: 'aria-disabled:text-primary-300',
     secondary: 'aria-disabled:text-secondary-300',
     tertiary: 'aria-disabled:text-tertiary-300',
@@ -13,8 +12,8 @@ export const disableds = {
     info: 'aria-disabled:text-info-300'
 };
 const placeholdersDark = {
-    white: 'dark:placeholder:text-frame-500',
-    light: 'dark:placeholder:text-frame-500',
+    $base: '',
+    default: 'dark:placeholder:text-frame-500',
     dark: 'dark:placeholder:text-frame-400',
     primary: 'dark:placeholder:text-primary-700',
     secondary: 'dark:placeholder:text-secondary-700',
@@ -25,8 +24,8 @@ const placeholdersDark = {
     info: 'dark:placeholder:text-info-700'
 };
 const placeholdersDisabled = {
-    white: 'aria-disabled:placeholder:text-frame-500',
-    light: 'aria-disabled:placeholder:text-frame-200',
+    $base: '',
+    default: 'aria-disabled:placeholder:text-frame-200',
     dark: 'aria-disabled:placeholder:text-frame-500',
     primary: 'aria-disabled:placeholder:text-primary-300',
     secondary: 'aria-disabled:placeholder:text-secondary-300',
@@ -37,8 +36,7 @@ const placeholdersDisabled = {
     info: 'aria-disabled:placeholder:text-info-300'
 };
 export const placeholders = mergeConfigs(placeholdersDark, placeholdersDisabled, {
-    white: 'placeholder:text-frame-400',
-    light: 'placeholder:text-frame-400',
+    default: 'placeholder:text-frame-400',
     dark: 'placeholder:text-frame-400',
     primary: 'placeholder:text-primary-300',
     secondary: 'placeholder:text-secondary-300',
@@ -48,9 +46,9 @@ export const placeholders = mergeConfigs(placeholdersDark, placeholdersDisabled,
     success: 'placeholder:text-success-300',
     info: 'placeholder:text-info-300'
 });
+//////////////////////////////////////////////////
 export const bgAriaChecked = {
-    white: 'aria-checked:bg-frame-100',
-    light: 'aria-checked:bg-frame-200',
+    default: 'aria-checked:bg-frame-200',
     dark: 'aria-checked:bg-frame-700',
     primary: 'aria-checked:bg-primary-600',
     secondary: 'aria-checked:bg-secondary-600',
@@ -61,8 +59,7 @@ export const bgAriaChecked = {
     info: 'aria-checked:bg-info-600'
 };
 export const bgGroupAriaChecked = {
-    white: 'group-aria-checked:bg-frame-100',
-    light: 'group-aria-checked:bg-frame-200',
+    default: 'group-aria-checked:bg-frame-200',
     dark: 'group-aria-checked:bg-frame-700',
     primary: 'group-aria-checked:bg-primary-600',
     secondary: 'group-aria-checked:bg-secondary-600',
@@ -73,8 +70,7 @@ export const bgGroupAriaChecked = {
     info: 'group-aria-checked:bg-info-600'
 };
 export const bgAriaSelected = {
-    white: 'aria-selected:bg-frame-100',
-    light: 'aria-selected:bg-frame-200',
+    default: 'aria-selected:bg-frame-200',
     dark: 'aria-selected:bg-frame-600',
     primary: 'aria-selected:bg-primary-500',
     secondary: 'aria-selected:bg-secondary-500',
@@ -85,8 +81,7 @@ export const bgAriaSelected = {
     info: 'aria-selected:bg-info-500'
 };
 export const bgAriaExpanded = {
-    white: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-100',
-    light: 'aria-expanded:bg-frame-200 dark:aria-expanded:bg-frame-200',
+    default: 'aria-expanded:bg-frame-200 dark:aria-expanded:bg-frame-500',
     dark: 'aria-expanded:bg-frame-600 dark:aria-expanded:bg-frame-600',
     primary: 'aria-expanded:bg-primary-500 dark:aria-expanded:bg-primary-500',
     secondary: 'aria-expanded:bg-secondary-500 dark:aria-expanded:bg-secondary-500',
@@ -97,8 +92,7 @@ export const bgAriaExpanded = {
     info: 'aria-expanded:bg-info-500 dark:aria-expanded:bg-info-500'
 };
 export const bgAriaGlassExpanded = {
-    white: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
-    light: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
+    default: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/40',
     dark: 'aria-expanded:bg-frame-900/30 dark:aria-expanded:bg-frame-900/40',
     primary: 'aria-expanded:bg-primary-500/20 dark:aria-expanded:bg-primary-500/20',
     secondary: 'aria-expanded:bg-secondary-500/20 dark:aria-expanded:bg-secondary-500/20',
@@ -109,8 +103,7 @@ export const bgAriaGlassExpanded = {
     info: 'aria-expanded:bg-info-500/20 dark:aria-expanded:bg-info-500/20'
 };
 export const bgAriaGlassSelected = {
-    white: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
-    light: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
+    default: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
     dark: 'aria-selected:bg-frame-900/30 dark:aria-selected:bg-frame-900/40',
     primary: 'aria-selected:bg-primary-500/20 dark:aria-selected:bg-primary-500/20',
     secondary: 'aria-selected:bg-secondary-500/20 dark:aria-selected:bg-secondary-500/20',
@@ -121,9 +114,8 @@ export const bgAriaGlassSelected = {
     info: 'aria-selected:bg-info-500/20 dark:aria-selected:bg-info-500/20'
 };
 export const textAriaExpanded = {
-    white: 'aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
-    light: 'aria-expanded:text-[color:var(--text-dark-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
-    dark: 'aria-expanded:text-[color:var(--text-light-hover)] dark:aria-expanded:text-[color:var(--text-dark-hover)]',
+    default: 'aria-expanded:text-[color:var(--text-dark)] dark:aria-expanded:text-[color:var(--text-light)]',
+    dark: 'aria-expanded:text-[color:var(--text-light)] dark:aria-expanded:text-[color:var(--text-light)]',
     primary: 'aria-expanded:text-primary-700',
     secondary: 'aria-expanded:text-secondary-700',
     tertiary: 'aria-expanded:text-tertiary-700',
@@ -133,8 +125,7 @@ export const textAriaExpanded = {
     info: 'aria-expanded:text-info-700'
 };
 export const textAriaSelected = {
-    white: 'aria-selected:text-[color:var(--text-dark-hover)]',
-    light: 'aria-selected:text-[color:var(--text-dark-hover)]',
+    default: 'aria-selected:text-[color:var(--text-dark-hover)]',
     dark: 'aria-selected:text-[color:var(--text-light-hover)]',
     primary: 'aria-selected:text-primary-700 dark:aria-selected:text-primary-500',
     secondary: 'aria-selected:text-secondary-700 dark:aria-selected:text-secondary-500',
@@ -144,21 +135,8 @@ export const textAriaSelected = {
     success: 'aria-selected:text-success-700 dark:aria-selected:text-success-500',
     info: 'aria-selected:text-info-700 dark:aria-selected:text-info-500'
 };
-export const textAriaSelectedSoft = {
-    white: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-400',
-    light: 'aria-selected:text-frame-300  dark:aria-selected:text-frame-500',
-    dark: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-600',
-    primary: 'aria-selected:text-primary-300 dark:aria-selected:text-primary-700',
-    secondary: 'aria-selected:text-secondary-300 dark:aria-selected:text-secondary-700',
-    tertiary: 'aria-selected:text-tertiary-300 dark:aria-selected:text-tertiary-700',
-    danger: 'aria-selected:text-danger-300 dark:aria-selected:text-danger-700',
-    warning: 'aria-selected:text-warning-300 dark:aria-selected:text-warning-700',
-    success: 'aria-selected:text-success-300 dark:aria-selected:text-success-700',
-    info: 'aria-selected:text-info-300 dark:aria-selected:text-info-700'
-};
 export const textAriaCurrent = {
-    white: 'aria-current:text-[color:var(--text-dark-hover)]',
-    light: 'aria-current:text-[color:var(--text-dark-hover)]',
+    default: 'aria-current:text-[color:var(--text-dark-hover)]',
     dark: 'aria-current:text-[color:var(--text-light-hover)]',
     primary: 'aria-current:text-primary-700 dark:aria-current:text-primary-500',
     secondary: 'aria-current:text-secondary-700 dark:aria-current:text-secondary-500',
@@ -168,10 +146,20 @@ export const textAriaCurrent = {
     success: 'aria-current:text-success-700 dark:aria-current:text-success-500',
     info: 'aria-current:text-info-700  dark:aria-current:text-info-500'
 };
+export const textAriaSelectedSoft = {
+    default: 'aria-selected:text-frame-300  dark:aria-selected:text-frame-500',
+    dark: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-600',
+    primary: 'aria-selected:text-primary-300 dark:aria-selected:text-primary-700',
+    secondary: 'aria-selected:text-secondary-300 dark:aria-selected:text-secondary-700',
+    tertiary: 'aria-selected:text-tertiary-300 dark:aria-selected:text-tertiary-700',
+    danger: 'aria-selected:text-danger-300 dark:aria-selected:text-danger-700',
+    warning: 'aria-selected:text-warning-300 dark:aria-selected:text-warning-700',
+    success: 'aria-selected:text-success-300 dark:aria-selected:text-success-700',
+    info: 'aria-selected:text-info-300 dark:aria-selected:text-info-700'
+};
 export const borderAriaSelected = {
     $base: 'border',
-    white: 'aria-selected:border-frame-50  dark:aria-selected:border-frame-50',
-    light: 'aria-selected:border-frame-300 dark:aria-selected:border-frame-300',
+    default: 'aria-selected:border-frame-300 dark:aria-selected:border-frame-300',
     dark: 'aria-selected:border-frame-700 dark:aria-selected:border-frame-600',
     primary: 'aria-selected:border-primary-600 dark:aria-selected:border-primary-600',
     secondary: 'aria-selected:border-secondary-600  dark:aria-selected:border-secondary-600',
@@ -183,8 +171,7 @@ export const borderAriaSelected = {
 };
 export const borderAriaExpanded = {
     $base: 'border',
-    white: 'aria-expanded:border-frame-50',
-    light: 'aria-expanded:border-frame-300',
+    default: 'aria-expanded:border-frame-300',
     dark: 'aria-expanded:border-frame-700',
     primary: 'aria-expanded:border-primary-600',
     secondary: 'aria-expanded:border-secondary-600',

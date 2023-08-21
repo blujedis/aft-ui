@@ -1,3 +1,4 @@
 import { createStore } from './store';
-export declare const themeStore: import("./store").ThemeStore<any>;
+import type { ThemeConfig } from '../types';
+export declare const themeStore: import("./store").ThemeStore<ThemeConfig>;
 export { createStore };

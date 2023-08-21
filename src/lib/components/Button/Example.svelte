@@ -3,6 +3,7 @@
 	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { Flushed } from '../Flushed';
 
 	const title = 'Buttons';
 	const description = 'Themed Buttons with variants.';
@@ -26,14 +27,11 @@
 			<label for="filled">
 				<Button {...props} theme={color}>button</Button>
 			</label>
-			<label for="glass">
-				<Button {...props} variant="glass" theme={color}>button</Button>
-			</label>
 			<label for="outline">
 				<Button {...props} variant="outlined" theme={color}>button</Button>
 			</label>
 			<label for="link">
-				<Button {...props} variant="text" theme={color}>button</Button>
+					<Button {...props} variant="text" theme={color}>button</Button>
 			</label>
 			<label for="ghost">
 				<Button {...props} variant="ghost" theme={color}>button</Button>

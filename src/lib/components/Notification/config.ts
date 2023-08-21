@@ -1,6 +1,8 @@
-import { text, border } from '$lib/constants';
+import { text } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
 import { placeholder } from '../../constants/placeholder';
+
+const border = { ...placeholder }
 
 export const notification = {
 	filled: mergeConfigs(border, {

@@ -2,7 +2,7 @@ export const switchDefaults = {
     focused: true,
     size: 'md',
     srtext: 'Use Switch',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled',
     position: 'right'
 };

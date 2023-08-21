@@ -6,7 +6,6 @@ import type {
 	ThemeTransitioned
 } from '$lib/types';
 
-
 export type LabelVariant = 'text';
 
 export type LabelProps = {

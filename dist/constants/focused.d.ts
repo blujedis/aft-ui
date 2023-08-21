@@ -1,7 +1,6 @@
 export declare const focusedRing: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -13,8 +12,7 @@ export declare const focusedRing: {
 };
 export declare const focusedRingVisible: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -26,8 +24,7 @@ export declare const focusedRingVisible: {
 };
 export declare const focusedRingWithin: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -39,8 +36,7 @@ export declare const focusedRingWithin: {
 };
 export declare const focusedRingPeer: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -52,8 +48,7 @@ export declare const focusedRingPeer: {
 };
 export declare const focusedRingGroup: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -65,8 +60,7 @@ export declare const focusedRingGroup: {
 };
 export declare const focusedBorder: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -78,8 +72,7 @@ export declare const focusedBorder: {
 };
 export declare const focusedBorderVisible: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -91,8 +84,7 @@ export declare const focusedBorderVisible: {
 };
 export declare const focusedBorderWithin: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -104,8 +96,7 @@ export declare const focusedBorderWithin: {
 };
 export declare const focusedBorderPeer: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -117,8 +108,7 @@ export declare const focusedBorderPeer: {
 };
 export declare const focusedBorderGroup: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -130,8 +120,7 @@ export declare const focusedBorderGroup: {
 };
 export declare const focusedBorderGroupWithin: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -143,8 +132,7 @@ export declare const focusedBorderGroupWithin: {
 };
 export declare const focusedOutline: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -156,8 +144,7 @@ export declare const focusedOutline: {
 };
 export declare const focusedOutlineVisible: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -169,8 +156,7 @@ export declare const focusedOutlineVisible: {
 };
 export declare const focusedOutlineWithin: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -182,8 +168,7 @@ export declare const focusedOutlineWithin: {
 };
 export declare const focusedOutlinePeer: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -195,8 +180,7 @@ export declare const focusedOutlinePeer: {
 };
 export declare const focusedOutlineGroup: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;

@@ -1,6 +1,6 @@
 export const popoverDefaults = {
     shadowed: 'md',
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };

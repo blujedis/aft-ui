@@ -8,7 +8,7 @@ import type {
 } from '$lib/types';
 // import type { kbd } from './config';
 
-export type KbdVariant = Exclude<ThemeVariant, 'flushed' | 'text'> // keyof typeof kbd;
+export type KbdVariant = Exclude<ThemeVariant, 'flushed' | 'text'>; // keyof typeof kbd;
 
 export type KbdProps = {
 	full?: boolean;

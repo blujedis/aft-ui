@@ -1,6 +1,5 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { badge } from './config';
-export type BadgeVariant = keyof typeof badge;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+export type BadgeVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
 export type BadgeProps = {
     full?: boolean;
     removable?: boolean;

@@ -1,8 +1,5 @@
 import { mergeConfigs } from '../theme';
 
-export * from './focused';
-export * from './states';
-
 export const borderSizes = {
 	unstyled: '',
 	transparent: 'border-transparent',
@@ -237,12 +234,16 @@ export const gridgaps = {
 	xl2: 'gap-24'
 };
 
-// ring-1 ring-inset ring-black ring-opacity-10 dark:ring-opacity-40
-// border border-frame-200 dark:border-black dark:border-opacity-40
-// divide-y divide-frame-200 dark:divide-black dark:divide-opacity-40
+export const animate = {
+	unstyled: '',
+	none: 'animate-none',
+	bounce: 'motion-safe:animate-bounce',
+	ping: 'motion-safe:animate-ping',
+	pulse: 'motion-safe:animate-pulse',
+	spin: 'motion-safe:animate-spin'
+};
 
 export const divideds = {
-	
 	default: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
 	dark: 'divide-frame-500',
 	primary: 'divide-primary-100 dark:divide-primary-600',
@@ -283,25 +284,13 @@ export const fill = {
 export const stroke = {
 	$base: '',
 	dark: 'stroke-frame-600',
-	primary: 'stroke-primary-500', secondary: 'stroke-secondary-500',
+	primary: 'stroke-primary-500',
+	secondary: 'stroke-secondary-500',
 	tertiary: 'stroke-tertiary-500',
 	danger: 'stroke-danger-500',
 	warning: 'stroke-warning-500',
 	success: 'stroke-success-500',
 	info: 'stroke-info-500'
-};
-
-export const textSoft = {
-	$base: '',
-	default: 'text-frame-300',
-	dark: 'text-frame-300',
-	primary: 'text-primary-300',
-	secondary: 'text-secondary-300',
-	tertiary: 'text-tertiary-300',
-	danger: 'text-danger-300',
-	warning: 'text-warning-300',
-	success: 'text-success-300',
-	info: 'text-info-300'
 };
 
 

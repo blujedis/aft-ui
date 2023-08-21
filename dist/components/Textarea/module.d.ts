@@ -1,6 +1,5 @@
-import type { ThemeColor, ThemeFocused, ThemeResize, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { textarea } from './config';
-export type TextareaVariant = keyof typeof textarea;
+import type { ThemeColor, ThemeFocused, ThemeResize, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+export type TextareaVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
 export type TextareaProps = {
     disabled?: boolean;
     focused?: ThemeFocused;

@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import { type TabsContext } from './module';
 declare const __propDef: {
@@ -10,7 +11,7 @@ declare const __propDef: {
         selected: import("../../stores/select").SelectStoreValue;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
         variant?: "flushed" | "filled" | "grouped" | "labeled" | undefined;
         navWrapperClasses?: string | undefined;
@@ -256,7 +257,7 @@ export default class Component extends SvelteComponent<ComponentProps, Component
             full: boolean;
             rounded: import("../../types").ThemeRounded;
             size: import("../../types").ThemeSize;
-            theme: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white";
+            theme: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info";
             transitioned: boolean;
             variant: "flushed" | "filled" | "grouped" | "labeled";
         };

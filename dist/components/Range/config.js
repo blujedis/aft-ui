@@ -1,6 +1,5 @@
 export const rangeTrackBackgroundBase = {
-    white: '',
-    light: 'frame-200',
+    default: 'frame-200',
     dark: '',
     primary: 'frame-200',
     secondary: 'frame-200',
@@ -11,8 +10,7 @@ export const rangeTrackBackgroundBase = {
     info: 'frame-200'
 };
 export const rangeTrackAccentBase = {
-    white: '',
-    light: 'frame-400',
+    default: 'frame-400',
     dark: '',
     primary: 'primary-500',
     secondary: 'secondary-500',
@@ -23,8 +21,7 @@ export const rangeTrackAccentBase = {
     info: 'info-500'
 };
 export const rangeThumbBorderBase = {
-    white: '',
-    light: 'frame-400',
+    default: 'frame-400',
     dark: '',
     primary: 'primary-500',
     secondary: 'secondary-500',
@@ -35,8 +32,7 @@ export const rangeThumbBorderBase = {
     info: 'info-500'
 };
 export const rangeThumbBackgroundBase = {
-    white: '',
-    light: 'white',
+    default: 'white',
     dark: 'white',
     primary: 'white',
     secondary: 'white',

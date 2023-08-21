@@ -1,8 +1,8 @@
 export declare const buttonGroupItem: {
     filled: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -11,11 +11,9 @@ export declare const buttonGroupItem: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
     };
     outlined: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -26,14 +24,13 @@ export declare const buttonGroupItem: {
         info: string;
     } & {
         $base: string;
-        white: string;
         light: string;
     } & import("../../theme").StringMap;
     text: {
         $base: string;
-        white: string;
         light: string;
         dark: string;
+        default: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -43,8 +40,7 @@ export declare const buttonGroupItem: {
         info: string;
     };
     ghost: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -55,13 +51,11 @@ export declare const buttonGroupItem: {
         info: string;
     } & {
         $base: string;
-        white: string;
         light: string;
     } & import("../../theme").StringMap;
     glass: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

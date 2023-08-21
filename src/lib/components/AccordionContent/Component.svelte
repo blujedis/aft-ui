@@ -1,0 +1,45 @@
+<script lang="ts">
+	import { transitioner } from '../Disclosure';
+	import type { AccordionOptionContext } from '../AccordionOption';
+	import type { AccordionContext } from '../Accordion/module';
+	import { getContext } from 'svelte';
+	import { type AccordionContentProps, accordionContentDefaults as defaults } from './module';
+	import { themer, themeStore } from '../../theme';
+	import type { ElementProps, HTMLTag } from '../../types';
+
+	type Tag = $$Generic<HTMLTag>;
+	type $$Props = AccordionContentProps<Tag> & ElementProps<Tag>;
+
+	const context = getContext('Accordion') as AccordionContext;
+	const optionContext = getContext('AccordionOption') as AccordionOptionContext;
+
+	export let { as, key, size, theme, transition, variant } = {
+		...defaults,
+		key: optionContext?.key,
+		size: context?.globals.size,
+		theme: context?.globals.theme,
+		variant: context?.globals.variant
+	} as Required<AccordionContentProps<Tag>>;
+
+	const th = themer($themeStore);
+
+	$: accordionContentClasses = th
+		.create('AccordionContent')
+		.variant('globals', 'filledActive', theme, variant === 'filled')
+		.option('fieldFontSizes', size, size)
+		.option('fieldPadding', size, size)
+		.append('mb-2', true)
+		.append($$restProps.class, true)
+		.compile(true);
+</script>
+
+{#if $context.selected.includes(key)}
+	<svelte:element
+		this={as}
+		{...$$restProps}
+		class={accordionContentClasses}
+		transition:transitioner={transition}
+	>
+		<slot />
+	</svelte:element>
+{/if}

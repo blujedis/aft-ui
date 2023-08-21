@@ -7,7 +7,7 @@
 	import { colors } from '$lib/constants';
 	import { themer } from '$lib/theme';
 	import { themeStore } from '$lib/theme';
-	import { variantFilled, variantOutlined } from '$lib/constants/base';
+	import { variantFilled, variantOutlined } from '$lib/constants';
 	import classNames from 'classnames';
 
 	const title = 'Downloads';

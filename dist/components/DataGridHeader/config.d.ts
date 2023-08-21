@@ -2,8 +2,7 @@ export declare const gridHeader: {
     filled: {
         [x: string]: string | string[];
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -15,8 +14,7 @@ export declare const gridHeader: {
     };
     outlined: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -28,8 +26,8 @@ export declare const gridHeader: {
     };
     glass: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -38,12 +36,11 @@ export declare const gridHeader: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
     };
     ghost: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -52,6 +49,5 @@ export declare const gridHeader: {
         warning: string;
         success: string;
         info: string;
-        $base: string;
     };
 };

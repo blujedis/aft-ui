@@ -1,8 +1,7 @@
 export declare const gridRow: {
     filled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -14,8 +13,7 @@ export declare const gridRow: {
     };
     outlined: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -27,8 +25,7 @@ export declare const gridRow: {
     };
     glass: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -40,8 +37,7 @@ export declare const gridRow: {
     };
     ghost: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

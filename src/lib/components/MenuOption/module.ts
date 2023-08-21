@@ -1,7 +1,6 @@
-import type { ThemeColor, ThemeSize } from '$lib/types';
-import type { menuOption } from './config';
+import type { ThemeColor, ThemeSize, ThemeVariant } from '$lib/types';
 
-export type MenuOptionVariant = keyof typeof menuOption;
+export type MenuOptionVariant = Exclude<ThemeVariant, 'text'>; //  keyof typeof menuOption;
 
 export type MenuOptionProps<Tag extends 'a' | 'button'> = {
 	active?: boolean;

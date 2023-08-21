@@ -6,7 +6,7 @@ export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyl
   ...defaults
 };
 $:
-  kbdClasses = themer($themeStore).create("Kbd").variant("kbd", variant, theme, true).option("common", "transition", transitioned).option("badgePadding", size, size).option("badgeFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("inline-flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  kbdClasses = themer($themeStore).create("Kbd").variant("globals", variant, theme, true).option("common", "transition", transitioned).option("badgePadding", size, size).option("badgeFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("inline-flex items-center justify-center", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

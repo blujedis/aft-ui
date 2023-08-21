@@ -1,6 +1,5 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { label } from './config';
-export type LabelVariant = keyof typeof label;
+export type LabelVariant = 'text';
 export type LabelProps = {
     full?: boolean;
     rounded?: ThemeRounded;

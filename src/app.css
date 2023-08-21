@@ -4,11 +4,11 @@
 
 :root {
 	--bg-light: #ffffff;
-	--bg-dark: theme('colors.frame.800');
-	--text-dark: theme('colors.frame.700');
-	--text-light: theme('colors.frame.100');
-	--text-dark-hover: theme('colors.frame.900');
-	--text-light-hover: theme('colors.frame.50');
+	--bg-dark: theme('colors.gray.800');
+	--text-dark: theme('colors.gray.700');
+	--text-light: theme('colors.gray.100');
+	--text-dark-hover: theme('colors.gray.900');
+	--text-light-hover: theme('colors.gray.300');
 }
 
 html,
@@ -21,7 +21,7 @@ body {
 }
 
 html.dark,
-html.dark>body {
+html.dark > body {
 	background-color: var(--bg-dark);
 	color: var(--text-light);
 }

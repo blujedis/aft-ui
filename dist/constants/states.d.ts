@@ -1,8 +1,7 @@
 export declare const disableds: {
     $base: string;
-    white: string;
+    default: string;
     dark: string;
-    light: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -12,8 +11,8 @@ export declare const disableds: {
     info: string;
 };
 export declare const placeholders: {
-    white: string;
-    light: string;
+    $base: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -23,8 +22,8 @@ export declare const placeholders: {
     success: string;
     info: string;
 } & {
-    white: string;
-    light: string;
+    $base: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -34,8 +33,7 @@ export declare const placeholders: {
     success: string;
     info: string;
 } & {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -46,8 +44,7 @@ export declare const placeholders: {
     info: string;
 } & import("../theme").StringMap;
 export declare const bgAriaChecked: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -58,8 +55,7 @@ export declare const bgAriaChecked: {
     info: string;
 };
 export declare const bgGroupAriaChecked: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -70,8 +66,7 @@ export declare const bgGroupAriaChecked: {
     info: string;
 };
 export declare const bgAriaSelected: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -82,8 +77,7 @@ export declare const bgAriaSelected: {
     info: string;
 };
 export declare const bgAriaExpanded: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -94,8 +88,7 @@ export declare const bgAriaExpanded: {
     info: string;
 };
 export declare const bgAriaGlassExpanded: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -106,8 +99,7 @@ export declare const bgAriaGlassExpanded: {
     info: string;
 };
 export declare const bgAriaGlassSelected: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -118,8 +110,7 @@ export declare const bgAriaGlassSelected: {
     info: string;
 };
 export declare const textAriaExpanded: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -130,20 +121,7 @@ export declare const textAriaExpanded: {
     info: string;
 };
 export declare const textAriaSelected: {
-    white: string;
-    light: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const textAriaSelectedSoft: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -154,8 +132,18 @@ export declare const textAriaSelectedSoft: {
     info: string;
 };
 export declare const textAriaCurrent: {
-    white: string;
-    light: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const textAriaSelectedSoft: {
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -167,8 +155,7 @@ export declare const textAriaCurrent: {
 };
 export declare const borderAriaSelected: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -180,8 +167,7 @@ export declare const borderAriaSelected: {
 };
 export declare const borderAriaExpanded: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;

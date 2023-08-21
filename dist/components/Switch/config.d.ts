@@ -1,8 +1,7 @@
 export declare const switchBackdrop: {
     filled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -16,8 +15,7 @@ export declare const switchBackdrop: {
 export declare const switchFill: {
     filled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -31,8 +29,7 @@ export declare const switchFill: {
 export declare const switchHandle: {
     filled: {
         $base: string;
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

@@ -1,11 +1,12 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         store?: import("../..").DisclosureStore | undefined;
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
-        variant?: "text" | "filled" | "outlined" | "ghost" | "glass" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
+        variant?: import("../..").ButtonVariant | undefined;
         visible?: boolean | undefined;
         full?: boolean | undefined;
         rounded?: import("../..").ThemeRounded | undefined;

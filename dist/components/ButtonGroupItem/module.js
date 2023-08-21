@@ -1,4 +1,4 @@
 export const buttonGroupItemDefaults = {
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };

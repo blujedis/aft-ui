@@ -1,6 +1,6 @@
 export const inputDefaults = {
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     transitioned: true,
     variant: 'outlined'
 };

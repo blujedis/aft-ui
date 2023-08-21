@@ -2,7 +2,6 @@
 // as it requires style "color: gray" as an example.
 const baseVariant = {
     $base: 'bg-frame-100 [&::-webkit-progress-bar]:bg-frame-200/50 dark:bg-frame-600 dark:[&::-webkit-progress-bar]:bg-frame-600',
-    white: 'bg-white [&::-webkit-progress-bar]:bg-white [&::-webkit-progress-value]:bg-frame-200 [&::-moz-progress-bar]:bg-frame-200',
     light: '[&::-webkit-progress-value]:bg-frame-300 [&::-moz-progress-bar]:bg-frame-300',
     dark: '[&::-webkit-progress-value]:bg-frame-600 [&::-moz-progress-bar]:bg-frame-600 dark[&::-webkit-progress-value]:bg-frame-700 dark[&::-moz-progress-bar]:bg-frame-700',
     primary: '[&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500',

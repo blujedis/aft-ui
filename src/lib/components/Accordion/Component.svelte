@@ -41,13 +41,14 @@
 
 	$: accordionClasses = th
 		.create('Accordion')
-		.variant('accordion', variant, theme, true)
-		.option(
-			'roundeds',
-			rounded === 'full' && variant !== 'filled' ? 'xl2' : rounded,
-			rounded && variant !== 'flushed'
-		)
+		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded && variant !== 'flushed')
 		.option('shadows', shadowed, shadowed && variant !== 'filled')
+		.option('common', 'bordered', variant === 'outlined')
+		.option('common', 'divided', variant !== 'flushed')
+		.append('divide-y border', variant === 'outlined')
+		.append('divide-y', variant === 'filled')
+		.append('rounded-none', variant === 'flushed')
+		.append('overflow-clip', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

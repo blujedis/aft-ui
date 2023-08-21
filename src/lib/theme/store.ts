@@ -18,8 +18,9 @@ let _themeStore: ThemeStore<any>;
  * @param baseTheme the base them so we can ensure all properties.
  */
 export function createStoreInternal<T extends ThemeConfig>(
-	userTheme: DeepPartial<T>, defaultTheme = {} as T): ThemeStore<T> {
-
+	userTheme: DeepPartial<T>,
+	defaultTheme = {} as T
+): ThemeStore<T> {
 	if (_themeStore) return _themeStore as ThemeStore<T>;
 
 	const normalized = defaults(userTheme, defaultTheme as any) as Required<T>;

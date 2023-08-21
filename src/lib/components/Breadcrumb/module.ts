@@ -3,9 +3,10 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
+	ThemeTransitioned,
+	ThemeVariant
 } from '$lib/types';
-import type { breadcrumbNav } from './config';
+
 
 export type BreadcrumbContext = {
 	globals: {
@@ -18,7 +19,7 @@ export type BreadcrumbContext = {
 	};
 };
 
-export type BreadcrumbVariant = keyof typeof breadcrumbNav;
+export type BreadcrumbVariant = Exclude<ThemeVariant, 'flushed' | 'outlined'>;
 
 export type BreadcrumbProps = {
 	flush?: boolean;

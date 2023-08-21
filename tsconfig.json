@@ -11,16 +11,10 @@
 		"strict": true,
 		"downlevelIteration": true,
 		"target": "esnext",
-		"lib": [
-			"es2019"
-		],
+		"lib": ["es2019"],
 		"paths": {
-			"$lib": [
-				"./src/lib"
-			],
-			"$lib/*": [
-				"./src/lib/*"
-			]
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"]
 		}
 	},
 	"ts-node": {

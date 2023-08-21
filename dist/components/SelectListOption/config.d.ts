@@ -1,8 +1,7 @@
 export declare const selectListOption: {
     filled: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -15,8 +14,7 @@ export declare const selectListOption: {
     };
     outlined: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -29,8 +27,7 @@ export declare const selectListOption: {
     };
     text: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -43,8 +40,7 @@ export declare const selectListOption: {
     };
     ghost: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -57,8 +53,7 @@ export declare const selectListOption: {
     };
     flushed: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

@@ -1,6 +1,5 @@
 export declare const rangeTrackBackgroundBase: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -11,8 +10,7 @@ export declare const rangeTrackBackgroundBase: {
     info: string;
 };
 export declare const rangeTrackAccentBase: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -23,8 +21,7 @@ export declare const rangeTrackAccentBase: {
     info: string;
 };
 export declare const rangeThumbBorderBase: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -35,8 +32,7 @@ export declare const rangeThumbBorderBase: {
     info: string;
 };
 export declare const rangeThumbBackgroundBase: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -48,8 +44,7 @@ export declare const rangeThumbBackgroundBase: {
 };
 export declare const rangeTrackBackground: {
     filled: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -62,8 +57,7 @@ export declare const rangeTrackBackground: {
 };
 export declare const rangeTrackAccent: {
     filled: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -76,8 +70,7 @@ export declare const rangeTrackAccent: {
 };
 export declare const rangeThumbBorder: {
     filled: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -90,8 +83,7 @@ export declare const rangeThumbBorder: {
 };
 export declare const rangeThumbBackground: {
     filled: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;

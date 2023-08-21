@@ -19,9 +19,9 @@ export declare const menuButtonDefaults: {
     rounded?: import("../..").ThemeRounded | undefined;
     shadowed?: import("../..").ThemeShadowed | undefined;
     size?: import("../..").ThemeSize | undefined;
-    theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+    theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
     transitioned?: boolean | undefined;
-    variant?: "text" | "filled" | "outlined" | "ghost" | "glass" | undefined;
+    variant?: import("../Button").ButtonVariant | undefined;
     underlined?: boolean | "hover" | undefined;
     unstyled?: boolean | undefined;
 };

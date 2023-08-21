@@ -244,9 +244,16 @@ export declare const gridgaps: {
     xl: string;
     xl2: string;
 };
+export declare const animate: {
+    unstyled: string;
+    none: string;
+    bounce: string;
+    ping: string;
+    pulse: string;
+    spin: string;
+};
 export declare const divideds: {
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -257,8 +264,43 @@ export declare const divideds: {
     info: string;
 };
 export declare const stripes: {
-    white: string;
-    light: string;
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const fill: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const stroke: {
+    $base: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const textSoft: {
+    $base: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;

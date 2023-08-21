@@ -1,5 +1,5 @@
 import { placeholder } from '../../constants/placeholder';
-import { bgGroupAriaChecked } from '../options';
+import { } from '../options';
 
 export const switchBackdrop = {
 	filled: {
@@ -7,9 +7,10 @@ export const switchBackdrop = {
 	}
 };
 
+// bgGroupAriaChecked 
 export const switchFill = {
 	filled: {
-		...bgGroupAriaChecked,
+
 		$base: 'bg-frame-100'
 	}
 };

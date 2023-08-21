@@ -7,7 +7,7 @@ import type {
 	ThemeVariant
 } from '$lib/types';
 
-export type BadgeVariant = Exclude<ThemeVariant, 'text' | 'flushed'>
+export type BadgeVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
 
 export type BadgeProps = {
 	full?: boolean;

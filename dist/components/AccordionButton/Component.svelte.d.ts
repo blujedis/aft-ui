@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -5,19 +6,19 @@ declare const __propDef: {
         unstyled?: boolean | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         focused?: import("../../types").ThemeFocused | undefined;
         size?: import("../../types").ThemeSize | undefined;
         transitioned?: boolean | undefined;
-        disabled?: boolean | undefined;
         as?: "button" | undefined;
+        disabled?: boolean | undefined;
         href?: string | null | undefined;
         underlined?: boolean | "hover" | undefined;
         caret?: import("../../types").Iconify | undefined;
         htag?: keyof import("svelte/elements").SvelteHTMLElements | undefined;
         roticon?: string | boolean | undefined;
         key?: import("../..").SelectStoreValue | undefined;
-        variant?: "flushed" | "filled" | "outlined" | "glass" | undefined;
+        variant?: "outlined" | "flushed" | "filled" | "glass" | undefined;
         form?: string | null | undefined;
         formaction?: string | null | undefined;
         formenctype?: string | null | undefined;

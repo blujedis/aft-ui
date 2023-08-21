@@ -132,66 +132,7 @@
 						</MenuPanel>
 					</Menu>
 				</label>
-
-				<label for={color}>
-					<Menu {...props} variant="glass" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
 			</div>
 		{/each}
-
-		<!-- <div class="grid grid-cols-8 gap-2 mt-8">
-			{#each colors as color}
-				<label for={color}>
-					<div class="text-sm">Filled:</div>
-					<Menu {...props} variant="outlined" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
-			{/each}
-		</div>
-
-		<div class="grid grid-cols-8 gap-2 mt-8">
-			{#each colors as color}
-				<label for={color}>
-					<div class="text-sm">Filled:</div>
-					<Menu {...props} variant="text" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
-			{/each}
-		</div> -->
-
-		<!-- <div class="grid grid-cols-8 gap-2 mt-8">
-			{#each colors as color}
-				<label for={color}>
-					<div class="text-sm">Filled:</div>
-					<Menu {...props} variant="ghost" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
-			{/each}
-		</div> -->
 	{/key}
 </ExamplePage>

@@ -2,7 +2,6 @@ import { fill, stroke } from '../../constants';
 import { mergeConfigs } from '../../theme';
 const baseTrackVariant = {
     $base: 'stroke-frame-100 dark:stroke-frame-600',
-    white: '',
     light: '',
     dark: '',
     primary: '',

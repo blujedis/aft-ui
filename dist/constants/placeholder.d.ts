@@ -1,7 +1,6 @@
 export declare const placeholder: {
     $base: string;
-    white: string;
-    light: string;
+    default: string;
     dark: string;
     primary: string;
     secondary: string;

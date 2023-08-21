@@ -1,8 +1,8 @@
 import { SvelteComponent } from "svelte";
 import { type AccordianOptionProps } from './module';
-import type { HTMLTag } from '../../types';
+import type { ElementProps, HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {
-    props(): AccordianOptionProps<Tag> & import("../..").ElementProps<Tag>;
+    props(): AccordianOptionProps<Tag> & ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

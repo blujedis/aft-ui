@@ -2,9 +2,14 @@ import type { SelectStoreValue } from '$lib/stores/select';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure/module';
 
+export type AccordionOptionContext = {
+	key: SelectStoreValue; // must be unique name for all accordions on page.
+};
+
 export type AccordianOptionProps<Tag = any> = {
 	as?: Tag;
-	key?: SelectStoreValue;
+	unflip?: boolean;
+	key: SelectStoreValue;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;

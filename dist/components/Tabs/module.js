@@ -2,6 +2,6 @@ export const tabsDefaults = {
     condensed: true,
     focused: true,
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'flushed'
 };

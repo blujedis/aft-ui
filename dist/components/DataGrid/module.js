@@ -5,7 +5,7 @@ export const gridDefaults = {
     divided: true,
     size: 'md',
     sticky: true,
-    theme: 'light',
+    theme: 'default',
     variant: 'outlined',
     filter: searchArray,
     sorter: sortArray,

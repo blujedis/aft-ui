@@ -1,8 +1,20 @@
+export declare const filledTextHover: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
 export declare const breadcrumbOption: {
     text: {
         [x: string]: string | string[];
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -13,19 +25,7 @@ export declare const breadcrumbOption: {
         info: string;
     };
     filled: {
-        white: string;
-        light: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -36,12 +36,21 @@ export declare const breadcrumbOption: {
         info: string;
     } & {
         $base: string;
-        white: string;
+        default: string;
+        dark: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    } & {
+        $base: string;
         light: string;
     } & import("../../theme").StringMap;
     glass: {
-        white: string;
-        light: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -51,8 +60,8 @@ export declare const breadcrumbOption: {
         success: string;
         info: string;
     } & {
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -62,8 +71,8 @@ export declare const breadcrumbOption: {
         success: string;
         info: string;
     } & {
-        white: string;
-        light: string;
+        $base: string;
+        default: string;
         dark: string;
         primary: string;
         secondary: string;
@@ -72,7 +81,5 @@ export declare const breadcrumbOption: {
         warning: string;
         success: string;
         info: string;
-    } & {
-        white: string;
     } & import("../../theme").StringMap;
 };

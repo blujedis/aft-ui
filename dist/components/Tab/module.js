@@ -1,5 +1,5 @@
 export const tabDefaults = {
     focused: true,
-    theme: 'light',
+    theme: 'default',
     variant: 'flushed'
 };

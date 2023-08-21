@@ -1,37 +1,17 @@
 import { writable, get as storeGet } from 'svelte/store';
 import { cleanObj } from '../utils';
+import defaults from 'defaults';
 let _themeStore;
-// const defaultTheme = {
-// 	options: defaultOptions,
-// 	defaults: defaultDefaults,
-// 	components: defaultComponents
-// 	//	palette
-// };
 /**
  * Internal store creator.
  *
  * @param initTheme the initial them to be applied.
  * @param baseTheme the base them so we can ensure all properties.
  */
-export function createStoreInternal({ options, defaults, components, ...rest }, baseTheme = {}) {
+export function createStoreInternal(userTheme, defaultTheme = {}) {
     if (_themeStore)
         return _themeStore;
-    const normalized = {
-        components: {
-            ...baseTheme.components,
-            ...components
-        },
-        options: {
-            ...baseTheme.options,
-            ...options
-        },
-        defaults: {
-            ...baseTheme.defaults,
-            ...defaults
-        },
-        // ...ensureDefaults(baseTheme, { options, defaults, components }),
-        ...rest
-    };
+    const normalized = defaults(userTheme, defaultTheme);
     normalized.defaults.component = cleanObj(normalized.defaults.component);
     const store = writable(normalized);
     /**
@@ -53,21 +33,20 @@ export function createStoreInternal({ options, defaults, components, ...rest }, 
         ...store,
         get,
         update,
-        defaultTheme: baseTheme
+        defaultTheme
     };
     if (!_themeStore)
         _themeStore = themeStoreInternal;
     return _themeStore;
 }
-// export const themeStore = createStoreInternal(defaultTheme);
 /**
  * Creates a new store which updates the default store's components and options when changed.
  *
  * @param initTheme the initial them to be applied.
  * @param baseTheme the base them so we can ensure all properties.
  */
-export function createStore(extendTheme, baseTheme = { ..._themeStore.defaultTheme }) {
-    const store = createStoreInternal(extendTheme, baseTheme);
+export function createStore(extendTheme, defaultTheme = { ..._themeStore.defaultTheme }) {
+    const store = createStoreInternal(extendTheme, defaultTheme);
     _themeStore.subscribe((s) => {
         // update default store on change.
         _themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });

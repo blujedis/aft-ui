@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
+	import {
+		type BreadcrumbOptionProps,
+		breadcrumbOptionDefaults as defaults,
+		variantMap
+	} from './module';
 	import { themer, themeStore } from '../../theme';
 	import type { ElementProps } from '../../types';
 	import { Icon } from '../Icon';
@@ -33,12 +37,15 @@
 
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
-		.variant('breadcrumbOption', variant, theme, true)
+		.variant('globals', variantMap[variant], theme, variant)
+		.option('textHoverFilled', theme, variant === 'filled') // override for filled items.
 		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
-		.append('pointer-events-none', selected)
+		.append('aria-selected:pointer-events-none dark:aria-selected:brightness-75', true)
+
+		.append('aria-selected:brightness-90', variant === 'filled')
 		.append($$restProps.class, true)
 		.compile(true);
 

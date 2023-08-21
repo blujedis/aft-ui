@@ -13,9 +13,12 @@ const th = themer($themeStore);
 $:
   selected = $context?.page === value;
 $:
-  paginationPageClasses = th.create("PaginationPage").variant("paginationPage", variant, theme, true).option("focusedRingVisible", theme, focused).option("fieldFontSizes", size, size).option("paginationGroupedPadding", size, size && ["filled", "glass"].includes(variant)).option("paginationFlushedPadding", size, size && variant === "flushed").option("roundeds", rounded, rounded && (previous || next)).append(
+  paginationPageClasses = th.create("PaginationPage").variant("paginationPage", variant, theme, true).option("focusedRingVisible", theme, focused).option("fieldFontSizes", size, size).option("paginationGroupedPadding", size, size && ["filled", "glass"].includes(variant)).option("paginationFlushedPadding", size, size && variant === "flushed").option("common", "ringed", ["filled", "glass"].includes(variant)).option("roundeds", rounded, rounded && (previous || next)).append(
     "relative inline-flex items-center justify-center font-semibold focus:z-20",
     ["filled", "glass"].includes(variant)
+  ).append(
+    "inline-flex items-center border-t-2 font-medium border-x-0 border-b-0",
+    variant === "flushed"
   ).append("z-10", ["filled", "glass"].includes(variant) && selected).append("pointer-events-none", value === "...").append("px-2", previous || next).append("rounded-r-none", previous).append("rounded-l-none", next).append($$restProps.class, true).compile(true);
 $:
   paginationPageIconClasses = th.create("PaginationPageIcon").option("paginationIconSizes", size, size && (previous || next)).compile(true);

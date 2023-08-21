@@ -1,7 +1,6 @@
 export declare const progressBar: {
     filled: {
         $base: string;
-        white: string;
         light: string;
         dark: string;
         primary: string;

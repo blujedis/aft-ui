@@ -1,6 +1,6 @@
 export const tileDefaults = {
     rounded: 'md',
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };

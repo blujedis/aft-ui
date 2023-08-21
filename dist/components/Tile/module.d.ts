@@ -1,6 +1,5 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { tile } from './config';
-export type TileVariant = keyof typeof tile;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+export type TileVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
 export type TileProps = {
     full?: boolean;
     rounded?: ThemeRounded;

@@ -1,5 +1,6 @@
 import { createStoreInternal, createStore } from './store';
-import baseTheme from './theme.json';
+import defaultTheme from './theme.json';
+// @ts-ignore
 import userTheme from '../../../../../aft.theme.json';
-export const themeStore = createStoreInternal(userTheme, baseTheme);
+export const themeStore = createStoreInternal(userTheme, defaultTheme);
 export { createStore };

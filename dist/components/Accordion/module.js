@@ -4,6 +4,6 @@ export const accordionDefaults = {
     as: 'div',
     multiple: false,
     selected: [],
-    theme: 'light',
+    theme: 'default',
     variant: 'outlined'
 };

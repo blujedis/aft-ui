@@ -37,8 +37,8 @@
 				<Badge {...props} variant="outlined" theme={color}>react</Badge>
 			</label>
 
-			<label for="glass">
-				<Badge {...props} variant="glass" theme={color}>React</Badge>
+			<label for="ghost">
+				<Badge {...props} variant="ghost" theme={color}>React</Badge>
 			</label>
 		</div>
 	{/each}

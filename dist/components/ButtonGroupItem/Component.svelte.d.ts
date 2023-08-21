@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -5,13 +6,13 @@ declare const __propDef: {
         unstyled?: boolean | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         full?: boolean | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
-        variant?: "text" | "filled" | "outlined" | "ghost" | "glass" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
+        variant?: import("../Button").ButtonVariant | undefined;
         focused?: import("../../types").ThemeFocused | undefined;
         size?: import("../../types").ThemeSize | undefined;
         transitioned?: boolean | undefined;
-        disabled?: boolean | undefined;
         as?: "a" | "button" | undefined;
+        disabled?: boolean | undefined;
         href?: string | null | undefined;
         underlined?: boolean | "hover" | undefined;
         value: string | number | (string & string[]) | (number & string[]);

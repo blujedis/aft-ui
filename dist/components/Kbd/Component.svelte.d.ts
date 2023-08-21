@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
@@ -5,23 +6,26 @@ declare const __propDef: {
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         transitioned?: boolean | undefined;
-        variant?: "filled" | "glass" | "outline" | undefined;
+        variant?: import("./module").KbdVariant | undefined;
         unstyled?: boolean | undefined;
         slot?: string | null | undefined;
         style?: string | null | undefined;
         title?: string | null | undefined;
         hidden?: boolean | null | undefined;
+        class?: string | null | undefined;
+        radiogroup?: string | null | undefined;
+        id?: string | null | undefined;
+        color?: string | null | undefined;
+        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         accesskey?: string | null | undefined;
         autofocus?: boolean | null | undefined;
-        class?: string | null | undefined;
         contenteditable?: import("svelte/elements").Booleanish | "inherit" | null | undefined;
         contextmenu?: string | null | undefined;
         dir?: string | null | undefined;
         draggable?: import("svelte/elements").Booleanish | null | undefined;
         enterkeyhint?: "search" | "done" | "enter" | "go" | "next" | "previous" | "send" | null | undefined;
-        id?: string | null | undefined;
         lang?: string | null | undefined;
         part?: string | null | undefined;
         placeholder?: string | null | undefined;
@@ -29,7 +33,6 @@ declare const __propDef: {
         tabindex?: number | null | undefined;
         translate?: "" | "yes" | "no" | null | undefined;
         inert?: boolean | null | undefined;
-        radiogroup?: string | null | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         about?: string | null | undefined;
         datatype?: string | null | undefined;
@@ -42,7 +45,6 @@ declare const __propDef: {
         autocapitalize?: string | null | undefined;
         autocorrect?: string | null | undefined;
         autosave?: string | null | undefined;
-        color?: string | null | undefined;
         itemprop?: string | null | undefined;
         itemscope?: boolean | null | undefined;
         itemtype?: string | null | undefined;
@@ -79,7 +81,6 @@ declare const __propDef: {
         'aria-flowto'?: string | null | undefined;
         'aria-grabbed'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-haspopup'?: "dialog" | "menu" | "grid" | import("svelte/elements").Booleanish | "listbox" | "tree" | null | undefined;
-        'aria-hidden'?: import("svelte/elements").Booleanish | null | undefined;
         'aria-invalid'?: import("svelte/elements").Booleanish | "grammar" | "spelling" | null | undefined;
         'aria-keyshortcuts'?: string | null | undefined;
         'aria-label'?: string | null | undefined;

@@ -3,6 +3,6 @@ export const accordionButtonDefaults = {
     focused: true,
     roticon: true,
     size: 'sm',
-    theme: 'light',
+    theme: 'default',
     variant: 'outlined'
 };

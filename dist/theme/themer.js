@@ -90,8 +90,7 @@ export function themer(themeConfig) {
         };
     }
     const mockThemer = {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        create: (instanceName = '') => mockApi
+        create: (_instanceName = '') => mockApi
     };
     // If no document return mock instance.
     if (!browser)
@@ -130,7 +129,7 @@ export function themer(themeConfig) {
             if (!comp || !variant)
                 return api;
             const conf = comp[variant];
-            if (!colors.includes(theme) && !['white'].includes(theme)) {
+            if (!colors.includes(theme)) {
                 when = theme;
                 theme = '';
             }
@@ -202,6 +201,8 @@ export function themer(themeConfig) {
             if (typeof themeConfig === 'undefined')
                 return api;
             const isRemoveFromOptions = arguments.length === 3;
+            if (!isRemoveFromOptions)
+                when = propOrWhen;
             if (!when)
                 return api;
             if (isRemoveFromOptions) {

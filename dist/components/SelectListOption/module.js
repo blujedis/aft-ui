@@ -1,6 +1,6 @@
 export const selectListOptionDefaults = {
     as: 'a',
     size: 'sm',
-    theme: 'light',
+    theme: 'default',
     variant: 'outlined'
 };

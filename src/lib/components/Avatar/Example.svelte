@@ -3,6 +3,7 @@
 	import { AvatarStack } from '../AvatarStack';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Avatar';
 	const description = `Avatar element with or without stacked groups.`;
@@ -29,30 +30,80 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-5 gap-4 mb-4">
-		<div>
-			<Avatar src={urls[0]} alt="" {...props} />
-		</div>
-		<div>
-			<Avatar src={urls[1]} alt="" {...props} theme="primary" notification />
-		</div>
-		<div>
-			<Avatar src={urls[2]} alt="" {...props} theme="success" notification />
-		</div>
-		<div>
-			<Avatar src={urls[3]} alt="" {...props} theme="danger" notification />
-		</div>
-		<div>
-			<Avatar src={urls[3]} alt="" {...props} placeholder />
-		</div>
+	<!-- <Avatar src="" alt="" variant="ghost" placeholder /> -->
+
+	<div class="text-2xl font-semibold mb-4">Filled w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar
+				src={urls[i] || urls[2]}
+				alt=""
+				variant="filled"
+				theme={color}
+				notification
+				animate="ping"
+			/>
+		{/each}
 	</div>
-	<div>
-		{#key props}
-			<AvatarStack {...props}>
-				{#each urls as url}
-					<Avatar src={url} alt="" />
-				{/each}
-			</AvatarStack>
-		{/key}
+
+	<div class="text-2xl font-semibold mb-4">Outlined w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src={urls[i] || urls[2]} alt="" variant="outlined" theme={color} notification />
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">Ghost w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar
+				src={urls[i] || urls[2]}
+				alt=""
+				variant="ghost"
+				theme={color}
+				notification
+				animate="pulse"
+			/>
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">Placeholders <span class="text-xs">(Filled)</span></div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="filled" theme={color} placeholder />
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">
+		Placeholders <span class="text-xs">(Outlined)</span>
+	</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="outlined" theme={color} placeholder />
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">Placeholders <span class="text-xs">(Ghost)</span></div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="ghost" theme={color} placeholder />
+		{/each}
+	</div>
+
+	<div class="grid grid-cols-2 gap-4">
+		<div>
+			<div class="text-2xl font-semibold mb-4">Basic Avatar</div>
+			<Avatar src={urls[0]} alt="" />
+		</div>
+		<div>
+			<div class="text-2xl font-semibold mb-4">Avatar Stack</div>
+			{#key props}
+				<AvatarStack direction="up">
+					{#each urls as url}
+						<Avatar src={url} alt="" />
+					{/each}
+				</AvatarStack>
+			{/key}
+		</div>
 	</div>
 </ExamplePage>

@@ -1,5 +1,5 @@
 export const paginationDefaults = {
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };

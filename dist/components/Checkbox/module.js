@@ -2,6 +2,6 @@ export const checkboxDefaults = {
     focused: true,
     rounded: 'full',
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'outlined'
 };

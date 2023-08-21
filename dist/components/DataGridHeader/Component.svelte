@@ -22,7 +22,9 @@ const th = themer($themeStore);
 $:
   gridHeaderStyles = st.create("DataGridHeader").add("--template-columns", context.getDataGridTemplate(), autocols).compile();
 $:
-  gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("common", "divided", divided && $$slots.filter).append("divide-y", divided && $$slots.filter).append("sticky top-0 z-10", sticky).append("rounded-b-none", rounded).append("bg-[color:var(--bg-dark)] dark:bg-[color:var(--bg-dark)]", true).prepend("datagrid__header shadow-sm", true).compile(true);
+  gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("common", "divided", divided && $$slots.filter).append("divide-y", divided && $$slots.filter).append("sticky top-0 z-10", sticky).append("rounded-b-none", rounded).prepend("datagrid__header shadow-sm", true).compile(true);
+$:
+  console.log(variant, theme);
 $:
   gridHeaderClasses = th.create("DataGridHeader").variant("gridHeader", variant, theme, variant).append("auto-cols-fr", autocols).prepend("datagrid__header_row grid grid-flow-col w-full", true).append($$restProps.class, true).compile(true);
 </script>

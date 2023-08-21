@@ -19,6 +19,6 @@ export const modalDefaults = {
     labelby: 'Modal',
     rounded: 'md',
     shadowed: 'lg',
-    theme: 'light',
+    theme: 'default',
     unmount: true
 };

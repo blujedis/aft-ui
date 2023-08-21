@@ -3,7 +3,7 @@
 	import { forwardEventsBuilder } from '../../utils';
 	import { themeStore, themer } from '../../';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps, ThemeVariantAppend } from '../../types';
 
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = ButtonProps<Tag> & ElementProps<Tag>;
@@ -35,7 +35,7 @@
 		? th.create('Button').append($$restProps.class, true).compile()
 		: th
 				.create('Button')
-				.variant('globals', variant, theme, variant)
+				.variant('globals', (variant + 'Hover') as any, theme, variant)
 				.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 				.option('common', 'transition', transitioned)
 				.option('fieldFontSizes', size, size)

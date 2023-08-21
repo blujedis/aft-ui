@@ -1,7 +1,6 @@
-import type { fontSizes, borderStyles, objectFit, aspectRatio, objectPosition } from '../constants/options';
+import type { fontSizes, borderStyles, objectFit, aspectRatio, objectPosition, animate } from '../constants/options';
 import type * as sharedOptions from '../constants/options';
 import type * as componentOptions from '../components/options';
-import type defaults from '../theme/defaults';
 import type * as configs from '../components/configs';
 import type { colors, shades } from '../constants/colors';
 import type { namedcolors, tailwindcolors } from '../theme/palettes';
@@ -29,16 +28,30 @@ export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string 
 export type ColorType = `${'#'}${string}` | `${'rgb' | 'rgba' | 'hsl' | 'hwb'}(${string})` | 'currentColor';
 export type TailwindColor = keyof typeof tailwindcolors;
 export type NamedColor = keyof typeof namedcolors;
-export type ThemeColorBase = typeof colors[number];
-export type ThemeColorShade = typeof shades[number];
+export type ThemeColorBase = (typeof colors)[number];
+export type ThemeColorShade = (typeof shades)[number];
 export type ThemeColor = ThemeColorBase;
 export interface ThemeConfig {
     options: ThemeOptions;
-    defaults: typeof defaults;
-    components: typeof configs;
+    defaults: ThemeDefaults;
+    components: ThemeComponents;
 }
 export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
 export type ThemeOption = keyof ThemeOptions;
+export type ThemeDefaults = {
+    component: {
+        focused: ThemeFocused;
+        rounded: ThemeRounded;
+        shadowed: ThemeShadowed;
+        size: ThemeSize;
+        theme: ThemeColor;
+        transitioned: boolean;
+    };
+};
+export type ThemeComponents = typeof configs;
+export type ThemeComponent = keyof ThemeComponents;
+export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost' | 'glass';
+export type ThemeVariantHover<V extends ThemeVariant> = `${V}Hover`;
 export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
 export type ThemeSimpleSize = 'sm' | 'md' | 'lg';
@@ -52,6 +65,7 @@ export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;
 export type ThemeAspect = keyof typeof aspectRatio;
 export type ThemeObjectPosition = keyof typeof objectPosition;
+export type ThemeAnimation = keyof typeof animate;
 export type ThemeFocusStrategy = 'ring' | 'outline' | 'border' | 'borderFlush';
 export type ThemeFocusState = 'focus' | 'focusVisible' | 'focusWithin' | 'focusPeer';
 export type ThemeFocusSize = 'inset' | 'none' | 'one' | 'two' | 'four' | 'eight' | 'unstyled';
@@ -67,13 +81,3 @@ export type Template = string | [string, string | string[], number | number[]];
 export type Templates<K extends string = string> = Record<K, Template>;
 export type TemplateInternal = [string, string[], number[]];
 export type TemplatesInternal<K extends string = string> = Record<K, TemplateInternal>;
-export type ThemeDefaults = {
-    component: {
-        focused: ThemeFocused;
-        rounded: ThemeRounded;
-        shadowed: ThemeShadowed;
-        size: ThemeSize;
-        theme: ThemeColor;
-        transitioned: boolean;
-    };
-};

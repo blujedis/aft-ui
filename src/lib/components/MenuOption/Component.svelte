@@ -21,10 +21,10 @@
 
 	$: optionClasses = th
 		.create('MenuOption')
-		.variant('menuOption', variant, theme, variant)
+		.variant('globals', 'itemHover', theme, variant)
 		.append('focus:outline outline-frame-400 outline-2', true)
 		.option('focusedOutline', theme, true)
-		.option('focusedOutlineSizes', 'two', true)
+		//.option('focusedOutlineSizes', 'two', true)
 		.remove('focus-visible:', true)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)

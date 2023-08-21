@@ -1,12 +1,12 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+import type { ThemeAnimation, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeVariant } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
-import type { avatar } from './config';
 import type { NotificationPosition } from '../Notifications';
-export type AvatarVariant = keyof typeof avatar;
+export type AvatarVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
+export type AvatarNotificationPosition = Exclude<NotificationPosition, 'top-center' | 'bottom-center'>;
 export type AvatarProps = {
     alt: string;
-    notification?: boolean | Exclude<NotificationPosition, 'top-center' | 'bottom-center'>;
-    animation?: 'ping' | 'pulse';
+    notification?: boolean | AvatarNotificationPosition;
+    animate?: ThemeAnimation;
     placeholder?: boolean | string | IconifyIcon;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;

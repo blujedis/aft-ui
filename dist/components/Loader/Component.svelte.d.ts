@@ -3,13 +3,13 @@ declare const __propDef: {
     props: {
         style?: string | undefined;
         unstyled?: boolean | undefined;
-        theme?: "light" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | "white" | undefined;
+        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
         size?: import("../..").ThemeSize | undefined;
         class?: string | undefined;
-        id?: string | undefined;
-        color?: string | undefined;
         inline?: boolean | undefined;
+        id?: string | undefined;
         mode?: import("@iconify/svelte").IconifyRenderMode | undefined;
+        color?: string | undefined;
         flip?: string | undefined;
         rotate?: number | undefined;
         hFlip?: boolean | undefined;

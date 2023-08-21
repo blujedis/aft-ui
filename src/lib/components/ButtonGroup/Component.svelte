@@ -50,6 +50,7 @@
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
 		.append('isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none', true)
+		.append('space-x-4', variant === 'text')
 		.append($$restProps.class, true)
 		.compile(true);
 

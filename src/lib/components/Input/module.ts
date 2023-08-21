@@ -8,8 +8,7 @@ import type {
 	ThemeVariant
 } from '$lib/types';
 
-
-export type InputVariant = Exclude<ThemeVariant, 'text'>
+export type InputVariant = Exclude<ThemeVariant, 'text'>;
 
 export type InputProps = {
 	disabled?: boolean;

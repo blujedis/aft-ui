@@ -1,5 +1,5 @@
 export const buttonDefaults = {
     size: 'md',
-    theme: 'light',
+    theme: 'default',
     variant: 'filled'
 };
