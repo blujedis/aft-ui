@@ -9,6 +9,7 @@ export type FlushedProps = {
 	group?: boolean;
 	peer?: boolean;
 	hover?: boolean;
+	active?: boolean;
 	theme?: ThemeColor;
 	// variant?: FlushedVariant;
 };

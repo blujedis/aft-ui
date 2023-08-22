@@ -3,7 +3,7 @@
 	import { type ButtonGroupItemProps, buttonGroupItemDefaults as defaults } from './module';
 	import { Button } from '../Button';
 	import type { ElementProps } from '../../types';
-	import { getContext } from 'svelte';
+	import { getContext, SvelteComponent } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import { cleanObj } from '$lib/utils';
@@ -32,8 +32,6 @@
 		variant
 	});
 
-	$: console.log(variant);
-
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
 		//	.variant('buttonGroupItem', variant, theme, true)
@@ -59,7 +57,13 @@
 <ConditionalElement
 	as={Flushed}
 	condition={variant === 'text'}
-	props={{ disabled: !$context?.selected?.includes(value), theme }}
+	props={{
+		active: $context?.selected?.includes(value),
+		theme,
+		group: true,
+		hover: true,
+		focused: true
+	}}
 >
 	<svelte:component
 		this={Button}

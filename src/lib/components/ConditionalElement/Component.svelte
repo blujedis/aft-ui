@@ -3,15 +3,21 @@
 	import { type ConditionalElementProps, conditionalElementDefaults as defaults } from './module';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps, HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag, SvelteConstructorProps } from '../../types';
 
-	type Tag = $$Generic<HTMLTag | typeof SvelteComponent>;
-	type AdditionalProps = Tag extends HTMLTag ? ElementProps<Tag> : never;
+	type Tag = $$Generic<HTMLTag | typeof SvelteComponent<any, any>>;
+	type AdditionalProps = Tag extends HTMLTag ? ElementProps<Tag> : Tag extends typeof SvelteComponent<any, any> ? { props?: SvelteConstructorProps<Tag> } : never;
 	type $$Props = ConditionalElementProps<Tag> & AdditionalProps;
+
+	// 	T extends typeof SvelteComponent
+	// ? SvelteConstructorProps<T>
+	// : T extends HTMLTag
+	// ? ElementProps<T>
+	// : never;
 
 	export let { as, condition, props } = {
 		...defaults
-	} as ConditionalElementProps<Tag>;
+	} as $$Props;
 
 	$: wrap = typeof condition === 'function' ? condition() : condition;
 
