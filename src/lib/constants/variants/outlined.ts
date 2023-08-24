@@ -16,7 +16,7 @@ const textOutlined = {
 export const ring = {
 	$base: 'ring-inset ring-1',
 	default: 'ring-frame-200 dark:ring-frame-500',
-	dark: 'ring-frame-400 dark:ring-frame-700',
+	dark: 'ring-frame-500 dark:ring-frame-800',
 	primary: 'ring-primary-500',
 	secondary: 'ring-secondary-500',
 	tertiary: 'ring-tertiary-500',
@@ -29,7 +29,7 @@ export const ring = {
 const ringHover = {
 	$base: 'ring-inset ring-1',
 	default: 'hover:ring-frame-300 dark:hover:ring-frame-500',
-	dark: 'hover:ring-frame-500 dark:hover:ring-frame-900',
+	dark: 'hover:ring-frame-600 dark:hover:ring-frame-900',
 	primary: 'hover:ring-primary-700 dark:hover:ring-primary-700',
 	secondary: 'hover:ring-secondary-700 dark:hover:ring-secondary-700',
 	tertiary: 'hover:ring-tertiary-700 dark:hover:ring-tertiary-700',
@@ -42,7 +42,7 @@ const ringHover = {
 const ringHoverless = {
 	$base: 'ring-inset ring-1',
 	default: 'hover:ring-frame-200 dark:hover:ring-frame-500',
-	dark: 'hover:ring-frame-400 dark:hover:ring-frame-700',
+	dark: 'hover:ring-frame-500 dark:hover:ring-frame-800',
 	primary: 'hover:ring-primary-500 dark:hover:ring-primary-500',
 	secondary: 'hover:ring-secondary-500 dark:hover:ring-secondary-500',
 	tertiary: 'hover:ring-tertiary-500 dark:hover:ring-tertiary-500',
@@ -55,7 +55,7 @@ const ringHoverless = {
 const border = {
 	$base: 'border',
 	default: 'border-frame-200 dark:border-frame-500',
-	dark: 'border-frame-400 dark:border-frame-700',
+	dark: 'border-frame-500 dark:border-frame-800',
 	primary: 'border-primary-500',
 	secondary: 'border-secondary-500',
 	tertiary: 'border-tertiary-500',
@@ -94,7 +94,7 @@ export const borderHoverGroup = {
 
 const borderExpanded = {
 	default: 'aria-expanded:border-frame-200 dark:aria-expanded:border-frame-500',
-	dark: 'aria-expanded:border-frame-500 dark:aria-expanded:border-frame-700',
+	dark: 'aria-expanded:border-frame-500 dark:aria-expanded:border-frame-800',
 	primary: 'aria-expanded:border-primary-500 dark:aria-expanded:border-primary-500',
 	secondary: 'aria-expanded:border-secondary-500 dark:aria-expanded:border-secondary-500',
 	tertiary: 'aria-expanded:border-tertiary-500 dark:aria-expanded:border-tertiary-500',

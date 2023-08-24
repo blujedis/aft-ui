@@ -3,7 +3,7 @@ import { mergeConfigs } from '$lib/theme';
 const textGhost = {
 	$base: '',
 	default: '',
-	dark: 'text-[color:var(--text-light)]',
+	dark: 'dark:text-[color:var(--text-light)]',
 	primary: 'text-primary-500',
 	secondary: 'text-secondary-500',
 	tertiary: 'text-tertiary-500',

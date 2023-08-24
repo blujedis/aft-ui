@@ -76,28 +76,28 @@ const bgItemChecked = {
 
 const bgItemCheckedGhost = {
   $base: 'bg-transparent',
-	default: 'aria-checked:bg-frame-100 dark:aria-checked:bg-frame-500/50',
-	dark: 'aria-checked:bg-frame-300 dark:aria-checked:bg-frame-900/40',
-	primary: 'aria-checked:bg-primary-100 dark:aria-checked:bg-primary-500/50',
-	secondary: 'aria-checked:bg-secondary-100 dark:aria-checked:bg-secondary-500/50',
-	tertiary: 'aria-checked:bg-tertiary-100 dark:aria-checked:bg-tertiary-500/50',
-	danger: 'aria-checked:bg-danger-100 dark:aria-checked:bg-danger-500/50',
-	warning: 'aria-checked:bg-warning-100 dark:aria-checked:bg-warning-500/50',
-	success: 'aria-checked:bg-success-100 dark:aria-checked:bg-success-500/50',
-	info: 'aria-checked:bg-info-100 dark:aria-checked:bg-info-500/50'
+  default: 'aria-checked:bg-frame-100 dark:aria-checked:bg-frame-500/50',
+  dark: 'aria-checked:bg-frame-300 dark:aria-checked:bg-frame-900/40',
+  primary: 'aria-checked:bg-primary-100 dark:aria-checked:bg-primary-500/50',
+  secondary: 'aria-checked:bg-secondary-100 dark:aria-checked:bg-secondary-500/50',
+  tertiary: 'aria-checked:bg-tertiary-100 dark:aria-checked:bg-tertiary-500/50',
+  danger: 'aria-checked:bg-danger-100 dark:aria-checked:bg-danger-500/50',
+  warning: 'aria-checked:bg-warning-100 dark:aria-checked:bg-warning-500/50',
+  success: 'aria-checked:bg-success-100 dark:aria-checked:bg-success-500/50',
+  info: 'aria-checked:bg-info-100 dark:aria-checked:bg-info-500/50'
 };
 
 const bgItemCheckedFilled = {
-	$base: '',
-	default: 'aria-checked:bg-frame-200/70 dark:aria-checked:bg-frame-600',
-	dark: 'aria-checked:bg-frame-600 dark:aria-checked:bg-frame-900',
-	primary: 'aria-checked:bg-primary-600',
-	secondary: 'aria-checked:bg-secondary-600',
-	tertiary: 'aria-checked:bg-tertiary-600',
-	danger: 'aria-checked:bg-danger-600',
-	warning: 'aria-checked:bg-warning-600',
-	success: 'aria-checked:bg-success-600',
-	info: 'aria-checked:bg-info-600'
+  $base: '',
+  default: 'aria-checked:bg-frame-200/70 dark:aria-checked:bg-frame-600',
+  dark: 'aria-checked:bg-frame-600 dark:aria-checked:bg-frame-900',
+  primary: 'aria-checked:bg-primary-600',
+  secondary: 'aria-checked:bg-secondary-600',
+  tertiary: 'aria-checked:bg-tertiary-600',
+  danger: 'aria-checked:bg-danger-600',
+  warning: 'aria-checked:bg-warning-600',
+  success: 'aria-checked:bg-success-600',
+  info: 'aria-checked:bg-info-600'
 };
 
 export const variantItemHover = mergeConfigs(textItem, bgItemHover);

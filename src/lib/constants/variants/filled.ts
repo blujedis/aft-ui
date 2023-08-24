@@ -17,7 +17,7 @@ const textFilled = {
 const bgFilled = {
 	$base: '',
 	default: 'bg-frame-100 dark:bg-frame-500',
-	dark: 'bg-frame-500 dark:bg-frame-700',
+	dark: 'bg-frame-500 dark:bg-frame-800',
 	primary: 'bg-primary-500 ',
 	secondary: 'bg-secondary-500',
 	tertiary: 'bg-tertiary-500',
