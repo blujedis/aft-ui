@@ -1,5 +1,3 @@
-
-
 export const ringSelected = {
 	$base: 'ring-inset ring-1',
 	default: 'aria-selected:ring-frame-300 dark:aria-selected:ring-frame-700',

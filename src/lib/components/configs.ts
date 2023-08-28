@@ -51,7 +51,7 @@ export const globals = {
 	itemExpanded: { ...variantItemExpanded },
 	itemChecked: { ...variantItemChecked },
 	itemCheckedGhost: { ...variantItemCheckedGhost },
-	itemCheckedFilled: { ...variantItemCheckedFilled },
+	itemCheckedFilled: { ...variantItemCheckedFilled }
 };
 
 export * from './BreadcrumbOption/config';
@@ -73,4 +73,3 @@ export * from './Switch/config';
 export * from './DataGrid/config';
 export * from './Tab/config';
 export * from './Tabs/config';
-

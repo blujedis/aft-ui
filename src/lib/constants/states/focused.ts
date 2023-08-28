@@ -205,4 +205,3 @@ export const focusedOutlineGroup = {
 	success: 'group-focus:outline-success-600',
 	info: 'group-focus:outline-info-600'
 };
-

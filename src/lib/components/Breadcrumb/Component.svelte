@@ -11,7 +11,7 @@
 
 	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 
-	export let { flush, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+	export let { full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults
 	} as Required<BreadcrumbProps>;
 
@@ -43,7 +43,7 @@
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',
 			true
 		)
-		.append('!pl-0', flush)
+		.append('!pl-0', variant !== 'filled')
 		.append($$restProps.class, true)
 		.compile(true);
 

@@ -1,6 +1,3 @@
-
-
-
 export const bgSelectedFilled = {
 	$base: '',
 	default: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-500/50',

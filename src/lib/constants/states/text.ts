@@ -2,7 +2,7 @@ import { mergeConfigs } from '$lib/theme';
 
 export const textSoft = {
 	$base: '',
-	default: 'text-frame-300 dark:text-frame-500',
+	default: 'text-frame-300 dark:text-frame-400',
 	dark: 'text-frame-400 dark:text-frame-600',
 	primary: 'text-primary-300 dark:text-primary-600',
 	secondary: 'text-secondary-300 dark:text-secondary-600',
@@ -30,7 +30,8 @@ const textHover = {};
 
 export const textHoverFilled = mergeConfigs(textHover, {
 	$base: '',
-	default: 'text-[color:var(--text-dark)] hover:text-[color:var(--text-dark-hover)] dark:text-[color:var(--text-light)] dark:hover:text-[color:var(--text-light-hover)]',
+	default:
+		'text-[color:var(--text-dark)] hover:text-[color:var(--text-dark-hover)] dark:text-[color:var(--text-light)] dark:hover:text-[color:var(--text-light-hover)]',
 	dark: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	primary: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	secondary: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
@@ -38,7 +39,7 @@ export const textHoverFilled = mergeConfigs(textHover, {
 	danger: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	warning: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	success: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
-	info: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
+	info: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]'
 });
 
 export const textExpanded = {
@@ -93,7 +94,6 @@ export const textCurrent = {
 // 	info: ''
 // };
 
-
 // export const textFilledActive = {
 // 	$base:
 // 		'aria-checked:text-[color:var(--text-light)] group-aria-checked:text-[color:var(--text-light)] aria-current:text-[color:var(--text-light)] aria-expanded:text-[color:var(--text-light)] aria-selected:text-[color:var(--text-light)]',
@@ -123,7 +123,6 @@ export const textCurrent = {
 // 	success: '',
 // 	info: ''
 // };
-
 
 // export const textGlassActive = {
 // 	$base:

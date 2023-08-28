@@ -7,7 +7,6 @@ import type {
 	ThemeVariant
 } from '$lib/types';
 
-
 export type BreadcrumbContext = {
 	globals: {
 		rounded: ThemeRounded;
@@ -22,7 +21,6 @@ export type BreadcrumbContext = {
 export type BreadcrumbVariant = Exclude<ThemeVariant, 'flushed' | 'outlined'>;
 
 export type BreadcrumbProps = {
-	flush?: boolean;
 	full?: boolean;
 	generate?: boolean;
 	rounded?: ThemeRounded;

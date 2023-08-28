@@ -91,7 +91,6 @@ export const borderHoverGroup = {
 	info: 'group-hover:border-info-700 dark:group-hover:border-info-700'
 };
 
-
 const borderExpanded = {
 	default: 'aria-expanded:border-frame-200 dark:aria-expanded:border-frame-500',
 	dark: 'aria-expanded:border-frame-500 dark:aria-expanded:border-frame-800',
@@ -104,10 +103,11 @@ const borderExpanded = {
 	info: 'aria-expanded:border-info-500 dark:aria-expanded:border-info-500'
 };
 
-
 export const variantOutlined = mergeConfigs(textOutlined, ring, { $base: 'bg-transparent' });
 
 export const variantOutlinedHover = mergeConfigs(variantOutlined, ringHover);
+
+export const variantOutlinedHoverless = { ...ringHoverless };
 
 export const variantBorder = mergeConfigs(textOutlined, border);
 
@@ -116,5 +116,3 @@ export const variantBorderHover = mergeConfigs(variantBorder, borderHover);
 export const variantBorderHoverGroup = mergeConfigs(variantBorder, borderHoverGroup);
 
 export const variantBorderExpanded = { ...borderExpanded };
-
-export const variantOutlinedHoverless = { ...ringHoverless };

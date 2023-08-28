@@ -1,7 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
 
-
-
 const placeholdersDark = {
 	$base: '',
 	default: 'dark:placeholder:text-frame-500',

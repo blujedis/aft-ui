@@ -1,11 +1,7 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import {
-		colors,
-		variantPanel,
-		variantPanelItemHover
-	} from '$lib/constants';
+	import { colors, variantPanel, variantPanelItemHover } from '$lib/constants';
 	import { themer } from '$lib/theme';
 	import { themeStore } from '$lib/theme';
 

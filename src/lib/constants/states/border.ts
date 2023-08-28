@@ -1,6 +1,3 @@
-
-
-
 export const borderSelected = {
 	$base: 'border',
 	default: 'aria-selected:border-frame-300 dark:aria-selected:border-frame-700',

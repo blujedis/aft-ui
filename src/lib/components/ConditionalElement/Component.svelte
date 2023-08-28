@@ -6,7 +6,11 @@
 	import type { ElementProps, HTMLTag, SvelteConstructorProps } from '../../types';
 
 	type Tag = $$Generic<HTMLTag | typeof SvelteComponent<any, any>>;
-	type AdditionalProps = Tag extends HTMLTag ? ElementProps<Tag> : Tag extends typeof SvelteComponent<any, any> ? { props?: SvelteConstructorProps<Tag> } : never;
+	type AdditionalProps = Tag extends HTMLTag
+		? ElementProps<Tag>
+		: Tag extends typeof SvelteComponent<any, any>
+		? { props?: SvelteConstructorProps<Tag> }
+		: never;
 	type $$Props = ConditionalElementProps<Tag> & AdditionalProps;
 
 	// 	T extends typeof SvelteComponent

@@ -293,7 +293,6 @@ export const stroke = {
 	info: 'stroke-info-500'
 };
 
-
 export const common = {
 	active: 'active:brightness-125',
 	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',

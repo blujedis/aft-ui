@@ -1,4 +1,4 @@
-import { text, textHover } from '$lib/constants';
+// import { text, textHover } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
 
 export const filledTextHover = {
@@ -15,7 +15,7 @@ export const filledTextHover = {
 };
 
 // textAriaSelectedSoft
-const defaultBreadcrumbOption = mergeConfigs(text, textHover);
+const defaultBreadcrumbOption = {}; // mergeConfigs(text, textHover);
 
 export const breadcrumbOption = {
 	text: {
@@ -27,5 +27,5 @@ export const breadcrumbOption = {
 		light: 'text-[color:var(--text-dark)]'
 	}),
 	// textAriaSelectedSoft
-	glass: mergeConfigs(text, textHover, {})
+	glass: {} // mergeConfigs(text, textHover, {})
 };

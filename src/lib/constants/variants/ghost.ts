@@ -3,7 +3,7 @@ import { mergeConfigs } from '$lib/theme';
 const textGhost = {
 	$base: '',
 	default: '',
-	dark: 'dark:text-[color:var(--text-light)]',
+	dark: '',
 	primary: 'text-primary-500',
 	secondary: 'text-secondary-500',
 	tertiary: 'text-tertiary-500',
@@ -29,7 +29,7 @@ const textGhostHover = {
 const bgGhost = {
 	$base: 'bg-transparent',
 	default: 'bg-frame-100 dark:bg-frame-500/50',
-	dark: 'bg-frame-600/60 dark:bg-frame-600/10',
+	dark: 'bg-frame-600/50 dark:bg-frame-600/10',
 	primary: 'bg-primary-100 dark:bg-primary-500/50',
 	secondary: 'bg-secondary-100 dark:bg-secondary-500/50',
 	tertiary: 'bg-tertiary-100 dark:bg-tertiary-500/50',
@@ -42,7 +42,7 @@ const bgGhost = {
 const bgGhostHover = {
 	$base: 'bg-transparent',
 	default: 'hover:bg-frame-100 dark:hover:bg-frame-500/50',
-	dark: 'hover:bg-frame-300 dark:hover:bg-frame-900/40',
+	dark: 'hover:bg-frame-600/50 dark:hover:bg-frame-900/40',
 	primary: 'hover:bg-primary-100 dark:hover:bg-primary-500/50',
 	secondary: 'hover:bg-secondary-100 dark:hover:bg-secondary-500/50',
 	tertiary: 'hover:bg-tertiary-100 dark:hover:bg-tertiary-500/50',

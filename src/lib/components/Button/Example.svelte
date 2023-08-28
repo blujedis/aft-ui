@@ -31,7 +31,7 @@
 				<Button {...props} variant="outlined" theme={color}>button</Button>
 			</label>
 			<label for="link">
-					<Button {...props} variant="text" theme={color}>button</Button>
+				<Button {...props} variant="text" theme={color}>button</Button>
 			</label>
 			<label for="ghost">
 				<Button {...props} variant="ghost" theme={color}>button</Button>

@@ -1,4 +1,10 @@
-import type { ThemeColor, ThemeFocused, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+import type {
+	ThemeColor,
+	ThemeFocused,
+	ThemeSize,
+	ThemeTransitioned,
+	ThemeVariant
+} from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
 import type { globals } from '../configs';
@@ -32,5 +38,5 @@ export const variantMap = {
 	text: 'textHover',
 	ghost: 'textHover',
 	glass: 'textHover',
-	filled: 'textHover',
+	filled: 'textHover'
 } as Record<Exclude<ThemeVariant, 'flushed' | 'outlined'>, keyof typeof globals>;

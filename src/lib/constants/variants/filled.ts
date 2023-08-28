@@ -42,7 +42,7 @@ const bgFilledHover = {
 
 export const variantActive = {
 	...placeholder,
-	$base: 'bg-frame-50 dark: dark:bg-frame-700/50',
+	$base: 'bg-frame-50 dark: dark:bg-frame-700/50'
 };
 
 export const variantFilled = mergeConfigs(textFilled, bgFilled);

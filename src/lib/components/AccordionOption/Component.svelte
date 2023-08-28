@@ -24,10 +24,7 @@
 
 	const th = themer($themeStore);
 
-	$: accordionClasses = th
-		.create('AccordianOption')
-		.append($$restProps.class, true)
-		.compile(true);
+	$: accordionClasses = th.create('AccordianOption').append($$restProps.class, true).compile(true);
 </script>
 
 <svelte:element
@@ -39,4 +36,3 @@
 >
 	<slot />
 </svelte:element>
-

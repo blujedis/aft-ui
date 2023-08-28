@@ -1,21 +1,24 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import type { ElementHandler, ThemeShade } from '$lib/types';
+	import type { ElementHandler, ThemeColor, ThemeShade } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { colors } from '../../constants/colors';
 	import Preview from './Preview.svelte';
 
-	type ShadeConfig = ThemeShade | 'default' | [ThemeShade, (ThemeShade | null)?, string?];
-	type ShadeConfigInternal = [ThemeShade | 'default', (ThemeShade | null)?, string?];
+	type ColorVar = `--${string}-${string}`;
+	type ShadeConfig =
+		| ThemeShade
+		| ColorVar
+		| [ThemeShade | ColorVar, (ThemeShade | ColorVar)?, ThemeColor?];
+	type ShadeConfigInternal = [ThemeShade | ColorVar, (ColorVar | ThemeShade)?, ThemeColor?];
 
 	interface GeneratorConfig {
-		type: 'text' | 'bg' | 'border' | 'ring' | 'divide';
-		base?: boolean;
-		color?: string | string[];
+		type: string; //  'text' | 'bg' | 'border' | 'ring' | 'divide';
+		$base?: string;
 		shades?: ShadeConfig;
-		modifiers?: Record<string, ShadeConfig>;
-		overrides?: Record<string, Record<string, ShadeConfig>>;
+		overrides?: Record<ThemeColor, ShadeConfig>;
 	}
 
 	const title = 'Class Generator';
@@ -23,24 +26,22 @@
 	const code = `
   `;
 	const defaultPlaceholder = `{
-		"color": "primary",
 		"type": "bg",
-		"shades": [500, 800],
-		"modifiers": {
-			"hover": [600, 900],
-			"focus": [600, 900]
+		"shades": [500, 700],
+		"overrides": {
+			"default": [100, 700]
 		},
-		"overrides": {},
 	}`;
 
 	const store = writable(getGenerators());
 
 	let mounted = false;
 	let textarea: HTMLTextAreaElement;
-	let savename = '';
 	let generator = '';
 	let generated = '';
+	let parsed: undefined | Record<string, string>;
 	let alert = '';
+	let savename = '';
 
 	let placeholder =
 		typeof localStorage !== 'undefined'
@@ -48,20 +49,9 @@
 			: defaultPlaceholder;
 
 	const defaults = {
-		color: [
-			'white',
-			'light',
-			'dark',
-			'primary',
-			'secondary',
-			'tertiary',
-			'danger',
-			'warning',
-			'success',
-			'info'
-		],
-		shades: [400, 600],
-		modifiers: {},
+		$base: '',
+		colors,
+		shades: [500, 700],
 		overrides: {}
 	};
 
@@ -70,9 +60,8 @@
 		return JSON.parse(localStorage.getItem('generators') || '{}');
 	}
 
-	function getOverrides(color: string, key: string, overrides: GeneratorConfig['overrides']) {
-		const obj = (overrides || {})[color] || {};
-		return obj[key];
+	function getOverrides(color: ThemeColor, overrides: GeneratorConfig['overrides']) {
+		return ((overrides || {})[color] || []) as ShadeConfigInternal;
 	}
 
 	function normalizeShades(shades: ShadeConfig, overrides?: ShadeConfig, merge = false) {
@@ -81,9 +70,11 @@
 			_overrides = normalizeShades(overrides);
 			if (!merge) return _overrides;
 		}
+
 		const result = (
-			!Array.isArray(shades) ? (typeof shades === 'undefined' ? ['default'] : [shades]) : shades
+			!Array.isArray(shades) ? (typeof shades === 'undefined' ? [500] : [shades]) : shades
 		) as ShadeConfigInternal;
+
 		if (merge) {
 			result[0] = _overrides[0] || result[0];
 			result[1] = _overrides[1] || result[1];
@@ -91,43 +82,39 @@
 		return result;
 	}
 
+	function getClass(type: string, color: string, value: string | number) {
+		if ((value + '').startsWith('--')) return `${type}-[color:var(${value})]`;
+		if ((value + '').includes('/')) return `${type}-${color}-${value}`;
+		if (typeof value === 'string') return value;
+		return `${type}-${color}-${value}`;
+	}
+
 	function parseConfig(config: Required<GeneratorConfig>) {
-		if (!config.type) return showAlert(`Cannot generate without property: "type".`);
-		const result = {} as Record<string, string>;
-		const colors = !Array.isArray(config.color) ? [config.color] : config.color;
-		colors.forEach((c) => {
-			let template = `${config.type}-${c}`;
+		const clone = { ...defaults, ...config };
+		clone.shades = clone.shades || 500;
+		clone.shades = !Array.isArray(clone.shades) ? [clone.shades] : clone.shades;
+
+		let result = {} as Record<ThemeColor | '$base', string>;
+		result.$base = clone.$base || '';
+
+		clone.colors.forEach((c) => {
 			let tmp = [] as string[];
 
-			const shades = normalizeShades(
+			const [light, dark, color] = config.shades as ShadeConfigInternal;
+
+			const [olight, odark, mcolor] = normalizeShades(
 				config.shades,
-				getOverrides(c, 'base', config.overrides)
+				getOverrides(c, config.overrides)
 			) as ShadeConfigInternal;
 
-			const [light, dark] = shades;
-
-			if (config.base === true || typeof config.base === 'undefined') {
-				if (light === 'default') {
-					tmp.push(template);
-				} else {
-					tmp.push(template + `-${light}`);
-					if (dark) tmp.push(`dark:${template}-${dark}`);
-				}
-			}
-
-			Object.entries(config.modifiers).forEach(([key, val]) => {
-				const mOverrides = getOverrides(c, key, config.overrides);
-				const [mlight, mdark, altcolor] = normalizeShades(val, mOverrides);
-				const mTemplate = altcolor ? `${config.type}-${altcolor}` : template;
-				if (mlight === 'default') {
-					tmp.push(`${key}:${mTemplate}`);
-				} else {
-					tmp.push(`${key}:${mTemplate}-${mlight}`);
-					if (mdark) tmp.push(`dark:${key}:${mTemplate}-${mdark}`);
-				}
-			});
+			if (light || olight) tmp.push(getClass(config.type, mcolor || color || c, olight || light));
+			if (dark || odark)
+				tmp.push(
+					getClass('dark:' + config.type, mcolor || color || c, (odark || dark) as string | number)
+				);
 			result[c] = tmp.join(' ');
 		});
+
 		return result;
 	}
 
@@ -144,9 +131,12 @@
 		localStorage.setItem('generators', JSON.stringify(generators));
 		store.update((s) => generators);
 		generator = '';
+		savename = '';
+		textarea.value = placeholder;
 	}
 	function loadGenerator(e: any) {
 		const template = $store[generator];
+		savename = e.target.value || '';
 		if (template) textarea.value = template;
 	}
 	function handleReset(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
@@ -169,18 +159,32 @@
 				store.update((s) => generators);
 			}
 			localStorage.setItem('generator', normalized); // always store the latest.
-			const processed = JSON.stringify(parseConfig(config), null, 2);
+			parsed = parseConfig(config);
+			const processed = JSON.stringify(parsed, null, 2);
 			generated = processed
 				.replace(/"([^"]+)":/g, (match, clean) => {
 					return clean;
 				})
 				.replace(/"([^"]+)"/g, (match, clean) => {
 					return "'" + clean + "'";
-				});
+				})
+				.replace(/"/g, "'");
 		} catch (e) {
 			const err = e as Error;
 			showAlert(err.message);
 			console.warn(err.message);
+		}
+	}
+
+	function handleKeydown(e: ElementHandler<HTMLTextAreaElement, KeyboardEvent>) {
+		if (e.key == 'Tab') {
+			e.preventDefault();
+			var start = textarea.selectionStart;
+			var end = textarea.selectionEnd;
+			// set textarea value to: text before caret + tab + text after caret
+			textarea.value = textarea.value.substring(0, start) + '\t' + textarea.value.substring(end);
+			// put caret at right position again
+			textarea.selectionStart = textarea.selectionEnd = start + 1;
 		}
 	}
 
@@ -234,7 +238,7 @@
 	<Section class={!mounted ? 'invisible' : ''}>
 		<div class="grid grid-cols-2 gap-2">
 			<div>
-				<Preview />
+				<Preview config={parsed} />
 			</div>
 			<div class="flex-col">
 				<div class="w-full">
@@ -261,6 +265,7 @@
 						rows={16}
 						{placeholder}
 						value={placeholder}
+						on:keydown={handleKeydown}
 					/>
 					<div class="mt-2">
 						<div class="flex space-x-4 w-full">
@@ -281,7 +286,7 @@
 								<div class="relative w-full">
 									<label
 										for="name"
-										class="absolute -top-2 left-2 inline-block bg-white dark:bg-frame-800 px-1 text-xs font-medium text-gray-900 dark:text-frame-100"
+										class="absolute -top-2 left-2 inline-block px-1 text-xs font-medium text-gray-900 dark:text-frame-100 bg-[color:var(--bg-light)] dark:bg-[color:var(--bg-dark)]"
 										>Save as:</label
 									>
 									<input
@@ -291,7 +296,7 @@
 										id="name"
 										class="form-input block w-full rounded-sm border-0 py-1.5 px-4 rounded-r-none shadow-sm text-sm
 
-										text-gray-900 dark:bg-frame-800 dark:text-frame-100
+										text-gray-900 dark:text-frame-100 bg-transparent
 										placeholder:text-gray-400 dark:placeholder:text-frame-500
 										ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
 										placeholder="Jane Smith"
@@ -306,15 +311,14 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="mt-4 w-full">
-					<pre class="overflow-x-auto whitespace-pre-wrap">
-					<code>
-						{generated}
-					</code>
-				</pre>
-				</div>
 			</div>
 		</div>
+	</Section>
+	<Section>
+		<pre class="overflow-x-auto whitespace-pre-wrap">
+<code>
+{generated}
+</code>
+</pre>
 	</Section>
 </ExamplePage>
