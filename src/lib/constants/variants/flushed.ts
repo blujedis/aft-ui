@@ -1,6 +1,6 @@
 import { mergeConfigs } from '$lib/theme';
 
-export const flushed = {
+export const borderFlushed = {
 	$base: '',
 	default: 'border-frame-200 dark:border-frame-300',
 	dark: 'border-frame-900',
@@ -13,7 +13,7 @@ export const flushed = {
 	info: 'border-info-400'
 };
 
-export const flushedHover = {
+export const borderflushedGroupHover = {
 	$base: '',
 	default: 'group-hover:border-frame-300 dark:group-hover:border-frame-400',
 	dark: 'group-hover:border-frame-500 dark:group-hover:border-frame-900',
@@ -26,6 +26,6 @@ export const flushedHover = {
 	info: 'group-hover:border-info-600'
 };
 
-export const variantFlushed = mergeConfigs(flushed, {});
+export const variantFlushed = mergeConfigs(borderFlushed, {});
 
-export const variantFlushedHover = mergeConfigs(variantFlushed, flushedHover);
+export const variantFlushedHover = mergeConfigs(variantFlushed, borderflushedGroupHover);

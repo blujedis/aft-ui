@@ -49,4 +49,15 @@
 			</Breadcrumb>
 		{/each}
 	</div>
+	<div class="mb-8 grid grid-cols-2 gap-4">
+		{#each colors as color}
+			<Breadcrumb {...props} variant="ghost" theme={color}>
+				<BreadcrumbOption label="Home" href="/" index={0} />
+				<BreadcrumbOption label="Get Started" href="/" />
+				<BreadcrumbOption label="Docs" href="/" />
+				<BreadcrumbOption label="Contact Us" href="/" selected />
+				<BreadcrumbOption label="About" href="/" />
+			</Breadcrumb>
+		{/each}
+	</div>
 </ExamplePage>

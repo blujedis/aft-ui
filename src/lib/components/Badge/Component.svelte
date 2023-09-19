@@ -27,11 +27,17 @@
 				.append('w-full', full)
 				.append('z-20 badge font-medium', true)
 				.append('badge-removable', removable)
-				.append('relative inline-flex items-center', !removable)
+				.append('relative inline-flex items-center leading-tight', !removable)
 				.append($$restProps.class, true)
 				.compile(true);
 </script>
 
 <span {...$$restProps} class={badgeClasses}>
-	<slot />
+	{#if !removable}
+		<span class:mb-0.5={size !== 'xs'}>
+			<slot />
+		</span>
+	{:else}
+		<slot />
+	{/if}
 </span>

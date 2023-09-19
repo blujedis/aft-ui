@@ -9,7 +9,7 @@ import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
 import type { globals } from '../configs';
 
-export type BreadcrumbOptionVariant = keyof typeof breadcrumbOption;
+export type BreadcrumbOptionVariant = Exclude<ThemeVariant, 'flushed' | 'outlined'>;
 
 export type BreadcrumbOptionProps = {
 	label?: string;

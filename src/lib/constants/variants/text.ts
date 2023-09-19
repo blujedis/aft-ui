@@ -1,6 +1,6 @@
 import { mergeConfigs } from '$lib/theme';
 
-const text = {
+export const text = {
 	$base: '',
 	default: '',
 	dark: '',
@@ -13,7 +13,7 @@ const text = {
 	info: 'text-info-500'
 };
 
-const textHover = {
+export const textHover = {
 	$base: '',
 	default:
 		'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
@@ -27,7 +27,7 @@ const textHover = {
 	info: 'hover:text-info-700 dark:hover:text-info-600'
 };
 
-const textExpanded = {
+export const textExpanded = {
 	$base: '',
 	default: '',
 	dark: '',

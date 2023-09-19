@@ -70,7 +70,7 @@
 	<div class={breadcrumbOptionWrapperClasses}>
 		<slot>
 			{#if separator && index !== 0}
-				{#if variant === 'filled'}
+				{#if variant !== 'text'}
 					<svg
 						class:invisible={!mounted}
 						class={breadcrumbIconClasses}

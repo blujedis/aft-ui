@@ -14,7 +14,7 @@ const textFilled = {
 	info: 'text-white'
 };
 
-const bgFilled = {
+export const bgFilled = {
 	$base: '',
 	default: 'bg-frame-100 dark:bg-frame-500',
 	dark: 'bg-frame-500 dark:bg-frame-800',
@@ -27,7 +27,7 @@ const bgFilled = {
 	info: 'bg-info-500'
 };
 
-const bgFilledHover = {
+export const bgFilledHover = {
 	$base: '',
 	default: 'hover:bg-frame-200/70 dark:hover:bg-frame-600',
 	dark: 'hover:bg-frame-600 dark:hover:bg-frame-900',

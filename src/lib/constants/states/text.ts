@@ -1,4 +1,3 @@
-import { mergeConfigs } from '$lib/theme';
 
 export const textSoft = {
 	$base: '',
@@ -26,9 +25,8 @@ export const textHoverSoft = {
 	info: 'hover:text-info-400  dark:hover:text-info-600'
 };
 
-const textHover = {};
 
-export const textHoverFilled = mergeConfigs(textHover, {
+export const textHoverFilled =  {
 	$base: '',
 	default:
 		'text-[color:var(--text-dark)] hover:text-[color:var(--text-dark-hover)] dark:text-[color:var(--text-light)] dark:hover:text-[color:var(--text-light-hover)]',
@@ -40,7 +38,7 @@ export const textHoverFilled = mergeConfigs(textHover, {
 	warning: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	success: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	info: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]'
-});
+};
 
 export const textExpanded = {
 	default:

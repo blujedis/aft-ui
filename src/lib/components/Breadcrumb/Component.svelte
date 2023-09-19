@@ -35,7 +35,7 @@
 	$: breadcrumbNavClasses = th
 		.create('BreadcrumbNav')
 		.variant('globals', variant, theme, true)
-		.option('textSoft', theme, variant === 'filled') // creates muted arrows in filled.
+		.option('textSoft', theme, variant !== 'text') // creates muted arrows in filled.
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
@@ -43,7 +43,7 @@
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',
 			true
 		)
-		.append('!pl-0', variant !== 'filled')
+		.append('!pl-0', variant === 'text')
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -87,12 +87,11 @@
 
 <nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
-		<slot>
-			{#if generate}
-				{#each items as item}
-					<BreadcrumbOption {...item} />
-				{/each}
-			{/if}
-		</slot>
+		{#if generate}
+			{#each items as item}
+				<BreadcrumbOption {...item} />
+			{/each}
+		{/if}
+		<slot />
 	</ol>
 </nav>
