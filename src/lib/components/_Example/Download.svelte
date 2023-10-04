@@ -7,7 +7,12 @@
 	import { colors } from '$lib/constants';
 	import { themer } from '$lib/theme';
 	import { themeStore } from '$lib/theme';
-	import { variantFilled, variantOutlined } from '$lib/constants';
+	import {
+		variantFilled,
+		variantOutlined,
+		variantFilledHover,
+		variantOutlinedHover
+	} from '$lib/constants';
 	import classNames from 'classnames';
 
 	const title = 'Downloads';
@@ -51,9 +56,9 @@
 
 	<Section>
 		<div>Filled</div>
-		<div class="grid gric-cols-6 gap-2">
+		<div class="grid grid-cols-6 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-12')}>
+				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-4')}>
 					{color}
 				</div>
 			{/each}
@@ -62,9 +67,9 @@
 
 	<Section>
 		<div>Filled Hover</div>
-		<div class="grid gric-cols-6 gap-2">
+		<div class="grid grid-cols-6 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-12')}>
+				<div class={classNames(variantFilledHover.$base, variantFilledHover[color], 'p-4')}>
 					{color}
 				</div>
 			{/each}
@@ -72,9 +77,19 @@
 	</Section>
 
 	<Section>
-		<div class="grid gric-cols-6 gap-2">
+		<div class="grid grid-cols-6 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-12')}>
+				<div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4')}>
+					{color}
+				</div>
+			{/each}
+		</div>
+	</Section>
+
+	<Section>
+		<div class="grid grid-cols-6 gap-2 text-center">
+			{#each colors as color}
+				<div class={classNames(variantOutlinedHover.$base, variantOutlinedHover[color], 'p-4')}>
 					{color}
 				</div>
 			{/each}

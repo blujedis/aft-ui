@@ -972,7 +972,12 @@
 		}
 	},
 	"defaults": {
-		"component": { "focused": true, "size": "md", "theme": "light", "transitioned": true }
+		"component": {
+			"focused": true,
+			"size": "md",
+			"theme": "light",
+			"transitioned": true
+		}
 	},
 	"components": {
 		"accordion": {
@@ -1084,8 +1089,12 @@
 			}
 		},
 		"avatar": {
-			"single": { "$base": "ring-1 ring-black ring-opacity-5" },
-			"stacked": { "$base": "ring-white ring-2" }
+			"single": {
+				"$base": "ring-1 ring-black ring-opacity-5"
+			},
+			"stacked": {
+				"$base": "ring-white ring-2"
+			}
 		},
 		"avatarNotification": {
 			"filled": {
@@ -1969,12 +1978,30 @@
 			}
 		},
 		"notificationsPosition": {
-			"bottom-right": { "x": 400, "y": 0 },
-			"top-right": { "x": 400, "y": 0 },
-			"bottom-left": { "x": -400, "y": 0 },
-			"top-left": { "x": -400, "y": 0 },
-			"bottom-center": { "x": 0, "y": 0 },
-			"top-center": { "x": 0, "y": 0 }
+			"bottom-right": {
+				"x": 400,
+				"y": 0
+			},
+			"top-right": {
+				"x": 400,
+				"y": 0
+			},
+			"bottom-left": {
+				"x": -400,
+				"y": 0
+			},
+			"top-left": {
+				"x": -400,
+				"y": 0
+			},
+			"bottom-center": {
+				"x": 0,
+				"y": 0
+			},
+			"top-center": {
+				"x": 0,
+				"y": 0
+			}
 		},
 		"notification": {
 			"filled": {
