@@ -96,3 +96,14 @@
 		</div>
 	</Section>
 </ExamplePage>
+
+
+https://jcpa.org/wp-content/uploads/2013/10/TimeLine.pdf
+
+Fungible monies are held in Qatar to be used for verifiable humanitarian aid. While not yet spent, it allows Iran to use money appropriated for aid elsewhere. Such as sponsoring terror. 
+
+U.S. does provide tax dollars to Palestine, Biden restored in 2021.
+
+https://www.foxnews.com/politics/republicans-biden-unfreezing-6-billion-iran-hamas-attack-israel
+
+https://www.bbc.com/news/world-middle-east-56665199
