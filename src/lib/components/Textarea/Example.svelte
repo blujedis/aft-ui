@@ -23,20 +23,19 @@
 </script>
 
 <ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-4 gap-4">
+	<div class="grid grid-cols-4 gap-4 mb-4">
 		{#each colors as color}
-			<label for="filled">
-				<Textarea {...props} variant="filled" theme={color} />
-			</label>
-			<label for="filled">
-				<Textarea {...props} variant="ghost" theme={color} />
-			</label>
-			<label for="glass">
-				<Textarea {...props} variant="glass" theme={color} />
-			</label>
-			<label for="outline">
-				<Textarea {...props} variant="outlined" theme={color} />
-			</label>
+			<Textarea {...props} variant="filled" theme={color} />
+		{/each}
+	</div>
+	<div class="grid grid-cols-4 gap-4 mb-4">
+		{#each colors as color}
+			<Textarea {...props} variant="ghost" theme={color} />
+		{/each}
+	</div>
+	<div class="grid grid-cols-4 gap-4 mb-4">
+		{#each colors as color}
+			<Textarea {...props} variant="outlined" theme={color} />
 		{/each}
 	</div>
 </ExamplePage>
