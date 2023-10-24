@@ -56,9 +56,9 @@
 
 	<Section>
 		<div>Filled</div>
-		<div class="grid grid-cols-6 gap-2 text-center">
+		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-4')}>
+				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-4 py-8')}>
 					{color}
 				</div>
 			{/each}
@@ -67,7 +67,7 @@
 
 	<Section>
 		<div>Filled Hover</div>
-		<div class="grid grid-cols-6 gap-2 text-center">
+		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
 				<div class={classNames(variantFilledHover.$base, variantFilledHover[color], 'p-4')}>
 					{color}
@@ -77,7 +77,7 @@
 	</Section>
 
 	<Section>
-		<div class="grid grid-cols-6 gap-2 text-center">
+		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
 				<div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4')}>
 					{color}
@@ -87,7 +87,7 @@
 	</Section>
 
 	<Section>
-		<div class="grid grid-cols-6 gap-2 text-center">
+		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
 				<div class={classNames(variantOutlinedHover.$base, variantOutlinedHover[color], 'p-4')}>
 					{color}
@@ -96,14 +96,3 @@
 		</div>
 	</Section>
 </ExamplePage>
-
-
-https://jcpa.org/wp-content/uploads/2013/10/TimeLine.pdf
-
-Fungible monies are held in Qatar to be used for verifiable humanitarian aid. While not yet spent, it allows Iran to use money appropriated for aid elsewhere. Such as sponsoring terror. 
-
-U.S. does provide tax dollars to Palestine, Biden restored in 2021.
-
-https://www.foxnews.com/politics/republicans-biden-unfreezing-6-billion-iran-hamas-attack-israel
-
-https://www.bbc.com/news/world-middle-east-56665199

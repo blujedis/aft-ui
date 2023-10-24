@@ -1,5 +1,5 @@
-import { placeholder } from '../../constants/placeholder';
-import {} from '../options';
+import { placeholder } from '../../constants/states';
+import { } from '../options';
 
 export const switchBackdrop = {
 	filled: {

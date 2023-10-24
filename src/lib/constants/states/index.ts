@@ -9,3 +9,5 @@ export * from './fill';
 export * from './common';
 export * from './divideds';
 export * from './stripes';
+export * from './placeholders';
+export * from './stroke';

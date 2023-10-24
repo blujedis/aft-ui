@@ -1,4 +1,84 @@
 
+export const textBase = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: 'text-primary-500',
+	secondary: 'text-secondary-500',
+	tertiary: 'text-tertiary-500',
+	danger: 'text-danger-500',
+	warning: 'text-warning-500',
+	success: 'text-success-500',
+	info: 'text-info-500'
+};
+
+export const textHover = {
+	$base: '',
+	default:
+		'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
+	dark: 'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
+	primary: 'hover:text-primary-700 dark:hover:text-primary-600',
+	secondary: 'hover:text-secondary-700 dark:hover:text-secondary-600',
+	tertiary: 'hover:text-tertiary-700 dark:hover:text-tertiary-600',
+	danger: 'hover:text-danger-700 dark:hover:text-danger-600',
+	warning: 'hover:text-warning-700 dark:hover:text-warning-600',
+	success: 'hover:text-success-700 dark:hover:text-success-600',
+	info: 'hover:text-info-700 dark:hover:text-info-600'
+};
+
+export const textGhost = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: 'text-primary-500',
+	secondary: 'text-secondary-500',
+	tertiary: 'text-tertiary-500',
+	danger: 'text-danger-500',
+	warning: 'text-warning-500',
+	success: 'text-success-500',
+	info: 'text-info-500'
+};
+
+export const textGhostHover = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: 'hover:text-primary-700 dark:hover:text-primary-50',
+	secondary: 'hover:text-secondary-700 dark:hover:text-secondary-50',
+	tertiary: 'hover:text-tertiary-700 dark:hover:text-tertiary-50',
+	danger: 'hover:text-danger-700 dark:hover:text-danger-50',
+	warning: 'hover:text-warning-700 dark:hover:text-warning-50',
+	success: 'hover:text-success-700 dark:hover:text-success-50',
+	info: 'hover:text-info-700 dark:hover:text-info-50'
+};
+
+
+export const textExpanded = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: 'aria-expanded:text-primary-500 dark:aria-expanded:text-primary-500',
+	secondary: 'aria-expanded:text-secondary-500 dark:aria-expanded:text-secondary-500',
+	tertiary: 'aria-expanded:text-tertiary-500 dark:aria-expanded:text-tertiary-500',
+	danger: 'aria-expanded:text-danger-500 dark:aria-expanded:text-danger-500',
+	warning: 'aria-expanded:text-warning-500 dark:aria-expanded:text-warning-500',
+	success: 'aria-expanded:text-success-500 dark:aria-expanded:text-success-500',
+	info: 'aria-expanded:text-info-500 dark:aria-expanded:text-info-500'
+};
+
+// export const textExpanded = {
+// 	default:
+// 		'aria-expanded:text-[color:var(--text-dark)] dark:aria-expanded:text-[color:var(--text-light)]',
+// 	dark: 'aria-expanded:text-[color:var(--text-light)] dark:aria-expanded:text-[color:var(--text-light)]',
+// 	primary: 'aria-expanded:text-primary-700 dark:aria-expanded:text-primary-500',
+// 	secondary: 'aria-expanded:text-secondary-700 dark:aria-expanded:text-secondary-500',
+// 	tertiary: 'aria-expanded:text-tertiary-700 dark:aria-expanded:text-tertiary-500',
+// 	danger: 'aria-expanded:text-danger-700 dark:aria-expanded:text-danger-500',
+// 	warning: 'aria-expanded:text-warning-700 dark:aria-expanded:text-warning-500',
+// 	success: 'aria-expanded:text-success-700 dark:aria-expanded:text-success-500',
+// 	info: 'aria-expanded:text-info-700 dark:aria-expanded:text-info-500'
+// };
+
 export const textSoft = {
 	$base: '',
 	default: 'text-frame-300 dark:text-frame-400',
@@ -25,6 +105,18 @@ export const textHoverSoft = {
 	info: 'hover:text-info-400  dark:hover:text-info-600'
 };
 
+export const textFilled = {
+	$base: '',
+	default: 'text-[color:var(--text-dark)] dark:text-[color:var(--text-light)]',
+	dark: 'text-[color:var(--text-light)]',
+	primary: 'text-white',
+	secondary: 'text-white',
+	tertiary: 'text-white',
+	danger: 'text-white',
+	warning: 'text-white',
+	success: 'text-white',
+	info: 'text-white'
+};
 
 export const textHoverFilled =  {
 	$base: '',
@@ -38,19 +130,6 @@ export const textHoverFilled =  {
 	warning: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	success: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]',
 	info: 'text-[color:var(--text-light)] hover:text-[color:var(--text-light-hover)]'
-};
-
-export const textExpanded = {
-	default:
-		'aria-expanded:text-[color:var(--text-dark)] dark:aria-expanded:text-[color:var(--text-light)]',
-	dark: 'aria-expanded:text-[color:var(--text-light)] dark:aria-expanded:text-[color:var(--text-light)]',
-	primary: 'aria-expanded:text-primary-700 dark:aria-expanded:text-primary-500',
-	secondary: 'aria-expanded:text-secondary-700 dark:aria-expanded:text-secondary-500',
-	tertiary: 'aria-expanded:text-tertiary-700 dark:aria-expanded:text-tertiary-500',
-	danger: 'aria-expanded:text-danger-700 dark:aria-expanded:text-danger-500',
-	warning: 'aria-expanded:text-warning-700 dark:aria-expanded:text-warning-500',
-	success: 'aria-expanded:text-success-700 dark:aria-expanded:text-success-500',
-	info: 'aria-expanded:text-info-700 dark:aria-expanded:text-info-500'
 };
 
 export const textSelected = {
@@ -77,74 +156,18 @@ export const textCurrent = {
 	info: 'aria-current:text-info-700  dark:aria-current:text-info-500'
 };
 
-// export const textFlat = {
-// 	$base:
-// 		'aria-checked:text-[color:var(--text-light)] group-aria-checked:text-[color:var(--text-light)] aria-current:text-[color:var(--text-light)] aria-expanded:text-[color:var(--text-light)] aria-selected:text-[color:var(--text-light)]',
-// 	default:
-// 		'aria-checked:text-inherit group-aria-checked:text-inherit aria-current:text-inherit aria-expanded:text-inherit aria-selected:text-inherit',
-// 	dark: '',
-// 	primary: '',
-// 	secondary: '',
-// 	tertiary: '',
-// 	danger: '',
-// 	warning: '',
-// 	success: '',
-// 	info: ''
-// };
 
-// export const textFilledActive = {
-// 	$base:
-// 		'aria-checked:text-[color:var(--text-light)] group-aria-checked:text-[color:var(--text-light)] aria-current:text-[color:var(--text-light)] aria-expanded:text-[color:var(--text-light)] aria-selected:text-[color:var(--text-light)]',
-// 	default:
-// 		'aria-checked:text-inherit group-aria-checked:text-inherit aria-current:text-inherit aria-expanded:text-inherit aria-selected:text-inherit',
-// 	dark: '',
-// 	primary: '',
-// 	secondary: '',
-// 	tertiary: '',
-// 	danger: '',
-// 	warning: '',
-// 	success: '',
-// 	info: ''
-// };
+export const textOutlined = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: 'text-primary-500',
+	secondary: 'text-secondary-500',
+	tertiary: 'text-tertiary-500',
+	danger: 'text-danger-500',
+	warning: 'text-warning-500',
+	success: 'text-success-500',
+	info: 'text-info-500'
+};
 
-// export const textGhostActive = {
-// 	$base:
-// 		'aria-checked:text-[color:var(--text-light)] group-aria-checked:text-[color:var(--text-light)] aria-current:text-[color:var(--text-light)] aria-expanded:text-[color:var(--text-light)] aria-selected:text-[color:var(--text-light)]',
-// 	default:
-// 		'aria-checked:text-inherit group-aria-checked:text-inherit aria-current:text-inherit aria-expanded:text-inherit aria-selected:text-inherit',
-// 	dark: '',
-// 	primary: '',
-// 	secondary: '',
-// 	tertiary: '',
-// 	danger: '',
-// 	warning: '',
-// 	success: '',
-// 	info: ''
-// };
 
-// export const textGlassActive = {
-// 	$base:
-// 		'aria-checked:text-[color:var(--text-light)] group-aria-checked:text-[color:var(--text-light)] aria-current:text-[color:var(--text-light)] aria-expanded:text-[color:var(--text-light)] aria-selected:text-[color:var(--text-light)]',
-// 	default:
-// 		'aria-checked:text-inherit group-aria-checked:text-inherit aria-current:text-inherit aria-expanded:text-inherit aria-selected:text-inherit',
-// 	dark: '',
-// 	primary: '',
-// 	secondary: '',
-// 	tertiary: '',
-// 	danger: '',
-// 	warning: '',
-// 	success: '',
-// 	info: ''
-// };
-
-// export const textSelectedSoft = {
-// 	default: 'aria-selected:text-frame-300  dark:aria-selected:text-frame-500',
-// 	dark: 'aria-selected:text-frame-300 dark:aria-selected:text-frame-600',
-// 	primary: 'aria-selected:text-primary-300 dark:aria-selected:text-primary-700',
-// 	secondary: 'aria-selected:text-secondary-300 dark:aria-selected:text-secondary-700',
-// 	tertiary: 'aria-selected:text-tertiary-300 dark:aria-selected:text-tertiary-700',
-// 	danger: 'aria-selected:text-danger-300 dark:aria-selected:text-danger-700',
-// 	warning: 'aria-selected:text-warning-300 dark:aria-selected:text-warning-700',
-// 	success: 'aria-selected:text-success-300 dark:aria-selected:text-success-700',
-// 	info: 'aria-selected:text-info-300 dark:aria-selected:text-info-700'
-// };

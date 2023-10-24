@@ -1,6 +1,6 @@
 // import { text } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
-import { placeholder } from '../../constants/placeholder';
+import { placeholder } from '../../constants/states';
 
 const border = { ...placeholder };
 

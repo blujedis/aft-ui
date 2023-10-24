@@ -1,3 +1,42 @@
+export const ring = {
+	$base: 'ring-inset ring-1',
+	default: 'ring-frame-200 dark:ring-frame-500',
+	dark: 'ring-frame-500 dark:ring-frame-800',
+	primary: 'ring-primary-500',
+	secondary: 'ring-secondary-500',
+	tertiary: 'ring-tertiary-500',
+	danger: 'ring-danger-500',
+	warning: 'ring-warning-500',
+	success: 'ring-success-500',
+	info: 'ring-info-500'
+};
+
+export const ringHover = {
+	$base: 'ring-inset ring-1',
+	default: 'hover:ring-frame-300 dark:hover:ring-frame-500',
+	dark: 'hover:ring-frame-600 dark:hover:ring-frame-900',
+	primary: 'hover:ring-primary-700 dark:hover:ring-primary-700',
+	secondary: 'hover:ring-secondary-700 dark:hover:ring-secondary-700',
+	tertiary: 'hover:ring-tertiary-700 dark:hover:ring-tertiary-700',
+	danger: 'hover:ring-danger-700 dark:hover:ring-danger-700',
+	warning: 'hover:ring-warning-700 dark:hover:ring-warning-700',
+	success: 'hover:ring-success-700 dark:hover:ring-success-700',
+	info: 'hover:ring-info-700 dark:hover:ring-info-700'
+};
+
+export const ringHoverless = {
+	$base: 'ring-inset ring-1',
+	default: 'hover:ring-frame-200 dark:hover:ring-frame-500',
+	dark: 'hover:ring-frame-500 dark:hover:ring-frame-800',
+	primary: 'hover:ring-primary-500 dark:hover:ring-primary-500',
+	secondary: 'hover:ring-secondary-500 dark:hover:ring-secondary-500',
+	tertiary: 'hover:ring-tertiary-500 dark:hover:ring-tertiary-500',
+	danger: 'hover:ring-danger-500 dark:hover:ring-danger-500',
+	warning: 'hover:ring-warning-500 dark:hover:ring-warning-500',
+	success: 'hover:ring-success-500 dark:hover:ring-success-500',
+	info: 'hover:ring-info-500 dark:hover:ring-info-500'
+};
+
 export const ringSelected = {
 	$base: 'ring-inset ring-1',
 	default: 'aria-selected:ring-frame-300 dark:aria-selected:ring-frame-700',

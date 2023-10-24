@@ -20,7 +20,7 @@
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('w-full', full)
-		.append('inline-flex items-center justify-center', true)
+		.append('inline-flex items-center justify-center flex-col', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

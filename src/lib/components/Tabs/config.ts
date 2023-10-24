@@ -1,4 +1,4 @@
-import { placeholder } from '../../constants/placeholder';
+import { placeholder } from '../../constants/states';
 
 export const tabs = {
 	flushed: {
