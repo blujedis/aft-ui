@@ -1,6 +1,6 @@
 import type { SelectStore, SelectStoreValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { SelectListButtonVariant, SelectListButtonProps } from '../SelectListButton';
+import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
 
 export type SelectListItemKey = SelectStoreValue;
 
@@ -45,7 +45,7 @@ export type SelectListContextProps = {
 	tags?: boolean;
 	theme?: ThemeColor;
 	underlined?: boolean;
-	variant?: SelectListButtonVariant;
+	variant?: SelectListVariant;
 	onBeforeAdd?: SelectListButtonProps['onBeforeAdd'];
 	onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
 };

@@ -31,7 +31,7 @@
 		? th.create('Input').append($$restProps.class, true).compile(true)
 		: th
 				.create('Input')
-				.variant('globals', variant, theme, true)
+				.variant('input', variant, theme, variant)
 				.option('focusedRing', theme, focused && variant !== 'flushed')
 				.option('placeholders', theme, true)
 				.option('common', 'transition', transitioned)

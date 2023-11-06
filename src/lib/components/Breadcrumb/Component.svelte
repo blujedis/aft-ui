@@ -35,6 +35,7 @@
 	$: breadcrumbNavClasses = th
 		.create('BreadcrumbNav')
 		.variant('globals', variant, theme, true)
+		.variant('breadcrumb', variant, theme, variant)
 		.option('textSoft', theme, variant !== 'text') // creates muted arrows in filled.
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)

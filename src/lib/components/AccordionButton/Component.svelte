@@ -5,11 +5,7 @@
 	import type { AccordionOptionContext } from '../AccordionOption/module';
 	import type { AccordionContext } from '../Accordion/module';
 	// import { ConditionalElement } from '../ConditionalElement';
-	import {
-		type AccordianButtonProps,
-		variantMap,
-		accordionButtonDefaults as defaults
-	} from './module';
+	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
 	import type { ElementProps, IconifyTuple, ThemeVariantAppend } from '../../types';
 
 	type $$Props = AccordianButtonProps & ElementProps<'button'>;
@@ -47,10 +43,7 @@
 
 	$: accordionButtonClasses = th
 		.create('AccordionButton')
-		.variant('globals', 'textExpanded', theme, variant !== 'filled')
-		.variant('globals', 'filledActive', theme, variant === 'filled')
-		.variant('globals', 'itemExpanded', theme, variant === 'filled')
-		.variant('globals', 'borderExpanded', theme, variant === 'flushed')
+		.variant('accordionButton', variant, theme, variant)
 		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('common', 'bordered', ['outlined', 'flushed'].includes(variant))

@@ -38,11 +38,11 @@
 				<Input {...props} variant="filled" theme={color} placeholder="Last Name" />
 			</label>
 
-			<label for="glass">
-				<Input {...props} variant="glass" theme={color} placeholder="First Name" />
+			<label for="ghost">
+				<Input {...props} variant="ghost" theme={color} placeholder="First Name" />
 			</label>
 
-			<label for="link">
+			<label for="flushed">
 				<Input {...props} variant="flushed" theme={color} placeholder="DOB" />
 			</label>
 		</div>

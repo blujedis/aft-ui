@@ -1,12 +1,11 @@
 import type { SelectStore, SelectStoreValue } from '$lib/stores/select';
 import type { AccordianOptionProps } from '../AccordionOption';
-import type { HTMLTag, ThemeRounded, ThemeShadowed, ThemeVariant } from '../../types';
+import type { HTMLTag, ThemeRounded, ThemeShadowed } from '../../types';
 import { accordionOptionDefaults } from '../AccordionOption';
-
-export type AccordianVariant = Exclude<ThemeVariant, 'text' | 'ghost'>;
+import type { AccordionVariant } from '../AccordionButton/module';
 
 export type AccordionContext = SelectStore & {
-	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded; variant: AccordianVariant };
+	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded; variant: AccordionVariant };
 };
 
 export type AccordionProps<Tag extends HTMLTag> = Omit<
@@ -18,7 +17,7 @@ export type AccordionProps<Tag extends HTMLTag> = Omit<
 	selected?: SelectStoreValue[];
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
-	variant?: AccordianVariant;
+	variant?: AccordionVariant;
 };
 
 export const accordionDefaults: Partial<AccordionProps<'div'>> = {

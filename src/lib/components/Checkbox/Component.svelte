@@ -24,8 +24,7 @@
 
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
-		// variant called outlined for consistency but we use bordered variant here.
-		.variant('globals', 'borderedHover', theme, variant)
+		.variant('checkbox', variant, theme, variant)
 		.option('focusedRing', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('checkboxSizes', size, size)

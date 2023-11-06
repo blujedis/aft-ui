@@ -21,7 +21,7 @@
 
 	$: optionClasses = th
 		.create('MenuOption')
-		.variant('globals', 'itemHover', theme, variant)
+		.variant('menuOption', variant, theme, variant)
 		.append('focus:outline outline-frame-400 outline-2', true)
 		.option('focusedOutline', theme, true)
 		//.option('focusedOutlineSizes', 'two', true)

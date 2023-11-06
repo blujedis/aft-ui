@@ -1,5 +1,5 @@
 
-import { placeholder } from '../options';
+import { placeholder } from '$lib/constants';
 
 export const paginationPage = {
 	filled: {

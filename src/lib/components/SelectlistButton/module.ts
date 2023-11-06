@@ -2,9 +2,9 @@ import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
 import type { BadgeVariant } from '../Badge';
-import type { ThemeVariant } from '$lib/types';
+import type { selectListButton} from './config';
 
-export type SelectListButtonVariant = Exclude<ThemeVariant, 'text'>;
+export type SelectListVariant = keyof typeof selectListButton;
 
 export type SelectListButtonProps = InputProps & {
 	caret?: string | IconifyIcon;
@@ -14,7 +14,7 @@ export type SelectListButtonProps = InputProps & {
 	removable?: boolean;
 	roticon?: boolean;
 	tags?: boolean;
-	variant?: SelectListButtonVariant;
+	variant?: SelectListVariant;
 	badgeVariant?: BadgeVariant;
 	onBeforeAdd?: <T extends SelectListItem>(
 		value: string,

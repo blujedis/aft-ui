@@ -49,8 +49,8 @@
 	$: activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
 
 	$: containerClasses = th
-		.create('SelectListContainer')
-		.variant('globals', variant, theme, true)
+		.create('SelectListButton')
+		.variant('selectListButton', variant, theme, variant)
 		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)

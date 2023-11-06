@@ -4,10 +4,10 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned,
-	ThemeVariant
 } from '$lib/types';
+import type { badge } from './config';
 
-export type BadgeVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
+export type BadgeVariant = keyof typeof badge;
 
 export type BadgeProps = {
 	full?: boolean;

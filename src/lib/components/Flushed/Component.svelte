@@ -18,8 +18,8 @@
 
 	$: flushedClasses = th
 		.create('Flushed')
-		.variant('globals', 'flushed', theme, true)
-		.variant('globals', 'flushedHover', theme, hover)
+		.variant('flushed', 'default', theme, true)
+		.variant('flushed', 'hovered', theme, hover)
 		.option('focusedBorderPeer', theme, peer)
 		.append('peer-focus:border-t-2', peer)
 		.append('group-focus-within:border-t-2', group)

@@ -16,7 +16,7 @@
 		? th.create('Badge').append($$restProps.class, true).compile()
 		: th
 				.create('Badge')
-				.variant('globals', variant, theme, variant)
+				.variant('badge', variant, theme, variant)
 				.option('common', 'transition', transitioned)
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)

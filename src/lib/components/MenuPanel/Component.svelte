@@ -22,7 +22,7 @@
 
 	$: panelClasses = th
 		.create('MenuPanel')
-		.variant('globals', 'panel', theme, true)
+		.variant('menuPanel', variant, theme, variant)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append(`dropdown-panel absolute z-30 mt-1 min-w-max focus:outline-none none`, true)

@@ -13,7 +13,7 @@
 
 	$: kbdClasses = themer($themeStore)
 		.create('Kbd')
-		.variant('globals', variant, theme, true)
+		.variant('kbd', variant, theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('badgePadding', size, size)
 		.option('badgeFontSizes', size, size)

@@ -1,9 +1,9 @@
 import type { SelectStoreValue } from '$lib/stores/select';
-import type { ThemeColor, HTMLTag, Iconify, ThemeVariant } from '../../types';
+import type { ThemeColor, Iconify } from '../../types';
 import type { ButtonProps } from '../Button';
-import type { globals } from '../configs';
+import type { accordionButton } from './config';
 
-export type AccordionButtonVariant = Exclude<ThemeVariant, 'text' | 'ghost'>;
+export type AccordionVariant = keyof typeof accordionButton
 
 export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full'> & {
 	caret?: Iconify; // AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
@@ -11,7 +11,7 @@ export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full
 	roticon?: boolean | string; // when true rotate expand icon ignore collapse.
 	key?: SelectStoreValue;
 	theme?: ThemeColor;
-	variant?: AccordionButtonVariant;
+	variant?: AccordionVariant;
 };
 
 export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
@@ -22,9 +22,3 @@ export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
 	theme: 'default',
 	variant: 'outlined'
 };
-
-export const variantMap = {
-	flushed: 'textExpanded',
-	filled: 'itemExpanded',
-	outlined: 'textExpanded'
-} as Record<Exclude<ThemeVariant, 'text'>, keyof typeof globals>;

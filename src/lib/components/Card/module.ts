@@ -1,13 +1,13 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-import type { CardElementVariant } from '../CardElement';
+import type { CardVariant } from '../CardElement';
 
 export type CardContext = {
 	globals: {
 		size?: ThemeSize;
 		theme?: ThemeColor;
 		horizontal?: boolean;
-		variant?: CardElementVariant;
+		variant?: CardVariant;
 	};
 };
 
@@ -19,7 +19,7 @@ export type CardProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	variant?: CardElementVariant;
+	variant?: CardVariant;
 	maxwidth?: ThemeSize;
 };
 

@@ -27,7 +27,7 @@
 
 	$: notificationClasses = th
 		.create('Notification')
-		.variant('notification', variant, theme, true)
+		.variant('notification', variant, theme, variant)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80', true)

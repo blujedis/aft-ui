@@ -5,9 +5,9 @@ import type {
 	ThemeSize,
 	ThemeTransitioned
 } from '$lib/types';
-// import type { empty } from './config';
+import type { empty } from './config';
 
-export type EmptyVariant = 'outlined';
+export type EmptyVariant = keyof typeof empty;
 
 export type EmptyProps = {
 	as?: 'button' | 'link' | 'div' | 'span' | 'label';

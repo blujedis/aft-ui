@@ -1,7 +1,4 @@
 import type { ThemeColor, ThemeFocused } from '../../types';
-// import type { flushed } from './config';
-
-// export type FlushedVariant = keyof typeof flushed;
 
 export type FlushedProps = {
 	disabled?: boolean;
@@ -11,11 +8,9 @@ export type FlushedProps = {
 	hover?: boolean;
 	active?: boolean;
 	theme?: ThemeColor;
-	// variant?: FlushedVariant;
 };
 
 export const flushedDefaults: Partial<FlushedProps> = {
 	peer: true,
 	theme: 'default'
-	// variant: 'flushed'
 };

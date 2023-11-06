@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ButtonGroup } from '.';
-	import { ButtonGroupItem, type ButtonGroupItemVariant } from '../ButtonGroupItem';
+	import { ButtonGroupItem, type ButtonGroupVariant } from '../ButtonGroupItem';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import type {
 		ThemeColor,
@@ -26,7 +26,7 @@
 		theme: 'default' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		underlined: false,
-		variant: 'filled' as ButtonGroupItemVariant
+		variant: 'filled' as ButtonGroupVariant
 	};
 
 	const buttons = [

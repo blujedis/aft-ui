@@ -24,8 +24,7 @@
 
 	$: checkboxClasses = themer($themeStore)
 		.create('Radio')
-		// variant called outlined for consistency but we use bordered variant here.
-		.variant('globals', 'borderedHover', theme, variant)
+		.variant('radio', variant, theme, variant)
 		.option('focusedRing', theme, focused)
 		.option('common', 'transition', transitioned)
 		.option('iconSizes', size, size)

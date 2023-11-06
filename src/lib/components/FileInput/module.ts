@@ -1,6 +1,3 @@
-import type { fileInput } from './config';
-
-export type FileInputVariant = keyof typeof fileInput;
 
 export type FileInputReaderType = 'text' | 'url' | 'binary' | 'buffer';
 

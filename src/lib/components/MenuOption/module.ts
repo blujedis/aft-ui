@@ -1,6 +1,5 @@
-import type { ThemeColor, ThemeSize, ThemeVariant } from '$lib/types';
-
-export type MenuOptionVariant = Exclude<ThemeVariant, 'text'>; //  keyof typeof menuOption;
+import type { ThemeColor, ThemeSize } from '$lib/types';
+import type { MenuButtonVariant } from '../MenuButton';
 
 export type MenuOptionProps<Tag extends 'a' | 'button'> = {
 	active?: boolean;
@@ -8,7 +7,7 @@ export type MenuOptionProps<Tag extends 'a' | 'button'> = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	key?: string | number;
-	variant?: MenuOptionVariant;
+	variant?: MenuButtonVariant;
 };
 
 export const menuOptionDefaults: MenuOptionProps<'a'> = {

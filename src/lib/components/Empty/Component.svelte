@@ -13,8 +13,7 @@
 
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
-		// variant called outlined for consistency but we use bordered variant here.
-		.variant('globals', 'bordered', theme, variant)
+		.variant('empty', variant, theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('emptySizes', size, size)
 		.option('roundeds', rounded, rounded)

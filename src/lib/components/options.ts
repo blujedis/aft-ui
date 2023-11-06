@@ -1,6 +1,6 @@
 export * from '../constants/options';
-export * from '../constants/variants';
 export * from '../constants/states';
+// export * from '../constants/variants';
 
 // Component Options
 

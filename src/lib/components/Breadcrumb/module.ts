@@ -4,8 +4,9 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned,
-	ThemeVariant
 } from '$lib/types';
+
+import type { BreadcrumbVariant } from '../BreadcrumbOption/module';
 
 export type BreadcrumbContext = {
 	globals: {
@@ -17,8 +18,6 @@ export type BreadcrumbContext = {
 		variant: BreadcrumbVariant;
 	};
 };
-
-export type BreadcrumbVariant = Exclude<ThemeVariant, 'flushed' | 'outlined'>;
 
 export type BreadcrumbProps = {
 	full?: boolean;

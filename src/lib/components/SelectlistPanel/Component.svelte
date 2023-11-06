@@ -40,7 +40,7 @@
 
 	$: panelClasses = th
 		.create('SelectListPanel')
-		.variant('selectListPanel', variant, theme, true)
+		.variant('selectListPanel', variant, theme, variant)
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true)

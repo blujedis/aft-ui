@@ -18,7 +18,7 @@
 
 	$: cardElementClasses = th
 		.create('CardContent')
-		.variant('globals', variant, theme, variant)
+		.variant('cardElement', variant, theme, variant)
 		.option('cardPadding', size, size && type === 'content')
 		.option('cardPaddingHeader', size, size && type === 'header')
 		.option('cardPaddingFooter', size, size && type === 'footer')
