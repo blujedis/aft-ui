@@ -35,7 +35,7 @@
 
 	$: gridSearchInputClasses = th
 		.create('DataGridSearchInput')
-		.variant('gridSearch', variant, theme, variant)
+		// .variant('gridSearch', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('focusedOutline', typeof focused === 'string' ? focused : theme, focused)

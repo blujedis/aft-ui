@@ -1,34 +1,19 @@
-import //	textHover,
-'$lib/constants';
-import { mergeConfigs } from '$lib/theme';
 
-// solidGlassHover, bgAriaSelected
-const baseVariant = mergeConfigs(
-	{},
-	{
-		$base: 'text-frame-500 aria-selected:text-white',
-		default: 'aria-selected:text-[color:var(--text-dark)]'
-	}
-);
+import { placeholder } from '../options';
 
 export const paginationPage = {
 	filled: {
-		...baseVariant
+		...placeholder,
+		$base: 'text-frame-500 aria-selected:text-white',
+		default: 'aria-selected:text-[color:var(--text-dark)]'
 	},
-	// textAriaSelected, borderAriaSelected, textHover,
-	flushed: mergeConfigs(
-		{},
-		{
-			$base: 'dark:border-black dark:border-opacity-40 aria-selected:border-opacity-100',
-			dark: 'aria-selected:border-frame-600'
-		}
-	),
-
-	// bgAriaGlassSelected, solidGlassHover,
-	glass: mergeConfigs(
-		{},
-		{
-			$base: 'text-frame-500 aria-selected:text-white'
-		}
-	)
+	flushed:
+	{
+		$base: 'dark:border-black dark:border-opacity-40 aria-selected:border-opacity-100',
+		dark: 'aria-selected:border-frame-600'
+	},
+	ghost:
+	{
+		$base: 'text-frame-500 aria-selected:text-white'
+	}
 };

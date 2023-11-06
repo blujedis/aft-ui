@@ -1,4 +1,4 @@
-import { placeholder, variantFilled, variantGhost } from '$lib/constants';
+import { placeholder } from '$lib/constants';
 
 export const gridSearch = {
 	filled: { ...placeholder },

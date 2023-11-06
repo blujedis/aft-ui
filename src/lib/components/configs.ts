@@ -54,13 +54,15 @@ export const globals = {
 	itemCheckedFilled: { ...variantItemCheckedFilled }
 };
 
+// export * from './DataGrid/config';
+// export * from './DataGridRow/config';
+// export * from './DataGridSearch/config';
+
 export * from './BreadcrumbOption/config';
 export * from './ButtonGroupItem/config';
-export * from './DataGrid/config';
 export * from './DataGridFilter/config';
 export * from './DataGridHeader/config';
-export * from './DataGridRow/config';
-export * from './DataGridSearch/config';
+
 export * from './Notifications/config';
 export * from './Notification/config';
 export * from './PaginationDetail/config';
@@ -70,6 +72,5 @@ export * from './ProgressCircle/config';
 export * from './Range/config';
 export * from './SelectListOption/config';
 export * from './Switch/config';
-export * from './DataGrid/config';
 export * from './Tab/config';
 export * from './Tabs/config';

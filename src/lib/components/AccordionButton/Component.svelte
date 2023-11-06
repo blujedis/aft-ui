@@ -46,7 +46,7 @@
 	const th = themer($themeStore);
 
 	$: accordionButtonClasses = th
-		.create('Accordion')
+		.create('AccordionButton')
 		.variant('globals', 'textExpanded', theme, variant !== 'filled')
 		.variant('globals', 'filledActive', theme, variant === 'filled')
 		.variant('globals', 'itemExpanded', theme, variant === 'filled')

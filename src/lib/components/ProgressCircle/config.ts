@@ -1,17 +1,9 @@
-import { fill, stroke } from '$lib/constants';
+import { fill, stroke, placeholder } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
 
 const baseTrackVariant = {
+	...placeholder,
 	$base: 'stroke-frame-100 dark:stroke-frame-600',
-	light: '',
-	dark: '',
-	primary: '',
-	secondary: '',
-	tertiary: '',
-	danger: '',
-	warning: '',
-	success: '',
-	info: ''
 };
 
 const baseValueVariant = mergeConfigs(stroke, {

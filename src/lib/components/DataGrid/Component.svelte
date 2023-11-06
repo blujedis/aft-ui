@@ -89,7 +89,7 @@
 
 	$: gridClasses = th
 		.create('DataGrid')
-		.variant('grid', variant, theme, true)
+		// .variant('grid', variant, theme, true)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.option('common', 'divided', divided)

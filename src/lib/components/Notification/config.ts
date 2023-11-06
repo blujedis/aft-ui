@@ -1,6 +1,5 @@
-// import { text } from '$lib/constants';
 import { mergeConfigs } from '$lib/theme';
-import { placeholder } from '../../constants/states';
+import { placeholder } from '$lib/constants';
 
 const border = { ...placeholder };
 
@@ -12,8 +11,7 @@ export const notification = {
 
 export const notificationIcon = {
 	filled: {
-		// ...text,
-		$base: ''
+		...placeholder
 	}
 };
 

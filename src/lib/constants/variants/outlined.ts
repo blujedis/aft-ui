@@ -1,9 +1,6 @@
 import { mergeConfigs } from '$lib/theme';
 import { border, borderHover, borderHoverGroup, ring, ringHover, textOutlined, borderExpanded, ringHoverless } from '../states';
 
-
-
-
 export const variantOutlined = mergeConfigs(textOutlined, ring, { $base: 'bg-transparent' });
 
 export const variantOutlinedHover = mergeConfigs(variantOutlined, ringHover);

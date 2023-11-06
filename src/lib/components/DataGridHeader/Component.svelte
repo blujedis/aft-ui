@@ -43,8 +43,6 @@
 		.prepend('datagrid__header shadow-sm', true)
 		.compile(true);
 
-	$: console.log(variant, theme);
-
 	$: gridHeaderClasses = th
 		.create('DataGridHeader')
 		.variant('gridHeader', variant, theme, variant)
