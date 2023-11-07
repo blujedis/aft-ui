@@ -1,4 +1,5 @@
 import { plugin, generateTailwindVars, defaultColors } from '@aft/config';
+import twcolors from 'tailwindcss/colors';
 
 
 const themeColors = {
@@ -6,18 +7,20 @@ const themeColors = {
 	white: '#ffffff',
 	black: '#000000',
 	frame: {
-		DEFAULT: '#64748B',
-		50: '#F3F5F6',
-		100: '#F0F2F4',
-		200: '#E4E7EC',
-		300: '#D5DAE1',
-		400: '#B8C0CC',
-		500: '#66778E',
-		600: '#444F5F',
-		700: '#2D343E',
-		800: '#1C2027',
-		900: '#0F1115',
-		950: '#060709'
+		DEFAULT: twcolors.gray[500],
+		...twcolors.gray
+		//DEFAULT: '#64748B',
+		// 50: '#F3F5F6',
+		// 100: '#F0F2F4',
+		// 200: '#E4E7EC',
+		// 300: '#D5DAE1',
+		// 400: '#B8C0CC',
+		// 500: '#66778E',
+		// 600: '#444F5F',
+		// 700: '#2D343E',
+		// 800: '#1C2027',
+		// 900: '#0F1115',
+		// 950: '#060709'
 	}
 };
 

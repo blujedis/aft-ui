@@ -3,7 +3,7 @@
 	import { themer, themeStore } from '../../theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps, ThemeVariantAlt } from '../../types';
+	import type { ElementProps } from '../../types';
 
 	type $$Props = TextareaProps & Omit<ElementProps<'input'>, 'size'>;
 
@@ -25,7 +25,7 @@
 
 	$: textareaClasses = themer($themeStore)
 		.create('Textarea')
-		.variant('globals', `${variant}Hover` as ThemeVariantAlt<typeof variant>, theme, true)
+		.variant('textarea', variant, theme, variant)
 		.option('focusedRing', theme, focused)
 		.option('placeholders', theme, true)
 		.option('common', 'transition', transitioned)

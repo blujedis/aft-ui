@@ -30,6 +30,7 @@
 		<a href="/popover">Popover</a>
 		<a href="/progressbar">Progress Bar</a>
 		<a href="/progresscircle">Progress Circle</a>
+		<a href="/radio">Radio</a>
 		<a href="/range">Range</a>
 		<a href="/rating">Rating</a>
 		<a href="/select">Select</a>

@@ -53,8 +53,8 @@
 	$: avatarNotificationClasses =
 		(notification &&
 			th
-				.create('AvatarNotification')
-				.variant('globals', variant, theme, true)
+				.create('Avatar')
+				.variant('avatar', variant, theme, variant)
 				.option('avatarNotificationSizes', size, size)
 				.option('animate', animate, animate)
 				.remove('ring-inset', variant === 'outlined')
@@ -69,7 +69,7 @@
 		(_placeholder &&
 			th
 				.create('AvatarPlaceholder')
-				.variant('globals', variant, theme, true)
+				.variant('avatar', variant, theme, variant)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.option('avatarSizes', size, size)

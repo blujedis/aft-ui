@@ -16,7 +16,7 @@
 
 	$: inputClasses = th
 		.create('Tile')
-		.variant('globals', variant, theme, true)
+		.variant('tile', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
 		.option('boxPadding', size, size)
 		.option('roundeds', rounded, rounded)

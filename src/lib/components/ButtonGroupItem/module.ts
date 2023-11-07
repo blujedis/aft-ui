@@ -3,8 +3,9 @@ import type { buttonGroupItem } from './config';
 
 export type ButtonGroupVariant = keyof typeof buttonGroupItem;
 
-export type ButtonGroupItemProps = Omit<ButtonProps<'button' | 'a'>, 'shadowed'> & {
+export type ButtonGroupItemProps = Omit<ButtonProps<'button' | 'a'>, 'shadowed' | 'variant'> & {
 	value: string | number;
+	variant?: ButtonGroupVariant;
 };
 
 export const buttonGroupItemDefaults: Partial<ButtonGroupItemProps> = {

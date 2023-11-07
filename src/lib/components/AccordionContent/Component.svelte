@@ -25,7 +25,7 @@
 
 	$: accordionContentClasses = th
 		.create('AccordionContent')
-		.variant('globals', 'filledActive', theme, variant === 'filled')
+		.variant('accordionContent', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.append('mb-2', true)

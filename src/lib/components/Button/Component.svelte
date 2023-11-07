@@ -29,6 +29,8 @@
 
 	const th = themer($themeStore);
 
+	const href = '#';
+
 	$: isStrong = strong || (as === 'button' && typeof strong === 'undefined');
 
 	$: buttonClasses = unstyled
@@ -71,7 +73,7 @@
 		{/if}
 	</button>
 {:else}
-	<a use:forwardedEvents href="#" {...$$restProps} class={buttonClasses} aria-disabled={disabled}>
+	<a use:forwardedEvents {href} {...$$restProps} class={buttonClasses} aria-disabled={disabled}>
 		{#if isStrong || buttonClasses.includes('uppercase')}
 			<div class="pt-px">
 				<slot />

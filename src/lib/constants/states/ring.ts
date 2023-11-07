@@ -13,7 +13,7 @@ export const ring = {
 
 export const ringHover = {
 	$base: 'ring-inset ring-1',
-	default: 'hover:ring-frame-300 dark:hover:ring-frame-500',
+	default: 'hover:ring-frame-300 dark:hover:ring-frame-600',
 	dark: 'hover:ring-frame-600 dark:hover:ring-frame-900',
 	primary: 'hover:ring-primary-700 dark:hover:ring-primary-700',
 	secondary: 'hover:ring-secondary-700 dark:hover:ring-secondary-700',

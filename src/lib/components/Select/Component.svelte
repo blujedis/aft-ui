@@ -38,7 +38,7 @@
 
 	$: inputClasses = th
 		.create('Select')
-		.variant('globals', variant, theme, true)
+		.variant('input', variant, theme, variant)
 		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transition', transitioned)
 		.option('placeholders', theme, true)

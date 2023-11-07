@@ -34,11 +34,7 @@
 
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
-		//	.variant('buttonGroupItem', variant, theme, true)
-		.variant('globals', 'itemChecked', theme, variant === 'outlined')
-		.variant('globals', 'itemCheckedGhost', theme, variant === 'ghost')
-		.variant('globals', 'itemCheckedFilled', theme, variant === 'filled')
-		.variant('globals', 'outlinedHoverless', theme, variant === 'outlined')
+		.variant('buttonGroupItem', variant, theme, variant)
 		.option('buttonPadding', size, size)
 		.append('px-1', variant === 'text')
 		.append(

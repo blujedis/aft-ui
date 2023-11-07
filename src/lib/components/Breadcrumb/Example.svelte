@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Section from '../_Example/Section.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import { Breadcrumb, type BreadcrumbVariant } from '.';
+	import { Breadcrumb } from '.';
 	import { BreadcrumbOption } from '../BreadcrumbOption';
 	import { colors } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
@@ -18,7 +18,7 @@
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
 		transitioned: false as boolean,
-		variant: 'text' as BreadcrumbVariant
+		variant: 'text' as any
 	};
 </script>
 

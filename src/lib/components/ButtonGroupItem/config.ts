@@ -1,37 +1,18 @@
-import { placeholder } from '$lib/constants';
-
-
-// bgAriaChecked, textFilled
-const baseVariant =
-{
-	$base: 'border border-transparent'
-};
+import { placeholder } from '$lib/constants/states';
+import { variantItemChecked, variantItemCheckedFilled, variantOutlinedHoverless, variantItemCheckedGhost } from '$lib/constants/variants';
+import { mergeConfigs } from '$lib/theme';
 
 export const buttonGroupItem = {
 	filled: {
-		...baseVariant
+		...variantItemCheckedFilled
 	},
-
-	// bgAriaChecked
-	outlined:
-	{
-		$base: 'bg-transparent aria-checked:text-white hover:z-10'
-		// light:
-		// 	'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
-	},
-
-	text: {
-		...placeholder,
-		$base: 'no-underline aria-checked:underline',
-		dark: 'text-inherit'
-	},
-
-	// bgAriaChecked
+	outlined: mergeConfigs(variantOutlinedHoverless, variantItemChecked),
 	ghost:
 	{
-		$base: 'aria-checked:text-white'
-		// light:
-		// 	'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
+		...variantItemCheckedGhost
+	},
+	text: {
+		...placeholder,
 	}
-
 };
+

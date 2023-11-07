@@ -33,8 +33,7 @@
 	$: items = generateBreadcrumbs();
 
 	$: breadcrumbNavClasses = th
-		.create('BreadcrumbNav')
-		.variant('globals', variant, theme, true)
+		.create('Breadcrumb')
 		.variant('breadcrumb', variant, theme, variant)
 		.option('textSoft', theme, variant !== 'text') // creates muted arrows in filled.
 		.option('roundeds', rounded, rounded)

@@ -17,32 +17,32 @@ export const textHover = {
 	default:
 		'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
 	dark: 'hover:text-[color:var(--text-dark-hover)] dark:hover:text-[color:var(--text-light-hover)]',
-	primary: 'hover:text-primary-700 dark:hover:text-primary-600',
-	secondary: 'hover:text-secondary-700 dark:hover:text-secondary-600',
-	tertiary: 'hover:text-tertiary-700 dark:hover:text-tertiary-600',
-	danger: 'hover:text-danger-700 dark:hover:text-danger-600',
-	warning: 'hover:text-warning-700 dark:hover:text-warning-600',
-	success: 'hover:text-success-700 dark:hover:text-success-600',
-	info: 'hover:text-info-700 dark:hover:text-info-600'
+	primary: 'hover:text-primary-700 dark:hover:text-primary-700',
+	secondary: 'hover:text-secondary-700 dark:hover:text-secondary-700',
+	tertiary: 'hover:text-tertiary-700 dark:hover:text-tertiary-700',
+	danger: 'hover:text-danger-700 dark:hover:text-danger-700',
+	warning: 'hover:text-warning-700 dark:hover:text-warning-700',
+	success: 'hover:text-success-700 dark:hover:text-success-700',
+	info: 'hover:text-info-700 dark:hover:text-info-700'
 };
 
 export const textGhost = {
 	$base: '',
 	default: '',
-	dark: '',
-	primary: 'text-primary-500',
-	secondary: 'text-secondary-500',
-	tertiary: 'text-tertiary-500',
-	danger: 'text-danger-500',
-	warning: 'text-warning-500',
-	success: 'text-success-500',
-	info: 'text-info-500'
+	dark: 'dark:text-[color:var(--text-light-hover)]',
+	primary: 'text-primary-500 dark:text-primary-200',
+	secondary: 'text-secondary-500 dark:text-secondary-200',
+	tertiary: 'text-tertiary-500 dark:text-tertiary-200',
+	danger: 'text-danger-500 dark:text-danger-200',
+	warning: 'text-warning-500 dark:text-warning-200',
+	success: 'text-success-500 dark:text-success-200',
+	info: 'text-info-500 dark:text-info-200'
 };
 
 export const textGhostHover = {
 	$base: '',
 	default: '',
-	dark: '',
+	dark: 'hover:text-white',
 	primary: 'hover:text-primary-700 dark:hover:text-primary-50',
 	secondary: 'hover:text-secondary-700 dark:hover:text-secondary-50',
 	tertiary: 'hover:text-tertiary-700 dark:hover:text-tertiary-50',
@@ -65,19 +65,6 @@ export const textExpanded = {
 	success: 'aria-expanded:text-success-500 dark:aria-expanded:text-success-500',
 	info: 'aria-expanded:text-info-500 dark:aria-expanded:text-info-500'
 };
-
-// export const textExpanded = {
-// 	default:
-// 		'aria-expanded:text-[color:var(--text-dark)] dark:aria-expanded:text-[color:var(--text-light)]',
-// 	dark: 'aria-expanded:text-[color:var(--text-light)] dark:aria-expanded:text-[color:var(--text-light)]',
-// 	primary: 'aria-expanded:text-primary-700 dark:aria-expanded:text-primary-500',
-// 	secondary: 'aria-expanded:text-secondary-700 dark:aria-expanded:text-secondary-500',
-// 	tertiary: 'aria-expanded:text-tertiary-700 dark:aria-expanded:text-tertiary-500',
-// 	danger: 'aria-expanded:text-danger-700 dark:aria-expanded:text-danger-500',
-// 	warning: 'aria-expanded:text-warning-700 dark:aria-expanded:text-warning-500',
-// 	success: 'aria-expanded:text-success-700 dark:aria-expanded:text-success-500',
-// 	info: 'aria-expanded:text-info-700 dark:aria-expanded:text-info-500'
-// };
 
 export const textSoft = {
 	$base: '',
@@ -118,7 +105,7 @@ export const textFilled = {
 	info: 'text-white'
 };
 
-export const textHoverFilled =  {
+export const textHoverFilled = {
 	$base: '',
 	default:
 		'text-[color:var(--text-dark)] hover:text-[color:var(--text-dark-hover)] dark:text-[color:var(--text-light)] dark:hover:text-[color:var(--text-light-hover)]',

@@ -19,7 +19,7 @@
 
 	$: inputClasses = th
 		.create('SelectOption')
-		.variant('globals', 'outlinedHover', theme, variant)
+		.variant('selectOption', variant, theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)

@@ -24,7 +24,7 @@
 
 	$: labelClasses = themer($themeStore)
 		.create('Label')
-		.variant('globals', variant, theme, true)
+		.variant('label', variant, theme, variant)
 		.option('common', 'transition', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', rounded, rounded)

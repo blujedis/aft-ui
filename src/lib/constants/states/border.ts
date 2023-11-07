@@ -37,8 +37,6 @@ export const borderHoverGroup = {
 	info: 'group-hover:border-info-700 dark:group-hover:border-info-700'
 };
 
-
-
 export const borderFlushed = {
 	$base: '',
 	default: 'border-frame-200 dark:border-frame-300',

@@ -2,7 +2,6 @@
 	import {
 		type BreadcrumbOptionProps,
 		breadcrumbOptionDefaults as defaults,
-		variantMap
 	} from './module';
 	import { themer, themeStore } from '../../theme';
 	import type { ElementProps } from '../../types';
@@ -37,7 +36,7 @@
 
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
-		.variant('globals', variantMap[variant], theme, variant)
+		.variant('breadcrumbOption', variant, theme, variant)
 		.option('textHoverFilled', theme, variant === 'filled') // override for filled items.
 		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
 		.option('common', 'transition', transitioned)

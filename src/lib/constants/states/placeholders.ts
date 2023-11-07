@@ -16,7 +16,7 @@ export const placeholder = {
 const placeholdersDark = {
 	$base: '',
 	default: 'dark:placeholder:text-frame-500',
-	dark: 'dark:placeholder:text-frame-400',
+	dark: 'dark:placeholder:text-frame-500',
 	primary: 'dark:placeholder:text-primary-700',
 	secondary: 'dark:placeholder:text-secondary-700',
 	tertiary: 'dark:placeholder:text-tertiary-700',

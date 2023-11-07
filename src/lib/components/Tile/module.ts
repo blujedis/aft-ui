@@ -4,11 +4,10 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 	ThemeTransitioned,
-	ThemeVariant
 } from '$lib/types';
-// import type { tile } from './config';
+import type { tile } from './config';
 
-export type TileVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
+export type TileVariant = keyof typeof tile;
 
 export type TileProps = {
 	full?: boolean;
