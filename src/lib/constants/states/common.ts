@@ -4,5 +4,7 @@ export const common = {
 	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
 	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
 	transition: 'transition-colors duration-125 motion-reduce:transition-none',
-	untransition: 'transition-none'
+	untransition: 'transition-none',
+	hovered: 'brightness-110',
+	unhovered: 'brightness-100'
 };
