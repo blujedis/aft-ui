@@ -1,10 +1,12 @@
 import type { ThemeColor, DeepPartial } from '$lib/types';
 
-type ThemeTokenValue = string | number | [string | number, (string | number)?];
-type ThemeTokenType = 'bg' | 'text' | 'ring' | 'border';
-type ThemeTokenGroup = 'root' | 'selected' | 'expanded' | 'current' | 'focused';
+type ThemeTokenTuple = [string | number, (string | number)?]
+type ThemeTokenValue = string | number | ThemeTokenTuple;
 type ThemeTokenConfig = Record<ThemeColor | 'base', ThemeTokenValue>;
-type ThemeTokenMap = Record<ThemeTokenType, Record<ThemeTokenGroup, ThemeTokenConfig>>;
+type ThemeTokenNormalizedConfig = Record<ThemeColor | 'base', [string, string]>;
+// type ThemeTokenType = 'bg' | 'text' | 'ring' | 'border';
+// type ThemeTokenGroup = 'root' | 'selected' | 'expanded' | 'current' | 'focused';
+// type ThemeTokenMap = Record<ThemeTokenType, Record<ThemeTokenGroup, ThemeTokenConfig>>;
 
 const colors = {
   default: 'frame',
@@ -18,112 +20,84 @@ const colors = {
   info: 'info',
 };
 
-const temp = {
+const tokenMap = {
 
-  bg: {
-    filled: {},
-    ghost: {},
-    text: {},
-    flushed: {}
-  },
-  text: {
-    filled: {},
-    ghost: {},
-    text: {},
-    flushed: {}
-  },
+  // [COMMON]
+
   ring: {
-    filled: {},
-    ghost: {},
-    text: {},
-    flushed: {}
+    base: 'bg-filled.base',
+    default: 'bg-filled.default',
+    dark: 'bg-filled.dark'
   },
+
   border: {
-    filled: {},
-    ghost: {},
-    text: {},
-    flushed: {}
+    base: 'ring.base',
+    default: 'ring.default',
+    dark: 'ring.dark'
+  },
+
+  // [FILLED]
+
+  'bg-filled': {
+    base: 500,
+    default: ['frame-200', 'frame-600'],
+    dark: ['frame-500', 'frame-800'],
+  },
+
+  'bg-filled-selected': {
+    base: 'bg-filled.base',
+    default: 'bg-filled.default',
+    dark: 'bg-filled.dark'
+  },
+
+  'text-filled': {
+    base: 'text-white',
+    default: ['--text-dark', '--text-light'],
+    dark: '--text-light'
+  },
+
+  // [OUTLINED]
+
+  'outlined-filled': {
+    base: 'bg-filled.base',
+    default: 'bg-filled.default',
+    dark: 'bg-filled.dark'
+  },
+
+
+  // [GHOST]
+
+  'bg-ghost': {
+    base: '500/50',
+    default: ['frame-200/50', 'frame-500/50'],
+    dark: 'frame-700/50',
+  },
+
+  'bg-ghost-selected': {
+    base: 'bg-ghost.base',
+    default: 'bg-ghost.default',
+    dark: 'bg-ghost.dark'
   },
 
 };
 
-const common = {
-  ring: {
-    root: {
-      base: 'filled.bg.base',
-      default: 'filled.bg.default',
-      dark: 'filled.bg.dark'
-    },
-  },
-};
+function ensureTuple(value?: ThemeTokenValue): ThemeTokenTuple {
+  if (typeof value === 'undefined' || value === null || Array.isArray(value))
+    return (value || []) as ThemeTokenTuple;
+  return [value];
+}
 
-const filled = {
-  bg: {
-    root: {
-      base: 500,
-      default: ['frame-200', 'frame-600'],
-      dark: ['frame-500', 'frame-800'],
-    },
-    selected: {
-      base: 'filled.bg.root.base',
-      default: 'filled.bg.root.default',
-      dark: 'filled.bg.root.dark'
-    },
+function normalizeConfig(conf: DeepPartial<ThemeTokenConfig>): ThemeTokenNormalizedConfig {
+  const clone = JSON.parse(JSON.stringify({ ...conf }));
 
-  },
+  return clone;
+}
 
-  text: {
-    root: {
-      base: '--text-white',
-      default: ['--text-dark', '--text-light'],
-      dark: '--text-light',
-    },
-    selected: {
-      base: 'filled.text.root.base',
-      default: 'filled.text.root.default',
-      dark: 'filled.text.root.dark'
-    }
-  },
+function parseTokens<T extends DeepPartial<Record<keyof typeof tokenMap, ThemeTokenConfig>>, C extends Record<string, string>>(tokens: T, colors: C) {
 
-};
-
-const ghost = {
-  bg: {
-    root: {
-      base: '500/50',
-      default: ['frame-200/50', 'frame-500/50'],
-      dark: 'frame-700/50',
-    },
-    selected: {
-      base: 'ghost.bg.root.base',
-      default: 'ghost.bg.root.default',
-      dark: 'ghost.bg.root.dark'
-    },
-
-  },
-
-  text: {
-    root: {
-      base: 500,
-      default: '--text-dark',
-      dark: '--text-light',
-    },
-    selected: {
-      base: 'ghost.text.root.base',
-      default: 'ghost.text.root.default',
-      dark: 'ghost.text.root.dark'
-    }
-  },
-
-};
-
-
-
-
-const map = { common, filled, ghost };
-
-function parseTokens<T extends DeepPartial<Record<keyof typeof map, ThemeTokenMap>>, C extends Record<string, string>>(tokens: T, colors: C) {
-  //
+  for (const [key, obj] of Object.entries(tokens)) {
+    const conf = normalizeConfig(obj);
+  }
 
 }
 
