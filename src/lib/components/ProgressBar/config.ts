@@ -7,7 +7,8 @@ export const progressBar = {
 		light: '[&::-webkit-progress-value]:bg-frame-300 [&::-moz-progress-bar]:bg-frame-300',
 		dark: '[&::-webkit-progress-value]:bg-frame-600 [&::-moz-progress-bar]:bg-frame-600 dark[&::-webkit-progress-value]:bg-frame-700 dark[&::-moz-progress-bar]:bg-frame-700',
 		primary: '[&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500',
-		secondary: '[&::-webkit-progress-value]:bg-secondary-500 [&::-moz-progress-bar]:bg-secondary-500',
+		secondary:
+			'[&::-webkit-progress-value]:bg-secondary-500 [&::-moz-progress-bar]:bg-secondary-500',
 		tertiary: '[&::-webkit-progress-value]:bg-tertiary-500 [&::-moz-progress-bar]:bg-tertiary-500',
 		danger: '[&::-webkit-progress-value]:bg-danger-500 [&::-moz-progress-bar]:bg-danger-500',
 		warning: '[&::-webkit-progress-value]:bg-warning-500 [&::-moz-progress-bar]:bg-warning-500',

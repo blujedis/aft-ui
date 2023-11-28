@@ -1,4 +1,3 @@
-
 export const divideds = {
 	default: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
 	dark: 'divide-frame-500',

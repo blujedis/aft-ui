@@ -3,7 +3,7 @@ import type { ThemeColor, Iconify } from '../../types';
 import type { ButtonProps } from '../Button';
 import type { accordionButton } from './config';
 
-export type AccordionVariant = keyof typeof accordionButton
+export type AccordionVariant = keyof typeof accordionButton;
 
 export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full'> & {
 	caret?: Iconify; // AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];

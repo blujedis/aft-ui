@@ -1,4 +1,3 @@
-
 import { mergeConfigs } from '$lib/theme';
 import { variantTextHover, variantTextGhostHover, placeholder } from '$lib/constants';
 

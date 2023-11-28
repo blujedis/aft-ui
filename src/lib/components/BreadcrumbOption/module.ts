@@ -1,9 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeSize,
-	ThemeTransitioned,
-} from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeSize, ThemeTransitioned } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
 

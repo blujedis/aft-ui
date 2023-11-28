@@ -2,7 +2,7 @@ import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
 import type { BadgeVariant } from '../Badge';
-import type { selectListButton} from './config';
+import type { selectListButton } from './config';
 
 export type SelectListVariant = keyof typeof selectListButton;
 

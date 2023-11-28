@@ -1,5 +1,3 @@
-
-
 export const rangeTrackBackground = {
 	filled: {
 		default: 'frame-200',

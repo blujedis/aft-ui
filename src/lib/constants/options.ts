@@ -242,5 +242,3 @@ export const animate = {
 	pulse: 'motion-safe:animate-pulse',
 	spin: 'motion-safe:animate-spin'
 };
-
-

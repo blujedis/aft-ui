@@ -24,7 +24,6 @@ export const bgFilledHover = {
 	info: 'hover:bg-info-600'
 };
 
-
 export const bgSelectedFilled = {
 	$base: '',
 	default: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-500/50',

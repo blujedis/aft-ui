@@ -1,5 +1,5 @@
-import { variantText} from '$lib/constants/variants';
+import { variantText } from '$lib/constants/variants';
 
 export const label = {
-  text: { ...variantText },
+	text: { ...variantText }
 };

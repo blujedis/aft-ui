@@ -46,7 +46,7 @@ export const borderFlushed = {
 	tertiary: 'border-tertiary-400',
 	danger: 'border-danger-400',
 	warning: 'border-warning-400',
-	success: 'border-success-400',  
+	success: 'border-success-400',
 	info: 'border-info-400'
 };
 

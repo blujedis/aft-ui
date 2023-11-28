@@ -1,8 +1,5 @@
 <script lang="ts">
-	import {
-		type BreadcrumbOptionProps,
-		breadcrumbOptionDefaults as defaults,
-	} from './module';
+	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
 	import { themer, themeStore } from '../../theme';
 	import type { ElementProps } from '../../types';
 	import { Icon } from '../Icon';

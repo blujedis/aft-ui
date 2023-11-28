@@ -1,6 +1,6 @@
-import  { variantFilled, variantOutlined } from '$lib/constants/variants';
+import { variantFilled, variantOutlined } from '$lib/constants/variants';
 
 export const popover = {
-  filled: { ...variantFilled },
-  outlined: { ...variantOutlined },
+	filled: { ...variantFilled },
+	outlined: { ...variantOutlined }
 };

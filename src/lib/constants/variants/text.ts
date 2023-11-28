@@ -10,4 +10,3 @@ export const variantTextGhost = { ...textGhost };
 export const variantTextGhostHover = mergeConfigs(textHover, textGhostHover);
 
 export const variantTextExpanded = { ...textExpanded };
-

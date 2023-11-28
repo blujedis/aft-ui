@@ -1,5 +1,10 @@
 import { placeholder } from '$lib/constants/states';
-import { variantItemChecked, variantItemCheckedFilled, variantOutlinedHoverless, variantItemCheckedGhost } from '$lib/constants/variants';
+import {
+	variantItemChecked,
+	variantItemCheckedFilled,
+	variantOutlinedHoverless,
+	variantItemCheckedGhost
+} from '$lib/constants/variants';
 import { mergeConfigs } from '$lib/theme';
 
 export const buttonGroupItem = {
@@ -7,12 +12,10 @@ export const buttonGroupItem = {
 		...variantItemCheckedFilled
 	},
 	outlined: mergeConfigs(variantOutlinedHoverless, variantItemChecked),
-	ghost:
-	{
+	ghost: {
 		...variantItemCheckedGhost
 	},
 	text: {
-		...placeholder,
+		...placeholder
 	}
 };
-

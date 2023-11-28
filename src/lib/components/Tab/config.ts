@@ -1,5 +1,4 @@
 export const tab = {
-
 	flushed: {
 		$base: 'border-transparent border-b-2 border-x-0 border-t-0 rounded-br-none rounded-bl-none'
 	},
@@ -21,5 +20,4 @@ export const tab = {
 		default: 'dark:text-[color:var(--text-light)]',
 		dark: 'aria-selected:text-[color:var(--text-dark)] dark:aria-selected:text-[color:var(--text-light)]'
 	}
-
 };

@@ -3,7 +3,7 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned,
+	ThemeTransitioned
 } from '$lib/types';
 import type { badge } from './config';
 

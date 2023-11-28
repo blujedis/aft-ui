@@ -1,4 +1,3 @@
-
 const baseVariant = {
 	$base:
 		'hover:bg-frame-100/70 dark:hover:bg-frame-800 aria-selected:font-medium aria-current:font-medium'

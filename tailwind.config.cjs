@@ -1,7 +1,6 @@
 import { plugin, generateTailwindVars, defaultColors } from '@aft/config';
 import twcolors from 'tailwindcss/colors';
 
-
 const themeColors = {
 	...defaultColors,
 	white: '#ffffff',

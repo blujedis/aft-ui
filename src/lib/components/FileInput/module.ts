@@ -1,4 +1,3 @@
-
 export type FileInputReaderType = 'text' | 'url' | 'binary' | 'buffer';
 
 export type FileInputProps = {

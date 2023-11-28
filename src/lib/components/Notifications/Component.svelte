@@ -2,7 +2,11 @@
 	/**
 	 * https://github.com/mzohaibqc/svelte-toasts/blob/main/src/ToastContainer.svelte
 	 */
-	import { type NotificationsProps, notificationsDefaults as defaults, notificationsPosition } from './module';
+	import {
+		type NotificationsProps,
+		notificationsDefaults as defaults,
+		notificationsPosition
+	} from './module';
 	import { themer, themeStore } from '../../theme';
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';

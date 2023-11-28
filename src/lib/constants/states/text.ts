@@ -1,4 +1,3 @@
-
 export const textBase = {
 	$base: '',
 	default: '',
@@ -51,7 +50,6 @@ export const textGhostHover = {
 	success: 'hover:text-success-700 dark:hover:text-success-50',
 	info: 'hover:text-info-700 dark:hover:text-info-50'
 };
-
 
 export const textExpanded = {
 	$base: '',
@@ -143,7 +141,6 @@ export const textCurrent = {
 	info: 'aria-current:text-info-700  dark:aria-current:text-info-500'
 };
 
-
 export const textOutlined = {
 	$base: '',
 	default: '',
@@ -156,5 +153,3 @@ export const textOutlined = {
 	success: 'text-success-500',
 	info: 'text-info-500'
 };
-
-

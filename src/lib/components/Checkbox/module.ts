@@ -8,7 +8,6 @@ import type {
 } from '$lib/types';
 import type { checkbox } from './config';
 
-
 export type CheckboxVariant = keyof typeof checkbox;
 
 export type CheckboxProps = {
