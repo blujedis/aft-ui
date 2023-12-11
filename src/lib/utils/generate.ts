@@ -23,7 +23,8 @@ type TokenModifier =
 type TokenModifierConfig<K extends TokenKey = TokenKey> = Record<
 	'modifiers',
 	Record<keyof TokenMap[K], TokenModifier | TokenModifier[]>
->;
+>
+
 
 type TokenConfigInitial =
 	| TokenKey
@@ -171,3 +172,5 @@ function parseTokens<
 		}
 	}
 }
+
+
