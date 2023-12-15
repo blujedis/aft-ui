@@ -25,7 +25,6 @@ type TokenModifierConfig<K extends TokenKey = TokenKey> = Record<
 	Record<keyof TokenMap[K], TokenModifier | TokenModifier[]>
 >
 
-
 type TokenConfigInitial =
 	| TokenKey
 	| (Record<ThemeColor | 'common', TokenValueInitial | TokenTuple> &
@@ -172,5 +171,3 @@ function parseTokens<
 		}
 	}
 }
-
-
