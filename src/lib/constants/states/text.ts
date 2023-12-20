@@ -38,7 +38,7 @@ export const textGhost = {
 	info: 'text-info-500 dark:text-info-200'
 };
 
-export const textGhostHover = {
+export const textGhostHover = {  
 	$base: '',
 	default: '',
 	dark: 'hover:text-white',
