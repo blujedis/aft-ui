@@ -7,7 +7,6 @@ type TokenColor = `--${string}` | `${ThemeColor}-${ThemeShade}` | number;
 type TokenTuple = [TokenColor, TokenColor];
 type TokenValue = TokenColor | TokenPath | TokenTuple;
 
-
 type TokenModifier =
 	| 'aria-current'
 	| 'aria-expanded'
@@ -25,9 +24,9 @@ type TokenModifier =
 
 type TokenConfigInit = Record<ThemeColor, TokenValue>;
 type TokenConfig = Record<ThemeColor, string>;
-type TokenMap<C extends TokenConfig | TokenConfigInit> = Record<TokenKey, C>;
+type TokenMap<C extends TokenConfig | TokenConfigInit> = Record<TokenKey, C | TokenKey>;
 
-const defaultColors = {
+const defaultColorMap = {
 	default: 'frame',
 	dark: 'frame',
 	primary: 'primary',
@@ -37,6 +36,15 @@ const defaultColors = {
 	warning: 'warning',
 	success: 'success',
 	info: 'info'
+};
+
+const defaultTypeMap = {
+	background: ['bg'],
+	divide: ['divide'],
+	stripe: ['even', 'odd'],
+	fill: ['fill'],
+	placeholder: ['placeholder'],
+	stroke: ['stroke'],
 };
 
 const defaultTokens = {
@@ -65,19 +73,13 @@ const defaultTokens = {
 		info: '500/50',
 	},
 
-	disabled: {
-		default: 'frame-300',
-		dark: 'frame-700',
-		primary: 300,
-		secondary: 300,
-		tertiary: 300,
-		danger: 300,
-		warning: 300,
-		success: 300,
-		info: 300,
-	},
+	background: 'solid',
 
-	divided: {
+	ring: 'solid',
+
+	border: 'solid',
+
+	divide: {
 		default: 'frame-200',
 		dark: 'frame-500',
 		primary: [100, 600],
@@ -89,19 +91,9 @@ const defaultTokens = {
 		info: [100, 600],
 	},
 
-	fill: {
-		default: ['--text-dark', '--text-light'],
-		dark: ['--text-dark', '--text-light'],
-		primary: 500,
-		secondary: 500,
-		tertiary: 500,
-		danger: 500,
-		warning: 500,
-		success: 500,
-		info: 500,
-	},
+	fill: 'solid',
 
-	stripes: {
+	stripe: {
 		default: 'frame-50',
 		dark: 'frame-100/90',
 		primary: 50,
@@ -111,6 +103,18 @@ const defaultTokens = {
 		warning: 50,
 		success: 50,
 		info: 50
+	},
+
+	placeholder: {
+		default: ['frame-400', 'frame-500'],
+		dark: ['frame-400', 'frame-500'],
+		primary: 300,
+		secondary: 300,
+		tertiary: 300,
+		danger: 300,
+		warning: 300,
+		success: 300,
+		info: 300
 	},
 
 	stroke: {
@@ -138,72 +142,70 @@ function ensureTuple(value?: TokenColor | TokenTuple): TokenTuple {
 	return [value, value] as TokenTuple;
 }
 
+function ensureTokens(
+	tokens: TokenMap<TokenConfigInit>,
+	value: TokenValue,
+	options = {} as { type?: string; color?: ThemeColor }
+
+): null | string {
+
+	if (!value) return null;
+
+	// top level key or nested.value in token map.
+	if (typeof value === 'string' && value.includes('.')) 
+		return getProperty(tokens, value);
+
+	// value is css variable
+	if (typeof value === 'string' && value.startsWith('--') && options.type)
+		return `${options.type}-[color:var(${value})]`;
+
+	// value is numeric color level.
+	if (typeof value === 'number' && options.color) 
+		return `${options.color}-${value}`;
+
+	// Tuple for light/dark colors.
+	if (Array.isArray(value)) {
+		//
+	}
+
+	return null;
+
+}
+
+/**
+ * Ensures the token configuration is a valid object
+ * Configurations may reference other configurations
+ * to limit verbosity. 
+ * 
+ * @param tokens the initial token configuration map.
+ * @param obj the string or object to be normalized. 
+ */
+function ensureConfig(tokens: TokenMap<TokenConfigInit>, obj: string | TokenConfigInit) {
+	if (typeof obj === 'string')
+		return ensureConfig(tokens, getProperty(tokens, obj));
+	return obj;
+}
+
 function parseTokens<
-	T extends TokenConfigInit,
+	T extends TokenMap<TokenConfigInit>,
 	C extends Record<ThemeColor, string>
 >(tokens: T, colors: C) {
 
 
-	function parseValue(
-		value: TokenValue | TokenTuple,
-		options = {} as { type?: string; color?: ThemeColor }
-
-	): null | string {
-
-		if (!value) return null;
-
-		// top level key or nested.value in token map.
-		if (typeof value === 'string' && value.includes('.')) 
-			return getProperty(tokens, value);
-
-		// value is css variable
-		if (typeof value === 'string' && value.startsWith('--') && options.type)
-			return `${options.type}-[color:var(${value})]`;
-
-		// value is numeric color level.
-		if (typeof value === 'number' && options.color) 
-			return `${options.color}-${value}`;
-
-		// Tuple for light/dark colors.
-		if (Array.isArray(value)) {
-			//
-		}
-
-		return null;
-
-	}
 	
-	function normalize(
-		conf: null | undefined | TokenKey | DeepPartial<TokenConfigInit>
-	): null | TokenConfig {
+	const map = {} as any;
 
-		if (!conf) 
-			return null;
+	for (const [key, conf] of Object.entries(tokens)) {
 
-		else if (typeof conf === 'string') {
-			const found = getProperty(tokens, conf);
-			return normalize(found);
-		} 
+		const nConf = ensureConfig(tokens, conf);
+
+		for (const [color, token] of Object.entries(nConf)) {
+
+			const nTokens = ensureTokens(tokens, token, { color: color as ThemeColor })
+
+		}
 		
-		else {
-
-			const clone = JSON.parse(JSON.stringify({ ...conf })) as DeepPartial<TokenConfigInit>;
-
-			for (const [key, val] of Object.entries(clone)) {
-				if (key === 'common') continue;
-
-				if (typeof val === 'number') {
-					//
-				} else {
-					//
-				}
-			}
-	
-			return clone as TokenConfig;
-
-		}
 	}
-
 
 }
 
