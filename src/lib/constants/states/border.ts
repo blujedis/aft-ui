@@ -113,6 +113,3 @@ export const borderExpanded = {
 // 	success: 'aria-expanded:border-success-700 dark:aria-expanded:border-success-700',
 // 	info: 'aria-expanded:border-info-700 dark:aria-expanded:border-info-700'
 // };
-
-
-

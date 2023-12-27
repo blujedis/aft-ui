@@ -9,3 +9,4 @@ export const stroke = {
 	success: 'stroke-success-500',
 	info: 'stroke-info-500'
 };
+ 
