@@ -39,12 +39,10 @@ const defaultColorMap = {
 };
 
 const defaultTypeMap = {
-	background: ['bg'],
+	solid: ['bg', 'fill', 'ring', 'border', 'stroke'],
+	soft: ['stripe'],
 	divide: ['divide'],
-	stripe: ['even', 'odd'],
-	fill: ['fill'],
 	placeholder: ['placeholder'],
-	stroke: ['stroke'],
 };
 
 const defaultTokens = {
@@ -61,7 +59,19 @@ const defaultTokens = {
 		info: 500,
 	},
 
-	ghost: {
+	soft: {
+		default: 'frame-50',
+		dark: 'frame-100/90',
+		primary: 50,
+		secondary: 50,
+		tertiary: 50,
+		danger: 50,
+		warning: 50,
+		success: 50,
+		info: 50
+	},
+
+	transparent: {
 		default: ['frame-200/50', 'frame-500/50'],
 		dark: ['frame-700/50', 'frame-700/50'],
 		primary: '500/50',
@@ -73,11 +83,17 @@ const defaultTokens = {
 		info: '500/50',
 	},
 
-	background: 'solid',
-
-	ring: 'solid',
-
-	border: 'solid',
+	dim: {
+		default: ['frame-400', 'frame-500'],
+		dark: ['frame-400', 'frame-500'],
+		primary: 300,
+		secondary: 300,
+		tertiary: 300,
+		danger: 300,
+		warning: 300,
+		success: 300,
+		info: 300
+	},
 
 	divide: {
 		default: 'frame-200',
@@ -90,44 +106,6 @@ const defaultTokens = {
 		success: [100, 600],
 		info: [100, 600],
 	},
-
-	fill: 'solid',
-
-	stripe: {
-		default: 'frame-50',
-		dark: 'frame-100/90',
-		primary: 50,
-		secondary: 50,
-		tertiary: 50,
-		danger: 50,
-		warning: 50,
-		success: 50,
-		info: 50
-	},
-
-	placeholder: {
-		default: ['frame-400', 'frame-500'],
-		dark: ['frame-400', 'frame-500'],
-		primary: 300,
-		secondary: 300,
-		tertiary: 300,
-		danger: 300,
-		warning: 300,
-		success: 300,
-		info: 300
-	},
-
-	stroke: {
-		default: ['--text-dark', '--text-light'],
-		dark: ['--text-dark', '--text-light'],
-		primary: 500,
-		secondary: 500,
-		tertiary: 500,
-		danger: 500,
-		warning: 500,
-		success: 500,
-		info: 500,
-	}
 
 };
 
