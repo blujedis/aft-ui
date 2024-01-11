@@ -63,6 +63,8 @@ export const focusedRingGroup = {
 	info: 'group-focus:ring-info-600'
 };
 
+
+
 export const focusedBorder = {
 	$base: 'focus:outline-none',
 	default: 'focus:border-frame-400',

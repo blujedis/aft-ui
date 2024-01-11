@@ -41,8 +41,9 @@ const defaultColorMap = {
 const defaultTypeMap = {
 	solid: ['bg', 'fill', 'ring', 'border', 'stroke'],
 	soft: ['stripe'],
+	transparent: ['bg', 'fill', 'ring', 'border', 'stroke'],
+	dim: ['text'],
 	divide: ['divide'],
-	placeholder: ['placeholder'],
 };
 
 const defaultTokens = {
@@ -131,7 +132,7 @@ function ensureTokens(
 
 	// top level key or nested.value in token map.
 	if (typeof value === 'string' && value.includes('.')) 
-		return getProperty(tokens, value);
+		return ensureTokens(tokens, getProperty(tokens, value));
 
 	// value is css variable
 	if (typeof value === 'string' && value.startsWith('--') && options.type)
@@ -169,8 +170,6 @@ function parseTokens<
 	C extends Record<ThemeColor, string>
 >(tokens: T, colors: C) {
 
-
-	
 	const map = {} as any;
 
 	for (const [key, conf] of Object.entries(tokens)) {
@@ -179,7 +178,7 @@ function parseTokens<
 
 		for (const [color, token] of Object.entries(nConf)) {
 
-			const nTokens = ensureTokens(tokens, token, { color: color as ThemeColor })
+			const nTokens = ensureTokens(tokens, token, { color: color as ThemeColor });
 
 		}
 		
