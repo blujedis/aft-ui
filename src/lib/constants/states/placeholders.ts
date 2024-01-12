@@ -1,4 +1,4 @@
-import { mergeConfigs } from '$lib/theme';
+  import { mergeConfigs } from '$lib/theme';
 
 export const placeholder = {
 	$base: '',
