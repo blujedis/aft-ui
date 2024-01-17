@@ -1,23 +1,12 @@
 import { SvelteComponent } from "svelte";
+/**
+     * This is just a wrapper class because Iconify IconProps is missing
+     * the property class. You can see the documentation at
+     * @see https://docs.iconify.design/icon-components/svelte/dimensions.html#:~:text=%22cil%3Atruck%22-,class,-%3D%22big%2Dicon
+     */
+import { type IconProps } from './module';
 declare const __propDef: {
-    props: {
-        id?: string | undefined;
-        style?: string | undefined;
-        icon: string | import("@iconify/svelte").IconifyIcon;
-        mode?: import("@iconify/svelte").IconifyRenderMode | undefined;
-        color?: string | undefined;
-        flip?: string | undefined;
-        rotate?: number | undefined;
-        hFlip?: boolean | undefined;
-        vFlip?: boolean | undefined;
-        width?: import("@iconify/svelte").IconifyIconSize | undefined;
-        height?: import("@iconify/svelte").IconifyIconSize | undefined;
-        inline?: boolean | undefined;
-        class?: string | undefined;
-        size?: import("../..").ThemeSize | undefined;
-        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
-        unstyled?: boolean | undefined;
-    };
+    props: IconProps;
     events: {
         [evt: string]: CustomEvent<any>;
     };

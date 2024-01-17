@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { bgGhost, bgGhostHover, textGhost, textGhostHover } from '../states';
+import { bgGhost, bgGhostHover, textGhost, textGhostHover } from '../statez';
 
 export const variantGhost = mergeConfigs(textGhost, bgGhost);
 

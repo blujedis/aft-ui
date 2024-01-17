@@ -19,7 +19,7 @@ export let {
 };
 const th = themer($themeStore);
 $:
-  notificationClasses = th.create("Notification").variant("notification", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80", true).append($$restProps.class, true).compile(true);
+  notificationClasses = th.create("Notification").variant("notification", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80", true).append($$restProps.class, true).compile(true);
 $:
   notificationIconClasses = th.create("NotificationIcon").variant("notificationIcon", variant, theme, true).append("pr-2 pt-1", true).compile(true);
 $:

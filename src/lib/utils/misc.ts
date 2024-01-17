@@ -17,18 +17,6 @@ export function DOMEnabled() {
 	return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 }
 
-/**
- * Removes undefined values.
- *
- * @param obj the object to be cleaned.
- */
-export function cleanObj<T>(obj = {} as T) {
-	return Object.entries(obj as object).reduce((a, [key, val]) => {
-		if (typeof val !== 'undefined') a[key as keyof T] = val as any;
-		return a;
-	}, {} as Partial<T>);
-}
-
 export function debounce<T>(func: (...args: T[]) => unknown, delay = 200): typeof func {
 	let timeout: number | NodeJS.Timeout;
 	return function (...args: T[]) {

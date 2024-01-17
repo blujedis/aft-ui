@@ -1,3 +1,4 @@
+/// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
 export type SelectStoreValue = string | number;
 export interface SelectStoreOptions {

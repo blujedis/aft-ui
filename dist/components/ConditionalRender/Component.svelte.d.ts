@@ -1,8 +1,7 @@
 import { SvelteComponent } from "svelte";
+import { type ConditionalRenderProps } from './module';
 declare const __propDef: {
-    props: {
-        condition: boolean | ((...args: any[]) => boolean);
-    };
+    props: ConditionalRenderProps;
     events: {
         [evt: string]: CustomEvent<any>;
     };

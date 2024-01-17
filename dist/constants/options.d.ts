@@ -1,5 +1,3 @@
-export * from './focused';
-export * from './states';
 export declare const borderSizes: {
     unstyled: string;
     transparent: string;
@@ -251,70 +249,4 @@ export declare const animate: {
     ping: string;
     pulse: string;
     spin: string;
-};
-export declare const divideds: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const stripes: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const fill: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const stroke: {
-    $base: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const textSoft: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const common: {
-    active: string;
-    ringed: string;
-    bordered: string;
-    divided: string;
-    transition: string;
-    untransition: string;
 };

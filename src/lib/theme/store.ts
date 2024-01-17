@@ -1,6 +1,6 @@
 import { writable, type Writable, get as storeGet } from 'svelte/store';
 import type { DeepPartial, ThemeConfig, ThemeDefaults } from '../types/theme';
-import { cleanObj } from '../utils';
+import { cleanObj, simpleClone } from '../utils';
 import defaults from 'defaults';
 
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
@@ -23,7 +23,10 @@ export function createStoreInternal<T extends ThemeConfig>(
 ): ThemeStore<T> {
 	if (_themeStore) return _themeStore as ThemeStore<T>;
 
-	const normalized = defaults(userTheme, defaultTheme as any) as Required<T>;
+	// Create simple clone to ensure not modules
+	// props exist otherwise structuredClone will fail internally.
+	const userClone = simpleClone(userTheme);
+	const normalized = defaults(userClone, defaultTheme as DeepPartial<T>) as Required<T>;
 
 	normalized.defaults.component = cleanObj(normalized.defaults.component) as Required<
 		ThemeDefaults['component']
@@ -36,11 +39,11 @@ export function createStoreInternal<T extends ThemeConfig>(
 	 *
 	 * NOTE: similar to interal store.set() but ensures defaults and validates types.
 	 *
-	 * @param theme the them configuration to update to.
+	 * @param updateTheme the them configuration to update to.
 	 */
-	function update(theme: DeepPartial<T>) {
+	function update(updateTheme: DeepPartial<T>) {
 		store.update((s) => {
-			return s; //  ensureDefaults(s, theme) as unknown as T;
+			return defaults(simpleClone(updateTheme), s) as Required<T>;
 		});
 	}
 
@@ -71,9 +74,9 @@ export function createStore<T extends Record<string, unknown> & DeepPartial<Them
 	defaultTheme = { ..._themeStore.defaultTheme }
 ) {
 	const store = createStoreInternal(extendTheme, defaultTheme);
-	_themeStore.subscribe((s) => {
-		// update default store on change.
-		_themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });
+	_themeStore.subscribe(({ options, defaults, components }) => {
+		// update internal store on change.
+		_themeStore.update({ options, defaults, components });
 	});
 	return store as ThemeStore<T & ThemeConfig>;
 }

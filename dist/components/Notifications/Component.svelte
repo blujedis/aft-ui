@@ -1,5 +1,7 @@
-<script>import { notificationsDefaults as defaults } from "./module";
-import { notificationsPosition } from "./config";
+<script>import {
+  notificationsDefaults as defaults,
+  notificationsPosition
+} from "./module";
 import { themer, themeStore } from "../../theme";
 import notifications from "../../stores/notification";
 import { fly } from "svelte/transition";

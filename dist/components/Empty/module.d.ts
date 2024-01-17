@@ -1,5 +1,6 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-export type EmptyVariant = 'outlined';
+import type { empty } from './config';
+export type EmptyVariant = keyof typeof empty;
 export type EmptyProps = {
     as?: 'button' | 'link' | 'div' | 'span' | 'label';
     full?: boolean;

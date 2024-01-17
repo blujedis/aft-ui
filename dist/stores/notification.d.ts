@@ -1,3 +1,4 @@
+/// <reference types="svelte" />
 import type { NotificationPosition } from '../components/Notifications';
 import { type Writable } from 'svelte/store';
 import type { Notification } from '../components/Notification/module';

@@ -23,18 +23,6 @@ export declare const gridRow: {
         success: string;
         info: string;
     };
-    glass: {
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
     ghost: {
         $base: string;
         default: string;

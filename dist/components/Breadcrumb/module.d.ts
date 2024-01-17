@@ -1,5 +1,5 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-import type { breadcrumbNav } from './config';
+import type { BreadcrumbVariant } from '../BreadcrumbOption/module';
 export type BreadcrumbContext = {
     globals: {
         rounded: ThemeRounded;
@@ -10,9 +10,7 @@ export type BreadcrumbContext = {
         variant: BreadcrumbVariant;
     };
 };
-export type BreadcrumbVariant = keyof typeof breadcrumbNav;
 export type BreadcrumbProps = {
-    flush?: boolean;
     full?: boolean;
     generate?: boolean;
     rounded?: ThemeRounded;

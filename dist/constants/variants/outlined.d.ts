@@ -1,39 +1,3 @@
-export declare const textOutlined: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const ring: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const ringHover: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
 export declare const variantOutlined: {
     $base: string;
     default: string;
@@ -95,31 +59,7 @@ export declare const variantOutlinedHover: {
     success: string;
     info: string;
 };
-export declare const border: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const borderHover: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const borderHoverGroup: {
+export declare const variantOutlinedHoverless: {
     $base: string;
     default: string;
     dark: string;
@@ -212,6 +152,17 @@ export declare const variantBorderHoverGroup: {
     info: string;
 } & import("../../theme").StringMap & {
     $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const variantBorderExpanded: {
     default: string;
     dark: string;
     primary: string;

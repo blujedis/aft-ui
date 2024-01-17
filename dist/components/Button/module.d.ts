@@ -1,5 +1,6 @@
-import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeColor, ThemeVariant } from '../../types';
-export type ButtonVariant = Exclude<ThemeVariant, 'flushed'>;
+import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeColor } from '../../types';
+import type { button } from './config';
+export type ButtonVariant = keyof typeof button;
 export type ButtonProps<Tag extends 'button' | 'a'> = {
     as?: Tag;
     disabled?: boolean;

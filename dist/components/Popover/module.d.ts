@@ -1,5 +1,6 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeVariant } from '../../types';
-export type PopoverVariant = Exclude<ThemeVariant, 'text' | 'flushed' | 'ghost'>;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+import type { popover } from '../configs';
+export type PopoverVariant = keyof typeof popover;
 export type PopoverProps = {
     close?: () => void;
     arrowed?: boolean;

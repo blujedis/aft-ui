@@ -1,9 +1,7 @@
-import { mergeConfigs } from '../../theme';
-import { textAriaSelected, textAriaCurrent } from '../options';
-const baseVariant = mergeConfigs(textAriaSelected, textAriaCurrent);
+import { variantItemHover } from '../../constants/variants';
 export const menuOption = {
-    filled: { ...baseVariant },
-    outlined: { ...baseVariant },
-    text: { ...baseVariant },
-    ghost: { ...baseVariant }
+    text: { ...variantItemHover },
+    filled: { ...variantItemHover },
+    outlined: { ...variantItemHover },
+    ghost: { ...variantItemHover }
 };

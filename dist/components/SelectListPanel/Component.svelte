@@ -31,7 +31,7 @@ nav?.onSelected((el) => {
   }
 });
 $:
-  panelClasses = th.create("SelectListPanel").variant("selectListPanel", variant, theme, true).option("roundeds", rounded === "full" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed).append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append("w-full", context.globals.full).append($$restProps.class, true).compile(true);
+  panelClasses = th.create("SelectListPanel").variant("selectListPanel", variant, theme, variant).option("roundeds", rounded === "full" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed).append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append("w-full", context.globals.full).append($$restProps.class, true).compile(true);
 function setFocus(el) {
   el.focus();
 }

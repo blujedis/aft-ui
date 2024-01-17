@@ -34,6 +34,6 @@ export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
 	variant: 'outlined',
 	badgeVariant: 'filled',
 	onBeforeAdd: (value: string, _input: HTMLInputElement) =>
-		({ label: value, value, group: '', selected: false } as any),
+		({ label: value, value, group: '', selected: false }) as any,
 	onBeforeRemove: (_item: SelectListItem, _input: HTMLInputElement) => true // default just allow removal.
 };

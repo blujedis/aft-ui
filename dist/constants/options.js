@@ -1,6 +1,4 @@
 import { mergeConfigs } from '../theme';
-export * from './focused';
-export * from './states';
 export const borderSizes = {
     unstyled: '',
     transparent: 'border-transparent',
@@ -220,70 +218,4 @@ export const animate = {
     ping: 'motion-safe:animate-ping',
     pulse: 'motion-safe:animate-pulse',
     spin: 'motion-safe:animate-spin'
-};
-export const divideds = {
-    default: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
-    dark: 'divide-frame-500',
-    primary: 'divide-primary-100 dark:divide-primary-600',
-    secondary: 'divide-secondary-100 dark:divide-secondary-600',
-    tertiary: 'divide-tertiary-100 dark:divide-tertiary-600',
-    danger: 'divide-danger-100 dark:divide-danger-600',
-    warning: 'divide-warning-100 dark:divide-warning-600',
-    success: 'divide-success-100 dark:divide-success-600',
-    info: 'divide-info-100 dark:divide-info-600'
-};
-export const stripes = {
-    $base: '',
-    default: 'even:bg-frame-50',
-    dark: 'even:bg-frame-100/90',
-    primary: 'even:bg-primary-50',
-    secondary: 'even:bg-secondary-50',
-    tertiary: 'even:bg-tertiary-50',
-    danger: 'even:bg-danger-50',
-    warning: 'even:bg-warning-50',
-    success: 'even:bg-success-50',
-    info: 'even:bg-info-50'
-};
-export const fill = {
-    $base: '',
-    default: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
-    dark: 'fill-[color:var(--text-dark)] dark:fill-[color:var(--text-light)]',
-    primary: 'fill-primary-500',
-    secondary: 'fill-secondary-500',
-    tertiary: 'fill-tertiary-500',
-    danger: 'fill-danger-500',
-    warning: 'fill-warning-500',
-    success: 'fill-success-500',
-    info: 'fill-info-500'
-};
-export const stroke = {
-    $base: '',
-    dark: 'stroke-frame-600',
-    primary: 'stroke-primary-500',
-    secondary: 'stroke-secondary-500',
-    tertiary: 'stroke-tertiary-500',
-    danger: 'stroke-danger-500',
-    warning: 'stroke-warning-500',
-    success: 'stroke-success-500',
-    info: 'stroke-info-500'
-};
-export const textSoft = {
-    $base: '',
-    default: 'text-frame-300',
-    dark: 'text-frame-300',
-    primary: 'text-primary-300',
-    secondary: 'text-secondary-300',
-    tertiary: 'text-tertiary-300',
-    danger: 'text-danger-300',
-    warning: 'text-warning-300',
-    success: 'text-success-300',
-    info: 'text-info-300'
-};
-export const common = {
-    active: 'active:brightness-125',
-    ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
-    bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
-    divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
-    transition: 'transition-colors duration-125 motion-reduce:transition-none',
-    untransition: 'transition-none'
 };

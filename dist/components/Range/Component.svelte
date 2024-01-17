@@ -51,7 +51,8 @@ function handleInputChange(e) {
 	*/
 
 	input[type='range']::-webkit-slider-thumb {
-		appearance: none;
+		-webkit-appearance: none;
+		        appearance: none;
 		height: var(--thumb-size);
 		width: var(--thumb-size);
 		border: solid var(--thumb-border-color);
@@ -73,7 +74,8 @@ function handleInputChange(e) {
 	}
 
 	input[type='range']::-moz-range-thumb {
-		appearance: none;
+		-moz-appearance: none;
+		     appearance: none;
 		height: var(--thumb-size);
 		width: var(--thumb-size);
 		border: solid var(--thumb-border-color);

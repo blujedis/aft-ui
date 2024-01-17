@@ -8,7 +8,7 @@ import {
 	textOutlined,
 	borderExpanded,
 	ringHoverless
-} from '../states';
+} from '../statez';
 
 export const variantOutlined = mergeConfigs(textOutlined, ring, { $base: 'bg-transparent' });
 

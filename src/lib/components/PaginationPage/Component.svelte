@@ -17,8 +17,8 @@
 	type NativeProps = Tag extends 'button'
 		? HTMLButtonAttributes
 		: Tag extends 'a'
-		? HTMLAnchorAttributes
-		: HTMLBaseAttributes;
+			? HTMLAnchorAttributes
+			: HTMLBaseAttributes;
 	type $$Props = PaginationPageProps<Tag> & NativeProps;
 
 	const context = getContext('Pagination') as PaginationContext;

@@ -20,10 +20,10 @@
 	$: inputClasses = th
 		.create('SelectOption')
 		.variant('selectOption', variant, theme, variant)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.option('disableds', theme, disabled)
+		.option('common', 'disabled', disabled)
 		.append('flex items-center justify-center', true) // always pad right for caret.
 		.append($$restProps.class, true)
 		.compile(true);

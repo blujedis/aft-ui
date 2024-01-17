@@ -1,5 +1,6 @@
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-export type RadioVariant = 'outlined';
+import type { radio } from './config';
+export type RadioVariant = keyof typeof radio;
 export type RadioProps = {
     disabled?: boolean;
     focused?: ThemeFocused;

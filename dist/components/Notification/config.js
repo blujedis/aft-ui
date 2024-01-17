@@ -1,15 +1,13 @@
-import { text, border } from '../../constants';
 import { mergeConfigs } from '../../theme';
-import { placeholder } from '../../constants/placeholder';
+import { placeholder } from '../../constants';
 export const notification = {
-    filled: mergeConfigs(border, {
+    filled: mergeConfigs(placeholder, {
         $base: 'border-r-0 border-y-0 bg-white dark:bg-frame-700 dark:text-white'
     })
 };
 export const notificationIcon = {
     filled: {
-        ...text,
-        $base: ''
+        ...placeholder
     }
 };
 export const notificationTitle = {

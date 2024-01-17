@@ -18,8 +18,8 @@
 	$: tabPanelStyles = $context.visible
 		? $$restProps.style
 		: !unmount
-		? 'display:none;'
-		: $$restProps.style;
+			? 'display:none;'
+			: $$restProps.style;
 
 	$: tabPanelClasses = themer($themeStore)
 		.create('TabPanel')

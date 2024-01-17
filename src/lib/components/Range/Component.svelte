@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { themeStore, themer, styler } from '$lib';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
+	import { onMount } from 'svelte';
 	import type { ElementProps } from '../../types';
 
 	type $$Props = RangeProps & Omit<ElementProps<'input'>, 'size'>;
@@ -20,7 +21,6 @@
 		.create('RangeStyles')
 		.colormap(components?.rangeTrackBackground[variant], theme, '--track-background-color', true)
 		.colormap(components?.rangeTrackAccent[variant], theme, '--track-accent-color', true)
-		// .colormap(components?.rangeThumbBackground[variant], theme, '--thumb-background-color', true)
 		.colormap(components?.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
@@ -30,7 +30,7 @@
 
 	$: rangeClasses = th
 		.create('RangeClasses')
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('rangeTrackSizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
@@ -51,6 +51,9 @@
 		const val = parseFloat(target.value);
 		target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
 	}
+	onMount(() => {
+		handleInputChange();
+	});
 </script>
 
 <input

@@ -2,7 +2,6 @@ import { twMerge } from 'tailwind-merge';
 import { getProperty } from 'dot-prop';
 import type { Path, ThemeColor, ThemeShade, TypeOrValue } from '../types';
 import { colors, shades } from '../constants/colors';
-import { cleanObj } from '$lib/utils';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -186,6 +185,7 @@ export function mergeConfigs<
 	}, target as any);
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 interface BEMString extends String {
 	state(...state: string[]): string;
 }

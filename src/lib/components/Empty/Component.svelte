@@ -14,7 +14,7 @@
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
 		.variant('empty', variant, theme, variant)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('emptySizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)

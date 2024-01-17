@@ -17,8 +17,12 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		variant: 'filled' as ButtonVariant,
-		underlined: false
+		underlined: false,
+		hoverable: true,
+		focused: true
 	};
+
+	const background = 'url("https://i.imgur.com/DdrZVb7.gif") center center / cover no-repeat';
 </script>
 
 <ExamplePage {title} {description} {code}>

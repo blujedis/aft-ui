@@ -14,18 +14,6 @@ export function uniqid(radix = 16) {
 export function DOMEnabled() {
     return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 }
-/**
- * Removes undefined values.
- *
- * @param obj the object to be cleaned.
- */
-export function cleanObj(obj = {}) {
-    return Object.entries(obj).reduce((a, [key, val]) => {
-        if (typeof val !== 'undefined')
-            a[key] = val;
-        return a;
-    }, {});
-}
 export function debounce(func, delay = 200) {
     let timeout;
     return function (...args) {

@@ -7,7 +7,7 @@ import {
 	bgItemExpanded,
 	bgItemHover,
 	bgItemSelected
-} from '../states';
+} from '../statez';
 
 export const variantItemHover = mergeConfigs(bgItemHover, {
 	$base: 'hover:text-[color:var(--text-light)]',

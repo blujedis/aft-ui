@@ -69,13 +69,16 @@ export const context = setContext("SelectListContext", {
 });
 const th = themer($themeStore);
 $:
-  groups = $store.items.reduce((a, c) => {
-    if (!c.group)
+  groups = $store.items.reduce(
+    (a, c) => {
+      if (!c.group)
+        return a;
+      a[c.group] = a[c.group] || [];
+      a[c.group].push(c);
       return a;
-    a[c.group] = a[c.group] || [];
-    a[c.group].push(c);
-    return a;
-  }, {});
+    },
+    {}
+  );
 $:
   groupKeys = Object.keys(groups);
 $:

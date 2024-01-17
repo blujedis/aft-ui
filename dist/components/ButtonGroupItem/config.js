@@ -1,27 +1,15 @@
-import { bgAriaChecked, textFilled, placeholder } from '../../constants';
+import { placeholder } from '../../constants/states';
+import { variantItemChecked, variantItemCheckedFilled, variantOutlinedHoverless, variantItemCheckedGhost } from '../../constants/variants';
 import { mergeConfigs } from '../../theme';
-const baseVariant = mergeConfigs(textFilled, bgAriaChecked, {
-    $base: 'border border-transparent'
-});
 export const buttonGroupItem = {
     filled: {
-        ...baseVariant
+        ...variantItemCheckedFilled
     },
-    outlined: mergeConfigs(bgAriaChecked, {
-        $base: 'bg-transparent aria-checked:text-white hover:z-10',
-        light: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
-    }),
+    outlined: mergeConfigs(variantOutlinedHoverless, variantItemChecked),
+    ghost: {
+        ...variantItemCheckedGhost
+    },
     text: {
-        ...placeholder,
-        $base: 'no-underline aria-checked:underline',
-        light: 'text-inherit',
-        dark: 'text-inherit'
-    },
-    ghost: mergeConfigs(bgAriaChecked, {
-        $base: 'aria-checked:text-white',
-        light: 'aria-checked:text-[color:var(--text-dark)] dark:aria-checked:text-[color:var(--text-dark)]'
-    }),
-    glass: {
-        ...placeholder // TODO: add glass styles.
+        ...placeholder
     }
 };

@@ -28,7 +28,7 @@
 	<Switch {checked} on:change={toggle} shadowed="lg" class="fixed bottom-4 right-6 z-30" />
 </ColorMode>
 
-<div>
+<div class="h-full">
 	<div class="flex mb-4">
 		<div class="flex-1 text-xl font-semibold">
 			<a href="/">{title}</a>

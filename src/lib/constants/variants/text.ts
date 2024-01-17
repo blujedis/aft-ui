@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { textHover, textExpanded, textBase, textGhost, textGhostHover } from '../states';
+import { textHover, textExpanded, textBase, textGhost, textGhostHover } from '../statez';
 
 export const variantText = { ...textBase };
 

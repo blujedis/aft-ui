@@ -5,7 +5,7 @@ import { onMount, setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder } from "../../utils";
 import { BreadcrumbOption } from "../BreadcrumbOption";
 import { breadcrumbDefaults as defaults } from "./module";
-export let { flush, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+export let { full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
   ...defaults
 };
 const globals = cleanObj({
@@ -23,10 +23,10 @@ const th = themer($themeStore);
 $:
   items = generateBreadcrumbs();
 $:
-  breadcrumbNavClasses = th.create("BreadcrumbNav").variant("breadcrumbNav", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append(
+  breadcrumbNavClasses = th.create("Breadcrumb").variant("breadcrumb", variant, theme, variant).option("textSoft", theme, variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append(
     "px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center",
     true
-  ).append("!pl-0", flush).append($$restProps.class, true).compile(true);
+  ).append("!pl-0", variant === "text").append($$restProps.class, true).compile(true);
 $:
   breadcrumbListClasses = th.create("Breadcrumb").option("fieldFontSizes", size, size).option("breadcrumbSpacings", size, size).append("inline-flex items-center", true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
@@ -59,12 +59,11 @@ function generateBreadcrumbs() {
 
 <nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
-		<slot>
-			{#if generate}
-				{#each items as item}
-					<BreadcrumbOption {...item} />
-				{/each}
-			{/if}
-		</slot>
+		{#if generate}
+			{#each items as item}
+				<BreadcrumbOption {...item} />
+			{/each}
+		{/if}
+		<slot />
 	</ol>
 </nav>

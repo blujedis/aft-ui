@@ -1,3 +1,4 @@
+/// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
 export interface PaginatorOptions<T = any> {
     items?: string | number | T[];

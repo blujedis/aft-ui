@@ -1,7 +1,7 @@
 import { inputDefaults } from '../Input';
 export const selectListButtonDefaults = {
     ...inputDefaults,
-    caret: 'octicon:chevron-down-24',
+    caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
     placeholder: '',
     roticon: true,
     variant: 'outlined',

@@ -32,7 +32,7 @@
 		.variant('popover', variant, theme, variant)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('popoverSizes', size, size)
 		.append('absolute animate-fade-in-down', true)

@@ -1,5 +1,6 @@
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
-export type CheckboxVariant = 'outlined';
+import type { checkbox } from './config';
+export type CheckboxVariant = keyof typeof checkbox;
 export type CheckboxProps = {
     disabled?: boolean;
     focused?: ThemeFocused;

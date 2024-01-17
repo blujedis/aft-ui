@@ -26,11 +26,11 @@
 		.create('Radio')
 		.variant('radio', variant, theme, variant)
 		.option('focusedRing', theme, focused)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('iconSizes', size, size)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.option('disableds', theme, disabled)
+		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append(
 			'flex items-center justify-center form-radio focus:outline-none focus:ring-2 focus:ring-offset-2',

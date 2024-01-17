@@ -2,7 +2,7 @@ import { writable, get as getSvelteStore } from 'svelte/store';
 const initialDefaults = {
     position: 'top-right',
     dismissible: true,
-    duration: 3500,
+    duration: 3500, // set 0 for static until dismissed.
     group: 'default',
     max: 0
 };

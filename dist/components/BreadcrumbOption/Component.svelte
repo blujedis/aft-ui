@@ -23,7 +23,7 @@ export let {
 const th = themer($themeStore);
 let mounted = false;
 $:
-  breadcrumbOptionClasses = th.create("BreadcrumbOption").variant("breadcrumbOption", variant, theme, true).option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).append("pointer-events-none", selected).append($$restProps.class, true).compile(true);
+  breadcrumbOptionClasses = th.create("BreadcrumbOption").variant("breadcrumbOption", variant, theme, variant).option("textHoverFilled", theme, variant === "filled").option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transition", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).append("aria-selected:pointer-events-none dark:aria-selected:brightness-75", true).append("aria-selected:brightness-90", variant === "filled").append($$restProps.class, true).compile(true);
 $:
   breadcrumbOptionWrapperClasses = th.create("BreadcrumbOptionWrapper").option("breadcrumbFilledHeight", size, size).append("flex items-center", true).compile(true);
 $:
@@ -37,7 +37,7 @@ onMount(() => {
 	<div class={breadcrumbOptionWrapperClasses}>
 		<slot>
 			{#if separator && index !== 0}
-				{#if variant === 'filled'}
+				{#if variant !== 'text'}
 					<svg
 						class:invisible={!mounted}
 						class={breadcrumbIconClasses}

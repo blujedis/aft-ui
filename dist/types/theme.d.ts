@@ -50,8 +50,9 @@ export type ThemeDefaults = {
 };
 export type ThemeComponents = typeof configs;
 export type ThemeComponent = keyof ThemeComponents;
-export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost' | 'glass';
-export type ThemeVariantHover<V extends ThemeVariant> = `${V}Hover`;
+export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost';
+export type ThemeVariantExt = ThemeVariant | 'panel' | 'bordered' | 'activated';
+export type ThemeVariantAppend<V extends ThemeVariant> = `${V}${'Hover' | 'HoverGroup' | 'Activated'}`;
 export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
 export type ThemeSimpleSize = 'sm' | 'md' | 'lg';

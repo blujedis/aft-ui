@@ -28,12 +28,6 @@
 		2
 	);
 
-	// const th = themer($themeStore);
-
-	// $: filledClasses =
-	// 	th.create('VariantFilled')
-	// 	.mapped(variantFilled, '')
-
 	function download(text: string, name: string) {
 		const a = document.createElement('a');
 		const type = name.split('.').pop();

@@ -66,9 +66,7 @@ const forwardedEvents = forwardEventsBuilder(get_current_component());
 <style>
 	.flickerless {
 		perspective: 1000;
-		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
-		-webkit-transform: translateZ(0.1px);
 		transform: translateZ(0.1px); /* needs an actual value */
 	}
 </style>

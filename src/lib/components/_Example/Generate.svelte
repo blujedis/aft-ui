@@ -1,179 +1,118 @@
 <script lang="ts">
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
-	import type { ElementHandler, ThemeColor, ThemeShade } from '$lib/types';
-	import { onMount } from 'svelte';
+	import type { ElementHandler } from '$lib/types';
+	import { defaultTokens, parseTokens } from '$lib/utils/generate';
+	import defaults from '$lib/theme/defaults';
+	import * as defaultOptions from '$lib/components/options';
+	import * as defaultComponents from '$lib/components/configs';
+
 	import { writable } from 'svelte/store';
-	import { colors } from '../../constants/colors';
-	import Preview from './Preview.svelte';
-
-	type ColorVar = `--${string}-${string}`;
-	type ShadeConfig =
-		| ThemeShade
-		| ColorVar
-		| [ThemeShade | ColorVar, (ThemeShade | ColorVar)?, ThemeColor?];
-	type ShadeConfigInternal = [ThemeShade | ColorVar, (ColorVar | ThemeShade)?, ThemeColor?];
-
-	interface GeneratorConfig {
-		type: string; //  'text' | 'bg' | 'border' | 'ring' | 'divide';
-		$base?: string;
-		shades?: ShadeConfig;
-		overrides?: Record<ThemeColor, ShadeConfig>;
-	}
+	import { onMount } from 'svelte';
 
 	const title = 'Class Generator';
 	const description = 'Accepts configuration then generates Tailwind classes.';
-	const code = `
-  `;
-	const defaultPlaceholder = `{
-		"type": "bg",
-		"shades": [500, 700],
-		"overrides": {
-			"default": [100, 700]
-		},
-	}`;
+	const code = ``;
+
+	let mounted = false;
+	let message = '';
+
+	let textarea: HTMLTextAreaElement;
+	let saveas: HTMLInputElement;
+	let generator = 'default';
+	let result = '';
+	let placeholder = init();
 
 	const store = writable(getGenerators());
 
-	let mounted = false;
-	let textarea: HTMLTextAreaElement;
-	let generator = '';
-	let generated = '';
-	let parsed: undefined | Record<string, string>;
-	let alert = '';
-	let savename = '';
-
-	let placeholder =
-		typeof localStorage !== 'undefined'
-			? localStorage.getItem('generator') || defaultPlaceholder
-			: defaultPlaceholder;
-
-	const defaults = {
-		$base: '',
-		colors,
-		shades: [500, 700],
-		overrides: {}
-	};
+	function init() {
+		let initGenerator = JSON.stringify(defaultTokens, null, 2);
+		const generators = getGenerators();
+		const active = getActive();
+		setGenerators('default', initGenerator);
+		if (generators.default) initGenerator = generators[active] || generators.default;
+		setActive(active || 'default');
+		return initGenerator;
+	}
 
 	function getGenerators() {
-		if (typeof localStorage === 'undefined') return {} as Record<string, string>;
+		if (typeof localStorage === 'undefined') return {} as Record<string, any>;
 		return JSON.parse(localStorage.getItem('generators') || '{}');
 	}
 
-	function getOverrides(color: ThemeColor, overrides: GeneratorConfig['overrides']) {
-		return ((overrides || {})[color] || []) as ShadeConfigInternal;
+	function getActive() {
+		return typeof localStorage !== 'undefined'
+			? localStorage.getItem('active') || 'default'
+			: 'default';
 	}
 
-	function normalizeShades(shades: ShadeConfig, overrides?: ShadeConfig, merge = false) {
-		let _overrides = [] as unknown as ShadeConfigInternal;
-		if (overrides) {
-			_overrides = normalizeShades(overrides);
-			if (!merge) return _overrides;
+	function setGenerators(name: string, value: string | Record<string, any>) {
+		if (value && typeof value !== 'string') value = JSON.stringify(value);
+		else if (typeof value === 'string') value = value.trim();
+		value = value || '{}';
+		if (typeof localStorage !== 'undefined') {
+			const generators = getGenerators();
+			generators[name] = value;
+			localStorage.setItem('generators', JSON.stringify(generators, null, 2));
+			return generators;
 		}
+		return {} as Record<string, string>;
+	}
 
-		const result = (
-			!Array.isArray(shades) ? (typeof shades === 'undefined' ? [500] : [shades]) : shades
-		) as ShadeConfigInternal;
+	function setActive(name: string) {
+		if (typeof localStorage !== 'undefined') localStorage.setItem('active', name);
+	}
 
-		if (merge) {
-			result[0] = _overrides[0] || result[0];
-			result[1] = _overrides[1] || result[1];
+	function removeGenerator(name: string) {
+		const generators = getGenerators();
+		if (name === 'default') return showAlert(`Default generator cannot be removed.`);
+		if (!generators[name]) return showAlert(`Cannot remove unknown generator "${name}".`);
+		delete generators[name];
+		localStorage.setItem('generators', JSON.stringify(generators));
+		store.update((s) => generators);
+		let active = getActive();
+		if (active === name) {
+			// removing active revert to default.
+			setActive('default');
+			active = 'default';
 		}
-		return result;
-	}
-
-	function getClass(type: string, color: string, value: string | number) {
-		if ((value + '').startsWith('--')) return `${type}-[color:var(${value})]`;
-		if ((value + '').includes('/')) return `${type}-${color}-${value}`;
-		if (typeof value === 'string') return value;
-		return `${type}-${color}-${value}`;
-	}
-
-	function parseConfig(config: Required<GeneratorConfig>) {
-		const clone = { ...defaults, ...config };
-		clone.shades = clone.shades || 500;
-		clone.shades = !Array.isArray(clone.shades) ? [clone.shades] : clone.shades;
-
-		let result = {} as Record<ThemeColor | '$base', string>;
-		result.$base = clone.$base || '';
-
-		clone.colors.forEach((c) => {
-			let tmp = [] as string[];
-
-			const [light, dark, color] = config.shades as ShadeConfigInternal;
-
-			const [olight, odark, mcolor] = normalizeShades(
-				config.shades,
-				getOverrides(c, config.overrides)
-			) as ShadeConfigInternal;
-
-			if (light || olight) tmp.push(getClass(config.type, mcolor || color || c, olight || light));
-			if (dark || odark)
-				tmp.push(
-					getClass('dark:' + config.type, mcolor || color || c, (odark || dark) as string | number)
-				);
-			result[c] = tmp.join(' ');
-		});
-
-		return result;
+		generator = active;
+		textarea.value = placeholder;
 	}
 
 	function showAlert(message: string) {
-		alert = message;
+		message = message;
 	}
-	function hideAlert() {
-		alert = '';
-	}
-	function removeGenerator(key: string) {
-		const generators = getGenerators();
-		if (!generators[key]) return showAlert(`Cannot remove unknown generator "${key}".`);
-		delete generators[key];
-		localStorage.setItem('generators', JSON.stringify(generators));
-		store.update((s) => generators);
-		generator = '';
-		savename = '';
-		textarea.value = placeholder;
-	}
-	function loadGenerator(e: any) {
-		const template = $store[generator];
-		savename = e.target.value || '';
-		if (template) textarea.value = template;
-	}
-	function handleReset(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
-		generated = '';
-		textarea.value = placeholder;
-	}
-	function handleClick(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
-		try {
-			if (!textarea.value) return showAlert(`Nothing to parse, please enter value.`);
-			const normalized = textarea.value.trim();
-			const config = {
-				...defaults,
-				...JSON.parse(normalized)
-			} as Required<GeneratorConfig>;
 
-			if (savename) {
-				const generators = JSON.parse(localStorage.getItem('generators') || '{}');
-				generators[savename] = normalized;
-				localStorage.setItem('generators', JSON.stringify(generators));
-				store.update((s) => generators);
-			}
-			localStorage.setItem('generator', normalized); // always store the latest.
-			parsed = parseConfig(config);
-			const processed = JSON.stringify(parsed, null, 2);
-			generated = processed
-				.replace(/"([^"]+)":/g, (match, clean) => {
-					return clean;
-				})
-				.replace(/"([^"]+)"/g, (match, clean) => {
-					return "'" + clean + "'";
-				})
-				.replace(/"/g, "'");
-		} catch (e) {
-			const err = e as Error;
-			showAlert(err.message);
-			console.warn(err.message);
-		}
+	function hideAlert() {
+		message = '';
+	}
+
+	function getTokens() {
+		const value = textarea.value.trim();
+		const tokens = {
+			...{},
+			...JSON.parse(value)
+		} as any;
+		return { tokens, value };
+	}
+
+	function formatTheme(currentResult: string) {
+		return currentResult
+			.replace(/"([^"]+)":/g, (match, clean) => {
+				return clean + ':';
+			})
+			.replace(/"([^"]+)"/g, (match, clean) => {
+				return "'" + clean + "'";
+			})
+			.replace(/"/g, "'");
+	}
+
+	function handleChange(e: any) {
+		const template = $store[generator];
+		if (template) textarea.value = template;
+		setActive(generator);
+		result = '';
 	}
 
 	function handleKeydown(e: ElementHandler<HTMLTextAreaElement, KeyboardEvent>) {
@@ -188,13 +127,98 @@
 		}
 	}
 
+	function handleGenerate(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
+		try {
+			hideAlert();
+			if (!textarea.value) return showAlert(`Nothing to parse, please enter value.`);
+			const { tokens, value } = getTokens();
+			if (saveas.value) {
+				store.update((s) => setGenerators(saveas.value, value));
+				setActive(saveas.value);
+			}
+			result = parseTokens(tokens);
+			handleCopy();
+		} catch (e) {
+			const err = e as Error;
+			showAlert(err.message);
+			console.warn(err.message);
+		}
+	}
+
+	function handleSave(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
+		const { value } = getTokens();
+		let name = saveas.value ? saveas.value : generator;
+		if (!value || value === '{}') return showAlert('Whoops nothing to save!');
+		store.update((s) => setGenerators(name, value));
+		setActive(name);
+		generator = name;
+		saveas.value = '';
+	}
+
+	function handleReset(e: ElementHandler<HTMLButtonElement, MouseEvent>) {
+		result = '';
+		textarea.value = placeholder;
+	}
+
+	function handleDownload(filename: string) {
+		const allowedExt = ['ts', 'js', 'cjs'];
+		return function (e: ElementHandler<HTMLButtonElement, MouseEvent>) {
+			if (!result) return showAlert(`Whoops Theme not generated, did you forget to "generate"?`);
+			const split = filename.split('.');
+			const ext = split.pop() || 'json';
+			if (!allowedExt.includes(ext))
+				return showAlert(`Cannot create download using extension ${ext}.`);
+			const a = document.createElement('a');
+			const type = 'text/javascript';
+			a.href = URL.createObjectURL(new Blob([result], { type }));
+			a.download = [...split, ext].join('.');
+			a.click();
+		};
+	}
+
+	function handleDownloadTheme(filename: string) {
+		const allowedExt = ['json'];
+		return function (e: ElementHandler<HTMLButtonElement, MouseEvent>) {
+			const split = filename.split('.');
+			const ext = split.pop() || 'json';
+			if (!allowedExt.includes(ext))
+				return showAlert(`Cannot create download using extension ${ext}.`);
+			let defaultTheme = JSON.stringify(
+				{
+					options: defaultOptions,
+					defaults,
+					components: defaultComponents
+				},
+				null,
+				2
+			);
+			const a = document.createElement('a');
+			const type = 'text/javascript';
+			a.href = URL.createObjectURL(new Blob([defaultTheme], { type }));
+			a.download = [...split, ext].join('.');
+			a.click();
+		};
+	}
+
+	async function handleCopy() {
+		if (!result || !result.length) return showAlert(`Copy failed! Did you forget to generate!`);
+		try {
+			await navigator.clipboard.writeText(result);
+			alert(`Output copied to clipboard!`);
+		} catch (err) {
+			console.error('Failed to copy: ', err);
+		}
+	}
+
 	onMount(() => {
 		mounted = true;
+		const active = getActive();
+		generator = active;
 	});
 </script>
 
 <ExamplePage {title} {description} {code}>
-	{#if alert}
+	{#if message}
 		<Section>
 			<div class="rounded-md bg-red-50 dark:bg-red-400 p-4">
 				<div class="flex">
@@ -213,13 +237,13 @@
 						</svg>
 					</div>
 					<div class="ml-3">
-						<p class="text-sm font-medium text-red-800 dark:text-red-50">{alert}</p>
+						<p class="text-sm font-medium text-red-100">{message}</p>
 					</div>
 					<div class="ml-auto pl-3">
 						<div class="-mx-1.5 -my-1.5">
 							<button
 								type="button"
-								class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 dark:text-red-50 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
+								class="inline-flex rounded-md p-1.5 text-red-700 focus:outline-none focus:ring-2 focus:ring-red-800 hover:brightness-90 focus:ring-offset-0 focus:ring-offset-red-400"
 								on:click={() => hideAlert()}
 							>
 								<span class="sr-only">Dismiss</span>
@@ -236,89 +260,91 @@
 		</Section>
 	{/if}
 	<Section class={!mounted ? 'invisible' : ''}>
-		<div class="grid grid-cols-2 gap-2">
-			<div>
-				<Preview config={parsed} />
+		<div class="grid grid-cols-2 gap-4">
+			<div class="mb-2">
+				<div class="flex space-x-2">
+					<select
+						bind:value={generator}
+						class="form-select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+						on:change={(e) => handleChange(e)}
+					>
+						<option value="" selected disabled>Please Select</option>
+						{#each Object.entries($store) as [gKey, gVal]}
+							<option value={gKey}>{gKey}</option>
+						{/each}
+					</select>
+
+					<button
+						class="bg-rose-600 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center hover:brightness-110"
+						on:click={() => removeGenerator(generator)}>Remove</button
+					>
+				</div>
 			</div>
-			<div class="flex-col">
-				<div class="w-full">
-					<div class="mb-2 w-full">
-						<label
-							for="location"
-							class="block text-sm font-medium leading-6 text-gray-900 dark:text-frame-100"
-							>Generator Templates</label
+			<div class="mb-2">
+				<div class="px-1 flex items-center h-full">
+					<div class="flex-1">Results:</div>
+					<div class="flex space-x-2">
+						<button
+							class="bg-orange-600 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center hover:brightness-110"
+							on:click={handleCopy}>Copy</button
 						>
-						<select
-							bind:value={generator}
-							class="form-select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-							on:change={(e) => loadGenerator(e)}
+						<button
+							class="bg-emerald-600 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center hover:brightness-110"
+							on:click={handleDownload('states.ts')}>Download States</button
 						>
-							<option value="" selected disabled>Please Select</option>
-							{#each Object.entries($store) as [gKey, gVal]}
-								<option value={gKey}>{gKey}</option>
-							{/each}
-						</select>
+						<button
+							class="bg-cyan-500 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center hover:brightness-110"
+							on:click={handleDownloadTheme('aft.theme.json')}>Download Theme</button
+						>
+						<button
+							class="bg-amber-600 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center hover:brightness-110"
+							on:click={handleReset}>Reset</button
+						>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid grid-cols-2 gap-4">
+			<div class="mb-2">
+				<div class="flex mb-2">
 					<textarea
 						bind:this={textarea}
-						class="p-4 w-full border border-frame-100 dark:border-frame-600 dark:bg-transparent dark:text-white"
+						class="p-4 w-full border border-frame-100 dark:border-frame-600 dark:bg-transparent dark:text-white max-h-96"
 						rows={16}
 						{placeholder}
 						value={placeholder}
 						on:keydown={handleKeydown}
 					/>
-					<div class="mt-2">
-						<div class="flex space-x-4 w-full">
-							<div class="flex">
-								<button
-									class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
-									on:click={() => removeGenerator(generator)}>Remove Generator</button
-								>
-							</div>
-							<div class="flex">
-								<button
-									class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
-									on:click={handleReset}>Reset</button
-								>
-							</div>
+				</div>
+				<div class="flex space-x-2">
+					<input
+						bind:this={saveas}
+						type="text"
+						name="name"
+						id="name"
+						placeholder="Save as name..."
+						class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-indigo-500 focus:border-indigo-500 px-4 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500 inline-flex items-center flex-1"
+					/>
 
-							<div class="flex flex-1">
-								<div class="relative w-full">
-									<label
-										for="name"
-										class="absolute -top-2 left-2 inline-block px-1 text-xs font-medium text-gray-900 dark:text-frame-100 bg-[color:var(--bg-light)] dark:bg-[color:var(--bg-dark)]"
-										>Save as:</label
-									>
-									<input
-										bind:value={savename}
-										type="text"
-										name="name"
-										id="name"
-										class="form-input block w-full rounded-sm border-0 py-1.5 px-4 rounded-r-none shadow-sm text-sm
+					<button
+						class="rounded-l-none inline-flex items-center bg-emerald-600 text-white px-4 py-1.5 font-medium uppercase text-sm hover:brightness-110"
+						on:click={handleSave}>Save or Create</button
+					>
 
-										text-gray-900 dark:text-frame-100 bg-transparent
-										placeholder:text-gray-400 dark:placeholder:text-frame-500
-										ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-										placeholder="Jane Smith"
-									/>
-								</div>
-
-								<button
-									class="rounded-l-none inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 font-medium uppercase text-sm"
-									on:click={handleClick}>Generate</button
-								>
-							</div>
-						</div>
-					</div>
+					<button
+						class="rounded-l-none inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 font-medium uppercase text-sm hover:brightness-110"
+						on:click={handleGenerate}>Generate</button
+					>
 				</div>
 			</div>
-		</div>
-	</Section>
-	<Section>
-		<pre class="overflow-x-auto whitespace-pre-wrap">
-<code>
-{generated}
+			<div class="mb-2">
+				<pre
+					class="overflow-auto whitespace-pre-wrap pl-4 pr-4 border border-frame-100 dark:border-frame-600 dark:bg-transparent dark:text-white max-h-96">
+<code id="result">
+{result}
 </code>
 </pre>
+			</div>
+		</div>
 	</Section>
 </ExamplePage>

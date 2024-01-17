@@ -36,7 +36,7 @@
 		.variant('breadcrumbOption', variant, theme, variant)
 		.option('textHoverFilled', theme, variant === 'filled') // override for filled items.
 		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
 		.append('aria-selected:pointer-events-none dark:aria-selected:brightness-75', true)

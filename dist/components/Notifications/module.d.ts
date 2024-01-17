@@ -11,3 +11,7 @@ export interface NotificationsProps {
     variant?: NotificationVariant;
 }
 export declare const notificationsDefaults: NotificationsProps;
+export declare const notificationsPosition: Record<NotificationPosition, {
+    x: number;
+    y: number;
+}>;

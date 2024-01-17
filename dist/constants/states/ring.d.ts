@@ -1,0 +1,72 @@
+export declare const ring: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringHover: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringHoverless: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringSelected: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringCurrent: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringExpanded: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};

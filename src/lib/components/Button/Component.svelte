@@ -13,6 +13,7 @@
 		disabled,
 		focused,
 		full,
+		hoverable,
 		rounded,
 		shadowed,
 		size,
@@ -38,18 +39,22 @@
 		: th
 				.create('Button')
 				.variant('button', variant, theme, variant)
-				.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
-				.option('common', 'transition', transitioned)
+				.option('hovered', theme, hoverable)
+				.option('common', 'focusedVisible', focused)
+				.option('common', 'transitioned', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('buttonPadding', size, size && variant !== 'text')
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed && variant !== 'text')
 				.option('dropshadows', shadowed, shadowed && variant === 'text')
-				.option('disableds', theme, disabled)
+				.option('common', 'disabled', disabled)
 				.append('underline', underlined && underlined !== 'hover')
 				.append('hover:underline', underlined === 'hover')
 				.append('w-full', full)
-				.append('inline-flex items-center justify-center focus:outline-none  cursor-pointer', true)
+				.append(
+					'inline-flex items-center justify-center cursor-pointer',
+					true
+				)
 				.append($$restProps.class, true)
 				.compile(true);
 

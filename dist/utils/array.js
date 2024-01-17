@@ -8,7 +8,7 @@ import { getProperty } from 'dot-prop';
  */
 export function arrayInsert(arr, index, newItem) {
     return [
-        ...arr.slice(0, index),
+        ...arr.slice(0, index), // before index
         newItem,
         ...arr.slice(index) // after index.
     ];

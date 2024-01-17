@@ -1,5 +1,6 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
-export type KbdVariant = Exclude<ThemeVariant, 'flushed' | 'text'>;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { kbd } from './config';
+export type KbdVariant = keyof typeof kbd;
 export type KbdProps = {
     full?: boolean;
     rounded?: ThemeRounded;

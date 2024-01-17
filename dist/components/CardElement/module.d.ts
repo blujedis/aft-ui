@@ -1,10 +1,11 @@
-import type { ThemeColor, ThemeSize, ThemeVariant } from '../../types';
-export type CardElementVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
+import type { ThemeColor, ThemeSize } from '../../types';
+import type { cardElement } from './config';
+export type CardVariant = keyof typeof cardElement;
 export type CardElementProps = {
     horizontal?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;
     type?: 'content' | 'header' | 'footer';
-    variant?: CardElementVariant;
+    variant?: CardVariant;
 };
 export declare const cardElementDefaults: Partial<CardElementProps>;

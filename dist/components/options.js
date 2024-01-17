@@ -1,4 +1,6 @@
 export * from '../constants/options';
+export * from '../constants/states';
+// Component Options
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';

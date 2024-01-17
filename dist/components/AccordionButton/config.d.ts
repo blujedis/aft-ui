@@ -1,5 +1,17 @@
 export declare const accordionButton: {
-    outlined: {
+    flushed: {
+        $base: string;
+        default: string;
+        dark: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    filled: {
         [x: string]: string | string[];
         default: string;
         dark: string;
@@ -11,19 +23,8 @@ export declare const accordionButton: {
         success: string;
         info: string;
         $base: string;
-        light: string;
     };
-    flushed: {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
+    outlined: {
         $base: string;
         default: string;
         dark: string;
@@ -34,59 +35,5 @@ export declare const accordionButton: {
         warning: string;
         success: string;
         info: string;
-    } & {
-        $base: string;
-        light: string;
-        dark: string;
-    } & import("../../theme").StringMap;
-    filled: {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        $base: string;
-        light: string;
-        dark: string;
-    } & import("../../theme").StringMap;
-    glass: {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        $base: string;
-        light: string;
-        dark: string;
-    } & import("../../theme").StringMap;
+    };
 };

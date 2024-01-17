@@ -72,16 +72,16 @@ function getPaginator(options = {}) {
         activePages = [...prefix, ...activePages, ...suffix];
     }
     const api = {
-        items,
-        page,
-        pageSize,
-        pages,
-        ellipsis,
-        totalPages,
-        startPage,
-        endPage,
-        startRecord,
-        endRecord,
+        items, // collection length of items
+        page, // the current page.
+        pageSize, // the items size/count shown per page.
+        pages, // the number of page buttons to display.
+        ellipsis, // when true ellipsis are included as needed.
+        totalPages, // total pages based on size/count of items displayed.
+        startPage, // the start page in the pages array.
+        endPage, // the end page in the pages array.
+        startRecord, // the starting index in the range.
+        endRecord, // the ending index in the range.
         activePages // the array of pages number for current config.
     };
     return api;

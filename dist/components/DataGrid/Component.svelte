@@ -68,7 +68,7 @@ setContext("DataGrid", {
 });
 const th = themer($themeStore);
 $:
-  gridClasses = th.create("DataGrid").variant("grid", variant, theme, true).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "divided", divided).option("common", "ringed", divided).option("fieldFontSizes", size, size).prepend("datagrid overflow-clip flow-root", true).append("divide-y", divided).append("w-full", full).append("relative", sticky).append($$restProps.class, true).compile(true);
+  gridClasses = th.create("DataGrid").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "divided", divided).option("common", "ringed", divided).option("fieldFontSizes", size, size).prepend("datagrid overflow-clip flow-root", true).append("divide-y", divided).append("w-full", full).append("relative", sticky).append($$restProps.class, true).compile(true);
 async function remove(key) {
   const item = $store.items.find((item2) => item2[rowkey] === key);
   const shouldRemove = await Promise.resolve(onBeforeRemove(item));

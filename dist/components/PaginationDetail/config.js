@@ -1,11 +1,10 @@
-import { text, border, solid } from '../../constants';
-import { mergeConfigs } from '../../theme';
+import { placeholder } from '../../constants';
 export const paginationDetail = {
     filled: {
-        ...solid,
         $base: 'text-inherit'
     },
-    outlined: mergeConfigs(border, text, {
+    outlined: {
+        ...placeholder,
         $base: 'text-inherit'
-    })
+    }
 };

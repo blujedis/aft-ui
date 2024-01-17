@@ -21,7 +21,7 @@ const th = themer($themeStore);
 $:
   gridSearchClasses = th.create("DataGridSearch").prepend("datagrid__search", true).compile(true);
 $:
-  gridSearchInputClasses = th.create("DataGridSearchInput").variant("gridSearch", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("focusedOutline", typeof focused === "string" ? focused : theme, focused).option("roundeds", rounded, rounded).prepend("datagrid__search_input", true).append("pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none", true).compile();
+  gridSearchInputClasses = th.create("DataGridSearchInput").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("focusedOutline", typeof focused === "string" ? focused : theme, focused).option("roundeds", rounded, rounded).prepend("datagrid__search_input", true).append("pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none", true).compile();
 function handleSearchSubmit(e) {
   if (strategy !== "submit" || method || action)
     return;

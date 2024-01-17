@@ -55,7 +55,7 @@
 		.variant('switchFill', variant, theme, true)
 		.option('switchFillSizes', size, size)
 		.option('shadows', shadowed, shadowed)
-		.option('disableds', theme, disabled)
+		.option('common', 'disabled', disabled)
 		.append(
 			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
 			true
@@ -68,7 +68,7 @@
 		.create('SwitchHandle')
 		.variant('switchHandle', variant, theme, true)
 		.option('switchHandleSizes', size, size)
-		.option('disableds', theme, disabled)
+		.option('common', 'disabled', disabled)
 		.append(
 			'pointer-events-none absolute left-0 inline-block transform rounded-full border shadow ring-0 transition-transform duration-200 ease-in-out',
 			true

@@ -9,8 +9,8 @@
 	type AdditionalProps = Tag extends HTMLTag
 		? ElementProps<Tag>
 		: Tag extends typeof SvelteComponent<any, any>
-		? { props?: SvelteConstructorProps<Tag> }
-		: never;
+			? { props?: SvelteConstructorProps<Tag> }
+			: never;
 	type $$Props = ConditionalElementProps<Tag> & AdditionalProps;
 
 	// 	T extends typeof SvelteComponent

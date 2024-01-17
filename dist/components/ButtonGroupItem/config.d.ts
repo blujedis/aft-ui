@@ -13,6 +13,17 @@ export declare const buttonGroupItem: {
         info: string;
     };
     outlined: {
+        $base: string;
+        default: string;
+        dark: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    } & {
         default: string;
         dark: string;
         primary: string;
@@ -24,13 +35,13 @@ export declare const buttonGroupItem: {
         info: string;
     } & {
         $base: string;
-        light: string;
-    } & import("../../theme").StringMap;
-    text: {
-        $base: string;
-        light: string;
-        dark: string;
         default: string;
+    } & import("../../theme").StringMap;
+    ghost: {
+        [x: string]: string | string[];
+        $base: string;
+        default: string;
+        dark: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -39,21 +50,7 @@ export declare const buttonGroupItem: {
         success: string;
         info: string;
     };
-    ghost: {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        $base: string;
-        light: string;
-    } & import("../../theme").StringMap;
-    glass: {
+    text: {
         $base: string;
         default: string;
         dark: string;

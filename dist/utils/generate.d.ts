@@ -1,0 +1,12 @@
+import type { ThemeColor, ThemeShade } from '../types';
+type TokenKey = 'solid' | 'muted' | 'dim' | 'soft' | 'ghost';
+type TokenPath = `${TokenKey}.${string}`;
+type TokenColor = `--${string}` | `${ThemeColor}-${ThemeShade}` | number;
+type TokenTuple = [TokenColor, TokenColor?];
+type TokenValue = TokenColor | TokenPath | TokenTuple;
+type TokenConfigInit = Record<ThemeColor, TokenValue>;
+type TokenConfig = Record<ThemeColor, string>;
+type TokenMap<C extends TokenConfig | TokenConfigInit> = Record<TokenKey, C | TokenKey>;
+export declare const defaultTokens: Record<TokenKey, TokenConfigInit>;
+export declare function parseTokens<T extends TokenMap<TokenConfigInit>, C extends Record<ThemeColor, string>>(tokens: T, colors?: C): Record<string, Record<keyof C, string>>;
+export {};

@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { borderFlushed, borderflushedGroupHover } from '../states';
+import { borderFlushed, borderflushedGroupHover } from '../statez';
 
 export const variantFlushed = mergeConfigs(borderFlushed, {});
 

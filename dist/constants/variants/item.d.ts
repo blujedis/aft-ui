@@ -1,76 +1,4 @@
-export declare const textItemFilledActive: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemSelectedFilled: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCheckedFilled: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCheckedFilledGroup: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCurrentFilled: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemExpandedFilled: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const variantItemFilledActive: {
+export declare const variantItemHover: {
     $base: string;
     default: string;
     dark: string;
@@ -84,189 +12,8 @@ export declare const variantItemFilledActive: {
 } & {
     $base: string;
     default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const textItemGlassActive: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemSelectedGlass: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCheckedGlass: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCurrentGlass: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCheckedGlassGroup: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemExpandedGlass: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const variantItemGlassActive: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
 } & import("../../theme").StringMap;
-export declare const textItemGhostActive: {
-    $base: string;
+export declare const variantItemSelected: {
     default: string;
     dark: string;
     primary: string;
@@ -276,9 +23,11 @@ export declare const textItemGhostActive: {
     warning: string;
     success: string;
     info: string;
-};
-export declare const itemSelectedGhost: {
+} & {
     $base: string;
+    default: string;
+} & import("../../theme").StringMap;
+export declare const variantItemCurrent: {
     default: string;
     dark: string;
     primary: string;
@@ -288,9 +37,11 @@ export declare const itemSelectedGhost: {
     warning: string;
     success: string;
     info: string;
-};
-export declare const itemCheckedGhost: {
+} & {
     $base: string;
+    default: string;
+} & import("../../theme").StringMap;
+export declare const variantItemChecked: {
     default: string;
     dark: string;
     primary: string;
@@ -300,44 +51,11 @@ export declare const itemCheckedGhost: {
     warning: string;
     success: string;
     info: string;
-};
-export declare const itemCurrentGhost: {
+} & {
     $base: string;
     default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemCheckedGhostGroup: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const itemExpandedGhost: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const variantItemGhostActive: {
+} & import("../../theme").StringMap;
+export declare const variantItemCheckedGhost: {
     $base: string;
     default: string;
     dark: string;
@@ -352,14 +70,8 @@ export declare const variantItemGhostActive: {
     $base: string;
     default: string;
     dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-} & {
+} & import("../../theme").StringMap;
+export declare const variantItemCheckedFilled: {
     $base: string;
     default: string;
     dark: string;
@@ -373,6 +85,9 @@ export declare const variantItemGhostActive: {
 } & {
     $base: string;
     default: string;
+} & import("../../theme").StringMap;
+export declare const variantItemExpanded: {
+    default: string;
     dark: string;
     primary: string;
     secondary: string;
@@ -384,12 +99,4 @@ export declare const variantItemGhostActive: {
 } & {
     $base: string;
     default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
 } & import("../../theme").StringMap;

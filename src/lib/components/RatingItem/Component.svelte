@@ -29,10 +29,10 @@
 			? initFill
 			: 'currentColor'
 		: percentage === 1
-		? initFill
-		: percentage === 0
-		? 'currentColor'
-		: `url(#${id})`; // SVG Pattern references Linear Gradient by ID
+			? initFill
+			: percentage === 0
+				? 'currentColor'
+				: `url(#${id})`; // SVG Pattern references Linear Gradient by ID
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);

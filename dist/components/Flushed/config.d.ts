@@ -1,0 +1,28 @@
+export declare const flushed: {
+    default: {
+        [x: string]: string | string[];
+        $base: string;
+        default: string;
+        dark: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    hovered: {
+        [x: string]: string | string[];
+        $base: string;
+        default: string;
+        dark: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+};

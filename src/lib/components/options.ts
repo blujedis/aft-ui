@@ -1,9 +1,8 @@
 export * from '../constants/options';
+export * from '../constants/statez';
 export * from '../constants/states';
-// export * from '../constants/variants';
 
 // Component Options
-
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';

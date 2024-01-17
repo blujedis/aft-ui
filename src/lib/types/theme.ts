@@ -51,8 +51,8 @@ export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Re
 			: never
 		: never
 	: P extends keyof T
-	? T[P]
-	: never;
+		? T[P]
+		: never;
 
 /**
  * Maintains code help while allowing arbitrary values/string.

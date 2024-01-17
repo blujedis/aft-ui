@@ -17,7 +17,7 @@
 		: th
 				.create('Badge')
 				.variant('badge', variant, theme, variant)
-				.option('common', 'transition', transitioned)
+				.option('common', 'transitioned', transitioned)
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)
 				.option('badgePadding', size, size && !removable)

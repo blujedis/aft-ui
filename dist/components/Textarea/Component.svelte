@@ -18,7 +18,7 @@ export let {
   ...defaults
 };
 $:
-  textareaClasses = themer($themeStore).create("Textarea").variant("globals", `${variant}Hover`, theme, true).option("focusedRing", theme, focused).option("placeholders", theme, true).option("common", "transition", transitioned).option("resizes", resize, resize).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("flex items-center justify-center form-textarea border-0", true).append("border-0 ring-1 ring-black ring-opacity-5", variant === "filled").append($$restProps.class, true).compile(true);
+  textareaClasses = themer($themeStore).create("Textarea").variant("textarea", variant, theme, variant).option("focusedRing", theme, focused).option("placeholders", theme, true).option("common", "transition", transitioned).option("resizes", resize, resize).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("flex items-center justify-center form-textarea border-0", true).append("border-0 ring-1 ring-black ring-opacity-5", variant === "filled").append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

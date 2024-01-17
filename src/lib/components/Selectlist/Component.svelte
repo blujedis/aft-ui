@@ -87,12 +87,15 @@
 
 	const th = themer($themeStore);
 
-	$: groups = $store.items.reduce((a, c) => {
-		if (!c.group) return a;
-		a[c.group] = a[c.group] || [];
-		a[c.group].push(c as Required<Item>);
-		return a;
-	}, {} as Record<string, Required<Item>[]>);
+	$: groups = $store.items.reduce(
+		(a, c) => {
+			if (!c.group) return a;
+			a[c.group] = a[c.group] || [];
+			a[c.group].push(c as Required<Item>);
+			return a;
+		},
+		{} as Record<string, Required<Item>[]>
+	);
 
 	$: groupKeys = Object.keys(groups);
 

@@ -1,5 +1,5 @@
 import { writable, get as storeGet } from 'svelte/store';
-import { cleanObj } from '../utils';
+import { cleanObj, simpleClone } from '../utils';
 import defaults from 'defaults';
 let _themeStore;
 /**
@@ -11,7 +11,10 @@ let _themeStore;
 export function createStoreInternal(userTheme, defaultTheme = {}) {
     if (_themeStore)
         return _themeStore;
-    const normalized = defaults(userTheme, defaultTheme);
+    // Create simple clone to ensure not modules
+    // props exist otherwise structuredClone will fail internally.
+    const userClone = simpleClone(userTheme);
+    const normalized = defaults(userClone, defaultTheme);
     normalized.defaults.component = cleanObj(normalized.defaults.component);
     const store = writable(normalized);
     /**
@@ -19,11 +22,11 @@ export function createStoreInternal(userTheme, defaultTheme = {}) {
      *
      * NOTE: similar to interal store.set() but ensures defaults and validates types.
      *
-     * @param theme the them configuration to update to.
+     * @param updateTheme the them configuration to update to.
      */
-    function update(theme) {
+    function update(updateTheme) {
         store.update((s) => {
-            return s; //  ensureDefaults(s, theme) as unknown as T;
+            return defaults(simpleClone(updateTheme), s);
         });
     }
     function get() {
@@ -47,9 +50,9 @@ export function createStoreInternal(userTheme, defaultTheme = {}) {
  */
 export function createStore(extendTheme, defaultTheme = { ..._themeStore.defaultTheme }) {
     const store = createStoreInternal(extendTheme, defaultTheme);
-    _themeStore.subscribe((s) => {
-        // update default store on change.
-        _themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });
+    _themeStore.subscribe(({ options, defaults, components }) => {
+        // update internal store on change.
+        _themeStore.update({ options, defaults, components });
     });
     return store;
 }

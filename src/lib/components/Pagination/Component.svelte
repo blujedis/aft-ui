@@ -51,7 +51,7 @@
 
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('roundeds', rounded, rounded)
 		.option('shadows', shadowed, shadowed)
 		.append('inline-flex items-center', ['filled', 'glass'].includes(variant))

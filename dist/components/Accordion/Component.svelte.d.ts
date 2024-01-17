@@ -1,19 +1,19 @@
 import { SvelteComponent } from "svelte";
 import type { ElementProps, HTMLTag } from '../../types';
 declare class __sveltets_Render<Tag extends HTMLTag> {
-    props(): Omit<import("..").AccordianOptionProps, "variant" | "as" | "value"> & {
+    props(): {
+        store?: import("../../stores/select").SelectStore<{
+            multiple: boolean;
+            selected: import("../../stores/select").SelectStoreValue[];
+        }> | undefined;
+    } & Omit<import("..").AccordianOptionProps, "key" | "variant" | "as" | "value"> & {
         as?: Tag | undefined;
         multiple?: boolean | undefined;
         selected?: import("../../stores/select").SelectStoreValue[] | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
-        variant?: import("./module").AccordianVariant | undefined;
-    } & ElementProps<Tag> & {
-        store?: import("../../stores/select").SelectStore<{
-            multiple: boolean;
-            selected: import("../../stores/select").SelectStoreValue[];
-        }> | undefined;
-    };
+        variant?: "flushed" | "filled" | "outlined" | undefined;
+    } & ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };

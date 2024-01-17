@@ -7,8 +7,6 @@
 		variantFilledHover,
 		variantGhost,
 		variantGhostHover,
-		variantGlass,
-		variantGlassHover,
 		variantOutlined,
 		variantOutlinedHover
 	} from '$lib/constants';
@@ -74,30 +72,6 @@
 						variantOutlinedHover[color],
 						'p-4 text-center'
 					)}
-				>
-					{color}
-				</div>
-			{/each}
-		</div>
-	</Section>
-
-	<Section>
-		<div class="text-2xl font-semibold mb-4">Glass</div>
-		<div class="grid grid-cols-6 gap-2 items-center justify-center">
-			{#each colors as color}
-				<div class={classNames(variantGlass.$base, variantGlass[color], 'p-4 text-center')}>
-					{color}
-				</div>
-			{/each}
-		</div>
-	</Section>
-
-	<Section>
-		<div class="text-2xl font-semibold mb-4">Glass Hover</div>
-		<div class="grid grid-cols-6 gap-2 items-center justify-center">
-			{#each colors as color}
-				<div
-					class={classNames(variantGlassHover.$base, variantGlassHover[color], 'p-4 text-center')}
 				>
 					{color}
 				</div>

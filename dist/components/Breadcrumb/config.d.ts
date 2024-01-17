@@ -1,4 +1,4 @@
-export declare const breadcrumbNav: {
+export declare const breadcrumb: {
     text: {
         $base: string;
         default: string;
@@ -12,6 +12,7 @@ export declare const breadcrumbNav: {
         info: string;
     };
     filled: {
+        [x: string]: string | string[];
         $base: string;
         default: string;
         dark: string;
@@ -22,7 +23,9 @@ export declare const breadcrumbNav: {
         warning: string;
         success: string;
         info: string;
-    } & {
+    };
+    ghost: {
+        [x: string]: string | string[];
         $base: string;
         default: string;
         dark: string;
@@ -33,31 +36,5 @@ export declare const breadcrumbNav: {
         warning: string;
         success: string;
         info: string;
-    } & {
-        light: string;
-        dark: string;
-    } & import("../../theme").StringMap;
-    glass: {
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & import("../../theme").StringMap;
+    };
 };

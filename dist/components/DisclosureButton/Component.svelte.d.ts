@@ -1,9 +1,8 @@
 import { SvelteComponent } from "svelte";
+import type { DisclosureButtonProps } from './module';
 import type { HTMLTag } from '../../types';
 declare class __sveltets_Render<T extends HTMLTag | typeof SvelteComponent> {
-    props(): {
-        as?: T | undefined;
-    } & (T extends typeof SvelteComponent ? import("svelte").ComponentProps<InstanceType<T>> : T extends keyof import("svelte/elements").SvelteHTMLElements ? import("../../types").ElementProps<T> : never);
+    props(): DisclosureButtonProps<T>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
