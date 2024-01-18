@@ -13,9 +13,12 @@ type TokenTuple = [TokenColor, TokenColor?];
 type TokenValue = TokenColor | TokenPath | TokenTuple;
 
 type TokenVariant = {
-	modifiers: string[];
+	modifiers: Partial<Record<Exclude<keyof TokenVariant, 'modifiers'>, string[]>>;
 	text?: TokenPath | Record<ThemeColor, TokenValue>;
-	fill?: TokenPath | Record<ThemeColor, TokenValue>
+	fill?: TokenPath | Record<ThemeColor, TokenValue>;
+	hover?: TokenPath | Record<ThemeColor, TokenValue>;
+	focus?: TokenPath | Record<ThemeColor, TokenValue>;
+	selected?: TokenPath | Record<ThemeColor, TokenValue>;
 };
 
 type TokenConfig = Record<ThemeColor, string>;
@@ -42,6 +45,9 @@ const defaultColorMap = {
 // 'aria-selected:ring',
 // 'aria-current:ring',
 // 'aria-expanded:ring',
+// 'aria-selected:outline',
+// 'aria-current:outline',
+// 'aria-expanded:outline',
 
 const defaultModifiers = [
 	'bg',
@@ -52,24 +58,16 @@ const defaultModifiers = [
 	'outline',
 	'even:bg',
 	'odd:bg',
+];
+
+const focusModifiers = [
 	'focus:outline',
 	'focus-visible:outline',
 	'focus-within:outline',
 	'peer-focus:outline',
 	'group-focus:outline',
 	'group-focus-within:outline',
-	'aria-selected:outline',
-	'aria-current:outline',
-	'aria-expanded:outline',
 ];
-
-// const defaultTypeMap = {
-// 	solid: [...defaultModifiers, 'fill', 'stroke'],
-// 	muted: [...defaultModifiers],
-// 	dim: [...defaultModifiers],
-// 	soft: [...defaultModifiers],
-// 	ghost: [...defaultModifiers, 'hover:bg'],
-// } as Record<string, string[]>;
 
 const placeholder = {
 	$base: '',
@@ -84,15 +82,61 @@ const placeholder = {
 	info: ''
 };
 
-// default: 'solid.text.default', // ['frame-800', 'frame-300'],
-// dark: 'solid.text.dark', // ['frame-800', 'frame-300'],
-
 export const defaultTokens = {
+
+	textBright: {
+		modifiers: ['text'],
+		colors: {
+			...placeholder,
+			$base: 'text-white',
+			default: ['frame-800', 'frame-300'],
+			dark: 'frame-300',
+		}
+	},
+
+	textStandard: {
+		modifiers: ['text'],
+		colors: {
+			default: ['frame-200', 'frame-600'],
+			dark: ['frame-600', 'frame-900'],
+			primary: 500,
+			secondary: 500,
+			tertiary: 500,
+			danger: 500,
+			warning: 500,
+			success: 500,
+			info: 500
+		}
+	},
+
+	textSoft: {
+		modifiers: ['text'],
+		colors: {
+			$base: '',
+			default: ['frame-800', 'frame-300'],
+			dark: ['frame-800', 'frame-300'],
+			primary: [500, 400],
+			secondary: [500, 400],
+			tertiary: [500, 400],
+			danger: [500, 400],
+			warning: [500, 400],
+			success: [500, 400],
+			info: [500, 400],
+		}
+	},
+
+
 	solid: {
-		modifiers: [...defaultModifiers],
+		modifiers: {
+			text: ['text'],
+			fill: [...defaultModifiers],
+			hover: ['hover'],
+			focus: [...focusModifiers],
+			selected: [], // ['aria-selected', 'aria-expanded', 'aria-current'],
+		},
 		text: {
 			...placeholder,
-			$base: 'white',
+			$base: 'text-white',
 			default: ['frame-800', 'frame-300'],
 			dark: 'frame-300',
 		},
@@ -106,11 +150,27 @@ export const defaultTokens = {
 			warning: 500,
 			success: 500,
 			info: 500
+		},
+		hover: {
+			...placeholder,
+			$base: 'hover:brightness-110',
+			default: 'hover:brightness-105',
+		},
+		focus: 'ghost.focus',
+		selected: {
+			...placeholder,
+			$base: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150'
 		}
 	},
 
 	soft: {
-		modifiers: [...defaultModifiers],
+		modifiers: {
+			text: ['text'],
+			fill: [...defaultModifiers],
+			hover: ['hover'],
+			focus: [...focusModifiers],
+			selected: [],
+		},
 		text: {
 			...placeholder,
 			default: ['frame-800', 'frame-300'],
@@ -134,11 +194,20 @@ export const defaultTokens = {
 			warning: 50,
 			success: 50,
 			info: 50
-		}
+		},
+		hover: 'solid.hover',
+		focus: 'ghost.focus',
+		selected: 'solid.selected'
 	},
 
 	ghost: {
-		modifiers: [...defaultModifiers, 'hover:bg'],
+		modifiers: {
+			text: ['text'],
+			fill: [...defaultModifiers],
+			hover: ['hover:bg'],
+			focus: [...focusModifiers],
+			selected: [],
+		},
 		text: 'soft.text',
 		fill: {
 			$base: '',
@@ -151,7 +220,10 @@ export const defaultTokens = {
 			warning: ['500/20', '500/40'],
 			success: ['500/20', '500/40'],
 			info: ['500/20', '500/40'],
-		}
+		},
+		hover: 'ghost.fill',
+		focus: 'ghost.fill',
+		selected: 'solid.selected'
 	},
 
 	// muted: {
@@ -200,7 +272,7 @@ function createLabel(modifier: string) {
 }
 
 function isArbitrary(value: string) {
-	if (value.startsWith('--')) return value;
+	if (value.startsWith('--')) return true;
 	return ['#', 'rgb', 'rgba', 'hsl', 'hsla'].some(v => value.includes(v));
 }
 
@@ -256,41 +328,56 @@ export function parseTokens<
 		return [light, null];
 	}
 
-	function buildTokens(modifier: string, conf?: TokenPath | Record<ThemeColor, TokenValue>) {
+	function buildClass(modifier: string, conf?: TokenPath | Record<ThemeColor, TokenValue>) {
 		if (!conf) return [];
 		const nConf = getConfig(tokens, conf) as Record<ThemeColor, TokenValue>;
-		const collectionStr = [];
+		const result = [];
 		for (const [color, token] of Object.entries(nConf)) {
-			const [light, dark] = getTuple(token, color as ThemeColor);
-			let str = '';
-			if (light) str += modifier + '-' + light;
-			if (dark) str += ' dark:' + (modifier + '-' + dark);
-			collectionStr.push(`  ${color}: '${str}'`);
+			if (color === '$base') { // do not parse base styles, copy to result.
+				result.push(`  ${'$base'}: '${token}'`);
+			}
+			else {
+				const [light, dark] = getTuple(token, color as ThemeColor);
+				let str = '';
+				if (light) str += !light.includes(':') ? (modifier + '-' + light) : light;
+				if (dark) str += !dark.includes(':') ? ' dark:' + (modifier + '-' + dark) : dark
+				result.push(`  ${color}: '${str}'`);
+			}
 		}
-		return collectionStr;
+		return result;
 	}
 
-	const resultStr = [];
+	const result = [];
 
 	for (const [key, conf] of Object.entries(tokens)) {
-		const nConf = getConfig(tokens, conf) as TokenVariant;
-		const modifiers = nConf.modifiers;
-		const textStr = buildTokens('text', nConf.text);
-		if (textStr.length) {
-			const textGroup = 'text' + (key.charAt(0).toUpperCase() + key.slice(1));
-			resultStr.push(`export const ${textGroup} = {\n${textStr.join(',\n')}\n};`);
-		}
-		for (const mod of modifiers) {
-			const fillStr = buildTokens(mod, nConf.fill);
-			if (fillStr.length) {
-				const fillGroup = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1));
-				resultStr.push(`export const ${fillGroup} = {\n${fillStr.join(',\n')}\n};`);
+		const { modifiers: modifierObj, ...nConf } = getConfig(tokens, conf) as TokenVariant; // normalize obj
+		for (const [sKey, state] of Object.entries(nConf)) {
+			const modifiers = modifierObj[sKey as keyof typeof modifierObj]; // get modifier collection.
+			if (!modifiers) continue; // nothing to do if no modifiers.
+			for (const mod of modifiers) { // iterate modifiers, build each class.
+				const str = buildClass(mod, state); // generate the Tailwind class prefixed with modifier.
+				if (!str.length) continue;
+				const group = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1)); // create object name.
+				result.push(`export const ${group} = {\n${str.join(',\n')}\n};`); // apply contents to object.
 			}
 		}
 	}
-
-	return resultStr.join('\n\n');
+	return result.join('\n\n');
 }
+
+// const textStr = buildTokens('text', nConf.text);
+// if (textStr.length) {
+// 	const textGroup = 'text' + (key.charAt(0).toUpperCase() + key.slice(1));
+// 	resultStr.push(`export const ${textGroup} = {\n${textStr.join(',\n')}\n};`);
+// }
+
+// for (const mod of modifiers[key as keyof typeof modifiers]) {
+// 	const fillStr = buildTokens(mod, nConf.fill);
+// 	if (fillStr.length) {
+// 		const fillGroup = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1));
+// 		resultStr.push(`export const ${fillGroup} = {\n${fillStr.join(',\n')}\n};`);
+// 	}
+// }
 
 
 // const collectionObj = {} as Record<keyof C, string>;

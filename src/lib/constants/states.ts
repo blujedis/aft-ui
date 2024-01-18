@@ -107,112 +107,95 @@ export const bgOddSolid = {
   info: 'odd:bg-info-500'
 };
 
+export const hoverSolid = {
+  $base: 'hover:brightness-110',
+  default: 'hover:brightness-105',
+  dark: '',
+  primary: '',
+  secondary: '',
+  tertiary: '',
+  danger: '',
+  warning: '',
+  success: '',
+  info: ''
+};
+
 export const outlineFocusSolid = {
-  default: 'focus:outline-frame-200 dark:focus:outline-frame-600',
-  dark: 'focus:outline-frame-600 dark:focus:outline-frame-900',
-  primary: 'focus:outline-primary-500',
-  secondary: 'focus:outline-secondary-500',
-  tertiary: 'focus:outline-tertiary-500',
-  danger: 'focus:outline-danger-500',
-  warning: 'focus:outline-warning-500',
-  success: 'focus:outline-success-500',
-  info: 'focus:outline-info-500'
+  $base: '',
+  default: 'focus:outline-frame-200/80 dark:focus:outline-frame-500/50',
+  dark: 'focus:outline-frame-600/30 dark:focus:outline-frame-900/50',
+  primary: 'focus:outline-primary-500/20 dark:focus:outline-primary-500/40',
+  secondary: 'focus:outline-secondary-500/20 dark:focus:outline-secondary-500/40',
+  tertiary: 'focus:outline-tertiary-500/20 dark:focus:outline-tertiary-500/40',
+  danger: 'focus:outline-danger-500/20 dark:focus:outline-danger-500/40',
+  warning: 'focus:outline-warning-500/20 dark:focus:outline-warning-500/40',
+  success: 'focus:outline-success-500/20 dark:focus:outline-success-500/40',
+  info: 'focus:outline-info-500/20 dark:focus:outline-info-500/40'
 };
 
 export const outlineFocusVisibleSolid = {
-  default: 'focus-visible:outline-frame-200 dark:focus-visible:outline-frame-600',
-  dark: 'focus-visible:outline-frame-600 dark:focus-visible:outline-frame-900',
-  primary: 'focus-visible:outline-primary-500',
-  secondary: 'focus-visible:outline-secondary-500',
-  tertiary: 'focus-visible:outline-tertiary-500',
-  danger: 'focus-visible:outline-danger-500',
-  warning: 'focus-visible:outline-warning-500',
-  success: 'focus-visible:outline-success-500',
-  info: 'focus-visible:outline-info-500'
+  $base: '',
+  default: 'focus-visible:outline-frame-200/80 dark:focus-visible:outline-frame-500/50',
+  dark: 'focus-visible:outline-frame-600/30 dark:focus-visible:outline-frame-900/50',
+  primary: 'focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/40',
+  secondary: 'focus-visible:outline-secondary-500/20 dark:focus-visible:outline-secondary-500/40',
+  tertiary: 'focus-visible:outline-tertiary-500/20 dark:focus-visible:outline-tertiary-500/40',
+  danger: 'focus-visible:outline-danger-500/20 dark:focus-visible:outline-danger-500/40',
+  warning: 'focus-visible:outline-warning-500/20 dark:focus-visible:outline-warning-500/40',
+  success: 'focus-visible:outline-success-500/20 dark:focus-visible:outline-success-500/40',
+  info: 'focus-visible:outline-info-500/20 dark:focus-visible:outline-info-500/40'
 };
 
 export const outlineFocusWithinSolid = {
-  default: 'focus-within:outline-frame-200 dark:focus-within:outline-frame-600',
-  dark: 'focus-within:outline-frame-600 dark:focus-within:outline-frame-900',
-  primary: 'focus-within:outline-primary-500',
-  secondary: 'focus-within:outline-secondary-500',
-  tertiary: 'focus-within:outline-tertiary-500',
-  danger: 'focus-within:outline-danger-500',
-  warning: 'focus-within:outline-warning-500',
-  success: 'focus-within:outline-success-500',
-  info: 'focus-within:outline-info-500'
+  $base: '',
+  default: 'focus-within:outline-frame-200/80 dark:focus-within:outline-frame-500/50',
+  dark: 'focus-within:outline-frame-600/30 dark:focus-within:outline-frame-900/50',
+  primary: 'focus-within:outline-primary-500/20 dark:focus-within:outline-primary-500/40',
+  secondary: 'focus-within:outline-secondary-500/20 dark:focus-within:outline-secondary-500/40',
+  tertiary: 'focus-within:outline-tertiary-500/20 dark:focus-within:outline-tertiary-500/40',
+  danger: 'focus-within:outline-danger-500/20 dark:focus-within:outline-danger-500/40',
+  warning: 'focus-within:outline-warning-500/20 dark:focus-within:outline-warning-500/40',
+  success: 'focus-within:outline-success-500/20 dark:focus-within:outline-success-500/40',
+  info: 'focus-within:outline-info-500/20 dark:focus-within:outline-info-500/40'
 };
 
 export const outlinePeerFocusSolid = {
-  default: 'peer-focus:outline-frame-200 dark:peer-focus:outline-frame-600',
-  dark: 'peer-focus:outline-frame-600 dark:peer-focus:outline-frame-900',
-  primary: 'peer-focus:outline-primary-500',
-  secondary: 'peer-focus:outline-secondary-500',
-  tertiary: 'peer-focus:outline-tertiary-500',
-  danger: 'peer-focus:outline-danger-500',
-  warning: 'peer-focus:outline-warning-500',
-  success: 'peer-focus:outline-success-500',
-  info: 'peer-focus:outline-info-500'
+  $base: '',
+  default: 'peer-focus:outline-frame-200/80 dark:peer-focus:outline-frame-500/50',
+  dark: 'peer-focus:outline-frame-600/30 dark:peer-focus:outline-frame-900/50',
+  primary: 'peer-focus:outline-primary-500/20 dark:peer-focus:outline-primary-500/40',
+  secondary: 'peer-focus:outline-secondary-500/20 dark:peer-focus:outline-secondary-500/40',
+  tertiary: 'peer-focus:outline-tertiary-500/20 dark:peer-focus:outline-tertiary-500/40',
+  danger: 'peer-focus:outline-danger-500/20 dark:peer-focus:outline-danger-500/40',
+  warning: 'peer-focus:outline-warning-500/20 dark:peer-focus:outline-warning-500/40',
+  success: 'peer-focus:outline-success-500/20 dark:peer-focus:outline-success-500/40',
+  info: 'peer-focus:outline-info-500/20 dark:peer-focus:outline-info-500/40'
 };
 
 export const outlineGroupFocusSolid = {
-  default: 'group-focus:outline-frame-200 dark:group-focus:outline-frame-600',
-  dark: 'group-focus:outline-frame-600 dark:group-focus:outline-frame-900',
-  primary: 'group-focus:outline-primary-500',
-  secondary: 'group-focus:outline-secondary-500',
-  tertiary: 'group-focus:outline-tertiary-500',
-  danger: 'group-focus:outline-danger-500',
-  warning: 'group-focus:outline-warning-500',
-  success: 'group-focus:outline-success-500',
-  info: 'group-focus:outline-info-500'
+  $base: '',
+  default: 'group-focus:outline-frame-200/80 dark:group-focus:outline-frame-500/50',
+  dark: 'group-focus:outline-frame-600/30 dark:group-focus:outline-frame-900/50',
+  primary: 'group-focus:outline-primary-500/20 dark:group-focus:outline-primary-500/40',
+  secondary: 'group-focus:outline-secondary-500/20 dark:group-focus:outline-secondary-500/40',
+  tertiary: 'group-focus:outline-tertiary-500/20 dark:group-focus:outline-tertiary-500/40',
+  danger: 'group-focus:outline-danger-500/20 dark:group-focus:outline-danger-500/40',
+  warning: 'group-focus:outline-warning-500/20 dark:group-focus:outline-warning-500/40',
+  success: 'group-focus:outline-success-500/20 dark:group-focus:outline-success-500/40',
+  info: 'group-focus:outline-info-500/20 dark:group-focus:outline-info-500/40'
 };
 
 export const outlineGroupFocusWithinSolid = {
-  default: 'group-focus-within:outline-frame-200 dark:group-focus-within:outline-frame-600',
-  dark: 'group-focus-within:outline-frame-600 dark:group-focus-within:outline-frame-900',
-  primary: 'group-focus-within:outline-primary-500',
-  secondary: 'group-focus-within:outline-secondary-500',
-  tertiary: 'group-focus-within:outline-tertiary-500',
-  danger: 'group-focus-within:outline-danger-500',
-  warning: 'group-focus-within:outline-warning-500',
-  success: 'group-focus-within:outline-success-500',
-  info: 'group-focus-within:outline-info-500'
-};
-
-export const outlineAriaSelectedSolid = {
-  default: 'aria-selected:outline-frame-200 dark:aria-selected:outline-frame-600',
-  dark: 'aria-selected:outline-frame-600 dark:aria-selected:outline-frame-900',
-  primary: 'aria-selected:outline-primary-500',
-  secondary: 'aria-selected:outline-secondary-500',
-  tertiary: 'aria-selected:outline-tertiary-500',
-  danger: 'aria-selected:outline-danger-500',
-  warning: 'aria-selected:outline-warning-500',
-  success: 'aria-selected:outline-success-500',
-  info: 'aria-selected:outline-info-500'
-};
-
-export const outlineAriaCurrentSolid = {
-  default: 'aria-current:outline-frame-200 dark:aria-current:outline-frame-600',
-  dark: 'aria-current:outline-frame-600 dark:aria-current:outline-frame-900',
-  primary: 'aria-current:outline-primary-500',
-  secondary: 'aria-current:outline-secondary-500',
-  tertiary: 'aria-current:outline-tertiary-500',
-  danger: 'aria-current:outline-danger-500',
-  warning: 'aria-current:outline-warning-500',
-  success: 'aria-current:outline-success-500',
-  info: 'aria-current:outline-info-500'
-};
-
-export const outlineAriaExpandedSolid = {
-  default: 'aria-expanded:outline-frame-200 dark:aria-expanded:outline-frame-600',
-  dark: 'aria-expanded:outline-frame-600 dark:aria-expanded:outline-frame-900',
-  primary: 'aria-expanded:outline-primary-500',
-  secondary: 'aria-expanded:outline-secondary-500',
-  tertiary: 'aria-expanded:outline-tertiary-500',
-  danger: 'aria-expanded:outline-danger-500',
-  warning: 'aria-expanded:outline-warning-500',
-  success: 'aria-expanded:outline-success-500',
-  info: 'aria-expanded:outline-info-500'
+  $base: '',
+  default: 'group-focus-within:outline-frame-200/80 dark:group-focus-within:outline-frame-500/50',
+  dark: 'group-focus-within:outline-frame-600/30 dark:group-focus-within:outline-frame-900/50',
+  primary: 'group-focus-within:outline-primary-500/20 dark:group-focus-within:outline-primary-500/40',
+  secondary: 'group-focus-within:outline-secondary-500/20 dark:group-focus-within:outline-secondary-500/40',
+  tertiary: 'group-focus-within:outline-tertiary-500/20 dark:group-focus-within:outline-tertiary-500/40',
+  danger: 'group-focus-within:outline-danger-500/20 dark:group-focus-within:outline-danger-500/40',
+  warning: 'group-focus-within:outline-warning-500/20 dark:group-focus-within:outline-warning-500/40',
+  success: 'group-focus-within:outline-success-500/20 dark:group-focus-within:outline-success-500/40',
+  info: 'group-focus-within:outline-info-500/20 dark:group-focus-within:outline-info-500/40'
 };
 
 export const textSoft = {
@@ -332,121 +315,95 @@ export const bgOddSoft = {
   info: 'odd:bg-info-50'
 };
 
+export const hoverSoft = {
+  $base: 'hover:brightness-110',
+  default: 'hover:brightness-105',
+  dark: '',
+  primary: '',
+  secondary: '',
+  tertiary: '',
+  danger: '',
+  warning: '',
+  success: '',
+  info: ''
+};
+
 export const outlineFocusSoft = {
   $base: '',
-  default: 'focus:outline-frame-50',
-  dark: 'focus:outline-frame-100/90',
-  primary: 'focus:outline-primary-50',
-  secondary: 'focus:outline-secondary-50',
-  tertiary: 'focus:outline-tertiary-50',
-  danger: 'focus:outline-danger-50',
-  warning: 'focus:outline-warning-50',
-  success: 'focus:outline-success-50',
-  info: 'focus:outline-info-50'
+  default: 'focus:outline-frame-200/80 dark:focus:outline-frame-500/50',
+  dark: 'focus:outline-frame-600/30 dark:focus:outline-frame-900/50',
+  primary: 'focus:outline-primary-500/20 dark:focus:outline-primary-500/40',
+  secondary: 'focus:outline-secondary-500/20 dark:focus:outline-secondary-500/40',
+  tertiary: 'focus:outline-tertiary-500/20 dark:focus:outline-tertiary-500/40',
+  danger: 'focus:outline-danger-500/20 dark:focus:outline-danger-500/40',
+  warning: 'focus:outline-warning-500/20 dark:focus:outline-warning-500/40',
+  success: 'focus:outline-success-500/20 dark:focus:outline-success-500/40',
+  info: 'focus:outline-info-500/20 dark:focus:outline-info-500/40'
 };
 
 export const outlineFocusVisibleSoft = {
   $base: '',
-  default: 'focus-visible:outline-frame-50',
-  dark: 'focus-visible:outline-frame-100/90',
-  primary: 'focus-visible:outline-primary-50',
-  secondary: 'focus-visible:outline-secondary-50',
-  tertiary: 'focus-visible:outline-tertiary-50',
-  danger: 'focus-visible:outline-danger-50',
-  warning: 'focus-visible:outline-warning-50',
-  success: 'focus-visible:outline-success-50',
-  info: 'focus-visible:outline-info-50'
+  default: 'focus-visible:outline-frame-200/80 dark:focus-visible:outline-frame-500/50',
+  dark: 'focus-visible:outline-frame-600/30 dark:focus-visible:outline-frame-900/50',
+  primary: 'focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/40',
+  secondary: 'focus-visible:outline-secondary-500/20 dark:focus-visible:outline-secondary-500/40',
+  tertiary: 'focus-visible:outline-tertiary-500/20 dark:focus-visible:outline-tertiary-500/40',
+  danger: 'focus-visible:outline-danger-500/20 dark:focus-visible:outline-danger-500/40',
+  warning: 'focus-visible:outline-warning-500/20 dark:focus-visible:outline-warning-500/40',
+  success: 'focus-visible:outline-success-500/20 dark:focus-visible:outline-success-500/40',
+  info: 'focus-visible:outline-info-500/20 dark:focus-visible:outline-info-500/40'
 };
 
 export const outlineFocusWithinSoft = {
   $base: '',
-  default: 'focus-within:outline-frame-50',
-  dark: 'focus-within:outline-frame-100/90',
-  primary: 'focus-within:outline-primary-50',
-  secondary: 'focus-within:outline-secondary-50',
-  tertiary: 'focus-within:outline-tertiary-50',
-  danger: 'focus-within:outline-danger-50',
-  warning: 'focus-within:outline-warning-50',
-  success: 'focus-within:outline-success-50',
-  info: 'focus-within:outline-info-50'
+  default: 'focus-within:outline-frame-200/80 dark:focus-within:outline-frame-500/50',
+  dark: 'focus-within:outline-frame-600/30 dark:focus-within:outline-frame-900/50',
+  primary: 'focus-within:outline-primary-500/20 dark:focus-within:outline-primary-500/40',
+  secondary: 'focus-within:outline-secondary-500/20 dark:focus-within:outline-secondary-500/40',
+  tertiary: 'focus-within:outline-tertiary-500/20 dark:focus-within:outline-tertiary-500/40',
+  danger: 'focus-within:outline-danger-500/20 dark:focus-within:outline-danger-500/40',
+  warning: 'focus-within:outline-warning-500/20 dark:focus-within:outline-warning-500/40',
+  success: 'focus-within:outline-success-500/20 dark:focus-within:outline-success-500/40',
+  info: 'focus-within:outline-info-500/20 dark:focus-within:outline-info-500/40'
 };
 
 export const outlinePeerFocusSoft = {
   $base: '',
-  default: 'peer-focus:outline-frame-50',
-  dark: 'peer-focus:outline-frame-100/90',
-  primary: 'peer-focus:outline-primary-50',
-  secondary: 'peer-focus:outline-secondary-50',
-  tertiary: 'peer-focus:outline-tertiary-50',
-  danger: 'peer-focus:outline-danger-50',
-  warning: 'peer-focus:outline-warning-50',
-  success: 'peer-focus:outline-success-50',
-  info: 'peer-focus:outline-info-50'
+  default: 'peer-focus:outline-frame-200/80 dark:peer-focus:outline-frame-500/50',
+  dark: 'peer-focus:outline-frame-600/30 dark:peer-focus:outline-frame-900/50',
+  primary: 'peer-focus:outline-primary-500/20 dark:peer-focus:outline-primary-500/40',
+  secondary: 'peer-focus:outline-secondary-500/20 dark:peer-focus:outline-secondary-500/40',
+  tertiary: 'peer-focus:outline-tertiary-500/20 dark:peer-focus:outline-tertiary-500/40',
+  danger: 'peer-focus:outline-danger-500/20 dark:peer-focus:outline-danger-500/40',
+  warning: 'peer-focus:outline-warning-500/20 dark:peer-focus:outline-warning-500/40',
+  success: 'peer-focus:outline-success-500/20 dark:peer-focus:outline-success-500/40',
+  info: 'peer-focus:outline-info-500/20 dark:peer-focus:outline-info-500/40'
 };
 
 export const outlineGroupFocusSoft = {
   $base: '',
-  default: 'group-focus:outline-frame-50',
-  dark: 'group-focus:outline-frame-100/90',
-  primary: 'group-focus:outline-primary-50',
-  secondary: 'group-focus:outline-secondary-50',
-  tertiary: 'group-focus:outline-tertiary-50',
-  danger: 'group-focus:outline-danger-50',
-  warning: 'group-focus:outline-warning-50',
-  success: 'group-focus:outline-success-50',
-  info: 'group-focus:outline-info-50'
+  default: 'group-focus:outline-frame-200/80 dark:group-focus:outline-frame-500/50',
+  dark: 'group-focus:outline-frame-600/30 dark:group-focus:outline-frame-900/50',
+  primary: 'group-focus:outline-primary-500/20 dark:group-focus:outline-primary-500/40',
+  secondary: 'group-focus:outline-secondary-500/20 dark:group-focus:outline-secondary-500/40',
+  tertiary: 'group-focus:outline-tertiary-500/20 dark:group-focus:outline-tertiary-500/40',
+  danger: 'group-focus:outline-danger-500/20 dark:group-focus:outline-danger-500/40',
+  warning: 'group-focus:outline-warning-500/20 dark:group-focus:outline-warning-500/40',
+  success: 'group-focus:outline-success-500/20 dark:group-focus:outline-success-500/40',
+  info: 'group-focus:outline-info-500/20 dark:group-focus:outline-info-500/40'
 };
 
 export const outlineGroupFocusWithinSoft = {
   $base: '',
-  default: 'group-focus-within:outline-frame-50',
-  dark: 'group-focus-within:outline-frame-100/90',
-  primary: 'group-focus-within:outline-primary-50',
-  secondary: 'group-focus-within:outline-secondary-50',
-  tertiary: 'group-focus-within:outline-tertiary-50',
-  danger: 'group-focus-within:outline-danger-50',
-  warning: 'group-focus-within:outline-warning-50',
-  success: 'group-focus-within:outline-success-50',
-  info: 'group-focus-within:outline-info-50'
-};
-
-export const outlineAriaSelectedSoft = {
-  $base: '',
-  default: 'aria-selected:outline-frame-50',
-  dark: 'aria-selected:outline-frame-100/90',
-  primary: 'aria-selected:outline-primary-50',
-  secondary: 'aria-selected:outline-secondary-50',
-  tertiary: 'aria-selected:outline-tertiary-50',
-  danger: 'aria-selected:outline-danger-50',
-  warning: 'aria-selected:outline-warning-50',
-  success: 'aria-selected:outline-success-50',
-  info: 'aria-selected:outline-info-50'
-};
-
-export const outlineAriaCurrentSoft = {
-  $base: '',
-  default: 'aria-current:outline-frame-50',
-  dark: 'aria-current:outline-frame-100/90',
-  primary: 'aria-current:outline-primary-50',
-  secondary: 'aria-current:outline-secondary-50',
-  tertiary: 'aria-current:outline-tertiary-50',
-  danger: 'aria-current:outline-danger-50',
-  warning: 'aria-current:outline-warning-50',
-  success: 'aria-current:outline-success-50',
-  info: 'aria-current:outline-info-50'
-};
-
-export const outlineAriaExpandedSoft = {
-  $base: '',
-  default: 'aria-expanded:outline-frame-50',
-  dark: 'aria-expanded:outline-frame-100/90',
-  primary: 'aria-expanded:outline-primary-50',
-  secondary: 'aria-expanded:outline-secondary-50',
-  tertiary: 'aria-expanded:outline-tertiary-50',
-  danger: 'aria-expanded:outline-danger-50',
-  warning: 'aria-expanded:outline-warning-50',
-  success: 'aria-expanded:outline-success-50',
-  info: 'aria-expanded:outline-info-50'
+  default: 'group-focus-within:outline-frame-200/80 dark:group-focus-within:outline-frame-500/50',
+  dark: 'group-focus-within:outline-frame-600/30 dark:group-focus-within:outline-frame-900/50',
+  primary: 'group-focus-within:outline-primary-500/20 dark:group-focus-within:outline-primary-500/40',
+  secondary: 'group-focus-within:outline-secondary-500/20 dark:group-focus-within:outline-secondary-500/40',
+  tertiary: 'group-focus-within:outline-tertiary-500/20 dark:group-focus-within:outline-tertiary-500/40',
+  danger: 'group-focus-within:outline-danger-500/20 dark:group-focus-within:outline-danger-500/40',
+  warning: 'group-focus-within:outline-warning-500/20 dark:group-focus-within:outline-warning-500/40',
+  success: 'group-focus-within:outline-success-500/20 dark:group-focus-within:outline-success-500/40',
+  info: 'group-focus-within:outline-info-500/20 dark:group-focus-within:outline-info-500/40'
 };
 
 export const textGhost = {
@@ -566,6 +523,19 @@ export const bgOddGhost = {
   info: 'odd:bg-info-500/20 dark:odd:bg-info-500/40'
 };
 
+export const bgHoverGhost = {
+  $base: '',
+  default: 'hover:bg-frame-200/80 dark:hover:bg-frame-500/50',
+  dark: 'hover:bg-frame-600/30 dark:hover:bg-frame-900/50',
+  primary: 'hover:bg-primary-500/20 dark:hover:bg-primary-500/40',
+  secondary: 'hover:bg-secondary-500/20 dark:hover:bg-secondary-500/40',
+  tertiary: 'hover:bg-tertiary-500/20 dark:hover:bg-tertiary-500/40',
+  danger: 'hover:bg-danger-500/20 dark:hover:bg-danger-500/40',
+  warning: 'hover:bg-warning-500/20 dark:hover:bg-warning-500/40',
+  success: 'hover:bg-success-500/20 dark:hover:bg-success-500/40',
+  info: 'hover:bg-info-500/20 dark:hover:bg-info-500/40'
+};
+
 export const outlineFocusGhost = {
   $base: '',
   default: 'focus:outline-frame-200/80 dark:focus:outline-frame-500/50',
@@ -642,56 +612,4 @@ export const outlineGroupFocusWithinGhost = {
   warning: 'group-focus-within:outline-warning-500/20 dark:group-focus-within:outline-warning-500/40',
   success: 'group-focus-within:outline-success-500/20 dark:group-focus-within:outline-success-500/40',
   info: 'group-focus-within:outline-info-500/20 dark:group-focus-within:outline-info-500/40'
-};
-
-export const outlineAriaSelectedGhost = {
-  $base: '',
-  default: 'aria-selected:outline-frame-200/80 dark:aria-selected:outline-frame-500/50',
-  dark: 'aria-selected:outline-frame-600/30 dark:aria-selected:outline-frame-900/50',
-  primary: 'aria-selected:outline-primary-500/20 dark:aria-selected:outline-primary-500/40',
-  secondary: 'aria-selected:outline-secondary-500/20 dark:aria-selected:outline-secondary-500/40',
-  tertiary: 'aria-selected:outline-tertiary-500/20 dark:aria-selected:outline-tertiary-500/40',
-  danger: 'aria-selected:outline-danger-500/20 dark:aria-selected:outline-danger-500/40',
-  warning: 'aria-selected:outline-warning-500/20 dark:aria-selected:outline-warning-500/40',
-  success: 'aria-selected:outline-success-500/20 dark:aria-selected:outline-success-500/40',
-  info: 'aria-selected:outline-info-500/20 dark:aria-selected:outline-info-500/40'
-};
-
-export const outlineAriaCurrentGhost = {
-  $base: '',
-  default: 'aria-current:outline-frame-200/80 dark:aria-current:outline-frame-500/50',
-  dark: 'aria-current:outline-frame-600/30 dark:aria-current:outline-frame-900/50',
-  primary: 'aria-current:outline-primary-500/20 dark:aria-current:outline-primary-500/40',
-  secondary: 'aria-current:outline-secondary-500/20 dark:aria-current:outline-secondary-500/40',
-  tertiary: 'aria-current:outline-tertiary-500/20 dark:aria-current:outline-tertiary-500/40',
-  danger: 'aria-current:outline-danger-500/20 dark:aria-current:outline-danger-500/40',
-  warning: 'aria-current:outline-warning-500/20 dark:aria-current:outline-warning-500/40',
-  success: 'aria-current:outline-success-500/20 dark:aria-current:outline-success-500/40',
-  info: 'aria-current:outline-info-500/20 dark:aria-current:outline-info-500/40'
-};
-
-export const outlineAriaExpandedGhost = {
-  $base: '',
-  default: 'aria-expanded:outline-frame-200/80 dark:aria-expanded:outline-frame-500/50',
-  dark: 'aria-expanded:outline-frame-600/30 dark:aria-expanded:outline-frame-900/50',
-  primary: 'aria-expanded:outline-primary-500/20 dark:aria-expanded:outline-primary-500/40',
-  secondary: 'aria-expanded:outline-secondary-500/20 dark:aria-expanded:outline-secondary-500/40',
-  tertiary: 'aria-expanded:outline-tertiary-500/20 dark:aria-expanded:outline-tertiary-500/40',
-  danger: 'aria-expanded:outline-danger-500/20 dark:aria-expanded:outline-danger-500/40',
-  warning: 'aria-expanded:outline-warning-500/20 dark:aria-expanded:outline-warning-500/40',
-  success: 'aria-expanded:outline-success-500/20 dark:aria-expanded:outline-success-500/40',
-  info: 'aria-expanded:outline-info-500/20 dark:aria-expanded:outline-info-500/40'
-};
-
-export const bgHoverGhost = {
-  $base: '',
-  default: 'hover:bg-frame-200/80 dark:hover:bg-frame-500/50',
-  dark: 'hover:bg-frame-600/30 dark:hover:bg-frame-900/50',
-  primary: 'hover:bg-primary-500/20 dark:hover:bg-primary-500/40',
-  secondary: 'hover:bg-secondary-500/20 dark:hover:bg-secondary-500/40',
-  tertiary: 'hover:bg-tertiary-500/20 dark:hover:bg-tertiary-500/40',
-  danger: 'hover:bg-danger-500/20 dark:hover:bg-danger-500/40',
-  warning: 'hover:bg-warning-500/20 dark:hover:bg-warning-500/40',
-  success: 'hover:bg-success-500/20 dark:hover:bg-success-500/40',
-  info: 'hover:bg-info-500/20 dark:hover:bg-info-500/40'
 };

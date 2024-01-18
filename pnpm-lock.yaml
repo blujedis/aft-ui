@@ -11,6 +11,9 @@ dependencies:
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
+  defaults:
+    specifier: ^3.0.0
+    version: 3.0.0
   dot-prop:
     specifier: ^8.0.2
     version: 8.0.2
@@ -91,9 +94,6 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.33)
-  defaults:
-    specifier: ^3.0.0
-    version: 3.0.0
   eslint:
     specifier: ^8.56.0
     version: 8.56.0
@@ -2134,7 +2134,7 @@ packages:
   /defaults@3.0.0:
     resolution: {integrity: sha512-RsqXDEAALjfRTro+IFNKpcPCt0/Cy2FqHSIlnomiJp9YGadpQnrtbRpSgN2+np21qHcIKiva4fiOQGjS9/qR/A==}
     engines: {node: '>=18'}
-    dev: true
+    dev: false
 
   /deprecation@2.3.1:
     resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}

@@ -19,7 +19,8 @@
 		variant: 'filled' as ButtonVariant,
 		underlined: false,
 		hoverable: true,
-		focused: true
+		focused: true,
+		transitioned: true
 	};
 
 	const background = 'url("https://i.imgur.com/DdrZVb7.gif") center center / cover no-repeat';
