@@ -13,7 +13,7 @@
 		disabled,
 		focused,
 		full,
-		hoverable,
+		hovered,
 		rounded,
 		shadowed,
 		size,
@@ -60,12 +60,7 @@
 </script>
 
 {#if as === 'button'}
-	<button
-		use:forwardedEvents
-		{...$$restProps}
-		class={buttonClasses}
-		{disabled}  
-	>
+	<button use:forwardedEvents {...$$restProps} class={buttonClasses} {disabled}>
 		{#if isStrong || buttonClasses.includes('uppercase')}
 			<div class="pt-px">
 				<slot />

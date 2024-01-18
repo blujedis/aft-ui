@@ -83,11 +83,12 @@ export type ThemeOption = keyof ThemeOptions;
 export type ThemeDefaults = {
 	component: {
 		focused: ThemeFocused; // elements that should receive focus either always or only focus-visible.
+		hovered: ThemeHovered;
 		rounded: ThemeRounded;
 		shadowed: ThemeShadowed;
 		size: ThemeSize;
 		theme: ThemeColor; // default theme color.
-		transitioned: boolean;
+		transitioned: ThemeTransitioned;
 	};
 };
 export type ThemeComponents = typeof configs;
@@ -107,7 +108,8 @@ export type ThemeRounded = ThemeSize | 'full' | 'none';
 export type ThemeShadowed = ThemeSize | 'inner' | 'none';
 export type ThemeFontSize = keyof typeof fontSizes;
 export type ThemeBorderStyle = keyof typeof borderStyles;
-export type ThemeTransitioned = boolean; // bool = colors
+export type ThemeTransitioned = boolean;
+export type ThemeHovered = boolean;
 export type ThemeResize = 'x' | 'y' | 'both';
 export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;

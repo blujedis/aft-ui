@@ -2,8 +2,9 @@ import type { ThemeDefaults } from '../types/theme';
 
 const component = {
 	focused: true,
-	// rounded: 'sm',
-	// shadowed: undefined,
+	hovered: true,
+	rounded: 'none',
+	shadowed: 'none',
 	size: 'md',
 	theme: 'default',
 	transitioned: true

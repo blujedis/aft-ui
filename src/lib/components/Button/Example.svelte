@@ -18,12 +18,10 @@
 		size: 'md' as ThemeSize,
 		variant: 'filled' as ButtonVariant,
 		underlined: false,
-		hoverable: true,
+		hovered: true,
 		focused: true,
 		transitioned: true
 	};
-
-	const background = 'url("https://i.imgur.com/DdrZVb7.gif") center center / cover no-repeat';
 </script>
 
 <ExamplePage {title} {description} {code}>
