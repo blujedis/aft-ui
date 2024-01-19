@@ -13,7 +13,8 @@ type TokenTuple = [TokenColor, TokenColor?];
 type TokenValue = TokenColor | TokenPath | TokenTuple;
 
 type TokenVariant = {
-	modifiers: Partial<Record<Exclude<keyof TokenVariant, 'modifiers'>, string[]>>;
+	modifiers?: Partial<Record<Exclude<keyof TokenVariant, 'modifiers'|'rename'>, string[]>>;
+	rename?: { [key: string]: string };
 	text?: TokenPath | Record<ThemeColor, TokenValue>;
 	fill?: TokenPath | Record<ThemeColor, TokenValue>;
 	hover?: TokenPath | Record<ThemeColor, TokenValue>;
@@ -84,48 +85,6 @@ const placeholder = {
 
 export const defaultTokens = {
 
-	textBright: {
-		modifiers: ['text'],
-		colors: {
-			...placeholder,
-			$base: 'text-white',
-			default: ['frame-800', 'frame-300'],
-			dark: 'frame-300',
-		}
-	},
-
-	textStandard: {
-		modifiers: ['text'],
-		colors: {
-			default: ['frame-200', 'frame-600'],
-			dark: ['frame-600', 'frame-900'],
-			primary: 500,
-			secondary: 500,
-			tertiary: 500,
-			danger: 500,
-			warning: 500,
-			success: 500,
-			info: 500
-		}
-	},
-
-	textSoft: {
-		modifiers: ['text'],
-		colors: {
-			$base: '',
-			default: ['frame-800', 'frame-300'],
-			dark: ['frame-800', 'frame-300'],
-			primary: [500, 400],
-			secondary: [500, 400],
-			tertiary: [500, 400],
-			danger: [500, 400],
-			warning: [500, 400],
-			success: [500, 400],
-			info: [500, 400],
-		}
-	},
-
-
 	solid: {
 		modifiers: {
 			text: ['text'],
@@ -133,6 +92,9 @@ export const defaultTokens = {
 			hover: ['hover'],
 			focus: [...focusModifiers],
 			selected: [], // ['aria-selected', 'aria-expanded', 'aria-current'],
+		},
+		rename: {
+			'textSolid': 'textBright'
 		},
 		text: {
 			...placeholder,
@@ -170,6 +132,9 @@ export const defaultTokens = {
 			hover: ['hover'],
 			focus: [...focusModifiers],
 			selected: [],
+		},
+		rename: {
+			'textSoft': 'textStandard'
 		},
 		text: {
 			...placeholder,
@@ -350,48 +315,20 @@ export function parseTokens<
 	const result = [];
 
 	for (const [key, conf] of Object.entries(tokens)) {
-		const { modifiers: modifierObj, ...nConf } = getConfig(tokens, conf) as TokenVariant; // normalize obj
+		const { modifiers: modifierObj, rename, ...nConf } = getConfig(tokens, conf) as TokenVariant; // normalize obj
+		if (!modifierObj) continue;
 		for (const [sKey, state] of Object.entries(nConf)) {
 			const modifiers = modifierObj[sKey as keyof typeof modifierObj]; // get modifier collection.
 			if (!modifiers) continue; // nothing to do if no modifiers.
 			for (const mod of modifiers) { // iterate modifiers, build each class.
 				const str = buildClass(mod, state); // generate the Tailwind class prefixed with modifier.
 				if (!str.length) continue;
-				const group = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1)); // create object name.
+				let group = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1)); // create object name.
+				if(rename && typeof rename[group] === 'string')
+					group = rename[group];
 				result.push(`export const ${group} = {\n${str.join(',\n')}\n};`); // apply contents to object.
 			}
 		}
 	}
 	return result.join('\n\n');
-}
-
-// const textStr = buildTokens('text', nConf.text);
-// if (textStr.length) {
-// 	const textGroup = 'text' + (key.charAt(0).toUpperCase() + key.slice(1));
-// 	resultStr.push(`export const ${textGroup} = {\n${textStr.join(',\n')}\n};`);
-// }
-
-// for (const mod of modifiers[key as keyof typeof modifiers]) {
-// 	const fillStr = buildTokens(mod, nConf.fill);
-// 	if (fillStr.length) {
-// 		const fillGroup = createLabel(mod) + (key.charAt(0).toUpperCase() + key.slice(1));
-// 		resultStr.push(`export const ${fillGroup} = {\n${fillStr.join(',\n')}\n};`);
-// 	}
-// }
-
-
-// const collectionObj = {} as Record<keyof C, string>;
-// const collectionStr = [];
-// for (const [color, token] of Object.entries(nConf)) {
-
-// 	const [light, dark] = getTuple(token, color as ThemeColor);
-// 	let str = '';
-// 	if (light) str += mod + '-' + light;
-// 	if (dark) str += ' dark:' + (mod + '-' + dark);
-
-// 	collectionObj[color as ThemeColor] = str;
-// 	collectionStr.push(`  ${color}: '${str}'`);
-
-// }
-// resultObj[group] = collectionObj;
-
+} 

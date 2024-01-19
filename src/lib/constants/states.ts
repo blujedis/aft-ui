@@ -198,7 +198,7 @@ export const outlineGroupFocusWithinSolid = {
   info: 'group-focus-within:outline-info-500/20 dark:group-focus-within:outline-info-500/40'
 };
 
-export const textSoft = {
+export const textStandard = {
   $base: '',
   default: 'text-frame-800 dark:text-frame-300',
   dark: 'text-frame-800 dark:text-frame-300',
