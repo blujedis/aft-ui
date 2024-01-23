@@ -77,7 +77,9 @@
 	{...$$restProps}
 	on:click={() => context.toggle(key)}
 	class={accordionButtonClasses}
+	{disabled}
 	aria-expanded={isSelected}
+	aria-disabled={disabled}
 >
 	<div>
 		<slot />

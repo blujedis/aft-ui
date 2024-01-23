@@ -278,7 +278,7 @@ export const common = {
 	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
 	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
 	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
-	disabled: 'disabled:opacity-60 aria-disabled:opacity-60',
+	disabled: 'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
 	transitioned: 'transition motion-reduce:transition-none',
 	selected: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150'
 };
