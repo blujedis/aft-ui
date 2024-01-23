@@ -27,7 +27,7 @@
 
 	$: accordionClasses = th
 		.create('AccordianOption')
-		.append('bg-frame-900/20', context.globals?.variant === 'filled' && isSelected)
+		.append('mb-2', isSelected)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

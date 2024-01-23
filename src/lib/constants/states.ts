@@ -46,6 +46,42 @@ export const filledBgAriaSelected = {
   info: 'aria-selected:bg-info-500'
 };
 
+export const filledBgDarkAriaCurrent = {
+  default: 'dark:aria-current:bg-frame-200 dark:dark:aria-current:bg-frame-600',
+  dark: 'dark:aria-current:bg-frame-600 dark:dark:aria-current:bg-frame-900',
+  primary: 'dark:aria-current:bg-primary-500',
+  secondary: 'dark:aria-current:bg-secondary-500',
+  tertiary: 'dark:aria-current:bg-tertiary-500',
+  danger: 'dark:aria-current:bg-danger-500',
+  warning: 'dark:aria-current:bg-warning-500',
+  success: 'dark:aria-current:bg-success-500',
+  info: 'dark:aria-current:bg-info-500'
+};
+
+export const filledBgDarkAriaExpanded = {
+  default: 'dark:aria-expanded:bg-frame-200 dark:dark:aria-expanded:bg-frame-600',
+  dark: 'dark:aria-expanded:bg-frame-600 dark:dark:aria-expanded:bg-frame-900',
+  primary: 'dark:aria-expanded:bg-primary-500',
+  secondary: 'dark:aria-expanded:bg-secondary-500',
+  tertiary: 'dark:aria-expanded:bg-tertiary-500',
+  danger: 'dark:aria-expanded:bg-danger-500',
+  warning: 'dark:aria-expanded:bg-warning-500',
+  success: 'dark:aria-expanded:bg-success-500',
+  info: 'dark:aria-expanded:bg-info-500'
+};
+
+export const filledBgDarkAriaSelected = {
+  default: 'dark:aria-selected:bg-frame-200 dark:dark:aria-selected:bg-frame-600',
+  dark: 'dark:aria-selected:bg-frame-600 dark:dark:aria-selected:bg-frame-900',
+  primary: 'dark:aria-selected:bg-primary-500',
+  secondary: 'dark:aria-selected:bg-secondary-500',
+  tertiary: 'dark:aria-selected:bg-tertiary-500',
+  danger: 'dark:aria-selected:bg-danger-500',
+  warning: 'dark:aria-selected:bg-warning-500',
+  success: 'dark:aria-selected:bg-success-500',
+  info: 'dark:aria-selected:bg-info-500'
+};
+
 export const filledBgEven = {
   default: 'even:bg-frame-200 dark:even:bg-frame-600',
   dark: 'even:bg-frame-600 dark:even:bg-frame-900',
@@ -96,8 +132,8 @@ export const filledStroke = {
 
 export const filledText = {
   $base: 'text-white',
-  default: 'text-frame-800 dark:text-frame-300',
-  dark: 'text-frame-300',
+  default: 'text-text-current dark:text-text-white',
+  dark: '',
   primary: '',
   secondary: '',
   tertiary: '',
@@ -108,8 +144,8 @@ export const filledText = {
 };
 
 export const filledTextAriaCurrent = {
-  default: 'aria-current:text-frame-200 dark:aria-current:text-frame-600',
-  dark: 'aria-current:text-frame-600 dark:aria-current:text-frame-900',
+  default: '',
+  dark: '',
   primary: 'aria-current:text-primary-500',
   secondary: 'aria-current:text-secondary-500',
   tertiary: 'aria-current:text-tertiary-500',
@@ -120,8 +156,8 @@ export const filledTextAriaCurrent = {
 };
 
 export const filledTextAriaExpanded = {
-  default: 'aria-expanded:text-frame-200 dark:aria-expanded:text-frame-600',
-  dark: 'aria-expanded:text-frame-600 dark:aria-expanded:text-frame-900',
+  default: '',
+  dark: '',
   primary: 'aria-expanded:text-primary-500',
   secondary: 'aria-expanded:text-secondary-500',
   tertiary: 'aria-expanded:text-tertiary-500',
@@ -132,8 +168,8 @@ export const filledTextAriaExpanded = {
 };
 
 export const filledTextAriaSelected = {
-  default: 'aria-selected:text-frame-200 dark:aria-selected:text-frame-600',
-  dark: 'aria-selected:text-frame-600 dark:aria-selected:text-frame-900',
+  default: '',
+  dark: '',
   primary: 'aria-selected:text-primary-500',
   secondary: 'aria-selected:text-secondary-500',
   tertiary: 'aria-selected:text-tertiary-500',
@@ -229,7 +265,7 @@ export const ghostOutlinePeerFocus = {
 
 export const ghostText = {
   $base: '',
-  default: 'text-frame-800 dark:text-frame-300',
+  default: 'text-text-current dark:text-text-current',
   dark: 'text-frame-800 dark:text-frame-300',
   primary: 'text-primary-500 dark:text-primary-400',
   secondary: 'text-secondary-500 dark:text-secondary-400',
@@ -278,7 +314,7 @@ export const outlinedRing = {
 
 export const outlinedText = {
   $base: '',
-  default: 'text-frame-800 dark:text-frame-300',
+  default: 'text-text-current dark:text-text-current',
   dark: 'text-frame-800 dark:text-frame-300',
   primary: 'text-primary-500 dark:text-primary-400',
   secondary: 'text-secondary-500 dark:text-secondary-400',

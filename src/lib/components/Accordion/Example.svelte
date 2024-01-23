@@ -42,7 +42,7 @@
 						</AccordionContent>
 					</AccordionOption>
 					<AccordionOption key={1}>
-						<AccordionButton disabled>Two</AccordionButton>
+						<AccordionButton>Two</AccordionButton>
 						<AccordionContent key={1}>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 							incididunt ut labore et dolore magna aliqua.

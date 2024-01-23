@@ -83,8 +83,8 @@ export const defaultTokens = {
 			text: {
 				...placeholder,
 				$base: 'text-white',
-				default: ['frame-800', 'frame-300'],
-				dark: 'frame-300'
+				default: ['text-current', 'text-white'],
+				// dark: 'frame-300'
 			},
 			container: {
 				default: ['frame-200', 'frame-600'],
@@ -102,15 +102,24 @@ export const defaultTokens = {
 		selected: {
 			modifiers: {
 				text: ['aria-selected:text', 'aria-expanded:text', 'aria-current:text'],
-				container: ['aria-selected:bg', 'aria-expanded:bg', 'aria-current:bg']
+				container: ['aria-selected:bg', 'aria-expanded:bg', 'aria-current:bg', 'dark:aria-selected:bg', 'dark:aria-expanded:bg', 'dark:aria-current:bg']
 			},
-			text: () => extend('filled.default.container', {
-
-			}),
-			container: () => extend('filled.default.container', {
-
-			})
-		}
+			text:{
+				...placeholder,
+				$base: 'text-white'
+			},
+			container: {
+				default: ['frame-200', 'frame-600'],
+				dark: ['frame-600', 'frame-900'],
+				primary: 500,
+				secondary: 500,
+				tertiary: 500,
+				danger: 500,
+				warning: 500,
+				success: 500,
+				info: 500
+			}
+		},
 
 	},
 
@@ -123,8 +132,8 @@ export const defaultTokens = {
 			},
 			text: {
 				...placeholder,
-				default: ['frame-800', 'frame-300'],
-				dark: ['frame-800', 'frame-300'],
+				default: ['text-current', 'text-current'],
+				dark: ['text-current', 'text-current'],
 				primary: [500, 400],
 				secondary: [500, 400],
 				tertiary: [500, 400],
@@ -237,7 +246,9 @@ function isArbitrary(value: string) {
  * @param tokens the initial token configuration map.
  * @param obj the string or object to be normalized.
  */
-function getConfig(tokens: Record<string,any>, obj: string | Record<string, any>) {
+function getConfig(tokens: Record<string,any>, obj: string | Record<string, any> | (() => TokenPath | Record<ThemeColor, TokenValue>)) {
+	if (typeof obj === 'function') 
+		obj = obj();
 	if (typeof obj === 'string') return getConfig(tokens, getProperty(tokens, obj));
 	return obj;
 }
@@ -246,7 +257,6 @@ export function parseTokens<
 	T extends TokenMap,
 	C extends Record<ThemeColor | 'white' | 'black', string>
 >(tokens: T, colors = defaultColorMap as C) {
-
 
 	function normalizeToken(
 		value?: TokenValue,
@@ -292,9 +302,9 @@ export function parseTokens<
 		return [light, null];
 	}
 
-	function buildClass(modifier: string, conf?: TokenPath | Record<ThemeColor, TokenValue>) {
+	function buildClass(modifier: string, conf?: TokenPath | Record<ThemeColor, TokenValue> | (() => TokenPath | Record<ThemeColor, TokenValue>)) {
 		if (!conf) return [];
-		const nConf = getConfig(tokens, conf) as Record<ThemeColor, TokenValue>;
+		let nConf = getConfig(tokens,typeof conf === 'function' ? conf() : conf) as Record<ThemeColor, TokenValue>;
 		const result = [];
 		for (const [color, token] of Object.entries(nConf)) {
 			if (color === '$base') {
@@ -321,9 +331,8 @@ export function parseTokens<
 			for (const [iKey, iConf] of Object.entries(items)) {
 				const modifiers = modifiersMap[iKey as keyof typeof modifiersMap] || [];// get modifier collection.
 				const aliases = ((alias || {})[iKey as keyof typeof alias] || []) as string[];
-				const nConf = typeof iConf === 'function' ? iConf() : iConf;
 				for (const m of modifiers) {
-					const str = buildClass(m, nConf); // generate the Tailwind class prefixed with modifier.
+					const str = buildClass(m, iConf); // generate the Tailwind class prefixed with modifier.
 					if (!str.length) continue;
 					const suffix = createLabel(m);
 					const name = gKey.toLowerCase() + suffix; // create object name.

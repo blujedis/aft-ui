@@ -36,11 +36,11 @@ export interface ThemerApi<C extends ThemeConfig> {
 	): ThemerApi<C>;
 
 	remove(classes: string | string[], when: Primitive): ThemerApi<C>;
-	remove<K extends ThemeOption>(
-		key: K,
-		prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-		when: Primitive
-	): ThemerApi<C>;
+	// remove<K extends ThemeOption>(
+	// 	key: K,
+	// 	prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
+	// 	when: Primitive
+	// ): ThemerApi<C>;
 
 	prepend(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
 
@@ -269,8 +269,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 				);
 			if (typeof value !== 'string')
 				throw new Error(
-					`${instanceName} mapped value using property ${
-						key as string
+					`${instanceName} mapped value using property ${key as string
 					} has invalid typeof ${typeof value}.`
 				);
 			const baseValue = obj.$base || '';
@@ -286,36 +285,35 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param classes tailwind class strings to be removed.
 		 * @param when if the value is truth otherwise reject.
 		 */
-
-		function remove<K extends ThemeOption>(
-			classesOrKey: string | string[],
-			propOrWhen: Primitive | PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-			when?: Primitive
+		// function remove<K extends ThemeOption>(
+		function remove(
+			classes: string | string[],
+			// propOrWhen: Primitive | PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
+			when?: Primitive,
 		) {
-			if (typeof themeConfig === 'undefined') return api;
-			const isRemoveFromOptions = arguments.length === 3;
-			if (!isRemoveFromOptions) when = propOrWhen as boolean;
-			if (!when) return api;
-			if (isRemoveFromOptions) {
-				const key = classesOrKey as K;
-				const prop = propOrWhen as PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined;
-				if (!key || typeof prop === 'undefined') return api;
-				const opt = (_options[key] || {}) as Record<string, string>;
-				if (!opt)
-					throw new Error(
-						`${instanceName} remove option using property ${prop as string} was NOT found.`
-					);
-				let value = opt[prop as string] || ('' as any);
-				if (value) {
-					value = ensureArray(value);
-					removed = [...removed, ...value];
-				}
-			} else {
-				let classes = classesOrKey as string | string[];
-				when = propOrWhen as Primitive;
-				classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
-				removed = [...removed, ...(classes as string[])];
-			}
+			if (typeof themeConfig === 'undefined' || !when) return api;
+			// const isRemoveFromOptions = arguments.length === 3;
+			// if (!isRemoveFromOptions) when = propOrWhen as boolean;
+			// if (!when) return api;
+			// if (isRemoveFromOptions) {
+			// 	const key = classesOrKey as K;
+			// 	const prop = propOrWhen as PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined;
+			// 	if (!key || typeof prop === 'undefined') return api;
+			// 	const opt = (_options[key] || {}) as Record<string, string>;
+			// 	if (!opt)
+			// 		throw new Error(
+			// 			`${instanceName} remove option using property ${prop as string} was NOT found.`
+			// 		);
+			// 	let value = opt[prop as string] || ('' as any);
+			// 	if (value) {
+			// 		value = ensureArray(value);
+			// 		removed = [...removed, ...value];
+			// 	}
+			// } else {
+			// let classes = classes as string | string[];
+			// when = propOrWhen as Primitive;
+			classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
+			removed = [...removed, ...(classes as string[])];
 			return api;
 		}
 

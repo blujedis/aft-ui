@@ -10,6 +10,6 @@ import { variantTextExpanded, variantItemExpanded } from '$lib/constants/variant
 
 export const accordionButton = {
 	flushed: mergeConfigs(filledTextAriaExpanded, {}),
-	filled: mergeConfigs({ $base: 'aria-expanded:text-white' }, filledBg),
+	filled: mergeConfigs(filledBgAriaExpanded, { $base: 'aria-expanded:text-white', default: 'aria-expanded:text-current' }),
 	outlined: mergeConfigs({}, {}),
 }

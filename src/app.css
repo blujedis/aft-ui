@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-	--bg-light: #ffffff;
-	--bg-dark: #2d3542; /*theme('colors.gray.700'); */
+	--aft-bg-light: #ffffff;
+	--aft-bg-dark: #2d3542;
 	--aft-text-dark: theme('colors.gray.700');
 	--aft-text-light: theme('colors.gray.100');
 }
@@ -14,13 +14,13 @@ body {
 	height: 100%;
 	@apply font-light;
 	@apply tracking-tight;
-	background-color: var(--bg-light);
+	background-color: var(--aft-bg-light);
 	color: var(--aft-text-dark);
 }
 
 html.dark,
 html.dark > body {
-	background-color: var(--bg-dark);
+	background-color: var(--aft-bg-dark);
 	color: var(--aft-text-light);
 }
 
@@ -40,7 +40,7 @@ input:where(:not([type])),
 [multiple],
 textarea,
 select {
-	color: var(--text-dark);
+	color: var(--aft-text-dark);
 }
 
 /* h1,
