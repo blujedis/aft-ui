@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import { Accordion, type AccordianVariant } from '.';
-	import { AccordionButton } from '../AccordionButton';
+	import { Accordion } from '.';
+	import { AccordionButton, type AccordionVariant } from '../AccordionButton';
 	import { AccordionOption } from '../AccordionOption';
 	import { colors } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
@@ -19,7 +19,7 @@
 		multiple: false,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
-		variant: 'filled' as AccordianVariant,
+		variant: 'filled' as AccordionVariant,
 		transition: 'expand' as DisclosureTransitionOption
 	};
 </script>

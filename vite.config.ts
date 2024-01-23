@@ -14,7 +14,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@root': resolve(process.cwd()),
-			'@rootpkg': resolve(__dirname),
+			'@rootpkg': resolve(__dirname)
 			// $lib: resolve('./src/lib'),
 			// '@app': resolve('./src/app'),
 		}
@@ -23,4 +23,3 @@ export default defineConfig({
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
 });
-

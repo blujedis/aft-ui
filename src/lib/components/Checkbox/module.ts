@@ -18,7 +18,7 @@ export type CheckboxProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: CheckboxVariant;
 	unstyled?: boolean;
 };

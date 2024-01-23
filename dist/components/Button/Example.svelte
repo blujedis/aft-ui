@@ -13,7 +13,10 @@ const props = {
   shadowed: "none",
   size: "md",
   variant: "filled",
-  underlined: false
+  underlined: false,
+  hovered: true,
+  focused: true,
+  transitioned: true
 };
 </script>
 

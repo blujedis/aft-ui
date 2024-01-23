@@ -14,6 +14,7 @@ export declare const menuButtonDefaults: {
     disabled?: boolean | undefined;
     focused?: import("../..").ThemeFocused | undefined;
     full?: boolean | undefined;
+    hovered?: boolean | undefined;
     href?: string | null | undefined;
     strong?: boolean | undefined;
     rounded?: import("../..").ThemeRounded | undefined;

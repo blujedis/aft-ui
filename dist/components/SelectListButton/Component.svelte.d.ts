@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { SvelteComponent } from "svelte";
 import type { SelectListItem } from '../SelectList';
 declare const __propDef: {

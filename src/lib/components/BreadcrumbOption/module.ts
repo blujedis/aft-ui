@@ -15,7 +15,7 @@ export type BreadcrumbOptionProps = {
 	separator?: string | IconifyIcon;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: BreadcrumbVariant;
 };
 

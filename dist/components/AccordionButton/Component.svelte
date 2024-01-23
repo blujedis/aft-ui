@@ -33,7 +33,7 @@ $:
   activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 const th = themer($themeStore);
 $:
-  accordionButtonClasses = th.create("AccordionButton").variant("accordionButton", variant, theme, variant).option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transition", transitioned).option("common", "bordered", ["outlined", "flushed"].includes(variant)).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("shadows", shadowed, shadowed && variant !== "flushed").option("disableds", theme, disabled).append("rounded-none border-0 border-b ", variant === "flushed").append("aria-expanded:border-b", variant === "outlined").append(
+  accordionButtonClasses = th.create("AccordionButton").variant("accordionButton", variant, theme, variant).option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transitioned", transitioned).option("common", "bordered", ["outlined", "flushed"].includes(variant)).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("shadows", shadowed, shadowed && variant !== "flushed").option("common", "disabled", disabled).append("rounded-none border-0 border-b ", variant === "flushed").append("aria-expanded:border-b", variant === "outlined").append(
     "inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium",
     true
   ).append($$restProps.class, true).compile(true);

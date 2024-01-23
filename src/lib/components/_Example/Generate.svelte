@@ -141,7 +141,7 @@
 		} catch (e) {
 			const err = e as Error;
 			showAlert(err.message);
-			console.warn(err.message);
+			console.error(err);
 		}
 	}
 

@@ -11,18 +11,6 @@ export const placeholder = {
     success: '',
     info: ''
 };
-const placeholdersDark = {
-    $base: '',
-    default: 'dark:placeholder:text-frame-500',
-    dark: 'dark:placeholder:text-frame-500',
-    primary: 'dark:placeholder:text-primary-700',
-    secondary: 'dark:placeholder:text-secondary-700',
-    tertiary: 'dark:placeholder:text-tertiary-700',
-    danger: 'dark:placeholder:text-danger-700',
-    warning: 'dark:placeholder:text-warning-700',
-    success: 'dark:placeholder:text-success-700',
-    info: 'dark:placeholder:text-info-700'
-};
 const placeholdersDisabled = {
     $base: '',
     default: 'aria-disabled:placeholder:text-frame-200',
@@ -34,6 +22,18 @@ const placeholdersDisabled = {
     warning: 'aria-disabled:placeholder:text-warning-300',
     success: 'aria-disabled:placeholder:text-success-300',
     info: 'aria-disabled:placeholder:text-info-300'
+};
+const placeholdersDark = {
+    $base: '',
+    default: 'dark:placeholder:text-frame-500',
+    dark: 'dark:placeholder:text-frame-500',
+    primary: 'dark:placeholder:text-primary-700',
+    secondary: 'dark:placeholder:text-secondary-700',
+    tertiary: 'dark:placeholder:text-tertiary-700',
+    danger: 'dark:placeholder:text-danger-700',
+    warning: 'dark:placeholder:text-warning-700',
+    success: 'dark:placeholder:text-success-700',
+    info: 'dark:placeholder:text-info-700'
 };
 export const placeholders = mergeConfigs(placeholdersDark, placeholdersDisabled, {
     default: 'placeholder:text-frame-400',

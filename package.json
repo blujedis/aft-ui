@@ -45,6 +45,7 @@
 		"postbuild": "node postbuild.cjs"
 	},
 	"dependencies": {
+		"@aft/config": "0.0.0-development",
 		"@floating-ui/dom": "^1.5.4",
 		"classnames": "^2.5.1",
 		"dot-prop": "^8.0.2",

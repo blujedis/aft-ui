@@ -8,7 +8,7 @@ const code = `
 let checked = true;
 const props = {
   disabled: false,
-  focused: "focusVisible",
+  focused: true,
   shadowed: "none",
   size: "lg",
   theme: "dark",
@@ -19,12 +19,15 @@ const props = {
 
 <ExamplePage {title} {description} {code}>
 	<div class="grid grid-cols-3 gap-4">
-		<Switch {...props} bind:checked theme="light" size="xs" />
-		<Switch {...props} bind:checked theme="light" size="sm" />
-		<Switch {...props} bind:checked theme="light" size="md" />
-		<Switch {...props} bind:checked theme="light" size="lg" />
-		<Switch {...props} bind:checked theme="light" size="xl" />
-		<Switch {...props} bind:checked theme="light" size="xl2" />
+		<Switch {...props} bind:checked theme="default" size="xs" />
+		<Switch {...props} bind:checked theme="dark" size="sm" />
+		<Switch {...props} bind:checked theme="primary" size="md" />
+		<Switch {...props} bind:checked theme="secondary" size="lg" />
+		<Switch {...props} bind:checked theme="tertiary" size="xl" />
+		<Switch {...props} bind:checked theme="danger" size="xl2" />
+		<Switch {...props} bind:checked theme="warning" size="xl2" />
+		<Switch {...props} bind:checked theme="success" size="xl2" />
+		<Switch {...props} bind:checked theme="info" size="xl2" />
 	</div>
 
 	<!-- <div class="grid grid-cols-3 gap-4">

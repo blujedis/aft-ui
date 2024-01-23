@@ -39,7 +39,7 @@
 		: th
 				.create('Button')
 				.variant('button', variant, theme, variant)
-				// .option('hovered', theme, hoverable)
+				.option('hovered', theme, hovered && variant !== 'ghost')
 				.option('common', 'focusedVisible', focused)
 				.option('common', 'transitioned', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -51,9 +51,9 @@
 				.append('underline', underlined && underlined !== 'hover')
 				.append('hover:underline', underlined === 'hover')
 				.append('w-full', full)
-				.append('inline-flex items-center justify-center cursor-pointer', true)
+				.append('inline-flex items-center justify-center cursor-pointer outline-0', true)
 				.append($$restProps.class, true)
-				.append('focus-visible:outline-none focus-visible:outline-0', !focused)
+
 				.compile(true);
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());

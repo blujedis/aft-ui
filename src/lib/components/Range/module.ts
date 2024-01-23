@@ -17,7 +17,7 @@ export type RangeProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: RangeVariant;
 };
 

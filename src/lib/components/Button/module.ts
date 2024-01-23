@@ -3,7 +3,6 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned,
 	ThemeColor
 } from '$lib/types';
 import type { button } from './config';
@@ -22,7 +21,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: ButtonVariant;
 	underlined?: boolean | 'hover'; // when hover only shown when hovering.
 	unstyled?: boolean;
@@ -32,5 +31,5 @@ export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	as: 'button',
 	size: 'md',
 	theme: 'default',
-	variant: 'filled',
+	variant: 'filled'
 };

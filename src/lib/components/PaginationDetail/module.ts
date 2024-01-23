@@ -15,7 +15,7 @@ export type PaginationDetailProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: PaginationDetailVariant;
 	unstyled?: boolean;
 };

@@ -19,7 +19,7 @@ export type PaginationPageProps<Tag> = {
 	rounded?: ThemeRounded;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	value?: SelectStoreValue;
 	variant?: PaginationPageVariant;
 };

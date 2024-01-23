@@ -219,3 +219,43 @@ export const animate = {
     pulse: 'motion-safe:animate-pulse',
     spin: 'motion-safe:animate-spin'
 };
+export const hovered = {
+    $base: 'hover:brightness-110',
+    default: 'hover:brightness-105',
+    dark: 'hover:brightness-150',
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    danger: '',
+    warning: '',
+    success: '',
+    info: ''
+};
+export const selected = {
+    $base: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150',
+    default: '',
+    dark: '',
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    danger: '',
+    warning: '',
+    success: '',
+    info: ''
+};
+// export const common = {
+// 	active: 'active:brightness-125',
+// 	hovered: 'brightness-110',
+// 	focused: 'focus:brightness-110',
+// 	focusedVisible: 'focus-visible:brightness-110',
+// 	focusedWithin: 'focus-within:brightness-110',
+// 	selected: '',
+// 	expanded: '',
+// 	current: '',
+// 	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
+// 	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
+// 	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
+// 	disabled: 'disabled:brightness-75 aria-diabled:brightness-75',
+// 	transition: 'transition-colors duration-125 motion-reduce:transition-none',
+// 	untransition: 'transition-none'
+// };

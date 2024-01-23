@@ -28,7 +28,7 @@ export const context = setContext("SelectContext", {
 });
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("Select").variant("input", variant, theme, variant).option("focusedRing", theme, focused && variant !== "flushed").option("common", "transition", transitioned).option("placeholders", theme, true).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", rounded, rounded && variant !== "flushed").option("shadows", shadowed, shadowed).option("disableds", theme, disabled).append("w-full", full).append("border-0 ring-0", variant !== "outlined").append("px-2 peer focus:ring-0 outline-none border-0", variant === "flushed").append("flex items-center justify-center pr-10 outline-none", true).append(multiple ? "form-multiselect" : "form-select", true).append($$restProps.class, true).compile(true);
+  inputClasses = th.create("Select").variant("input", variant, theme, variant).option("focusedRing", theme, focused && variant !== "flushed").option("common", "transitioned", transitioned).option("placeholders", theme, true).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", rounded, rounded && variant !== "flushed").option("shadows", shadowed, shadowed).option("common", "disabled", disabled).append("w-full", full).append("border-0 ring-0", variant !== "outlined").append("px-2 peer focus:ring-0 outline-none border-0", variant === "flushed").append("flex items-center justify-center pr-10 outline-none", true).append(multiple ? "form-multiselect" : "form-select", true).append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 const component = Flushed;
 </script>

@@ -16,8 +16,8 @@ import type { namedcolors, tailwindcolors } from '../theme/palettes';
 
 export type DeepPartial<T> = T extends object
 	? T extends Array<infer U>
-		? DeepPartial<U>[]
-		: { [K in keyof T]?: DeepPartial<T[K]> }
+	? DeepPartial<U>[]
+	: { [K in keyof T]?: DeepPartial<T[K]> }
 	: T;
 
 /**
@@ -34,10 +34,10 @@ export type PropsWithPrefix<T, P extends string> = T extends `${P}${infer Rest}`
 
 export type ParsePath<T, Key extends keyof T> = Key extends string
 	? T[Key] extends Record<string, any>
-		?
-				| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
-				| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
-		: never
+	?
+	| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+	| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+	: never
 	: never;
 
 export type ParsePathKey<T> = ParsePath<T, keyof T> | keyof T;
@@ -46,13 +46,13 @@ export type Path<T> = ParsePathKey<T> extends string | keyof T ? ParsePathKey<T>
 
 export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Rest}`
 	? Key extends keyof T
-		? Rest extends Path<T[Key]>
-			? PathValue<T[Key], Rest>
-			: never
-		: never
+	? Rest extends Path<T[Key]>
+	? PathValue<T[Key], Rest>
+	: never
+	: never
 	: P extends keyof T
-		? T[P]
-		: never;
+	? T[P]
+	: never;
 
 /**
  * Maintains code help while allowing arbitrary values/string.
@@ -83,12 +83,12 @@ export type ThemeOption = keyof ThemeOptions;
 export type ThemeDefaults = {
 	component: {
 		focused: ThemeFocused; // elements that should receive focus either always or only focus-visible.
-		hovered: ThemeHovered;
+		hovered: boolean;
 		rounded: ThemeRounded;
 		shadowed: ThemeShadowed;
 		size: ThemeSize;
 		theme: ThemeColor; // default theme color.
-		transitioned: ThemeTransitioned;
+		transitioned: boolean;
 	};
 };
 export type ThemeComponents = typeof configs;
@@ -96,8 +96,7 @@ export type ThemeComponent = keyof ThemeComponents;
 
 export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost';
 export type ThemeVariantExt = ThemeVariant | 'panel' | 'bordered' | 'activated';
-export type ThemeVariantAppend<V extends ThemeVariant> = `${V}${
-	| 'Hover'
+export type ThemeVariantAppend<V extends ThemeVariant> = `${V}${| 'Hover'
 	| 'HoverGroup'
 	| 'Activated'}`;
 
@@ -108,8 +107,6 @@ export type ThemeRounded = ThemeSize | 'full' | 'none';
 export type ThemeShadowed = ThemeSize | 'inner' | 'none';
 export type ThemeFontSize = keyof typeof fontSizes;
 export type ThemeBorderStyle = keyof typeof borderStyles;
-export type ThemeTransitioned = boolean;
-export type ThemeHovered = boolean;
 export type ThemeResize = 'x' | 'y' | 'both';
 export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;

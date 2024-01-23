@@ -18,7 +18,7 @@ export type RadioProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: RadioVariant;
 	unstyled?: boolean;
 };

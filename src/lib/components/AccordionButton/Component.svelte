@@ -17,6 +17,7 @@
 		caret,
 		disabled,
 		focused,
+		hovered,
 		key,
 		roticon,
 		rounded,
@@ -44,7 +45,8 @@
 	$: accordionButtonClasses = th
 		.create('AccordionButton')
 		.variant('accordionButton', variant, theme, variant)
-		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
+		.option('common', 'focusedVisible', focused)
+		.option('hovered', theme, hovered)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'bordered', ['outlined', 'flushed'].includes(variant))
 		.option('fieldFontSizes', size, size)
@@ -53,8 +55,9 @@
 		.option('common', 'disabled', disabled)
 		.append('rounded-none border-0 border-b ', variant === 'flushed')
 		.append('aria-expanded:border-b', variant === 'outlined')
+		.append('mb-1 aria-expanded:mb-0', variant === 'filled')
 		.append(
-			'inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium',
+			'inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium outline-0',
 			true
 		)
 		.append($$restProps.class, true)

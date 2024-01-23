@@ -1,7 +1,10 @@
-import { variantFilledHover, variantTextHover, variantGhostHover, variantOutlinedHover } from '../../constants/variants';
+import { filledBg, filledText, outlinedText, outlinedRing, ghostBgHover, ghostText, filledOutlineFocusVisible, outlinedOutlineFocusVisible, ghostOutlineFocusVisible } from '../../constants/states';
+import { mergeConfigs } from '../../theme/utils';
 export const button = {
-    text: { ...variantTextHover },
-    filled: { ...variantFilledHover },
-    outlined: { ...variantOutlinedHover },
-    ghost: { ...variantGhostHover }
+    text: mergeConfigs(outlinedText, outlinedOutlineFocusVisible),
+    filled: mergeConfigs(filledBg, filledText, filledOutlineFocusVisible),
+    outlined: mergeConfigs(outlinedText, outlinedRing, outlinedOutlineFocusVisible, {
+        $base: 'ring-1'
+    }),
+    ghost: mergeConfigs(ghostText, ghostBgHover, ghostOutlineFocusVisible)
 };

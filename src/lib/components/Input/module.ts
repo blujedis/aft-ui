@@ -19,7 +19,7 @@ export type InputProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: InputVariant;
 	unstyled?: boolean;
 };

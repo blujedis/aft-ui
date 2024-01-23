@@ -16,7 +16,7 @@ export type TabProps<Tag = 'a'> = {
 	full?: boolean;
 	rounded?: ThemeRounded;
 	size?: ThemeSize;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	theme?: ThemeColor;
 	value: string | number;
 	variant?: TabVariant;

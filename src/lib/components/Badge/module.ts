@@ -16,7 +16,7 @@ export type BadgeProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: BadgeVariant;
 	unstyled?: boolean;
 };

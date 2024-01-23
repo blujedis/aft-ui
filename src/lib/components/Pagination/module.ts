@@ -15,7 +15,7 @@ export type PaginationContext<T extends Record<string, any> = Record<string, any
 			shadowed?: ThemeShadowed;
 			size?: ThemeSize;
 			theme?: ThemeColor;
-			transitioned?: ThemeTransitioned;
+			transitioned?: boolean;
 			variant?: PaginationVariant;
 		};
 	};
@@ -29,7 +29,7 @@ export interface PaginationProps<T extends Record<string, any> = Record<string, 
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: PaginationVariant;
 }
 

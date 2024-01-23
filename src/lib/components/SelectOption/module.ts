@@ -8,7 +8,7 @@ export type SelectOptionProps = {
 	full?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	value: string | number;
 	variant?: SelectOptionVariant;
 	unstyled?: boolean;

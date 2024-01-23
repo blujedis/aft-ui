@@ -39,7 +39,7 @@ export const context = setContext("Pagination", {
 });
 const th = themer($themeStore);
 $:
-  paginationControllerClasses = th.create("PagerControllerNav").option("common", "transition", transitioned).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("inline-flex items-center", ["filled", "glass"].includes(variant)).append("isolate inline-flex -space-x-px", variant === "filled").append($$restProps.class, true).compile(true);
+  paginationControllerClasses = th.create("PagerControllerNav").option("common", "transitioned", transitioned).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("inline-flex items-center", ["filled", "glass"].includes(variant)).append("isolate inline-flex -space-x-px", variant === "filled").append($$restProps.class, true).compile(true);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

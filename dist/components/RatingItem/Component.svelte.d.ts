@@ -3,10 +3,10 @@ import { type RatingItemProps } from './module';
 declare const __propDef: {
     props: RatingItemProps & import("svelte/elements").SVGAttributes<SVGSVGElement>;
     events: {
-        mouseover: HTMLElementEventMap;
-        mouseleave: HTMLElementEventMap;
-        click: HTMLElementEventMap;
-        focus: HTMLElementEventMap;
+        mouseover: MouseEvent;
+        mouseleave: MouseEvent;
+        click: MouseEvent;
+        focus: FocusEvent;
     } & {
         [evt: string]: CustomEvent<any>;
     };

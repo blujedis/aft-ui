@@ -4,7 +4,7 @@ export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyl
   ...defaults
 };
 $:
-  paginationDetailClasses = themer($themeStore).create("PaginationDetail").variant("paginationDetail", variant, theme, true).option("common", "transition", transitioned).option("badgePadding", size, size).option("badgeFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  paginationDetailClasses = themer($themeStore).create("PaginationDetail").variant("paginationDetail", variant, theme, true).option("common", "transitioned", transitioned).option("badgePadding", size, size).option("badgeFontSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
 </script>
 
 <div {...$$restProps} class={paginationDetailClasses}>

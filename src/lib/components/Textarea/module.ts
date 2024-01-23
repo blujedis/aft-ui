@@ -21,7 +21,7 @@ export type TextareaProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: TextareaVariant;
 	unstyled?: boolean;
 };

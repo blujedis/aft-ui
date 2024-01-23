@@ -18,7 +18,7 @@ export type TabsProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: TabVariant;
 	navWrapperClasses?: string;
 	navContainerClasses?: string;

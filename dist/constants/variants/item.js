@@ -1,5 +1,5 @@
 import { mergeConfigs } from '../../theme';
-import { bgItemChecked, bgItemCheckedFilled, bgItemCheckedGhost, bgItemCurrent, bgItemExpanded, bgItemHover, bgItemSelected } from '../states';
+import { bgItemChecked, bgItemCheckedFilled, bgItemCheckedGhost, bgItemCurrent, bgItemExpanded, bgItemHover, bgItemSelected } from '../statez';
 export const variantItemHover = mergeConfigs(bgItemHover, {
     $base: 'hover:text-[color:var(--text-light)]',
     default: 'hover:text-inherit'

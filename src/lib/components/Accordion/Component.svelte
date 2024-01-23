@@ -46,7 +46,7 @@
 		.option('common', 'bordered', variant === 'outlined')
 		.option('common', 'divided', variant !== 'flushed')
 		.append('divide-y border', variant === 'outlined')
-		.append('divide-y', variant === 'filled')
+		//.append('divide-y', variant === 'filled')
 		.append('rounded-none', variant === 'flushed')
 		.append('overflow-clip', true)
 		.append($$restProps.class, true)

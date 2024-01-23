@@ -28,7 +28,7 @@ export type SelectProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: SelectVariant;
 	unstyled?: boolean;
 };

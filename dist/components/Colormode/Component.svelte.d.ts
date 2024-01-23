@@ -10,7 +10,7 @@ declare const __propDef: {
     slots: {
         default: {
             store: import("svelte/store").Writable<boolean> & {
-                getRoot: () => any;
+                getRoot: () => HTMLElement | null;
                 getLocalValue: () => boolean;
                 setLocalValue: (value: any) => void;
                 enable: (mode: "dark" | "light") => void;

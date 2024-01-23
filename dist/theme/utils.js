@@ -1,7 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { getProperty } from 'dot-prop';
 import { colors, shades } from '../constants/colors';
-import { cleanObj } from '../utils';
 /**
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *

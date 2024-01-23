@@ -22,9 +22,14 @@
 		key
 	});
 
+	$: isSelected = $context.selected?.includes(key);
 	const th = themer($themeStore);
 
-	$: accordionClasses = th.create('AccordianOption').append($$restProps.class, true).compile(true);
+	$: accordionClasses = th
+		.create('AccordianOption')
+		.append('bg-frame-900/20', context.globals?.variant === 'filled' && isSelected)
+		.append($$restProps.class, true)
+		.compile(true);
 </script>
 
 <svelte:element

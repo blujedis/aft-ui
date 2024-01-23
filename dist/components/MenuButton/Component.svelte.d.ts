@@ -2,14 +2,15 @@ import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         strong?: boolean | undefined;
+        hovered?: boolean | undefined;
         unstyled?: boolean | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         full?: boolean | undefined;
         disabled?: boolean | undefined;
+        transitioned?: boolean | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
         theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
-        transitioned?: boolean | undefined;
         variant?: "text" | "filled" | "outlined" | "ghost" | undefined;
         href?: string | null | undefined;
         underlined?: boolean | "hover" | undefined;

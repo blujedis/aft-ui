@@ -17,7 +17,7 @@ export type LabelProps = {
 	dropshadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: LabelVariant;
 	unstyled?: boolean;
 };
