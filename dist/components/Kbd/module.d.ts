@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { kbd } from './config';
 export type KbdVariant = keyof typeof kbd;
 export type KbdProps = {
@@ -7,7 +7,7 @@ export type KbdProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: KbdVariant;
     unstyled?: boolean;
 };

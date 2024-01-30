@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { label } from './config';
 export type LabelVariant = keyof typeof label;
 export type LabelProps = {
@@ -8,7 +8,7 @@ export type LabelProps = {
     dropshadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: LabelVariant;
     unstyled?: boolean;
 };

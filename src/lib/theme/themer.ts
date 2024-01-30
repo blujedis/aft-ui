@@ -4,6 +4,14 @@ import classnames from 'classnames';
 import { colors } from '../constants/colors';
 import { getProperty } from 'dot-prop';
 import { browser } from '$app/environment';
+import type {
+	PropsWithoutPrefix,
+	ThemeConfig,
+	ThemeOption,
+	ThemeOptions,
+	ThemeColor,
+	Path
+} from '../types/theme';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
 
@@ -29,11 +37,11 @@ export interface ThemerApi<C extends ThemeConfig> {
 		when: Primitive
 	): ThemerApi<C>;
 
-	mapped<T extends Record<string, unknown>, K extends Path<T>>(
-		obj: T | null,
-		key: K,
-		when: Primitive
-	): ThemerApi<C>;
+	// mapped<T extends Record<string, unknown>, K extends Path<T>>(
+	// 	obj: T | null,
+	// 	key: K,
+	// 	when: Primitive
+	// ): ThemerApi<C>;
 
 	remove(classes: string | string[], when: Primitive): ThemerApi<C>;
 	// remove<K extends ThemeOption>(
@@ -61,14 +69,7 @@ export type ThemerInstance<C extends ThemeConfig> = {
 	create: (instanceName?: string) => ThemerApi<C>;
 };
 
-import type {
-	PropsWithoutPrefix,
-	ThemeConfig,
-	ThemeOption,
-	ThemeOptions,
-	ThemeColor,
-	Path
-} from '../types/theme';
+
 
 /**
  * Simply flattens array then joins by strings.
@@ -192,7 +193,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		const api = {
 			variant: getVariant,
 			option,
-			mapped,
+			// mapped,
 			remove,
 			prepend,
 			append,
@@ -236,8 +237,8 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		) {
 			if (typeof themeConfig === 'undefined') return api;
 			if (typeof prop === 'undefined' || !when) return api;
-			const opt = (_options[key] || {}) as Record<string, string>;
-			if (!opt)
+			const opt = getProperty(_options, key); // (_options[key] || {}) as Record<string, string>;
+			if (typeof opt === 'undefined')
 				throw new Error(`${instanceName} option using property ${prop as string} was NOT found.`);
 			const baseValue = opt.$base || '';
 			const value = opt[prop as string] || '';
@@ -253,30 +254,31 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		 * @param prop the property of the above key to be applied.
 		 * @param when if value is truthy add value otherwise reject.
 		 */
-		function mapped<T extends Record<string, unknown>, K extends Path<T>>(
-			obj: T | null,
-			key: K,
-			when: Primitive
-		) {
-			if (typeof themeConfig === 'undefined' || obj === null) return api;
-			if (!when) return api;
+		// function mapped<T extends Record<string, unknown>, K extends Path<T>>(
+		// 	obj: T | null,
+		// 	key: K,
+		// 	when: Primitive
+		// ) {
+		// 	if (typeof themeConfig === 'undefined' || obj === null) return api;
+		// 	if (!when) return api;
 
-			const value = getProperty(obj, key as string);
+		// 	const value = getProperty(obj, key as string);
 
-			if (!value)
-				throw new Error(
-					`${instanceName} mapped value using property ${key as string} was NOT found.`
-				);
-			if (typeof value !== 'string')
-				throw new Error(
-					`${instanceName} mapped value using property ${key as string
-					} has invalid typeof ${typeof value}.`
-				);
-			const baseValue = obj.$base || '';
-			if (baseValue && typeof baseValue === 'string') base.push(baseValue);
-			if (value) themed.push(value);
-			return api;
-		}
+		// 	if (!value)
+		// 		throw new Error(
+		// 			`${instanceName} mapped value using property ${key as string} was NOT found.`
+		// 		);
+		// 	if (typeof value !== 'string')
+		// 		throw new Error(
+		// 			`${instanceName} mapped value using property ${
+		// 				key as string
+		// 			} has invalid typeof ${typeof value}.`
+		// 		);
+		// 	const baseValue = obj.$base || '';
+		// 	if (baseValue && typeof baseValue === 'string') base.push(baseValue);
+		// 	if (value) themed.push(value);
+		// 	return api;
+		// }
 
 		/**
 		 * Removes class strings, called ONLY after classnames() is called
@@ -289,7 +291,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		function remove(
 			classes: string | string[],
 			// propOrWhen: Primitive | PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-			when?: Primitive,
+			when?: Primitive
 		) {
 			if (typeof themeConfig === 'undefined' || !when) return api;
 			// const isRemoveFromOptions = arguments.length === 3;

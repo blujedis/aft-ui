@@ -244,9 +244,9 @@ export const animate = {
 };
 
 export const hovered = {
-	$base: 'hover:brightness-110',
-	default: 'hover:brightness-105',
-	dark: 'hover:brightness-125',
+	$base: 'hover:brightness-115',
+	default: '',
+	dark: '',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -254,6 +254,41 @@ export const hovered = {
 	warning: '',
 	success: '',
 	info: ''
+};
+
+const defaults = {
+	default: '',
+	dark: '',
+	primary: '',
+	secondary: '',
+	tertiary: '',
+	danger: '',
+	warning: '',
+	success: '',
+	info: ''
+};
+
+export const hovered2 = {
+	text: {
+		...defaults,
+		$base: 'hover:brightness-115'
+	},
+	filled: {
+		...defaults,
+		$base: 'hover:brightness-115'
+	},
+	outlined: {
+		...defaults,
+		$base: 'hover:brightness-115'
+	},
+	ghost: {
+		...defaults,
+		$base: 'hover:brightness-115'
+	},
+	soft: {
+		...defaults,
+		$base: 'hover:brightness-105 dark:hover:brightness-125'
+	}
 };
 
 export const selected = {
@@ -278,7 +313,8 @@ export const common = {
 	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
 	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
 	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
-	disabled: 'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
+	disabled:
+		'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
 	transitioned: 'transition motion-reduce:transition-none',
 	selected: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150'
 };

@@ -36,7 +36,7 @@ export default class Component extends SvelteComponent<ComponentProps, Component
             rounded: import("../../types").ThemeRounded;
             size: import("../../types").ThemeSize;
             theme: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info";
-            transitioned: boolean;
+            transitioned: ThemeTransitioned;
             variant: "flushed" | "filled" | "grouped" | "labeled";
         };
     };

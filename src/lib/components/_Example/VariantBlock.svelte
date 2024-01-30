@@ -10,20 +10,12 @@
 		variantOutlined,
 		variantOutlinedHover
 	} from '$lib/constants';
-	import { themer } from '$lib/theme';
-	import { themeStore } from '$lib/theme';
 
 	import classNames from 'classnames';
 	import { Flushed } from '../Flushed';
 
 	const title = 'Block Variants';
 	const description = 'Page for testing various variants and their themes.';
-
-	// const th = themer($themeStore);
-
-	// $: filledClasses =
-	// 	th.create('VariantFilled')
-	// 	.mapped(variantFilled, '')
 </script>
 
 <ExamplePage {title} {description}>

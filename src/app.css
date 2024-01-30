@@ -2,29 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--aft-bg-light: #ffffff;
-	--aft-bg-dark: #2d3542;
-	--aft-text-dark: theme('colors.gray.700');
-	--aft-text-light: theme('colors.gray.100');
-}
-
 html,
 body {
-	height: 100%;
 	@apply font-light;
 	@apply tracking-tight;
-	background-color: var(--aft-bg-light);
-	color: var(--aft-text-dark);
 }
 
-html.dark,
-html.dark > body {
-	background-color: var(--aft-bg-dark);
-	color: var(--aft-text-light);
-}
-
-.dark & [type='text'],
+/* .dark & [type='text'],
 input:where(:not([type])),
 [type='email'],
 [type='url'],
@@ -40,8 +24,8 @@ input:where(:not([type])),
 [multiple],
 textarea,
 select {
-	color: var(--aft-text-dark);
-}
+	color: var(--body-text-dark);
+} */
 
 /* h1,
 h2,

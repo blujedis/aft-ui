@@ -13,7 +13,7 @@ export let { as, key, size, theme, transition, variant } = {
 };
 const th = themer($themeStore);
 $:
-  accordionContentClasses = th.create("AccordionContent").variant("accordionContent", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).append("mb-2", true).append($$restProps.class, true).compile(true);
+  accordionContentClasses = th.create("AccordionContent").variant("accordionContent", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).append($$restProps.class, true).compile(true);
 </script>
 
 {#if $context.selected.includes(key)}

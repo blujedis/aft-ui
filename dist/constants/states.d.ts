@@ -1,15 +1,3 @@
-export declare const filledText: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
 export declare const filledBg: {
     default: string;
     dark: string;
@@ -21,7 +9,8 @@ export declare const filledBg: {
     success: string;
     info: string;
 };
-export declare const filledStroke: {
+export declare const filledBgAriaCurrent: {
+    $base: string;
     default: string;
     dark: string;
     primary: string;
@@ -32,7 +21,56 @@ export declare const filledStroke: {
     success: string;
     info: string;
 };
-export declare const filledFill: {
+export declare const filledBgAriaExpanded: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledBgAriaSelected: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledBgDarkAriaCurrent: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledBgDarkAriaExpanded: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledBgDarkAriaSelected: {
+    $base: string;
     default: string;
     dark: string;
     primary: string;
@@ -65,7 +103,7 @@ export declare const filledBgOdd: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocus: {
+export declare const filledFill: {
     default: string;
     dark: string;
     primary: string;
@@ -76,7 +114,7 @@ export declare const filledOutlineFocus: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocusVisible: {
+export declare const filledStroke: {
     default: string;
     dark: string;
     primary: string;
@@ -87,51 +125,7 @@ export declare const filledOutlineFocusVisible: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocusWithin: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledOutlinePeerFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledOutlineGroupFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledOutlineGroupFocusWithin: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedText: {
+export declare const filledText: {
     $base: string;
     default: string;
     dark: string;
@@ -143,107 +137,43 @@ export declare const outlinedText: {
     success: string;
     info: string;
 };
-export declare const outlinedOutline: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedRing: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedBorder: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlineFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlineFocusVisible: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlineFocusWithin: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlinePeerFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlineGroupFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const outlinedOutlineGroupFocusWithin: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const ghostText: {
+export declare const filledTextAriaCurrent: {
     $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledTextAriaExpanded: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledTextAriaSelected: {
+    $base: string;
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ghostBgHover: {
     default: string;
     dark: string;
     primary: string;
@@ -287,17 +217,6 @@ export declare const ghostOutlineFocusWithin: {
     success: string;
     info: string;
 };
-export declare const ghostOutlinePeerFocus: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
 export declare const ghostOutlineGroupFocus: {
     default: string;
     dark: string;
@@ -320,7 +239,194 @@ export declare const ghostOutlineGroupFocusWithin: {
     success: string;
     info: string;
 };
-export declare const ghostBgHover: {
+export declare const ghostOutlinePeerFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ghostText: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedBorder: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutline: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedRing: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedText: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlineFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlineFocusVisible: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlineFocusWithin: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlineGroupFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlineGroupFocusWithin: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledOutlinePeerFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlineFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlineFocusVisible: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlineFocusWithin: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlineGroupFocus: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlineGroupFocusWithin: {
+    default: string;
+    dark: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinedOutlinePeerFocus: {
     default: string;
     dark: string;
     primary: string;

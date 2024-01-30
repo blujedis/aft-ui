@@ -1,4 +1,4 @@
-import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeColor } from '../../types';
+import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeColor } from '../../types';
 import type { button } from './config';
 export type ButtonVariant = keyof typeof button;
 export type ButtonProps<Tag extends 'button' | 'a'> = {
@@ -13,7 +13,7 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: ButtonVariant;
     underlined?: boolean | 'hover';
     unstyled?: boolean;

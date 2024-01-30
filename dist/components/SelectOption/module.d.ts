@@ -1,11 +1,11 @@
-import type { ThemeColor, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeSize } from '../../types';
 export type SelectOptionVariant = 'outlined';
 export type SelectOptionProps = {
     disabled?: boolean;
     full?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     value: string | number;
     variant?: SelectOptionVariant;
     unstyled?: boolean;

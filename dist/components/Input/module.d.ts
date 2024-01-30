@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { input } from './config';
 export type InputVariant = keyof typeof input;
 export type InputProps = {
@@ -10,7 +10,7 @@ export type InputProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: InputVariant;
     unstyled?: boolean;
 };

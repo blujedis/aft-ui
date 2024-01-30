@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeResize, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned, ThemeVariant } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeResize, ThemeRounded, ThemeShadowed, ThemeSize, ThemeVariant } from '../../types';
 export type TextareaVariant = Exclude<ThemeVariant, 'text' | 'flushed'>;
 export type TextareaProps = {
     disabled?: boolean;
@@ -9,7 +9,7 @@ export type TextareaProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: TextareaVariant;
     unstyled?: boolean;
 };

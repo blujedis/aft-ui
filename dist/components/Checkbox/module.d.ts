@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { checkbox } from './config';
 export type CheckboxVariant = keyof typeof checkbox;
 export type CheckboxProps = {
@@ -9,7 +9,7 @@ export type CheckboxProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: CheckboxVariant;
     unstyled?: boolean;
 };

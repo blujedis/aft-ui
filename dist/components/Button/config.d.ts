@@ -1,6 +1,5 @@
 export declare const button: {
     text: {
-        $base: string;
         default: string;
         dark: string;
         primary: string;
@@ -54,7 +53,6 @@ export declare const button: {
         info: string;
     } & import("../../theme/utils").StringMap;
     outlined: {
-        $base: string;
         default: string;
         dark: string;
         primary: string;
@@ -88,7 +86,6 @@ export declare const button: {
         $base: string;
     } & import("../../theme/utils").StringMap;
     ghost: {
-        $base: string;
         default: string;
         dark: string;
         primary: string;

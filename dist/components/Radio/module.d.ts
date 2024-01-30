@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { radio } from './config';
 export type RadioVariant = keyof typeof radio;
 export type RadioProps = {
@@ -9,7 +9,7 @@ export type RadioProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: RadioVariant;
     unstyled?: boolean;
 };

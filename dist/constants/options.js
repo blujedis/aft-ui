@@ -222,7 +222,7 @@ export const animate = {
 export const hovered = {
     $base: 'hover:brightness-110',
     default: 'hover:brightness-105',
-    dark: 'hover:brightness-150',
+    dark: 'hover:brightness-125',
     primary: '',
     secondary: '',
     tertiary: '',
@@ -242,6 +242,19 @@ export const selected = {
     warning: '',
     success: '',
     info: ''
+};
+export const common = {
+    active: 'active:brightness-125',
+    focused: 'focus:outline focus:outline-2 focus:outline-offset-0',
+    focusedVisible: 'focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-1',
+    focusedWithin: 'focus-within:outline focus-within:outline-3 focus-within:outline-offset-1',
+    unfocused: 'focus:outline-0 focus-visible:outline-0 focus-within:outline-0',
+    ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
+    bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
+    divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
+    disabled: 'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
+    transitioned: 'transition motion-reduce:transition-none',
+    selected: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150'
 };
 // export const common = {
 // 	active: 'active:brightness-125',

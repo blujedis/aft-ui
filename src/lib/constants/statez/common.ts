@@ -1,5 +1,3 @@
-
-
 // ...placeholder,
 // $base: 'hover:brightness-110',
 // default: 'hover:brightness-105',

@@ -41,12 +41,12 @@ export type ThemeOption = keyof ThemeOptions;
 export type ThemeDefaults = {
     component: {
         focused: ThemeFocused;
-        hovered: ThemeHovered;
+        hovered: boolean;
         rounded: ThemeRounded;
         shadowed: ThemeShadowed;
         size: ThemeSize;
         theme: ThemeColor;
-        transitioned: ThemeTransitioned;
+        transitioned: boolean;
     };
 };
 export type ThemeComponents = typeof configs;
@@ -61,8 +61,6 @@ export type ThemeRounded = ThemeSize | 'full' | 'none';
 export type ThemeShadowed = ThemeSize | 'inner' | 'none';
 export type ThemeFontSize = keyof typeof fontSizes;
 export type ThemeBorderStyle = keyof typeof borderStyles;
-export type ThemeTransitioned = boolean;
-export type ThemeHovered = boolean;
 export type ThemeResize = 'x' | 'y' | 'both';
 export type ThemeSpeed = 'slow' | 'medium' | 'fast';
 export type ThemeObjectFit = keyof typeof objectFit;

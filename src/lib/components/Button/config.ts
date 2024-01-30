@@ -7,7 +7,11 @@ import {
 	ghostText,
 	filledOutlineFocusVisible,
 	outlinedOutlineFocusVisible,
-	ghostOutlineFocusVisible
+	ghostOutlineFocusVisible,
+	ghostTextHover,
+	softBg,
+	softText,
+	softOutlineFocusVisible
 } from '$lib/constants/states';
 import { mergeConfigs } from '$lib/theme/utils';
 
@@ -17,5 +21,6 @@ export const button = {
 	outlined: mergeConfigs(outlinedText, outlinedRing, outlinedOutlineFocusVisible, {
 		$base: 'ring-1'
 	}),
-	ghost: mergeConfigs(ghostText, ghostBgHover, ghostOutlineFocusVisible)
+	ghost: mergeConfigs(ghostText, ghostBgHover, ghostTextHover, ghostOutlineFocusVisible),
+	soft: mergeConfigs(softText, softBg, softOutlineFocusVisible)
 };

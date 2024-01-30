@@ -66,9 +66,9 @@
 />
 
 <style>
-	:root {
-		--color-dark: 255 255 255;
-	}
+	/* :root {
+	 --color-range-dark: 255 255 255;
+	} */
 
 	input[type='range'] {
 		background-color: var(--track-background-color);

@@ -1,10 +1,4 @@
-import type {
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeColor
-} from '$lib/types';
+import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeColor } from '$lib/types';
 import type { button } from './config';
 
 export type ButtonVariant = keyof typeof button;

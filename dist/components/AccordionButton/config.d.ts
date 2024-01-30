@@ -10,21 +10,8 @@ export declare const accordionButton: {
         warning: string;
         success: string;
         info: string;
-    };
+    } & import("../../theme/utils").StringMap;
     filled: {
-        [x: string]: string | string[];
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-        $base: string;
-    };
-    outlined: {
         $base: string;
         default: string;
         dark: string;
@@ -36,4 +23,5 @@ export declare const accordionButton: {
         success: string;
         info: string;
     };
+    outlined: import("../../theme/utils").StringMap;
 };

@@ -274,3 +274,16 @@ export declare const selected: {
     success: string;
     info: string;
 };
+export declare const common: {
+    active: string;
+    focused: string;
+    focusedVisible: string;
+    focusedWithin: string;
+    unfocused: string;
+    ringed: string;
+    bordered: string;
+    divided: string;
+    disabled: string;
+    transitioned: string;
+    selected: string;
+};

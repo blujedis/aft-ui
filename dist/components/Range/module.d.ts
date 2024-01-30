@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { rangeTrackBackground } from './config';
 export type RangeVariant = keyof typeof rangeTrackBackground;
 export type RangeProps = {
@@ -8,7 +8,7 @@ export type RangeProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: RangeVariant;
 };
 export declare const rangeDefaults: RangeProps;

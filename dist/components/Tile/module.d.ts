@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { tile } from './config';
 export type TileVariant = keyof typeof tile;
 export type TileProps = {
@@ -7,7 +7,7 @@ export type TileProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: TileVariant;
 };
 export declare const tileDefaults: Partial<TileProps>;

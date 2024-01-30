@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { empty } from './config';
 export type EmptyVariant = keyof typeof empty;
 export type EmptyProps = {
@@ -8,7 +8,7 @@ export type EmptyProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: EmptyVariant;
     unstyled?: boolean;
 };

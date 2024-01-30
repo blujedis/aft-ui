@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '../../types';
 import type { tab } from './config';
 export type TabVariant = keyof typeof tab;
 export type TabProps<Tag = 'a'> = {
@@ -8,7 +8,7 @@ export type TabProps<Tag = 'a'> = {
     full?: boolean;
     rounded?: ThemeRounded;
     size?: ThemeSize;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     theme?: ThemeColor;
     value: string | number;
     variant?: TabVariant;

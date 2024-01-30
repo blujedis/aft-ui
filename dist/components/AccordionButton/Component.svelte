@@ -8,6 +8,7 @@ export let {
   caret,
   disabled,
   focused,
+  hovered,
   key,
   roticon,
   rounded,
@@ -33,8 +34,8 @@ $:
   activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 const th = themer($themeStore);
 $:
-  accordionButtonClasses = th.create("AccordionButton").variant("accordionButton", variant, theme, variant).option("focusedRingVisible", typeof focused === "string" ? focused : theme, focused).option("common", "transitioned", transitioned).option("common", "bordered", ["outlined", "flushed"].includes(variant)).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("shadows", shadowed, shadowed && variant !== "flushed").option("common", "disabled", disabled).append("rounded-none border-0 border-b ", variant === "flushed").append("aria-expanded:border-b", variant === "outlined").append(
-    "inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium",
+  accordionButtonClasses = th.create("AccordionButton").variant("accordionButton", variant, theme, variant).option("common", "focusedVisible", focused).option("hovered", theme, hovered).option("common", "transitioned", transitioned).option("common", "bordered", ["outlined", "flushed"].includes(variant)).option("common", "disabled", disabled).option("roundeds", rounded, rounded).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("shadows", shadowed, shadowed && variant !== "flushed").append("rounded-none border-0 border-b ", variant === "flushed").append("aria-expanded:border-b", variant === "outlined").append("mb-1 aria-expanded:mb-0", variant === "filled").append(
+    "inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium outline-0",
     true
   ).append($$restProps.class, true).compile(true);
 $:
@@ -47,7 +48,9 @@ $:
 	{...$$restProps}
 	on:click={() => context.toggle(key)}
 	class={accordionButtonClasses}
+	{disabled}
 	aria-expanded={isSelected}
+	aria-disabled={disabled}
 >
 	<div>
 		<slot />

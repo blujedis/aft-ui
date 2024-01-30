@@ -1,5 +1,5 @@
 import type { SelectStoreValue, SelectStore } from '../../stores/select';
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { select } from './config';
 export type SelectVariant = keyof typeof select;
 export type SelectContext = SelectStore & {};
@@ -15,7 +15,7 @@ export type SelectProps = {
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
-    transitioned?: ThemeTransitioned;
+    transitioned?: boolean;
     variant?: SelectVariant;
     unstyled?: boolean;
 };

@@ -1,6 +1,7 @@
-import { variantActive } from '../../constants/variants';
+// import { variantActive } from '../../constants/variants';
+import { placeholder } from '../options';
 export const accordionContent = {
-    flushed: { ...variantActive },
-    filled: { ...variantActive },
-    outlined: { ...variantActive }
+    flushed: { ...placeholder },
+    filled: { ...placeholder },
+    outlined: { ...placeholder }
 };

@@ -11,6 +11,7 @@ const code = `
   `;
 const props = {
   multiple: false,
+  rounded: "md",
   size: "md",
   theme: "default",
   variant: "filled",

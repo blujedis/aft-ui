@@ -6,7 +6,6 @@ export * from './text';
 export * from './border';
 export * from './ring';
 export * from './fill';
-export * from './common';
 export * from './divideds';
 export * from './stripes';
 export * from './placeholders';

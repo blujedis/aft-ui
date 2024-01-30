@@ -11,9 +11,11 @@ export let { as, unflip, key, rounded, size, theme, transition } = {
 setContext("AccordionOption", {
   key
 });
+$:
+  isSelected = $context.selected?.includes(key);
 const th = themer($themeStore);
 $:
-  accordionClasses = th.create("AccordianOption").append($$restProps.class, true).compile(true);
+  accordionClasses = th.create("AccordianOption").append("mb-2", isSelected).append($$restProps.class, true).compile(true);
 </script>
 
 <svelte:element

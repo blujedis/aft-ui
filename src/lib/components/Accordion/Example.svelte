@@ -17,6 +17,7 @@
 
 	const props = {
 		multiple: false,
+		rounded: 'md' as ThemeRounded,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
 		variant: 'filled' as AccordionVariant,
