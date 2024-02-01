@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { placeholder } from '../statez/placeholders';
+import { placeholder } from '../options';
 import { bgFilled, bgFilledHover, textFilled } from '../statez';
 
 export const variantActive = {

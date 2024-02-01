@@ -1,20 +1,9 @@
-import { mergeConfigs } from '$lib/theme/utils';
-import {
-	filledBg,
-	filledBgAriaExpanded,
-	filledText,
-	filledTextAriaExpanded
-} from '$lib/constants/states';
-import { variantTextExpanded, variantItemExpanded } from '$lib/constants/variants';
-
-// export const accordionButton = {
-// 	flushed: { ...variantTextExpanded },
-// 	filled: { ...variantItemExpanded },
-// 	outlined: { ...variantTextExpanded }
-// };
+import { placeholder } from '$lib/constants/options';
+// import { mergeConfigs } from '$lib/theme/utils';
 
 export const accordionButton = {
-	flushed: mergeConfigs(filledTextAriaExpanded, {}),
-	filled: filledBgAriaExpanded,
-	outlined: mergeConfigs({}, {})
+	// filled: { ...placeholder },
+	outlined: { ...placeholder },
+	// flat: { ...placeholder },
+	// condensed: { ...placeholder },
 };

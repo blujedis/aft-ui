@@ -1,58 +1,57 @@
+
 import type { ThemeColor, ThemeShade } from '../types';
 import { getProperty } from 'dot-prop';
 
 type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
-type TokenPath = 'string';
+
 type PaletteColor = Exclude<ThemeColor, 'default' | 'dark'> | 'frame';
 type Opacity = 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100;
 type TokenColor = PaletteColor | `${PaletteColor}-${ThemeShade}` | `${ThemeShade}/${Opacity}`;
-type TokenTuple = [TokenColor, TokenColor?];
-type TokenValue = TokenColor | TokenPath | TokenTuple;
+type TokenTuple = [TypeOrValue<TokenColor | ThemeShade>, TypeOrValue<TokenColor | ThemeShade>?];
+type TokenValue = TypeOrValue<TokenColor | ThemeShade> | TokenTuple;
 
 type TokenVariantModifier = {
 	text?: string[];
 	container?: string[];
 };
 
+type TokenConfHandler = (tokens: TokenMap) => string | TokenConfInit;
+
 type TokenConfInit =
 	| string
-	| (Partial<Record<ThemeColor | '$base', TokenValue>> & {
+	| (Partial<Record<ThemeColor, TokenValue>> & {
 		$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
 	});
 
-type TokenConf = Record<ThemeColor | '$base', TokenValue> & {
+type TokenConf = Record<ThemeColor, TokenValue> & {
 	$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
 };
 
 type TokenVariant = {
 	variant?: string | string[]; // if undefined use key name.
-	// alias?: TokenVariantModifier;
 	modifiers: TokenVariantModifier;
-	text?: TokenConfInit; // TokenPath | Record<ThemeColor, TokenValue>;
-	container?: TokenConfInit; // TokenPath | Record<ThemeColor, TokenValue>;
+	text?: TokenConfInit | TokenConfHandler;
+	container?: TokenConfInit | TokenConfHandler;
 };
 
-type TokenMap = Record<string, Record<string, TokenVariant>>;
+type TokenMap = Record<string, TokenVariant>;
 
-// const defaultColorMap = {
-// 	default: 'frame',
-// 	dark: 'frame',
-// 	primary: 'primary',
-// 	secondary: 'secondary',
-// 	tertiary: 'tertiary',
-// 	danger: 'danger',
-// 	warning: 'warning',
-// 	success: 'success',
-// 	info: 'info'
-// };
-
-const focusModifiers = [
+const focusOutlineModifiers = [
 	'focus:outline',
 	'focus-visible:outline',
 	'focus-within:outline',
 	'peer-focus:outline',
 	'group-focus:outline',
 	'group-focus-within:outline'
+];
+
+const focusRingModifiers = [
+	'focus:ring',
+	'focus-visible:ring',
+	'focus-within:ring',
+	'peer-focus:ring',
+	'group-focus:ring',
+	'group-focus-within:ring'
 ];
 
 const placeholder = {
@@ -86,15 +85,15 @@ function getDefaultTokens(conf = {} as any) {
 				$base: 'text-white'
 			},
 			container: {
-				default: 500,
+				default: [500, 500],
 				dark: [700, 950],
-				primary: 500,
-				secondary: 500,
-				tertiary: 500,
-				danger: 500,
-				warning: 500,
-				success: 500,
-				info: 500
+				primary: [500, 500],
+				secondary: [500, 500],
+				tertiary: [500, 500],
+				danger: [500, 500],
+				warning: [500, 500],
+				success: [500, 500],
+				info: [500, 500],
 			}
 		},
 
@@ -104,7 +103,6 @@ function getDefaultTokens(conf = {} as any) {
 				container: ['outline', 'ring', 'border']
 			},
 			text: {
-				...placeholder,
 				default: ['text-current', 'text-current'],
 				dark: ['text-current', 'text-current'],
 				primary: [500, 400],
@@ -132,10 +130,11 @@ function getDefaultTokens(conf = {} as any) {
 				text: ['text'],
 				container: ['bg']
 			},
-			text: {
-				...placeholder,
-				$base: 'text-current'
-			},
+			text: 'outlined.text',
+			// text: {
+			// 	...placeholder,
+			// 	$base: 'text-current'
+			// },
 			container: {
 				default: [200, '500/20'],
 				dark: [300, 'frame-950/40'],
@@ -151,32 +150,7 @@ function getDefaultTokens(conf = {} as any) {
 
 		// Selected, Expanded, Current Hover states etc...
 
-		filledSelected: {
-			variant: 'filled',
-			modifiers: {
-				text: ['aria-selected:text', 'aria-expanded:text', 'aria-current:text'],
-				container: [
-					'aria-selected:bg',
-					'aria-expanded:bg',
-					'aria-current:bg',
-					'dark:aria-selected:bg',
-					'dark:aria-expanded:bg',
-					'dark:aria-current:bg'
-				]
-			},
-			text: {
-				...placeholder,
-				$base: 'text-white'
-			},
-			container: () => extend('filled.container', {
-				$base: {
-					$base: 'bg-gray-100 dark:bg-frame-800 aria-expanded:text-white',
-					default: 'aria-expanded:text-current'
-				}
-			})
-		},
-
-		ghostHover: {
+		hoverGhost: {
 			variant: 'ghost',
 			modifiers: {
 				text: ['hover:text'],
@@ -198,36 +172,84 @@ function getDefaultTokens(conf = {} as any) {
 			}
 		},
 
-		outlineHover: {
-			variant: 'outline',
+		selectedBg: {
+			variant: 'common',
 			modifiers: {
-				container: ['hover:bg']
+				text: ['aria-selected:text', 'aria-expanded:text', 'aria-current:text'],
+				container: [
+					'aria-selected:bg',
+					'aria-expanded:bg',
+					'aria-current:bg',
+				]
+			},
+			// text: {
+			// 	...placeholder,
+			// 	$base: 'text-white'
+			// },
+			container: () => extend('filled.container', {
+				$base: {
+					$base: 'bg-gray-100 dark:bg-frame-700 aria-expanded:text-white',
+				}
+			})
+		},
+
+		selectedText: {
+			variant: 'common',
+			modifiers: {
+				text: ['aria-selected:text', 'aria-expanded:text', 'aria-current:text'],
+				container: [
+					'aria-selected:bg',
+					'aria-expanded:bg',
+					'aria-current:bg',
+				]
+			},
+			text: () => extend('outlined.text', {
+				default: ['primary-500', 'primary-400'],
+				dark: ['primary-500', 'primary-400']
+			})
+		},
+
+		focusOutline: {
+			variant: 'common',
+			// variant: ['filled', 'outlined', 'ghost', 'soft'],
+			modifiers: {
+				container: [...focusOutlineModifiers]
 			},
 			container: {
-				default: ['frame-200/80', 'frame-500/40'],
-				dark: ['frame-600/60', 'frame-950/40'],
-				primary: ['50'],
-				secondary: ['500/20', '500/40'],
-				tertiary: ['500/20', '500/40'],
-				danger: ['500/20', '500/40'],
-				warning: ['500/20', '500/40'],
-				success: ['500/20', '500/40'],
-				info: ['500/20', '500/40']
+				default: ['frame-500/50', 'frame-500/50'],
+				dark: ['frame-700/50', 'frame-950/50'],
+				primary: ['500/50', '500/50'],
+				secondary: ['500/50', '500/50'],
+				tertiary: ['500/50', '500/50'],
+				danger: ['500/50', '500/50'],
+				warning: ['500/50', '500/50'],
+				success: ['500/50', '500/50'],
+				info: ['500/50', '500/50']
 			}
 		},
 
-
-		focus: {
-			variant: ['filled', 'outlined', 'ghost', 'soft'],
+		focusRing: {
+			variant: 'common',
+			// variant: ['filled', 'outlined', 'ghost', 'soft'],
 			modifiers: {
-				container: [...focusModifiers]
+				container: [...focusRingModifiers]
 			},
-			container: 'ghostHover.container'
+			container: {
+				default: ['frame-500/50', 'frame-500/50'],
+				dark: ['frame-700/50', 'frame-950/50'],
+				primary: ['500/50', '500/50'],
+				secondary: ['500/50', '500/50'],
+				tertiary: ['500/50', '500/50'],
+				danger: ['500/50', '500/50'],
+				warning: ['500/50', '500/50'],
+				success: ['500/50', '500/50'],
+				info: ['500/50', '500/50']
+			}
 		}
 
-	};
+	} as TokenMap;
 
-};
+}
 
 function ensureArray<T = any>(value: T | T[]): T[] {
 	if (Array.isArray(value) || typeof value === 'undefined' || value === null)
@@ -235,13 +257,24 @@ function ensureArray<T = any>(value: T | T[]): T[] {
 	return [value];
 }
 
-function extend(path: string | Record<string, any>, ...obj: Record<string, any>[]): any {
+function getConfig(
+	tokens: Record<string, unknown>,
+	obj?: string | Record<string, unknown> | TokenConfHandler
+) {
+	defaultTokens = defaultTokens || getDefaultTokens();
+	if (typeof obj === 'function') obj = obj(defaultTokens);
+	if (typeof obj === 'string') return getConfig(tokens, getProperty(tokens, obj));
+	return obj;
+}
+
+
+function extend(path: string | Record<string, unknown>, ...obj: Record<string, unknown>[]): any {
 	defaultTokens = defaultTokens || getDefaultTokens();
 	const existing =
 		typeof path === 'string'
 			? getConfig(defaultTokens, getProperty(defaultTokens, path)) || {}
 			: {};
-	const next = obj.shift() || {};
+	const next = obj.shift() || {} as TokenVariant;
 	if (obj.length) return extend({ ...existing, ...next }, ...obj);
 	return { ...existing, ...next };
 }
@@ -264,27 +297,9 @@ function createResult(name: string, content: string[]) {
 	return `export const ${name} = {\n${content.join(',\n')}\n};`;
 }
 
-// function createAlias(name: string, alias: string) {
-// 	return `export const ${alias} = ${name};`;
-// }
-
-// function isArbitrary(value: string) {
-// 	if (value.startsWith('--')) return true;
-// 	return ['#', 'rgb', 'rgba', 'hsl', 'hsla'].some((v) => value.includes(v));
-// }
-
-function getConfig(
-	tokens: Record<string, any>,
-	obj: string | Record<string, any> | (() => TokenPath | Record<ThemeColor, TokenValue>)
-) {
-	if (typeof obj === 'function') obj = obj();
-	if (typeof obj === 'string') return getConfig(tokens, getProperty(tokens, obj));
-	return obj;
-}
 
 export function parseTokens<
-	T extends TokenMap,
-	C extends Record<ThemeColor | 'white' | 'black', string>
+	T extends TokenMap
 >(tokens: T) {
 
 	function normalizeToken(
@@ -302,7 +317,7 @@ export function parseTokens<
 		if (typeof value === 'string' && value.includes('.'))
 			return normalizeToken(getProperty(tokens as Record<string, any>, value), color);
 
-		// value is numeric color level or color level with opacity modifier, combine with color.
+		// Value is numeric color level or color level with opacity modifier, combine with color.
 		// ex: 500 or '500/50';
 		if (
 			(typeof value === 'number' ||
@@ -334,13 +349,13 @@ export function parseTokens<
 
 	}
 
-	function buildClass(modifier: string, conf?: TokenConfInit) {
+	function buildClass(modifier: string, conf?: TokenConfInit | TokenConfHandler) {
 		if (!conf) return [];
 
 		const { $base, ...nConf } = getConfig(tokens, conf) as TokenConf;
 
 		const result = [];
-		const extend = (typeof $base === 'string' ? { $base } : $base || {}) as Partial<
+		const extend = (typeof $base === 'string' ? { $base } : $base || { $base: '' }) as Partial<
 			Record<ThemeColor | '$base', TokenColor>
 		>;
 
@@ -364,16 +379,6 @@ export function parseTokens<
 
 	for (const [gKey, gConf] of Object.entries(tokens)) {
 
-		// Iterate each variant in group.
-		// for (const [, mConf] of Object.entries(gConf)) {
-
-		// 	// Iterate each state in group.
-		// 	const {
-		// 		modifiers: modifiersMap,
-		// 		variant,
-		// 		...items
-		// 	} = getConfig(tokens, sConf) as TokenVariant;
-
 		const {
 			modifiers: modifiersMap,
 			variant,
@@ -385,18 +390,10 @@ export function parseTokens<
 			const variants = ensureArray<string>(variant || gKey);
 			const modifiers = modifiersMap[iKey as keyof typeof modifiersMap] || []; // get modifier collection.
 
-			//const aliases = ((alias || {})[iKey as keyof typeof alias] || []) as string[];
-
 			for (const m of modifiers) {
 				const str = buildClass(m, iConf); // generate the Tailwind class prefixed with modifier.
 				if (!str.length) continue;
 				const suffix = createLabel(m);
-				// const name = gKey.toLowerCase() + suffix; // create object name.
-				// if (keys.includes(name))
-				// 	throw new Error(`Detected duplicate generated key name ${name}.`);
-				// keys.push(name); // save key name check for previously generated object names.
-				// result.push(`export const ${name} = {\n${str.join(',\n')}\n};`); // apply contents to object.
-				// result[name] = createResult(name, str);
 				variants.forEach((v) => {
 					const aName = v.toLowerCase() + suffix;
 					if (keys.includes(aName))
@@ -409,18 +406,11 @@ export function parseTokens<
 
 		}
 
-		// }
-
 	}
 
 	const resultMap = Object.keys(result)
 		.sort()
 		.map((k) => result[k]);
-	// const aliasesMap = Object.keys(resultAliases)
-	// 	.sort()
-	// 	.map((k) => resultAliases[k]);
-	// return [...resultMap, ...aliasesMap].join('\n\n');
-
 	return resultMap.join('\n\n');
 
 }

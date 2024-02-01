@@ -40,7 +40,9 @@
 				<Button {...props} variant="ghost" theme={color}>Button</Button>
 			</label>
 			<label for="soft">
+
 				<Button {...props} variant="soft" theme={color}>Button</Button>
+				
 			</label>
 		</div>
 	{/each}

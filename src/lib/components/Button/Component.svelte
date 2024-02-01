@@ -3,7 +3,7 @@
 	import { forwardEventsBuilder } from '../../utils';
 	import { themeStore, themer } from '../../';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
-	import type { ElementProps, ThemeVariantAppend } from '../../types';
+	import type { ElementProps } from '../../types';
 
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = ButtonProps<Tag> & ElementProps<Tag>;
@@ -17,7 +17,6 @@
 		rounded,
 		shadowed,
 		size,
-		strong,
 		theme,
 		transitioned,
 		variant,
@@ -29,17 +28,14 @@
 	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
-
 	const href = '#';
-
-	$: isStrong = strong || (as === 'button' && typeof strong === 'undefined');
 
 	$: buttonClasses = unstyled
 		? th.create('Button').append($$restProps.class, true).compile()
 		: th
 				.create('Button')
 				.variant('button', variant, theme, variant)
-				.option(`hovered2.${variant}` as any, theme, hovered)
+				.option('hovered', variant, theme, hovered)
 				.option('common', 'focusedVisible', focused)
 				.option('common', 'transitioned', transitioned)
 				.option('fieldFontSizes', size, size)
@@ -50,7 +46,6 @@
 				.option('common', 'disabled', disabled)
 				.append('underline', underlined && underlined !== 'hover')
 				.append('hover:underline', underlined === 'hover')
-				.append('font-medium', strong)
 				.append('w-full', full)
 				.append('inline-flex items-center justify-center cursor-pointer outline-0', true)
 				.append($$restProps.class, true)
@@ -62,22 +57,10 @@
 
 {#if as === 'button'}
 	<button use:forwardedEvents {...$$restProps} class={buttonClasses} {disabled}>
-		{#if isStrong || buttonClasses.includes('font-medium')}
-			<div class="pt-px">
-				<slot />
-			</div>
-		{:else}
-			<slot />
-		{/if}
+		<slot />
 	</button>
 {:else}
 	<a use:forwardedEvents {href} {...$$restProps} class={buttonClasses} aria-disabled={disabled}>
-		{#if isStrong || buttonClasses.includes('font-medium')}
-			<div class="pt-px">
-				<slot />
-			</div>
-		{:else}
-			<slot />
-		{/if}
+		<slot />
 	</a>
 {/if}

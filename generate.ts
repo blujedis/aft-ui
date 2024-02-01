@@ -6,7 +6,6 @@ const cwd = process.cwd();
 const outpath = './src/lib/constants/states.ts';
 const ws = createWriteStream(outpath, { flags: 'w' });
 
-
 export function buildTokens() {
 
   const tokens = parseTokens(defaultTokens as any);
@@ -14,19 +13,19 @@ export function buildTokens() {
 
   let hasError = false;
 
-  ws.on('error', (err) => {
+  ws.once('error', (err) => {
     console.error(err);
     hasError = true;
   });
 
-  ws.on('close', () => {
+  ws.once('close', () => {
     if (hasError) {
       process.stdout.write(
-        `  \u001b[31m✖\u001b[0m  Aft: generated output FAILED: "${outpath}"\n`
+        `  \u001b[31m✖\u001b[0m  @aft: generated output FAILED: "${outpath}"\n`
       );
     } else {
       process.stdout.write(
-        `  \u001b[32;1m➜\u001b[0m  Aft: generated output: "${relative(
+        `  \u001b[32;1m➜\u001b[0m  @aft: generated output: "${relative(
           cwd,
           outpath
         )}"\n`
@@ -34,7 +33,8 @@ export function buildTokens() {
     }
   });
 
-  ws.write(buffer, (err) => {
-    ws.close();
+  ws.write(buffer, () => {
+    ws.destroy();
   });
+
 }

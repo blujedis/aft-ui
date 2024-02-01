@@ -4,8 +4,8 @@
 
 html,
 body {
-	@apply font-light;
-	@apply tracking-tight;
+	/* @apply font-light;
+	@apply tracking-tight; */
 }
 
 /* .dark & [type='text'],

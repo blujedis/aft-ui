@@ -5,10 +5,20 @@
 
 	type $$Props = BadgeProps & Omit<ElementProps<'span'>, 'size'>;
 
-	export let { removable, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } =
-		{
-			...defaults
-		} as Required<BadgeProps>;
+	export let {
+		removable,
+		full,
+		hovered,
+		rounded,
+		shadowed,
+		size,
+		theme,
+		transitioned,
+		variant,
+		unstyled
+	} = {
+		...defaults
+	} as Required<BadgeProps>;
 
 	const th = themer($themeStore);
 
@@ -20,24 +30,29 @@
 				.option('common', 'transitioned', transitioned)
 				.option('focusedRingVisible', theme, removable)
 				.remove('focus:', true)
-				.option('badgePadding', size, size && !removable)
+				// .option('badgePadding', size, size && !removable)
 				.option('badgeFontSizes', size, size)
 				.option('roundeds', rounded, rounded)
 				.option('shadows', shadowed, shadowed)
 				.append('w-full', full)
-				.append('z-20 badge font-medium', true)
+				.append('z-20 badge', true)
 				.append('badge-removable', removable)
-				.append('relative inline-flex items-center leading-tight', !removable)
+				.append('relative inline-flex items-center leading-tight justify-center', !removable)
 				.append($$restProps.class, true)
 				.compile(true);
+
+	$: badgeInnerClasses = unstyled
+		? ''
+		: th.create('BadgeInner').option('badgeInnerMargin', size, size).compile();
 </script>
 
 <span {...$$restProps} class={badgeClasses}>
-	{#if !removable}
-		<span class:mb-0.5={size !== 'xs'}>
-			<slot />
-		</span>
-	{:else}
+	<!-- {#if !removable} -->
+	<!-- <div class:mt-0.5={!['sm', 'xs', 'xl'].includes(size)}> -->
+	<div class={badgeInnerClasses}>
 		<slot />
-	{/if}
+	</div>
+	<!-- {:else}
+		<slot />
+	{/if} -->
 </span>

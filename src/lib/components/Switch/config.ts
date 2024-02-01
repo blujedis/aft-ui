@@ -1,5 +1,4 @@
-import { placeholder } from '../../constants/statez';
-import {} from '../options';
+import { placeholder } from '$lib/constants/options';
 
 export const switchBackdrop = {
 	filled: {

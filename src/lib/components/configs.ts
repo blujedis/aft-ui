@@ -1,5 +1,5 @@
 export * from './AccordionButton/config';
-export * from './AccordionContent/config';
+export * from './AccordionOption/config';
 export * from './Avatar/config';
 export * from './Badge/config';
 export * from './Breadcrumb/config';

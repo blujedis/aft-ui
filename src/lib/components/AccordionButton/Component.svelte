@@ -4,9 +4,8 @@
 	import { getContext } from 'svelte';
 	import type { AccordionOptionContext } from '../AccordionOption/module';
 	import type { AccordionContext } from '../Accordion/module';
-	// import { ConditionalElement } from '../ConditionalElement';
 	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
-	import type { ElementProps, IconifyTuple, ThemeVariantAppend } from '../../types';
+	import type { ElementProps, IconifyTuple } from '../../types';
 
 	type $$Props = AccordianButtonProps & ElementProps<'button'>;
 
@@ -29,36 +28,32 @@
 	} = {
 		...defaults,
 		key: optionContext.key,
-		rounded: context.globals.rounded,
-		shadowed: context.globals.shadowed,
-		size: context.globals.size,
-		theme: context.globals.theme,
-		variant: context.globals.variant
+		hovered: context.globals?.hovered,
+		rounded: context.globals?.rounded,
+		shadowed: context.globals?.shadowed,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals?.variant
 	} as Required<AccordianButtonProps>;
 
 	$: isSelected = $context.selected?.includes(key);
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 
+	console.log(hovered);
+
 	const th = themer($themeStore);
 
 	$: accordionButtonClasses = th
 		.create('AccordionButton')
 		.variant('accordionButton', variant, theme, variant)
-		.option('common', 'focusedVisible', focused)
-		.option('hovered', theme, hovered)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'bordered', ['outlined', 'flushed'].includes(variant))
 		.option('common', 'disabled', disabled)
-		.option('roundeds', rounded, rounded)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
-		.option('shadows', shadowed, shadowed && variant !== 'flushed')
-		.append('rounded-none border-0 border-b ', variant === 'flushed')
-		.append('aria-expanded:border-b', variant === 'outlined')
-		.append('mb-1 aria-expanded:mb-0', variant === 'filled')
+		.append('aria-expanded:border-b-0', variant === 'outlined')
 		.append(
-			'inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium outline-0',
+			'accordion-button inline-flex items-center justify-between w-full focus:outline-none',
 			true
 		)
 		.append($$restProps.class, true)
@@ -76,6 +71,7 @@
 	id={`${key}-accordion-heading`}
 	aria-controls={`${key}-accordion-option`}
 	{...$$restProps}
+	tabindex={-1}
 	on:click={() => context.toggle(key)}
 	class={accordionButtonClasses}
 	{disabled}

@@ -1,4 +1,4 @@
-import { placeholder } from '../../constants/statez';
+import { placeholder } from '$lib/constants/options';
 
 export const tabs = {
 	flushed: {

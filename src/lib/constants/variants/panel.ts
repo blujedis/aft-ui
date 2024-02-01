@@ -1,5 +1,5 @@
 import { mergeConfigs } from '$lib/theme';
-import { placeholder } from '../statez';
+import { placeholder } from '../options';
 import { common } from '../options';
 
 export const variantPanel = mergeConfigs(placeholder, {

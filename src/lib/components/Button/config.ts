@@ -5,22 +5,19 @@ import {
 	outlinedRing,
 	ghostBgHover,
 	ghostText,
-	filledOutlineFocusVisible,
-	outlinedOutlineFocusVisible,
-	ghostOutlineFocusVisible,
 	ghostTextHover,
 	softBg,
 	softText,
-	softOutlineFocusVisible
+	commonOutlineFocusVisible
 } from '$lib/constants/states';
 import { mergeConfigs } from '$lib/theme/utils';
 
 export const button = {
-	text: mergeConfigs(outlinedText, outlinedOutlineFocusVisible),
-	filled: mergeConfigs(filledBg, filledText, filledOutlineFocusVisible),
-	outlined: mergeConfigs(outlinedText, outlinedRing, outlinedOutlineFocusVisible, {
-		$base: 'ring-1'
+	text: mergeConfigs(outlinedText, commonOutlineFocusVisible),
+	filled: mergeConfigs(filledBg, filledText, commonOutlineFocusVisible),
+	outlined: mergeConfigs(outlinedText, outlinedRing, commonOutlineFocusVisible, {
+		$base: 'ring-1 ring-inset'
 	}),
-	ghost: mergeConfigs(ghostText, ghostBgHover, ghostTextHover, ghostOutlineFocusVisible),
-	soft: mergeConfigs(softText, softBg, softOutlineFocusVisible)
+	ghost: mergeConfigs(ghostText, ghostBgHover, ghostTextHover, commonOutlineFocusVisible),
+	soft: mergeConfigs(softText, softBg, commonOutlineFocusVisible)
 };

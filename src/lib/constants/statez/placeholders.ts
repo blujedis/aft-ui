@@ -1,17 +1,17 @@
 import { mergeConfigs } from '$lib/theme';
 
-export const placeholder = {
-	$base: '',
-	default: '',
-	dark: '',
-	primary: '',
-	secondary: '',
-	tertiary: '',
-	danger: '',
-	warning: '',
-	success: '',
-	info: ''
-};
+// export const placeholder = {
+// 	$base: '',
+// 	default: '',
+// 	dark: '',
+// 	primary: '',
+// 	secondary: '',
+// 	tertiary: '',
+// 	danger: '',
+// 	warning: '',
+// 	success: '',
+// 	info: ''
+// };
 
 const placeholdersDisabled = {
 	$base: '',

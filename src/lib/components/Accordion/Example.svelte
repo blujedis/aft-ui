@@ -18,6 +18,7 @@
 	const props = {
 		multiple: false,
 		rounded: 'md' as ThemeRounded,
+		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
 		variant: 'filled' as AccordionVariant,
@@ -31,68 +32,27 @@
 	</div>
 
 	<Section>
-		<div class="text-2xl font-semibold mb-4">Filled Accordion</div>
-		<div class="grid grid-cols-9 gap-2 items-start mb-4">
-			{#each colors as color}
-				<Accordion {...props} theme={color} variant="filled">
-					<AccordionOption key={0}>
-						<AccordionButton>One</AccordionButton>
-						<AccordionContent key={0}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.
-						</AccordionContent>
-					</AccordionOption>
-					<AccordionOption key={1}>
-						<AccordionButton>Two</AccordionButton>
-						<AccordionContent key={1}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.
-						</AccordionContent>
-					</AccordionOption>
-				</Accordion>
-			{/each}
-		</div>
-	</Section>
-
-	<Section>
 		<div class="text-2xl font-semibold mb-4">Outlined Accordion</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="outlined">
+				<Accordion {...props} theme={color} variant="outlined" shadowed="md">
 					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
-						<AccordionContent key={0}>
+						<AccordionContent>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 							incididunt ut labore et dolore magna aliqua.
 						</AccordionContent>
 					</AccordionOption>
 					<AccordionOption key={1}>
 						<AccordionButton>Two</AccordionButton>
-						<AccordionContent key={1}>
+						<AccordionContent>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 							incididunt ut labore et dolore magna aliqua.
 						</AccordionContent>
 					</AccordionOption>
-				</Accordion>
-			{/each}
-		</div>
-	</Section>
-
-	<Section>
-		<div class="text-2xl font-semibold mb-4">Flushed Accordion</div>
-		<div class="grid grid-cols-9 gap-2 items-start mb-4">
-			{#each colors as color}
-				<Accordion {...props} theme={color} variant="flushed">
-					<AccordionOption key={0}>
-						<AccordionButton>One</AccordionButton>
-						<AccordionContent key={0}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.
-						</AccordionContent>
-					</AccordionOption>
-					<AccordionOption key={1}>
-						<AccordionButton>Two</AccordionButton>
-						<AccordionContent key={1}>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 							incididunt ut labore et dolore magna aliqua.
 						</AccordionContent>
@@ -103,100 +63,57 @@
 	</Section>
 
 	<!-- <Section>
-		<div class="text-2xl font-semibold mb-4">Ghost Accordion</div>
+		<div class="text-2xl font-semibold mb-4">Filled Accordion</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="ghost">
-					<AccordionPanel key={0}>
+				<Accordion {...props} theme={color} variant="filled" hovered>
+					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
-						<AccordionOption class="p-4"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.</AccordionOption
-						>
-					</AccordionPanel>
-					<AccordionPanel key={1}>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1} selected={color === 'primary'}>
 						<AccordionButton>Two</AccordionButton>
-						<AccordionOption class="p-4"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.</AccordionOption
-						>
-					</AccordionPanel>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent key={2}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
 				</Accordion>
 			{/each}
 		</div>
 	</Section> -->
-	<!-- 
-	<Section>
-		<div class="text-2xl font-semibold mb-4">Flushed Accordion</div>
+
+	<!-- <Section>
+		<div class="text-2xl font-semibold mb-4">Flat Accordion</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="flushed">
-					<AccordionPanel key={0}>
+				<Accordion {...props} theme={color} variant="flat">
+					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
-						<AccordionOption class="p-4"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.</AccordionOption
-						>
-					</AccordionPanel>
-					<AccordionPanel key={1}>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1}>
 						<AccordionButton>Two</AccordionButton>
-						<AccordionOption class="p-4"
-							>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.</AccordionOption
-						>
-					</AccordionPanel>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
 				</Accordion>
 			{/each}
 		</div>
 	</Section> -->
 </ExamplePage>
-<!-- 
-<Accordion {...props} variant="outlined" theme={color}>
-	<AccordionPanel key={0}>
-		<AccordionButton>One</AccordionButton>
-		<AccordionOption class="p-4"
-			>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-			incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-			exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-			dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-			mollit anim id est laborum.</AccordionOption
-		>
-	</AccordionPanel>
-	<AccordionPanel key={1}>
-		<AccordionButton>Two</AccordionButton>
-		<AccordionOption class="p-4"
-			>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-			incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-			exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-			dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-			mollit anim id est laborum.</AccordionOption
-		>
-	</AccordionPanel>
-</Accordion> -->
-<!-- 
-<Accordion {...props} variant="flushed" theme={color}>
-	<AccordionPanel key={0}>
-		<AccordionButton>One</AccordionButton>
-		<AccordionOption class="p-4"
-			>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-			incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-			exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-			dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-			mollit anim id est laborum.</AccordionOption
-		>
-	</AccordionPanel>
-	<AccordionPanel key={1}>
-		<AccordionButton>Two</AccordionButton>
-		<AccordionOption class="p-4"
-			>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-			incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-			exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-			dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-			mollit anim id est laborum.</AccordionOption
-		>
-	</AccordionPanel>
-</Accordion> -->

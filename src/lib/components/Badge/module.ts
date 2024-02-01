@@ -3,7 +3,6 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
 import type { badge } from './config';
 
@@ -11,6 +10,7 @@ export type BadgeVariant = keyof typeof badge;
 
 export type BadgeProps = {
 	full?: boolean;
+	hovered?: boolean;
 	removable?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;

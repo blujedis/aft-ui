@@ -35,7 +35,7 @@
 		</div>
 		<div>
 			<div
-				class="rounded-sm p-1 bg-frame-100 ring-frame-700 dark:bg-frame-900/50 dark:ring-frame-600 ring-opacity-10 ring-1"
+				class="rounded-sm p-1 bg-frame-100 ring-frame-950/10 dark:bg-frame-900/40 dark:ring-frame-700 ring-opacity-10 ring-1"
 			>
 				<button
 					class={'rounded-sm px-4 py-1 border border-transparent text-sm ' +
@@ -53,8 +53,9 @@
 	<div class="mb-6">
 		{#if description}
 			<p
-				class="mt-2 mb-4 p-4 bg-frame-100 ring-frame-700 dark:ring-frame-600 dark:bg-frame-900/50 ring-opacity-10 ring-1"
+				class="mt-2 mb-4 p-4 bg-frame-100 ring-frame-950/10 dark:ring-frame-700 dark:bg-frame-900/40 ring-opacity-10 ring-1"
 			>
+				4
 				{description}
 			</p>
 		{/if}

@@ -1,4 +1,4 @@
-import { placeholder } from '$lib/constants/statez';
+import { placeholder } from '$lib/constants/options';
 import {
 	variantItemChecked,
 	variantItemCheckedFilled,

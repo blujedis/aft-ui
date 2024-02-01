@@ -5,14 +5,15 @@ import { accordionOptionDefaults } from '../AccordionOption';
 import type { AccordionVariant } from '../AccordionButton/module';
 
 export type AccordionContext = SelectStore & {
-	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded; variant: AccordionVariant };
+	globals: Omit<AccordianOptionProps, 'as' | 'selected'> & { rounded: ThemeRounded; variant: AccordionVariant, hovered: boolean };
 };
 
 export type AccordionProps<Tag extends HTMLTag> = Omit<
 	AccordianOptionProps,
-	'as' | 'value' | 'variant' | 'key'
+	'as' | 'value' | 'variant' | 'key' | 'selected'
 > & {
 	as?: Tag;
+	hovered?: boolean;
 	multiple?: boolean;
 	selected?: SelectStoreValue[];
 	rounded?: ThemeRounded;

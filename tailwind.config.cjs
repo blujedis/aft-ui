@@ -1,7 +1,9 @@
 import { aft, defaultTheme } from '@aft/config';
 
 const themes = {
-	default: defaultTheme
+	default: {
+		...defaultTheme
+	}
 };
 
 /** @type {import('tailwindcss').Config} */

@@ -243,7 +243,7 @@ export const animate = {
 	spin: 'motion-safe:animate-spin'
 };
 
-export const hovered = {
+const _hovered = {
 	$base: 'hover:brightness-115',
 	default: '',
 	dark: '',
@@ -256,37 +256,15 @@ export const hovered = {
 	info: ''
 };
 
-const defaults = {
-	default: '',
-	dark: '',
-	primary: '',
-	secondary: '',
-	tertiary: '',
-	danger: '',
-	warning: '',
-	success: '',
-	info: ''
-};
-
-export const hovered2 = {
-	text: {
-		...defaults,
-		$base: 'hover:brightness-115'
-	},
-	filled: {
-		...defaults,
-		$base: 'hover:brightness-115'
-	},
-	outlined: {
-		...defaults,
-		$base: 'hover:brightness-115'
-	},
-	ghost: {
-		...defaults,
-		$base: 'hover:brightness-115'
-	},
+export const hovered = {
+	text: _hovered,
+	filled: _hovered,
+	outlined: _hovered,
+	ghost: _hovered,
+	flushed: _hovered,
+	flat: _hovered,
 	soft: {
-		...defaults,
+		..._hovered,
 		$base: 'hover:brightness-105 dark:hover:brightness-125'
 	}
 };
@@ -304,34 +282,35 @@ export const selected = {
 	info: ''
 };
 
+export const placeholder = {
+	$base: '',
+	default: '',
+	dark: '',
+	primary: '',
+	secondary: '',
+	tertiary: '',
+	danger: '',
+	warning: '',
+	success: '',
+	info: ''
+};
+
 export const common = {
 	active: 'active:brightness-125',
-	focused: 'focus:outline focus:outline-2 focus:outline-offset-0',
-	focusedVisible: 'focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-1',
-	focusedWithin: 'focus-within:outline focus-within:outline-3 focus-within:outline-offset-1',
-	unfocused: 'focus:outline-0 focus-visible:outline-0 focus-within:outline-0',
-	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
-	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
-	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
+	focused: 'focus:outline-2 focus:outline-offset-1',
+	focusedVisible: 'focus-visible:outline-3 focus-visible:outline-offset-1',
+	focusedWithin: 'focus-within:outline-3 focus-within:outline-offset-1',
+	unfocused: 'focus:outline-0',
+	ringed: 'ring-1 ring-frame-950 ring-opacity-10 dark:ring-opacity-40',
+	bordered: 'border-frame-200 dark:border-frame-950 dark:border-opacity-40',
+	divided: 'divide-frame-200 dark:divide-frame-950 dark:divide-opacity-40',
 	disabled:
 		'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
 	transitioned: 'transition motion-reduce:transition-none',
-	selected: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150'
+	baseFill: 'bg-frame-100 dark:bg-frame-700',
+	baseAccent: 'bg-white dark:bg-frame-900',
+	baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
+	baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
+	baseSelected: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
+	baseCurrent: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
 };
-
-// export const common = {
-// 	active: 'active:brightness-125',
-// 	hovered: 'brightness-110',
-// 	focused: 'focus:brightness-110',
-// 	focusedVisible: 'focus-visible:brightness-110',
-// 	focusedWithin: 'focus-within:brightness-110',
-// 	selected: '',
-// 	expanded: '',
-// 	current: '',
-// 	ringed: 'ring-1 ring-black ring-opacity-10 dark:ring-opacity-40',
-// 	bordered: 'border-frame-200 dark:border-black dark:border-opacity-40',
-// 	divided: 'divide-frame-200 dark:divide-black dark:divide-opacity-40',
-// 	disabled: 'disabled:brightness-75 aria-diabled:brightness-75',
-// 	transition: 'transition-colors duration-125 motion-reduce:transition-none',
-// 	untransition: 'transition-none'
-// };

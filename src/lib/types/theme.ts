@@ -16,8 +16,8 @@ import type { namedcolors, tailwindcolors } from '../theme/palettes';
 
 export type DeepPartial<T> = T extends object
 	? T extends Array<infer U>
-		? DeepPartial<U>[]
-		: { [K in keyof T]?: DeepPartial<T[K]> }
+	? DeepPartial<U>[]
+	: { [K in keyof T]?: DeepPartial<T[K]> }
 	: T;
 
 /**
@@ -34,10 +34,10 @@ export type PropsWithPrefix<T, P extends string> = T extends `${P}${infer Rest}`
 
 export type ParsePath<T, Key extends keyof T> = Key extends string
 	? T[Key] extends Record<string, any>
-		?
-				| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
-				| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
-		: never
+	?
+	| `${Key}.${ParsePath<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+	| `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+	: never
 	: never;
 
 export type ParsePathKey<T> = ParsePath<T, keyof T> | keyof T;
@@ -46,13 +46,13 @@ export type Path<T> = ParsePathKey<T> extends string | keyof T ? ParsePathKey<T>
 
 export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Rest}`
 	? Key extends keyof T
-		? Rest extends Path<T[Key]>
-			? PathValue<T[Key], Rest>
-			: never
-		: never
+	? Rest extends Path<T[Key]>
+	? PathValue<T[Key], Rest>
+	: never
+	: never
 	: P extends keyof T
-		? T[P]
-		: never;
+	? T[P]
+	: never;
 
 /**
  * Maintains code help while allowing arbitrary values/string.
@@ -79,7 +79,7 @@ export interface ThemeConfig {
 }
 
 export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
-export type ThemeOption = Path<ThemeOptions>; // keyof ThemeOptions;
+export type ThemeOption = keyof ThemeOptions;
 export type ThemeDefaults = {
 	component: {
 		focused: ThemeFocused; // elements that should receive focus either always or only focus-visible.
@@ -96,10 +96,6 @@ export type ThemeComponent = keyof ThemeComponents;
 
 export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost';
 export type ThemeVariantExt = ThemeVariant | 'panel' | 'bordered' | 'activated';
-export type ThemeVariantAppend<V extends ThemeVariant> = `${V}${
-	| 'Hover'
-	| 'HoverGroup'
-	| 'Activated'}`;
 
 export type ThemeShade = ThemeColorShade;
 export type ThemeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xl2' | 'unstyled';
@@ -131,11 +127,3 @@ export type Template = string | [string, string | string[], number | number[]];
 export type Templates<K extends string = string> = Record<K, Template>;
 export type TemplateInternal = [string, string[], number[]];
 export type TemplatesInternal<K extends string = string> = Record<K, TemplateInternal>;
-
-// export type ThemeColorPrefix = typeof prefixes[number];
-
-// export type ThemeColorKey =
-// 	| `${ThemeColorBase}${'.' | '-'}${ThemeColorShade}`
-// 	| Exclude<ThemeColor, 'light' | 'dark'>
-// 	| ColorType;
-// export type ThemePickKey = `${ThemeColorPrefix}${'.' | '-'}${ThemeColorKey}` | ThemeColorKey;

@@ -14,7 +14,7 @@ import type {
 
 export type PrimitiveValue = string | number | boolean | undefined | null;
 export type ClassArgument = PrimitiveValue | Record<string, unknown>;
-export type HTMLTag = keyof SvelteHTMLElements; // keyof HTMLElementTagNameMap;
+export type HTMLTag = keyof SvelteHTMLElements; 
 export type ElementProps<K extends HTMLTag> = SvelteHTMLElements[K];
 export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 

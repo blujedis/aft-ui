@@ -21,18 +21,20 @@
 		variant: context?.globals.variant
 	} as Required<AccordionContentProps<Tag>>;
 
+	$: isSelected = $context.selected.includes(key);
+
 	const th = themer($themeStore);
 
 	$: accordionContentClasses = th
 		.create('AccordionContent')
-		.variant('accordionContent', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
-		.option('fieldPadding', size, size)
+		.option('buttonPadding', size, size)
+		.append(`accordion-content`, true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
 
-{#if $context.selected.includes(key)}
+{#if isSelected}
 	<svelte:element
 		this={as}
 		{...$$restProps}

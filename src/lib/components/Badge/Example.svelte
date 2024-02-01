@@ -2,13 +2,7 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { Badge, type BadgeVariant } from '.';
 	import { colors } from '$lib/constants';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Badges';
 	const description = 'Simple component for displaying tags, notification counts and more.';
@@ -17,29 +11,31 @@
 
 	const props = {
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		rounded: 'full' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
-		transitioned: false as ThemeTransitioned,
+		hovered: true,
+		focused: true,
+		transitioned: false,
 		variant: 'filled' as BadgeVariant
 	};
 </script>
 
 <ExamplePage {title} {description} {code}>
 	{#each colors as color}
-		<div class="grid grid-cols-8 gap-2 mb-4">
+		<div class="grid grid-cols-4 gap-2 mb-4">
 			<label for="filled">
-				<Badge {...props} theme={color}>React</Badge>
+				<Badge {...props} theme={color}>Badge</Badge>
 			</label>
-
 			<label for="outlined">
-				<Badge {...props} variant="outlined" theme={color}>react</Badge>
+				<Badge {...props} variant="outlined" theme={color}>Badge</Badge>
 			</label>
-
-			<label for="ghost">
-				<Badge {...props} variant="ghost" theme={color}>React</Badge>
+			<label for="soft">
+				<Badge {...props} variant="soft" theme={color}>Badge</Badge>
 			</label>
 		</div>
 	{/each}
+	<!-- <Badge {...props} variant="filled" theme="primary" size="xl2">1</Badge>
+	<Badge {...props} variant="filled" theme="primary" rounded="full" size="xl2">1</Badge> -->
 </ExamplePage>
