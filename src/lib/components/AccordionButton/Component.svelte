@@ -16,7 +16,6 @@
 		caret,
 		disabled,
 		focused,
-		hovered,
 		key,
 		roticon,
 		rounded,
@@ -28,7 +27,6 @@
 	} = {
 		...defaults,
 		key: optionContext.key,
-		hovered: context.globals?.hovered,
 		rounded: context.globals?.rounded,
 		shadowed: context.globals?.shadowed,
 		size: context.globals?.size,
@@ -40,8 +38,6 @@
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 
-	console.log(hovered);
-
 	const th = themer($themeStore);
 
 	$: accordionButtonClasses = th
@@ -51,9 +47,10 @@
 		.option('common', 'disabled', disabled)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
-		.append('aria-expanded:border-b-0', variant === 'outlined')
+		.option('common', 'baseFill', variant === 'filled' || variant === 'grouped')
+		.prepend('accordion-button', true)
 		.append(
-			'accordion-button inline-flex items-center justify-between w-full focus:outline-none',
+			'inline-flex items-center justify-between w-full focus:outline-none',
 			true
 		)
 		.append($$restProps.class, true)

@@ -9,7 +9,7 @@ export type AccordionOptionContext = {
 
 export type AccordianOptionProps<Tag = any> = {
 	as?: Tag;
-	unflip?: boolean;
+	focused?: boolean;
 	key: SelectStoreValue;
 	rounded?: ThemeRounded;
 	selected?: boolean;
@@ -17,6 +17,7 @@ export type AccordianOptionProps<Tag = any> = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
+	unflip?: boolean;
 	variant?: AccordionVariant;
 };
 

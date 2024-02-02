@@ -1,8 +1,8 @@
-import { common, placeholder } from '$lib/constants/options';
+import { placeholder } from '$lib/constants/options';
 
 export const accordionOption = {
-  // filled: { ...placeholder, $base: common.baseFill },
+  filled: { ...placeholder },
   outlined: { ...placeholder },
-  // flat: { ...placeholder },
-  // condensed: { ...placeholder },
+  grouped: { ...placeholder },
+  unstyled: { ...placeholder },
 };

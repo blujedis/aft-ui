@@ -14,25 +14,13 @@
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementProps<Tag>;
 
-	export let {
-		as,
-		hovered,
-		multiple,
-		selected,
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transition,
-		variant
-	} = {
+	export let { as, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 
 	export const store = useSelect({ multiple, selected });
 
 	const globals = cleanObj({
-		hovered,
 		rounded,
 		shadowed,
 		size,
@@ -55,12 +43,12 @@
 		.create('Accordion')
 		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
 		.option('shadows', shadowed, shadowed)
-		.option('common', 'bordered', variant === 'outlined')
-		.option('common', 'divided', true)
-		.append(`accordion`, true)
-		// .append('overflow-clip', variant !== 'flat')
-		.append('divide-y', true)
-		.append('border', variant === 'outlined')
+		.prepend(`accordion`, true)
+		.option('common', 'bordered', variant !== 'unstyled' && variant !== 'filled')
+		.option('common', 'divided', variant !== 'unstyled')
+		.append('divide-y', variant !== 'unstyled')
+		.append('border', variant !== 'unstyled' && variant !== 'filled')
+		.append('overflow-clip', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

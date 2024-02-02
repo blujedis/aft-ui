@@ -262,7 +262,8 @@ export const hovered = {
 	outlined: _hovered,
 	ghost: _hovered,
 	flushed: _hovered,
-	flat: _hovered,
+	unstyled: _hovered,
+	grouped: _hovered,
 	soft: {
 		..._hovered,
 		$base: 'hover:brightness-105 dark:hover:brightness-125'
@@ -308,7 +309,7 @@ export const common = {
 		'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
 	transitioned: 'transition motion-reduce:transition-none',
 	baseFill: 'bg-frame-100 dark:bg-frame-700',
-	baseAccent: 'bg-white dark:bg-frame-900',
+	baseAccent: 'bg-white dark:bg-frame-900/40',
 	baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
 	baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
 	baseSelected: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',

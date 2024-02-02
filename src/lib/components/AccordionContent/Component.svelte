@@ -29,7 +29,11 @@
 		.create('AccordionContent')
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
-		.append(`accordion-content`, true)
+		//.option('common', 'baseFill', variant === 'filled')
+		.option('common', 'baseAccent', variant === 'grouped' || variant === 'filled')
+		.option('common', 'bordered', isSelected && ['grouped'].includes(variant))
+		.prepend(`accordion-content`, true)
+		.append('border-t', isSelected && ['grouped'].includes(variant))
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

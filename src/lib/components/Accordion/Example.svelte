@@ -16,8 +16,9 @@
   `;
 
 	const props = {
+		focused: true,
 		multiple: false,
-		rounded: 'md' as ThemeRounded,
+		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
@@ -32,10 +33,10 @@
 	</div>
 
 	<Section>
-		<div class="text-2xl font-semibold mb-4">Outlined Accordion</div>
+		<div class="text-2xl font-semibold mb-4">Filled</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="outlined" shadowed="md">
+				<Accordion {...props} theme={color} variant="filled" rounded="md">
 					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
 						<AccordionContent>
@@ -62,11 +63,11 @@
 		</div>
 	</Section>
 
-	<!-- <Section>
-		<div class="text-2xl font-semibold mb-4">Filled Accordion</div>
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Outlined</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="filled" hovered>
+				<Accordion {...props} theme={color} variant="outlined" hovered rounded="md">
 					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
 						<AccordionContent key={0}>
@@ -91,13 +92,13 @@
 				</Accordion>
 			{/each}
 		</div>
-	</Section> -->
+	</Section>
 
-	<!-- <Section>
-		<div class="text-2xl font-semibold mb-4">Flat Accordion</div>
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Grouped</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="flat">
+				<Accordion {...props} theme={color} variant="grouped" rounded="md">
 					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
 						<AccordionContent key={0}>
@@ -112,8 +113,46 @@
 							incididunt ut labore et dolore magna aliqua.
 						</AccordionContent>
 					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
 				</Accordion>
 			{/each}
 		</div>
-	</Section> -->
+	</Section>
+
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Unstyled</div>
+		<div class="grid grid-cols-9 gap-2 items-start mb-4">
+			{#each colors as color}
+				<Accordion {...props} theme={color} variant="unstyled">
+					<AccordionOption key={0}>
+						<AccordionButton>One</AccordionButton>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1}>
+						<AccordionButton>Two</AccordionButton>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+				</Accordion>
+			{/each}
+		</div>
+	</Section>
 </ExamplePage>

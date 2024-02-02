@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
-	import { themeStore, themer, transitioner } from '$lib';
-	import type { ElementProps, HTMLTag } from '../../types';
+	import { themeStore, themer } from '$lib/theme';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { getContext, setContext } from 'svelte';
+	// import { transitioner } from '$lib/components';
 
 	import type { AccordionContext } from '../Accordion/module';
 
@@ -11,8 +12,9 @@
 
 	const context = getContext('Accordion') as AccordionContext;
 
-	export let { as, unflip, key, rounded, selected, size, theme, transition, variant } = {
+	export let { as, focused, key, rounded, selected, size, theme, transition, unflip, variant } = {
 		...defaults,
+		focused: context.globals?.focused,
 		size: context.globals?.size,
 		theme: context.globals?.theme,
 		transition: context.globals?.transition,
@@ -32,9 +34,13 @@
 	$: accordionClasses = th
 		.create('AccordianOption')
 		.variant('accordionOption', variant, theme, variant)
-		.option('commonOutlineFocusVisible', theme, isSelected)
-		.append(`accordian-option accordion-${variant} outline-none focus-visible:offset-0`, true)
-		.append('accordion-expanded', isSelected)
+		.option('commonRingFocusVisible', theme, true)
+		.option('common', 'bordered', variant === 'filled' && $context.selected.length)
+		.prepend(`accordian-option accordion-${variant}`, true)
+		.prepend('accordion-collapsed', !isSelected)
+		.prepend('accordion-expanded', isSelected)
+		.append(`outline-none transition-[margin]`, true)
+		.append(`focus-visible:ring-4 focus-visible:ring-inset`, true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
@@ -43,7 +49,7 @@
 	this={as}
 	id={`${key}-accordion-option`}
 	aria-labelledby={`${key}-accordion-heading`}
-	tabindex="0"
+	tabindex={isSelected ? 0 : -1}
 	{...$$restProps}
 	class={accordionClasses}
 >
@@ -51,10 +57,10 @@
 </svelte:element>
 
 <style>
-	.accordion-outlined.accordion-expanded:not(:last-child) {
+	.accordion-filled.accordion-expanded:not(:last-child) {
 		margin-bottom: 6px;
 	}
-	.accordion-outlined.accordion-expanded:not(:first-child) {
+	.accordion-filled.accordion-expanded:not(:first-child) {
 		margin-top: 6px;
 	}
 </style>
