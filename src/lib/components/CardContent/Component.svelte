@@ -9,6 +9,6 @@
 	} as Required<CardContentProps>;
 </script>
 
-<svelte:component this={CardElement} {...$$restProps} type="footer" {size}>
+<svelte:component this={CardElement} {...$$restProps} type="content" {size}>
 	<slot />
 </svelte:component>

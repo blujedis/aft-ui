@@ -20,6 +20,7 @@
 		hovered,
 		key,
 		roticon,
+		rotiangle,
 		selectable,
 		size,
 		theme,
@@ -66,7 +67,10 @@
 		.option('iconCaretSizes', size, true)
 		.prepend('accordion-caret', true)
 		.append('transition-transform duration-300 origin-center', roticon)
-		.append(typeof roticon === 'string' ? roticon : '-rotate-180', isSelected && roticon)
+		.append(
+			typeof roticon === 'string' ? roticon : rotiangle === 180 ? '-rotate-180' : 'rotate-90',
+			isSelected && roticon
+		)
 		.compile();
 
 	const additionalProps = {

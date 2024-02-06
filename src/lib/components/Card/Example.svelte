@@ -57,7 +57,7 @@
 			</Card>
 
 			<Card {...props} variant="soft" theme={color} divided>
-				<CardHeader variant="filled">Header</CardHeader>
+				<CardHeader>Header</CardHeader>
 				<CardContent
 					>Lorem ipsum was conceived as filler text, formatted in a certain way to enable the
 					presentation of graphic elements in documents, without the need for formal copy. Using

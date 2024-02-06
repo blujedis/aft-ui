@@ -59,6 +59,8 @@
 		.append($$restProps.style, true)
 		.compile();
 
+	// first:mt-0 -mt-px
+
 	$: accordionOptionClasses = th
 		.create('AccordianOption')
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
@@ -71,10 +73,11 @@
 		.prepend('accordion-expanded', isSelected)
 		.prepend('accordion-detached', detached && ['filled', 'outlined'].includes(variant))
 		.append(`focus-visible:outline-offset-0`, focused)
-		.append(isSelected ? 'z-10' : 'z-0', true)
+		.append('focus:z-10', true)
 		.append('border-l border-r border-t', isBordered)
-		.append('border-b', detached || isBordered)
-		.append('relative overflow-clip outline-none transition-[margin] -mt-px', true)
+		.append('border-b', detached && isSelected && ['filled', 'outlined'].includes(variant))
+		.append('last:border-b', ['filled', 'outlined'].includes(variant))
+		.append('relative overflow-clip outline-none transition-[margin]', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

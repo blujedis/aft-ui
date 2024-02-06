@@ -42,8 +42,8 @@ export function buildTokens() {
     cleanUp();
   }
 
-  ws.on('error', handleError);
-  ws.on('close', handleClose);
+  ws.once('error', handleError);
+  ws.once('close', handleClose);
   ws.write(buffer, () => {
     ws.close();
   });

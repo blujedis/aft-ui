@@ -9,6 +9,7 @@ export type AccordianButtonProps<Tag extends HTMLTag> = Omit<ButtonProps<'button
 	as?: Tag;
 	caret?: Iconify; // AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
 	roticon?: boolean | string; // when true rotate expand icon ignore collapse.
+	rotiangle?: 90 | 180;
 	selectable?: boolean;
 	key?: SelectStoreValue;
 	theme?: ThemeColor;
@@ -17,7 +18,10 @@ export type AccordianButtonProps<Tag extends HTMLTag> = Omit<ButtonProps<'button
 
 export const accordionButtonDefaults: Partial<AccordianButtonProps<'button'>> = {
 	as: 'button',
-	caret: 'octicon:chevron-down-24', // ['octicon:chevron-down-24', 'octicon:chevron-up-24'],
+	// ['octicon:chevron-down-24', 'octicon:chevron-up-24'], 180 example
+	// [ 'octicon:chevron-right-24'] set rotiangle to 90 which gives you ▶ to ▼
+	caret: 'octicon:chevron-down-24',
 	roticon: true,
+	rotiangle: 180,
 	size: 'sm',
 };
