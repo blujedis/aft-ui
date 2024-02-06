@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { CardElement } from '../CardElement';
-	import type { ElementProps } from '../../types';
+	import { CardElement } from '$lib/components';
+	import type { ElementProps } from '$lib/types';
 	import { type CardContentProps, cardContentDefaults as defaults } from './module';
 	type $$Props = CardContentProps & ElementProps<'div'>;
 

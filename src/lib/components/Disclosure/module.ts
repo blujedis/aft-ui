@@ -1,5 +1,5 @@
 import type { DisclosureStore } from '../../stores';
-import type { HTMLTag, ElementProps } from '../../types';
+import type { HTMLTag, ElementProps } from '$lib/types';
 import type {
 	BlurParams,
 	FadeParams,

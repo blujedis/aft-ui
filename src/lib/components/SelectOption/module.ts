@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeSize, ThemeTransitioned } from '../../types';
+import type { ThemeColor, ThemeSize, ThemeTransitioned } from '$lib/types';
 // import type { selectOption } from './config';
 
 export type SelectOptionVariant = 'outlined'; // keyof typeof selectOption;

@@ -2,9 +2,9 @@
 	import { transitioner, type DisclosureContext } from '../Disclosure/module';
 	import { getContext, onMount } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '../../utils';
+	import { forwardEventsBuilder } from '$lib/utils';
 	import { type DisclosurePanelProps, disclosurePanelDefaults as defaults } from './module';
-	import type { ElementProps, HTMLTag } from '../../types';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = DisclosurePanelProps<HTMLTag> & ElementProps<'div'>;

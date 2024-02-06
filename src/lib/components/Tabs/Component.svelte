@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type TabsProps, tabsDefaults as defaults, type TabsContext } from './module';
-	import { themer, themeStore } from '../../theme';
-	import { onMount, setContext } from 'svelte';
+	import { themer, themeStore } from '$lib/theme';
+	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
-	import { cleanObj, ensureArray } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = TabsProps & ElementProps<'div'>;
 
@@ -66,8 +66,12 @@
 
 	$: tabControllerNavClasses = th
 		.create('TabsNav')
-		.option('roundeds', rounded, rounded && !['underlined', 'labeled'].includes(variant))
-		.option('shadows', shadowed, shadowed && variant !== 'labeled')
+		.option(
+			'roundeds',
+			boolToMapValue(rounded),
+			rounded && !['underlined', 'labeled'].includes(variant)
+		)
+		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'labeled')
 		.append('-mb-px', ['underlined', 'default'].includes(variant))
 		.append('space-x-4', variant !== 'grouped')
 		.append('w-full justify-around space-x-0', full)

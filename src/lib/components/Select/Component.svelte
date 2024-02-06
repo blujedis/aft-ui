@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
-	import { themeStore, ConditionalElement, Flushed, ensureArray, themer } from '$lib';
-	import { onMount, setContext } from 'svelte';
+	import { ConditionalElement, Flushed } from '$lib/components';
+	import { themeStore, themer } from '$lib/theme';
+	import { setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, ensureArray, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 	import { useSelect } from '$lib/stores/select';
 
 	type $$Props = SelectProps & Omit<ElementProps<'select'>, 'size'>;
@@ -44,8 +45,8 @@
 		.option('placeholders', theme, true)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.option('roundeds', rounded, rounded && variant !== 'flushed')
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append('border-0 ring-0', variant !== 'outlined')

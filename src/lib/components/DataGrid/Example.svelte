@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { DataGrid, type DataGridColumnConfig, type DataGridVariant } from '.';
 	import jsondata from '../_Example/jsondata';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { DataGridHeader } from '../DataGridHeader';
 	import { DataGridRow } from '../DataGridRow';

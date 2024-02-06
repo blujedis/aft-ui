@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type DataGridFilterProps, gridFilterDefaults as defaults } from './module';
-	import { themeStore, bem, pickCleanProps, styler, themer } from '$lib';
-	import type { ElementProps } from '../../types';
-	import type { DataGridContext } from '../DataGrid';
+	import { themeStore, pickCleanProps, styler, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
-	import { DataGridCell } from '../DataGridCell';
+	import { DataGridCell } from '$lib/components/DataGridCell';
 	import { debounce } from '$lib/utils';
 
 	type $$Props = DataGridFilterProps & ElementProps<'div'>;
@@ -13,15 +13,20 @@
 
 	export let { autocols, columns, focused, size, theme, variant } = {
 		...defaults,
-		...pickCleanProps(
-			context?.globals,
-			'autocols',
-			'columns',
-			'focused',
-			'size',
-			'theme',
-			'variant'
-		)
+		autocols: context.globals?.autocols,
+		columns: context.globals?.columns,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals.variant
+		// ...pickCleanProps(
+		// 	context?.globals,
+		// 	'autocols',
+		// 	'columns',
+		// 	'focused',
+		// 	'size',
+		// 	'theme',
+		// 	'variant'
+		// )
 	} as Required<$$Props>;
 
 	const st = styler($themeStore);

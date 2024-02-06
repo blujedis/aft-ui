@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type DataGridSearchProps, gridSearchDefaults as defaults } from './module';
-	import { themeStore, bem, pickCleanProps, themer } from '$lib';
-	import type { ElementProps } from '../../types';
-	import type { DataGridContext } from '../DataGrid';
+	import { themeStore, pickCleanProps, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
-	import { DataGridCell } from '../DataGridCell';
-	import { debounce } from '$lib/utils';
+	import { DataGridCell } from '$lib/components/DataGridCell';
+	import { debounce, boolToMapValue } from '$lib/utils';
 
 	type $$Props = DataGridSearchProps & ElementProps<'div'>;
 
@@ -13,16 +13,21 @@
 
 	export let { action, focused, method, rounded, size, strategy, theme, variant } = {
 		...defaults,
-		...pickCleanProps(
-			context?.globals,
-			'autocols',
-			'columns',
-			'focused',
-			'rounded',
-			'size',
-			'theme',
-			'variant'
-		)
+		focused: context.globals?.focused,
+		rounded: context.globals?.rounded,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals.variant,
+		// ...pickCleanProps(
+		// 	context?.globals,
+		// 	'autocols',
+		// 	'columns',
+		// 	'focused',
+		// 	'rounded',
+		// 	'size',
+		// 	'theme',
+		// 	'variant'
+		// )
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
@@ -39,7 +44,7 @@
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('focusedOutline', typeof focused === 'string' ? focused : theme, focused)
-		.option('roundeds', rounded, rounded)
+		.option('roundeds', boolToMapValue(rounded), rounded)
 		.prepend('datagrid__search_input', true)
 		.append('pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none', true)
 		.compile();

@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeShadowed, ThemeSize, ThemeSpeed } from '../../types';
+import type { ThemeColor, ThemeShadowed, ThemeSize, ThemeSpeed } from '$lib/types';
 import type { SvelteComponent } from 'svelte';
 
 export type DrawerProps = {

@@ -7,7 +7,7 @@ import type {
 	ThemeSize,
 	ThemeTransitioned,
 	ThemeVariant
-} from '../../types';
+} from '$lib/types';
 // import type { textarea } from './config';
 
 export type TextareaVariant = Exclude<ThemeVariant, 'text' | 'flushed'>; //  keyof typeof textarea;

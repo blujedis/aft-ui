@@ -5,7 +5,7 @@ import type {
 	ThemeRounded,
 	ThemeSize,
 	ThemeTransitioned
-} from '../../types';
+} from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { paginationPage } from './config';
 

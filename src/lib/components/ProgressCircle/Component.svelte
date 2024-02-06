@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
-	import { themeStore, styler, themer } from '$lib';
-	import type { ElementProps } from '../../types';
-	import { onMount } from 'svelte';
+	import { themeStore, styler, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = ProgressCircleProps & Omit<ElementProps<'svg'>, 'size'>;
 
@@ -52,7 +52,7 @@
 
 	$: progressCircleClasses = th
 		.create('ProgressCircle')
-		.option('dropshadows', shadowed, shadowed)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.append($$restProps.class, true)
 		.compile(true);
 

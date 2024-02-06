@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { type SwitchProps, switchDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
-	import { onMount } from 'svelte';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 	import classNames from 'classnames';
 
 	type $$Props = SwitchProps & Omit<ElementProps<'input'>, 'size'>;
@@ -54,7 +53,7 @@
 		.create('SwitchFill')
 		.variant('switchFill', variant, theme, true)
 		.option('switchFillSizes', size, size)
-		.option('shadows', shadowed, shadowed)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.append(
 			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',

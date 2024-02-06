@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '$lib/stores';
 import {

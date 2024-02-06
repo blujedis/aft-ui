@@ -6,7 +6,7 @@
 		ThemeRounded,
 		ThemeShadowed,
 		ThemeSize
-	} from '../../types';
+	} from '$lib/types';
 	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 

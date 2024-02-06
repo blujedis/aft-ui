@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type ColormodeProps, colormodDefaults as defaults } from './module';
-	import type { ElementProps } from '../../types';
-	import { useColorMode, type ColorModeHook } from '../../hooks';
+	import type { ElementProps } from '$lib/types';
+	import { useColorMode, type ColorModeHook } from '$lib/hooks';
 	import type { Unsubscriber } from 'svelte/store';
 
 	type $$Props = ColormodeProps & ElementProps<'input'>;

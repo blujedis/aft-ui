@@ -4,11 +4,11 @@
 		buttonGroupDefaults as defaults,
 		type ButtonGroupContext
 	} from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps, ThemeFocused } from '../../types';
-	import { onMount, setContext } from 'svelte';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import {  setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
-	import { cleanObj, ensureArray } from '$lib/utils';
+	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
 
 	type $$Props = ButtonGroupProps & Omit<ElementProps<'span'>, 'size'>;
 
@@ -46,8 +46,8 @@
 
 	$: buttonGroupClasses = themer($themeStore)
 		.create('ButtonGroup')
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none', true)
 		.append('space-x-4', variant === 'text')

@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import { Button } from '../Button';
-	import { Icon } from '../Icon';
+	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import type { MenuContext } from '../Menu';
+	import  { type MenuContext, Button, Icon } from '$lib/components';
 	import { getContext } from 'svelte';
 
 	type $$Props = MenuButtonProps & ElementProps<'div'>;
@@ -36,7 +34,7 @@
 		.compile();
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
-		console.log('clicked');
+	
 		context.toggle();
 	}
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Switch } from '.';
-	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { colors } from '$lib/constants';
 

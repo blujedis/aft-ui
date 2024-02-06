@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { type MenuProps, menuDefaults as defaults, type MenuContext } from './module';
-	import { themeStore, themer, useDisclosure } from '$lib';
-	import type { ElementProps } from '../../types';
+	import { themeStore, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { useDisclosure} from '$lib/stores';
 	import { setContext } from 'svelte';
-	import type { MenuGlobalProps } from '../Menu';
+	import type { MenuGlobalProps } from '$lib/components/Menu';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
 
 	type $$Props = MenuProps & MenuGlobalProps & ElementProps<'div'>;

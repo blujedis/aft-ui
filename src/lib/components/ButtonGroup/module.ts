@@ -5,7 +5,7 @@ import type {
 	ThemeRounded,
 	ThemeSize,
 	ThemeTransitioned
-} from '../../types';
+} from '$lib/types';
 import type { ButtonProps } from '../Button/module';
 import type { ButtonGroupVariant } from '../ButtonGroupItem';
 

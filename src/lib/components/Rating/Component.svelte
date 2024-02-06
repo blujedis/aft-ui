@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { RatingItem } from '../RatingItem';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 	import {
 		type RatingProps,
 		ratingControllerDefaults as defaults,
 		type RatingStoreValue
 	} from './module';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = RatingProps & ElementProps<'div'>;
 
@@ -49,7 +50,7 @@
 
 	$: ratingControllerClasses = th
 		.create('RatingController')
-		.option('dropshadows', shadowed, shadowed)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.append('inline-flex spacing-x-0', true)
 		.append($$restProps.class, true)
 		.compile(true);

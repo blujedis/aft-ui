@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { type NotificationProps, notificationDefaults as defaults } from './module';
 	import useNotifications from '$lib/stores/notification';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
-	import { Icon } from '../Icon';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { Icon } from '$lib/components/Icon';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = NotificationProps & ElementProps<'div'>;
 
@@ -28,8 +29,8 @@
 	$: notificationClasses = th
 		.create('Notification')
 		.variant('notification', variant, theme, variant)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80', true)
 		.append($$restProps.class, true)
 		.compile(true);

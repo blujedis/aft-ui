@@ -2,11 +2,10 @@
 	import { tweened } from 'svelte/motion';
 
 	import { type ProgressBarProps, progressBarDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
-	import { onMount } from 'svelte';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = ProgressBarProps & Omit<ElementProps<'progress'>, 'size'>;
 
@@ -39,9 +38,9 @@
 		.create('ProgressBar')
 		.variant('progressBar', variant, theme, true)
 		.option('progressBarSizes', size, size)
-		.option('progressBarRoundedBar', rounded, rounded)
-		.option('progressBarRoundedValue', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('progressBarRoundedBar', boolToMapValue(rounded), rounded)
+		.option('progressBarRoundedValue', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)

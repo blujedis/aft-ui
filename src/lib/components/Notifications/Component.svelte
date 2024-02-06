@@ -7,11 +7,11 @@
 		notificationsDefaults as defaults,
 		notificationsPosition
 	} from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import notifications from '$lib/stores/notification';
 	import { fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = NotificationsProps & ElementProps<'div'>;
 

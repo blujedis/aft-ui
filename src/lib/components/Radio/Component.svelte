@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type RadioProps, radioDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = RadioProps & Omit<ElementProps<'input'>, 'size'>;
 
@@ -28,8 +28,8 @@
 		.option('focusedRing', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('iconSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append(

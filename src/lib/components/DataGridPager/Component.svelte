@@ -9,7 +9,7 @@
 		Pagination,
 		PaginationPage
 	} from '$lib';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type Data = $$Generic<DataGridDataItem>;
 	type Tag = $$Generic<'a' | 'button' | 'span'>;
@@ -19,7 +19,10 @@
 
 	export let { ellipsis, page, pageSize, pages, size, theme, variant } = {
 		...defaults,
-		...pickCleanProps(context?.globals, 'size', 'theme', 'variant')
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals.variant
+		// ...pickCleanProps(context?.globals, 'size', 'theme', 'variant')
 	} as Required<$$Props>;
 
 	$: gridPagerClasses = themer($themeStore)

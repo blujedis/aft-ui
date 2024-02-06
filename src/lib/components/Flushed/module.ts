@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused } from '../../types';
+import type { ThemeColor, ThemeFocused } from '$lib/types';
 
 export type FlushedProps = {
 	disabled?: boolean;

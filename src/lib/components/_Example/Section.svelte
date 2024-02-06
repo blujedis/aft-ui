@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 	type $$Props = ElementProps<'div'> & Record<string, any>;
 </script>
 

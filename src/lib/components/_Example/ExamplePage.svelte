@@ -5,18 +5,9 @@
 	// import typescript from 'svelte-highlight/languages/typescript';
 	// import github from 'svelte-highlight/styles/github';
 	// import githubDark from 'svelte-highlight/styles/github-dark-dimmed';
-	import { beforeUpdate } from 'svelte';
-
+	// let mode = github;
 	export let title = 'Example';
 	export let description = '';
-	export let code = 'Coming soon';
-	export let visible = false;
-
-	// let mode = github;
-
-	function switchMode() {
-		visible = !visible;
-	}
 </script>
 
 <!-- 
@@ -29,26 +20,8 @@
 </ColorMode>
 
 <div class="h-full">
-	<div class="flex mb-4">
-		<div class="flex-1 text-xl font-semibold">
-			<a href="/">{title}</a>
-		</div>
-		<div>
-			<div
-				class="rounded-sm p-1 bg-frame-100 ring-frame-950/10 dark:bg-frame-900/40 dark:ring-frame-700 ring-opacity-10 ring-1"
-			>
-				<button
-					class={'rounded-sm px-4 py-1 border border-transparent text-sm ' +
-						(visible ? '' : 'bg-white dark:bg-frame-700')}
-					on:click={switchMode}>Preview</button
-				>
-				<button
-					class={'rounded-sm px-4 py-1 border border-transparent text-sm ' +
-						(visible ? 'bg-white dark:bg-frame-700' : '')}
-					on:click={switchMode}>Code</button
-				>
-			</div>
-		</div>
+	<div class="text-xl font-semibold mb-4">
+		<a href="/">{title}</a>
 	</div>
 	<div class="mb-6">
 		{#if description}
@@ -60,12 +33,5 @@
 			</p>
 		{/if}
 	</div>
-	<div>
-		{#if visible}
-			{code}
-			<!-- <Highlight language={typescript} {code} class="ring-1 ring-black ring-opacity-5" /> -->
-		{:else}
-			<slot />
-		{/if}
-	</div>
+	<slot />
 </div>

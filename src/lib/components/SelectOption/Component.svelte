@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type SelectOptionProps, selectOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
-	import type { SelectContext } from '../Select/module';
+	import type { ElementProps } from '$lib/types';
+	import type { SelectContext } from '$lib/components/Select';
 	import { getContext } from 'svelte';
 
 	type $$Props = SelectOptionProps & ElementProps<'option'>;

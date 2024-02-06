@@ -9,6 +9,8 @@ export type AccordionOptionContext = {
 
 export type AccordianOptionProps<Tag = any> = {
 	as?: Tag;
+	bordered?: boolean;
+	detached?: boolean | string; // when expanded detatch option from stack.
 	focused?: boolean;
 	key: SelectStoreValue;
 	rounded?: ThemeRounded;
@@ -17,13 +19,12 @@ export type AccordianOptionProps<Tag = any> = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
-	unflip?: boolean;
 	variant?: AccordionVariant;
 };
 
 export const accordionOptionDefaults: Partial<AccordianOptionProps<'div'>> = {
 	as: 'div',
 	size: 'md',
-	theme: 'default',
+	// theme: 'frame',
 	transition: 'expand'
 };

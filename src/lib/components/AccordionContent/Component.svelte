@@ -4,8 +4,8 @@
 	import type { AccordionContext } from '../Accordion/module';
 	import { getContext } from 'svelte';
 	import { type AccordionContentProps, accordionContentDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps, HTMLTag } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionContentProps<Tag> & ElementProps<Tag>;
@@ -16,9 +16,9 @@
 	export let { as, key, size, theme, transition, variant } = {
 		...defaults,
 		key: optionContext?.key,
-		size: context?.globals.size,
-		theme: context?.globals.theme,
-		variant: context?.globals.variant
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals?.variant
 	} as Required<AccordionContentProps<Tag>>;
 
 	$: isSelected = $context.selected.includes(key);
@@ -28,12 +28,9 @@
 	$: accordionContentClasses = th
 		.create('AccordionContent')
 		.option('fieldFontSizes', size, size)
-		.option('buttonPadding', size, size)
-		//.option('common', 'baseFill', variant === 'filled')
-		.option('common', 'baseAccent', variant === 'grouped' || variant === 'filled')
-		.option('common', 'bordered', isSelected && ['grouped'].includes(variant))
+		.option('buttonPadding', size, size) // should match button for alignment.
+		.option('common', 'panelFill', variant === 'filled')
 		.prepend(`accordion-content`, true)
-		.append('border-t', isSelected && ['grouped'].includes(variant))
 		.append($$restProps.class, true)
 		.compile(true);
 </script>

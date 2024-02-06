@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
 	import { fade } from 'svelte/transition';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = PopoverProps & ElementProps<'div'>;
 
@@ -30,8 +31,8 @@
 	$: popoverClasses = th
 		.create('Popover')
 		.variant('popover', variant, theme, variant)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('popoverSizes', size, size)

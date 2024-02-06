@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { getPaginator } from '$lib/stores/paginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { setContext } from 'svelte';
-	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { cleanObj, forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type Item = $$Generic<Record<string, any>>;
 	type $$Props = PaginationProps<Item> & ElementProps<'nav'>;
@@ -52,8 +52,8 @@
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
 		.option('common', 'transitioned', transitioned)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('inline-flex items-center', ['filled', 'glass'].includes(variant))
 		.append('isolate inline-flex -space-x-px', variant === 'filled')
 		.append($$restProps.class, true)

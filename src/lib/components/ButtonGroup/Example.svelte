@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ButtonGroup } from '.';
+	import { colors } from '$lib/constants';
 	import { ButtonGroupItem, type ButtonGroupVariant } from '../ButtonGroupItem';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import type {
@@ -8,7 +9,7 @@
 		ThemeShadowed,
 		ThemeSize,
 		ThemeFocused
-	} from '../../types';
+	} from '$lib/types';
 
 	const title = 'Button Groups';
 	const description = 'Themed Buttons within selectable groups.';
@@ -36,22 +37,11 @@
 		{ value: 'react', label: 'React' }
 	];
 
-	const themes = [
-		'default',
-		'dark',
-		'primary',
-		'secondary',
-		'tertiary',
-		'danger',
-		'warning',
-		'success',
-		'info'
-	] as ThemeColor[];
 </script>
 
-<ExamplePage {title} {description} {code}>
-	{#each themes as theme}
-		<div class="grid grid-cols-4 gap-2 mt-4">
+<ExamplePage {title} {description}>
+	{#each colors as theme}
+		<div class="grid grid-cols-5 gap-2 mt-4">
 			<div>
 				<ButtonGroup {...props} {theme}>
 					{#each buttons as button}
@@ -78,6 +68,15 @@
 
 			<div>
 				<ButtonGroup {...props} variant="ghost" {theme}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			</div>
+
+
+			<div>
+				<ButtonGroup {...props} variant="soft" {theme}>
 					{#each buttons as button}
 						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
 					{/each}

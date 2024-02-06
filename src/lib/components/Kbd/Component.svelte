@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type KbdProps, kbdDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, boolToMapValue} from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = KbdProps & Omit<ElementProps<'kbd'>, 'size'>;
 
@@ -15,10 +15,10 @@
 		.create('Kbd')
 		.variant('kbd', variant, theme, variant)
 		.option('common', 'transitioned', transitioned)
-		.option('badgePadding', size, size)
+		.option('kbdPadding', size, size)
 		.option('badgeFontSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('inline-flex items-center justify-center flex-col', true)
 		.append($$restProps.class, true)

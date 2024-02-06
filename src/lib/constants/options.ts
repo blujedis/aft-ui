@@ -1,4 +1,18 @@
-import { mergeConfigs } from '../theme';
+import { mergeConfigs } from '../theme/utils';
+
+export const placeholder = {
+	$base: '',
+	// default: '',
+	// dark: '',
+	frame: '',
+	primary: '',
+	secondary: '',
+	tertiary: '',
+	danger: '',
+	warning: '',
+	success: '',
+	info: ''
+};
 
 export const borderSizes = {
 	unstyled: '',
@@ -132,7 +146,9 @@ export const roundeds = {
 	lg: 'rounded-lg',
 	xl: 'rounded-xl',
 	xl2: 'rounded-2xl',
-	full: 'rounded-full'
+	full: 'rounded-full',
+	true: 'rounded-sm',
+	false: 'rounded-none'
 };
 
 export const fontSizes = {
@@ -182,7 +198,9 @@ export const shadows = {
 	md: 'shadow-md',
 	lg: 'shadow-lg',
 	xl: 'shadow-xl',
-	xl2: 'shadow-2xl'
+	xl2: 'shadow-2xl',
+	true: 'rounded-sm',
+	false: 'rounded-none'
 };
 
 export const dropshadows = {
@@ -194,7 +212,9 @@ export const dropshadows = {
 	md: 'drop-shadow-md',
 	lg: 'drop-shadow-lg',
 	xl: 'drop-shadow-xl',
-	xl2: 'drop-shadow-2xl'
+	xl2: 'drop-shadow-2xl',
+	true: 'rounded-sm',
+	false: 'rounded-none'
 };
 
 export const resizes = {
@@ -245,8 +265,8 @@ export const animate = {
 
 const _hovered = {
 	$base: 'hover:brightness-115',
-	default: '',
-	dark: '',
+	frame: '',
+	// dark: 'dark:hover:brightness-150',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -262,56 +282,31 @@ export const hovered = {
 	outlined: _hovered,
 	ghost: _hovered,
 	flushed: _hovered,
-	unstyled: _hovered,
-	grouped: _hovered,
-	soft: {
-		..._hovered,
-		$base: 'hover:brightness-105 dark:hover:brightness-125'
+	simple: _hovered,
+	soft: _hovered,
+	panel: {
+		...placeholder,
+		$base: 'hover:brightness-105 dark:hover:brightness-115',
 	}
-};
-
-export const selected = {
-	$base: 'aria-selected:saturate-150 aria-expanded:saturate-150 aria-current:saturate-150',
-	default: '',
-	dark: '',
-	primary: '',
-	secondary: '',
-	tertiary: '',
-	danger: '',
-	warning: '',
-	success: '',
-	info: ''
-};
-
-export const placeholder = {
-	$base: '',
-	default: '',
-	dark: '',
-	primary: '',
-	secondary: '',
-	tertiary: '',
-	danger: '',
-	warning: '',
-	success: '',
-	info: ''
 };
 
 export const common = {
 	active: 'active:brightness-125',
-	focused: 'focus:outline-2 focus:outline-offset-1',
-	focusedVisible: 'focus-visible:outline-3 focus-visible:outline-offset-1',
-	focusedWithin: 'focus-within:outline-3 focus-within:outline-offset-1',
-	unfocused: 'focus:outline-0',
-	ringed: 'ring-1 ring-frame-950 ring-opacity-10 dark:ring-opacity-40',
-	bordered: 'border-frame-200 dark:border-frame-950 dark:border-opacity-40',
-	divided: 'divide-frame-200 dark:divide-frame-950 dark:divide-opacity-40',
+	focused: 'outline-none focus:outline-2 focus:outline-offset-0',
+	focusedVisible: 'outline-none focus-visible:outline-2 focus-visible:outline-offset-0',
+	focusedWithin: 'outline-none focus-within:outline-2 focus-within:outline-offset-0',
+	ringed: 'ring-1 ring-black/10 dark:ring-black/30',
+	bordered: 'border-black/10 dark:border-black/30',
+	divided: 'divide-black/10 dark:divide-black/30',
 	disabled:
-		'disabled:opacity-75 aria-disabled:opacity-75 dark:disabled:opacity-60 dark:aria-disabled:opacity-60',
+		'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
 	transitioned: 'transition motion-reduce:transition-none',
-	baseFill: 'bg-frame-100 dark:bg-frame-700',
-	baseAccent: 'bg-white dark:bg-frame-900/40',
-	baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
-	baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
-	baseSelected: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
-	baseCurrent: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
+	muteSelected: 'aria-selected:opacity-65',
+	defaultFill: 'bg-frame-200 dark:bg-frame-700',
+	panelFill: ''
+	// baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
+	// baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
+	// baseSelected: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-700',
+	// baseCurrent: 'aria-current:bg-frame-100 dark:aria-current:bg-frame-700',
+
 };

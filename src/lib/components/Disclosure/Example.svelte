@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import { Disclosure } from './';
 	import { DisclosureButton } from '../DisclosureButton';
 	import { DisclosurePanel } from '../DisclosurePanel';

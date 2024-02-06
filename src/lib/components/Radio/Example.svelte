@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Radio, type RadioVariant } from '.';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Radio';

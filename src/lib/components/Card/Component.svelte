@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type CardProps, cardDefaults as defaults, type CardContext } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
 	import { setContext } from 'svelte';
-	import { cleanObj } from '$lib/utils';
+	import { cleanObj, boolToMapValue } from '$lib/utils';
 
 	type $$Props = CardProps & ElementProps<'div'>;
 
@@ -25,12 +25,11 @@
 	$: cardClasses = th
 		.create('Card')
 		.option('cardSizes', maxwidth, maxwidth)
-		.option('divideds', theme, divided)
-		.option('common', 'ringed', divided)
-		.option('roundeds', rounded, rounded)
-		.option('common', 'ringed', true)
-		.option('shadows', shadowed, shadowed)
-		.append(horizontal ? 'divide-x' : 'divide-y', divided)
+		.option('common', 'divided', divided)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('common', 'ringed', divided || variant === 'outlined')
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')
 		.append('h-full', full)
 		.append(horizontal ? 'flex' : 'flex flex-col', true)
 		.append('overflow-hidden', true)

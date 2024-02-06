@@ -22,7 +22,7 @@
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-4 gap-2 mb-4">
 			<label for="filled">

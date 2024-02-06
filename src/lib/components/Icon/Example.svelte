@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Icon } from '.';
 	import { colors } from '$lib/constants';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Icon';

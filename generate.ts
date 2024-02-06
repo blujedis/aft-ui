@@ -1,10 +1,11 @@
-import { defaultTokens, parseTokens } from './src/lib/utils/generate';
+import { defaultTokens, parseTokens } from './src/lib/theme/generate';
 import { relative } from 'path';
 import { createWriteStream } from 'fs';
 
 const cwd = process.cwd();
 const outpath = './src/lib/constants/states.ts';
 const ws = createWriteStream(outpath, { flags: 'w' });
+
 
 export function buildTokens() {
 
@@ -13,12 +14,19 @@ export function buildTokens() {
 
   let hasError = false;
 
-  ws.once('error', (err) => {
+  function cleanUp() {
+    ws
+      .off('error', handleError)
+      .off('close', handleClose);
+  }
+
+  function handleError(err: any) {
     console.error(err);
     hasError = true;
-  });
+    cleanUp();
+  }
 
-  ws.once('close', () => {
+  function handleClose() {
     if (hasError) {
       process.stdout.write(
         `  \u001b[31m✖\u001b[0m  @aft: generated output FAILED: "${outpath}"\n`
@@ -31,10 +39,13 @@ export function buildTokens() {
         )}"\n`
       );
     }
-  });
+    cleanUp();
+  }
 
+  ws.on('error', handleError);
+  ws.on('close', handleClose);
   ws.write(buffer, () => {
-    ws.destroy();
+    ws.close();
   });
 
 }

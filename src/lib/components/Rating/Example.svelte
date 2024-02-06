@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Rating } from '.';
 	import { RatingItem } from '../RatingItem';
-	import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Ratings';

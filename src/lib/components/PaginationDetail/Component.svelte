@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { type PaginationDetailProps, paginationDetailDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = PaginationDetailProps & Omit<ElementProps<'span'>, 'size'>;
 
@@ -13,10 +14,10 @@
 		.create('PaginationDetail')
 		.variant('paginationDetail', variant, theme, true)
 		.option('common', 'transitioned', transitioned)
-		.option('badgePadding', size, size)
+		.option('kbdPadding', size, size)
 		.option('badgeFontSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('flex items-center justify-center', true)
 		.append($$restProps.class, true)

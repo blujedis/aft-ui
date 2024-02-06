@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { cleanObj, type SortAccessor } from '$lib/utils';
 	import { setContext } from 'svelte';
-	import { themeStore, themer, useSelect } from '$lib';
+	import { cleanObj, type SortAccessor, boolToMapValue } from '$lib/utils';
+	import { themeStore, themer } from '$lib/theme';
+	import { useSelect } from '$lib/stores';
 	import {
 		type DataGridProps,
 		gridDefaults as defaults,
@@ -10,7 +11,7 @@
 		type DataGridContextProps,
 		type DataGridDataItem
 	} from './module';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type Column = $$Generic<DataGridColumnConfig>;
 	type Data = $$Generic<DataGridDataItem>;
@@ -90,8 +91,8 @@
 	$: gridClasses = th
 		.create('DataGrid')
 		// .variant('grid', variant, theme, true)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'divided', divided)
 		.option('common', 'ringed', divided)
 		.option('fieldFontSizes', size, size)

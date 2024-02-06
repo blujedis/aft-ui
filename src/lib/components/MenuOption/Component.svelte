@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type MenuOptionProps, menuOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
-	import type { MenuContext } from '../Menu';
+	import type { MenuContext } from '$lib/components/Menu';
 	import { getContext } from 'svelte';
 
 	type Tag = $$Generic<'button' | 'a'>;

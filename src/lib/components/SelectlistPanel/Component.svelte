@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { type SelectListPanelProps, selectListPanelDefaults as defaults } from './module';
-	import { themeStore, themer, transitioner } from '$lib';
-	import type { SelectListContext, SelectListItem } from '../SelectList';
-	import type { ElementProps } from '../../types';
+	import { themeStore, themer } from '$lib/theme';
+	import { transitioner } from '$lib/components/Disclosure';
+	import type { SelectListContext, SelectListItem } from '$lib/components/SelectList';
 	import { getContext } from 'svelte';
 	import { useFocusNav } from '$lib/hooks';
+	import { boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = SelectListPanelProps & ElementProps<'div'>;
 
@@ -41,8 +43,8 @@
 	$: panelClasses = th
 		.create('SelectListPanel')
 		.variant('selectListPanel', variant, theme, variant)
-		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)

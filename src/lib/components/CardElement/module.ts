@@ -1,7 +1,7 @@
 import type { ThemeColor, ThemeSize } from '$lib/types';
 import type { cardElement } from './config';
 
-export type CardVariant = keyof typeof cardElement;
+export type CardVariant = 'text' | 'filled' | 'outlined' | 'soft'; // keyof typeof cardElement;
 
 export type CardElementProps = {
 	horizontal?: boolean;
@@ -14,5 +14,4 @@ export type CardElementProps = {
 export const cardElementDefaults: Partial<CardElementProps> = {
 	type: 'content',
 	size: 'md',
-	theme: 'default'
 };

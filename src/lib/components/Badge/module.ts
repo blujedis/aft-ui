@@ -6,10 +6,11 @@ import type {
 } from '$lib/types';
 import type { badge } from './config';
 
-export type BadgeVariant = keyof typeof badge;
+export type BadgeVariant = 'filled' | 'outlined' | 'soft'; // keyof typeof badge;
 
 export type BadgeProps = {
 	full?: boolean;
+	focused?: boolean;
 	hovered?: boolean;
 	removable?: boolean;
 	rounded?: ThemeRounded;
@@ -23,6 +24,6 @@ export type BadgeProps = {
 
 export const badgeDefaults: Partial<BadgeProps> = {
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'filled'
 };

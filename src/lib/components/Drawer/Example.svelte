@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Drawer } from '.';
-	import type { ThemeColor, ThemeShadowed, ThemeSpeed, ThemeSimpleSize } from '../../types';
+	import type { ThemeColor, ThemeShadowed, ThemeSpeed, ThemeSimpleSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Drawer';

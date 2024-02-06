@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { type ModalProps, modalDefaults as defaults } from './module';
-	import { themeStore, themer, transitioner } from '$lib';
+	import { themeStore, themer } from '$lib/theme';
+	import { transitioner } from '$lib/components/Disclosure';
 	import { useDisclosure } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import Placeholder from './Placeholder.svelte';
 	import { useFocusTrap } from '$lib/hooks';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = ModalProps;
 
@@ -58,8 +60,8 @@
 
 	$: contentClasses = th
 		.create('ModalContent')
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append(
 			'bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6',
 			true

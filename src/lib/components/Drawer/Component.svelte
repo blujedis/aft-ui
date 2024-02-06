@@ -7,10 +7,11 @@
 		drawerSpeedMap,
 		drawerOffsetMap
 	} from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
 	import { fade, fly } from 'svelte/transition';
 	import { useDisclosure } from '$lib/stores';
+	import { boolToMapValue } from '$lib/utils';
 	import Placeholder from './Placeholder.svelte';
 
 	type $$Props = DrawerProps & ElementProps<'div'>;
@@ -50,7 +51,7 @@
 
 	$: drawerClasses = th
 		.create('DrawerWrapper')
-		.option('shadows', shadowed, shadowed)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('flex h-full flex-col overflow-y-scroll z-20 bg-white', true)
 		.append($$restProps.class, true)
 		.compile(true);

@@ -3,8 +3,8 @@
 	import { themeStore, themer } from '$lib';
 	import { Flushed } from '../Flushed';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = InputProps & Omit<ElementProps<'input'>, 'size'>;
 
@@ -22,7 +22,7 @@
 		unstyled
 	} = {
 		...defaults,
-		...$themeStore?.defaults?.component
+		// ...$themeStore?.defaults?.component
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
@@ -37,8 +37,8 @@
 				.option('common', 'transitioned', transitioned)
 				.option('fieldFontSizes', size, size)
 				.option('fieldPadding', size, size)
-				.option('roundeds', rounded, rounded && variant !== 'flushed')
-				.option('shadows', shadowed, shadowed)
+				.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
+				.option('shadows', boolToMapValue(shadowed), shadowed)
 				.option('common', 'disabled', disabled)
 				.append('w-full', full)
 				.append('focus:outline-none focus:ring-2', focused && variant !== 'flushed')

@@ -6,8 +6,8 @@
 		type DisclosureNativeProps,
 		disclosureDefaults as defaults
 	} from './module';
-	import type { HTMLTag } from '../../types';
-	import { useDisclosure, type DisclosureStore } from '../../stores';
+	import type { HTMLTag } from '$lib/types';
+	import { useDisclosure, type DisclosureStore } from '$lib/stores';
 
 	type Tag = $$Generic<HTMLTag>;
 	type Store = $$Generic<DisclosureStore>;

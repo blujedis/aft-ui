@@ -10,7 +10,7 @@
 		ThemeShadowed,
 		ThemeSize,
 		ThemeTransitioned
-	} from '../../types';
+	} from '$lib/types';
 
 	const title = 'Pagination';
 	const description = 'Pager for data tables and record sets.';

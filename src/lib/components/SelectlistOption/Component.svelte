@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type SelectListOptionProps, selectListOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
-	import type { SelectListContext, SelectListItem } from '../SelectList';
+	import type { SelectListContext, SelectListItem } from '$lib/components/SelectList';
 	import { getContext } from 'svelte';
 
 	type Tag = $$Generic<'button' | 'a'>;

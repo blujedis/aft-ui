@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { type DataGridHeaderCellProps, gridHeaderCellDefaults as defaults } from './module';
-	import { themeStore, pickCleanProps, themer } from '$lib';
-	import type { DataGridContext } from '../DataGrid';
-	import type { ElementProps } from '../../types';
+	import { themeStore, pickCleanProps, themer } from '$lib/theme';
+	import type { DataGridContext } from '$lib/components/DataGrid';
+	import type { ElementProps } from '$lib/types';
 
 	type Data = $$Generic<DataGridDataItem>;
 	type $$Props = DataGridHeaderCellProps<Data> & ElementProps<'div'>;
@@ -15,7 +15,11 @@
 
 	export let { accessor, size, stacked, theme, variant } = {
 		...defaults,
-		...pickCleanProps(context?.globals, 'size', 'stacked', 'theme', 'variant')
+		size: context.globals?.size,
+		stacked: context.globals?.stacked,
+		theme: context.globals?.theme,
+		variant: context.globals.variant
+		// ...pickCleanProps(context?.globals, 'size', 'stacked', 'theme', 'variant')
 	} as Required<$$Props>;
 
 	$: gridHeaderCellClasses = themer($themeStore)

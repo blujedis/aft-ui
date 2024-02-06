@@ -1,8 +1,8 @@
 import { twMerge, type ClassNameValue } from 'tailwind-merge';
-import { ensureArray } from './utils';
+import { ensureArray, mergeConfigs } from '$lib/theme';
 import classnames from 'classnames';
 import { colors } from '../constants/colors';
-import { browser } from '$app/environment';
+// import { browser } from '$app/environment';
 import type {
 	PropsWithoutPrefix,
 	ThemeConfig,
@@ -29,12 +29,27 @@ export interface ThemerApi<C extends ThemeConfig> {
 		when?: Primitive
 	): ThemerApi<C>;
 
+	/**
+	 * Adds an option to themed classes to be compiled.
+	 *
+	 * @param key the option key to be add.
+	 * @param prop the property of the above key to be applied.
+	 * @param when if value is truthy add value otherwise reject.
+	 */
 	option<K extends ThemeOption>(
 		key: K,
 		prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
 		when: Primitive
 	): ThemerApi<C>;
 
+	/**
+	 * Adds an option to themed classes to be compiled.
+	 *
+	 * @param key the option key to be add.
+	 * @param prop the property of the above key to be applied.
+	 * @param variant option contains nested variants.
+	 * @param when if value is truthy add value otherwise reject.
+	 */
 	option<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
 		key: K,
 		prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
@@ -42,12 +57,47 @@ export interface ThemerApi<C extends ThemeConfig> {
 		when: Primitive
 	): ThemerApi<C>;
 
+	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
+		keys: K[],
+		prop: PropsWithoutPrefix<P, '$'> | undefined,
+		when: Primitive): ThemerApi<C>;
+
+	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
+		keys: K[],
+		extend: Record<string, any>,
+		prop: PropsWithoutPrefix<P, '$'> | undefined,
+		when: Primitive): ThemerApi<C>;
+
+	/**
+	 * Removes class strings, called ONLY after classnames() is called
+	 * and before Tailwind Merge if enabled.
+	 *
+	 * @param classes tailwind class strings to be removed.
+	 * @param when if the value is truth otherwise reject.
+	 */
 	remove(classes: string | string[], when: Primitive): ThemerApi<C>;
 
+	/**
+	 * Prepends value before options base, and themed colors.
+	 *
+	 * @param arg the value to be appended.
+	 * @param when if value is truthy add value otherwise reject.
+	 */
 	prepend(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
 
+	/**
+	 * Appends value after options base, and themed colors.
+	 *
+	 * @param arg the value to be appended.
+	 * @param when if value is truthy add value otherwise reject.
+	 */
 	append(arg: ClassNameValue, when: Primitive): ThemerApi<C>;
 
+	/**
+	 * Compiles all classes returning single output string.
+	 *
+	 * @param withTailwindMerge when true (default) Tailwind Merge dedupes classes.
+	 */
 	compile(withTailwindMerge?: boolean): string;
 
 	classes(): {
@@ -57,122 +107,31 @@ export interface ThemerApi<C extends ThemeConfig> {
 		prepended: classnames.ArgumentArray;
 		appended: classnames.ArgumentArray;
 	};
+
 }
 
 export type ThemerInstance<C extends ThemeConfig> = {
-	create: (instanceName?: string) => ThemerApi<C>;
+
+	/**
+	 * Creates a new instance for generating themes.
+	 *
+	 * @param instanceName simply gives you a reference in console on where the Themer failed.
+	 */
+	create: (instanceName: string) => ThemerApi<C>;
+
 };
 
-
-
-/**
- * Simply flattens array then joins by strings.
- *
- * @param classes the classes to be joined.
- */
-function join(...classes: (string | string[])[]) {
-	return classes.flat().join(' ');
-}
-
-/**
- *
- * @param classes the array of classes that should be merged using TailwindMerge.
- */
-function merge(...classes: ClassNameValue[]) {
-	return twMerge(...classes);
-}
-
-/**
- * Simple string formatter that replaces values by positional order of arguments matched.
- *
- * @param template the template to be formatted
- * @param token the token to search for ex: {{theme}}
- * @param args the positional arguments to replace tokens with.
- */
-export function formatter(template: string, token: string, ...args: any[]) {
-	const exp = new RegExp('{{' + token + '}}', 'g');
-	const matches = template.match(exp) || [];
-	if (!matches.length) return template; // nothing to do no matching tokens.
-	const diff = Math.max(0, matches.length - args.length);
-	if (diff > 0)
-		// if diff in length use first arg as fill arg.
-		args = [...args, ...Array(diff).fill(args[0])];
-	for (const i in args) {
-		template = template.replace(`{{${token}}}`, args[i] + '');
-	}
-	return template;
-}
-
 export function themer<C extends ThemeConfig>(themeConfig: C) {
-	const mockApi = {
-		variant: mockVariant,
-		option: mockOption,
-		remove: mockRemove,
-		prepend: mockPrepend,
-		append: mockAppend,
-		compile: mockCompile,
-		classes: mockClasses
-	} as ThemerApi<C>;
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockVariant(...args: any) {
-		return mockApi;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockOption(...args: any) {
-		return mockApi;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockRemove(...args: any) {
-		return mockApi;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockPrepend(...args: any) {
-		return mockApi;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockAppend(...args: any) {
-		return mockApi;
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockCompile(...args: any) {
-		return '';
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function mockClasses(...args: any) {
-		return {
-			base: [],
-			themed: [],
-			removed: [],
-			prepended: [],
-			appended: []
-		};
-	}
-	const mockThemer: ThemerInstance<C> = {
-		create: (_instanceName = '') => mockApi
-	};
-
-	// If no document return mock instance.
-	if (!browser) return mockThemer;
 
 	type Components = typeof themeConfig.components;
 	type Options = typeof themeConfig.options;
 	type Component = keyof Components;
 	type Variant<K extends Component> = keyof Components[K];
-	// type Defaults = typeof themeConfig.defaults;
-	// type Palette = typeof themeConfig.palette;
 
 	const _components: Components = themeConfig?.components || {};
 	const _options: Options = themeConfig?.options || {};
-	// const _defaults: Defaults = themeConfig?.defaults || {};
-	// const _palette: Palette = themeConfig?.palette || {};
 
-	/**
-	 * Creates a new instance for generating themes.
-	 *
-	 * @param instanceName only used in errors to make it easier to determine where you screwed up!
-	 */
-	function create(instanceName = '') {
+	function create(instanceName = ''): ThemerApi<C> {
 		const base = [] as string[];
 		const themed = [] as string[];
 		let removed = [] as string[];
@@ -182,7 +141,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		const api = {
 			variant: getVariant,
 			option,
-			// mapped,
+			bundle,
 			remove,
 			prepend,
 			append,
@@ -197,7 +156,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			when?: Primitive
 		) {
 			if (typeof themeConfig === 'undefined') return api;
-			const comp = _components[name] || {};
+			const comp = _components[name] || {} as any;
 			if (!comp || !variant) return api;
 			const conf = comp[variant] as Record<string, string>;
 			if (!colors.includes(theme as any)) {
@@ -211,34 +170,6 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			if (themeVal) themed.push(themeVal);
 			return api;
 		}
-
-		/**
-		 * Adds an option to themed classes to be compiled.
-		 *
-		 * @param key the option key to be add.
-		 * @param prop the property of the above key to be applied.
-		 * @param when if value is truthy add value otherwise reject.
-		 */
-		function option<K extends ThemeOption>(
-			key: K,
-			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-			when: Primitive
-		): ThemerApi<C>;
-
-		/**
-		 * Adds an option to themed classes to be compiled.
-		 *
-		 * @param key the option key to be add.
-		 * @param prop the property of the above key to be applied.
-		 * @param variant option contains nested variants.
-		 * @param when if value is truthy add value otherwise reject.
-		 */
-		function option<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
-			key: K,
-			prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined,
-			variant: PropsWithoutPrefix<keyof ThemeOptions[K][P], '$'>,
-			when: Primitive
-		): ThemerApi<C>;
 
 		function option<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
 			key: K,
@@ -266,14 +197,38 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**
-		 * Removes class strings, called ONLY after classnames() is called
-		 * and before Tailwind Merge if enabled.
-		 *
-		 * @param classes tailwind class strings to be removed.
-		 * @param when if the value is truth otherwise reject.
-		 */
-		// function remove<K extends ThemeOption>(
+		function bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
+			keys: K[],
+			extendOrProp: Record<string, any> | PropsWithoutPrefix<P, '$'> | undefined,
+			propOrWhen: PropsWithoutPrefix<P, '$'> | undefined | Primitive,
+			when?: Primitive) {
+			if (typeof themeConfig === 'undefined') return api;
+			let prop: PropsWithoutPrefix<P, '$'> | undefined;
+			let extend: Record<string, any> | undefined;
+			if (arguments.length === 4) {
+				extend = extendOrProp as Record<string, any>;
+				prop = propOrWhen as PropsWithoutPrefix<P, '$'> | undefined;
+			}
+			else {
+				when = propOrWhen as Primitive;
+				prop = extendOrProp as PropsWithoutPrefix<P, '$'> | undefined;
+				extend = {};
+			}
+			if (typeof prop === 'undefined' || !when) return api;
+			let merged = keys.reduce((result, k) => {
+				const opt = _options[k];
+				if (typeof opt === 'undefined')
+					throw new Error(`${instanceName} option ${k} using property ${prop as string} was NOT found.`);
+				return mergeConfigs(result, opt as any); // TODO: fix types.
+			}, {} as Record<string, any>);
+			merged = mergeConfigs(merged, extend);
+			const baseValue = merged.$base || '';
+			const value = merged[prop as string] || '';
+			if (baseValue) base.push(baseValue);
+			if (value) themed.push(value);
+			return api;
+		}
+
 		function remove(
 			classes: string | string[],
 			when?: Primitive
@@ -284,12 +239,6 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**
-		 * Appends value after options base, andy themed colors.
-		 *
-		 * @param arg the value to be appended.
-		 * @param when if value is truthy add value otherwise reject.
-		 */
 		function prepend(arg: ClassNameValue, when: Primitive) {
 			if (typeof themeConfig === 'undefined') return api;
 			arg = arg || '';
@@ -297,12 +246,6 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**
-		 * Appends value after options base, andy themed colors.
-		 *
-		 * @param arg the value to be appended.
-		 * @param when if value is truthy add value otherwise reject.
-		 */
 		function append(arg: ClassNameValue, when: Primitive) {
 			if (typeof themeConfig === 'undefined') return api;
 			arg = arg || '';
@@ -310,12 +253,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		/**
-		 * Compiles all classes returning single output string.
-		 *
-		 * @param withTailwindMerge when true runs through Tailwind Merge deduping classes.
-		 */
-		function compile(withTailwindMerge = false) {
+		function compile(withTailwindMerge = true) {
 			if (typeof themeConfig === 'undefined') return '';
 
 			const preserves = removed.filter((v) => v.charAt(0) === '!');
@@ -361,13 +299,11 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		}
 
 		return api;
+
 	}
 
 	return {
 		create
 	};
-}
 
-themer.join = join;
-themer.merge = merge;
-themer.format = formatter;
+}

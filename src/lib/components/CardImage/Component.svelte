@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type CardImageProps, cardImageDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import { Image } from '../Image';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import { Image } from '$lib/components';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = CardImageProps & ElementProps<'img'>;
 

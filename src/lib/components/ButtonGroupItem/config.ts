@@ -8,6 +8,9 @@ import {
 import { mergeConfigs } from '$lib/theme';
 
 export const buttonGroupItem = {
+	text: {
+		...placeholder
+	},
 	filled: {
 		...variantItemCheckedFilled
 	},
@@ -15,7 +18,7 @@ export const buttonGroupItem = {
 	ghost: {
 		...variantItemCheckedGhost
 	},
-	text: {
+	soft: {
 		...placeholder
 	}
 };

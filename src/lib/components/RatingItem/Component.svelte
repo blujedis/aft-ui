@@ -2,9 +2,9 @@
 	import { themeStore, getColor, styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
-	import type { RatingContext } from '../Rating';
+	import type { RatingContext } from '$lib/components/Rating';
 	import { uniqid } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = RatingItemProps & ElementProps<'svg'>;
 

@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { type SelectListButtonProps, selectListButtonDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import { Badge } from '../Badge';
-	import { Flushed } from '../Flushed';
-	import { Icon } from '../Icon';
+	import { themer, themeStore } from '$lib/theme';
+	import {
+		Flushed,
+		Badge,
+		Icon,
+		type SelectListContext,
+		type SelectListItem
+	} from '$lib/components';
 	import type { ElementProps, IconifyTuple } from '$lib/types';
-	import type { SelectListContext, SelectListItem } from '../SelectList';
+	import { boolToMapValue } from '$lib/utils';
 	import { getContext, onMount } from 'svelte';
 
 	type $$Props = SelectListButtonProps & ElementProps<'input'>;
@@ -54,8 +58,8 @@
 		.option('focusedRing', theme, focused && variant !== 'flushed')
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
-		.option('roundeds', rounded, rounded && variant !== 'flushed')
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append('inline-flex items-center justify-between relative min-w-[176px] peer', true)

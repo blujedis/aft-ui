@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
 	import { Icon } from '../Icon';
 	import { getContext, onMount } from 'svelte';
 	import type { BreadcrumbContext } from '../Breadcrumb/module';
@@ -34,14 +34,13 @@
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
 		.variant('breadcrumbOption', variant, theme, variant)
-		.option('textHoverFilled', theme, variant === 'filled') // override for filled items.
-		.option('focusedRingVisible', typeof focused === 'string' ? focused : theme, focused)
+		.option('common', 'focusedVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
+		.option('common', 'muteSelected', true)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
-		.append('aria-selected:pointer-events-none dark:aria-selected:brightness-75', true)
-
-		.append('aria-selected:brightness-90', variant === 'filled')
+		.append('aria-selected:pointer-events-none outline-none', true)
 		.append($$restProps.class, true)
 		.compile(true);
 
@@ -54,6 +53,7 @@
 	$: breadcrumbIconClasses = th
 		.create('BreadcrumbIcon')
 		.option('breadcrumbFilledIconWidth', size, size)
+		.append('opacity-40', true) // mutes icon separators
 		.append('h-full flex-shrink-0 pointer-events-none', true)
 		.compile(true);
 

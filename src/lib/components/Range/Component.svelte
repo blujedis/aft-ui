@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { themeStore, themer, styler } from '$lib';
+	import { themeStore, themer, styler } from '$lib/theme';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
 	import { onMount } from 'svelte';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
+	import {boolToMapValue} from '$lib/utils';
 
 	type $$Props = RangeProps & Omit<ElementProps<'input'>, 'size'>;
 
@@ -32,8 +33,8 @@
 		.create('RangeClasses')
 		.option('common', 'transitioned', transitioned)
 		.option('rangeTrackSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)

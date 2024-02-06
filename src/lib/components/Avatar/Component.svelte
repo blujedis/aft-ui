@@ -4,11 +4,11 @@
 		avatarDefaults as defaults,
 		type AvatarNotificationPosition
 	} from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, boolToMapValue, lazyImage } from '$lib/utils';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { Icon } from '../Icon';
 	import type { AvatarStackContext } from '../AvatarStack';
 	import type { IconifyIcon } from '@iconify/svelte';
@@ -19,11 +19,14 @@
 
 	export let {
 		animate,
+		counter,
+		hovered,
 		notification,
 		placeholder,
 		rounded,
 		shadowed,
 		size,
+		src,
 		stacked,
 		theme,
 		variant
@@ -38,43 +41,60 @@
 	let _notification = notification as boolean | AvatarNotificationPosition;
 	if (notification === true) _notification = 'top-right' as AvatarNotificationPosition;
 
+	const lazyload = lazyImage();
 	const th = themer($themeStore);
 
 	$: avatarClasses = th
 		.create('Avatar')
 		.option('avatarSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.append('ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]', stacked)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('hovered', variant, theme, hovered)
+		.append('ring-2 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))]', stacked)
 		.append('relative', stacked === 'down')
 		.append($$restProps.class, true)
 		.compile(true);
-
-	$: avatarNotificationClasses =
-		(notification &&
-			th
-				.create('Avatar')
-				.variant('avatar', variant, theme, variant)
-				.option('avatarNotificationSizes', size, size)
-				.option('animate', animate, animate)
-				.remove('ring-inset', variant === 'outlined')
-				.append(
-					'absolute -right-1 -top-1 block rounded-full ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]',
-					true
-				)
-				.compile(true)) ||
-		'';
 
 	$: avatarPlaceholderClasses =
 		(_placeholder &&
 			th
 				.create('AvatarPlaceholder')
-				.variant('avatar', variant, theme, variant)
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed)
+				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+				.bundle(['mainText', 'mainRing'], { $base: 'ring-1' }, theme, variant === 'outlined')
+				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.option('roundeds', boolToMapValue(rounded), rounded)
+				.option('shadows', boolToMapValue(shadowed), shadowed)
+				.option('hovered', variant, theme, hovered)
 				.option('avatarSizes', size, size)
-				.option('common', 'ringed', typeof variant === 'undefined')
-				.append('relative inline-flex overflow-hidden"', true)
+				.append(
+					'ring-4 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))]',
+					stacked
+				)
+				.append('relative', stacked === 'down')
+				.append('relative inline-flex overflow-hidden', true)
+				.compile(true)) ||
+		'';
+
+	$: avatarNotificationClasses =
+		(notification &&
+			th
+				.create('Avatar')
+				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled') // white text
+				.bundle(['mainText', 'mainRing'], theme, variant === 'outlined')
+				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.option('avatarNotificationSizes', size, size && typeof counter === 'undefined')
+				.option('avatarCounterSizes', size, size && typeof counter !== 'undefined')
+				.option('avatarCounterTextSizes', size, size && typeof counter !== 'undefined')
+				.option('animate', animate, animate)
+				.option('avatarNotificationOffsets', size, size)
+				.append(
+					'absolute block rounded-full inline-flex items-center justify-center ring-2 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))] ',
+					true
+				)
+				.append(
+					'w-auto px-0.5 -right-2',
+					typeof counter !== 'undefined' && (counter + '').length > 2
+				)
 				.compile(true)) ||
 		'';
 
@@ -83,16 +103,37 @@
 
 {#if _placeholder}
 	<span class={avatarPlaceholderClasses}>
-		<Icon icon={_placeholder} class="h-full w-full" />
-		{#if notification}
-			<span class={avatarNotificationClasses} />
-		{/if}
-	</span>
-{:else if notification}
-	<span class="relative inline-flex max-w-fit">
-		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
-		<span class={avatarNotificationClasses} />
+		<slot>
+			<Icon icon={_placeholder} class="h-full w-full" />
+			{#if notification}
+				<span class={avatarNotificationClasses}>
+					{#if counter}
+						{counter}
+					{/if}
+				</span>
+			{/if}
+		</slot>
 	</span>
 {:else}
-	<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
+	<span class="relative inline-flex max-w-fit">
+		<img
+			use:forwardedEvents
+			use:lazyload={src}
+			alt="Avatar"
+			{...$$restProps}
+			class={avatarClasses}
+		/>
+		{#if notification}
+			<span class={avatarNotificationClasses}>
+				{#if counter}
+					{counter}
+				{/if}
+			</span>
+		{/if}
+	</span>
 {/if}
+<!-- {:else}
+	<span>
+		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
+	</span>
+{/if} -->

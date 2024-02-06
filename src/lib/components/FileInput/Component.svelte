@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type FileInputProps, fileInputDefaults as defaults } from './module';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = FileInputProps & ElementProps<'input'>;
 

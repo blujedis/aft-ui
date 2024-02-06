@@ -1,7 +1,7 @@
 import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeColor } from '$lib/types';
 import type { button } from './config';
 
-export type ButtonVariant = keyof typeof button;
+export type ButtonVariant = 'text' | 'filled' | 'outlined' | 'ghost' | 'soft'; // keyof typeof button;
 
 export type ButtonProps<Tag extends 'button' | 'a'> = {
 	as?: Tag;
@@ -17,7 +17,6 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 	transitioned?: boolean;
 	variant?: ButtonVariant;
 	underlined?: boolean | 'hover'; // when hover only shown when hovering.
-	unstyled?: boolean;
 };
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {

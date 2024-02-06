@@ -6,7 +6,7 @@
 		ThemeRounded,
 		ThemeShadowed,
 		ThemeSize
-	} from '../../types';
+	} from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { Button } from '../Button';
 	import { Empty } from '../Empty';

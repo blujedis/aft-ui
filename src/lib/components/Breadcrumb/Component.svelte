@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { onMount, setContext } from 'svelte';
-	import { cleanObj, forwardEventsBuilder } from '$lib/utils';
+	import { cleanObj, forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 	import { BreadcrumbOption } from '../BreadcrumbOption';
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
-	import type { ElementProps } from '../../types';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 
@@ -34,10 +34,11 @@
 
 	$: breadcrumbNavClasses = th
 		.create('Breadcrumb')
-		.variant('breadcrumb', variant, theme, variant)
-		.option('textSoft', theme, variant !== 'text') // creates muted arrows in filled.
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(['mainText'], theme, variant === 'text')
+		.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append(
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type EmptyProps, emptyDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = EmptyProps & Omit<ElementProps<'span'>, 'size'>;
 
@@ -16,8 +16,8 @@
 		.variant('empty', variant, theme, variant)
 		.option('common', 'transitioned', transitioned)
 		.option('emptySizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
 		.append('flex items-center justify-center border-[3px] border-dashed relative', true)
 		.append($$restProps.class, true)

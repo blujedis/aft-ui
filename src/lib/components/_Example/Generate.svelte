@@ -2,7 +2,7 @@
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
 	import type { ElementHandler } from '$lib/types';
-	import { defaultTokens, parseTokens } from '$lib/utils/generate';
+	import { defaultTokens, parseTokens } from '$lib/theme/generate';
 	import defaults from '$lib/theme/defaults';
 	import * as defaultOptions from '$lib/components/options';
 	import * as defaultComponents from '$lib/components/configs';

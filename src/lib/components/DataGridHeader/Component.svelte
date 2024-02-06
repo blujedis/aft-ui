@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type DataGridHeaderProps, gridHeaderDefaults as defaults } from './module';
-	import { themeStore, pickCleanProps, styler, themer } from '$lib';
-	import type { ElementProps } from '../../types';
-	import type { DataGridContext } from '../DataGrid';
+	import { themeStore, pickCleanProps, styler, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
 
 	type $$Props = DataGridHeaderProps & ElementProps<'div'>;
@@ -11,18 +11,27 @@
 
 	export let { autocols, columns, divided, focused, rounded, size, sticky, theme, variant } = {
 		...defaults,
-		...pickCleanProps(
-			context?.globals,
-			'autocols',
-			'columns',
-			'divided',
-			'focused',
-			'rounded',
-			'size',
-			'sticky',
-			'theme',
-			'variant'
-		)
+		autocols: context.globals?.autocols,
+		columns: context.globals?.columns,
+		divided: context.globals?.divided,
+		focused: context.globals?.focused,
+		rounded: context.globals?.rounded,
+		size: context.globals?.size,
+		sticky: context.globals?.sticky,
+		theme: context.globals?.theme,
+		variant: context.globals.variant
+		// ...pickCleanProps(
+		// 	context?.globals,
+		// 	'autocols',
+		// 	'columns',
+		// 	'divided',
+		// 	'focused',
+		// 	'rounded',
+		// 	'size',
+		// 	'sticky',
+		// 	'theme',
+		// 	'variant'
+		// )
 	} as Required<$$Props>;
 
 	const st = styler($themeStore);
@@ -37,7 +46,6 @@
 		.create('DataGridHeaderWrapper')
 		.option('common', 'divided', divided && $$slots.filter)
 		.append('divide-y', divided && $$slots.filter)
-		// .option('roundeds', rounded, rounded)
 		.append('sticky top-0 z-10', sticky) // add overflow-clip & "rounded" to keep top rounding
 		.append('rounded-b-none', rounded)
 		.prepend('datagrid__header shadow-sm', true)

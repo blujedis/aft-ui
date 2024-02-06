@@ -6,22 +6,42 @@
 		accordionDefaults as defaults,
 		type AccordionContext
 	} from './module';
-	import { themer, themeStore } from '../../theme';
-	import type { ElementProps, HTMLTag } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { useSelect } from '$lib/stores/select';
 	import { setContext } from 'svelte';
 
 	type Tag = $$Generic<HTMLTag>;
 	type $$Props = AccordionProps<Tag> & ElementProps<Tag>;
 
-	export let { as, multiple, selected, rounded, shadowed, size, theme, transition, variant } = {
+	export let {
+		as,
+		bordered,
+		detached,
+		focused,
+		hovered,
+		multiple,
+		rounded,
+		selected,
+		selectable,
+		shadowed,
+		size,
+		theme,
+		transition,
+		variant
+	} = {
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 
 	export const store = useSelect({ multiple, selected });
 
 	const globals = cleanObj({
+		bordered,
+		detached,
+		hovered,
+		focused,
 		rounded,
+		selectable,
 		shadowed,
 		size,
 		theme,
@@ -41,14 +61,7 @@
 
 	$: accordionClasses = th
 		.create('Accordion')
-		.option('roundeds', rounded === 'full' ? 'xl2' : rounded, rounded)
-		.option('shadows', shadowed, shadowed)
 		.prepend(`accordion`, true)
-		.option('common', 'bordered', variant !== 'unstyled' && variant !== 'filled')
-		.option('common', 'divided', variant !== 'unstyled')
-		.append('divide-y', variant !== 'unstyled')
-		.append('border', variant !== 'unstyled' && variant !== 'filled')
-		.append('overflow-clip', true)
 		.append($$restProps.class, true)
 		.compile(true);
 

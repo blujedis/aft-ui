@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { Button, type ButtonVariant } from '.';
-	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import { Flushed } from '../Flushed';
 
 	const title = 'Buttons';
 	const description = 'Themed Buttons with variants.';
@@ -40,9 +39,7 @@
 				<Button {...props} variant="ghost" theme={color}>Button</Button>
 			</label>
 			<label for="soft">
-
 				<Button {...props} variant="soft" theme={color}>Button</Button>
-				
 			</label>
 		</div>
 	{/each}

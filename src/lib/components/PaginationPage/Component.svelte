@@ -5,13 +5,12 @@
 		HTMLButtonAttributes
 	} from 'svelte/elements';
 	import type { SelectStoreValue } from '$lib/stores/select';
-	import type { PaginationContext } from '../Pagination';
+	import  { type PaginationContext, Icon } from '$lib/components';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
-	import { themer, themeStore } from '../../theme';
+	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import { Icon } from '../Icon';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 
 	type Tag = $$Generic<'a' | 'button' | 'span'>;
 	type NativeProps = Tag extends 'button'
@@ -40,7 +39,7 @@
 		.option('paginationGroupedPadding', size, size && ['filled', 'glass'].includes(variant))
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
 		.option('common', 'ringed', ['filled', 'glass'].includes(variant))
-		.option('roundeds', rounded, rounded && ((previous || next) as boolean))
+		.option('roundeds', boolToMapValue(rounded), rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
 			['filled', 'glass'].includes(variant)

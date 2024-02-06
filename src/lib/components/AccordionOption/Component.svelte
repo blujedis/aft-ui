@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { boolToMapValue } from '$lib/utils';
+
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib/theme';
+	import { styler, themeStore, themer } from '$lib/theme';
 	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { getContext, setContext } from 'svelte';
-	// import { transitioner } from '$lib/components';
 
 	import type { AccordionContext } from '../Accordion/module';
 
@@ -12,9 +13,26 @@
 
 	const context = getContext('Accordion') as AccordionContext;
 
-	export let { as, focused, key, rounded, selected, size, theme, transition, unflip, variant } = {
+	export let {
+		as,
+		bordered,
+		detached,
+		focused,
+		key,
+		rounded,
+		selected,
+		shadowed,
+		size,
+		theme,
+		transition,
+		variant
+	} = {
 		...defaults,
+		bordered: context.globals?.bordered,
+		detached: context.globals?.detached,
 		focused: context.globals?.focused,
+		rounded: context.globals?.rounded,
+		shadowed: context.globals?.shadowed,
 		size: context.globals?.size,
 		theme: context.globals?.theme,
 		transition: context.globals?.transition,
@@ -30,17 +48,33 @@
 	$: isSelected = $context.selected?.includes(key);
 
 	const th = themer($themeStore);
+	const st = styler($themeStore);
 
-	$: accordionClasses = th
+	$: isBordered =
+		variant === 'outlined' || bordered || (variant === 'filled' && typeof bordered === 'undefined');
+
+	$: accordionOptionStyles = st
+		.create('AccordionOption')
+		.append(`--detatched-margin:${detached === true ? '6px' : detached || '6px'}`, true)
+		.append($$restProps.style, true)
+		.compile();
+
+	$: accordionOptionClasses = th
 		.create('AccordianOption')
-		.variant('accordionOption', variant, theme, variant)
-		.option('commonRingFocusVisible', theme, true)
-		.option('common', 'bordered', variant === 'filled' && $context.selected.length)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'focusedVisible', focused)
+		.option('common', 'bordered', isBordered)
+		.option('accordionOptionRoundeds', size, rounded)
 		.prepend(`accordian-option accordion-${variant}`, true)
 		.prepend('accordion-collapsed', !isSelected)
 		.prepend('accordion-expanded', isSelected)
-		.append(`outline-none transition-[margin]`, true)
-		.append(`focus-visible:ring-4 focus-visible:ring-inset`, true)
+		.prepend('accordion-detached', detached && ['filled', 'outlined'].includes(variant))
+		.append(`focus-visible:outline-offset-0`, focused)
+		.append(isSelected ? 'z-10' : 'z-0', true)
+		.append('border-l border-r border-t', isBordered)
+		.append('border-b', detached || isBordered)
+		.append('relative overflow-clip outline-none transition-[margin] -mt-px', true)
 		.append($$restProps.class, true)
 		.compile(true);
 </script>
@@ -51,16 +85,17 @@
 	aria-labelledby={`${key}-accordion-heading`}
 	tabindex={isSelected ? 0 : -1}
 	{...$$restProps}
-	class={accordionClasses}
+	class={accordionOptionClasses}
+	style={accordionOptionStyles}
 >
 	<slot />
 </svelte:element>
 
 <style>
-	.accordion-filled.accordion-expanded:not(:last-child) {
-		margin-bottom: 6px;
+	.accordion-detached.accordion-expanded:not(:first-child) {
+		margin-top: var(--detatched-margin); /* 6px; */
 	}
-	.accordion-filled.accordion-expanded:not(:first-child) {
-		margin-top: 6px;
+	.accordion-detached.accordion-expanded:not(:last-child) {
+		margin-bottom: var(--detatched-margin); /* 6px; */
 	}
 </style>

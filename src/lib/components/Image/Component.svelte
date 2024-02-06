@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { themer, themeStore } from '../../theme';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementProps } from '../../types';
+	import { themer, themeStore } from '$lib/theme';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
+	import { lazyImage } from '$lib/utils/lazyImage';
 	import { type ImageProps, imageDefaults as defaults } from './module';
 	type $$Props = ImageProps & ElementProps<'img'>;
 
-	export let { fit, full, position, rounded, shadowed } = {
+	export let { alt, fit, full, lazyload, position, rounded, shadowed, src } = {
 		...defaults
 	} as Required<ImageProps>;
 
+	const lazyloader = lazyload ? lazyImage(lazyload === true ? {} : lazyload) : () => {};
+
 	$: inputClasses = themer($themeStore)
 		.create('Image')
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('objectFit', position ? 'none' : fit, fit) // if position fit must be none.
 		.option('objectPosition', position, position)
 		.append('w-full h-full', full === true)
@@ -25,4 +28,8 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<img {...$$restProps} use:forwardedEvents class={inputClasses} alt={$$restProps.alt} />
+{#if lazyload}
+	<img {...$$restProps} use:forwardedEvents use:lazyloader={src} {alt} class={inputClasses} />
+{:else}
+	<img {...$$restProps} use:forwardedEvents {src} {alt} class={inputClasses} />
+{/if}
