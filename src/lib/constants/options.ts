@@ -290,23 +290,21 @@ export const hovered = {
 	}
 };
 
-export const common = {
-	active: 'active:brightness-125',
-	focused: 'outline-none focus:outline-2 focus:outline-offset-0',
-	focusedVisible: 'outline-none focus-visible:outline-2 focus-visible:outline-offset-0',
-	focusedWithin: 'outline-none focus-within:outline-2 focus-within:outline-offset-0',
-	ringed: 'ring-1 ring-black/10 dark:ring-black/30',
-	bordered: 'border-black/10 dark:border-black/30',
-	divided: 'divide-black/10 dark:divide-black/30',
-	disabled:
-		'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
-	transitioned: 'transition motion-reduce:transition-none',
-	muteSelected: 'aria-selected:opacity-65',
-	defaultFill: 'bg-frame-200 dark:bg-frame-700',
-	panelFill: ''
-	// baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
-	// baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
-	// baseSelected: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-700',
-	// baseCurrent: 'aria-current:bg-frame-100 dark:aria-current:bg-frame-700',
+// export const common = {
+// 	active: 'active:brightness-125',
+// 	focused: 'outline-none focus:outline-2 focus:outline-offset-0',
+// 	focusedVisible: 'outline-none focus-visible:outline-2 focus-visible:outline-offset-0',
+// 	focusedWithin: 'outline-none focus-within:outline-2 focus-within:outline-offset-0',
+// 	ringed: 'ring-1 ring-frame-900/10 dark:ring-frame-900/40',
+// 	bordered: 'border-frame-900/10 dark:border-frame-900/40',
+// 	divided: 'divide-frame-900/10 dark:divide-frame-900/40',
+// 	disabled:
+// 		'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
+// 	transitioned: 'transition motion-reduce:transition-none',
+// 	muteSelected: 'aria-selected:opacity-65',
+// 	// baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
+// 	// baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
+// 	// baseSelected: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-700',
+// 	// baseCurrent: 'aria-current:bg-frame-100 dark:aria-current:bg-frame-700',
 
-};
+// };

@@ -2,12 +2,15 @@
 import type { ThemeColor, ThemeShade } from '../types';
 import { colors } from '../constants/colors';
 import { getProperty } from 'dot-prop';
+import { mergeConfigs } from './utils';
 
 type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
-type PaletteColor = Exclude<ThemeColor, 'default' | 'dark'> | 'frame';
-type Opacity = 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100;
-type TokenColor = PaletteColor | `${PaletteColor}-${ThemeShade}` | `${ThemeShade}/${Opacity}`;
+// type PaletteColor = ThemeColor; // Exclude<ThemeColor, 'default' | 'dark'> | 'frame';
+type TokenOpacity = 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100;
+type TokenWidth = 0 | 1 | 2 | 4 | 8;
+type ThemeColorBase = ThemeColor | `${ThemeColor}-${ThemeShade}`;
+type TokenColor = ThemeColorBase | `${ThemeShade}/${TokenOpacity}`;
 type TokenTuple = [TypeOrValue<TokenColor | ThemeShade>, TypeOrValue<TokenColor | ThemeShade>?];
 type TokenValue = TypeOrValue<TokenColor | ThemeShade> | TokenTuple;
 
@@ -34,15 +37,26 @@ type TokenVariant = {
 type TokenMap = Record<string, TokenVariant>;
 
 interface GenerateOptions {
-	bodyTextLight: number;
-	bodyTextDark: number;
-	bodyBgLight: number;
-	bodyBgDark: number;
-	shade: number;
-	opacitySoft: number;
-	opacityHover: number;
-	opacityFocus: number;
-	opacitySoftSelected: number;
+
+	bodyTextLight: ThemeColorBase | 'white' | 'black';
+	bodyTextDark: ThemeColorBase | 'white' | 'black';
+
+	bodyBgLight: ThemeColorBase | 'white' | 'black';
+	bodyBgDark: ThemeColorBase | 'white' | 'black';
+
+	shade: ThemeShade;
+
+	softOpacity: TokenOpacity;
+	hoverOpacity: TokenOpacity;
+	focusOpacity: TokenOpacity;
+	softSelectedOpacity: TokenOpacity;
+	disabledOpacity: TokenOpacity;
+
+	gridOpacity: TokenOpacity;
+	gridColor: ThemeColorBase | 'black';
+
+	focusOffset: TokenWidth;
+	focusWidth: TokenWidth;
 }
 
 const focusOutlineModifiers = [
@@ -91,31 +105,35 @@ const placeholder = {
 	info: '',
 };
 
-const defaultOptions = {
-	bodyTextLight: 700,
-	bodyTextDark: 100,
-	bodyBgLight: 50,
-	bodyBgDark: 800,
+export const defaultOptions = {
+	bodyTextLight: 'frame-700',
+	bodyTextDark: 'frame-100',
+	bodyBgLight: 'white',
+	bodyBgDark: 'frame-800',
+
 	shade: 500,
-	opacitySoft: 20,
-	opacityHover: 20,
-	opacityFocus: 50,
-	opacitySoftSelected: 70
+
+	softOpacity: 10,
+	hoverOpacity: 20,
+	focusOpacity: 50,
+	softSelectedOpacity: 70,
+	disabledOpacity: 60,
+
+	gridColor: 'frame-900',
+	gridOpacity: 40,
+
+	focusOffset: 0,
+	focusWidth: 2
 } as GenerateOptions;
 
-export let defaultTokens = getDefaultTokens();
+//export let defaultTokens = getDefaultTokens();
 
-function getDefaultTokens(options?: Partial<GenerateOptions>) {
-
-	options = {
-		...defaultOptions,
-		...options
-	};
+function getDefaultTokens(options: Required<GenerateOptions>) {
 
 	const {
-		bodyTextLight, bodyTextDark, bodyBgLight, bodyBgDark,
-		shade, opacitySoft, opacityHover, opacitySoftSelected, opacityFocus
-	} = options as Required<GenerateOptions>;
+		bodyTextDark, shade, softOpacity, hoverOpacity,
+		softSelectedOpacity, focusOpacity
+	} = options;
 
 	return {
 
@@ -128,16 +146,17 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 		text: {
 			variant: 'main',
 			modifiers: ['text'],
-			colors: () => createColorMap(colors, shade, shade - 100, { frame: '' })
+			colors: () => createColorMap(colors, shade, shade, { frame: '' })
 		},
 
 		textWhite: {
 			variant: 'white',
 			modifiers: ['text'],
 			colors: {
-				$base: `${toColor('text', 'frame', bodyTextDark)} ${toColor('dark:text', 'frame', bodyTextDark)}`
+				$base: `text-${bodyTextDark} dark:text-${bodyTextDark}`
 			}
 		},
+
 
 		textSoft: {
 			variant: 'soft',
@@ -148,44 +167,34 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 		bgSoft: {
 			variant: 'soft',
 			modifiers: ['bg'],
-			colors: createColorMap(colors, `${shade}/${opacitySoft}`, true, {
-				frame: [`500/${opacitySoft - 10}`, `${shade}/${opacitySoft}`]
-			})
+			colors: createColorMap(colors, `${shade}/${softOpacity}`, true)
 		},
 
 		bgPanel: {
 			variant: 'panel',
 			modifiers: ['bg'],
 			colors: {
-				$base: `bg-frame-${shade}/${opacitySoft - 10} dark:bg-frame-${shade}/${opacitySoft}`
+				$base: `bg-frame-${shade}/${softOpacity} dark:bg-frame-${shade}/${softOpacity}`
 			}
 		},
 
 		bgHoverGhost: {
 			variant: 'ghost',
 			modifiers: ['hover:bg'],
-			colors: createColorMap(colors, `${shade}/${opacityHover}`, true)
+			colors: createColorMap(colors, `${shade}/${hoverOpacity}`, true)
 		},
 
 		bgHoverSoft: {
 			variant: 'soft',
 			modifiers: ['hover:bg'],
-			colors: createColorMap(colors, `${shade}/${20}`, true)
+			colors: createColorMap(colors, `${shade}/${softOpacity}`, true)
 		},
 
 		bgHoverPanel: {
 			variant: 'panel',
 			modifiers: ['hover:bg'],
 			colors: {
-				$base: 'hover:brightness-150 dark:hover:brightness-125'
-			}
-		},
-
-		bgHoverPanelSoft: {
-			variant: 'panelSoft',
-			modifiers: ['hover:bg'],
-			colors: {
-				$base: `hover:bg-frame-50 dark:hover:bg-frame-${shade}/${opacitySoft - 10}`
+				$base: `hover:bg-frame-${shade}/${softOpacity - 5} dark:hover:bg-frame-${shade}/${softOpacity - 5}`
 			}
 		},
 
@@ -215,7 +224,7 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 		bgSelectedSoft: {
 			variant: 'selectedSoft',
 			modifiers: [...selectedBgModifiers],
-			colors: createColorMap(colors, `${shade}/${opacitySoftSelected}`, true)
+			colors: createColorMap(colors, `${shade}/${softSelectedOpacity}`, true)
 		},
 
 		textSelected: {
@@ -227,7 +236,9 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 		textSelectedWhite: {
 			variant: 'selectedWhite',
 			modifiers: [...selectedTextModifiers],
-			colors: createColorMap(colors, toColor('text', 'frame', bodyTextDark), toColor('text', 'frame', bodyTextDark))
+			colors: {
+				$base: [`${bodyTextDark}`, `${bodyTextDark}`]
+			}
 		},
 
 		textSelectedGhost: {
@@ -239,7 +250,7 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 		outlineFocus: {
 			variant: '',
 			modifiers: [...focusOutlineModifiers],
-			colors: createColorMap(colors, `${shade}/${opacityFocus}`, true)
+			colors: createColorMap(colors, `${shade}/${focusOpacity}`, true)
 		},
 
 		ringFocus: {
@@ -252,8 +263,53 @@ function getDefaultTokens(options?: Partial<GenerateOptions>) {
 
 }
 
-function toColor(type: string, color: ThemeColor, value: number, opacity?: number) {
-	return opacity ? `${type}-${color}-${value}/${opacity}` : `${type}-${color}-${value}`;
+function getCommon(options: Required<GenerateOptions>) {
+
+	options = {
+		...defaultOptions,
+		...options
+	};
+
+	const {
+		gridColor, gridOpacity,
+		disabledOpacity, focusOffset, focusWidth
+	} = options as Required<GenerateOptions>;
+
+	const gridOpacityLight = getMin(gridOpacity, 30, 10);
+
+	const common = {
+		transitioned: 'transition motion-reduce:transition-none',
+		ringed: `ring-${gridColor}/${gridOpacityLight} dark:ring-${gridColor}/${gridOpacity}`,
+		bordered: `border-${gridColor}/${gridOpacityLight} dark:border-${gridColor}/${gridOpacity}`,
+		divided: `divide-${gridColor}/${gridOpacityLight} dark:divide-${gridColor}/${gridOpacity}`,
+		disabled:
+			`disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
+
+		focused: `outline-none focus:outline-${focusWidth} focus:outline-offset-${focusOffset}`,
+		focusedVisible: `outline-none focus-visible:outline-${focusWidth} focus-visible:outline-offset-${focusOffset}`,
+		focusedWithin: `outline-none focus-within:outline-${focusWidth} focus-within:outline-offset-${focusOffset}`,
+
+		muteSelected: `aria-selected:opacity-${disabledOpacity}`,
+
+
+	};
+
+	return objectToString('common', common);
+
+}
+
+// ex: getMin(40, 50, 10) = 10
+// subtracting 50 from 40 = -10 but our min val was set to 10
+// Math.max will choose the larger  number between -10 and 10.
+function getMin(value: number, offset = 0, min = 0) {
+	return Math.max(min, value - offset);
+}
+
+// ex: getMax(40, 50, 60) = 60
+// adding 40 to 50 = 90 but our max val was set to 60
+// Math.min will choose the lower or our max between 60 and 90.
+function getMax(value: number, offset = 0, max = 0) {
+	return Math.min(max, value + offset);
 }
 
 function createColorMap(colors: readonly ThemeColor[], light: string | number, dark?: string | number | boolean, override?: Partial<Record<ThemeColor | '$base', any>>) {
@@ -292,27 +348,31 @@ function ensureArray<T = any>(value: T | T[]): T[] {
 	return [value];
 }
 
+function objectToString(name: string, obj: Record<string, any>, level = 1, indent = 2): string {
+	const template = level > 1 ? `{\n{0}\n${' '.repeat(indent)}}` : `export const ${name} ={\n{0}\n};`;
+	const rows = [];
+	for (const [key, val] of Object.entries(obj)) {
+		if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+			const nestedVal = objectToString(key, val, level += 1);
+			rows.push(`${' '.repeat(indent)}${key}: ${nestedVal}`);
+		}
+		else {
+			rows.push(`${' '.repeat(indent * level)}${key}: '${val}'`);
+		}
+	}
+	return template.replace('{0}', rows.join(',\n'));
+}
+
 function getConfig(
-	tokens: Record<string, unknown>,
+	tokens: Record<string, TokenVariant>,
 	obj?: string | Record<string, unknown> | TokenConfHandler
 ) {
-	defaultTokens = defaultTokens || getDefaultTokens();
+	// defaultTokens = defaultTokens || getDefaultTokens();
 	if (typeof obj === 'function') {
-		obj = obj(defaultTokens);
+		obj = obj(tokens);
 	}
 	if (typeof obj === 'string') return getConfig(tokens, getProperty(tokens, obj));
 	return obj;
-}
-
-function extend(path: string | Record<string, unknown>, ...obj: Record<string, unknown>[]): any {
-	defaultTokens = defaultTokens || getDefaultTokens();
-	const existing =
-		typeof path === 'string'
-			? getConfig(defaultTokens, getProperty(defaultTokens, path)) || {}
-			: {};
-	const next = obj.shift() || {} as TokenVariant;
-	if (obj.length) return extend({ ...existing, ...next }, ...obj);
-	return { ...existing, ...next };
 }
 
 function createLabel(modifier: string) {
@@ -329,10 +389,6 @@ function createLabel(modifier: string) {
 	return type.charAt(0).toUpperCase() + type.slice(1) + suffix;
 }
 
-function createResult(name: string, content: string[]) {
-	return `export const ${name} = {\n${content.join(',\n')}\n};`;
-}
-
 function normalizeToken(
 	tokens?: Record<string, any>,
 	value?: TokenValue,
@@ -341,24 +397,23 @@ function normalizeToken(
 
 	if (!value) return null;
 
-	if (['default', 'dark'].includes(color || ''))
-		color = 'frame';
-
-	// if value contains dot notation get property value
-	// by using getter, then recurse.
-	if (typeof value === 'string' && value.includes('.'))
-		return normalizeToken(getProperty(tokens, value), color);
-
-	// Value is numeric color level or color level with opacity modifier, combine with color.
-	// ex: 500 or '500/50';
-	if (
-		(typeof value === 'number' ||
-			(typeof value === 'string' && value.includes('/') && !value.includes('-'))) &&
-		color
-	)
+	// Value is numeric color level.
+	if (color && typeof value === 'number')
 		return `${color}-${value}`;
 
-	if (typeof value === 'string') return value;
+	if (typeof value === 'string') {
+
+		// if value contains dot notation get property value
+		// by using getter, then recurse.
+		if (typeof value === 'string' && value.includes('.'))
+			return normalizeToken(getProperty(tokens, value), color);
+
+		// color level with opacity modifie ex 500/50
+		if (color && value.includes('/') && !value.includes('-'))
+			return `${color}-${value}`;
+
+		return value;
+	}
 
 	return null;
 
@@ -369,8 +424,7 @@ function getTuple(
 	value: TokenValue,
 	color: ThemeColor | 'white' | 'black' | 'frame'
 ): [string | null, string | null] {
-	if (['default', 'dark'].includes(color))
-		color = 'frame';
+
 	if (Array.isArray(value)) {
 		const light = normalizeToken(tokens, value[0], color);
 		const dark = normalizeToken(tokens, value[1], color);
@@ -379,40 +433,67 @@ function getTuple(
 
 	const light = normalizeToken(tokens, value, color);
 	return [light, null];
+}
 
+function buildClassItem(tokens: Record<string, any>, modifier: string, color: string, token: TokenValue) {
+	if (typeof token === 'string') {
+		token = token.trim();
+		// manually defined row containing 
+		if (/\s/.test(token))
+			return token;
+	}
+	const suffix = modifier.split(':').pop();
+	let [light, dark] = getTuple(tokens, token as TokenValue, color as ThemeColor);
+	let str = '';
+	light = light || '';
+	dark = dark || '';
+	light = light.replace(`${suffix}-`, '');
+	dark = dark.replace(`${suffix}-`, '');
+	if (light) str += !light.includes(':') ? modifier + '-' + light : ' ' + light;
+	if (dark) str += !dark.includes(':') ? ' dark:' + (modifier + '-' + dark) : ' ' + dark;
+	return str;
 }
 
 function buildClass(tokens: Record<string, any>, modifier: string, conf?: TokenConfInit | TokenConfHandler) {
+
 	if (!conf) return [];
+
 	const _conf = { ...placeholder, ...getConfig(tokens, conf) };
 	const { $base, ...nConf } = _conf as TokenConf;
-	const result = [];
-	const extend = (typeof $base === 'string' ? { $base } : $base || { $base: '' }) as Partial<
-		Record<ThemeColor | '$base', TokenColor>
+	const result = {} as Record<string, any>;
+
+	const extend = (typeof $base === 'string' || Array.isArray($base) ? { $base } : $base || { $base: '' }) as Partial<
+		Record<ThemeColor | '$base', any>
 	>;
-	const suffix = modifier.split(':').pop();
-	if (extend.$base) result.push(`  ${'$base'}: '${extend.$base}'`);
+
+	for (const [color, token] of Object.entries(extend)) {
+		const str = buildClassItem(tokens, modifier, color, token);
+		extend[color as keyof typeof extend] = str;
+	}
 
 	for (const [color, token] of Object.entries(nConf)) {
-		let [light, dark] = getTuple(tokens, token as TokenValue, color as ThemeColor);
-		let str = '';
-		light = light || '';
-		dark = dark || '';
-		light = light.replace(`${suffix}-`, '');
-		dark = dark.replace(`${suffix}-`, '');
-		if (light) str += !light.includes(':') ? modifier + '-' + light : ' ' + light;
-		if (dark) str += !dark.includes(':') ? ' dark:' + (modifier + '-' + dark) : ' ' + dark;
-		if (extend[color as ThemeColor]) str = extend[color as ThemeColor] + ' ' + str;
-		result.push(`  ${color}: '${str}'`);
+		const str = buildClassItem(tokens, modifier, color, token);
+		result[color] = str;
 	}
-	return result;
+
+	return mergeConfigs(extend, result) as Record<ThemeColor | '$base', string>;
 }
 
 export function parseTokens<
 	T extends TokenMap
->(tokens: T) {
-	const result = {} as Record<string, string>;
+>(options?: Partial<GenerateOptions>) {
+
+	options = {
+		...defaultOptions,
+		...options
+	};
+
+	const tokens = getDefaultTokens(options as Required<GenerateOptions>);
+
+	const result = [] as string[];
 	const keys = [] as string[];
+
+	result.push(getCommon(options as Required<GenerateOptions>));
 
 	for (const [gKey, gConf] of Object.entries(tokens)) {
 
@@ -425,27 +506,21 @@ export function parseTokens<
 		const modifiersArr = ensureArray(modifiers);
 
 		for (const m of modifiersArr) {
-			const str = buildClass(tokens, m, colors);
-			if (!str.length) continue;
-
 			const prefix = (variant || '').split(/(?=[A-Z])/);
 			let suffix = createLabel(m);
-			if (!(variant || '').length) {
+			if (!(variant || '').length)
 				suffix = suffix.charAt(0).toLocaleLowerCase() + suffix.slice(1);
-			}
 			const name = toCamelCase([...prefix, ...suffix.split(/(?=[A-Z])/)]);
-
 			if (keys.includes(name))
 				throw new Error(`Detected duplicate generated key/alias name ${name}.`);
+			const obj = buildClass(tokens, m, colors);
+			result.push(objectToString(name, obj));
 			keys.push(name);
-			result[name] = createResult(name, str);
 		}
+
 	}
 
-	const resultMap = Object.keys(result)
-		.sort()
-		.map((k) => result[k]);
-	return resultMap.join('\n\n');
+	return result.join('\n\n');
 
 }
 
@@ -453,3 +528,27 @@ export function parseTokens<
 // bg-[rgb(var(--color-primary-600))]/30
 // hex example.
 // text-[color:var(--text-light-hover)]
+
+
+// function extend(path: string | Record<string, unknown>, ...obj: Record<string, unknown>[]): any {
+// 	defaultTokens = defaultTokens || getDefaultTokens();
+// 	const existing =
+// 		typeof path === 'string'
+// 			? getConfig(defaultTokens, getProperty(defaultTokens, path)) || {}
+// 			: {};
+// 	const next = obj.shift() || {} as TokenVariant;
+// 	if (obj.length) return extend({ ...existing, ...next }, ...obj);
+// 	return { ...existing, ...next };
+// }
+
+// function createResult(name: string, content: string[]) {
+// 	return `export const ${name} = {\n${content.join(',\n')}\n};`;
+// }
+
+// function toColor(type: string, color: ThemeColor | 'white' | 'black', value?: number | 'white' | 'black', opacity?: number) {
+// 	if (['white', 'black'].includes(value + ''))
+// 		color = (value + '');
+// 	if (['white', 'black'].includes(color))
+// 		return opacity ? `${type}-${color}/${opacity}` : `${type}-${color}`;
+// 	return opacity ? `${type}-${color}-${value}/${opacity}` : `${type}-${color}-${value}`;
+// }

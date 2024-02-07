@@ -1,4 +1,4 @@
-import { defaultTokens, parseTokens } from './src/lib/theme/generate';
+import { parseTokens } from './src/lib/theme/generate';
 import { relative } from 'path';
 import { createWriteStream } from 'fs';
 
@@ -9,7 +9,7 @@ const ws = createWriteStream(outpath, { flags: 'w' });
 
 export function buildTokens() {
 
-  const tokens = parseTokens(defaultTokens as any);
+  const tokens = parseTokens();
   const buffer = Buffer.from(tokens, 'utf-8');
 
   let hasError = false;

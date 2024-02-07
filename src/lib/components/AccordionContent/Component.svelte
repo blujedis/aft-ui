@@ -29,7 +29,6 @@
 		.create('AccordionContent')
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size) // should match button for alignment.
-		.option('common', 'panelFill', variant === 'filled')
 		.prepend(`accordion-content`, true)
 		.append($$restProps.class, true)
 		.compile(true);
