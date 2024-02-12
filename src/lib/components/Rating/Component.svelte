@@ -53,7 +53,7 @@
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.append('inline-flex spacing-x-0', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleSelect(selected: number, e: MouseEvent) {
 		if (readonly) return;

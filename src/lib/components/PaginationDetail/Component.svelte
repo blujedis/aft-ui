@@ -21,7 +21,7 @@
 		.append('w-full', full)
 		.append('flex items-center justify-center', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={paginationDetailClasses}>

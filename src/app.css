@@ -8,7 +8,7 @@ body {
 	@apply tracking-tight; */
 }
 
-/* .dark & [type='text'],
+.dark & [type='text'],
 input:where(:not([type])),
 [type='email'],
 [type='url'],
@@ -24,8 +24,8 @@ input:where(:not([type])),
 [multiple],
 textarea,
 select {
-	color: var(--body-text-dark);
-} */
+	color: rgb(var(--body-text-light));
+}
 
 /* h1,
 h2,

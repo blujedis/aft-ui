@@ -4,7 +4,7 @@
 
 	type $$Props = FlushedProps & ElementProps<'div'>;
 
-	export let { active, disabled, focused, group, peer, hover, theme } = {
+	export let { selected, disabled, focused, group, peer, hovered, theme } = {
 		...defaults
 	} as Required<$$Props>;
 
@@ -18,13 +18,14 @@
 
 	$: flushedClasses = th
 		.create('Flushed')
-		.variant('flushed', 'default', theme, true)
-		.variant('flushed', 'hovered', theme, hover)
-		.option('focusedBorderPeer', theme, peer)
+		.option('mainBorder', theme, true)
+		.option('mainBorderPeerFocus', theme, true)
+		.option('mainBorderGroupHover', theme, true)
+		.append('group-hover:border', hovered)
 		.append('peer-focus:border-t-2', peer)
 		.append('group-focus-within:border-t-2', group)
-		.append('aria-checked:border-t-2 aria-selected:border-t-2 aria-expanded:border-t-2', active)
-		.append('border-t', active !== false)
+		.append('aria-checked:border-t-2 aria-selected:border-t-2 aria-expanded:border-t-2', selected)
+		.append('border-t', selected !== false)
 		.append('absolute inset-x-0 bottom-0 border-x-0 border-b-0', true)
 		.compile();
 </script>

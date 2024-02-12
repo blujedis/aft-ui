@@ -27,7 +27,7 @@
 		.option('gridHeaderPadding', size, size)
 		.prepend('datagrid__header_cell datagrid__cell', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function sort() {
 		const key = sortdir === 0 ? accessor : '-' + accessor;

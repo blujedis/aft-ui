@@ -24,7 +24,7 @@
 		.append('flex -space-x-2 overflow-hidden', true)
 		.append('isolate ', direction === 'down')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	// Prevents user from having to decorate each
 	// Avatar with a z-index, should we do this?

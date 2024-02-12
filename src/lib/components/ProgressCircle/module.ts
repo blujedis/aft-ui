@@ -1,8 +1,5 @@
 import { cubicOut } from 'svelte/easing';
 import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { progressCircleTrack } from './config';
-
-export type ProgressCircleVariant = keyof typeof progressCircleTrack;
 
 export type ProgressCircleTweenedOptions<T extends number = any> = {
 	delay?: number;
@@ -21,7 +18,6 @@ export type ProgressCircleProps<T extends number = any> = ProgressCircleTweenedO
 	theme?: ThemeColor;
 	tracksize?: ThemeSize | number; // fallback to "size"
 	value?: T;
-	variant?: ProgressCircleVariant;
 };
 
 export const progressCircleDefaults: ProgressCircleProps<any> = {
@@ -32,7 +28,6 @@ export const progressCircleDefaults: ProgressCircleProps<any> = {
 	size: 'md',
 	text: true,
 	textunit: '%',
-	theme: 'default',
+	theme: 'frame',
 	value: 0,
-	variant: 'filled'
 };

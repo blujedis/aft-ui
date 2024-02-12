@@ -8,18 +8,28 @@
 	import { type IconProps, iconDefaults as defaults } from './module';
 	import Icon from '@iconify/svelte';
 	import { themer, themeStore } from '$lib/theme';
+	import type { ThemeColor } from '$lib/types';
 	type $$Props = IconProps;
-	export let { icon, size, unstyled } = { ...defaults } as Required<$$Props>;
+	export let { hovered, icon, size, stroke, theme, transitioned } = {
+		...defaults
+	} as Required<$$Props>;
 
 	const th = themer($themeStore);
+	$: _theme = (['white', 'black'].includes(theme) ? '' : theme) as ThemeColor;
 
-	$: iconClasses = unstyled
-		? $$restProps.class
-		: th
-				.create('Icon')
-				.option('iconSizes', size, size)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: iconClasses = th
+		.create('Icon')
+		.option('iconSizes', size, size)
+		.option('iconText', theme, theme && !stroke)
+		.option('iconStroke', theme, theme && stroke)
+		.option('hovered', 'filled', theme, hovered)
+		.option('common', 'transitioned', transitioned)
+		// .append('text-white', theme === 'white')
+		// .append('text-black', theme === 'black')
+		// .append('stroke-white', stroke && theme === 'white')
+		// .append('stroke-black', stroke && theme === 'black')
+		.append($$restProps.class, true)
+		.compile();
 </script>
 
 <Icon {icon} class={iconClasses} aria-hidden={true} />

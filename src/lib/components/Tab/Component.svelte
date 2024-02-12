@@ -54,7 +54,7 @@
 			variant === 'grouped'
 		)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleSelect(value: SelectStoreValue) {
 		if ($context?.selected?.includes(value)) context.unselect(value);

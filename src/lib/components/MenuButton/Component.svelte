@@ -2,7 +2,7 @@
 	import { type MenuButtonProps, menuButtonDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import  { type MenuContext, Button, Icon } from '$lib/components';
+	import { type MenuContext, Button, Icon } from '$lib/components';
 	import { getContext } from 'svelte';
 
 	type $$Props = MenuButtonProps & ElementProps<'div'>;
@@ -20,7 +20,7 @@
 		.create('MenuButton')
 		.append('h-full', true) // without h-full button won't fill parent.
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: iconClasses = th
 		.create('MenuButtonIcon')
@@ -34,7 +34,6 @@
 		.compile();
 
 	function handleClick(e: CustomEvent<HTMLButtonElement>) {
-	
 		context.toggle();
 	}
 </script>

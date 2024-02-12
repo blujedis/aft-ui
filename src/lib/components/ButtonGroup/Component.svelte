@@ -6,7 +6,7 @@
 	} from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import {  setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
 
@@ -15,6 +15,7 @@
 	export let {
 		focused,
 		full,
+		hovered,
 		multiple,
 		rounded,
 		selected,
@@ -32,6 +33,7 @@
 	const globals = cleanObj({
 		focused,
 		full,
+		hovered,
 		rounded,
 		size,
 		theme,
@@ -46,13 +48,12 @@
 
 	$: buttonGroupClasses = themer($themeStore)
 		.create('ButtonGroup')
-		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
-		.append('isolate inline-flex[&>:not(:first-child):not(:last-child)]:rounded-none', true)
+		.append('isolate inline-flex [&>:not(:first-child):not(:last-child)]:rounded-none', true)
 		.append('space-x-4', variant === 'text')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleReset() {}
 </script>

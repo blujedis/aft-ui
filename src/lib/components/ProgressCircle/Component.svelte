@@ -20,7 +20,6 @@
 		textunit,
 		theme,
 		value,
-		variant,
 		tracksize
 	} = {
 		...defaults
@@ -54,25 +53,25 @@
 		.create('ProgressCircle')
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleTrackClasses = th
 		.create('ProgressCircleTrack')
-		.variant('progressCircleTrack', variant, theme, true)
+		.bundle(['progressStroke'], theme, true)
 		.append('fill-transparent', true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleValueClasses = th
 		.create('ProgressCircleValue')
-		.variant('progressCircleValue', variant, theme, true)
+		.bundle(['iconStroke'], theme, true)
 		.append('fill-transparent', true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleTextClasses = th
 		.create('ProgressCircleText')
-		.variant('progressCircleText', variant, theme, true)
+		.bundle(['progressFill'], theme, true)
 		.option('progressCircleTextSizes', size as 'md', typeof size === 'string')
-		.compile(true);
+		.compile();
 
 	function normalizeSize() {
 		let nsize = 0;

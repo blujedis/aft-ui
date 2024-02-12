@@ -1,13 +1,8 @@
 <script lang="ts">
 	import { Checkbox, type CheckboxVariant } from '.';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/types';
+	import { colors } from '$lib/constants/colors';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Checkboxes';
 	const description = 'Themed Checkbox component.';
@@ -17,20 +12,20 @@
 	const props = {
 		disabled: false,
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as ThemeTransitioned,
+		transitioned: false,
 		variant: 'outlined' as CheckboxVariant
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Checkbox {...props} />
-		</label>
+<ExamplePage {title} {description}>
+	<div class="grid grid-cols-8 gap-2">
+		{#each colors as color}
+			<label for="outlined">
+				<Checkbox {...props} theme={color} />
+			</label>
+		{/each}
 	</div>
 </ExamplePage>

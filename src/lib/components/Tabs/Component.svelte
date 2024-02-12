@@ -54,7 +54,7 @@
 		.append('hidden sm:flex items-start flex-col', true)
 		.append('max-w-min', condensed && !full)
 		.append(navWrapperClasses, true)
-		.compile(true);
+		.compile();
 
 	$: tabControllerNavContainerClasses = th
 		.create('TabsNavContainer')
@@ -62,7 +62,7 @@
 		.append('w-full', full)
 		.append('hidden sm:block', true)
 		.append(navContainerClasses, true)
-		.compile(true);
+		.compile();
 
 	$: tabControllerNavClasses = th
 		.create('TabsNav')
@@ -78,7 +78,7 @@
 		.append('isolate flex', true)
 		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'grouped')
 		.append(navClasses, true)
-		.compile(true);
+		.compile();
 
 	function handleReset() {}
 </script>

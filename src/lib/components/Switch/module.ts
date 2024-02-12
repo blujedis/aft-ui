@@ -1,7 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { switchBackdrop } from './config';
-
-export type SwitchVariant = keyof typeof switchBackdrop;
+import type { ThemeColor,  ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type SwitchProps = {
 	position?: 'right' | 'left' | 'top' | 'bottom'; // relative to slot element
@@ -9,20 +6,18 @@ export type SwitchProps = {
 	classFill?: string;
 	classBackdrop?: string;
 	disabled?: boolean;
-	focused?: ThemeFocused;
+	focused?: boolean;
+	hovered?: boolean;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	srtext?: string;
 	theme?: ThemeColor;
-	variant?: SwitchVariant;
-	unstyled?: boolean;
+	transitioned?: boolean;
 };
 
 export const switchDefaults: Partial<SwitchProps> = {
-	focused: true,
 	size: 'md',
 	srtext: 'Use Switch',
-	theme: 'default',
-	variant: 'filled',
+	theme: 'frame',
 	position: 'right'
 };

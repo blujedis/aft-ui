@@ -31,7 +31,7 @@
 		.option('buttonPadding', size, size) // should match button for alignment.
 		.prepend(`accordion-content`, true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 {#if isSelected}

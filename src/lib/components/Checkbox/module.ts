@@ -4,16 +4,15 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { checkbox } from './config';
 
-export type CheckboxVariant = keyof typeof checkbox;
+export type CheckboxVariant = 'outlined';
 
 export type CheckboxProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	hovered?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -25,8 +24,6 @@ export type CheckboxProps = {
 
 export const checkboxDefaults: Partial<CheckboxProps> = {
 	focused: true,
-	rounded: 'full',
 	size: 'md',
-	theme: 'default',
 	variant: 'outlined'
 };

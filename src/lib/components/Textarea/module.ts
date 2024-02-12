@@ -5,17 +5,15 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned,
-	ThemeVariant
 } from '$lib/types';
-// import type { textarea } from './config';
 
-export type TextareaVariant = Exclude<ThemeVariant, 'text' | 'flushed'>; //  keyof typeof textarea;
+export type TextareaVariant = 'outlined' | 'soft' | 'text';  
 
 export type TextareaProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	hovered?: boolean;
 	resize?: ThemeResize;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
@@ -23,7 +21,6 @@ export type TextareaProps = {
 	theme?: ThemeColor;
 	transitioned?: boolean;
 	variant?: TextareaVariant;
-	unstyled?: boolean;
 };
 
 export const textareaDefaults: Partial<TextareaProps> = {
@@ -31,6 +28,6 @@ export const textareaDefaults: Partial<TextareaProps> = {
 	resize: 'both',
 	rounded: 'sm',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'outlined'
 };

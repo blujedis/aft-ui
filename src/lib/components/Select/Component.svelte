@@ -14,6 +14,7 @@
 		disabled,
 		focused,
 		full,
+		hovered,
 		multiple,
 		placeholder,
 		rows,
@@ -24,7 +25,6 @@
 		theme,
 		transitioned,
 		variant,
-		unstyled
 	} = {
 		...defaults
 	} as Required<$$Props>;
@@ -39,22 +39,37 @@
 
 	$: inputClasses = th
 		.create('Select')
-		.variant('input', variant, theme, variant)
-		.option('focusedRing', theme, focused && variant !== 'flushed')
+		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['inputText', 'mainRing'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['softBg', 'inputText'], theme, variant === 'soft')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
+		.option('common', 'focusedOutline', focused && variant === 'outlined')
+		.option(
+			'outlineFocus',
+			theme,
+			focused && ['outlined', 'ghost', 'soft', 'text'].includes(variant)
+		)
+		.bundle(['inputText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
-		.option('placeholders', theme, true)
+		.option('hovered', variant, theme, hovered)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
+		.prepend(`select select-${variant}`, true)
 		.append('w-full', full)
-		.append('border-0 ring-0', variant !== 'outlined')
-		.append('px-2 peer focus:ring-0 outline-none border-0', variant === 'flushed')
-		.append('flex items-center justify-center pr-10 outline-none', true) // always pad right for caret.
+		.append('dark:bg-transparent', ['outlined', 'flushed', 'text', 'ghost'].includes(variant))
+		.append('peer px-2', variant === 'flushed')
+		.append('flex items-center justify-center pr-10 focus:ring-0 outline-none border-0', true) // always pad right for caret.
 		.append(multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 	const component = Flushed as any; // TODO: Fix types in Conditional Element

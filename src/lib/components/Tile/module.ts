@@ -3,14 +3,14 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { tile } from './config';
 
-export type TileVariant = keyof typeof tile;
+export type TileVariant = 'filled' | 'outlined' | 'soft';  
 
 export type TileProps = {
+	focused?: boolean;
 	full?: boolean;
+	hovered?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -22,6 +22,6 @@ export type TileProps = {
 export const tileDefaults: Partial<TileProps> = {
 	rounded: 'md',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'filled'
 };

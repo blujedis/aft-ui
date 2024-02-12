@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { type DataGridCellProps, gridCellDefaults as defaults } from './module';
-	import {  type DataGridContext } from '$lib/components/DataGrid';
-	import { themeStore, themer, pickCleanProps} from '$lib/theme';
+	import { type DataGridContext } from '$lib/components/DataGrid';
+	import { themeStore, themer, pickCleanProps } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
 
 	type Data = $$Generic<DataGridDataItem>;
@@ -25,7 +25,7 @@
 		.prepend('datagrid__cell', true)
 		.append('col-span-full', full)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={gridCellClasses}>

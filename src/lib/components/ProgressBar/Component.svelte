@@ -36,7 +36,7 @@
 
 	$: progressClasses = themer($themeStore)
 		.create('ProgressBar')
-		.variant('progressBar', variant, theme, true)
+		.bundle(['progressBgWebkitProgressValue', 'progressBgMozProgressBar'], theme, true)
 		.option('progressBarSizes', size, size)
 		.option('progressBarRoundedBar', boolToMapValue(rounded), rounded)
 		.option('progressBarRoundedValue', boolToMapValue(rounded), rounded)
@@ -44,7 +44,7 @@
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

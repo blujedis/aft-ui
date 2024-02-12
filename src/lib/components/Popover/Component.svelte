@@ -17,9 +17,7 @@
 		shadowed,
 		size,
 		theme,
-		transitioned,
-		unstyled,
-		variant
+		transitioned
 	} = {
 		id: 'popover',
 		...defaults
@@ -30,7 +28,7 @@
 
 	$: popoverClasses = th
 		.create('Popover')
-		.variant('popover', variant, theme, variant)
+		.bundle(['tooltipBg', 'tooltipText'], theme, true)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'transitioned', transitioned)
@@ -38,7 +36,7 @@
 		.option('popoverSizes', size, size)
 		.append('absolute animate-fade-in-down', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div

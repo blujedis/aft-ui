@@ -34,7 +34,7 @@
 		.append(horizontal ? 'flex' : 'flex flex-col', true)
 		.append('overflow-hidden', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={cardClasses}>

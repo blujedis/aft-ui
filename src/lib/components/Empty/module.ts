@@ -3,15 +3,15 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { empty } from './config';
 
-export type EmptyVariant = keyof typeof empty;
+export type EmptyVariant = 'outlined'; 
 
 export type EmptyProps = {
 	as?: 'button' | 'link' | 'div' | 'span' | 'label';
+	focused?: bolean;
 	full?: boolean;
+	hovered?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -24,6 +24,5 @@ export type EmptyProps = {
 export const emptyDefaults: Partial<EmptyProps> = {
 	as: 'div',
 	size: 'md',
-	theme: 'default',
 	variant: 'outlined'
 };

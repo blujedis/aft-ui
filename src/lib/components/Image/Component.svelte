@@ -23,7 +23,7 @@
 		.append('w-full', ['w', 'width'].includes(full as string))
 		.append('h-full', ['h', 'height'].includes(full as string))
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

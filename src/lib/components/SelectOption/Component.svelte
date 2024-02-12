@@ -26,7 +26,7 @@
 		.option('common', 'disabled', disabled)
 		.append('flex items-center justify-center', true) // always pad right for caret.
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

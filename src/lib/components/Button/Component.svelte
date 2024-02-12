@@ -37,8 +37,7 @@
 		.bundle(['mainText', 'ghostBgHover'], { dark: 'hover:text-white' }, theme, variant === 'ghost')
 		.bundle(['softText', 'softBg'], theme, variant === 'soft')
 		.option('hovered', variant, theme, hovered)
-		.option('outlineFocusVisible', theme, focused)
-		.option('common', 'focusedVisible', focused)
+		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
@@ -52,7 +51,7 @@
 		.append('w-full', full)
 		.append('inline-flex items-center justify-center cursor-pointer outline-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

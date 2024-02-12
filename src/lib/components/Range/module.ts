@@ -4,11 +4,7 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { rangeTrackBackground } from './config';
-
-export type RangeVariant = keyof typeof rangeTrackBackground;
 
 export type RangeProps = {
 	focused?: ThemeFocused;
@@ -18,11 +14,9 @@ export type RangeProps = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;
-	variant?: RangeVariant;
 };
 
 export const rangeDefaults: RangeProps = {
 	size: 'md',
-	theme: 'default',
-	variant: 'filled'
+	theme: 'frame',
 };

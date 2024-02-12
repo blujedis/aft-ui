@@ -27,7 +27,7 @@
 		.option('cardFontSizes', size, size)
 		.append('flex-1', type === 'content')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={cardElementClasses}>

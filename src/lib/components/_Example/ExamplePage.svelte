@@ -28,7 +28,6 @@
 			<p
 				class="mt-2 mb-4 p-4 bg-frame-100 ring-frame-950/10 dark:ring-frame-700 dark:bg-frame-900/40 ring-opacity-10 ring-1"
 			>
-				4
 				{description}
 			</p>
 		{/if}

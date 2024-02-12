@@ -5,13 +5,7 @@
 	import { MenuOption } from '../MenuOption';
 	import { MenuPanel } from '../MenuPanel';
 	import { colors } from '$lib/constants';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Menu';
 	const description = 'Dropdown menu examples.';
@@ -78,17 +72,18 @@
 	];
 
 	const props = {
+		hovered: true,
 		disabled: false,
 		full: false,
 		rounded: 'none' as ThemeRounded,
-		shadowed: 'none' as ThemeShadowed,
+		// shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
 		variant: 'filled' as any
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#key props}
 		{#each colors as color}
 			<div class="grid grid-cols-5 gap-2 mb-4">
@@ -102,6 +97,7 @@
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
 					<Menu {...props} variant="outlined" theme={color}>
 						<MenuButton>Languages</MenuButton>
@@ -112,8 +108,9 @@
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
-					<Menu {...props} variant="text" theme={color}>
+					<Menu {...props} variant="soft" theme={color}>
 						<MenuButton>Languages</MenuButton>
 						<MenuPanel>
 							{#each sourceItems as item}
@@ -122,8 +119,20 @@
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
 					<Menu {...props} variant="ghost" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+
+				<label for={color}>
+					<Menu {...props} variant="text" theme={color}>
 						<MenuButton>Languages</MenuButton>
 						<MenuPanel>
 							{#each sourceItems as item}

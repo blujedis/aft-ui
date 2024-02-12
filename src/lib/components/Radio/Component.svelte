@@ -11,6 +11,7 @@
 		disabled,
 		focused,
 		full,
+		hovered,
 		rounded,
 		shadowed,
 		size,
@@ -22,24 +23,30 @@
 		...defaults
 	} as Required<$$Props>;
 
-	$: checkboxClasses = themer($themeStore)
+	const th = themer($themeStore);
+
+	$: radioClasses = th
 		.create('Radio')
-		.variant('radio', variant, theme, variant)
-		.option('focusedRing', theme, focused)
-		.option('common', 'transitioned', transitioned)
 		.option('iconSizes', size, size)
+		.bundle(['defaultText'], theme, true)
+		.option('hovered', variant, theme, hovered)
+		.option('common', 'focusedOutline', focused)
+		.option('outlineFocus', theme, focused)
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'formBorder', true)
+		.option('checkboxSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append(
-			'flex items-center justify-center form-radio focus:outline-none focus:ring-2 focus:ring-offset-2',
+			'flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent',
 			true
 		)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} type="radio" use:forwardedEvents class={checkboxClasses} />
+<input {...$$restProps} type="radio" use:forwardedEvents class={radioClasses} />

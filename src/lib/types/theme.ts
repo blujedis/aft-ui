@@ -70,7 +70,7 @@ export type TailwindColor = keyof typeof tailwindcolors;
 export type NamedColor = keyof typeof namedcolors;
 export type ThemeColorBase = (typeof colors)[number];
 export type ThemeColorShade = (typeof shades)[number];
-export type ThemeColor = ThemeColorBase;
+export type ThemeColor = ThemeColorBase | 'white' | 'black';
 
 export interface ThemeConfig {
 	options: ThemeOptions;

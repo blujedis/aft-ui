@@ -34,7 +34,7 @@
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
 		.variant('breadcrumbOption', variant, theme, variant)
-		.option('common', 'focusedVisible', focused)
+		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'muteSelected', true)
@@ -42,20 +42,20 @@
 		.option('breadcrumbMargins', size, size)
 		.append('aria-selected:pointer-events-none outline-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: breadcrumbOptionWrapperClasses = th
 		.create('BreadcrumbOptionWrapper')
 		.option('breadcrumbFilledHeight', size, size)
 		.append('flex items-center', true)
-		.compile(true);
+		.compile();
 
 	$: breadcrumbIconClasses = th
 		.create('BreadcrumbIcon')
 		.option('breadcrumbFilledIconWidth', size, size)
 		.append('opacity-40', true) // mutes icon separators
 		.append('h-full flex-shrink-0 pointer-events-none', true)
-		.compile(true);
+		.compile();
 
 	onMount(() => {
 		mounted = true;

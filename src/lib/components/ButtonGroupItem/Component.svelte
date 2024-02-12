@@ -33,7 +33,7 @@
 	const passthru = cleanObj({
 		disabled,
 		focused,
-		full,
+		full: false,
 		hovered,
 		rounded,
 		size,
@@ -65,13 +65,16 @@
 			variant === 'soft'
 		)
 		.option('buttonPadding', size, size)
+		.option('common', 'bordered', variant === 'filled')
+		.append('first:border-l-0 border-l', variant === 'filled')
 		.append('px-1', variant === 'text')
+		.append('flex-1', full)
 		.append(
 			'relative first:ml-0 focus:z-10 -ml-px first:rounded-r-none last:rounded-l-none aria-checked:pointer-events-none',
 			true
 		)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleSelect(value: SelectStoreValue) {
 		if ($context?.selected?.includes(value)) context.unselect(value);
@@ -83,21 +86,21 @@
 	as={Flushed}
 	condition={variant === 'text'}
 	props={{
-		active: isSelected,
+		selected: isSelected,
 		theme,
 		group: true,
-		hover: hovered,
-		focused: focused
+		hovered,
+		focused
 	}}
 >
 	<svelte:component
 		this={Button}
+		aria-labelledby={value + ''}
 		{...$$restProps}
 		{...passthru}
 		role="listitem"
 		class={buttonClasses}
 		aria-checked={isSelected}
-		aria-labelledby={value + ''}
 		on:click={() => handleSelect(value)}
 	>
 		<slot />

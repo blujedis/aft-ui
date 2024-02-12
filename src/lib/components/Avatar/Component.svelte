@@ -50,10 +50,13 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('hovered', variant, theme, hovered)
-		.append('ring-2 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))]', stacked)
+		.append(
+			'ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]',
+			stacked
+		)
 		.append('relative', stacked === 'down')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: avatarPlaceholderClasses =
 		(_placeholder &&
@@ -67,7 +70,7 @@
 				.option('hovered', variant, theme, hovered)
 				.option('avatarSizes', size, size)
 				.append(
-					'ring-4 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))]',
+					'ring-4 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]',
 					stacked
 				)
 				.append('relative', stacked === 'down')
@@ -88,7 +91,7 @@
 				.option('animate', animate, animate)
 				.option('avatarNotificationOffsets', size, size)
 				.append(
-					'absolute block rounded-full inline-flex items-center justify-center ring-2 ring-[rgb(var(--body-bg-light))] dark:ring-[rgb(var(--body-bg-dark))] ',
+					'absolute block rounded-full inline-flex items-center justify-center ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))] ',
 					true
 				)
 				.append(

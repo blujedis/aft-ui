@@ -5,12 +5,11 @@ export type FlushedProps = {
 	focused?: ThemeFocused;
 	group?: boolean;
 	peer?: boolean;
-	hover?: boolean;
-	active?: boolean;
+	hovered?: boolean;
+	selected?: boolean;
 	theme?: ThemeColor;
 };
 
 export const flushedDefaults: Partial<FlushedProps> = {
 	peer: true,
-	theme: 'default'
 };

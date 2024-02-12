@@ -6,32 +6,22 @@
 
 	const title = 'Switch';
 	const description = 'Toggle switch component.';
-	const code = `
-  `;
 
 	let checked = true;
 
 	const props = {
 		disabled: false,
-		focused: true as ThemeFocused,
+		focused: true,
 		shadowed: 'none' as ThemeShadowed,
-		size: 'lg' as ThemeSize,
-		theme: 'dark' as ThemeColor,
 		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
-		<Switch {...props} bind:checked theme="default" size="xs" />
-		<Switch {...props} bind:checked theme="dark" size="sm" />
-		<Switch {...props} bind:checked theme="primary" size="md" />
-		<Switch {...props} bind:checked theme="secondary" size="lg" />
-		<Switch {...props} bind:checked theme="tertiary" size="xl" />
-		<Switch {...props} bind:checked theme="danger" size="xl2" />
-		<Switch {...props} bind:checked theme="warning" size="xl2" />
-		<Switch {...props} bind:checked theme="success" size="xl2" />
-		<Switch {...props} bind:checked theme="info" size="xl2" />
+		{#each colors as color}
+			<Switch {...props} bind:checked theme={color} size="md" />
+		{/each}
 	</div>
 
 	<!-- <div class="grid grid-cols-3 gap-4">

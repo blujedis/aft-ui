@@ -13,39 +13,52 @@
 		disabled,
 		focused,
 		full,
+		hovered,
 		rounded,
 		shadowed,
 		size,
 		theme,
 		transitioned,
-		variant,
-		unstyled
+		variant
 	} = {
-		...defaults,
-		// ...$themeStore?.defaults?.component
+		...defaults
+		//...$themeStore.defaults?.component
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: inputClasses = unstyled
-		? th.create('Input').append($$restProps.class, true).compile(true)
-		: th
-				.create('Input')
-				.variant('input', variant, theme, variant)
-				.option('focusedRing', theme, focused && variant !== 'flushed')
-				.option('placeholders', theme, true)
-				.option('common', 'transitioned', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('fieldPadding', size, size)
-				.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
-				.option('shadows', boolToMapValue(shadowed), shadowed)
-				.option('common', 'disabled', disabled)
-				.append('w-full', full)
-				.append('focus:outline-none focus:ring-2', focused && variant !== 'flushed')
-				.append('px-1 peer focus:ring-0 focus:outline-none border-0', variant === 'flushed')
-				.append('flex items-center justify-center', true)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: inputClasses = th
+		.create('Input')
+		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['inputText', 'mainRing'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(
+			['mainBorder', 'mainBorderGroupHover', 'softBg', 'inputText'],
+			theme,
+			variant === 'soft'
+		)
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
+		.option('common', 'focusedOutline', focused && variant === 'outlined')
+		.option('outlineFocus', theme, focused && variant === 'outlined')
+		.bundle(['inputText'], theme, variant === 'text')
+		.option('common', 'transitioned', transitioned)
+		.option('hovered', variant, theme, hovered)
+		.option('fieldFontSizes', size, size)
+		.option('fieldPadding', size, size)
+		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('common', 'disabled', disabled)
+		.append('w-full', full)
+		.append('dark:bg-transparent', ['outlined', 'flushed', 'text'].includes(variant))
+		.append('peer border-0', ['flushed'].includes(variant))
+		.append('px-1', variant === 'flushed')
+		.append('flex items-center justify-center outline-none', true)
+		.append($$restProps.class, true)
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

@@ -5,12 +5,9 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
 
-import type { select } from './config';
-
-export type SelectVariant = keyof typeof select;
+export type SelectVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text'; // keyof typeof select;
 
 export type SelectContext = SelectStore & {
 	//
@@ -20,6 +17,7 @@ export type SelectProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	hovered?: boolean;
 	multiple?: boolean;
 	placeholder?: boolean | string;
 	rows?: number; // mapped to native size attribute.
@@ -30,7 +28,6 @@ export type SelectProps = {
 	theme?: ThemeColor;
 	transitioned?: boolean;
 	variant?: SelectVariant;
-	unstyled?: boolean;
 };
 
 export const selectDefaults: Partial<SelectProps> = {
@@ -38,6 +35,6 @@ export const selectDefaults: Partial<SelectProps> = {
 	placeholder: true,
 	rounded: 'sm',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'outlined'
 };

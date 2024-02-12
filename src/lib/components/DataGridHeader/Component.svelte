@@ -49,7 +49,7 @@
 		.append('sticky top-0 z-10', sticky) // add overflow-clip & "rounded" to keep top rounding
 		.append('rounded-b-none', rounded)
 		.prepend('datagrid__header shadow-sm', true)
-		.compile(true);
+		.compile();
 
 	$: gridHeaderClasses = th
 		.create('DataGridHeader')
@@ -57,7 +57,7 @@
 		.append('auto-cols-fr', autocols)
 		.prepend('datagrid__header_row grid grid-flow-col w-full', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div class={gridHeaderWrapperClasses}>

@@ -46,14 +46,14 @@
 		)
 		.append('!pl-0', variant === 'text')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: breadcrumbListClasses = th
 		.create('Breadcrumb')
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbSpacings', size, size)
 		.append('inline-flex items-center', true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 

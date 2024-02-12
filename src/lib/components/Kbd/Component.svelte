@@ -2,31 +2,38 @@
 	import { type KbdProps, kbdDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder, boolToMapValue} from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 
 	type $$Props = KbdProps & Omit<ElementProps<'kbd'>, 'size'>;
 
-	export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
+	export let { full, hovered, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults
 	} as Required<$$Props>;
 
-	$: kbdClasses = themer($themeStore)
+	const th = themer($themeStore);
+
+	$: kbdClasses = th
 		.create('Kbd')
-		.variant('kbd', variant, theme, variant)
+		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
+		.bundle(['softBg', 'mainText'], theme, variant === 'soft')
 		.option('common', 'transitioned', transitioned)
+		.option('hovered', variant, theme, hovered)
 		.option('kbdPadding', size, size)
 		.option('badgeFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
-		.append('inline-flex items-center justify-center flex-col', true)
+		.append('relative inline-flex items-center justify-center align-text-bottom', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 <kbd use:forwardedEvents {...$$restProps} class={kbdClasses}>
-	<slot />
+	<span class="pt-px">
+		<slot />
+	</span>
 </kbd>

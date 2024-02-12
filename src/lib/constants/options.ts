@@ -2,8 +2,8 @@ import { mergeConfigs } from '../theme/utils';
 
 export const placeholder = {
 	$base: '',
-	// default: '',
-	// dark: '',
+	white: '',
+	black: '',
 	frame: '',
 	primary: '',
 	secondary: '',
@@ -76,7 +76,16 @@ export const fieldPaddingX = {
 	xl2: 'px-6'
 };
 
-export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX);
+export const fieldLeading = {
+	xs: 'sm:leading-5',
+	sm: 'sm:leading-5',
+	md: 'sm:leading-6',
+	lg: 'sm:leading-7',
+	xl: 'sm:leading-8',
+	xl2: 'sm:leading-9'
+};
+
+export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
 
 export const buttonPadding = mergeConfigs(fieldPaddingY, {
 	unstyled: '',
@@ -189,6 +198,20 @@ export const boxPadding = {
 	xl2: 'px-12'
 };
 
+export const sizeStepdown = {
+	unstyled: 'unstyled',
+	none: 'none',
+	xs: 'xs',
+	sm: 'xs',
+	md: 'sm',
+	lg: 'md',
+	xl: 'lg',
+	xl2: 'xl',
+	full: 'rounded-full',
+	true: 'rounded-sm',
+	false: 'rounded-none'
+};
+
 export const shadows = {
 	unstyled: '',
 	inner: 'shadow-inner',
@@ -265,8 +288,9 @@ export const animate = {
 
 const _hovered = {
 	$base: 'hover:brightness-115',
+	white: '',
+	black: '',
 	frame: '',
-	// dark: 'dark:hover:brightness-150',
 	primary: '',
 	secondary: '',
 	tertiary: '',

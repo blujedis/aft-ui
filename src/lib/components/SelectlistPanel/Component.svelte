@@ -12,7 +12,7 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { origin, position, rounded, shadowed, theme, transition, variant } = {
+	export let { origin, position, rounded, shadowed, theme, transition } = {
 		...defaults,
 		...context?.globals
 	} as Required<SelectListPanelProps>;
@@ -20,6 +20,7 @@
 	const th = themer($themeStore);
 
 	$: nav = useFocusNav($context.panel?.firstChild);
+
 	$: selected = $context.selected.map((v) =>
 		$context.items.find((item) => item.value === v)
 	) as SelectListItem[];
@@ -42,7 +43,7 @@
 
 	$: panelClasses = th
 		.create('SelectListPanel')
-		.variant('selectListPanel', variant, theme, variant)
+		.option('panelBg', theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true)
@@ -51,7 +52,7 @@
 		.append('origin-center', origin === 'center')
 		.append('w-full', context.globals.full)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function setFocus(el: HTMLElement) {
 		el.focus();

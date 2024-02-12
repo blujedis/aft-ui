@@ -14,6 +14,7 @@
 		disabled: false,
 		focused: true, // true: focus-visible.
 		full: false,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
@@ -31,9 +32,17 @@
 	];
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="grid grid-cols-4 gap-4 mb-4">
+		<div class="grid grid-cols-5 gap-4 mb-4">
+			<label for="filled">
+				<Select {...props} variant="filled" selected="react" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+
 			<label for="filled">
 				<Select {...props} variant="outlined" selected="react" theme={color}>
 					{#each items as item}
@@ -42,16 +51,8 @@
 				</Select>
 			</label>
 
-			<label for="glass">
-				<Select {...props} variant="glass" selected="rust" theme={color}>
-					{#each items as item}
-						<SelectOption value={item.value}>{item.label}</SelectOption>
-					{/each}
-				</Select>
-			</label>
-
 			<label for="outline">
-				<Select {...props} variant="filled" selected="java" theme={color}>
+				<Select {...props} variant="soft" selected="java" theme={color}>
 					{#each items as item}
 						<SelectOption value={item.value}>{item.label}</SelectOption>
 					{/each}
@@ -60,6 +61,14 @@
 
 			<label for="link">
 				<Select {...props} variant="flushed" selected="rust" theme={color}>
+					{#each items as item}
+						<SelectOption value={item.value}>{item.label}</SelectOption>
+					{/each}
+				</Select>
+			</label>
+
+			<label for="glass">
+				<Select {...props} variant="text" selected="rust" theme={color}>
 					{#each items as item}
 						<SelectOption value={item.value}>{item.label}</SelectOption>
 					{/each}

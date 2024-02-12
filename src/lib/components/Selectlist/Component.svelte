@@ -16,11 +16,16 @@
 	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size'>;
 
 	export let {
+		badgeProps,
 		autoclose,
+		disabled,
 		escapable,
 		items,
+		filterable,
 		filter: initFilter,
 		full,
+		focused,
+		hovered,
 		multiple,
 		newable,
 		placeholder,
@@ -31,9 +36,9 @@
 		store: initStore,
 		tags,
 		theme,
-		underlined,
 		variant,
 		visible,
+		badgeVariant,
 		onBeforeAdd,
 		onBeforeRemove
 	} = {
@@ -44,7 +49,7 @@
 
 	export const store = (initStore ||
 		useSelect({
-			multiple: true,
+			multiple: tags ? true : multiple,
 			visible,
 			selected: [],
 			items: [],
@@ -52,7 +57,12 @@
 		})) as SelectStore<SelectListStore<Item>>;
 
 	const globals = cleanObj({
+		badgeProps,
+		disabled,
+		filterable,
 		full,
+		focused,
+		hovered,
 		newable,
 		multiple,
 		placeholder,
@@ -62,8 +72,8 @@
 		size,
 		tags,
 		theme,
-		underlined,
 		variant,
+		badgeVariant,
 		onBeforeAdd,
 		onBeforeRemove
 	});
@@ -99,14 +109,20 @@
 
 	$: groupKeys = Object.keys(groups);
 
-	$: multiselectClasses = th
+	$: controllerClasses = th
 		.create('SelectListController')
-		.append('w-full', full)
-		.append('relative inline-flex not-sr-only', true)
+		.append('relative flex not-sr-only min-w-min', true)
+		// .append('max-w-full', full)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
+		if (!tags && $context.input) {
+			const labels = $store.items
+				.filter((i) => $store.selected.includes(i.value))
+				.map((v) => v.label);
+			$context.input.value = labels.join(', ');
+		}
 		return (
 			(n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible) || false
 		);
@@ -186,13 +202,16 @@
 		return $store.selected.includes(key);
 	}
 
-	Promise.resolve(items)
-		.then((arr) => {
-			arr.forEach((i) => add(i));
-		})
-		.catch((ex) => {
-			console.warn((ex as Error).message);
-		});
+	items.forEach((i) => add(i));
+
+	// Promise.resolve(items)
+	// 	.then((arr) => {
+	// 		arr.forEach((i) => add(i));
+	// 		console.log('resolved all');
+	// 	})
+	// 	.catch((ex) => {
+	// 		console.warn((ex as Error).message);
+	// 	});
 </script>
 
 <div
@@ -201,9 +220,9 @@
 	use:clickOutside
 	on:click_outside={handleClose}
 	on:keydown={handleKeydown}
-	class={multiselectClasses}
+	class={controllerClasses}
 >
-	<div class:w-full={full}>
+	<div class="min-w-full">
 		<slot
 			visible={$store.visible}
 			selected={$store.selected}
@@ -216,7 +235,7 @@
 	</div>
 
 	<slot name="select">
-		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={true}>
+		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={tags ? true : multiple}>
 			{#if groupKeys.length}
 				{#each Object.entries(groups) as [group, items]}
 					<optgroup>{group}</optgroup>

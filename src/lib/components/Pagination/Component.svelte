@@ -57,7 +57,7 @@
 		.append('inline-flex items-center', ['filled', 'glass'].includes(variant))
 		.append('isolate inline-flex -space-x-px', variant === 'filled')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

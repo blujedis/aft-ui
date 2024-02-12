@@ -17,7 +17,7 @@
 		rounded: context.globals?.rounded,
 		size: context.globals?.size,
 		theme: context.globals?.theme,
-		variant: context.globals.variant,
+		variant: context.globals.variant
 		// ...pickCleanProps(
 		// 	context?.globals,
 		// 	'autocols',
@@ -36,7 +36,7 @@
 		.create('DataGridSearch')
 		.prepend('datagrid__search', true)
 		//.append('py-2 px-4', true)
-		.compile(true);
+		.compile();
 
 	$: gridSearchInputClasses = th
 		.create('DataGridSearchInput')

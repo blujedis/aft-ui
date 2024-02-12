@@ -41,20 +41,20 @@
 		.append(drawerSizeMap[size], size)
 		.append('pointer-events-auto w-screen', true)
 
-		.compile(true);
+		.compile();
 
 	$: drawerPositionClasses = th
 		.create('DrawerPosition')
 		.append(drawerPositionMap[position], position)
 		.append('pointer-events-none fixed inset-y-0 flex max-w-full', true)
-		.compile(true);
+		.compile();
 
 	$: drawerClasses = th
 		.create('DrawerWrapper')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('flex h-full flex-col overflow-y-scroll z-20 bg-white', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleClose() {
 		store.close();

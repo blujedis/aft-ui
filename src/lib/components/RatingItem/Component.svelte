@@ -51,7 +51,7 @@
 		.append('z-10 focus-visible:outline outline-2', true)
 		.append('hover:scale-125', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: stops = [
 		{ offset: `0%`, 'stop-color': initFill, 'stop-opacity': '1' },

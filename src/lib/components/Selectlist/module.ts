@@ -1,6 +1,7 @@
 import type { SelectStore, SelectStoreValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
+import type { BadgeProps, BadgeVariant } from '../Badge/module';
 
 export type SelectListItemKey = SelectStoreValue;
 
@@ -35,16 +36,22 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 	};
 
 export type SelectListContextProps = {
+	badgeProps?: BadgeProps;
+	disabled?: boolean;
+	filterable?: boolean
 	full?: boolean;
-	newable?: boolean;
+	focused?: boolean;
+	hovered?: boolean;
+	multiple?: boolean; // when not tags allows multiple items to be selected.
+	newable?: boolean;			// can add new tags
 	placeholder?: string;
-	removable?: boolean;
+	removable?: boolean;		// can remote tags
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
-	tags?: boolean;
+	tags?: boolean;				// tags enabled.
 	theme?: ThemeColor;
-	underlined?: boolean;
+	badgeVariant?: BadgeVariant;
 	variant?: SelectListVariant;
 	onBeforeAdd?: SelectListButtonProps['onBeforeAdd'];
 	onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
@@ -53,21 +60,22 @@ export type SelectListContextProps = {
 export type SelectListProps<T extends SelectListItem> = SelectListContextProps & {
 	autoclose?: boolean; // on click outside menu close.
 	escapable?: boolean; // close panel on escape key.
-	items: T[] | Promise<T[]>;
-	store?: SelectStore<SelectListStore>;
+	items: T[]; // | Promise<T[]>;
+	store?: SelectStore<SelectListStore>; // custom store.
 	visible?: boolean;
-	filter?: (query: string, items: Required<T>[]) => Required<T>[];
+	filter?: (query: string, items: Required<T>[]) => Required<T>[]; // filter used to find items in list.
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-	{
-		autoclose: true,
-		escapable: true,
-		filter: (q, i) =>
-			i.filter(
-				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-			),
-		size: 'md',
-		theme: 'default',
-		variant: 'outlined'
-	};
+{
+	autoclose: true,
+	escapable: true,
+	filterable: true,
+	filter: (q, i) =>
+		i.filter(
+			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+		),
+	size: 'md',
+	theme: 'frame',
+	variant: 'outlined'
+};

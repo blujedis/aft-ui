@@ -2,7 +2,7 @@
 	import { type MenuProps, menuDefaults as defaults, type MenuContext } from './module';
 	import { themeStore, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { useDisclosure} from '$lib/stores';
+	import { useDisclosure } from '$lib/stores';
 	import { setContext } from 'svelte';
 	import type { MenuGlobalProps } from '$lib/components/Menu';
 	import { cleanObj, createCustomEvent } from '$lib/utils';
@@ -12,12 +12,16 @@
 	export let {
 		autoclose,
 		escapable,
+		disabled,
 		full,
+		focused,
+		hovered,
 		rounded,
 		shadowed,
 		size,
 		store: initStore,
 		theme,
+		transitioned,
 		underlined,
 		variant,
 		visible
@@ -35,11 +39,15 @@
 	let div: HTMLDivElement;
 
 	const globals = cleanObj({
+		disabled,
 		full,
+		focused,
+		hovered,
 		rounded,
 		shadowed,
 		size,
 		theme,
+		transitioned,
 		underlined,
 		variant
 	});
@@ -54,7 +62,7 @@
 		.append('w-full', full)
 		.append('relative inline-block clear-both', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
 		return (

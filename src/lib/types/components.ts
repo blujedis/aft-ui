@@ -1,5 +1,5 @@
 import type { IconifyIcon } from '@iconify/svelte';
-import type { SvelteComponent, ComponentProps, SvelteComponent_1 } from 'svelte';
+import type { SvelteComponent, ComponentProps } from 'svelte';
 import type { SvelteHTMLElements } from 'svelte/elements';
 import type {
 	BlurParams,
@@ -14,7 +14,7 @@ import type {
 
 export type PrimitiveValue = string | number | boolean | undefined | null;
 export type ClassArgument = PrimitiveValue | Record<string, unknown>;
-export type HTMLTag = keyof SvelteHTMLElements; 
+export type HTMLTag = keyof SvelteHTMLElements;
 export type ElementProps<K extends HTMLTag> = SvelteHTMLElements[K];
 export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
@@ -51,7 +51,10 @@ export type ElementNativeProps<
 	A extends keyof ElementProps<T> | undefined = undefined
 > = PickNativeProps<T, A>;
 
-export type SvelteConstructorProps<T extends typeof SvelteComponent<any, any>> = ComponentProps<
+// export type SvelteConstructorProps<T extends typeof SvelteComponent<any, any>> = ComponentProps<
+// 	InstanceType<T>
+// >;
+export type SvelteConstructorProps<T extends typeof SvelteComponent> = ComponentProps<
 	InstanceType<T>
 >;
 

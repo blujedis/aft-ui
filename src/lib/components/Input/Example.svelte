@@ -12,14 +12,13 @@
 
 	const title = 'Input';
 	const description = 'Themed input form elements and variants.';
-	const code = `
-  `;
 
 	const props = {
 		disabled: false,
-		//focused: true as ThemeFocused,
+		focused: true,
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		hovered: true,
+		rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
@@ -27,23 +26,27 @@
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="grid grid-cols-4 gap-4 mb-4">
+		<div class="grid grid-cols-5 gap-4 mb-4">
+			<label for="outline">
+				<Input {...props} variant="filled" theme={color} placeholder="Last Name" />
+			</label>
+
 			<label for="filled">
 				<Input {...props} variant="outlined" theme={color} placeholder="First Name" />
 			</label>
 
 			<label for="outline">
-				<Input {...props} variant="filled" theme={color} placeholder="Last Name" />
-			</label>
-
-			<label for="ghost">
-				<Input {...props} variant="ghost" theme={color} placeholder="First Name" />
+				<Input {...props} variant="soft" theme={color} placeholder="Last Name" />
 			</label>
 
 			<label for="flushed">
 				<Input {...props} variant="flushed" theme={color} placeholder="DOB" />
+			</label>
+
+			<label for="text">
+				<Input {...props} variant="text" theme={color} placeholder="DOB" />
 			</label>
 		</div>
 	{/each}

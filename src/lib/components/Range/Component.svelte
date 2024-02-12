@@ -3,11 +3,11 @@
 	import { type RangeProps, rangeDefaults as defaults } from './module';
 	import { onMount } from 'svelte';
 	import type { ElementProps } from '$lib/types';
-	import {boolToMapValue} from '$lib/utils';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = RangeProps & Omit<ElementProps<'input'>, 'size'>;
 
-	export let { focused, full, rounded, transitioned, shadowed, size, theme, variant } = {
+	export let { focused, full, rounded, transitioned, shadowed, size, theme } = {
 		...defaults
 	} as Required<RangeProps>;
 
@@ -16,16 +16,14 @@
 	const th = themer($themeStore);
 	const st = styler($themeStore);
 
-	$: components = $themeStore?.components || {};
-
 	$: rangeStyles = st
 		.create('RangeStyles')
-		.colormap(components?.rangeTrackBackground[variant], theme, '--track-background-color', true)
-		.colormap(components?.rangeTrackAccent[variant], theme, '--track-accent-color', true)
-		.colormap(components?.rangeThumbBorder[variant], theme, '--thumb-border-color', true)
+		.color('--track-background-color', $themeStore.options.common.rangeBg, true)
+		.color('--thumb-background-color', `${theme}-${$themeStore.options.common.rangeThumb}`, true)
+		.color('--track-accent-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
+		.color('--thumb-border-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
-		.append('--thumb-background-color:#ffffff', true)
 		.append($$restProps.style, true)
 		.compile();
 
@@ -38,7 +36,7 @@
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	// IMPORTANT: without min/max selected range
 	// background will not be visible.
@@ -91,19 +89,19 @@
 		border: solid var(--thumb-border-color);
 		border-width: var(--thumb-border-width);
 		border-radius: 50%;
-		background: var(--thumb-background-color);
+		background-color: var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-webkit-slider-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-moz-range-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-ms-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']::-moz-range-thumb {

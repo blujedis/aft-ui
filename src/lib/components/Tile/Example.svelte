@@ -6,8 +6,6 @@
 
 	const title = 'Tile';
 	const description = 'Basic tiles that can be used for button or anchor content for navigation.';
-	const code = `
-  `;
 
 	const props = {
 		full: false,
@@ -20,20 +18,17 @@
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-4 gap-4 mb-4">
 			<label for="filled">
 				<Tile {...props} theme={color}>My Profile</Tile>
 			</label>
 			<label for="filled">
-				<Tile {...props} theme={color} variant="ghost">My Profile</Tile>
-			</label>
-			<label for="filled">
-				<Tile {...props} theme={color} variant="glass">Some content</Tile>
-			</label>
-			<label for="filled">
 				<Tile {...props} variant="outlined" theme={color}>Some content</Tile>
+			</label>
+			<label for="filled">
+				<Tile {...props} theme={color} variant="soft">Some content</Tile>
 			</label>
 		</div>
 	{/each}

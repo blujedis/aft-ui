@@ -4,9 +4,8 @@ import type {
 	ThemeShadowed,
 	ThemeSize,
 } from '$lib/types';
-import type { badge } from './config';
 
-export type BadgeVariant = 'filled' | 'outlined' | 'soft'; // keyof typeof badge;
+export type BadgeVariant = 'filled' | 'outlined' | 'soft'; 
 
 export type BadgeProps = {
 	full?: boolean;
@@ -19,7 +18,6 @@ export type BadgeProps = {
 	theme?: ThemeColor;
 	transitioned?: boolean;
 	variant?: BadgeVariant;
-	unstyled?: boolean;
 };
 
 export const badgeDefaults: Partial<BadgeProps> = {

@@ -11,6 +11,7 @@
 		disabled,
 		focused,
 		full,
+		hovered,
 		rounded,
 		shadowed,
 		size,
@@ -24,8 +25,10 @@
 
 	$: checkboxClasses = themer($themeStore)
 		.create('Checkbox')
-		.variant('checkbox', variant, theme, variant)
-		.option('focusedRing', typeof focused === 'string' ? focused : theme, focused)
+		.bundle(['defaultText'], theme, true)
+		.option('hovered', variant, theme, hovered)
+		.option('common', 'focusedOutline', focused)
+		.option('outlineFocus', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('checkboxSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
@@ -33,11 +36,12 @@
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append(
-			'flex items-center justify-center form-checkbox focus:outline-none focus:ring-2 focus:ring-offset-2',
+			// to remove default styling both ring and ring-offset
+			'flex items-center justify-center form-checkbox focus:ring-0 focus:ring-offset-0 bg-transparent',
 			true
 		)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

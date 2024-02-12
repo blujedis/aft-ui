@@ -18,10 +18,11 @@
 
 	const props = {
 		disabled: false,
-		focused: 'focusVisible' as ThemeFocused,
-		full: false,
+		focused: true,
+		full: true,
+		// hovered: false,
 		multiple: false,
-		rounded: 'none' as ThemeRounded,
+		rounded: 'sm' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
@@ -36,19 +37,16 @@
 		{ value: 'python', label: 'Python' },
 		{ value: 'react', label: 'React' }
 	];
-
 </script>
 
 <ExamplePage {title} {description}>
 	{#each colors as theme}
 		<div class="grid grid-cols-5 gap-2 mt-4">
-			<div>
-				<ButtonGroup {...props} {theme}>
-					{#each buttons as button}
-						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-					{/each}
-				</ButtonGroup>
-			</div>
+			<ButtonGroup {...props} {theme} class="bg-frame-50 dark:bg-frame-950/50">
+				{#each buttons as button}
+					<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+				{/each}
+			</ButtonGroup>
 
 			<div>
 				<ButtonGroup {...props} variant="outlined" {theme}>
@@ -73,7 +71,6 @@
 					{/each}
 				</ButtonGroup>
 			</div>
-
 
 			<div>
 				<ButtonGroup {...props} variant="soft" {theme}>

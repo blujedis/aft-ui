@@ -13,7 +13,6 @@ import {
 	type ReferenceElement,
 	arrow,
 	autoPlacement,
-	type Placement,
 	type Strategy,
 	type Padding
 } from '@floating-ui/dom';
@@ -36,23 +35,9 @@ export type PopoverComponentProps<C extends typeof SvelteComponent> = SvelteCons
 	close?: () => void;
 };
 
-export type PopoverTooltipHook = <C extends typeof SvelteComponent<any>>(
-	node: Element,
-	props?: PopoverComponentProps<C>
-) => { destroy: () => void };
-
-export type PopoverTriggerHook = (node: Element | VirtualElement | Readable<VirtualElement>) => {
-	destroy: () => void;
-};
-
-export type PopoverContentHook = (
-	node: HTMLElement,
-	config?: PopoverTriggerOptions
-) => { update: (options?: Partial<ComputePositionConfig>) => void; destroy: () => void };
-
 type ComputeMiddleware = false | null | undefined | Middleware;
 
-export type PopoverOptions<C extends typeof SvelteComponent = typeof SvelteComponent> = {
+export type PopoverOptions<C extends typeof SvelteComponent> = {
 	abortable?: boolean;
 	anchored?: boolean;
 	arrow?: string | null;
@@ -145,7 +130,7 @@ function mapMiddleware(
 	return [...arr];
 }
 
-export function createInstance<C extends typeof SvelteComponent>(
+export function createInstance<C extends typeof SvelteComponent<any>>(
 	initOptions = {} as PopoverOptions<C>,
 	initConfig = {} as Partial<ComputePositionConfig>,
 	initProps = {} as PopoverComponentProps<C>
@@ -471,6 +456,7 @@ const CONFIG_DEFAULTS = {
 	shift: 4
 };
 
+
 export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popover>(
 	settings = {} as PopoverInitOptions<C>
 ) => {
@@ -492,7 +478,7 @@ export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popove
 
 	const rootOptions = {
 		arrow: '#arrow',
-		Component: Popover as C,
+		Component: Popover,
 		abortable: true,
 		escapable: true,
 		content: '#popover',
@@ -501,6 +487,7 @@ export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popove
 		...initOptions
 	};
 
+	// TODO: Types aren't quite right here.
 	const tooltip = (node: Element, props = {} as PopoverComponentProps<C>) => {
 		props = {
 			arrowed: true,
@@ -525,7 +512,8 @@ export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popove
 		return registerTrigger(node);
 	};
 
-	return [tooltip] as [PopoverTooltipHook];
+	return [tooltip] as [typeof tooltip];
+
 };
 
 export const usePopover = (settings = {} as PopoverTriggerOptions) => {
@@ -568,5 +556,5 @@ export const usePopover = (settings = {} as PopoverTriggerOptions) => {
 		return registerContent(node, options, cleaned);
 	};
 
-	return [trigger, content] as [PopoverTriggerHook, PopoverContentHook];
+	return [trigger, content] as [typeof trigger, typeof content];
 };

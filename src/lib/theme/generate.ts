@@ -1,14 +1,13 @@
 
 import type { ThemeColor, ThemeShade } from '../types';
-import { colors } from '../constants/colors';
+import { colors as baseColors } from '../constants/colors';
 import { getProperty } from 'dot-prop';
 import { mergeConfigs } from './utils';
 
 type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
-// type PaletteColor = ThemeColor; // Exclude<ThemeColor, 'default' | 'dark'> | 'frame';
 type TokenOpacity = 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100;
-type TokenWidth = 0 | 1 | 2 | 4 | 8;
+type TokenWidth = 0 | 1 | 2 | 3 | 4 | 8;
 type ThemeColorBase = ThemeColor | `${ThemeColor}-${ThemeShade}`;
 type TokenColor = ThemeColorBase | `${ThemeShade}/${TokenOpacity}`;
 type TokenTuple = [TypeOrValue<TokenColor | ThemeShade>, TypeOrValue<TokenColor | ThemeShade>?];
@@ -44,7 +43,7 @@ interface GenerateOptions {
 	bodyBgLight: ThemeColorBase | 'white' | 'black';
 	bodyBgDark: ThemeColorBase | 'white' | 'black';
 
-	shade: ThemeShade;
+	defaultShade: ThemeShade;
 
 	softOpacity: TokenOpacity;
 	hoverOpacity: TokenOpacity;
@@ -57,7 +56,14 @@ interface GenerateOptions {
 
 	focusOffset: TokenWidth;
 	focusWidth: TokenWidth;
+
+	formBorderColorLight: ThemeColorBase;
+	formBorderColorDark?: ThemeColorBase;
+
+	panelBgLight: ThemeColorBase;
+	panelBgDark: ThemeColorBase;
 }
+const colors = ['white', 'black', ...baseColors] as ThemeColor[];
 
 const focusOutlineModifiers = [
 	'focus:outline',
@@ -93,9 +99,9 @@ const selectedTextModifiers = [
 
 const placeholder = {
 	$base: '',
+	white: '',
+	black: '',
 	frame: '',
-	// default: '',
-	// dark: '',
 	primary: '',
 	secondary: '',
 	tertiary: '',
@@ -111,7 +117,7 @@ export const defaultOptions = {
 	bodyBgLight: 'white',
 	bodyBgDark: 'frame-800',
 
-	shade: 500,
+	defaultShade: 500,
 
 	softOpacity: 10,
 	hoverOpacity: 20,
@@ -119,82 +125,103 @@ export const defaultOptions = {
 	softSelectedOpacity: 70,
 	disabledOpacity: 60,
 
-	gridColor: 'frame-900',
+	gridColor: 'frame-950',
 	gridOpacity: 40,
 
 	focusOffset: 0,
-	focusWidth: 2
+	focusWidth: 3,
+
+	formBorderColorLight: 'frame-500',
+
+	panelBgLight: 'frame-100',
+	panelBgDark: 'frame-700'
+
 } as GenerateOptions;
 
-//export let defaultTokens = getDefaultTokens();
-
-function getDefaultTokens(options: Required<GenerateOptions>) {
+function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colors) {
 
 	const {
-		bodyTextDark, shade, softOpacity, hoverOpacity,
-		softSelectedOpacity, focusOpacity
+		bodyTextDark, bodyTextLight, defaultShade, softOpacity, hoverOpacity,
+		softSelectedOpacity, focusOpacity, panelBgDark, panelBgLight, gridOpacity
 	} = options;
 
 	return {
 
+		icon: {
+			variant: 'icon',
+			modifiers: ['text', 'fill', 'stroke'],
+			colors: () => createColorMap(themeColors, defaultShade, defaultShade)
+		},
+
 		bg: {
 			variant: 'main',
-			modifiers: ['bg', 'stroke', 'fill', 'even:bg', 'odd:bg', 'ring', 'border', 'outline'],
-			colors: () => createColorMap(colors, shade, true)
-		},
-
-		text: {
-			variant: 'main',
-			modifiers: ['text'],
-			colors: () => createColorMap(colors, shade, shade, { frame: '' })
-		},
-
-		textWhite: {
-			variant: 'white',
-			modifiers: ['text'],
-			colors: {
-				$base: `text-${bodyTextDark} dark:text-${bodyTextDark}`
-			}
-		},
-
-
-		textSoft: {
-			variant: 'soft',
-			modifiers: ['text'],
-			colors: 'text.colors'
+			modifiers: ['bg', 'even:bg', 'odd:bg', 'ring', 'border', 'outline', 'group-hover:border', 'peer-focus:border', 'peer-hover:border'],
+			colors: () => createColorMap(themeColors, defaultShade, true)
 		},
 
 		bgSoft: {
 			variant: 'soft',
 			modifiers: ['bg'],
-			colors: createColorMap(colors, `${shade}/${softOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${softOpacity}`, true)
 		},
 
 		bgPanel: {
 			variant: 'panel',
 			modifiers: ['bg'],
 			colors: {
-				$base: `bg-frame-${shade}/${softOpacity} dark:bg-frame-${shade}/${softOpacity}`
+				$base: `bg-${panelBgLight} dark:bg-${panelBgDark}`
+			}
+		},
+
+		bgNotification: {
+			variant: 'notification',
+			modifiers: ['bg'],
+			colors: {
+				$base: `bg-${panelBgDark} dark:bg-${panelBgLight}`
+			}
+		},
+
+		bgTooltip: {
+			variant: 'tooltip',
+			modifiers: ['bg'],
+			colors: () => createColorMap(themeColors, defaultShade, true, {
+				frame: `bg-${panelBgDark} dark:bg-${panelBgLight}`
+			})
+		},
+
+		bgPanelAccordion: {
+			variant: 'panelAccordion',
+			modifiers: ['bg'],
+			colors: {
+				$base: `bg-frame-${defaultShade}/${softOpacity} dark:bg-frame-${defaultShade}/${softOpacity}`
 			}
 		},
 
 		bgHoverGhost: {
 			variant: 'ghost',
 			modifiers: ['hover:bg'],
-			colors: createColorMap(colors, `${shade}/${hoverOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${hoverOpacity}`, true)
 		},
 
 		bgHoverSoft: {
 			variant: 'soft',
 			modifiers: ['hover:bg'],
-			colors: createColorMap(colors, `${shade}/${softOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${softOpacity}`, true)
 		},
 
 		bgHoverPanel: {
 			variant: 'panel',
 			modifiers: ['hover:bg'],
 			colors: {
-				$base: `hover:bg-frame-${shade}/${softOpacity - 5} dark:hover:bg-frame-${shade}/${softOpacity - 5}`
+				$base: 'hover:bg-frame-300/50 hover:dark:bg-frame-800/50'
+			}
+		},
+
+		bgHoverPanelAccordion: {
+			variant: 'panelAccordion',
+			modifiers: ['hover:bg'],
+			colors: {
+				$base: `hover:bg-frame-${defaultShade}/${softOpacity - 5} dark:hover:bg-frame-${defaultShade}/${softOpacity - 5}`
 			}
 		},
 
@@ -212,7 +239,7 @@ function getDefaultTokens(options: Required<GenerateOptions>) {
 		bgSelectedAccent: {
 			variant: 'selectedAccent',
 			modifiers: [...selectedBgModifiers],
-			colors: createColorMap(colors, shade + 100, true)
+			colors: createColorMap(themeColors, defaultShade + 100, true)
 		},
 
 		bgSelectedGhost: {
@@ -224,7 +251,108 @@ function getDefaultTokens(options: Required<GenerateOptions>) {
 		bgSelectedSoft: {
 			variant: 'selectedSoft',
 			modifiers: [...selectedBgModifiers],
-			colors: createColorMap(colors, `${shade}/${softSelectedOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${softSelectedOpacity}`, true)
+		},
+
+		bgProgress: {
+			variant: 'progress',
+			modifiers: ['[&::-webkit-progress-value]:bg', '[&::-moz-progress-bar]:bg'],
+			colors: () => createColorMap(themeColors, defaultShade, false, {
+				$base: `bg-frame-${defaultShade}/${softOpacity} [&::-webkit-progress-bar]:bg-frame-${defaultShade}/${softOpacity}`
+			})
+		},
+
+		bgRange: {
+			variant: 'range',
+			modifiers: ['bg'],
+			colors: {
+				$base: `bg-frame-${defaultShade}/${softOpacity} dark:bg-frame-${defaultShade}/${softOpacity}`
+			}
+		},
+
+		bgSwitch: {
+			variant: 'switch',
+			modifiers: ['aria-checked:bg'],
+			colors: () => createColorMap(themeColors, `${defaultShade}/80`, true, {
+				$base: `bg-frame-${defaultShade}/${hoverOpacity} dark:bg-frame-${defaultShade}/${hoverOpacity}`
+			})
+		},
+
+		textProgress: {
+			variant: 'progress',
+			modifiers: ['fill'],
+			colors: () => createColorMap(themeColors, defaultShade, true, {
+				frame: [`${bodyTextLight}`, `${bodyTextDark}`]
+			})
+		},
+
+		strokeProgress: {
+			variant: 'progress',
+			modifiers: ['stroke'],
+			colors: {
+				$base: `stroke-frame-${defaultShade}/${softOpacity} dark:stroke-frame-${defaultShade}/${softOpacity}`
+			}
+		},
+
+		text: {
+			variant: 'main',
+			modifiers: ['text'],
+			colors: () => createColorMap(themeColors, defaultShade, true, { frame: '' })
+		},
+
+		textWhite: {
+			variant: 'white',
+			modifiers: ['text'],
+			colors: {
+				$base: `text-${bodyTextDark} dark:text-${bodyTextDark}`
+			}
+		},
+
+		textTooltip: {
+			variant: 'tooltip',
+			modifiers: ['text'],
+			colors: {
+				...placeholder,
+				$base: `text-${bodyTextDark} dark:text-${bodyTextDark}`,
+				frame: ['', `${bodyTextLight}`]
+			}
+		},
+
+		textSoft: {
+			variant: 'soft',
+			modifiers: ['text'],
+			colors: 'text.colors'
+		},
+
+		textFilled: {
+			variant: 'filled',
+			modifiers: ['placeholder'],
+			colors: () => createColorMap(themeColors, getMin(defaultShade, -300, 200), true, {
+				frame: 'placholder-frame-3sound00'
+			})
+		},
+
+
+		textNotification: {
+			variant: 'notification',
+			modifiers: ['text'],
+			colors: {
+				$base: `text-${bodyTextDark} dark:text-${bodyTextLight}`
+			}
+		},
+
+		textDefault: {
+			variant: 'default',
+			modifiers: ['text'],
+			colors: () => createColorMap(themeColors, defaultShade, true)
+		},
+
+		textInput: {
+			variant: 'input',
+			modifiers: ['text'],
+			colors: () => createColorMap(themeColors, defaultShade, true, {
+				frame: `text-${bodyTextLight} dark:text-${bodyTextDark}`
+			})
 		},
 
 		textSelected: {
@@ -250,7 +378,7 @@ function getDefaultTokens(options: Required<GenerateOptions>) {
 		outlineFocus: {
 			variant: '',
 			modifiers: [...focusOutlineModifiers],
-			colors: createColorMap(colors, `${shade}/${focusOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${focusOpacity}`, true)
 		},
 
 		ringFocus: {
@@ -270,12 +398,14 @@ function getCommon(options: Required<GenerateOptions>) {
 		...options
 	};
 
+	options.formBorderColorDark = options.formBorderColorDark || options.formBorderColorLight;
+
 	const {
-		gridColor, gridOpacity,
-		disabledOpacity, focusOffset, focusWidth
+		gridColor, gridOpacity, formBorderColorLight, formBorderColorDark,
+		disabledOpacity, focusOffset, focusWidth, defaultShade, softOpacity
 	} = options as Required<GenerateOptions>;
 
-	const gridOpacityLight = getMin(gridOpacity, 30, 10);
+	const gridOpacityLight = getMin(gridOpacity, -20, 20);
 
 	const common = {
 		transitioned: 'transition motion-reduce:transition-none',
@@ -284,14 +414,19 @@ function getCommon(options: Required<GenerateOptions>) {
 		divided: `divide-${gridColor}/${gridOpacityLight} dark:divide-${gridColor}/${gridOpacity}`,
 		disabled:
 			`disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
-
-		focused: `outline-none focus:outline-${focusWidth} focus:outline-offset-${focusOffset}`,
-		focusedVisible: `outline-none focus-visible:outline-${focusWidth} focus-visible:outline-offset-${focusOffset}`,
-		focusedWithin: `outline-none focus-within:outline-${focusWidth} focus-within:outline-offset-${focusOffset}`,
-
+		focusedOutline: `outline-none focus:outline-${focusWidth} focus:outline-offset-${focusOffset}`,
+		focusedOutlineVisible: `outline-none focus-visible:outline-${focusWidth} focus-visible:outline-offset-${focusOffset}`,
+		focusedOutlineWithin: `outline-none focus-within:outline-${focusWidth} focus-within:outline-offset-${focusOffset}`,
+		focusedRing: `outline-none focus:outline-${focusWidth} focus:ring-offset-${focusOffset}`,
+		focusedRingVisible: `outline-none focus-visible:ring-${focusWidth} focus-visible:ring-offset-${focusOffset}`,
+		focusedRingWithin: `outline-none focus-within:ring-${focusWidth} focus-within:ring-offset-${focusOffset}`,
 		muteSelected: `aria-selected:opacity-${disabledOpacity}`,
-
-
+		formBorder: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,
+		neutralBg: `bg-frame-${defaultShade}/${softOpacity} dark:bg-frame-${defaultShade}/${softOpacity}`,
+		rangeBg: `frame-${defaultShade}/${softOpacity}`,
+		rangeValue: `${defaultShade}`,
+		rangeThumb: `${getMin(defaultShade, -200, 300)}`,
+		placeholderFilled: `placeholder-frame-400`
 	};
 
 	return objectToString('common', common);
@@ -302,7 +437,7 @@ function getCommon(options: Required<GenerateOptions>) {
 // subtracting 50 from 40 = -10 but our min val was set to 10
 // Math.max will choose the larger  number between -10 and 10.
 function getMin(value: number, offset = 0, min = 0) {
-	return Math.max(min, value - offset);
+	return Math.max(min, value + offset);
 }
 
 // ex: getMax(40, 50, 60) = 60
@@ -314,6 +449,10 @@ function getMax(value: number, offset = 0, max = 0) {
 
 function createColorMap(colors: readonly ThemeColor[], light: string | number, dark?: string | number | boolean, override?: Partial<Record<ThemeColor | '$base', any>>) {
 	const result = colors.reduce((a, c) => {
+		if (['white', 'black'].includes(c)) {
+			a[c as ThemeColor] = [c, c];
+			return a;
+		}
 		if (dark === true)
 			dark = light;
 		if (!dark && light)
@@ -379,13 +518,14 @@ function createLabel(modifier: string) {
 	const mod = modifier.split(':');
 	const type = mod.pop()?.split('-')[0];
 	if (!type) throw new Error(`Failed to create token group label using modifier ${modifier}`);
-	const suffix = mod
+	let suffix = mod
 		.reduce((a, c) => {
 			const split = c.split('-');
 			return [...a, ...split];
 		}, [] as string[])
 		.map((v) => v.charAt(0).toUpperCase() + v.slice(1))
 		.join('');
+	suffix = suffix.replace(/^\[&/, '').replace(/\]$/, '')
 	return type.charAt(0).toUpperCase() + type.slice(1) + suffix;
 }
 
@@ -528,27 +668,3 @@ export function parseTokens<
 // bg-[rgb(var(--color-primary-600))]/30
 // hex example.
 // text-[color:var(--text-light-hover)]
-
-
-// function extend(path: string | Record<string, unknown>, ...obj: Record<string, unknown>[]): any {
-// 	defaultTokens = defaultTokens || getDefaultTokens();
-// 	const existing =
-// 		typeof path === 'string'
-// 			? getConfig(defaultTokens, getProperty(defaultTokens, path)) || {}
-// 			: {};
-// 	const next = obj.shift() || {} as TokenVariant;
-// 	if (obj.length) return extend({ ...existing, ...next }, ...obj);
-// 	return { ...existing, ...next };
-// }
-
-// function createResult(name: string, content: string[]) {
-// 	return `export const ${name} = {\n${content.join(',\n')}\n};`;
-// }
-
-// function toColor(type: string, color: ThemeColor | 'white' | 'black', value?: number | 'white' | 'black', opacity?: number) {
-// 	if (['white', 'black'].includes(value + ''))
-// 		color = (value + '');
-// 	if (['white', 'black'].includes(color))
-// 		return opacity ? `${type}-${color}/${opacity}` : `${type}-${color}`;
-// 	return opacity ? `${type}-${color}-${value}/${opacity}` : `${type}-${color}-${value}`;
-// }

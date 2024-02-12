@@ -49,7 +49,7 @@
 		.append(stacked ? 'auto-rows-fr' : 'auto-cols-fr', autocols)
 		.append('grid__row', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={gridRowClasses} style={gridRowStyles}>

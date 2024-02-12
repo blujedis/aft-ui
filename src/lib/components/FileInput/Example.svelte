@@ -13,10 +13,6 @@
 
 	const title = 'File Input';
 	const description = 'Component for handling input files.';
-	const code = `
-  `;
-
-	let theme: ThemeColor = 'dark';
 
 	const props = {
 		disabled: false,
@@ -29,23 +25,27 @@
 		transitioned: false as boolean // ThemeTransitioned,
 	};
 
+	let theme = 'frame' as ThemeColor;
+
 	function handleUpload(data: FormData | null, files: FileList | null) {
-		// console.log(data?.get('file'));
+		const file = data?.get('file') as File;
+		console.info(`Uploaded file ${file.name}`);
+		console.log(file);
 		// console.log(files);
 		setTheme('end');
 	}
 
 	function setTheme(type: 'start' | 'end') {
 		if (type === 'start') theme = 'success';
-		else theme = 'light';
+		else theme = 'frame';
 	}
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="flex space-x-8">
 		<label for="Upload Button">
 			<FileInput accept="image/png, image/jpeg" onFormData={handleUpload} let:click>
-				<Button variant="text" theme="dark" on:click={click}>Upload Files</Button>
+				<Button variant="text" theme="frame" on:click={click}>Upload Files</Button>
 			</FileInput>
 		</label>
 

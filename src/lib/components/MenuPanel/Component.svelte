@@ -13,7 +13,7 @@
 
 	const context = getContext('Menu') as MenuContext;
 
-	export let { origin, position, rounded, shadowed, theme, transition, variant } = {
+	export let { origin, position, rounded, shadowed, theme, transition } = {
 		...defaults,
 		...context?.globals
 	} as Required<MenuPanelProps>;
@@ -24,15 +24,17 @@
 
 	$: panelClasses = th
 		.create('MenuPanel')
-		.variant('menuPanel', variant, theme, variant)
+		.bundle(['panelBg'], theme, true)
+		.option('common', 'ringed', true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.append(`dropdown-panel absolute z-30 mt-1 min-w-max focus:outline-none none`, true)
+		.prepend('dropdown-panel', true)
+		.append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
 		.append('origin-center', origin === 'center')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function setFocus(el: HTMLElement) {
 		el.focus();

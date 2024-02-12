@@ -18,6 +18,7 @@ export function buildTokens() {
     ws
       .off('error', handleError)
       .off('close', handleClose);
+      
   }
 
   function handleError(err: any) {

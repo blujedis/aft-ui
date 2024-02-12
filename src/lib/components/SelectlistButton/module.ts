@@ -1,14 +1,15 @@
 import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
-import type { BadgeVariant } from '../Badge';
-import type { selectListButton } from './config';
+import type { BadgeProps, BadgeVariant } from '../Badge';
 
-export type SelectListVariant = keyof typeof selectListButton;
+export type SelectListVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text';
 
 export type SelectListButtonProps = InputProps & {
+	badgeProps?: BadgeProps;
 	caret?: string | IconifyIcon;
 	filterable?: boolean;
+	hovered?: boolean;
 	newable?: boolean;
 	placeholder?: string;
 	removable?: boolean;
@@ -29,10 +30,8 @@ export type SelectListButtonProps = InputProps & {
 export const selectListButtonDefaults: Partial<SelectListButtonProps> = {
 	...inputDefaults,
 	caret: 'octicon:chevron-down-24', // 'mdi:chevron-down', //  mdi:unfold-more-horizontal,
-	placeholder: '',
 	roticon: true,
-	variant: 'outlined',
-	badgeVariant: 'filled',
+	placeholder: 'Please Select',
 	onBeforeAdd: (value: string, _input: HTMLInputElement) =>
 		({ label: value, value, group: '', selected: false }) as any,
 	onBeforeRemove: (_item: SelectListItem, _input: HTMLInputElement) => true // default just allow removal.

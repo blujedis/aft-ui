@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { transitioner, type DisclosureContext } from '../Disclosure/module';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { type DisclosurePanelProps, disclosurePanelDefaults as defaults } from './module';

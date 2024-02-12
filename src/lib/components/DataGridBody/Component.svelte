@@ -40,7 +40,7 @@
 		.prepend('datagrid__body overflow-y-auto', true)
 		.append('divide-y', divided)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <div {...$$restProps} class={gridBodyClasses}>

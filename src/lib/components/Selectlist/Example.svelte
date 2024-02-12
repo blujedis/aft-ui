@@ -9,8 +9,6 @@
 
 	const title = 'SelectList';
 	const description = 'Comprehensive component for single and multi selection.';
-	const code = `
-  `;
 
 	const sourceItems = [
 		{
@@ -49,6 +47,8 @@
 
 	const props = {
 		full: false,
+		focused: true,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
@@ -57,9 +57,9 @@
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	{#each colors as color}
-		<div class="grid grid-cols-4 gap-2 mb-4">
+<ExamplePage {title} {description}>
+	<!-- {#each colors as color}
+		<div class="grid grid-cols-5 gap-2 mb-4">
 			<label for="filled">
 				<SelectList
 					{...props}
@@ -82,10 +82,10 @@
 				</SelectList>
 			</label>
 
-			<label for="glass">
+			<label for="outlined">
 				<SelectList
 					{...props}
-					variant="glass"
+					variant="outlined"
 					tags
 					removable
 					items={sourceItems}
@@ -104,10 +104,10 @@
 				</SelectList>
 			</label>
 
-			<label for="outlined">
+			<label for="glass">
 				<SelectList
 					{...props}
-					variant="outlined"
+					variant="soft"
 					tags
 					removable
 					items={sourceItems}
@@ -147,6 +147,56 @@
 					</SelectListPanel>
 				</SelectList>
 			</label>
+
+			<label for="glass">
+				<SelectList
+					{...props}
+					variant="text"
+					tags
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					theme={color}
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value}>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					</SelectListPanel>
+				</SelectList>
+			</label>
 		</div>
-	{/each}
+	{/each} -->
+
+	<!-- <label for="outlined" class="flex mt-12"> -->
+
+	<div class="w-64">
+		<SelectList
+			{...props}
+			size="xl2"
+			rounded="sm"
+			variant="outlined"
+			items={sourceItems}
+			placeholder="Please Select"
+			theme="primary"
+			let:filtered
+			tags
+			newable
+		>
+			<SelectListButton />
+			<SelectListPanel>
+				{#each filtered as item}
+					<SelectListOption as="button" key={item.value}>
+						{item.label}
+					</SelectListOption>
+				{/each}
+			</SelectListPanel>
+		</SelectList>
+	</div>
+
+	<!-- </label> -->
 </ExamplePage>

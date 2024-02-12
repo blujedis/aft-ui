@@ -63,7 +63,7 @@
 		.create('Accordion')
 		.prepend(`accordion`, true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleReset() {}
 </script>

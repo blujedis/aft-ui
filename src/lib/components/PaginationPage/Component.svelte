@@ -5,7 +5,7 @@
 		HTMLButtonAttributes
 	} from 'svelte/elements';
 	import type { SelectStoreValue } from '$lib/stores/select';
-	import  { type PaginationContext, Icon } from '$lib/components';
+	import { type PaginationContext, Icon } from '$lib/components';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
@@ -54,12 +54,12 @@
 		.append('rounded-r-none', previous as any)
 		.append('rounded-l-none', next as any)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: paginationPageIconClasses = th
 		.create('PaginationPageIcon')
 		.option('paginationIconSizes', size, size && ((previous || next) as boolean))
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 

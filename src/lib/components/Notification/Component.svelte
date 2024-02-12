@@ -8,19 +8,7 @@
 
 	type $$Props = NotificationProps & ElementProps<'div'>;
 
-	export let {
-		key,
-		description,
-		dismissible,
-		duration,
-		group,
-		icon,
-		rounded,
-		shadowed,
-		title,
-		theme,
-		variant
-	} = {
+	export let { key, description, dismissible, group, icon, rounded, shadowed, title, theme } = {
 		...defaults
 	} as Required<$$Props>;
 
@@ -28,24 +16,20 @@
 
 	$: notificationClasses = th
 		.create('Notification')
-		.variant('notification', variant, theme, variant)
+		.bundle(['notificationBg', 'notificationText', 'mainBorder'], theme, true)
+		.option('common', 'ringed', true)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
-	$: notificationIconClasses = th
-		.create('NotificationIcon')
-		.variant('notificationIcon', variant, theme, true)
-		.append('pr-2 pt-1', true)
-		.compile(true);
+	$: notificationIconClasses = th.create('NotificationIcon').append('pr-2 pt-1', true).compile();
 
 	$: notificationTitleClasses = th
 		.create('NotificaionTitle')
-		.variant('notificationTitle', variant, theme, true)
 		.append('font-semibold', true)
-		.compile(true);
+		.compile();
 </script>
 
 <div

@@ -16,8 +16,7 @@
 		size,
 		theme,
 		transitioned,
-		variant,
-		unstyled
+		variant
 	} = {
 		...defaults
 	} as Required<BadgeProps>;
@@ -25,37 +24,25 @@
 	const th = themer($themeStore);
 	const additionalProps = focused ? { tabindex: 0 } : {};
 
-	$: badgeClasses = unstyled
-		? $$restProps.class
-		: th
-				.create('Badge')
-				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
-				.bundle(
-					['mainText', 'mainRing'],
-					{ $base: 'ring-1 ring-inset' },
-					theme,
-					variant === 'outlined'
-				)
-				.bundle(['softBg', 'softText'], {}, theme, variant === 'soft')
-				.option('common', 'transitioned', transitioned)
-				.option('common', 'focusedVisible', focused)
-				.option('outlineFocusVisible', theme, focused)
-				.option('badgeFontSizes', size, size)
-				.option('roundeds', boolToMapValue(rounded), rounded)
-				.option('shadows', boolToMapValue(shadowed), shadowed)
-				.prepend('badge-removable', removable)
-				.append('w-full', full)
-				.append('z-20 badge', true)
-				.append(
-					'relative inline-flex items-center leading-tight justify-center',
-					!removable
-				)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: badgeClasses = th
+		.create('Badge')
+		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
+		.bundle(['softBg', 'softText'], {}, theme, variant === 'soft')
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('badgeFontSizes', size, size)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('badge-removable', removable)
+		.append('w-full', full)
+		.append('z-20 badge', true)
+		.append('relative inline-flex items-center leading-tight justify-center', !removable)
+		.append($$restProps.class, true)
+		.compile();
 
-	$: badgeInnerClasses = unstyled
-		? ''
-		: th.create('BadgeInner').option('badgeInnerMargin', size, size).compile();
+	$: badgeInnerClasses = th.create('BadgeInner').option('badgeInnerMargin', size, size).compile();
 </script>
 
 <span {...additionalProps} {...$$restProps} class={badgeClasses}>

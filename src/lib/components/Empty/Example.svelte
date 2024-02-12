@@ -10,22 +10,23 @@
   `;
 
 	const props = {
+		focused: true,
 		full: false,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'success' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
+		transitioned: false,
 		variant: 'outlined' as EmptyVariant
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4">
 		{#each colors as color}
 			<label for={color}>
 				<div class="text-sm">Outlined:</div>
-				<Empty theme={color}>Empty</Empty>
+				<Empty {...props} tabindex={0} theme={color}>Empty</Empty>
 			</label>
 		{/each}
 	</div>

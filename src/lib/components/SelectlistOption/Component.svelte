@@ -12,50 +12,49 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { as, size, theme, key, variant } = {
+	export let { as, focused, hovered, removable, size, theme, key } = {
 		...defaults,
 		...context?.globals
 	} as Required<SelectListOptionProps<Tag>>;
 
 	const th = themer($themeStore);
+
 	$: selected = $context.selected.map((v) =>
 		$context.items.find((item) => item.value === v)
 	) as SelectListItem[];
 
 	$: optionClasses = th
 		.create('SelectListOption')
-		.variant('selectListOption', variant, theme, variant)
-		.append('focus:outline outline-frame-400 outline-2', true)
-		.option('focusedOutline', theme, true)
-		//	.option('focusedOutlineSizes', 'two', true)
-		.remove('focus-visible:', true)
+		.bundle(['selectedBgAriaSelected', 'selectedWhiteTextAriaSelected'], theme, true)
+		.option('common', 'focusedOutline', focused)
+		.option('outlineFocus', theme, focused)
+		.option('panelBgHover', theme, true)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
 		.append('block w-full text-left z-40', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
+	function handleSelect() {
+		if (context.isSelected(key) && removable) context.unselect(key);
+		else if (key) context.select(key);
+	}
+
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
 		if (!context.globals.tags && $context.input) {
-			const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
+			handleSelect();
 			setTimeout(() => {
+				const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
 				if ($context.input) $context.input.value = labels.join(', ');
 				$context.input?.focus();
 			});
 		} else {
-			if (context.isSelected(key)) {
-				setTimeout(() => {
-					context.unselect(key);
-					$context.input?.focus();
-				});
-			} else if (key) {
-				setTimeout(() => {
-					context.select(key);
-					$context.input?.focus();
-				});
-			}
+			handleSelect();
+			setTimeout(() => {
+				$context.input?.focus();
+			});
 		}
 	}
 </script>

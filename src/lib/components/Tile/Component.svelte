@@ -7,7 +7,7 @@
 
 	type $$Props = TileProps & ElementProps<'div'>;
 
-	export let { full, rounded, shadowed, size, theme, variant } = {
+	export let { focused, full, hovered, rounded, shadowed, size, theme, transitioned, variant } = {
 		...defaults
 	} as Required<$$Props>;
 
@@ -15,7 +15,13 @@
 
 	$: inputClasses = th
 		.create('Tile')
-		.variant('tile', variant, theme, variant)
+		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
+		.bundle(['softText', 'softBg'], theme, variant === 'soft')
+		.option('hovered', variant, theme, hovered)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('boxPadding', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
@@ -23,7 +29,7 @@
 		.append('w-full h-full', full)
 		.append('inline-flex flex-col items-center justify-center font-semibold', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

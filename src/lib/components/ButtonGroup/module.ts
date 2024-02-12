@@ -4,7 +4,6 @@ import type {
 	ThemeFocused,
 	ThemeRounded,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
 import type { ButtonProps } from '../Button/module';
 import type { ButtonGroupVariant } from '../ButtonGroupItem';
@@ -19,17 +18,18 @@ export type ButtonGroupContext = SelectStore & {
 	globals: {
 		focused: ThemeFocused;
 		full: boolean;
+		hovered: boolean;
 		rounded: ThemeRounded;
 		size: ThemeSize;
 		theme: ThemeColor;
-		transitioned: ThemeTransitioned;
+		transitioned: boolean;
 		variant: ButtonGroupVariant;
 	};
 };
 
 export const buttonGroupDefaults: Partial<ButtonGroupProps> = {
+	hovered: true,
 	rounded: 'none',
 	shadowed: 'none',
-	theme: 'default',
 	variant: 'filled'
 };

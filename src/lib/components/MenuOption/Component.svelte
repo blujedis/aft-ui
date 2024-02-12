@@ -12,7 +12,7 @@
 
 	const context = getContext('Menu') as MenuContext;
 
-	export let { active, as, key, size, theme, variant } = {
+	export let { active, as, key, focused, hovered, size, theme, transitioned } = {
 		...defaults,
 		...context?.globals
 	} as Required<MenuOptionProps<Tag>>;
@@ -21,16 +21,16 @@
 
 	$: optionClasses = th
 		.create('MenuOption')
-		.variant('menuOption', variant, theme, variant)
-		.append('focus:outline outline-frame-400 outline-2', true)
-		.option('focusedOutline', theme, true)
-		//.option('focusedOutlineSizes', 'two', true)
-		.remove('focus-visible:', true)
+		.option('panelBgHover', theme, hovered)
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
 		.append('block w-full', true)
+		.append('hover:brightness-125', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 

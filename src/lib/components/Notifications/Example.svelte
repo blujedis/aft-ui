@@ -1,14 +1,11 @@
 <script lang="ts">
-	import type { NotificationVariant } from '../Notification';
 	import { Notifications, type NotificationPosition } from '.';
 	import notification from '$lib/stores/notification';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
 	const title = 'Notifications';
 	const description = 'Alert notifications with 6 optional positions.';
-	const code = `
-  `;
 
 	let textarea: HTMLTextAreaElement;
 
@@ -17,8 +14,6 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		variant: 'filled' as NotificationVariant
 	};
 
 	const themes = [
@@ -50,7 +45,7 @@
 	}
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
 		<div>
 			<label for="notification" class="flex flex-col"

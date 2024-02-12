@@ -112,7 +112,7 @@
 		<div class="text-2xl font-semibold mb-4">Flushed Hover</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<Flushed theme={color} hover>
+				<Flushed theme={color} hovered>
 					<div class={classNames('p-4 text-center group')}>
 						{color}
 					</div>

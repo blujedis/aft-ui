@@ -24,7 +24,7 @@
 	$: tabPanelClasses = themer($themeStore)
 		.create('TabPanel')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 {#if (unmount && visible) || !unmount}

@@ -45,7 +45,7 @@
 		.create('ModalWrapper')
 		.append('fixed inset-0 z-10 overflow-y-auto', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: containerClasses = th
 		.create('ModalContainer')
@@ -56,7 +56,7 @@
 		.append('sm:items-end sm:justify-end', position === 'bottom-right')
 		.append('sm:items-start sm:justify-start', position === 'top-left')
 		.append('sm:items-end sm:justify-start', position === 'bottom-left')
-		.compile(true);
+		.compile();
 
 	$: contentClasses = th
 		.create('ModalContent')
@@ -66,7 +66,7 @@
 			'bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6',
 			true
 		)
-		.compile(true);
+		.compile();
 
 	// $: $store.visible && unmount === false && restart()
 

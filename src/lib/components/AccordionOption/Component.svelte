@@ -65,7 +65,7 @@
 		.create('AccordianOption')
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.option('outlineFocusVisible', theme, focused)
-		.option('common', 'focusedVisible', focused)
+		.option('common', 'focusedOutlineVisible', focused)
 		.option('common', 'bordered', isBordered)
 		.option('accordionOptionRoundeds', size, rounded)
 		.prepend(`accordian-option accordion-${variant}`, true)
@@ -79,7 +79,7 @@
 		.append('last:border-b', ['filled', 'outlined'].includes(variant))
 		.append('relative overflow-clip outline-none transition-[margin]', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
 <svelte:element

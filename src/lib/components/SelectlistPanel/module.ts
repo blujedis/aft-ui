@@ -1,7 +1,7 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
-import type { SelectListVariant } from '../SelectListButton';
+// import type { SelectListVariant } from '../SelectListButton';
 
 export type SelectListPanelProps = {
 	origin?: 'left' | 'right' | 'center';
@@ -10,7 +10,7 @@ export type SelectListPanelProps = {
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor; // not really used placeholder in case of future use.
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
-	variant?: SelectListVariant;
+	// variant?: SelectListVariant;
 };
 
 export const selectListPanelDefaults = {
@@ -19,5 +19,5 @@ export const selectListPanelDefaults = {
 	shadowed: 'md',
 	theme: 'default',
 	transition: { start: 0.95, type: 'scale' },
-	variant: 'outlined'
+	// variant: 'outlined'
 };

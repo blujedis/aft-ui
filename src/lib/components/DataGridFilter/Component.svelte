@@ -45,13 +45,13 @@
 		.append('auto-cols-fr', autocols)
 		.prepend('datagrid__filter grid grid-flow-col w-full', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: filterInputCellClasses = th
 		.create('DataGridFilterInput')
 		.option('focusedRingWithin', typeof focused === 'string' ? focused : theme, focused)
 		.append('focus:outline-none', true)
-		.compile(true);
+		.compile();
 
 	function handleFilterColumn(
 		e: Event & {

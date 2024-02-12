@@ -2,6 +2,7 @@
 	import { Radio, type RadioVariant } from '.';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
+	import { colors } from '$lib/constants/colors';
 
 	const title = 'Radio';
 	const description = 'Themed radio input element.';
@@ -10,22 +11,25 @@
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		focused: true,
+		rounded: 'full' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'outlined' as RadioVariant
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
+<ExamplePage {title} {description}>
+	<!-- <div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
 			<Radio {...props} />
 		</label>
+	</div> -->
+	<div class="grid grid-cols-8 gap-2">
+		{#each colors as color}
+			<Radio {...props} theme={color} />
+		{/each}
 	</div>
 </ExamplePage>

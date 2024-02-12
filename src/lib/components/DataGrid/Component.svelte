@@ -101,7 +101,7 @@
 		.append('w-full', full)
 		.append('relative', sticky)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	async function remove(key: string) {
 		const item = $store.items.find((item) => item[rowkey] === key);
