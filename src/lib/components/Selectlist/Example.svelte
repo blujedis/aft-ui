@@ -4,7 +4,9 @@
 	import { SelectListButton } from '../SelectListButton';
 	import { SelectListOption } from '../SelectListOption';
 	import { SelectListPanel } from '../SelectListPanel';
-	import { colors } from '$lib/constants';
+	import { Input } from '../Input';
+	import { Button } from '../Button';
+	import { colors, placeholder } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'SelectList';
@@ -52,9 +54,12 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		//theme: 'default' as ThemeColor,
 		variant: 'outlined' as any
 	};
+	const shared = {
+		size: 'md'
+	} as any;
 </script>
 
 <ExamplePage {title} {description}>
@@ -172,13 +177,11 @@
 		</div>
 	{/each} -->
 
-	<!-- <label for="outlined" class="flex mt-12"> -->
-
-	<div class="w-64">
+	<div class="flex">
 		<SelectList
 			{...props}
-			size="xl2"
-			rounded="sm"
+			{...shared}
+			rounded="none"
 			variant="outlined"
 			items={sourceItems}
 			placeholder="Please Select"
@@ -186,6 +189,7 @@
 			let:filtered
 			tags
 			newable
+			class="flex-1"
 		>
 			<SelectListButton />
 			<SelectListPanel>
@@ -196,6 +200,8 @@
 				{/each}
 			</SelectListPanel>
 		</SelectList>
+		<Input {...shared} type="text" placeholder="Enter name" />
+		<Button {...shared}>Hello World</Button>
 	</div>
 
 	<!-- </label> -->

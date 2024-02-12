@@ -22,4 +22,6 @@ export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	as: 'button',
 	hovered: true,
 	size: 'md',
+	theme: 'frame',
+	variant: 'filled'
 };

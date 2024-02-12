@@ -111,7 +111,7 @@
 
 	$: controllerClasses = th
 		.create('SelectListController')
-		.append('relative flex not-sr-only min-w-min', true)
+		.append('relative not-sr-only', true)
 		// .append('max-w-full', full)
 		.append($$restProps.class, true)
 		.compile();
@@ -214,42 +214,44 @@
 	// 	});
 </script>
 
-<div
-	role="none"
-	{...$$restProps}
-	use:clickOutside
-	on:click_outside={handleClose}
-	on:keydown={handleKeydown}
-	class={controllerClasses}
->
-	<div class="min-w-full">
-		<slot
-			visible={$store.visible}
-			selected={$store.selected}
-			filtered={$store.filtered}
-			isSelected={context.isSelected}
-			open={context.open}
-			close={context.close}
-			toggle={store.toggle}
-		/>
-	</div>
+<div>
+	<div
+		role="none"
+		{...$$restProps}
+		use:clickOutside
+		on:click_outside={handleClose}
+		on:keydown={handleKeydown}
+		class={controllerClasses}
+	>
+		<div class="w-full">
+			<slot
+				visible={$store.visible}
+				selected={$store.selected}
+				filtered={$store.filtered}
+				isSelected={context.isSelected}
+				open={context.open}
+				close={context.close}
+				toggle={store.toggle}
+			/>
+		</div>
 
-	<slot name="select">
-		<select bind:this={sel} class="sr-only" {...$$restProps} multiple={tags ? true : multiple}>
-			{#if groupKeys.length}
-				{#each Object.entries(groups) as [group, items]}
-					<optgroup>{group}</optgroup>
-					{#each items as item}
-						<option value={item.value}>{item.label}</option>
+		<!-- <slot name="select">
+			<select bind:this={sel} class="sr-only" {...$$restProps} multiple={tags ? true : multiple}>
+				{#if groupKeys.length}
+					{#each Object.entries(groups) as [group, items]}
+						<optgroup>{group}</optgroup>
+						{#each items as item}
+							<option value={item.value}>{item.label}</option>
+						{/each}
 					{/each}
-				{/each}
-			{:else}
-				{#each $store.items as item}
-					<option value={item.value} selected={$store.selected.includes(item.value)}
-						>{item.label}</option
-					>
-				{/each}
-			{/if}
-		</select>
-	</slot>
+				{:else}
+					{#each $store.items as item}
+						<option value={item.value} selected={$store.selected.includes(item.value)}
+							>{item.label}</option
+						>
+					{/each}
+				{/if}
+			</select>
+		</slot> -->
+	</div>
 </div>

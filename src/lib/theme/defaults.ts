@@ -6,7 +6,7 @@ const component = {
 	rounded: 'none',
 	shadowed: 'none',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	transitioned: true
 } as ThemeDefaults['component'];
 

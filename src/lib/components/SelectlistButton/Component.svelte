@@ -93,7 +93,7 @@
 		// .append('w-full', full)
 		// .append('min-w-full', tags && !selected.length)
 		// .append('flex items-center w-full pr-2', true)
-		.append('flex flex-1 items-center flex-wrap overflow-hidden min-w-full', true)
+		.append('flex flex-1 w-full items-center flex-wrap overflow-hidden', true)
 		.compile();
 
 	// $: tagWrapperClasses = th
