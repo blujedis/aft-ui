@@ -34,11 +34,10 @@
 		shadowed,
 		size,
 		store: initStore,
-		tags,
 		theme,
 		variant,
 		visible,
-		badgeVariant,
+		transitioned,
 		onBeforeAdd,
 		onBeforeRemove
 	} = {
@@ -49,7 +48,7 @@
 
 	export const store = (initStore ||
 		useSelect({
-			multiple: tags ? true : multiple,
+			multiple,
 			visible,
 			selected: [],
 			items: [],
@@ -70,10 +69,9 @@
 		rounded,
 		shadowed,
 		size,
-		tags,
 		theme,
 		variant,
-		badgeVariant,
+		transitioned,
 		onBeforeAdd,
 		onBeforeRemove
 	});
@@ -88,6 +86,8 @@
 		filter,
 		reset
 	};
+
+	const { class: classes, ...restProps } = $$restProps;
 
 	export const context = setContext('SelectListContext', {
 		...store,
@@ -111,18 +111,13 @@
 
 	$: controllerClasses = th
 		.create('SelectListController')
-		.append('relative not-sr-only', true)
-		// .append('max-w-full', full)
-		.append($$restProps.class, true)
+		.append('relative not-sr-only inline-flex', true)
+		.append('w-full', full)
+		.append(classes, true)
 		.compile();
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
-		if (!tags && $context.input) {
-			const labels = $store.items
-				.filter((i) => $store.selected.includes(i.value))
-				.map((v) => v.label);
-			$context.input.value = labels.join(', ');
-		}
+		if ($context.input) $context.input.value = '';
 		return (
 			(n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible) || false
 		);
@@ -149,7 +144,7 @@
 				const items = [...s.items, { value, label, group } as Required<Item>];
 				let selectedItems = [...s.selected];
 				if (selected && !selectedItems.includes(value)) {
-					if (selected && selectedItems.length && tags) selectedItems.push(value);
+					if (selected && selectedItems.length && multiple) selectedItems.push(value);
 					else selectedItems = [value];
 				}
 				return {
@@ -203,25 +198,16 @@
 	}
 
 	items.forEach((i) => add(i));
-
-	// Promise.resolve(items)
-	// 	.then((arr) => {
-	// 		arr.forEach((i) => add(i));
-	// 		console.log('resolved all');
-	// 	})
-	// 	.catch((ex) => {
-	// 		console.warn((ex as Error).message);
-	// 	});
 </script>
 
-<div>
+<div class={controllerClasses}>
 	<div
 		role="none"
-		{...$$restProps}
+		{...restProps}
 		use:clickOutside
 		on:click_outside={handleClose}
 		on:keydown={handleKeydown}
-		class={controllerClasses}
+		class="w-full"
 	>
 		<div class="w-full">
 			<slot
@@ -235,8 +221,8 @@
 			/>
 		</div>
 
-		<!-- <slot name="select">
-			<select bind:this={sel} class="sr-only" {...$$restProps} multiple={tags ? true : multiple}>
+		<slot name="select">
+			<select bind:this={sel} class="sr-only" {...restProps} {multiple}>
 				{#if groupKeys.length}
 					{#each Object.entries(groups) as [group, items]}
 						<optgroup>{group}</optgroup>
@@ -252,6 +238,6 @@
 					{/each}
 				{/if}
 			</select>
-		</slot> -->
+		</slot>
 	</div>
 </div>

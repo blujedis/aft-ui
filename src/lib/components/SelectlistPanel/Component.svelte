@@ -12,9 +12,13 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { origin, position, rounded, shadowed, theme, transition } = {
+	export let { full, multiple, origin, position, rounded, shadowed, theme, transition } = {
 		...defaults,
-		...context?.globals
+		full: context.globals?.full,
+		multiple: context.globals?.multiple,
+		rounded: context.globals?.rounded,
+		shadowed: context.globals?.shadowed,
+		theme: context.globals?.theme
 	} as Required<SelectListPanelProps>;
 
 	const th = themer($themeStore);
@@ -27,18 +31,18 @@
 
 	nav?.onSelected((el) => {
 		const key = el.dataset.key as string;
-		if (!context.globals.tags && $context.input) {
-			const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
-			setTimeout(() => {
-				if ($context.input) $context.input.value = labels.join(', ');
-			});
-		} else {
-			if (context.isSelected(key)) {
-				setTimeout(() => context.unselect(key));
-			} else if (key) {
-				setTimeout(() => context.select(key));
-			}
+		// if (!multiple && $context.input) {
+		// 	const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
+		// 	setTimeout(() => {
+		// 		if ($context.input) $context.input.value = labels.join(', ');
+		// 	});
+		// } else {
+		if (context.isSelected(key)) {
+			setTimeout(() => context.unselect(key));
+		} else if (key) {
+			setTimeout(() => context.select(key));
 		}
+		//}
 	});
 
 	$: panelClasses = th
@@ -46,11 +50,11 @@
 		.option('panelBg', theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.append(`dropdown-panel absolute z-30 mt-1 min-w-max text-left`, true)
+		.append(`dropdown-panel absolute z-30 mt-1 text-left min-w-32`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
 		.append('origin-center', origin === 'center')
-		.append('w-full', context.globals.full)
+		.append('min-w-full', full)
 		.append($$restProps.class, true)
 		.compile();
 

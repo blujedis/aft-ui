@@ -56,7 +56,7 @@
 		.append('dark:bg-transparent', ['outlined', 'flushed', 'text'].includes(variant))
 		.append('peer border-0', ['flushed'].includes(variant))
 		.append('px-1', variant === 'flushed')
-		.append('flex items-center justify-center outline-none', true)
+		.append('inline-flex items-center justify-center outline-none', true)
 		.append($$restProps.class, true)
 		.compile();
 

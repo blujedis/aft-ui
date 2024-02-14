@@ -10,13 +10,12 @@ export type SelectListButtonProps = InputProps & {
 	caret?: string | IconifyIcon;
 	filterable?: boolean;
 	hovered?: boolean;
+	multiple?: boolean;
 	newable?: boolean;
 	placeholder?: string;
 	removable?: boolean;
 	roticon?: boolean;
-	tags?: boolean;
 	variant?: SelectListVariant;
-	badgeVariant?: BadgeVariant;
 	onBeforeAdd?: <T extends SelectListItem>(
 		value: string,
 		input: HTMLInputElement

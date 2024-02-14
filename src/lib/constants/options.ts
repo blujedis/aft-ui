@@ -36,6 +36,74 @@ export const borderStyles = {
 	hidden: 'border-hidden'
 };
 
+export const fontLeadings = {
+	unstyled: '',
+	none: 'leading-none',
+	xs: 'leading-3',
+	sm: 'leading-4',
+	md: 'leading-5',
+	lg: 'leading-6',
+	xl: 'leading-7',
+	xl2: 'leading-8',
+	xl3: 'leading-9',
+	xl4: 'leading-10',
+	tight: 'leading-tight',
+	snug: 'leading-snug',
+	normal: 'leading-normal',
+	relaxed: 'leading-relaxed',
+	loose: 'leading-loose'
+};
+
+export const fieldLeading = {
+	xs: fontLeadings.md, // 'sm:leading-5',
+	sm: fontLeadings.md, // 'sm:leading-5',
+	md: fontLeadings.lg, // 'sm:leading-6',
+	lg: fontLeadings.xl, // 'sm:leading-7',
+	xl: fontLeadings.xl2, // 'sm:leading-8',
+	xl2: fontLeadings.xl3, //  'sm:leading-9'
+};
+
+export const fontSizes = {
+	unstyled: '',
+	base: 'text-base',
+	xs: 'text-xs',
+	sm: 'text-sm',
+	md: 'text-base',
+	lg: 'text-lg',
+	xl: 'text-xl',
+	xl2: 'text-2xl',
+	xl3: 'text-3xl',
+	xl4: 'text-4xl',
+	xl5: 'text-5xl',
+	xl6: 'text-6xl',
+	xl7: 'text-7xl',
+	xl8: 'text-8xl',
+	xl9: 'text-9xl'
+};
+
+export const fieldPaddingX = {
+	unstyled: '',
+	xs: 'px-2.5',
+	sm: 'px-2.5',
+	md: 'px-3',
+	lg: 'px-3.5',
+	xl: 'px-5',
+	xl2: 'px-6'
+};
+
+
+
+
+export const fieldFontSizes = {
+	unstyled: '',
+	xs: fontSizes.xs,
+	sm: fontSizes.sm,
+	md: fontSizes.sm,
+	lg: fontSizes.base,
+	xl: fontSizes.lg,
+	xl2: fontSizes.xl
+};
+
 export const fieldPaddingY = {
 	unstyled: '',
 	xs: 'py-0.5',
@@ -66,23 +134,14 @@ export const fieldUpperPaddingY = {
 	xl2: 'py-3.5'
 };
 
-export const fieldPaddingX = {
+export const boxPadding = {
 	unstyled: '',
-	xs: 'px-2.5',
-	sm: 'px-2.5',
-	md: 'px-3',
-	lg: 'px-3.5',
-	xl: 'px-5',
-	xl2: 'px-6'
-};
-
-export const fieldLeading = {
-	xs: 'sm:leading-5',
-	sm: 'sm:leading-5',
-	md: 'sm:leading-6',
-	lg: 'sm:leading-7',
-	xl: 'sm:leading-8',
-	xl2: 'sm:leading-9'
+	xs: 'p-3',
+	sm: 'p-4',
+	md: 'p-6',
+	lg: 'p-8',
+	xl: 'p-10',
+	xl2: 'px-12'
 };
 
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
@@ -95,7 +154,7 @@ export const buttonPadding = mergeConfigs(fieldPaddingY, {
 	lg: 'px-5',
 	xl: 'px-6',
 	xl2: 'px-8'
-});
+}, fieldLeading);
 
 export const menuPadding = mergeConfigs(fieldPaddingTightY, {
 	unstyled: '',
@@ -160,44 +219,6 @@ export const roundeds = {
 	false: 'rounded-none'
 };
 
-export const fontSizes = {
-	unstyled: '',
-	base: 'text-base',
-	xs: 'text-xs',
-	sm: 'text-sm',
-	md: 'text-base',
-	lg: 'text-lg',
-	xl: 'text-xl',
-	xl2: 'text-2xl',
-	xl3: 'text-3xl',
-	xl4: 'text-4xl',
-	xl5: 'text-5xl',
-	xl6: 'text-6xl',
-	xl7: 'text-7xl',
-	xl8: 'text-8xl',
-	xl9: 'text-9xl'
-};
-
-export const fieldFontSizes = {
-	unstyled: '',
-	xs: fontSizes.xs,
-	sm: fontSizes.sm,
-	md: fontSizes.sm,
-	lg: fontSizes.base,
-	xl: fontSizes.lg,
-	xl2: fontSizes.xl
-};
-
-export const boxPadding = {
-	unstyled: '',
-	xs: 'p-3',
-	sm: 'p-4',
-	md: 'p-6',
-	lg: 'p-8',
-	xl: 'p-10',
-	xl2: 'px-12'
-};
-
 export const sizeStepdown = {
 	unstyled: 'unstyled',
 	none: 'none',
@@ -248,23 +269,7 @@ export const resizes = {
 	both: 'resize-both'
 };
 
-export const fontLeadings = {
-	unstyled: '',
-	none: 'leading-none',
-	xs: 'leading-3',
-	sm: 'leading-4',
-	md: 'leading-5',
-	lg: 'leading-6',
-	xl: 'leading-7',
-	xl2: 'leading-8',
-	xl3: 'leading-9',
-	xl4: 'leading-10',
-	tight: 'leading-tight',
-	snug: 'leading-snug',
-	normal: 'leading-normal',
-	relaxed: 'leading-relaxed',
-	loose: 'leading-loose'
-};
+
 
 export const gridgaps = {
 	unstyled: '',

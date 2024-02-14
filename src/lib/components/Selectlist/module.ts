@@ -42,17 +42,16 @@ export type SelectListContextProps = {
 	full?: boolean;
 	focused?: boolean;
 	hovered?: boolean;
-	multiple?: boolean; // when not tags allows multiple items to be selected.
+	multiple?: boolean; // multiple tags mode.
 	newable?: boolean;			// can add new tags
 	placeholder?: string;
 	removable?: boolean;		// can remote tags
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
-	tags?: boolean;				// tags enabled.
 	theme?: ThemeColor;
-	badgeVariant?: BadgeVariant;
 	variant?: SelectListVariant;
+	transitioned?: boolean;
 	onBeforeAdd?: SelectListButtonProps['onBeforeAdd'];
 	onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
 };

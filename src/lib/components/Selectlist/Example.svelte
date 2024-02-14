@@ -26,7 +26,7 @@
 			label: 'JavaScript',
 			description:
 				'JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.',
-			selected: false,
+			selected: true,
 			href: 'https://www.javascript.com/'
 		},
 		{
@@ -42,7 +42,7 @@
 			label: 'React',
 			description:
 				'React is a JavaScript-based UI development library. Facebook and an open-source developer community run it. Although React is a library rather than a language, it is widely used in web development. The library first appeared in May 2013 and is now one of the most commonly used frontend libraries for web development.',
-			selected: true,
+			selected: false,
 			href: 'https://react.dev/'
 		}
 	];
@@ -177,7 +177,7 @@
 		</div>
 	{/each} -->
 
-	<div class="flex">
+	<div class="mb-2 flex max-w-xl">
 		<SelectList
 			{...props}
 			{...shared}
@@ -187,8 +187,9 @@
 			placeholder="Please Select"
 			theme="primary"
 			let:filtered
-			tags
+			multiple
 			newable
+			removable
 			class="flex-1"
 		>
 			<SelectListButton />
@@ -200,9 +201,9 @@
 				{/each}
 			</SelectListPanel>
 		</SelectList>
+
 		<Input {...shared} type="text" placeholder="Enter name" />
 		<Button {...shared}>Hello World</Button>
 	</div>
-
 	<!-- </label> -->
 </ExamplePage>

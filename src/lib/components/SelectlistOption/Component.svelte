@@ -12,9 +12,13 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { as, focused, hovered, removable, size, theme, key } = {
+	export let { as, focused, hovered, multiple, removable, size, theme, key } = {
 		...defaults,
-		...context?.globals
+		focused: context.globals?.focused,
+		hovered: context.globals?.hovered,
+		multiple: context.globals?.multiple,
+		size: context.globals?.size,
+		theme: context.globals?.theme
 	} as Required<SelectListOptionProps<Tag>>;
 
 	const th = themer($themeStore);
@@ -43,7 +47,7 @@
 	}
 
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
-		if (!context.globals.tags && $context.input) {
+		if (!multiple && $context.input) {
 			handleSelect();
 			setTimeout(() => {
 				const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
