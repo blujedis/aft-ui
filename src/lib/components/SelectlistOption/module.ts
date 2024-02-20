@@ -2,6 +2,7 @@ import type { ThemeColor, ThemeSize } from '$lib/types';
 import type { SelectListItemKey } from '../SelectList';
 
 export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
+	activeStyles?: boolean;
 	as?: Tag;
 	focused?: boolean;
 	hovered?: boolean;
@@ -15,5 +16,4 @@ export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
 export const selectListOptionDefaults: SelectListOptionProps<'a'> = {
 	as: 'a',
 	size: 'sm',
-	theme: 'frame'
 };

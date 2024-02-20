@@ -57,7 +57,7 @@
 			</div>
 
 			<div>
-				<ButtonGroup {...props} variant="text" {theme}>
+				<ButtonGroup {...props} variant="flushed" {theme}>
 					{#each buttons as button}
 						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
 					{/each}
@@ -82,39 +82,5 @@
 		</div>
 	{/each}
 
-	<!-- <div class="grid grid-cols-4 gap-2">
 
-		<div>
-				<ButtonGroup {...props}>
-					{#each buttons as button}
-						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-					{/each}
-				</ButtonGroup>
-		</div>
-
-		<div>
-				<ButtonGroup {...props} variant="outlined">
-					{#each buttons as button}
-						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-					{/each}
-				</ButtonGroup>
-		</div>
-
-		<div>
-				<ButtonGroup {...props} variant="text">
-					{#each buttons as button}
-						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-					{/each}
-				</ButtonGroup>
-		</div>
-
-		<div>
-				<ButtonGroup {...props} variant="ghost">
-					{#each buttons as button}
-						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-					{/each}
-				</ButtonGroup>
-		</div>
-
-	</div> -->
 </ExamplePage>

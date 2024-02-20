@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPaginator } from '$lib/stores/paginator';
+	import usePaginator, { getPaginator } from '$lib/stores/paginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
@@ -12,6 +12,8 @@
 
 	export let {
 		ellipsis,
+		focused,
+		hovered,
 		items,
 		page,
 		pages,
@@ -26,7 +28,7 @@
 		...defaults
 	} as Required<PaginationProps>;
 
-	const pg = getPaginator({
+	const pg = usePaginator({
 		page,
 		pages,
 		pageSize,
@@ -35,8 +37,10 @@
 	});
 
 	const globals = cleanObj({
+		focused,
+		hovered,
 		rounded,
-		shadowed,
+		// shadowed,
 		size,
 		theme,
 		transitioned,
@@ -44,6 +48,7 @@
 	});
 
 	export const context = setContext('Pagination', {
+		...pg,
 		globals
 	});
 
@@ -54,8 +59,13 @@
 		.option('common', 'transitioned', transitioned)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.append('inline-flex items-center', ['filled', 'glass'].includes(variant))
-		.append('isolate inline-flex -space-x-px', variant === 'filled')
+		.option('common', 'ringed', ['filled', 'soft'].includes(variant))
+		.option('common', 'divided', ['filled', 'soft'].includes(variant))
+		.option('common', 'bordered', variant === 'flushed')
+		.append('inline-flex items-center', ['filled', 'soft'].includes(variant))
+		.append('isolate inline-flex -space-x-px', ['filled', 'soft'].includes(variant))
+		.append('divide-x ring-1 ring-inset', ['filled', 'soft'].includes(variant))
+		.append('border-t isolate inline-flex', variant === 'flushed')
 		.append($$restProps.class, true)
 		.compile();
 
@@ -69,12 +79,12 @@
 	class={paginationControllerClasses}
 >
 	<slot
-		page={pg.page}
-		startPage={pg.startPage}
-		endPage={pg.endPage}
-		rangeStart={pg.startRecord}
-		rangeEnd={pg.endRecord}
-		activePages={pg.activePages}
-		totalPages={pg.totalPages}
+		page={$pg.page}
+		startPage={$pg.startPage}
+		endPage={$pg.endPage}
+		rangeStart={$pg.startRecord}
+		rangeEnd={$pg.endRecord}
+		activePages={$pg.activePages}
+		totalPages={$pg.totalPages}
 	/>
 </nav>

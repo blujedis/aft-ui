@@ -12,7 +12,7 @@
 
 	$: paginationDetailClasses = themer($themeStore)
 		.create('PaginationDetail')
-		.variant('paginationDetail', variant, theme, true)
+		// .variant('paginationDetail', variant, theme, true)
 		.option('common', 'transitioned', transitioned)
 		.option('kbdPadding', size, size)
 		.option('badgeFontSizes', size, size)

@@ -4,16 +4,15 @@ import type {
 	ThemeFocused,
 	ThemeRounded,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
-import type { paginationPage } from './config';
 
-export type PaginationPageVariant = keyof typeof paginationPage;
+export type PaginationPageVariant = 'filled' | 'flushed' | 'soft'; 
 
 export type PaginationPageProps<Tag> = {
 	as?: Tag;
 	focused?: ThemeFocused;
+	hovered?: boolean;
 	next?: boolean | string | IconifyIcon;
 	previous?: boolean | string | IconifyIcon;
 	rounded?: ThemeRounded;
@@ -28,6 +27,6 @@ export const paginationPageDefaults: Partial<PaginationPageProps<'button'>> = {
 	as: 'button',
 	focused: true,
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'flushed'
 };

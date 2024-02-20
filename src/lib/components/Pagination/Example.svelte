@@ -8,30 +8,30 @@
 		ThemeColor,
 		ThemeRounded,
 		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
+		ThemeSize
 	} from '$lib/types';
 
 	const title = 'Pagination';
 	const description = 'Pager for data tables and record sets.';
-	const code = `
-  `;
 
 	const props = {
+		focused: true,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
-		transitioned: false as ThemeTransitioned,
+		transitioned: false,
 		variant: 'grouped' as PaginationVariant
 	};
 
 	let pagination = null as Pagination<any> | null;
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description} >
 	{#each colors as color}
 		<div class="grid grid-cols-3 gap-2 mb-8">
+
 			<div>
 				<Pagination
 					{...props}
@@ -79,7 +79,7 @@
 				<Pagination
 					{...props}
 					bind:this={pagination}
-					variant="glass"
+					variant="soft"
 					items={jsondata.length}
 					page={1}
 					pageSize={5}

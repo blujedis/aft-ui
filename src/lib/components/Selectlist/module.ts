@@ -1,9 +1,10 @@
 import type { SelectStore, SelectStoreValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
-import type { BadgeProps, BadgeVariant } from '../Badge/module';
+import type { BadgeProps } from '../Badge/module';
 
 export type SelectListItemKey = SelectStoreValue;
+export type FilterQuery<T = SelectListItem> = (query: string, items: Required<T>[], selected: SelectListItemKey[]) => Required<T>[] | Promise<Required<T>[]>;
 
 export type SelectListItem = {
 	label?: string;
@@ -16,8 +17,11 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
 	visible?: boolean;
 	items: T[];
 	filtered: T[];
+	persisted: SelectStoreValue[];
+	filtering?: boolean;
 	input?: HTMLInputElement;
 	panel?: HTMLDivElement;
+	trigger?: HTMLDivElement;
 };
 
 export type SelectListContext<T extends SelectListItem = SelectListItem> =
@@ -30,8 +34,9 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 		add({ value, label, group, selected }: T): void;
 		remove(key: SelectListItemKey): void;
 		remove(item: T): void;
+		restore(restoreInput?: boolean): void;
+		restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
 		filter(query?: string): void;
-		reset(selectedItems?: SelectListItemKey[]): void;
 		globals: SelectListContextProps;
 	};
 
@@ -62,18 +67,15 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 	items: T[]; // | Promise<T[]>;
 	store?: SelectStore<SelectListStore>; // custom store.
 	visible?: boolean;
-	filter?: (query: string, items: Required<T>[]) => Required<T>[]; // filter used to find items in list.
+	filter?: FilterQuery<T>; // filter used to find items in list.
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
 {
 	autoclose: true,
 	escapable: true,
-	filterable: true,
-	filter: (q, i) =>
-		i.filter(
-			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-		),
+	filter: (q, i) => i.filter(
+		(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)),
 	size: 'md',
 	theme: 'frame',
 	variant: 'outlined'

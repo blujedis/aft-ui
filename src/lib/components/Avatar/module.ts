@@ -4,13 +4,11 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	TypeOrValue,
 } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { NotificationPosition } from '../Notifications';
-import type { avatar } from './config';
 
-export type AvatarVariant = 'filled' | 'outlined' | 'soft'; //  keyof typeof avatar;
+export type AvatarVariant = 'filled' | 'outlined' | 'soft'; 
 
 export type AvatarNotificationPosition = Exclude<
 	NotificationPosition,

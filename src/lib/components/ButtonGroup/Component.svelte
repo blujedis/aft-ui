@@ -50,8 +50,10 @@
 		.create('ButtonGroup')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('w-full', full)
-		.append('isolate inline-flex [&>:not(:first-child):not(:last-child)]:rounded-none', true)
-		.append('space-x-4', variant === 'text')
+		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant !== 'ghost')
+		.append('isolate inline-flex', true)
+		.append('space-x-4', variant === 'flushed')
+		.append('gap-1', ['ghost', 'flushed'].includes(variant))
 		.append($$restProps.class, true)
 		.compile();
 

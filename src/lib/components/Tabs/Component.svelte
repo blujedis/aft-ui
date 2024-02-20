@@ -5,6 +5,7 @@
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
+	import { divideds } from '../options';
 
 	type $$Props = TabsProps & ElementProps<'div'>;
 
@@ -12,6 +13,7 @@
 		condensed,
 		focused,
 		full,
+		hovered,
 		rounded,
 		selected,
 		shadowed,
@@ -32,6 +34,7 @@
 	const globals = cleanObj({
 		focused,
 		full,
+		hovered,
 		rounded,
 		size,
 		theme,
@@ -71,12 +74,14 @@
 			boolToMapValue(rounded),
 			rounded && !['underlined', 'labeled'].includes(variant)
 		)
-		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'labeled')
-		.append('-mb-px', ['underlined', 'default'].includes(variant))
-		.append('space-x-4', variant !== 'grouped')
+		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
+		.append('-mb-px', ['flushed', 'filled'].includes(variant))
+		.option('common', 'bordered', variant === 'outlined')
+		.option('common', 'divided', variant === 'outlined')
+		//.append('space-x-4', variant !== 'outlined')
 		.append('w-full justify-around space-x-0', full)
 		.append('isolate flex', true)
-		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'grouped')
+		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
 		.append(navClasses, true)
 		.compile();
 
@@ -84,13 +89,17 @@
 </script>
 
 <div class={tabControllerlWrapperClasses}>
+
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
 			<slot name="mobile" />
 		</div>
 	{/if}
+
 	<div class={tabControllerNavWrapperClasses}>
+
 		<div class={tabControllerNavContainerClasses}>
+
 			<nav class={tabControllerNavClasses} aria-label="Tabs">
 				<slot
 					name="tabs"
@@ -101,7 +110,9 @@
 					isSelected={store.isSelected}
 				/>
 			</nav>
+
 		</div>
+
 		<div class="hidden sm:flex">
 			<slot
 				name="panels"
@@ -112,5 +123,7 @@
 				isSelected={store.isSelected}
 			/>
 		</div>
+		
 	</div>
+
 </div>

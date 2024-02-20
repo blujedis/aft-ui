@@ -72,7 +72,7 @@
 		.create('SwitchHandle')
 		.option('switchHandleSizes', size, size)
 		.option('common', 'disabled', disabled)
-		.append('bg-white border-frame-400 dark:border-frame-600', true)
+		.append('bg-white border-frame-300', true)
 		.append(
 			'pointer-events-none absolute left-0 inline-block transform rounded-full border shadow ring-0 transition-transform duration-200 ease-in-out',
 			true

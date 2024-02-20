@@ -23,6 +23,7 @@
 
 	$: tabPanelClasses = themer($themeStore)
 		.create('TabPanel')
+		.prepend('tab-panel', true)
 		.append($$restProps.class, true)
 		.compile();
 </script>

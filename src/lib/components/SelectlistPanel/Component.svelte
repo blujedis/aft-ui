@@ -10,6 +10,11 @@
 
 	type $$Props = SelectListPanelProps & ElementProps<'div'>;
 
+	interface ActiveItem {
+		el?: HTMLElement;
+		index?: number;
+	}
+
 	const context = getContext('SelectListContext') as SelectListContext;
 
 	export let { full, multiple, origin, position, rounded, shadowed, theme, transition } = {
@@ -23,34 +28,23 @@
 
 	const th = themer($themeStore);
 
-	$: nav = useFocusNav($context.panel?.firstChild);
-
-	$: selected = $context.selected.map((v) =>
-		$context.items.find((item) => item.value === v)
-	) as SelectListItem[];
-
-	nav?.onSelected((el) => {
-		const key = el.dataset.key as string;
-		// if (!multiple && $context.input) {
-		// 	const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
-		// 	setTimeout(() => {
-		// 		if ($context.input) $context.input.value = labels.join(', ');
-		// 	});
-		// } else {
-		if (context.isSelected(key)) {
-			setTimeout(() => context.unselect(key));
-		} else if (key) {
-			setTimeout(() => context.select(key));
-		}
-		//}
+	$: nav = useFocusNav($context.panel?.firstChild, {
+		onSelected,
+		onFind,
+		onInit,
+		onNavigate
 	});
+
+	$: activeItem = { el: undefined, index: undefined } as ActiveItem;
 
 	$: panelClasses = th
 		.create('SelectListPanel')
-		.option('panelBg', theme, true)
+		.option('panelBg', theme, theme)
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.append(`dropdown-panel absolute z-30 mt-1 text-left min-w-32`, true)
+		.prepend('select-list-panel', true)
+		.append('outline-none', true)
+		.append(`absolute z-30 mt-1 text-left min-w-32`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
 		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
 		.append('origin-center', origin === 'center')
@@ -58,8 +52,51 @@
 		.append($$restProps.class, true)
 		.compile();
 
-	function setFocus(el: HTMLElement) {
-		el.focus();
+	function onInit(items = [] as HTMLElement[]) {
+		if (!items.length || $context.filtering) return;
+		activeItem = items.reduce((a,c, i) => {
+			if (c.classList.contains('select-list-option-selected')){
+				a.el = c;
+				a.index = Math.max(0, i-1)
+			}
+			return a;
+		}, {el: undefined, index: undefined} as ActiveItem);
+
+		if (!activeItem.el) // just focus on first option item if none selected.
+			activeItem = { el: items[0], index: 0 }
+			activeItem.el?.focus();
+	}
+
+	function onNavigate(el: HTMLElement | undefined, index: number) {
+		activeItem = { el, index };
+	}
+
+	function onSelected(el: HTMLElement, e: KeyboardEvent) {
+		e.preventDefault(); // prevent or will bubble for option select event.
+		const key = el.dataset.key as string;
+		if (!multiple && $context.input) {
+			context.toggle();
+			context.restore(key, false)
+			setTimeout(() => {
+				if ($context.input) {
+					const nextValue = $context.items.find((i) => key === i.value)?.label || '';
+					$context.input.value = nextValue;
+					$context.input.focus();
+				}
+			});
+		} else {
+			context.select(key);
+			setTimeout(() => {
+				$context.input?.focus();
+			});
+		}
+	}
+
+	function onFind(items: HTMLElement[]) {
+		let found = items.find((el) => el.classList.contains('select-list-option-selected'));
+		if (!found)
+			found = items.find((el) => el.classList.contains('select-list-option'));
+		return found as HTMLElement;
 	}
 </script>
 
@@ -70,13 +107,12 @@
 		{...$$restProps}
 		aria-orientation="vertical"
 		bind:this={$context.panel}
-		use:setFocus
 		on:keydown={nav.onKeydown}
 		transition:transitioner={transition}
 		class={panelClasses}
 	>
 		<div class="py-1" role="none">
-			<slot />
+			<slot currentElement={activeItem.el} currentIndex={activeItem.index}/>
 		</div>
 	</div>
 {/if}

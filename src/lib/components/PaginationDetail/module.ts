@@ -3,11 +3,10 @@ import type {
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { paginationDetail } from './config';
 
-export type PaginationDetailVariant = keyof typeof paginationDetail;
+
+export type PaginationDetailVariant = 'filled' | 'flushed' | 'soft'; 
 
 export type PaginationDetailProps = {
 	full?: boolean;
@@ -23,6 +22,6 @@ export type PaginationDetailProps = {
 export const paginationDetailDefaults: Partial<PaginationDetailProps> = {
 	rounded: 'full',
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'filled'
 };

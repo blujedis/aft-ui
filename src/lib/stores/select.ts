@@ -1,7 +1,7 @@
 import { ensureArray } from '$lib/utils';
 import { writable, get, type Writable } from 'svelte/store';
 
-export type SelectStoreValue = string | number;
+export type SelectStoreValue = string | number | HTMLElement;
 
 export interface SelectStoreOptions {
 	max?: number;
@@ -15,7 +15,7 @@ export type SelectInitProps = SelectStoreOptions & {
 };
 
 export interface SelectStoreMethods {
-	resetSelected(...selected: SelectStoreValue[]): void;
+	restore(...selected: SelectStoreValue[]): void;
 	select(value?: SelectStoreValue): void;
 	unselect(value?: SelectStoreValue): void;
 	toggle(value?: SelectStoreValue): void;
@@ -57,7 +57,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	function swap(value?: SelectStoreValue) {
+	function toggle(value?: SelectStoreValue) {
 		if (typeof value === 'undefined') return;
 		store.update((s) => {
 			let selected = [...s.selected];
@@ -68,7 +68,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	function resetSelected(...selected: SelectStoreValue[]) {
+	function restore(...selected: SelectStoreValue[]) {
 		store.update((s) => {
 			return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
 		});
@@ -81,10 +81,10 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 
 	return {
 		...store,
-		resetSelected,
+		restore,
 		select,
 		unselect,
-		toggle: swap,
+		toggle,
 		isSelected
 	};
 }

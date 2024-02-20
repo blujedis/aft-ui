@@ -1,7 +1,6 @@
-import type { ThemeColor, ThemeSize, ThemeTransitioned } from '$lib/types';
-// import type { selectOption } from './config';
+import type { ThemeColor, ThemeSize } from '$lib/types';
 
-export type SelectOptionVariant = 'outlined'; // keyof typeof selectOption;
+export type SelectOptionVariant = 'outlined'; 
 
 export type SelectOptionProps = {
 	disabled?: boolean;
@@ -16,6 +15,6 @@ export type SelectOptionProps = {
 
 export const selectOptionDefaults: Partial<SelectOptionProps> = {
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'outlined'
 };

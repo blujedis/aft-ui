@@ -22,9 +22,15 @@
 
 	const context = getContext('Pagination') as PaginationContext;
 
-	export let { as, focused, next, previous, rounded, size, theme, transitioned, value, variant } = {
+	export let { as, focused, hovered, next, previous, rounded, size, theme, transitioned, value, variant } = {
 		...defaults,
-		...context?.globals
+		focused: context.globals?.focused,
+		hovered: context.globals?.hovered,
+		rounded: context.globals?.rounded,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		transitioned: context.globals?.transitioned,
+		variant: context.globals?.variant
 	} as Required<PaginationPageProps<Tag>>;
 
 	const th = themer($themeStore);
@@ -33,23 +39,33 @@
 
 	$: paginationPageClasses = th
 		.create('PaginationPage')
-		.variant('paginationPage', variant, theme, true)
-		.option('focusedRingVisible', theme, focused)
+		.bundle(['selectedBgAriaSelected'], { $base: 'aria-selected:text-white dark:aria-selected:text-white' }, theme, variant === 'filled')
+		.bundle(['selectedSoftBgAriaSelected'], { $base: 'aria-selected:text-current dark:aria-selected:text-white'}, theme, variant === 'soft')
+		.bundle(['selectedBorderAriaSelected'], { 
+			$base: 'aria-selected:text-current dark:aria-selected:text-white'
+
+		}, theme, variant === 'flushed')
+		.option('common', 'mutedText', true)
 		.option('fieldFontSizes', size, size)
-		.option('paginationGroupedPadding', size, size && ['filled', 'glass'].includes(variant))
+		.option('paginationGroupedPadding', size, size && ['filled', 'soft'].includes(variant))
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
-		.option('common', 'ringed', ['filled', 'glass'].includes(variant))
+		// .option('hovered', variant, theme, hovered)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'transitioned', transitioned)
+		.option('panelAccordionBgHover', theme, hovered && ['filled', 'soft'].includes(variant))
 		.option('roundeds', boolToMapValue(rounded), rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
-			['filled', 'glass'].includes(variant)
+			['filled', 'soft'].includes(variant)
 		)
 		.append(
-			'inline-flex items-center border-t-2 font-medium border-x-0 border-b-0',
+			'inline-flex items-center border-t-2 border-transparent font-medium border-x-0 border-b-0',
 			variant === 'flushed'
 		)
-		.append('z-10', ['filled', 'glass'].includes(variant) && selected)
-		.append('pointer-events-none', value === '...')
+		.append('z-10', ['filled', 'soft'].includes(variant) && selected)
+		.append('hover:border-frame-300 dark:hover:border-frame-600', variant === 'flushed' && !selected)
+		.append('pointer-events-none', value === '...' || selected)
 		.append('px-2', (previous || next) as any)
 		.append('rounded-r-none', previous as any)
 		.append('rounded-l-none', next as any)

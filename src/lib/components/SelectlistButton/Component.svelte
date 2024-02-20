@@ -10,7 +10,7 @@
 	} from '$lib/components';
 	import type { ElementProps, IconifyTuple } from '$lib/types';
 	import { boolToMapValue } from '$lib/utils';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 
 	type $$Props = SelectListButtonProps & ElementProps<'input'>;
 
@@ -59,11 +59,12 @@
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
-	let mounted = false;
 
 	$: selected = $context.selected.map((v) =>
 		$context.items.find((item) => v === item.value)
-	) as SelectListItem[];
+	).filter(v => typeof v !== 'undefined') as SelectListItem[];
+
+	$: labels = selected.map((i) => i.label) as string[];
 
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
@@ -93,7 +94,7 @@
 		.option('common', 'disabled', disabled)
 		.prepend('select-list-button', true)
 		.append('w-full', full)
-		.append('relative peer flex items-center', true)
+		.append('relative peer flex items-center min-w-[176px]', true)
 		.append('outline-none', focused && variant !== 'flushed')
 		.append('border-0', variant === 'flushed')
 		.append($$restProps.class, true)
@@ -103,13 +104,15 @@
 		.create('SelectListInputWrapper')
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.append('relative flex flex-1 gap-1 flex-wrap overflow-hidden', true)
+		.prepend('select-list-content-wrapper', true)
+		.append('relative flex flex-1 gap-1 flex-wrap overflow-hidden mr-4', true)
 		.compile();
 
 	$: inputWrapperClasses = th
 		.create('SelectListInput')
 		.prepend('select-list-input-wrapper', true)
-		.append('relative', true)
+		.append('relative pl-1', true)
+		.append('min-w-12 max-w-fit', multiple)
 		.compile();
 
 	$: badgeButtonClasses = th
@@ -128,13 +131,14 @@
 		.create('SelectListInput')
 		.prepend('select-list-input', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
-		.append('relative bg-transparent outline-none border-none inline', true)
-		.append('group peer', true)
+		.append('caret-transparent', !filterable) // caret not need if can't filter.
+		.append('relative group peer inline w-full bg-transparent outline-none border-none', true)
+		.append('cursor-pointer', !multiple && !filterable)
 		.compile();
 
 	$: triggerClasses = th
 		.create('SelectListButtonIconWrapper')
-		.append('absolute inset-y-0 right-2 flex items-center', true)
+		.append('absolute inset-y-0 right-2 flex items-center outline-none', true)
 		.compile();
 
 	$: iconClasses = th
@@ -148,55 +152,90 @@
 		.append('ml-2 pointer-events-none', true) // shrink
 		.compile();
 
-	function updateWidth() {
-		if (!$context.input) return;
-		const multiplier = ['xl', 'xl2'].includes(size) ? 8.75 : ['xs', 'sm'].includes(size) ? 6 : 7.5;
-		const value = $context.input.value;
-		let width = Math.max(32, value.length * multiplier + 25); // 8px per character
-		// $context.input.style.width = width + 'px';
-	}
-
 	async function handleRemoveTag(item?: SelectListItem) {
+
 		if (!removable) return;
 		let shouldRemove = false;
+
 		if (item && item.value) {
 			shouldRemove = await Promise.resolve(
 				onBeforeRemove(item, $context.input as HTMLInputElement)
 			);
 			if (shouldRemove) context.remove(item.value);
 		}
+
 		$context.input?.focus();
 		return shouldRemove;
+
 	}
 
 	async function handleAddTag(value: string) {
+
 		if (!$context.input) return;
 		const item = await onBeforeAdd(value, $context.input);
+	
 		if (item) {
 			item.selected = true;
 			context.add(item);
 			$context.input.value = '';
 		}
-		updateWidth(); // reset the width.
 		$context.input.focus();
+
+	}
+
+	async function handleFilter(query = '', key = '') {
+	
+		if (!$context.filtering && !multiple) {
+			context.update((s) => {
+				return { ...s, persisted: [...s.selected], selected: [] };
+			});
+			$context.filtering = true;
+		}
+
+			if (!$context.visible) {
+					
+				context.open(); // do this to ensure focus after opening dropdown.
+
+				setTimeout(() => {
+					if ($context.input) {
+						if (key.length === 1) $context.input.value = key;
+						$context.input.focus();
+					}
+				});
+
+	
+		}
+
+		else {
+				context.filter(query);
+			}
+
 	}
 
 	function handleClick(e: MouseEvent) {
-		// if (!tags) {
 		context.toggle();
-		// }
-		// else if ($context.input) {
-		// 	$context.input.value = '';
-		// }
+		setTimeout(() => {
+				// if ($context.trigger && !$context.visible)
+				if (!$context.visible)
+					$context.input?.focus();
+		});
 	}
 
 	function handleInputClick(e: MouseEvent & { currentTarget: EventTarget | HTMLInputElement }) {
-		if (!multiple && !filterable) context.toggle();
-		if (!multiple && $context.input) {
-			$context.input.value = '';
-			$context.input.focus();
+		if (!multiple && !filterable) {
+			context.toggle();
+			setTimeout(() => {
+				if ($context.trigger && !$context.visible)
+					$context.trigger.focus();
+		});
 		}
-		// e.preventDefault();
+		else if (!filterable && !$context.visible) {
+			e.preventDefault();
+			context.toggle();
+		}
+		else if (multiple) {
+			$context.filtering = true;
+		}
 	}
 
 	function handleInputUpdate(
@@ -205,9 +244,6 @@
 			currentTarget: EventTarget | HTMLInputElement;
 		}
 	) {
-		if (multiple) {
-			updateWidth();
-		}
 	}
 
 	async function handleInputKeydown(
@@ -215,18 +251,25 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-		if ($context.input && ['Backspace', 'Enter'].includes(e?.key || '')) {
+
+		if (multiple && $context.input && ['Backspace', 'Enter'].includes(e?.key || '')) {
+	
+			// Nothing to new reset input.
 			if (e.key === 'Enter' && !newable) {
 				$context.input.value = '';
-			} else if (
-				multiple &&
+			} 
+			
+			// Should remove tag?
+			else if (
 				e.key === 'Backspace' &&
 				removable &&
 				$context.selected.length &&
 				!$context.input.value.length
 			) {
+
 				e.preventDefault();
 				const last = selected.slice(-1)[0];
+
 				if (last && removable) {
 					const shouldRemove = await handleRemoveTag(last);
 					if (shouldRemove) {
@@ -234,48 +277,74 @@
 						context.close();
 					}
 				}
-			} else if (multiple && e.key === 'Enter' && $context.input.value && newable) {
+
+			} 
+			// Should create new tag?
+			else if (multiple && e.key === 'Enter' && $context.input.value && newable) {
+
 				const value = $context.input.value || '';
+
 				if (value) {
 					e.preventDefault();
 					handleAddTag(value);
 				}
+
 			}
+		} else if ($context.input && filterable) {
+
+			// Always focus on first, focus trap at Panel will
+			// apply focus if an element is selected.
+			if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+				e.preventDefault();
+				if (!$context.visible) context.open();
+				const container = $context.panel?.firstChild as HTMLDivElement;
+				const children = !container?.children ? [] : Array.from(container.children) as HTMLElement[];
+				if (children[0]) children[0].focus();
+			} 
+		
+			// If in filter mode and Enter key exit filter mode rerun query/filter.
+			else if (['Enter'].includes(e.key)) {
+				if ($context.filtering) {
+					const current = $context.selected[0];
+					if (current) context.select(current);
+					$context.filtering = false;
+					handleFilter('', e.key);
+				}
+			}
+
+			// Other key? Filter results.
+			else if (!['Backspace', 'Enter'].includes(e.key)) {
+				let query = $context.input?.value || '';
+				if (e.key.length === 1) query += e.key;
+				handleFilter(query, e.key);
+			} 
+
 		}
-		// else if ($context.input && filterable) {
-		// 	let query = $context.input.value || '';
-		// 	if (e.key.length === 1) query += e.key;
-		// 	else if (e.key === 'Backspace') query = query.slice(0, -1);
-		// 	context.filter(query);
-		// 	if (!$context.visible) {
-		// 		// do this to ensure focus after opening dropdown.
-		// 		context.open();
-		// 		setTimeout(() => {
-		// 			if ($context.input) {
-		// 				if (e.key.length === 1) $context.input.value = e.key || '';
-		// 				$context.input.focus();
-		// 			}
-		// 		});
-		// 	}
-		// }
+	}
+
+	async function handleInputKeyUp(
+		e: {
+			currentTarget: EventTarget & HTMLInputElement;
+		} & KeyboardEvent
+	) {
+
+		if (['Backspace'].includes(e.key)) {
+			handleFilter($context.input?.value);
+		}
+
 	}
 
 	function setInitialValue(el: HTMLInputElement) {
-		const labels = selected.map((i) => i.label).filter((l) => typeof l !== 'undefined');
-		if (!multiple && labels.length) el.value = labels.join(', ');
+		if (!multiple && labels.length) 
+			el.value = labels[0] + '';
 	}
-
-	onMount(() => {
-		mounted = true;
-	});
 </script>
 
 <!-- <div> -->
 <Flushed disabled={variant !== 'flushed'} {theme} {focused} group>
-	<div role="button" tabindex="-1" aria-disabled={disabled} class={containerClasses}>
+	<div 	bind:this={$context.trigger} role="button" tabindex="-1" aria-disabled={disabled} class={containerClasses}>
 		<div class={contentWrapperClasses}>
 			{#if multiple && selected.length}
-				<!-- <div class={badgeWrapperClasses}> -->
 				<slot name="tags" {handleRemoveTag}>
 					{#each selected as item}
 						<button on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
@@ -284,7 +353,7 @@
 									{item?.label}
 								</span>
 								{#if removable}
-									<span class="absolute inset-y-0 right-1 top-0.5">
+									<span class="absolute inset-y-0 right-1.5 top-0.5">
 										<slot name="icon">×</slot>
 									</span>
 								{/if}
@@ -292,7 +361,6 @@
 						</button>
 					{/each}
 				</slot>
-				<!-- </div> -->
 			{/if}
 			<div class={inputWrapperClasses}>
 				<slot name="input" {handleInputUpdate} {handleInputKeydown} {handleInputClick}>
@@ -311,6 +379,7 @@
 						class={inputClasses}
 						on:input={handleInputUpdate}
 						on:keydown={handleInputKeydown}
+						on:keyup={handleInputKeyUp}
 						on:click={handleInputClick}
 					/>
 				</slot>
@@ -323,21 +392,3 @@
 		</button>
 	</div>
 </Flushed>
-
-<!-- </div> -->
-
-<style>
-	/* .select-list-input-wrapper {
-		grid-area: 1 / 1 / 2 / 3;
-	}
-	.select-list-input {
-		grid-area: 1/2;
-		outline: 0px;
-		padding: 0px;
-		margin: 0px;
-		border: 0px;
-		min-width: 2px;
-		width: 100%;
-		background: 0px center;
-	} */
-</style>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ConditionalElement, Flushed } from '..';
+
 	import { themer, themeStore } from '$lib/theme';
 	import { type TabProps, tabDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
@@ -8,9 +10,6 @@
 	import { boolToMapValue } from '$lib/utils';
 
 	type Tag = $$Generic<'a' | 'button'>;
-	// type NativeProps = Tag extends 'button'
-	// 	? ElementProps<'button', 'disabled' | 'value'>
-	// 	: ElementProps<'a'>;
 	type $$Props = TabProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Tabs') as TabsContext;
@@ -20,6 +19,7 @@
 		disabled,
 		focused,
 		full,
+		hovered,
 		rounded,
 		size,
 		theme,
@@ -29,30 +29,64 @@
 		variant
 	} = {
 		...defaults,
-		...context?.globals
+		focused: context.globals?.focused,
+		full: context.globals?.full,
+		hovered: context.globals?.hovered,
+		rounded: context.globals?.rounded,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		transitioned: context.globals?.transitioned,
+		variant: context.globals?.variant,
 	} as Required<TabProps<Tag>>;
 
 	const th = themer($themeStore);
 
+	const additionalProps = {
+		disabled,
+		'aria-disabled': disabled
+	};
+
+	$: isSelected = $context.selected?.includes(value);
+
 	$: tabClasses = th
 		.create('Tab')
-		.variant('tab', variant, theme, true)
-		.option('focusedRingVisible', theme, focused)
+		// .variant('tab', '', theme, true)
+
+		// .bundle(
+		// 	['selectedBgAriaExpanded', 'selectedWhiteTextAriaExpanded'],
+		// 	theme,
+		// 	variant === 'filled' && selectable
+		// )
+		// .bundle(['selectedTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'disabled', disabled)
+		.option('panelAccordionBg', theme, variant === 'filled')
+		.option('panelAccordionBgHover', theme, hovered) // !isSelected.
+
+		.option('hovered', variant, theme, hovered)
+		// .option('common', 'focusedOutlineVisible', focused)
+		// .option('outlineFocusVisible', theme, focused)
+		// .option('common', 'transitioned', transitioned)
+
+		// .option('dropshadows', boolToMapValue(shadowed), shadowed)
+		// .option('outlineFocusVisible', theme, focused)
+		// .option('common', 'focusedOutlineVisible', focused)
+
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.append(
 			'rounded-br-none rounded-bl-none',
-			['labeled', 'default', 'underlined'].includes(variant)
+			['text', 'filled', 'flushed'].includes(variant)
 		)
-		.append('inline-flex items-center justify-center', true)
+		.append('w-full', full && ['grouped', 'text'].includes(variant))
+		.append('px-10', full && ['pills', 'flushed', 'filled'].includes(variant))
 		.append('whitespace-nowrap', variant === 'flushed')
-		.append('w-full', full && ['grouped', 'labeled'].includes(variant))
-		.append('px-10', full && ['pills', 'underlined', 'default'].includes(variant))
 		.append(
 			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
-			variant === 'grouped'
+			variant === 'outlined'
 		)
+		.append('inline-flex items-center justify-center', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -62,16 +96,31 @@
 	}
 </script>
 
-<svelte:element
-	this={as}
-	aria-labelledby={value + ''}
-	{...$$restProps}
-	role={as === 'a' ? 'link' : 'button'}
-	tabindex="-1"
-	class={tabClasses}
-	aria-current={$context?.selected?.includes(value)}
-	aria-selected={$context?.selected?.includes(value)}
-	on:click={() => handleSelect(value)}
+<ConditionalElement
+	as={Flushed}
+	condition={variant === 'flushed'}
+	props={{
+		selected: isSelected,
+		theme,
+		group: true,
+		hovered,
+		focused
+	}}
 >
-	<slot />
-</svelte:element>
+	<svelte:element
+		this={as}
+		aria-labelledby={value + ''}
+		{...$$restProps}
+		{...additionalProps}
+		role={as === 'a' ? 'link' : 'button'}
+		tabindex="-1"
+		class={tabClasses}
+		aria-current={isSelected}
+		on:click={() => handleSelect(value)}
+	>
+		<slot />
+	</svelte:element>
+
+</ConditionalElement>
+
+

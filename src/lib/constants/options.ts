@@ -2,6 +2,7 @@ import { mergeConfigs } from '../theme/utils';
 
 export const placeholder = {
 	$base: '',
+	unstyled: '',
 	white: '',
 	black: '',
 	frame: '',
@@ -148,12 +149,18 @@ export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLead
 
 export const buttonPadding = mergeConfigs(fieldPaddingY, {
 	unstyled: '',
-	xs: 'px-2.5',
-	sm: 'px-3',
-	md: 'px-4',
-	lg: 'px-5',
-	xl: 'px-6',
+	xs: 'px-3',
+	sm: 'px-3.5',
+	md: 'px-5',
+	lg: 'px-6',
+	xl: 'px-7',
 	xl2: 'px-8'
+	// xs: 'px-2.5',
+	// sm: 'px-3',
+	// md: 'px-4',
+	// lg: 'px-5',
+	// xl: 'px-6',
+	// xl2: 'px-8'
 }, fieldLeading);
 
 export const menuPadding = mergeConfigs(fieldPaddingTightY, {
@@ -293,6 +300,7 @@ export const animate = {
 
 const _hovered = {
 	$base: 'hover:brightness-115',
+	unstyled: '',
 	white: '',
 	black: '',
 	frame: '',
@@ -318,22 +326,3 @@ export const hovered = {
 		$base: 'hover:brightness-105 dark:hover:brightness-115',
 	}
 };
-
-// export const common = {
-// 	active: 'active:brightness-125',
-// 	focused: 'outline-none focus:outline-2 focus:outline-offset-0',
-// 	focusedVisible: 'outline-none focus-visible:outline-2 focus-visible:outline-offset-0',
-// 	focusedWithin: 'outline-none focus-within:outline-2 focus-within:outline-offset-0',
-// 	ringed: 'ring-1 ring-frame-900/10 dark:ring-frame-900/40',
-// 	bordered: 'border-frame-900/10 dark:border-frame-900/40',
-// 	divided: 'divide-frame-900/10 dark:divide-frame-900/40',
-// 	disabled:
-// 		'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
-// 	transitioned: 'transition motion-reduce:transition-none',
-// 	muteSelected: 'aria-selected:opacity-65',
-// 	// baseHover: 'hover:bg-frame-100 dark:hover:bg-frame-700',
-// 	// baseExpanded: 'aria-expanded:bg-frame-100 dark:aria-expanded:bg-frame-700',
-// 	// baseSelected: 'aria-selected:bg-frame-100 dark:aria-selected:bg-frame-700',
-// 	// baseCurrent: 'aria-current:bg-frame-100 dark:aria-current:bg-frame-700',
-
-// };

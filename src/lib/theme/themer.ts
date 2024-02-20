@@ -166,7 +166,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			if (!when || !conf) return api;
 			const baseVal = conf.$base || '';
 			const themeVal = conf[theme as ThemeColor] || '';
-			if (baseVal) base.push(baseVal);
+			if (baseVal && theme !== 'unstyled') base.push(baseVal);
 			if (themeVal) themed.push(themeVal);
 			return api;
 		}
@@ -192,7 +192,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			}
 			const baseValue = opt.$base || '';
 			const value = opt[prop as string] || '';
-			if (baseValue) base.push(baseValue);
+			if (baseValue && prop !== 'unstyled') base.push(baseValue);
 			if (value) themed.push(value);
 			return api;
 		}
@@ -224,7 +224,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			merged = mergeConfigs(merged, extend);
 			const baseValue = merged.$base || '';
 			const value = merged[prop as string] || '';
-			if (baseValue) base.push(baseValue);
+			if (baseValue && prop !== 'unstyled') base.push(baseValue);
 			if (value) themed.push(value);
 			return api;
 		}

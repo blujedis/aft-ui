@@ -1,24 +1,37 @@
-type FindActive = (items: HTMLElement[]) => HTMLElement | null | undefined;
-type HandleEnter = (node: HTMLElement) => void;
 
-export function useFocusNav(root?: HTMLElement | ChildNode | null) {
-	const options = {
-		findActive: (_items: HTMLElement[]) => null as HTMLElement | null | undefined,
+type FindHandler<T extends HTMLElement> = (items: T[], e: KeyboardEvent) => T;
+type SelectedHandler<T extends HTMLElement> = (el: T, e: KeyboardEvent) => any;
+type InitHandler<T extends HTMLElement> = (items: T[]) => void;
+type NavigateHandler<T extends HTMLElement> = (item: T | undefined, index: number) => any;
+
+export interface FocusNavOptions<T extends HTMLElement> {
+	selectedClass?: string;
+	allowedClass?: string;
+	onFind?: FindHandler<T>,
+	onSelected?: SelectedHandler<T>;
+	onNavigate?: NavigateHandler<T>;
+	onInit?: InitHandler<T>;
+}
+
+const defaults = {
+
+			onFind: <T>(_items: T[]) => null as T | null | undefined,
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		onSelected: (_node: HTMLElement) => {}
-	};
+		onSelected: <T>(_node: T) => { },
+		onInit: <T>(_items: T[]) => { },
+		onNavigate: <T>(_item: T, _index: number) => {},
+};
 
-	function onSelected(fn: HandleEnter) {
-		options.onSelected = fn;
-	}
+export function useFocusNav<T extends HTMLElement>(root?: HTMLElement | ChildNode | null, options?: FocusNavOptions<T>) {
 
-	function onFindActive(fn: FindActive) {
-		options.findActive = fn;
-	}
+	const _options = {
+		...defaults,
+		...options
+	} as Required<FocusNavOptions<T>>;
 
-	function getChildren() {
-		if (!root) return [] as HTMLElement[];
-		return (Array.from((root as HTMLElement).children) || []) as HTMLElement[];
+	function getItems() {
+		if (!root) return [] as T[];
+		return (Array.from((root as HTMLElement).children) || []) as T[];
 	}
 
 	function focusRoot() {
@@ -26,11 +39,13 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 	}
 
 	function onKeydown(e: KeyboardEvent, preventDefault = false) {
+
 		if (e.repeat || !['ArrowUp', 'ArrowDown', ' ', 'Enter'].includes(e.key)) return;
-		const items = getChildren();
+
+		const items = getItems();
 		if (!items?.length || !root) return; // nothing to do aren't any option items.
 
-		const activeNode = document.activeElement as HTMLElement;
+		const activeNode = document.activeElement as T;
 
 		//////////////////////////////////////////////
 		// User is selecting current value.
@@ -38,14 +53,17 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 
 		if ((e.key === ' ' || e.key === 'Enter') && (root as HTMLElement).contains(activeNode)) {
 			if (preventDefault) e.preventDefault();
-			options.onSelected(activeNode);
+			_options.onSelected(activeNode, e);
 		}
 
 		//////////////////////////////////////////////
 		// User is navigating options.
 		//////////////////////////////////////////////
 		else {
+
 			let currentNode: HTMLElement | undefined;
+			e.preventDefault(); // otherwise overflow will cause scroll jumping.
+
 			if (root.contains(activeNode)) {
 				// already navigating child nodes.
 				const currentIndex = items.indexOf(activeNode);
@@ -54,20 +72,21 @@ export function useFocusNav(root?: HTMLElement | ChildNode | null) {
 				if (nextIndex < 0 || nextIndex > items.length - 1) return;
 				// Otherwise set the current node to the new index.
 				currentNode = items[nextIndex];
+				_options.onNavigate(currentNode as T, Math.max(0, nextIndex -1));
 			} else {
 				// dropdown expanded start at first or selected node.
-				currentNode = options.findActive(items) || items[0];
+				currentNode = _options.onFind(items, e);
+				_options.onNavigate(currentNode as T, 0);
 			}
 			if (currentNode) currentNode.focus();
-			e.preventDefault(); // otherwise overflow will cause scroll jumping.
 		}
 	}
 
+	_options.onInit(getItems());
+
 	return {
-		getChildren,
+		getItems,
 		focusRoot,
-		onSelected,
-		onFindActive,
 		onKeydown
 	};
 }

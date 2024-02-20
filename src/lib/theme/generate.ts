@@ -99,6 +99,7 @@ const selectedTextModifiers = [
 
 const placeholder = {
 	$base: '',
+	unstyled: '',
 	white: '',
 	black: '',
 	frame: '',
@@ -119,10 +120,10 @@ export const defaultOptions = {
 
 	defaultShade: 500,
 
-	softOpacity: 10,
+	softOpacity: 20,
 	hoverOpacity: 20,
 	focusOpacity: 50,
-	softSelectedOpacity: 70,
+	softSelectedOpacity: 40,
 	disabledOpacity: 60,
 
 	gridColor: 'frame-950',
@@ -231,7 +232,8 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 				'aria-selected:bg',
 				'aria-expanded:bg',
 				'aria-current:bg',
-				'aria-checked:bg'
+				'aria-checked:bg',
+				'aria-selected:border'
 			],
 			colors: 'bg.colors'
 		},
@@ -328,7 +330,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'filled',
 			modifiers: ['placeholder'],
 			colors: () => createColorMap(themeColors, getMin(defaultShade, -300, 200), true, {
-				frame: 'placholder-frame-3sound00'
+				frame: 'placholder-frame-300'
 			})
 		},
 
@@ -350,7 +352,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		textInput: {
 			variant: 'input',
 			modifiers: ['text'],
-			colors: () => createColorMap(themeColors, defaultShade, true, {
+			colors: () => createColorMap(themeColors, defaultShade, getMin(defaultShade, - 100, 400), {
 				frame: `text-${bodyTextLight} dark:text-${bodyTextDark}`
 			})
 		},
@@ -402,7 +404,8 @@ function getCommon(options: Required<GenerateOptions>) {
 
 	const {
 		gridColor, gridOpacity, formBorderColorLight, formBorderColorDark,
-		disabledOpacity, focusOffset, focusWidth, defaultShade, softOpacity
+		disabledOpacity, focusOffset, focusWidth, defaultShade, softOpacity,
+		bodyTextDark, bodyTextLight
 	} = options as Required<GenerateOptions>;
 
 	const gridOpacityLight = getMin(gridOpacity, -20, 20);
@@ -421,12 +424,13 @@ function getCommon(options: Required<GenerateOptions>) {
 		focusedRingVisible: `outline-none focus-visible:ring-${focusWidth} focus-visible:ring-offset-${focusOffset}`,
 		focusedRingWithin: `outline-none focus-within:ring-${focusWidth} focus-within:ring-offset-${focusOffset}`,
 		muteSelected: `aria-selected:opacity-${disabledOpacity}`,
+		mutedText: `text-${bodyTextLight}/60 dark:text-${bodyTextDark}/40`,
 		formBorder: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,
 		neutralBg: `bg-frame-${defaultShade}/${softOpacity} dark:bg-frame-${defaultShade}/${softOpacity}`,
 		rangeBg: `frame-${defaultShade}/${softOpacity}`,
 		rangeValue: `${defaultShade}`,
 		rangeThumb: `${getMin(defaultShade, -200, 300)}`,
-		placeholderFilled: `placeholder-frame-400`
+		placeholderFilled: `placeholder-frame-400`,
 	};
 
 	return objectToString('common', common);

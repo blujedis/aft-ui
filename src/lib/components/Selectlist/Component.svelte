@@ -10,14 +10,14 @@
 	import { themeStore, themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '$lib/types';
 	import { setContext } from 'svelte';
-	import { cleanObj, createCustomEvent } from '$lib/utils';
+	import { cleanObj, createCustomEvent, ensureArray } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
 	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size'>;
 
 	export let {
-		badgeProps,
 		autoclose,
+		badgeProps,
 		disabled,
 		escapable,
 		items,
@@ -52,7 +52,8 @@
 			visible,
 			selected: [],
 			items: [],
-			filtered: []
+			filtered: [],
+			persisted: []
 		})) as SelectStore<SelectListStore<Item>>;
 
 	const globals = cleanObj({
@@ -62,10 +63,10 @@
 		full,
 		focused,
 		hovered,
-		newable,
+		newable: multiple ? newable : false,
 		multiple,
 		placeholder,
-		removable,
+		removable: multiple ? removable : false,
 		rounded,
 		shadowed,
 		size,
@@ -83,8 +84,8 @@
 		add,
 		toggle,
 		remove,
+		restore,
 		filter,
-		reset
 	};
 
 	const { class: classes, ...restProps } = $$restProps;
@@ -111,17 +112,11 @@
 
 	$: controllerClasses = th
 		.create('SelectListController')
+		.prepend('select-list', true)
 		.append('relative not-sr-only inline-flex', true)
 		.append('w-full', full)
 		.append(classes, true)
 		.compile();
-
-	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
-		if ($context.input) $context.input.value = '';
-		return (
-			(n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible) || false
-		);
-	});
 
 	function open() {
 		store.update((s) => ({ ...s, visible: true }));
@@ -129,10 +124,15 @@
 
 	function close() {
 		store.update((s) => ({ ...s, visible: false }));
+		setTimeout(() => {
+			// if (!$context.visible)
+			// 	$context.trigger?.focus();
+		});
 	}
 
 	function toggle() {
-		store.update((s) => ({ ...s, visible: !s.visible }));
+		if ($context.visible) close();
+		else open();
 	}
 
 	function add({ value, label, group, selected }: Item) {
@@ -166,35 +166,89 @@
 		});
 	}
 
-	function filter(query?: string) {
+	async function resolveItems(query?: string) {
+		if (!query) return $context.items as Required<Item>[];
+		return Promise.resolve(initFilter(query, $context.items as Required<Item>[], $context.selected));
+	}
+
+	async function filter(query?: string) {
+		const filtered = await resolveItems(query);
+		const filteredValue = !query ? [] : filtered[0] ? [filtered[0].value] : [];
 		store.update((s) => {
-			const newItems = !query?.length
-				? [...s.items]
-				: initFilter(query, s.items as Required<Item>[]);
-			return { ...s, filtered: [...newItems] };
+			return {
+				...s,
+				filtered: [...filtered],
+				selected: multiple ? s.selected : filtered.length ? filteredValue : []
+			};
 		});
-	}
-
-	function reset(selectedItems = [] as SelectListItemKey[]) {
-		store.update((s) => {
-			return { ...s, filtered: [...s.items], selectedItems };
-		});
-	}
-
-	function handleClose(_e?: Event) {
-		context.close();
-	}
-
-	function handleKeydown(e: KeyboardEvent) {
-		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible))
-			return context.close();
-		if (!$store.visible && e.key === 'ArrowDown') return context.open();
 	}
 
 	function isSelected(itemOrKey: Item | SelectListItemKey) {
 		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
 		return $store.selected.includes(key);
+	}
+
+	function restore(selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean, restoreInput?: boolean) {
+	
+		if (!$context.filtering) return;
+
+		if (typeof selectedItemsOrRestoreInput === 'boolean') {
+			restoreInput = selectedItemsOrRestoreInput;
+			selectedItemsOrRestoreInput = undefined
+		}
+
+		if ($context.input && restoreInput) {
+			if (!multiple) {
+				const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
+				if (label) $context.input.value = label || '';
+			}
+			else {
+				$context.input.value = '';
+			}
+		}
+
+		const normalizedItems = typeof selectedItemsOrRestoreInput !== 'undefined' ? ensureArray(selectedItemsOrRestoreInput) : !multiple ? $context.persisted : $context.selected;
+
+		store.update((s) => {
+			return { ...s, filtered: [...s.items], selected: [...normalizedItems], persisted: [], filtering: false };
+		});
+
+	}
+
+	function handleClose(_e?: Event) {
+		context.close();
+	}
+
+	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
+		if (multiple) {
+			restore(true);
+		}
+		else if (!multiple && filterable) {
+			if ($context.input && $context.filtering){
+				restore(true);
+			}
+		}
+		return (
+			(n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible) || false
+		);
+	});
+
+	function handleKeydown(e: KeyboardEvent) {
+		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible)) {
+			e.preventDefault();
+				restore(true);
+				context.close();
+			setTimeout(() => {
+				$context.input?.focus();
+			});
+		}
+		else if (e.key === 'ArrowDown') {
+			if (!$context.visible) {
+				context.open();
+				$context.input?.focus();
+			}
+		}
 	}
 
 	items.forEach((i) => add(i));
@@ -212,8 +266,9 @@
 		<div class="w-full">
 			<slot
 				visible={$store.visible}
-				selected={$store.selected}
+				selectedItems={$store.selected}
 				filtered={$store.filtered}
+				filtering={$store.filtering}
 				isSelected={context.isSelected}
 				open={context.open}
 				close={context.close}

@@ -3,7 +3,7 @@ import type { ThemeColor, Iconify, HTMLTag } from '$lib/types';
 import type { ButtonProps } from '../Button';
 // import type { accordionButton } from './config';
 
-export type AccordionVariant = 'filled' | 'outlined'; // keyof typeof accordionButton;
+export type AccordionVariant = 'filled' | 'outlined' | 'text'; // keyof typeof accordionButton;
 
 export type AccordianButtonProps<Tag extends HTMLTag> = Omit<ButtonProps<'button'>, 'as' | 'variant' | 'full' | 'focused' | 'underlined' | 'rounded' | 'shadowed' | 'href'> & {
 	as?: Tag;

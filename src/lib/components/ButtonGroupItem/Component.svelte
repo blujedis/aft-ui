@@ -6,7 +6,7 @@
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import { cleanObj } from '$lib/utils';
-	import { ConditionalElement, Flushed, Button } from '$lib/components';
+	import { ConditionalElement, Flushed, Button, type ButtonVariant } from '$lib/components';
 
 	type $$Props = ButtonGroupItemProps & ElementProps<'button'>;
 
@@ -39,14 +39,14 @@
 		size,
 		theme,
 		transitioned,
-		variant
+		variant: (variant === 'flushed' ? 'text' : variant) as ButtonVariant
 	});
 
 	$: isSelected = $context.selected?.includes(value);
 
 	$: buttonClasses = th
 		.create('ButtonGroupItem')
-		.bundle(['mainText'], theme, variant === 'text')
+		.bundle(['mainText'], theme, variant === 'flushed')
 		.bundle(['mainBg', 'selectedAccentBgAriaChecked'], theme, variant === 'filled')
 		.bundle(
 			['selectedBgAriaChecked', 'selectedWhiteTextAriaChecked'],
@@ -67,10 +67,11 @@
 		.option('buttonPadding', size, size)
 		.option('common', 'bordered', variant === 'filled')
 		.append('first:border-l-0 border-l', variant === 'filled')
-		.append('px-1', variant === 'text')
+		.append('px-1', variant === 'flushed')
 		.append('flex-1', full)
+		.append('first:rounded-r-none last:rounded-l-none -ml-px', variant !== 'ghost')
 		.append(
-			'relative first:ml-0 focus:z-10 -ml-px first:rounded-r-none last:rounded-l-none aria-checked:pointer-events-none',
+			'relative first:ml-0 focus:z-10 aria-checked:pointer-events-none',
 			true
 		)
 		.append($$restProps.class, true)
@@ -84,7 +85,7 @@
 
 <ConditionalElement
 	as={Flushed}
-	condition={variant === 'text'}
+	condition={variant === 'flushed'}
 	props={{
 		selected: isSelected,
 		theme,

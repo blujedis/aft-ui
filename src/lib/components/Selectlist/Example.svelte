@@ -8,6 +8,12 @@
 	import { Button } from '../Button';
 	import { colors, placeholder } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import { Icon } from '../Icon';
+	import { themer, themeStore } from '../../theme';
+
+	const th = themer($themeStore);
+
+	const iconClasses = th.create().option('iconCaretSizes', 'md', true).compile(false);
 
 	const title = 'SelectList';
 	const description = 'Comprehensive component for single and multi selection.';
@@ -63,12 +69,12 @@
 </script>
 
 <ExamplePage {title} {description}>
-	<!-- {#each colors as color}
-		<div class="grid grid-cols-5 gap-2 mb-4">
+	{#each colors as color}
+		<div class="grid grid-cols-3 gap-2 mb-4">
 			<label for="filled">
 				<SelectList
 					{...props}
-					tags
+					
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -91,7 +97,7 @@
 				<SelectList
 					{...props}
 					variant="outlined"
-					tags
+					multiple
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -113,7 +119,7 @@
 				<SelectList
 					{...props}
 					variant="soft"
-					tags
+					multiple
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -135,7 +141,7 @@
 				<SelectList
 					{...props}
 					variant="flushed"
-					tags
+					multiple
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -157,7 +163,6 @@
 				<SelectList
 					{...props}
 					variant="text"
-					tags
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -175,35 +180,51 @@
 				</SelectList>
 			</label>
 		</div>
-	{/each} -->
+	{/each} 
 
-	<div class="mb-2 flex max-w-xl">
+	<div class="mb-2 max-w-52">
 		<SelectList
 			{...props}
 			{...shared}
 			rounded="none"
 			variant="outlined"
 			items={sourceItems}
-			placeholder="Please Select"
+			placeholder="Filter..."
 			theme="primary"
-			let:filtered
 			multiple
-			newable
+			filterable
 			removable
-			class="flex-1"
+			exclusive
+			let:filtered
+			let:filtering
+			let:isSelected
 		>
 			<SelectListButton />
-			<SelectListPanel>
-				{#each filtered as item}
-					<SelectListOption as="button" key={item.value}>
-						{item.label}
-					</SelectListOption>
-				{/each}
+			<SelectListPanel let:currentIndex>
+
+				{#if !filtered.length}
+					<div class="px-2 text-sm">No Results</div>
+				{:else}
+					<!-- <div class="px-2 text-sm">Current Index: {currentIndex}</div> -->
+					{#each filtered as item}
+						{#if !isSelected(item.value)}
+						<SelectListOption as="button" key={item.value} let:active>
+							<div class="flex justify-between items-center">
+								{item.label}
+								{#if active && !filtering}
+									<Icon icon="mdi:check" class={iconClasses} />
+								{/if}
+							</div>
+						</SelectListOption>
+						{/if}
+					{/each}
+				{/if}
+			
 			</SelectListPanel>
 		</SelectList>
 
-		<Input {...shared} type="text" placeholder="Enter name" />
-		<Button {...shared}>Hello World</Button>
+		<!-- <Input {...shared} type="text" placeholder="Enter name" />
+		<Button {...shared}>Hello World</Button> -->
 	</div>
 	<!-- </label> -->
 </ExamplePage>

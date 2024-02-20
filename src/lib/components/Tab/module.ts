@@ -2,17 +2,15 @@ import type {
 	ThemeColor,
 	ThemeFocused,
 	ThemeRounded,
-	ThemeSize,
-	ThemeTransitioned
 } from '$lib/types';
-import type { tab } from './config';
 
-export type TabVariant = keyof typeof tab;
+export type TabVariant = 'flushed' | 'filled' | 'outlined' | 'text'; 
 
 export type TabProps<Tag = 'a'> = {
 	as: Tag;
 	disabled?: boolean;
-	focused?: ThemeFocused; // true = focus-visible.
+	focused?: ThemeFocused; 
+	hovered?: boolean;
 	full?: boolean;
 	rounded?: ThemeRounded;
 	size?: ThemeSize;

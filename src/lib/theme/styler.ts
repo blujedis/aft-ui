@@ -132,7 +132,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			if (!opt)
 				throw new Error(`${instanceName} option using property ${path as string} was NOT found.`);
 			const baseValue = opt.$base || '';
-			if (baseValue) append(baseValue, true);
+			if (baseValue && key !== 'unstyled') append(baseValue, true);
 			const value = opt[path as string] || '';
 			add(key, value, true);
 			return api;

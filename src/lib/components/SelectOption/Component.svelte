@@ -28,15 +28,14 @@
 		.append($$restProps.class, true)
 		.compile();
 
+	function handleClick(e: MouseEvent) {
+		e.preventDefault();
+		context.select(value);
+	}
+
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<option
-	{...$$restProps}
-	use:forwardedEvents
-	{value}
-	class={inputClasses}
-	on:click={() => context.select(value)}
->
+<option {...$$restProps} use:forwardedEvents {value} class={inputClasses} on:click={handleClick}>
 	<slot selected={() => context.isSelected(value)} />
 </option>

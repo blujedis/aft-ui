@@ -11,9 +11,10 @@ export const common ={
   focusedRingVisible: 'outline-none focus-visible:ring-3 focus-visible:ring-offset-0',
   focusedRingWithin: 'outline-none focus-within:ring-3 focus-within:ring-offset-0',
   muteSelected: 'aria-selected:opacity-60',
+  mutedText: 'text-frame-700/60 dark:text-frame-100/40',
   formBorder: 'border-frame-500 dark:border-frame-500',
-  neutralBg: 'bg-frame-500/10 dark:bg-frame-500/10',
-  rangeBg: 'frame-500/10',
+  neutralBg: 'bg-frame-500/20 dark:bg-frame-500/20',
+  rangeBg: 'frame-500/20',
   rangeValue: '500',
   rangeThumb: '300',
   placeholderFilled: 'placeholder-frame-400'
@@ -21,6 +22,7 @@ export const common ={
 
 export const iconText ={
   $base: '',
+  unstyled: '',
   white: 'text-white dark:text-white',
   black: 'text-black dark:text-black',
   frame: 'text-frame-500 dark:text-frame-500',
@@ -35,6 +37,7 @@ export const iconText ={
 
 export const iconFill ={
   $base: '',
+  unstyled: '',
   white: 'fill-white dark:fill-white',
   black: 'fill-black dark:fill-black',
   frame: 'fill-frame-500 dark:fill-frame-500',
@@ -49,6 +52,7 @@ export const iconFill ={
 
 export const iconStroke ={
   $base: '',
+  unstyled: '',
   white: 'stroke-white dark:stroke-white',
   black: 'stroke-black dark:stroke-black',
   frame: 'stroke-frame-500 dark:stroke-frame-500',
@@ -63,6 +67,7 @@ export const iconStroke ={
 
 export const mainBg ={
   $base: '',
+  unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
   frame: 'bg-frame-500 dark:bg-frame-500',
@@ -77,6 +82,7 @@ export const mainBg ={
 
 export const mainBgEven ={
   $base: '',
+  unstyled: '',
   white: 'even:bg-white dark:even:bg-white',
   black: 'even:bg-black dark:even:bg-black',
   frame: 'even:bg-frame-500 dark:even:bg-frame-500',
@@ -91,6 +97,7 @@ export const mainBgEven ={
 
 export const mainBgOdd ={
   $base: '',
+  unstyled: '',
   white: 'odd:bg-white dark:odd:bg-white',
   black: 'odd:bg-black dark:odd:bg-black',
   frame: 'odd:bg-frame-500 dark:odd:bg-frame-500',
@@ -105,6 +112,7 @@ export const mainBgOdd ={
 
 export const mainRing ={
   $base: '',
+  unstyled: '',
   white: 'ring-white dark:ring-white',
   black: 'ring-black dark:ring-black',
   frame: 'ring-frame-500 dark:ring-frame-500',
@@ -119,6 +127,7 @@ export const mainRing ={
 
 export const mainBorder ={
   $base: '',
+  unstyled: '',
   white: 'border-white dark:border-white',
   black: 'border-black dark:border-black',
   frame: 'border-frame-500 dark:border-frame-500',
@@ -133,6 +142,7 @@ export const mainBorder ={
 
 export const mainOutline ={
   $base: '',
+  unstyled: '',
   white: 'outline-white dark:outline-white',
   black: 'outline-black dark:outline-black',
   frame: 'outline-frame-500 dark:outline-frame-500',
@@ -147,6 +157,7 @@ export const mainOutline ={
 
 export const mainBorderGroupHover ={
   $base: '',
+  unstyled: '',
   white: 'group-hover:border-white dark:group-hover:border-white',
   black: 'group-hover:border-black dark:group-hover:border-black',
   frame: 'group-hover:border-frame-500 dark:group-hover:border-frame-500',
@@ -161,6 +172,7 @@ export const mainBorderGroupHover ={
 
 export const mainBorderPeerFocus ={
   $base: '',
+  unstyled: '',
   white: 'peer-focus:border-white dark:peer-focus:border-white',
   black: 'peer-focus:border-black dark:peer-focus:border-black',
   frame: 'peer-focus:border-frame-500 dark:peer-focus:border-frame-500',
@@ -175,6 +187,7 @@ export const mainBorderPeerFocus ={
 
 export const mainBorderPeerHover ={
   $base: '',
+  unstyled: '',
   white: 'peer-hover:border-white dark:peer-hover:border-white',
   black: 'peer-hover:border-black dark:peer-hover:border-black',
   frame: 'peer-hover:border-frame-500 dark:peer-hover:border-frame-500',
@@ -189,20 +202,22 @@ export const mainBorderPeerHover ={
 
 export const softBg ={
   $base: '',
+  unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
-  frame: 'bg-frame-500/10 dark:bg-frame-500/10',
-  primary: 'bg-primary-500/10 dark:bg-primary-500/10',
-  secondary: 'bg-secondary-500/10 dark:bg-secondary-500/10',
-  tertiary: 'bg-tertiary-500/10 dark:bg-tertiary-500/10',
-  danger: 'bg-danger-500/10 dark:bg-danger-500/10',
-  warning: 'bg-warning-500/10 dark:bg-warning-500/10',
-  success: 'bg-success-500/10 dark:bg-success-500/10',
-  info: 'bg-info-500/10 dark:bg-info-500/10'
+  frame: 'bg-frame-500/20 dark:bg-frame-500/20',
+  primary: 'bg-primary-500/20 dark:bg-primary-500/20',
+  secondary: 'bg-secondary-500/20 dark:bg-secondary-500/20',
+  tertiary: 'bg-tertiary-500/20 dark:bg-tertiary-500/20',
+  danger: 'bg-danger-500/20 dark:bg-danger-500/20',
+  warning: 'bg-warning-500/20 dark:bg-warning-500/20',
+  success: 'bg-success-500/20 dark:bg-success-500/20',
+  info: 'bg-info-500/20 dark:bg-info-500/20'
 };
 
 export const panelBg ={
   $base: 'bg-frame-100 dark:bg-frame-700',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -217,6 +232,7 @@ export const panelBg ={
 
 export const notificationBg ={
   $base: 'bg-frame-700 dark:bg-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -231,6 +247,7 @@ export const notificationBg ={
 
 export const tooltipBg ={
   $base: '',
+  unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
   frame: 'bg-frame-700 dark:bg-frame-100',
@@ -244,7 +261,8 @@ export const tooltipBg ={
 };
 
 export const panelAccordionBg ={
-  $base: 'bg-frame-500/10 dark:bg-frame-500/10',
+  $base: 'bg-frame-500/20 dark:bg-frame-500/20',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -259,6 +277,7 @@ export const panelAccordionBg ={
 
 export const ghostBgHover ={
   $base: '',
+  unstyled: '',
   white: 'hover:bg-white dark:hover:bg-white',
   black: 'hover:bg-black dark:hover:bg-black',
   frame: 'hover:bg-frame-500/20 dark:hover:bg-frame-500/20',
@@ -273,20 +292,22 @@ export const ghostBgHover ={
 
 export const softBgHover ={
   $base: '',
+  unstyled: '',
   white: 'hover:bg-white dark:hover:bg-white',
   black: 'hover:bg-black dark:hover:bg-black',
-  frame: 'hover:bg-frame-500/10 dark:hover:bg-frame-500/10',
-  primary: 'hover:bg-primary-500/10 dark:hover:bg-primary-500/10',
-  secondary: 'hover:bg-secondary-500/10 dark:hover:bg-secondary-500/10',
-  tertiary: 'hover:bg-tertiary-500/10 dark:hover:bg-tertiary-500/10',
-  danger: 'hover:bg-danger-500/10 dark:hover:bg-danger-500/10',
-  warning: 'hover:bg-warning-500/10 dark:hover:bg-warning-500/10',
-  success: 'hover:bg-success-500/10 dark:hover:bg-success-500/10',
-  info: 'hover:bg-info-500/10 dark:hover:bg-info-500/10'
+  frame: 'hover:bg-frame-500/20 dark:hover:bg-frame-500/20',
+  primary: 'hover:bg-primary-500/20 dark:hover:bg-primary-500/20',
+  secondary: 'hover:bg-secondary-500/20 dark:hover:bg-secondary-500/20',
+  tertiary: 'hover:bg-tertiary-500/20 dark:hover:bg-tertiary-500/20',
+  danger: 'hover:bg-danger-500/20 dark:hover:bg-danger-500/20',
+  warning: 'hover:bg-warning-500/20 dark:hover:bg-warning-500/20',
+  success: 'hover:bg-success-500/20 dark:hover:bg-success-500/20',
+  info: 'hover:bg-info-500/20 dark:hover:bg-info-500/20'
 };
 
 export const panelBgHover ={
   $base: 'hover:bg-frame-300/50 hover:dark:bg-frame-800/50',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -300,7 +321,8 @@ export const panelBgHover ={
 };
 
 export const panelAccordionBgHover ={
-  $base: 'hover:bg-frame-500/5 dark:hover:bg-frame-500/5',
+  $base: 'hover:bg-frame-500/15 dark:hover:bg-frame-500/15',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -315,6 +337,7 @@ export const panelAccordionBgHover ={
 
 export const selectedBgAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:bg-white dark:aria-selected:bg-white',
   black: 'aria-selected:bg-black dark:aria-selected:bg-black',
   frame: 'aria-selected:bg-frame-500 dark:aria-selected:bg-frame-500',
@@ -329,6 +352,7 @@ export const selectedBgAriaSelected ={
 
 export const selectedBgAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:bg-white dark:aria-expanded:bg-white',
   black: 'aria-expanded:bg-black dark:aria-expanded:bg-black',
   frame: 'aria-expanded:bg-frame-500 dark:aria-expanded:bg-frame-500',
@@ -343,6 +367,7 @@ export const selectedBgAriaExpanded ={
 
 export const selectedBgAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:bg-white dark:aria-current:bg-white',
   black: 'aria-current:bg-black dark:aria-current:bg-black',
   frame: 'aria-current:bg-frame-500 dark:aria-current:bg-frame-500',
@@ -357,6 +382,7 @@ export const selectedBgAriaCurrent ={
 
 export const selectedBgAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
   frame: 'aria-checked:bg-frame-500 dark:aria-checked:bg-frame-500',
@@ -369,8 +395,24 @@ export const selectedBgAriaChecked ={
   info: 'aria-checked:bg-info-500 dark:aria-checked:bg-info-500'
 };
 
+export const selectedBorderAriaSelected ={
+  $base: '',
+  unstyled: '',
+  white: 'aria-selected:border-white dark:aria-selected:border-white',
+  black: 'aria-selected:border-black dark:aria-selected:border-black',
+  frame: 'aria-selected:border-frame-500 dark:aria-selected:border-frame-500',
+  primary: 'aria-selected:border-primary-500 dark:aria-selected:border-primary-500',
+  secondary: 'aria-selected:border-secondary-500 dark:aria-selected:border-secondary-500',
+  tertiary: 'aria-selected:border-tertiary-500 dark:aria-selected:border-tertiary-500',
+  danger: 'aria-selected:border-danger-500 dark:aria-selected:border-danger-500',
+  warning: 'aria-selected:border-warning-500 dark:aria-selected:border-warning-500',
+  success: 'aria-selected:border-success-500 dark:aria-selected:border-success-500',
+  info: 'aria-selected:border-info-500 dark:aria-selected:border-info-500'
+};
+
 export const selectedAccentBgAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:bg-white dark:aria-selected:bg-white',
   black: 'aria-selected:bg-black dark:aria-selected:bg-black',
   frame: 'aria-selected:bg-frame-600 dark:aria-selected:bg-frame-600',
@@ -385,6 +427,7 @@ export const selectedAccentBgAriaSelected ={
 
 export const selectedAccentBgAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:bg-white dark:aria-expanded:bg-white',
   black: 'aria-expanded:bg-black dark:aria-expanded:bg-black',
   frame: 'aria-expanded:bg-frame-600 dark:aria-expanded:bg-frame-600',
@@ -399,6 +442,7 @@ export const selectedAccentBgAriaExpanded ={
 
 export const selectedAccentBgAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:bg-white dark:aria-current:bg-white',
   black: 'aria-current:bg-black dark:aria-current:bg-black',
   frame: 'aria-current:bg-frame-600 dark:aria-current:bg-frame-600',
@@ -413,6 +457,7 @@ export const selectedAccentBgAriaCurrent ={
 
 export const selectedAccentBgAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
   frame: 'aria-checked:bg-frame-600 dark:aria-checked:bg-frame-600',
@@ -427,6 +472,7 @@ export const selectedAccentBgAriaChecked ={
 
 export const selectedGhostBgAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:bg-white dark:aria-selected:bg-white',
   black: 'aria-selected:bg-black dark:aria-selected:bg-black',
   frame: 'aria-selected:bg-frame-500/20 dark:aria-selected:bg-frame-500/20',
@@ -441,6 +487,7 @@ export const selectedGhostBgAriaSelected ={
 
 export const selectedGhostBgAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:bg-white dark:aria-expanded:bg-white',
   black: 'aria-expanded:bg-black dark:aria-expanded:bg-black',
   frame: 'aria-expanded:bg-frame-500/20 dark:aria-expanded:bg-frame-500/20',
@@ -455,6 +502,7 @@ export const selectedGhostBgAriaExpanded ={
 
 export const selectedGhostBgAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:bg-white dark:aria-current:bg-white',
   black: 'aria-current:bg-black dark:aria-current:bg-black',
   frame: 'aria-current:bg-frame-500/20 dark:aria-current:bg-frame-500/20',
@@ -469,6 +517,7 @@ export const selectedGhostBgAriaCurrent ={
 
 export const selectedGhostBgAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
   frame: 'aria-checked:bg-frame-500/20 dark:aria-checked:bg-frame-500/20',
@@ -483,62 +532,67 @@ export const selectedGhostBgAriaChecked ={
 
 export const selectedSoftBgAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:bg-white dark:aria-selected:bg-white',
   black: 'aria-selected:bg-black dark:aria-selected:bg-black',
-  frame: 'aria-selected:bg-frame-500/70 dark:aria-selected:bg-frame-500/70',
-  primary: 'aria-selected:bg-primary-500/70 dark:aria-selected:bg-primary-500/70',
-  secondary: 'aria-selected:bg-secondary-500/70 dark:aria-selected:bg-secondary-500/70',
-  tertiary: 'aria-selected:bg-tertiary-500/70 dark:aria-selected:bg-tertiary-500/70',
-  danger: 'aria-selected:bg-danger-500/70 dark:aria-selected:bg-danger-500/70',
-  warning: 'aria-selected:bg-warning-500/70 dark:aria-selected:bg-warning-500/70',
-  success: 'aria-selected:bg-success-500/70 dark:aria-selected:bg-success-500/70',
-  info: 'aria-selected:bg-info-500/70 dark:aria-selected:bg-info-500/70'
+  frame: 'aria-selected:bg-frame-500/40 dark:aria-selected:bg-frame-500/40',
+  primary: 'aria-selected:bg-primary-500/40 dark:aria-selected:bg-primary-500/40',
+  secondary: 'aria-selected:bg-secondary-500/40 dark:aria-selected:bg-secondary-500/40',
+  tertiary: 'aria-selected:bg-tertiary-500/40 dark:aria-selected:bg-tertiary-500/40',
+  danger: 'aria-selected:bg-danger-500/40 dark:aria-selected:bg-danger-500/40',
+  warning: 'aria-selected:bg-warning-500/40 dark:aria-selected:bg-warning-500/40',
+  success: 'aria-selected:bg-success-500/40 dark:aria-selected:bg-success-500/40',
+  info: 'aria-selected:bg-info-500/40 dark:aria-selected:bg-info-500/40'
 };
 
 export const selectedSoftBgAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:bg-white dark:aria-expanded:bg-white',
   black: 'aria-expanded:bg-black dark:aria-expanded:bg-black',
-  frame: 'aria-expanded:bg-frame-500/70 dark:aria-expanded:bg-frame-500/70',
-  primary: 'aria-expanded:bg-primary-500/70 dark:aria-expanded:bg-primary-500/70',
-  secondary: 'aria-expanded:bg-secondary-500/70 dark:aria-expanded:bg-secondary-500/70',
-  tertiary: 'aria-expanded:bg-tertiary-500/70 dark:aria-expanded:bg-tertiary-500/70',
-  danger: 'aria-expanded:bg-danger-500/70 dark:aria-expanded:bg-danger-500/70',
-  warning: 'aria-expanded:bg-warning-500/70 dark:aria-expanded:bg-warning-500/70',
-  success: 'aria-expanded:bg-success-500/70 dark:aria-expanded:bg-success-500/70',
-  info: 'aria-expanded:bg-info-500/70 dark:aria-expanded:bg-info-500/70'
+  frame: 'aria-expanded:bg-frame-500/40 dark:aria-expanded:bg-frame-500/40',
+  primary: 'aria-expanded:bg-primary-500/40 dark:aria-expanded:bg-primary-500/40',
+  secondary: 'aria-expanded:bg-secondary-500/40 dark:aria-expanded:bg-secondary-500/40',
+  tertiary: 'aria-expanded:bg-tertiary-500/40 dark:aria-expanded:bg-tertiary-500/40',
+  danger: 'aria-expanded:bg-danger-500/40 dark:aria-expanded:bg-danger-500/40',
+  warning: 'aria-expanded:bg-warning-500/40 dark:aria-expanded:bg-warning-500/40',
+  success: 'aria-expanded:bg-success-500/40 dark:aria-expanded:bg-success-500/40',
+  info: 'aria-expanded:bg-info-500/40 dark:aria-expanded:bg-info-500/40'
 };
 
 export const selectedSoftBgAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:bg-white dark:aria-current:bg-white',
   black: 'aria-current:bg-black dark:aria-current:bg-black',
-  frame: 'aria-current:bg-frame-500/70 dark:aria-current:bg-frame-500/70',
-  primary: 'aria-current:bg-primary-500/70 dark:aria-current:bg-primary-500/70',
-  secondary: 'aria-current:bg-secondary-500/70 dark:aria-current:bg-secondary-500/70',
-  tertiary: 'aria-current:bg-tertiary-500/70 dark:aria-current:bg-tertiary-500/70',
-  danger: 'aria-current:bg-danger-500/70 dark:aria-current:bg-danger-500/70',
-  warning: 'aria-current:bg-warning-500/70 dark:aria-current:bg-warning-500/70',
-  success: 'aria-current:bg-success-500/70 dark:aria-current:bg-success-500/70',
-  info: 'aria-current:bg-info-500/70 dark:aria-current:bg-info-500/70'
+  frame: 'aria-current:bg-frame-500/40 dark:aria-current:bg-frame-500/40',
+  primary: 'aria-current:bg-primary-500/40 dark:aria-current:bg-primary-500/40',
+  secondary: 'aria-current:bg-secondary-500/40 dark:aria-current:bg-secondary-500/40',
+  tertiary: 'aria-current:bg-tertiary-500/40 dark:aria-current:bg-tertiary-500/40',
+  danger: 'aria-current:bg-danger-500/40 dark:aria-current:bg-danger-500/40',
+  warning: 'aria-current:bg-warning-500/40 dark:aria-current:bg-warning-500/40',
+  success: 'aria-current:bg-success-500/40 dark:aria-current:bg-success-500/40',
+  info: 'aria-current:bg-info-500/40 dark:aria-current:bg-info-500/40'
 };
 
 export const selectedSoftBgAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
-  frame: 'aria-checked:bg-frame-500/70 dark:aria-checked:bg-frame-500/70',
-  primary: 'aria-checked:bg-primary-500/70 dark:aria-checked:bg-primary-500/70',
-  secondary: 'aria-checked:bg-secondary-500/70 dark:aria-checked:bg-secondary-500/70',
-  tertiary: 'aria-checked:bg-tertiary-500/70 dark:aria-checked:bg-tertiary-500/70',
-  danger: 'aria-checked:bg-danger-500/70 dark:aria-checked:bg-danger-500/70',
-  warning: 'aria-checked:bg-warning-500/70 dark:aria-checked:bg-warning-500/70',
-  success: 'aria-checked:bg-success-500/70 dark:aria-checked:bg-success-500/70',
-  info: 'aria-checked:bg-info-500/70 dark:aria-checked:bg-info-500/70'
+  frame: 'aria-checked:bg-frame-500/40 dark:aria-checked:bg-frame-500/40',
+  primary: 'aria-checked:bg-primary-500/40 dark:aria-checked:bg-primary-500/40',
+  secondary: 'aria-checked:bg-secondary-500/40 dark:aria-checked:bg-secondary-500/40',
+  tertiary: 'aria-checked:bg-tertiary-500/40 dark:aria-checked:bg-tertiary-500/40',
+  danger: 'aria-checked:bg-danger-500/40 dark:aria-checked:bg-danger-500/40',
+  warning: 'aria-checked:bg-warning-500/40 dark:aria-checked:bg-warning-500/40',
+  success: 'aria-checked:bg-success-500/40 dark:aria-checked:bg-success-500/40',
+  info: 'aria-checked:bg-info-500/40 dark:aria-checked:bg-info-500/40'
 };
 
 export const progressBgWebkitProgressValue ={
-  $base: 'bg-frame-500/10 [&::-webkit-progress-bar]:bg-frame-500/10',
+  $base: 'bg-frame-500/20 [&::-webkit-progress-bar]:bg-frame-500/20',
+  unstyled: '',
   white: '[&::-webkit-progress-value]:bg-white dark:[&::-webkit-progress-value]:bg-white',
   black: '[&::-webkit-progress-value]:bg-black dark:[&::-webkit-progress-value]:bg-black',
   frame: '[&::-webkit-progress-value]:bg-frame-500',
@@ -552,7 +606,8 @@ export const progressBgWebkitProgressValue ={
 };
 
 export const progressBgMozProgressBar ={
-  $base: 'bg-frame-500/10 [&::-webkit-progress-bar]:bg-frame-500/10',
+  $base: 'bg-frame-500/20 [&::-webkit-progress-bar]:bg-frame-500/20',
+  unstyled: '',
   white: '[&::-moz-progress-bar]:bg-white dark:[&::-moz-progress-bar]:bg-white',
   black: '[&::-moz-progress-bar]:bg-black dark:[&::-moz-progress-bar]:bg-black',
   frame: '[&::-moz-progress-bar]:bg-frame-500',
@@ -566,7 +621,8 @@ export const progressBgMozProgressBar ={
 };
 
 export const rangeBg ={
-  $base: 'bg-frame-500/10 dark:bg-frame-500/10',
+  $base: 'bg-frame-500/20 dark:bg-frame-500/20',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -581,6 +637,7 @@ export const rangeBg ={
 
 export const switchBgAriaChecked ={
   $base: 'bg-frame-500/20 dark:bg-frame-500/20',
+  unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
   frame: 'aria-checked:bg-frame-500/80 dark:aria-checked:bg-frame-500/80',
@@ -595,6 +652,7 @@ export const switchBgAriaChecked ={
 
 export const progressFill ={
   $base: '',
+  unstyled: '',
   white: 'fill-white dark:fill-white',
   black: 'fill-black dark:fill-black',
   frame: 'fill-frame-700 dark:fill-frame-100',
@@ -608,7 +666,8 @@ export const progressFill ={
 };
 
 export const progressStroke ={
-  $base: 'stroke-frame-500/10 dark:stroke-frame-500/10',
+  $base: 'stroke-frame-500/20 dark:stroke-frame-500/20',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -623,6 +682,7 @@ export const progressStroke ={
 
 export const mainText ={
   $base: '',
+  unstyled: '',
   white: 'text-white dark:text-white',
   black: 'text-black dark:text-black',
   frame: '',
@@ -637,6 +697,7 @@ export const mainText ={
 
 export const whiteText ={
   $base: 'text-frame-100 dark:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -651,6 +712,7 @@ export const whiteText ={
 
 export const tooltipText ={
   $base: 'text-frame-100 dark:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: 'dark:text-frame-700',
@@ -665,6 +727,7 @@ export const tooltipText ={
 
 export const softText ={
   $base: '',
+  unstyled: '',
   white: 'text-white dark:text-white',
   black: 'text-black dark:text-black',
   frame: '',
@@ -679,9 +742,10 @@ export const softText ={
 
 export const filledPlaceholder ={
   $base: '',
+  unstyled: '',
   white: 'placeholder-white dark:placeholder-white',
   black: 'placeholder-black dark:placeholder-black',
-  frame: 'placeholder-placholder-frame-3sound00',
+  frame: 'placeholder-placholder-frame-300',
   primary: 'placeholder-primary-200 dark:placeholder-primary-200',
   secondary: 'placeholder-secondary-200 dark:placeholder-secondary-200',
   tertiary: 'placeholder-tertiary-200 dark:placeholder-tertiary-200',
@@ -693,6 +757,7 @@ export const filledPlaceholder ={
 
 export const notificationText ={
   $base: 'text-frame-100 dark:text-frame-700',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -707,6 +772,7 @@ export const notificationText ={
 
 export const defaultText ={
   $base: '',
+  unstyled: '',
   white: 'text-white dark:text-white',
   black: 'text-black dark:text-black',
   frame: 'text-frame-500 dark:text-frame-500',
@@ -721,20 +787,22 @@ export const defaultText ={
 
 export const inputText ={
   $base: '',
+  unstyled: '',
   white: 'text-white dark:text-white',
   black: 'text-black dark:text-black',
   frame: 'text-frame-700 dark:text-frame-100',
-  primary: 'text-primary-500 dark:text-primary-500',
-  secondary: 'text-secondary-500 dark:text-secondary-500',
-  tertiary: 'text-tertiary-500 dark:text-tertiary-500',
-  danger: 'text-danger-500 dark:text-danger-500',
-  warning: 'text-warning-500 dark:text-warning-500',
-  success: 'text-success-500 dark:text-success-500',
-  info: 'text-info-500 dark:text-info-500'
+  primary: 'text-primary-500 dark:text-primary-400',
+  secondary: 'text-secondary-500 dark:text-secondary-400',
+  tertiary: 'text-tertiary-500 dark:text-tertiary-400',
+  danger: 'text-danger-500 dark:text-danger-400',
+  warning: 'text-warning-500 dark:text-warning-400',
+  success: 'text-success-500 dark:text-success-400',
+  info: 'text-info-500 dark:text-info-400'
 };
 
 export const selectedTextAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:text-white dark:aria-selected:text-white',
   black: 'aria-selected:text-black dark:aria-selected:text-black',
   frame: '',
@@ -749,6 +817,7 @@ export const selectedTextAriaSelected ={
 
 export const selectedTextAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:text-white dark:aria-expanded:text-white',
   black: 'aria-expanded:text-black dark:aria-expanded:text-black',
   frame: '',
@@ -763,6 +832,7 @@ export const selectedTextAriaExpanded ={
 
 export const selectedTextAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:text-white dark:aria-current:text-white',
   black: 'aria-current:text-black dark:aria-current:text-black',
   frame: '',
@@ -777,6 +847,7 @@ export const selectedTextAriaCurrent ={
 
 export const selectedTextAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:text-white dark:aria-checked:text-white',
   black: 'aria-checked:text-black dark:aria-checked:text-black',
   frame: '',
@@ -791,6 +862,7 @@ export const selectedTextAriaChecked ={
 
 export const selectedWhiteTextAriaSelected ={
   $base: 'aria-selected:text-frame-100 dark:aria-selected:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -805,6 +877,7 @@ export const selectedWhiteTextAriaSelected ={
 
 export const selectedWhiteTextAriaExpanded ={
   $base: 'aria-expanded:text-frame-100 dark:aria-expanded:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -819,6 +892,7 @@ export const selectedWhiteTextAriaExpanded ={
 
 export const selectedWhiteTextAriaCurrent ={
   $base: 'aria-current:text-frame-100 dark:aria-current:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -833,6 +907,7 @@ export const selectedWhiteTextAriaCurrent ={
 
 export const selectedWhiteTextAriaChecked ={
   $base: 'aria-checked:text-frame-100 dark:aria-checked:text-frame-100',
+  unstyled: '',
   white: '',
   black: '',
   frame: '',
@@ -847,6 +922,7 @@ export const selectedWhiteTextAriaChecked ={
 
 export const selectedGhostTextAriaSelected ={
   $base: '',
+  unstyled: '',
   white: 'aria-selected:text-white dark:aria-selected:text-white',
   black: 'aria-selected:text-black dark:aria-selected:text-black',
   frame: '',
@@ -861,6 +937,7 @@ export const selectedGhostTextAriaSelected ={
 
 export const selectedGhostTextAriaExpanded ={
   $base: '',
+  unstyled: '',
   white: 'aria-expanded:text-white dark:aria-expanded:text-white',
   black: 'aria-expanded:text-black dark:aria-expanded:text-black',
   frame: '',
@@ -875,6 +952,7 @@ export const selectedGhostTextAriaExpanded ={
 
 export const selectedGhostTextAriaCurrent ={
   $base: '',
+  unstyled: '',
   white: 'aria-current:text-white dark:aria-current:text-white',
   black: 'aria-current:text-black dark:aria-current:text-black',
   frame: '',
@@ -889,6 +967,7 @@ export const selectedGhostTextAriaCurrent ={
 
 export const selectedGhostTextAriaChecked ={
   $base: '',
+  unstyled: '',
   white: 'aria-checked:text-white dark:aria-checked:text-white',
   black: 'aria-checked:text-black dark:aria-checked:text-black',
   frame: '',
@@ -903,6 +982,7 @@ export const selectedGhostTextAriaChecked ={
 
 export const outlineFocus ={
   $base: '',
+  unstyled: '',
   white: 'focus:outline-white dark:focus:outline-white',
   black: 'focus:outline-black dark:focus:outline-black',
   frame: 'focus:outline-frame-500/50 dark:focus:outline-frame-500/50',
@@ -917,6 +997,7 @@ export const outlineFocus ={
 
 export const outlineFocusVisible ={
   $base: '',
+  unstyled: '',
   white: 'focus-visible:outline-white dark:focus-visible:outline-white',
   black: 'focus-visible:outline-black dark:focus-visible:outline-black',
   frame: 'focus-visible:outline-frame-500/50 dark:focus-visible:outline-frame-500/50',
@@ -931,6 +1012,7 @@ export const outlineFocusVisible ={
 
 export const outlineFocusWithin ={
   $base: '',
+  unstyled: '',
   white: 'focus-within:outline-white dark:focus-within:outline-white',
   black: 'focus-within:outline-black dark:focus-within:outline-black',
   frame: 'focus-within:outline-frame-500/50 dark:focus-within:outline-frame-500/50',
@@ -945,6 +1027,7 @@ export const outlineFocusWithin ={
 
 export const outlinePeerFocus ={
   $base: '',
+  unstyled: '',
   white: 'peer-focus:outline-white dark:peer-focus:outline-white',
   black: 'peer-focus:outline-black dark:peer-focus:outline-black',
   frame: 'peer-focus:outline-frame-500/50 dark:peer-focus:outline-frame-500/50',
@@ -959,6 +1042,7 @@ export const outlinePeerFocus ={
 
 export const outlineGroupFocus ={
   $base: '',
+  unstyled: '',
   white: 'group-focus:outline-white dark:group-focus:outline-white',
   black: 'group-focus:outline-black dark:group-focus:outline-black',
   frame: 'group-focus:outline-frame-500/50 dark:group-focus:outline-frame-500/50',
@@ -973,6 +1057,7 @@ export const outlineGroupFocus ={
 
 export const outlineGroupFocusWithin ={
   $base: '',
+  unstyled: '',
   white: 'group-focus-within:outline-white dark:group-focus-within:outline-white',
   black: 'group-focus-within:outline-black dark:group-focus-within:outline-black',
   frame: 'group-focus-within:outline-frame-500/50 dark:group-focus-within:outline-frame-500/50',
@@ -987,6 +1072,7 @@ export const outlineGroupFocusWithin ={
 
 export const ringFocus ={
   $base: '',
+  unstyled: '',
   white: 'focus:ring-white dark:focus:ring-white',
   black: 'focus:ring-black dark:focus:ring-black',
   frame: 'focus:ring-frame-500/50 dark:focus:ring-frame-500/50',
@@ -1001,6 +1087,7 @@ export const ringFocus ={
 
 export const ringFocusVisible ={
   $base: '',
+  unstyled: '',
   white: 'focus-visible:ring-white dark:focus-visible:ring-white',
   black: 'focus-visible:ring-black dark:focus-visible:ring-black',
   frame: 'focus-visible:ring-frame-500/50 dark:focus-visible:ring-frame-500/50',
@@ -1015,6 +1102,7 @@ export const ringFocusVisible ={
 
 export const ringFocusWithin ={
   $base: '',
+  unstyled: '',
   white: 'focus-within:ring-white dark:focus-within:ring-white',
   black: 'focus-within:ring-black dark:focus-within:ring-black',
   frame: 'focus-within:ring-frame-500/50 dark:focus-within:ring-frame-500/50',
@@ -1029,6 +1117,7 @@ export const ringFocusWithin ={
 
 export const ringPeerFocus ={
   $base: '',
+  unstyled: '',
   white: 'peer-focus:ring-white dark:peer-focus:ring-white',
   black: 'peer-focus:ring-black dark:peer-focus:ring-black',
   frame: 'peer-focus:ring-frame-500/50 dark:peer-focus:ring-frame-500/50',
@@ -1043,6 +1132,7 @@ export const ringPeerFocus ={
 
 export const ringGroupFocus ={
   $base: '',
+  unstyled: '',
   white: 'group-focus:ring-white dark:group-focus:ring-white',
   black: 'group-focus:ring-black dark:group-focus:ring-black',
   frame: 'group-focus:ring-frame-500/50 dark:group-focus:ring-frame-500/50',
@@ -1057,6 +1147,7 @@ export const ringGroupFocus ={
 
 export const ringGroupFocusWithin ={
   $base: '',
+  unstyled: '',
   white: 'group-focus-within:ring-white dark:group-focus-within:ring-white',
   black: 'group-focus-within:ring-black dark:group-focus-within:ring-black',
   frame: 'group-focus-within:ring-frame-500/50 dark:group-focus-within:ring-frame-500/50',

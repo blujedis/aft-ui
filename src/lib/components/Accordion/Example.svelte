@@ -19,10 +19,9 @@
 		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		// shadowed: 'none' as ThemeShadowed,
-		//selectable: false,
+		selectable: true,
 		size: 'md' as ThemeSize,
 		theme: 'frame' as ThemeColor,
-		// variant: 'filled' as AccordionVariant,
 		transition: 'expand' as DisclosureTransitionOption
 	};
 </script>
@@ -33,7 +32,7 @@
 	</div>
 
 	<Section>
-		<div class="text-2xl font-semibold mb-4">simple</div>
+		<div class="text-2xl font-semibold mb-4">Text</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
 				<Accordion {...props}>
