@@ -85,7 +85,7 @@
 		toggle,
 		remove,
 		restore,
-		filter,
+		filter
 	};
 
 	const { class: classes, ...restProps } = $$restProps;
@@ -168,7 +168,9 @@
 
 	async function resolveItems(query?: string) {
 		if (!query) return $context.items as Required<Item>[];
-		return Promise.resolve(initFilter(query, $context.items as Required<Item>[], $context.selected));
+		return Promise.resolve(
+			initFilter(query, $context.items as Required<Item>[], $context.selected)
+		);
 	}
 
 	async function filter(query?: string) {
@@ -189,31 +191,42 @@
 		return $store.selected.includes(key);
 	}
 
-	function restore(selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean, restoreInput?: boolean) {
-	
+	function restore(
+		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
+		restoreInput?: boolean
+	) {
 		if (!$context.filtering) return;
 
 		if (typeof selectedItemsOrRestoreInput === 'boolean') {
 			restoreInput = selectedItemsOrRestoreInput;
-			selectedItemsOrRestoreInput = undefined
+			selectedItemsOrRestoreInput = undefined;
 		}
 
 		if ($context.input && restoreInput) {
 			if (!multiple) {
 				const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
 				if (label) $context.input.value = label || '';
-			}
-			else {
+			} else {
 				$context.input.value = '';
 			}
 		}
 
-		const normalizedItems = typeof selectedItemsOrRestoreInput !== 'undefined' ? ensureArray(selectedItemsOrRestoreInput) : !multiple ? $context.persisted : $context.selected;
+		const normalizedItems =
+			typeof selectedItemsOrRestoreInput !== 'undefined'
+				? ensureArray(selectedItemsOrRestoreInput)
+				: !multiple
+					? $context.persisted
+					: $context.selected;
 
 		store.update((s) => {
-			return { ...s, filtered: [...s.items], selected: [...normalizedItems], persisted: [], filtering: false };
+			return {
+				...s,
+				filtered: [...s.items],
+				selected: [...normalizedItems],
+				persisted: [],
+				filtering: false
+			};
 		});
-
 	}
 
 	function handleClose(_e?: Event) {
@@ -223,9 +236,8 @@
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
 		if (multiple) {
 			restore(true);
-		}
-		else if (!multiple && filterable) {
-			if ($context.input && $context.filtering){
+		} else if (!multiple && filterable) {
+			if ($context.input && $context.filtering) {
 				restore(true);
 			}
 		}
@@ -237,13 +249,12 @@
 	function handleKeydown(e: KeyboardEvent) {
 		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible)) {
 			e.preventDefault();
-				restore(true);
-				context.close();
+			restore(true);
+			context.close();
 			setTimeout(() => {
 				$context.input?.focus();
 			});
-		}
-		else if (e.key === 'ArrowDown') {
+		} else if (e.key === 'ArrowDown') {
 			if (!$context.visible) {
 				context.open();
 				$context.input?.focus();
