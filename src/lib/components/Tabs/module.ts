@@ -1,16 +1,16 @@
 import type { SelectStore, SelectStoreValue } from '../../stores/select';
 import type {
 	ThemeColor,
-	ThemeFocused,
 	ThemeRounded,
 	ThemeShadowed,
 	ThemeSize,
 } from '$lib/types';
+import { type Writable } from 'svelte/store';
 import type { TabVariant } from '../Tab';
 
 export type TabsProps = {
 	condensed?: boolean;
-	focused?: ThemeFocused;
+	focused?: boolean;
 	hovered?: boolean;
 	full?: boolean;
 	rounded?: ThemeRounded;
@@ -25,9 +25,14 @@ export type TabsProps = {
 	navClasses?: string;
 };
 
-export type TabsContext = SelectStore & {
+export type TabsStore = {
+	nodes: HTMLElement[];
+	selected?: HTMLElement;
+}
+
+export type TabsContext = Writable<TabsStore> & {
 	globals: {
-		focused: ThemeFocused;
+		focused?: boolean;
 		hovered: boolean;
 		full: boolean;
 		rounded: ThemeRounded;
@@ -36,7 +41,20 @@ export type TabsContext = SelectStore & {
 		transitioned: boolean;
 		variant: TabVariant;
 	};
-};
+}
+
+// export type TabsContext = SelectStore & {
+// 	globals: {
+// 		focused: ThemeFocused;
+// 		hovered: boolean;
+// 		full: boolean;
+// 		rounded: ThemeRounded;
+// 		size: ThemeSize;
+// 		theme: ThemeColor;
+// 		transitioned: boolean;
+// 		variant: TabVariant;
+// 	};
+// };
 
 export const tabsDefaults: Partial<TabsProps> = {
 	condensed: true,

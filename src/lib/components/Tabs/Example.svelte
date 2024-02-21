@@ -74,13 +74,13 @@
 			</svelte:fragment>
 		</Tabs> -->
 
-		<TempTabs selected="Python">
+		<Tabs selected="Python">
 			{#each tabs as tab}
-				<TempTab title={tab.label} visible={tab.value === 'python'}>
+				<Tab title={tab.label} selected={tab.value === 'python'}>
 					{tab.description}
-				</TempTab>
+				</Tab>
 			{/each}
-		</TempTabs>
+		</Tabs>
 
 		<!-- <Tabs {...props} variant="outlined" selected="java" theme="primary">
 			<svelte:fragment slot="tabs">

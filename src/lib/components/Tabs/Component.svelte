@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { type TabsProps, tabsDefaults as defaults, type TabsContext } from './module';
+	import { type TabsProps, tabsDefaults as defaults, type TabsContext, type TabsStore } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
 	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 	import { divideds } from '../options';
+	import { writable } from 'svelte/store';
 
 	type $$Props = TabsProps & ElementProps<'div'>;
 
@@ -29,7 +30,10 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const store = useSelect({ selected: ensureArray(selected), multiple: false });
+	const store = writable<TabsStore>({ nodes: [], selected: undefined });
+	
+
+	// const store = useSelect({ selected: ensureArray(selected), multiple: false });
 
 	const globals = cleanObj({
 		focused,
@@ -42,10 +46,15 @@
 		variant
 	});
 
-	export const context = setContext<TabsContext>('Tabs', {
+	export const context = setContext('Tabs', {
 		...store,
-		globals: globals as any
+		globals
 	});
+
+	// export const context = setContext<TabsContext>('Tabs', {
+	// 	...store,
+	// 	globals: globals as any
+	// });
 
 	const th = themer($themeStore);
 
@@ -85,10 +94,23 @@
 		.append(navClasses, true)
 		.compile();
 
-	function handleReset() {}
+
+		function mount(node: HTMLElement) {
+			const destroy = context.subscribe((s) => {
+				if (s.selected) node.replaceChildren(s.selected as HTMLElement);
+			});
+		return { destroy };
+	}
 </script>
 
-<div class={tabControllerlWrapperClasses}>
+<div>
+	<ul class="flex flex-wrap space-x-2">
+		<slot />
+	</ul>
+	<div role="tabpanel" aria-labelledby={`tab-${0}`} use:mount class="flex"></div>
+</div>
+
+<!-- <div class={tabControllerlWrapperClasses}>
 
 	{#if $$slots.mobile}
 		<div class="sm:hidden">
@@ -104,7 +126,6 @@
 				<slot
 					name="tabs"
 					selectedItems={$store.selected}
-					reset={handleReset}
 					select={store.select}
 					unselect={store.unselect}
 					isSelected={store.isSelected}
@@ -117,7 +138,6 @@
 			<slot
 				name="panels"
 				selectedItems={$store.selected}
-				reset={handleReset}
 				select={store.select}
 				unselect={store.unselect}
 				isSelected={store.isSelected}
@@ -126,4 +146,4 @@
 		
 	</div>
 
-</div>
+</div> -->

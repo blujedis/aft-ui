@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { ConditionalElement, Flushed } from '..';
-
+	import { get_current_component } from 'svelte/internal';
+	import { Flushed } from '../Flushed';
+	import { ConditionalElement } from '../ConditionalElement';
 	import { themer, themeStore } from '$lib/theme';
 	import { type TabProps, tabDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '$lib/components/Tabs';
 	import type { SelectStoreValue } from '$lib/stores/select';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
 
 	type Tag = $$Generic<'a' | 'button'>;
 	type $$Props = TabProps<Tag> & ElementProps<Tag>;
@@ -21,8 +22,10 @@
 		full,
 		hovered,
 		rounded,
+		selected,
 		size,
 		theme,
+		title,
 		transitioned,
 		underlined,
 		value,
@@ -39,14 +42,16 @@
 		variant: context.globals?.variant,
 	} as Required<TabProps<Tag>>;
 
-	const th = themer($themeStore);
+	let panel: HTMLDivElement | undefined;
 
 	const additionalProps = {
 		disabled,
 		'aria-disabled': disabled
 	};
 
-	$: isSelected = $context.selected?.includes(value);
+	const th = themer($themeStore);
+
+	// $: isSelected = $context.selected?.includes(value);
 
 	$: tabClasses = th
 		.create('Tab')
@@ -90,24 +95,59 @@
 		.append($$restProps.class, true)
 		.compile();
 
-	function handleSelect(value: SelectStoreValue) {
-		if ($context?.selected?.includes(value)) context.unselect(value);
-		else context.select(value);
-	}
+	// function handleSelect(value: SelectStoreValue) {
+	// 	if ($context?.selected?.includes(value)) context.unselect(value);
+	// 	else context.select(value);
+	// }
+
+  function mount(node: HTMLElement) {
+    context.update(s => { 
+			if (!s.nodes.includes(node))
+			s.nodes = [...s.nodes, node];
+			return { ...s, selected: node };
+		})
+    const destroy = context.subscribe(s => { 
+      if (s.selected !== node) 
+        selected = false;
+    });
+    return { destroy };
+  }
+
+	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<ConditionalElement
-	as={Flushed}
-	condition={variant === 'flushed'}
-	props={{
-		selected: isSelected,
-		theme,
-		group: true,
-		hovered,
-		focused
-	}}
+<li role="presentation">
+	<ConditionalElement
+		as={Flushed}
+		condition={variant === 'flushed'}
+		props={{
+			selected,
+			theme,
+			group: true,
+			hovered,
+			focused
+		}}
 >
 	<svelte:element
+		use:forwardedEvents
+		this={as}
+		id={`tab-${0}`}
+		aria-controls={`tabpanel-${0}`}
+		{...$$restProps}
+		{...additionalProps}
+		role="tab"
+		tabindex="-1"
+		class=""
+		aria-current={selected}
+		aria-selected={selected}
+		on:click={() => selected = true}
+	>
+		<slot name="title">
+			{title}
+		</slot>
+	</svelte:element>
+
+	<!-- <svelte:element
 		this={as}
 		aria-labelledby={value + ''}
 		{...$$restProps}
@@ -116,11 +156,21 @@
 		tabindex="-1"
 		class={tabClasses}
 		aria-current={isSelected}
+		aria-selected={isSelected}
 		on:click={() => handleSelect(value)}
 	>
 		<slot />
-	</svelte:element>
+	</svelte:element> -->
 
 </ConditionalElement>
+	{#if selected}
+	<div class="hidden">
+		<div bind:this={panel} use:mount>
+			<slot />
+		</div>
+	</div>
+	{/if}
+</li>
+
 
 
