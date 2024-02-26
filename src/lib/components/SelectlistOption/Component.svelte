@@ -52,7 +52,7 @@
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
 		if (!multiple && $context.input) {
 			context.toggle();
-			context.restore(key, false)
+			context.restoreSelected(key, false)
 			setTimeout(() => {
 				if ($context.input) {
 					const nextValue = $context.items.find((i) => key === i.value)?.label || '';

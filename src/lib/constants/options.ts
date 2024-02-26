@@ -56,6 +56,7 @@ export const fontLeadings = {
 };
 
 export const fieldLeading = {
+	unstyled: '',
 	xs: fontLeadings.md, // 'sm:leading-5',
 	sm: fontLeadings.md, // 'sm:leading-5',
 	md: fontLeadings.lg, // 'sm:leading-6',
@@ -91,9 +92,6 @@ export const fieldPaddingX = {
 	xl: 'px-5',
 	xl2: 'px-6'
 };
-
-
-
 
 export const fieldFontSizes = {
 	unstyled: '',

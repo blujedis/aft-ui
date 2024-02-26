@@ -1,5 +1,5 @@
 import type { ThemeColor, ThemeSize } from '$lib/types';
-import type { DataGridColumnConfig, DataGridVariant } from '../DataGrid/module';
+import type { DataGridColumnConfig } from '../DataGrid/module';
 
 export type DataGridRowProps = {
 	autocols?: boolean;
@@ -9,7 +9,7 @@ export type DataGridRowProps = {
 	stacked?: boolean;
 	striped?: boolean;
 	theme?: ThemeColor;
-	variant?: DataGridVariant;
 };
 
-export const gridRowDefaults: Partial<DataGridRowProps> = {};
+export const gridRowDefaults: Partial<DataGridRowProps> = {
+};

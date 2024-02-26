@@ -2,26 +2,23 @@
 	import { Tabs } from '.';
 	import { Tab } from '../Tab';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-	import { TabPanel } from '../TabPanel';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { colors } from '$lib/constants';
-	import TempTabs from '../Temp/Tabs.svelte';
-	import TempTab from '../Temp/Tab.svelte';
 
 
 	const title = 'Tabs';
 	const description = 'Themed Tabs and Tab controller component.';
 
 	const props = {
-		condensed: true,
+		// condensed: true,
 		full: false,
 		focused: true,
 		hovered: true,
-		rounded: 'none' as ThemeRounded,
+		rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean // ThemeTransitioned,
+		theme: 'frame' as ThemeColor,
+		transitioned: true // ThemeTransitioned,
 		//variant: 'accented' as TabVariant
 	};
 
@@ -58,6 +55,15 @@
 </script>
 
 <ExamplePage {title} {description} >
+
+	<Tabs {...props} variant="flushed"  theme="primary" selected="Python" >
+		{#each tabs as tab}
+			<Tab label={tab.label} selected={tab.value === 'python'}>
+				{tab.description}
+			</Tab>
+		{/each}
+	</Tabs>
+
 	<div class="grid grid-cols-1 mb-4">
 		<!-- {#each colors as color} -->
 
@@ -73,14 +79,6 @@
 				{/each}
 			</svelte:fragment>
 		</Tabs> -->
-
-		<Tabs selected="Python">
-			{#each tabs as tab}
-				<Tab title={tab.label} selected={tab.value === 'python'}>
-					{tab.description}
-				</Tab>
-			{/each}
-		</Tabs>
 
 		<!-- <Tabs {...props} variant="outlined" selected="java" theme="primary">
 			<svelte:fragment slot="tabs">

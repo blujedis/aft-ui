@@ -11,22 +11,12 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { autocols, columns, focused, size, theme, variant } = {
+	export let { autocols, columns, focused, size, theme } = {
 		...defaults,
 		autocols: context.globals?.autocols,
 		columns: context.globals?.columns,
 		size: context.globals?.size,
-		theme: context.globals?.theme,
-		variant: context.globals.variant
-		// ...pickCleanProps(
-		// 	context?.globals,
-		// 	'autocols',
-		// 	'columns',
-		// 	'focused',
-		// 	'size',
-		// 	'theme',
-		// 	'variant'
-		// )
+		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	const st = styler($themeStore);
@@ -41,16 +31,24 @@
 
 	$: gridFilterClasses = th
 		.create('DataGridFilter')
-		.variant('gridFilter', variant, theme, variant)
 		.append('auto-cols-fr', autocols)
-		.prepend('datagrid__filter grid grid-flow-col w-full', true)
+		.prepend('datagrid-filter', true)
+		.append('grid grid-flow-col w-full body-light dark:body-dark', true)
 		.append($$restProps.class, true)
 		.compile();
 
-	$: filterInputCellClasses = th
+	$: gridFilterCellClasses = th
+		.create('DataGridFilterInputWrapper')
+		.prepend('datagrid-filter-cell', true)
+		.append('px-0 py-0', true)
+		.compile();
+
+	$: gridFilterInputClasses = th
 		.create('DataGridFilterInput')
-		.option('focusedRingWithin', typeof focused === 'string' ? focused : theme, focused)
-		.append('focus:outline-none', true)
+		.option('fieldPadding', size, size)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.prepend('datagrid-filter-input outline-none w-full h-full bg-transparent', true)
 		.compile();
 
 	function handleFilterColumn(
@@ -67,27 +65,27 @@
 	}
 </script>
 
-<slot>
-	{#if hasFilters}
-		<div class={gridFilterClasses} style={gridFilterStyles}>
+{#if hasFilters}
+	<div class={gridFilterClasses} style={gridFilterStyles}>
+		<slot>
 			{#each columns as col, i}
-				<DataGridCell class={filterInputCellClasses}>
+				<DataGridCell class={gridFilterCellClasses}>
 					{#if col.filterable}
 						<input
 							type="text"
 							placeholder="filter"
-							class="datagrid__filter_input focus:outline-none w-full bg-transparent"
+							class={gridFilterInputClasses}
 							on:input={(e) => handleFilterColumn(e, col.accessor)}
 						/>
 					{/if}
 				</DataGridCell>
 			{/each}
-		</div>
-	{/if}
-</slot>
+		</slot>
+	</div>
+{/if}
 
 <style>
-	.grid__filter {
+	.datagrid-filter {
 		grid-template-columns: var(--template-columns);
 	}
 </style>

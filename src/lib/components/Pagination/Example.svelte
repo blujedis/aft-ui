@@ -2,7 +2,7 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { Pagination, type PaginationVariant } from '.';
 	import { PaginationPage } from '../PaginationPage';
-	import jsondata from '../_Example/jsondata';
+	import jsondata from '../_Example/jsondata.ts.old';
 	import { colors } from '$lib/constants';
 	import type {
 		ThemeColor,

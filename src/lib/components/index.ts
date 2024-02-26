@@ -67,6 +67,5 @@ export * from './Switch';
 export * from './DataGrid';
 export * from './Tab';
 export * from './Tabs';
-export * from './TabPanel';
 export * from './Textarea';
 export * from './Tile';

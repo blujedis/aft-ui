@@ -1,9 +1,9 @@
-import type { SelectStore, SelectStoreValue } from '$lib/stores';
+import type { SelectStore } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
 import type { BadgeProps } from '../Badge/module';
 
-export type SelectListItemKey = SelectStoreValue;
+export type SelectListItemKey = string | number;
 export type FilterQuery<T = SelectListItem> = (query: string, items: Required<T>[], selected: SelectListItemKey[]) => Required<T>[] | Promise<Required<T>[]>;
 
 export type SelectListItem = {
@@ -17,7 +17,7 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
 	visible?: boolean;
 	items: T[];
 	filtered: T[];
-	persisted: SelectStoreValue[];
+	persisted: SelectListItemKey[];
 	filtering?: boolean;
 	input?: HTMLInputElement;
 	panel?: HTMLDivElement;
@@ -34,8 +34,8 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 		add({ value, label, group, selected }: T): void;
 		remove(key: SelectListItemKey): void;
 		remove(item: T): void;
-		restore(restoreInput?: boolean): void;
-		restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+		restoreSelected(restoreInput?: boolean): void;
+		restoreSelected(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
 		filter(query?: string): void;
 		globals: SelectListContextProps;
 	};

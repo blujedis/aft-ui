@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type DataGridSearchProps, gridSearchDefaults as defaults } from './module';
-	import { themeStore, pickCleanProps, themer } from '$lib/theme';
+	import { themeStore, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
 	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
@@ -11,42 +11,30 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { action, focused, method, rounded, size, strategy, theme, variant } = {
+	export let { action, focused, method, rounded, size, strategy, theme } = {
 		...defaults,
 		focused: context.globals?.focused,
 		rounded: context.globals?.rounded,
 		size: context.globals?.size,
-		theme: context.globals?.theme,
-		variant: context.globals.variant
-		// ...pickCleanProps(
-		// 	context?.globals,
-		// 	'autocols',
-		// 	'columns',
-		// 	'focused',
-		// 	'rounded',
-		// 	'size',
-		// 	'theme',
-		// 	'variant'
-		// )
+		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: gridSearchClasses = th
-		.create('DataGridSearch')
-		.prepend('datagrid__search', true)
-		//.append('py-2 px-4', true)
-		.compile();
+	$: gridSearchClasses = th.create('DataGridSearch').prepend('datagrid-search', true).compile();
 
 	$: gridSearchInputClasses = th
 		.create('DataGridSearchInput')
-		// .variant('gridSearch', variant, theme, variant)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.option('focusedOutline', typeof focused === 'string' ? focused : theme, focused)
 		.option('roundeds', boolToMapValue(rounded), rounded)
-		.prepend('datagrid__search_input', true)
-		.append('pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none', true)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.prepend('datagrid-search-input', true)
+		.append(
+			'outline-none px-4 py-2 pl-10 w-full rounded-b-none bg-transparent hover:bg-transparent !font-dark !dark:font-light ',
+			true
+		)
 		.compile();
 
 	function handleSearchSubmit(
@@ -86,7 +74,7 @@
 			<div class="flex items-center">
 				<div class="flex-1 relative p-1">
 					<svg
-						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-4"
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-2"
 						viewBox="0 0 20 20"
 						fill="currentColor"
 						aria-hidden="true"
@@ -101,7 +89,7 @@
 						<input
 							type="search"
 							name="search"
-							placeholder="filter"
+							placeholder="Search Records"
 							class={gridSearchInputClasses}
 							on:input={handleSearchInput}
 						/>
@@ -109,7 +97,7 @@
 						<input
 							type="search"
 							name="search"
-							placeholder="filter"
+							placeholder="Search Records"
 							class={gridSearchInputClasses}
 						/>
 					{/if}

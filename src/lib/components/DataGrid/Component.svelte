@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { useResizer } from '$lib/hooks';
 	import { setContext } from 'svelte';
 	import { cleanObj, type SortAccessor, boolToMapValue } from '$lib/utils';
 	import { themeStore, themer } from '$lib/theme';
@@ -36,16 +37,15 @@
 		striped,
 		theme,
 		transitioned,
-		variant,
 		onBeforeRemove
 	} = {
 		...(defaults as DataGridProps<Column, Data>)
 	} as Required<DataGridProps<Column, Data>>;
 
-	let grid = undefined as HTMLDivElement | undefined;
+	let datagrid = undefined as HTMLDivElement | undefined;
 
 	export const store = useSelect<DataGridStore<Column, Data>>({
-		grid,
+		datagrid: datagrid,
 		sort: [],
 		selected: [],
 		filtered: [],
@@ -67,8 +67,7 @@
 		stacked,
 		striped,
 		theme,
-		transitioned,
-		variant
+		transitioned
 	};
 
 	export const api = {
@@ -77,7 +76,8 @@
 		reset,
 		remove,
 		getDataGridTemplate,
-		getSortToken
+		getSortToken,
+		updateColumn
 	};
 
 	setContext('DataGrid', {
@@ -90,16 +90,17 @@
 
 	$: gridClasses = th
 		.create('DataGrid')
-		// .variant('grid', variant, theme, true)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'divided', divided)
-		.option('common', 'ringed', divided)
+		.option('common', 'bordered', divided)
 		.option('fieldFontSizes', size, size)
-		.prepend('datagrid overflow-clip flow-root', true)
+		.prepend(`datagrid`, true)
 		.append('divide-y', divided)
 		.append('w-full', full)
 		.append('relative', sticky)
+		.append('border', divided)
+		.append('overflow-clip flow-root', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -111,6 +112,20 @@
 			const newItems = s.items.filter((item) => item[rowkey] !== key);
 			const newFiltered = s.filtered.filter((item) => item[rowkey] !== key);
 			return { ...s, items: newItems, filtered: newFiltered };
+		});
+	}
+
+	function updateColumn(
+		accessor: string,
+		config: Partial<DataGridColumnConfig>,
+		done?: (columns: Required<Column>[]) => any
+	) {
+		const index = $store.columns.findIndex((c) => c.accessor == accessor);
+		store.update((s) => {
+			const columns = [...s.columns];
+			columns[index] = { ...columns[index], ...config };
+			if (done) done(columns);
+			return { ...s, columns };
 		});
 	}
 
@@ -154,10 +169,8 @@
 		});
 	}
 
-	function getDataGridTemplate(
-		name = 'cols' as 'rows' | 'cols',
-		cols = $store.columns as Column[]
-	) {
+	function getDataGridTemplate(cols: Column[]) {
+		cols = cols || $store.columns;
 		const values = cols.map((c) => c.width);
 		return values.join(' ') + '';
 	}
@@ -176,6 +189,6 @@
 	});
 </script>
 
-<div bind:this={grid} {...$$restProps} class={gridClasses}>
+<div bind:this={datagrid} {...$$restProps} class={gridClasses}>
 	<slot rows={$store.filtered} columns={$store.columns} {remove} {filter} {reset} {sortby} />
 </div>

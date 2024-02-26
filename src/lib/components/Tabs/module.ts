@@ -26,8 +26,9 @@ export type TabsProps = {
 };
 
 export type TabsStore = {
-	nodes: HTMLElement[];
+	tabs: (HTMLElement & { $select: () => any })[];
 	selected?: HTMLElement;
+	currentIndex: number;
 }
 
 export type TabsContext = Writable<TabsStore> & {

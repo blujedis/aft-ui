@@ -1,8 +1,8 @@
 export const common ={
   transitioned: 'transition motion-reduce:transition-none',
-  ringed: 'ring-frame-950/20 dark:ring-frame-950/40',
-  bordered: 'border-frame-950/20 dark:border-frame-950/40',
-  divided: 'divide-frame-950/20 dark:divide-frame-950/40',
+  ringed: 'ring-frame-300 dark:ring-frame-700',
+  bordered: 'border-frame-300 dark:border-frame-700',
+  divided: 'divide-frame-300 dark:divide-frame-700',
   disabled: 'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
   focusedOutline: 'outline-none focus:outline-3 focus:outline-offset-0',
   focusedOutlineVisible: 'outline-none focus-visible:outline-3 focus-visible:outline-offset-0',
@@ -12,9 +12,9 @@ export const common ={
   focusedRingWithin: 'outline-none focus-within:ring-3 focus-within:ring-offset-0',
   muteSelected: 'aria-selected:opacity-60',
   mutedText: 'text-frame-700/60 dark:text-frame-100/40',
-  formBorder: 'border-frame-500 dark:border-frame-500',
-  neutralBg: 'bg-frame-500/20 dark:bg-frame-500/20',
-  rangeBg: 'frame-500/20',
+  formBorder: 'border-frame-300 dark:border-frame-700',
+  neutralBg: 'bg-frame-500/10 dark:bg-frame-500/10',
+  rangeBg: 'frame-500/10',
   rangeValue: '500',
   rangeThumb: '300',
   placeholderFilled: 'placeholder-frame-400'
@@ -205,14 +205,14 @@ export const softBg ={
   unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
-  frame: 'bg-frame-500/20 dark:bg-frame-500/20',
-  primary: 'bg-primary-500/20 dark:bg-primary-500/20',
-  secondary: 'bg-secondary-500/20 dark:bg-secondary-500/20',
-  tertiary: 'bg-tertiary-500/20 dark:bg-tertiary-500/20',
-  danger: 'bg-danger-500/20 dark:bg-danger-500/20',
-  warning: 'bg-warning-500/20 dark:bg-warning-500/20',
-  success: 'bg-success-500/20 dark:bg-success-500/20',
-  info: 'bg-info-500/20 dark:bg-info-500/20'
+  frame: 'bg-frame-500/10 dark:bg-frame-500/10',
+  primary: 'bg-primary-500/10 dark:bg-primary-500/10',
+  secondary: 'bg-secondary-500/10 dark:bg-secondary-500/10',
+  tertiary: 'bg-tertiary-500/10 dark:bg-tertiary-500/10',
+  danger: 'bg-danger-500/10 dark:bg-danger-500/10',
+  warning: 'bg-warning-500/10 dark:bg-warning-500/10',
+  success: 'bg-success-500/10 dark:bg-success-500/10',
+  info: 'bg-info-500/10 dark:bg-info-500/10'
 };
 
 export const panelBg ={
@@ -261,7 +261,7 @@ export const tooltipBg ={
 };
 
 export const panelAccordionBg ={
-  $base: 'bg-frame-500/20 dark:bg-frame-500/20',
+  $base: 'bg-frame-500/10 dark:bg-frame-500/10',
   unstyled: '',
   white: '',
   black: '',
@@ -295,14 +295,14 @@ export const softBgHover ={
   unstyled: '',
   white: 'hover:bg-white dark:hover:bg-white',
   black: 'hover:bg-black dark:hover:bg-black',
-  frame: 'hover:bg-frame-500/20 dark:hover:bg-frame-500/20',
-  primary: 'hover:bg-primary-500/20 dark:hover:bg-primary-500/20',
-  secondary: 'hover:bg-secondary-500/20 dark:hover:bg-secondary-500/20',
-  tertiary: 'hover:bg-tertiary-500/20 dark:hover:bg-tertiary-500/20',
-  danger: 'hover:bg-danger-500/20 dark:hover:bg-danger-500/20',
-  warning: 'hover:bg-warning-500/20 dark:hover:bg-warning-500/20',
-  success: 'hover:bg-success-500/20 dark:hover:bg-success-500/20',
-  info: 'hover:bg-info-500/20 dark:hover:bg-info-500/20'
+  frame: 'hover:bg-frame-500/10 dark:hover:bg-frame-500/10',
+  primary: 'hover:bg-primary-500/10 dark:hover:bg-primary-500/10',
+  secondary: 'hover:bg-secondary-500/10 dark:hover:bg-secondary-500/10',
+  tertiary: 'hover:bg-tertiary-500/10 dark:hover:bg-tertiary-500/10',
+  danger: 'hover:bg-danger-500/10 dark:hover:bg-danger-500/10',
+  warning: 'hover:bg-warning-500/10 dark:hover:bg-warning-500/10',
+  success: 'hover:bg-success-500/10 dark:hover:bg-success-500/10',
+  info: 'hover:bg-info-500/10 dark:hover:bg-info-500/10'
 };
 
 export const panelBgHover ={
@@ -321,7 +321,7 @@ export const panelBgHover ={
 };
 
 export const panelAccordionBgHover ={
-  $base: 'hover:bg-frame-500/15 dark:hover:bg-frame-500/15',
+  $base: 'hover:bg-frame-500/5 dark:hover:bg-frame-500/5',
   unstyled: '',
   white: '',
   black: '',
@@ -591,7 +591,7 @@ export const selectedSoftBgAriaChecked ={
 };
 
 export const progressBgWebkitProgressValue ={
-  $base: 'bg-frame-500/20 [&::-webkit-progress-bar]:bg-frame-500/20',
+  $base: 'bg-frame-500/10 [&::-webkit-progress-bar]:bg-frame-500/10',
   unstyled: '',
   white: '[&::-webkit-progress-value]:bg-white dark:[&::-webkit-progress-value]:bg-white',
   black: '[&::-webkit-progress-value]:bg-black dark:[&::-webkit-progress-value]:bg-black',
@@ -606,7 +606,7 @@ export const progressBgWebkitProgressValue ={
 };
 
 export const progressBgMozProgressBar ={
-  $base: 'bg-frame-500/20 [&::-webkit-progress-bar]:bg-frame-500/20',
+  $base: 'bg-frame-500/10 [&::-webkit-progress-bar]:bg-frame-500/10',
   unstyled: '',
   white: '[&::-moz-progress-bar]:bg-white dark:[&::-moz-progress-bar]:bg-white',
   black: '[&::-moz-progress-bar]:bg-black dark:[&::-moz-progress-bar]:bg-black',
@@ -621,7 +621,7 @@ export const progressBgMozProgressBar ={
 };
 
 export const rangeBg ={
-  $base: 'bg-frame-500/20 dark:bg-frame-500/20',
+  $base: 'bg-frame-500/10 dark:bg-frame-500/10',
   unstyled: '',
   white: '',
   black: '',
@@ -666,7 +666,7 @@ export const progressFill ={
 };
 
 export const progressStroke ={
-  $base: 'stroke-frame-500/20 dark:stroke-frame-500/20',
+  $base: 'stroke-frame-500/10 dark:stroke-frame-500/10',
   unstyled: '',
   white: '',
   black: '',

@@ -7,11 +7,14 @@
 	import type { ElementProps } from '$lib/types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '$lib/components/Tabs';
-	import type { SelectStoreValue } from '$lib/stores/select';
 	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
 
 	type Tag = $$Generic<'a' | 'button'>;
 	type $$Props = TabProps<Tag> & ElementProps<Tag>;
+
+		type Temp = ElementProps<'button'>;
+
+		let t: Temp['id']
 
 	const context = getContext('Tabs') as TabsContext;
 
@@ -21,14 +24,14 @@
 		focused,
 		full,
 		hovered,
+		id,
 		rounded,
 		selected,
 		size,
 		theme,
-		title,
+		label,
 		transitioned,
 		underlined,
-		value,
 		variant
 	} = {
 		...defaults,
@@ -43,6 +46,8 @@
 	} as Required<TabProps<Tag>>;
 
 	let panel: HTMLDivElement | undefined;
+	let initialized = false;
+	let index = -1;
 
 	const additionalProps = {
 		disabled,
@@ -51,61 +56,54 @@
 
 	const th = themer($themeStore);
 
-	// $: isSelected = $context.selected?.includes(value);
+		// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
 
-	$: tabClasses = th
-		.create('Tab')
-		// .variant('tab', '', theme, true)
-
-		// .bundle(
-		// 	['selectedBgAriaExpanded', 'selectedWhiteTextAriaExpanded'],
-		// 	theme,
-		// 	variant === 'filled' && selectable
-		// )
-		// .bundle(['selectedTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		$: tabClasses = th
+		.create('TabClass')
+		.bundle(
+			['selectedBgAriaSelected', 'selectedWhiteTextAriaSelected'],
+			theme,
+			['filled', 'pills'].includes(variant) && selected
+		)
+		// .bundle(['selectedTextAriaSelected'], theme, selectable && variant !== 'filled')
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'disabled', disabled)
-		.option('panelAccordionBg', theme, variant === 'filled')
-		.option('panelAccordionBgHover', theme, hovered) // !isSelected.
-
-		.option('hovered', variant, theme, hovered)
-		// .option('common', 'focusedOutlineVisible', focused)
-		// .option('outlineFocusVisible', theme, focused)
-		// .option('common', 'transitioned', transitioned)
-
-		// .option('dropshadows', boolToMapValue(shadowed), shadowed)
-		// .option('outlineFocusVisible', theme, focused)
-		// .option('common', 'focusedOutlineVisible', focused)
-
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
-		.option('roundeds', boolToMapValue(rounded), rounded)
-		.append(
-			'rounded-br-none rounded-bl-none',
-			['text', 'filled', 'flushed'].includes(variant)
+		.option('fieldLeading', size, size)
+		.option('panelAccordionBg', theme, ['filled', 'pills'].includes(variant))
+		.option('panelAccordionBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
+		.option(
+			'roundeds',
+			boolToMapValue(rounded),
+			rounded
 		)
-		.append('w-full', full && ['grouped', 'text'].includes(variant))
-		.append('px-10', full && ['pills', 'flushed', 'filled'].includes(variant))
-		.append('whitespace-nowrap', variant === 'flushed')
-		.append(
-			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
-			variant === 'outlined'
-		)
-		.append('inline-flex items-center justify-center', true)
-		.append($$restProps.class, true)
+		.prepend('tab', true)
+		.prepend('tab-selected', selected)
+		.append('w-full', full)
+		// .append('whitespace-nowrap', variant === 'flushed')
+		.append('group-first:pl-0', variant === 'text')
+		.append('rounded-none group-first:rounded-l group-last:rounded-r', variant === 'filled')
+		.append('inline-flex items-center justify-center outline-none h-full', true)
 		.compile();
 
-	// function handleSelect(value: SelectStoreValue) {
-	// 	if ($context?.selected?.includes(value)) context.unselect(value);
-	// 	else context.select(value);
-	// }
+
+	function init(node: HTMLElement & { $select: () => any }) {
+		let tabs = $context.tabs
+		if (!initialized) {
+			node.$select = () => selected = true;
+			tabs = [...tabs, node];
+			const currentIndex = selected ? tabs.indexOf(node) : $context.currentIndex;
+			context.set({ ...$context, tabs, currentIndex });
+			initialized = true;
+		}
+		index = tabs.indexOf(node);
+	}
 
   function mount(node: HTMLElement) {
-    context.update(s => { 
-			if (!s.nodes.includes(node))
-			s.nodes = [...s.nodes, node];
-			return { ...s, selected: node };
-		})
+		context.set({ ...$context, selected: node, currentIndex: index });
     const destroy = context.subscribe(s => { 
       if (s.selected !== node) 
         selected = false;
@@ -116,7 +114,7 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<li role="presentation">
+<li role="presentation" class:w-full={full} class="flex group">
 	<ConditionalElement
 		as={Flushed}
 		condition={variant === 'flushed'}
@@ -125,52 +123,35 @@
 			theme,
 			group: true,
 			hovered,
-			focused
+			focused,
+			class: '-mb-px' // makes indicator line sit inline with horizontal line for group
 		}}
 >
 	<svelte:element
 		use:forwardedEvents
+		use:init
 		this={as}
-		id={`tab-${0}`}
-		aria-controls={`tabpanel-${0}`}
+		aria-controls={`tab-panel-${index}`}
 		{...$$restProps}
 		{...additionalProps}
 		role="tab"
-		tabindex="-1"
-		class=""
+		tabindex="0"
+		class={tabClasses}
 		aria-current={selected}
 		aria-selected={selected}
 		on:click={() => selected = true}
 	>
-		<slot name="title">
-			{title}
+		<slot name="label">
+			{label}
 		</slot>
 	</svelte:element>
 
-	<!-- <svelte:element
-		this={as}
-		aria-labelledby={value + ''}
-		{...$$restProps}
-		{...additionalProps}
-		role={as === 'a' ? 'link' : 'button'}
-		tabindex="-1"
-		class={tabClasses}
-		aria-current={isSelected}
-		aria-selected={isSelected}
-		on:click={() => handleSelect(value)}
-	>
-		<slot />
-	</svelte:element> -->
-
 </ConditionalElement>
 	{#if selected}
-	<div class="hidden">
-		<div bind:this={panel} use:mount>
-			<slot />
+		<div class="hidden">
+			<div bind:this={panel} use:mount>
+				<slot />
+			</div>
 		</div>
-	</div>
 	{/if}
 </li>
-
-
-

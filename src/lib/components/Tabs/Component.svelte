@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { type TabsProps, tabsDefaults as defaults, type TabsContext, type TabsStore } from './module';
+	import { type TabsProps, tabsDefaults as defaults, type TabsStore } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { setContext } from 'svelte';
-	import { useSelect } from '$lib/stores/select';
-	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
+	import { cleanObj, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
-	import { divideds } from '../options';
 	import { writable } from 'svelte/store';
 
-	type $$Props = TabsProps & ElementProps<'div'>;
+	type $$Props = TabsProps & ElementProps<'ul'>;
 
 	export let {
 		condensed,
@@ -30,11 +28,9 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const store = writable<TabsStore>({ nodes: [], selected: undefined });
+
+	const store = writable<TabsStore>({ tabs: [], selected: undefined, currentIndex: -1 });
 	
-
-	// const store = useSelect({ selected: ensureArray(selected), multiple: false });
-
 	const globals = cleanObj({
 		focused,
 		full,
@@ -51,49 +47,32 @@
 		globals
 	});
 
-	// export const context = setContext<TabsContext>('Tabs', {
-	// 	...store,
-	// 	globals: globals as any
-	// });
+	let panel: HTMLDivElement;
 
 	const th = themer($themeStore);
 
-	$: tabControllerlWrapperClasses = th.create('TabsWrapper').append(klass, true).compile();
-
-	$: tabControllerNavWrapperClasses = th
-		.create('TabsNavWrapper')
-		.append('w-full', full)
-		.append('hidden sm:flex items-start flex-col', true)
-		.append('max-w-min', condensed && !full)
-		.append(navWrapperClasses, true)
-		.compile();
-
-	$: tabControllerNavContainerClasses = th
-		.create('TabsNavContainer')
-		.variant('tabs', variant, theme, true)
-		.append('w-full', full)
-		.append('hidden sm:block', true)
-		.append(navContainerClasses, true)
-		.compile();
-
-	$: tabControllerNavClasses = th
-		.create('TabsNav')
-		.option(
-			'roundeds',
-			boolToMapValue(rounded),
-			rounded && !['underlined', 'labeled'].includes(variant)
-		)
+		$: tabsClasses = th
+		.create("TabsWrapper")
+		.option('common', 'formBorder', variant === 'flushed')
+		.option('common', 'divided', ['filled'].includes(variant))
 		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
+		.prepend(`tabs tabs-${variant}`, true)
 		.append('-mb-px', ['flushed', 'filled'].includes(variant))
-		.option('common', 'bordered', variant === 'outlined')
-		.option('common', 'divided', variant === 'outlined')
-		//.append('space-x-4', variant !== 'outlined')
-		.append('w-full justify-around space-x-0', full)
-		.append('isolate flex', true)
-		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
-		.append(navClasses, true)
+		.append('divide-x', variant === 'filled')
+		.append('border-b', variant === 'flushed')
+		.append('w-full', full)
+		.append('space-x-2', ['flushed', 'pills'].includes(variant))
+		.append('mb-1', variant === 'text')
+		.append('not-sr-only isolate inline-flex flex-wrap mb-4', true)
+		.append($$restProps.class, true)
 		.compile();
 
+		$: selectClasses = th
+		.create('TabsSelect')
+		.prepend(`tabs-${variant}`, true)
+		.prepend('tabs', true)
+		.append('sr-only mb-4', true)
+		.compile();
 
 		function mount(node: HTMLElement) {
 			const destroy = context.subscribe((s) => {
@@ -104,46 +83,16 @@
 </script>
 
 <div>
-	<ul class="flex flex-wrap space-x-2">
+	<ul {...$$restProps} class={tabsClasses} role="tablist">
 		<slot />
 	</ul>
-	<div role="tabpanel" aria-labelledby={`tab-${0}`} use:mount class="flex"></div>
+	<select aria-controls={`tab-panel-${$context.currentIndex}`} class={selectClasses} on:change={(e) => {
+		const index = e.currentTarget.selectedIndex
+		$context.tabs[index].$select();
+	}}>
+		{#each $context.tabs as tab, i} 
+			<option value={tab.innerText} selected={i === $context.currentIndex}>{tab.innerText}</option>
+		{/each}
+	</select>
+	<div bind:this={panel} role="tabpanel" aria-labelledby={`tab-${$context.currentIndex}`} use:mount class="flex"></div>
 </div>
-
-<!-- <div class={tabControllerlWrapperClasses}>
-
-	{#if $$slots.mobile}
-		<div class="sm:hidden">
-			<slot name="mobile" />
-		</div>
-	{/if}
-
-	<div class={tabControllerNavWrapperClasses}>
-
-		<div class={tabControllerNavContainerClasses}>
-
-			<nav class={tabControllerNavClasses} aria-label="Tabs">
-				<slot
-					name="tabs"
-					selectedItems={$store.selected}
-					select={store.select}
-					unselect={store.unselect}
-					isSelected={store.isSelected}
-				/>
-			</nav>
-
-		</div>
-
-		<div class="hidden sm:flex">
-			<slot
-				name="panels"
-				selectedItems={$store.selected}
-				select={store.select}
-				unselect={store.unselect}
-				isSelected={store.isSelected}
-			/>
-		</div>
-		
-	</div>
-
-</div> -->

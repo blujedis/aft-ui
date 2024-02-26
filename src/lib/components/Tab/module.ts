@@ -5,21 +5,21 @@ import type {
 	ThemeSize
 } from '$lib/types';
 
-export type TabVariant = 'flushed' | 'filled' | 'outlined' | 'text'; 
+export type TabVariant = 'flushed' | 'filled' | 'pills' | 'text'; 
 
 export type TabProps<Tag extends 'a' | 'button' = 'button'> = {
 	as?: Tag;
 	disabled?: boolean;
 	focused?: ThemeFocused; 
 	hovered?: boolean;
+	id?: string | null;
 	full?: boolean;
 	rounded?: ThemeRounded;
 	selected?: boolean;
 	size?: ThemeSize;
-	title?: string | number;
+	label: string | number;
 	transitioned?: boolean;
 	theme?: ThemeColor;
-	value?: string | number;
 	variant?: TabVariant;
 	underlined?: boolean;
 };

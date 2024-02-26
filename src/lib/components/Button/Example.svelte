@@ -25,22 +25,12 @@
 
 <ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="grid grid-cols-5 gap-4 mb-4">
-			<label for="filled">
+		<!-- <div class="grid grid-cols-5 gap-4 mb-4"> -->
 				<Button {...props} variant="filled" theme={color}>Button</Button>
-			</label>
-			<label for="outline">
 				<Button {...props} variant="outlined" theme={color}>Button</Button>
-			</label>
-			<label for="soft">
 				<Button {...props} variant="soft" theme={color}>Button</Button>
-			</label>
-			<label for="ghost">
 				<Button {...props} variant="ghost" theme={color}>Button</Button>
-			</label>
-			<label for="link">
 				<Button {...props} variant="text" theme={color}>Button</Button>
-			</label>
-		</div>
+		<!-- </div> -->
 	{/each}
 </ExamplePage>

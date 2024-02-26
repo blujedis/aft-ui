@@ -20,13 +20,12 @@
 	export let { ellipsis, page, pageSize, pages, size, theme, variant } = {
 		...defaults,
 		size: context.globals?.size,
-		theme: context.globals?.theme,
-		variant: context.globals.variant
-		// ...pickCleanProps(context?.globals, 'size', 'theme', 'variant')
+		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	$: gridPagerClasses = themer($themeStore)
 		.create('DataGridPager')
+		.prepend('datagrid-pager', true)
 		.append($$restProps.class, true)
 		.compile();
 </script>

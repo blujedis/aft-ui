@@ -10,19 +10,17 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { accessor, full, size, stacked, theme, variant } = {
+	export let { accessor, full, size, stacked, theme } = {
 		...defaults,
 		size: context.globals?.size,
 		stacked: context.globals?.stacked,
-		theme: context.globals?.theme,
-		variant: context.globals.variant
-		// ...pickCleanProps(context?.globals, 'size', 'stacked', 'theme', 'variant')
+		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	$: gridCellClasses = themer($themeStore)
 		.create('DataGridCell')
 		.option('fieldPadding', size, size)
-		.prepend('datagrid__cell', true)
+		.prepend('datagrid-cell', true)
 		.append('col-span-full', full)
 		.append($$restProps.class, true)
 		.compile();

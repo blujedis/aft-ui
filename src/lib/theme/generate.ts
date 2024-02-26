@@ -120,7 +120,7 @@ export const defaultOptions = {
 
 	defaultShade: 500,
 
-	softOpacity: 20,
+	softOpacity: 10,
 	hoverOpacity: 20,
 	focusOpacity: 50,
 	softSelectedOpacity: 40,
@@ -132,7 +132,8 @@ export const defaultOptions = {
 	focusOffset: 0,
 	focusWidth: 3,
 
-	formBorderColorLight: 'frame-500',
+	formBorderColorLight: 'frame-300',
+	formBorderColorDark: 'frame-700',
 
 	panelBgLight: 'frame-100',
 	panelBgDark: 'frame-700'
@@ -408,13 +409,16 @@ function getCommon(options: Required<GenerateOptions>) {
 		bodyTextDark, bodyTextLight
 	} = options as Required<GenerateOptions>;
 
-	const gridOpacityLight = getMin(gridOpacity, -20, 20);
+	const gridOpacityLight = getMin(gridOpacity, -30, 20);
 
 	const common = {
 		transitioned: 'transition motion-reduce:transition-none',
-		ringed: `ring-${gridColor}/${gridOpacityLight} dark:ring-${gridColor}/${gridOpacity}`,
-		bordered: `border-${gridColor}/${gridOpacityLight} dark:border-${gridColor}/${gridOpacity}`,
-		divided: `divide-${gridColor}/${gridOpacityLight} dark:divide-${gridColor}/${gridOpacity}`,
+		// ringed: `ring-${gridColor}/${gridOpacityLight} dark:ring-${gridColor}/${gridOpacity}`,
+		// bordered: `border-${gridColor}/${gridOpacityLight} dark:border-${gridColor}/${gridOpacity}`,
+		// divided: `divide-${gridColor}/${gridOpacityLight} dark:divide-${gridColor}/${gridOpacity}`,
+		ringed: `ring-${formBorderColorLight} dark:ring-${formBorderColorDark}`,
+		bordered: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,
+		divided: `divide-${formBorderColorLight} dark:divide-${formBorderColorDark}`,
 		disabled:
 			`disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
 		focusedOutline: `outline-none focus:outline-${focusWidth} focus:outline-offset-${focusOffset}`,

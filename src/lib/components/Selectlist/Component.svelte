@@ -77,26 +77,22 @@
 		onBeforeRemove
 	});
 
-	export const api = {
+	const { class: classes, ...restProps } = $$restProps;
+
+	export const context = setContext('SelectListContext', {
+		...store,
 		open,
 		close,
 		isSelected,
 		add,
 		toggle,
 		remove,
-		restore,
-		filter
-	};
-
-	const { class: classes, ...restProps } = $$restProps;
-
-	export const context = setContext('SelectListContext', {
-		...store,
-		...api,
+		restoreSelected,
+		filter,
 		globals
 	}) as SelectListContext;
 
-	const th = themer($themeStore);
+	const th = themer($themeStore); 
 
 	$: groups = $store.items.reduce(
 		(a, c) => {
@@ -124,10 +120,6 @@
 
 	function close() {
 		store.update((s) => ({ ...s, visible: false }));
-		setTimeout(() => {
-			// if (!$context.visible)
-			// 	$context.trigger?.focus();
-		});
 	}
 
 	function toggle() {
@@ -169,7 +161,7 @@
 	async function resolveItems(query?: string) {
 		if (!query) return $context.items as Required<Item>[];
 		return Promise.resolve(
-			initFilter(query, $context.items as Required<Item>[], $context.selected)
+			initFilter(query, $context.items as Required<Item>[], $context.selected as SelectListItemKey[])
 		);
 	}
 
@@ -191,7 +183,7 @@
 		return $store.selected.includes(key);
 	}
 
-	function restore(
+	function restoreSelected(
 		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
 		restoreInput?: boolean
 	) {
@@ -222,7 +214,7 @@
 			return {
 				...s,
 				filtered: [...s.items],
-				selected: [...normalizedItems],
+				selected: [...normalizedItems as SelectListItemKey[]],
 				persisted: [],
 				filtering: false
 			};
@@ -235,10 +227,10 @@
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
 		if (multiple) {
-			restore(true);
+			restoreSelected(true);
 		} else if (!multiple && filterable) {
 			if ($context.input && $context.filtering) {
-				restore(true);
+				restoreSelected(true);
 			}
 		}
 		return (
@@ -249,7 +241,7 @@
 	function handleKeydown(e: KeyboardEvent) {
 		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible)) {
 			e.preventDefault();
-			restore(true);
+			restoreSelected(true);
 			context.close();
 			setTimeout(() => {
 				$context.input?.focus();
