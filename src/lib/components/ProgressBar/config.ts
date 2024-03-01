@@ -9,8 +9,6 @@ export const progressBar = {
 
 		dark: '[&::-webkit-progress-value]:bg-frame-600 [&::-moz-progress-bar]:bg-frame-600 dark[&::-webkit-progress-value]:bg-frame-700 dark[&::-moz-progress-bar]:bg-frame-700',
 
-
-
 		primary: '[&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500',
 
 		secondary:

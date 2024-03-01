@@ -6,6 +6,7 @@ export type DataGridFilterProps = {
 	columns?: DataGridColumnConfig[];
 	focused?: ThemeFocused;
 	size?: ThemeSize;
+	stacked?: boolean;
 	theme?: ThemeColor;
 };
 

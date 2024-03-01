@@ -1,7 +1,16 @@
 import { ensureArray } from '$lib/utils';
 import { writable, get, type Writable } from 'svelte/store';
 
-export type SelectStoreValue = string | number | HTMLElement;
+export type SelectStoreValue =
+	| string
+	| number
+	| Date
+	| boolean
+	| symbol
+	| bigint
+	| null
+	| undefined
+	| HTMLElement;
 
 export interface SelectStoreOptions {
 	max?: number;

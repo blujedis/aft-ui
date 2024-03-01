@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
-	import { ConditionalElement, Flushed } from '$lib/components';
+	import { ConditionalComponent, Flushed } from '$lib/components';
 	import { themeStore, themer } from '$lib/theme';
-	import { setContext } from 'svelte';
+	// import { setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder, ensureArray, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
-	import { useSelect } from '$lib/stores/select';
 
 	type $$Props = SelectProps & Omit<ElementProps<'select'>, 'size'>;
 
@@ -15,25 +14,24 @@
 		focused,
 		full,
 		hovered,
-		multiple,
 		placeholder,
 		rows,
 		rounded,
-		selected,
+		value,
 		shadowed,
 		size,
 		theme,
 		transitioned,
-		variant,
+		variant
 	} = {
 		...defaults
 	} as Required<$$Props>;
 
-	const store = useSelect({ multiple, selected: ensureArray(selected) });
+	// const store = useSelect({ multiple, selected: ensureArray(value) });
 
-	export const context = setContext<SelectContext>('SelectContext', {
-		...store
-	});
+	// export const context = setContext<SelectContext>('SelectContext', {
+	// 	...store
+	// });
 
 	const th = themer($themeStore);
 
@@ -48,12 +46,8 @@
 		)
 		.bundle(['softBg', 'inputText'], theme, variant === 'soft')
 		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
-		.option('common', 'focusedOutline', focused && variant === 'outlined')
-		.option(
-			'outlineFocus',
-			theme,
-			focused && ['outlined', 'ghost', 'soft', 'text'].includes(variant)
-		)
+		.option('common', 'focusedOutline', focused && variant !== 'flushed')
+		.option('outlineFocus', theme, focused && variant !== 'flushed')
 		.bundle(['inputText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
@@ -63,52 +57,48 @@
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
 		.prepend(`select select-${variant}`, true)
+		.append('min-w-min', true)
 		.append('w-full', full)
 		.append('dark:bg-transparent', ['outlined', 'flushed', 'text', 'ghost'].includes(variant))
 		.append('peer px-2', variant === 'flushed')
 		.append('flex items-center justify-center pr-10 focus:ring-0 outline-none border-0', true) // always pad right for caret.
-		.append(multiple ? 'form-multiselect' : 'form-select', true)
+		.append($$restProps.multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)
 		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
-	const component = Flushed as any; // TODO: Fix types in Conditional Element
+	const component = Flushed; // TODO: Fix types in Conditional Element
 </script>
 
-<ConditionalElement as={component} {theme} condition={variant === 'flushed'} />
-
-{#if variant === 'flushed'}
-	<Flushed {theme}>
-		<select
-			{...$$restProps}
-			use:forwardedEvents
-			{multiple}
-			size={rows}
-			class={inputClasses}
-			value={multiple ? $store.selected : $store.selected[0]}
-		>
-			{#if placeholder}
-				<option value="" disabled selected
-					>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
-				>
-			{/if}
-			<slot selectedItems={$store.selected} select={context.select} unselect={context.unselect} />
-		</select>
-	</Flushed>
-{:else}
-	<select
-		{...$$restProps}
-		use:forwardedEvents
-		{multiple}
-		size={rows}
-		class={inputClasses}
-		value={multiple ? $store.selected : $store.selected[0]}
-	>
+<ConditionalComponent as={component} condition={variant === 'flushed'} {theme}>
+	<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
 		{#if placeholder}
 			<option value="" disabled selected
 				>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
 			>
 		{/if}
-		<slot selectedItems={$store.selected} select={context.select} unselect={context.unselect} />
+		<slot />
 	</select>
-{/if}
+</ConditionalComponent>
+
+<!-- {#if variant === 'flushed'}
+	<Flushed {theme}>
+		<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
+			{#if placeholder}
+				<option value="" disabled selected
+					>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
+				>
+			{/if}
+			<slot />
+		</select>
+	</Flushed>
+{:else}
+	<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
+		{#if placeholder}
+			<option value="" disabled selected
+				>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
+			>
+		{/if}
+		<slot />
+	</select>
+{/if} -->

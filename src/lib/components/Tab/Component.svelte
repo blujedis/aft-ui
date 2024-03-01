@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
 	import { Flushed } from '../Flushed';
-	import { ConditionalElement } from '../ConditionalElement';
 	import { themer, themeStore } from '$lib/theme';
 	import { type TabProps, tabDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
 	import { getContext } from 'svelte';
 	import type { TabsContext } from '$lib/components/Tabs';
 	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
+	import { ConditionalComponent } from '$lib/components';
 
 	type Tag = $$Generic<'a' | 'button'>;
 	type $$Props = TabProps<Tag> & ElementProps<Tag>;
 
-		type Temp = ElementProps<'button'>;
+	type Temp = ElementProps<'button'>;
 
-		let t: Temp['id']
+	let t: Temp['id'];
 
 	const context = getContext('Tabs') as TabsContext;
 
@@ -42,7 +42,7 @@
 		size: context.globals?.size,
 		theme: context.globals?.theme,
 		transitioned: context.globals?.transitioned,
-		variant: context.globals?.variant,
+		variant: context.globals?.variant
 	} as Required<TabProps<Tag>>;
 
 	let panel: HTMLDivElement | undefined;
@@ -56,9 +56,9 @@
 
 	const th = themer($themeStore);
 
-		// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
+	// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
 
-		$: tabClasses = th
+	$: tabClasses = th
 		.create('TabClass')
 		.bundle(
 			['selectedBgAriaSelected', 'selectedWhiteTextAriaSelected'],
@@ -74,12 +74,12 @@
 		.option('fieldFontSizes', size, size)
 		.option('fieldLeading', size, size)
 		.option('panelAccordionBg', theme, ['filled', 'pills'].includes(variant))
-		.option('panelAccordionBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
 		.option(
-			'roundeds',
-			boolToMapValue(rounded),
-			rounded
+			'panelAccordionBgHover',
+			theme,
+			['filled', 'pills'].includes(variant) && hovered && !selected
 		)
+		.option('roundeds', boolToMapValue(rounded), rounded)
 		.prepend('tab', true)
 		.prepend('tab-selected', selected)
 		.append('w-full', full)
@@ -89,11 +89,10 @@
 		.append('inline-flex items-center justify-center outline-none h-full', true)
 		.compile();
 
-
 	function init(node: HTMLElement & { $select: () => any }) {
-		let tabs = $context.tabs
+		let tabs = $context.tabs;
 		if (!initialized) {
-			node.$select = () => selected = true;
+			node.$select = () => (selected = true);
 			tabs = [...tabs, node];
 			const currentIndex = selected ? tabs.indexOf(node) : $context.currentIndex;
 			context.set({ ...$context, tabs, currentIndex });
@@ -102,51 +101,47 @@
 		index = tabs.indexOf(node);
 	}
 
-  function mount(node: HTMLElement) {
+	function mount(node: HTMLElement) {
 		context.set({ ...$context, selected: node, currentIndex: index });
-    const destroy = context.subscribe(s => { 
-      if (s.selected !== node) 
-        selected = false;
-    });
-    return { destroy };
-  }
+		const destroy = context.subscribe((s) => {
+			if (s.selected !== node) selected = false;
+		});
+		return { destroy };
+	}
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 <li role="presentation" class:w-full={full} class="flex group">
-	<ConditionalElement
+	<ConditionalComponent
 		as={Flushed}
 		condition={variant === 'flushed'}
-		props={{
-			selected,
-			theme,
-			group: true,
-			hovered,
-			focused,
-			class: '-mb-px' // makes indicator line sit inline with horizontal line for group
-		}}
->
-	<svelte:element
-		use:forwardedEvents
-		use:init
-		this={as}
-		aria-controls={`tab-panel-${index}`}
-		{...$$restProps}
-		{...additionalProps}
-		role="tab"
-		tabindex="0"
-		class={tabClasses}
-		aria-current={selected}
-		aria-selected={selected}
-		on:click={() => selected = true}
+		{selected}
+		{theme}
+		group={true}
+		{hovered}
+		{focused}
+		class="-mb-px"
 	>
-		<slot name="label">
-			{label}
-		</slot>
-	</svelte:element>
-
-</ConditionalElement>
+		<svelte:element
+			this={as}
+			use:forwardedEvents
+			use:init
+			aria-controls={`tab-panel-${index}`}
+			{...$$restProps}
+			{...additionalProps}
+			role="tab"
+			tabindex="0"
+			class={tabClasses}
+			aria-current={selected}
+			aria-selected={selected}
+			on:click={() => (selected = true)}
+		>
+			<slot name="label">
+				{label}
+			</slot>
+		</svelte:element>
+	</ConditionalComponent>
 	{#if selected}
 		<div class="hidden">
 			<div bind:this={panel} use:mount>

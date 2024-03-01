@@ -74,7 +74,6 @@
 			<label for="filled">
 				<SelectList
 					{...props}
-					
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -180,7 +179,7 @@
 				</SelectList>
 			</label>
 		</div>
-	{/each} 
+	{/each}
 
 	<div class="mb-2 max-w-52">
 		<SelectList
@@ -201,25 +200,23 @@
 		>
 			<SelectListButton />
 			<SelectListPanel let:currentIndex>
-
 				{#if !filtered.length}
 					<div class="px-2 text-sm">No Results</div>
 				{:else}
 					<!-- <div class="px-2 text-sm">Current Index: {currentIndex}</div> -->
 					{#each filtered as item}
 						{#if !isSelected(item.value)}
-						<SelectListOption as="button" key={item.value} let:active>
-							<div class="flex justify-between items-center">
-								{item.label}
-								{#if active && !filtering}
-									<Icon icon="mdi:check" class={iconClasses} />
-								{/if}
-							</div>
-						</SelectListOption>
+							<SelectListOption as="button" key={item.value} let:active>
+								<div class="flex justify-between items-center">
+									{item.label}
+									{#if active && !filtering}
+										<Icon icon="mdi:check" class={iconClasses} />
+									{/if}
+								</div>
+							</SelectListOption>
 						{/if}
 					{/each}
 				{/if}
-			
 			</SelectListPanel>
 		</SelectList>
 

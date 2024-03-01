@@ -29,5 +29,5 @@ export const progressCircleDefaults: ProgressCircleProps<any> = {
 	text: true,
 	textunit: '%',
 	theme: 'frame',
-	value: 0,
+	value: 0
 };

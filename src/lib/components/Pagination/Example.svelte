@@ -4,12 +4,7 @@
 	import { PaginationPage } from '../PaginationPage';
 	import jsondata from '../_Example/jsondata.ts.old';
 	import { colors } from '$lib/constants';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize
-	} from '$lib/types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Pagination';
 	const description = 'Pager for data tables and record sets.';
@@ -28,10 +23,9 @@
 	let pagination = null as Pagination<any> | null;
 </script>
 
-<ExamplePage {title} {description} >
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-3 gap-2 mb-8">
-
 			<div>
 				<Pagination
 					{...props}

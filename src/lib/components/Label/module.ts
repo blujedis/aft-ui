@@ -1,9 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type LabelProps = {
 	full?: boolean;
@@ -18,5 +13,5 @@ export type LabelProps = {
 
 export const labelDefaults: Partial<LabelProps> = {
 	rounded: 'full',
-	size: 'md',
+	size: 'md'
 };

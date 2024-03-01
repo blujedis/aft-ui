@@ -30,7 +30,7 @@ export const switchHandleSizes = {
 };
 
 export const switchTranslateSizes = {
-	unstyled: '', 
+	unstyled: '',
 	xs: 'translate-x-0',
 	sm: 'translate-x-0',
 	md: 'translate-x-0',

@@ -1,10 +1,5 @@
 import type { SelectStore, SelectStoreValue } from '../../stores/select';
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import { type Writable } from 'svelte/store';
 import type { TabVariant } from '../Tab';
 
@@ -29,7 +24,7 @@ export type TabsStore = {
 	tabs: (HTMLElement & { $select: () => any })[];
 	selected?: HTMLElement;
 	currentIndex: number;
-}
+};
 
 export type TabsContext = Writable<TabsStore> & {
 	globals: {
@@ -42,7 +37,7 @@ export type TabsContext = Writable<TabsStore> & {
 		transitioned: boolean;
 		variant: TabVariant;
 	};
-}
+};
 
 // export type TabsContext = SelectStore & {
 // 	globals: {

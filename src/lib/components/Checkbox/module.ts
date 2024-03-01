@@ -1,10 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type CheckboxVariant = 'outlined';
 

@@ -1,4 +1,5 @@
 import { getProperty } from 'dot-prop';
+import { isLike, isNumeric } from './is';
 
 /**
  * Inserts a new item into an array without mutating.
@@ -23,18 +24,9 @@ export function arrayInsert(arr: any[], index: number, newItem: any) {
  */
 export function ensureArray<T = any>(value?: null | T | T[], clean = true) {
 	if (typeof value === 'undefined' || value === null || value === '') return [] as T[];
-	if (Array.isArray(value)) return (clean ? value.filter(v => typeof v !== 'undefined') : value) as T[];
+	if (Array.isArray(value))
+		return (clean ? value.filter((v) => typeof v !== 'undefined') : value) as T[];
 	return [value] as T[];
-}
-
-/**
- * Simple function using indexOf for SQL LIKE evaluation.
- *
- * @param query the search query.
- * @param value the value to apply search query against.
- */
-export function isLike(query: string, value: any): boolean {
-	return (value + '').toLowerCase().indexOf(query.toLowerCase()) > -1;
 }
 
 /**
@@ -62,6 +54,14 @@ function defaultComparator(a: any, b: any) {
 	return a == b ? 0 : a > b ? 1 : -1;
 }
 
+function defaultPrimer(value: unknown, accessor: any) {
+	const isDate = value instanceof Date;
+	if (typeof value !== 'string' && !isDate && typeof value !== 'number') return value;
+	if (isDate) return (value as Date).getTime();
+	if (isNumeric(value, true)) return Number(value);
+	return value;
+}
+
 /**
  * Create a sort comparator function with optional primer so that values can be
  * converted to the correct type for comparison.
@@ -69,19 +69,28 @@ function defaultComparator(a: any, b: any) {
  * @example
  * createComparator('-name', ('Bob Smith', name) => 'bob smith')
  *
+ * @example
+ * This is done so values can be properly compared here we convert a date to an
+ * epoch or number which can be easily evaluated.
+ * primer = (value = '01/01/1999') => 915177600
+ *
  * @param accessor the property that is to be primed if required.
- * @param primer the function for priming the value.
+ * @param primer the function for priming the value convert to type etc.
  */
-function createComparator<T>(accessor: SortAccessor<T>, primer?: Primer) {
+function createComparator<T>(accessor: SortAccessor<T>, primer = defaultPrimer as Primer) {
 	const isDesc = accessor.charAt(0) === '-';
 	const key = isDesc ? accessor.slice(1) : accessor;
+
 	let comparator = defaultComparator;
+
 	if (primer) comparator = (a, b) => defaultComparator(primer(a, key), primer(b, key));
+
 	if (isDesc)
 		return [key, (a: any, b: any) => -1 * comparator(a, b)] as [
 			Extract<keyof T, string>,
 			Comparator
 		];
+
 	return [key, comparator] as [Extract<keyof T, string>, Comparator];
 }
 

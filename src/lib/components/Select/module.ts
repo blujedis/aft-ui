@@ -1,13 +1,9 @@
 import type { SelectStoreValue, SelectStore } from '$lib/stores/select';
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type SelectVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text'; // keyof typeof select;
+
+export type SelectValue = string | number;
 
 export type SelectContext = SelectStore & {
 	//
@@ -22,7 +18,7 @@ export type SelectProps = {
 	placeholder?: boolean | string;
 	rows?: number; // mapped to native size attribute.
 	rounded?: ThemeRounded;
-	selected?: SelectStoreValue | SelectStoreValue[];
+	value?: SelectStoreValue | SelectStoreValue[];
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
@@ -31,10 +27,8 @@ export type SelectProps = {
 };
 
 export const selectDefaults: Partial<SelectProps> = {
-	focused: true,
-	placeholder: true,
-	rounded: 'sm',
 	size: 'md',
 	theme: 'frame',
-	variant: 'outlined'
+	variant: 'outlined',
+	value: ''
 };

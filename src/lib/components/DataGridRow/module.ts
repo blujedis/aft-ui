@@ -11,5 +11,4 @@ export type DataGridRowProps = {
 	theme?: ThemeColor;
 };
 
-export const gridRowDefaults: Partial<DataGridRowProps> = {
-};
+export const gridRowDefaults: Partial<DataGridRowProps> = {};

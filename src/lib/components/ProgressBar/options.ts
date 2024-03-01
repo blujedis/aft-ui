@@ -8,7 +8,7 @@ export const progressBarSizes = {
 	md: 'h-1.5',
 	lg: 'h-2.5',
 	xl: 'h-3',
-	xl2: 'h-4',
+	xl2: 'h-4'
 };
 
 // Firefox requires default rounding without pseudo selector.

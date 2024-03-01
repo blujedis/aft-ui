@@ -92,7 +92,7 @@
 		globals
 	}) as SelectListContext;
 
-	const th = themer($themeStore); 
+	const th = themer($themeStore);
 
 	$: groups = $store.items.reduce(
 		(a, c) => {
@@ -161,7 +161,11 @@
 	async function resolveItems(query?: string) {
 		if (!query) return $context.items as Required<Item>[];
 		return Promise.resolve(
-			initFilter(query, $context.items as Required<Item>[], $context.selected as SelectListItemKey[])
+			initFilter(
+				query,
+				$context.items as Required<Item>[],
+				$context.selected as SelectListItemKey[]
+			)
 		);
 	}
 
@@ -214,7 +218,7 @@
 			return {
 				...s,
 				filtered: [...s.items],
-				selected: [...normalizedItems as SelectListItemKey[]],
+				selected: [...(normalizedItems as SelectListItemKey[])],
 				persisted: [],
 				filtering: false
 			};

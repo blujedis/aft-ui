@@ -1,9 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type KbdVariant = 'filled' | 'outlined' | 'soft';
 
@@ -19,5 +14,5 @@ export type KbdProps = {
 };
 
 export const kbdDefaults: Partial<KbdProps> = {
-	size: 'md',
+	size: 'md'
 };

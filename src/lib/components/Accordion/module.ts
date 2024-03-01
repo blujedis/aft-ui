@@ -5,7 +5,10 @@ import { accordionOptionDefaults } from '../AccordionOption';
 import type { AccordionVariant } from '../AccordionButton/module';
 
 export type AccordionContext = SelectStore & {
-	globals: Omit<AccordianOptionProps, 'as' | 'selected'> & { hovered: boolean; selectable: boolean; };
+	globals: Omit<AccordianOptionProps, 'as' | 'selected'> & {
+		hovered: boolean;
+		selectable: boolean;
+	};
 };
 
 // { focused: boolean, rounded: ThemeRounded; variant: AccordionVariant}
@@ -29,7 +32,7 @@ export const accordionDefaults: Partial<AccordionProps<'div'>> = {
 	...accordionOptionDefaults,
 	as: 'div',
 	multiple: false,
-	selected: [],
+	selected: []
 	// theme: 'frame',
 	// variant: 'filled'
 };

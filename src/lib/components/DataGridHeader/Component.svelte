@@ -4,23 +4,24 @@
 	import type { ElementProps } from '$lib/types';
 	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
-	import { useResizer } from '$lib';
-	import type { ChannelListener } from 'diagnostics_channel';
+	import { useResizer } from '$lib/hooks';
 
 	type $$Props = DataGridHeaderProps & ElementProps<'div'>;
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { autocols, divided, focused, rounded, size, sticky, theme, onAfterResize } = {
-		...defaults,
-		autocols: context.globals?.autocols,
-		divided: context.globals?.divided,
-		focused: context.globals?.focused,
-		rounded: context.globals?.rounded,
-		size: context.globals?.size,
-		sticky: context.globals?.sticky,
-		theme: context.globals?.theme
-	} as Required<$$Props>;
+	export let { autocols, divided, focused, rounded, size, stacked, sticky, theme, onAfterResize } =
+		{
+			...defaults,
+			autocols: context.globals?.autocols,
+			divided: context.globals?.divided,
+			focused: context.globals?.focused,
+			rounded: context.globals?.rounded,
+			size: context.globals?.size,
+			stacked: context.globals?.stacked,
+			sticky: context.globals?.sticky,
+			theme: context.globals?.theme
+		} as Required<$$Props>;
 
 	const st = styler($themeStore);
 	const th = themer($themeStore);
@@ -51,6 +52,7 @@
 		.compile();
 
 	function init(node: HTMLDivElement) {
+		if (stacked) return; // can't resize columns when in stacked mode.
 		const header = node.children[0] as HTMLDivElement;
 
 		if (!header) return;
@@ -72,20 +74,21 @@
 				handles: {
 					right: true
 				},
-				debug: true
+				debug: false
 			});
 			resizer(c as HTMLElement);
 		}
 	}
 </script>
 
-<div use:init class={gridHeaderWrapperClasses}>
-	<div {...$$restProps} class={gridHeaderClasses} style={gridHeaderStyles}>
-		<slot />
+{#if $$slots.default && !stacked}
+	<div use:init class={gridHeaderWrapperClasses}>
+		<div {...$$restProps} class={gridHeaderClasses} style={gridHeaderStyles}>
+			<slot {stacked} />
+		</div>
+		<slot name="filter" />
 	</div>
-
-	<slot name="filter" />
-</div>
+{/if}
 
 <style>
 	.datagrid-header-row {

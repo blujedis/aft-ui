@@ -6,21 +6,24 @@
 	import { getContext } from 'svelte';
 	import { DataGridCell } from '$lib/components/DataGridCell';
 	import { debounce } from '$lib/utils';
+	import { Select, SelectOption, Input, Button } from '$lib/components';
 
 	type $$Props = DataGridFilterProps & ElementProps<'div'>;
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { autocols, columns, focused, size, theme } = {
+	export let { autocols, columns, focused, size, stacked, theme } = {
 		...defaults,
 		autocols: context.globals?.autocols,
 		columns: context.globals?.columns,
 		size: context.globals?.size,
+		stacked: context.globals?.stacked,
 		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	const st = styler($themeStore);
 	const th = themer($themeStore);
+	let accessor: string | undefined;
 
 	$: hasFilters = columns.some((c) => c.filterable);
 
@@ -51,21 +54,18 @@
 		.prepend('datagrid-filter-input outline-none w-full h-full bg-transparent', true)
 		.compile();
 
-	function handleFilterColumn(
-		e: Event & {
-			currentTarget: EventTarget & HTMLInputElement;
-		},
-		accessor: string
-	): void {
+	function handleFilterColumn(e: Event, currentAccessor?: string | undefined): void {
+		currentAccessor = currentAccessor || accessor;
+		if (typeof currentAccessor === 'undefined') return;
 		const input = e.target as HTMLInputElement;
 		if (input)
 			debounce(() => {
-				context.filter(input.value, accessor);
+				context.filter(input.value, currentAccessor as string);
 			})();
 	}
 </script>
 
-{#if hasFilters}
+{#if hasFilters && !stacked}
 	<div class={gridFilterClasses} style={gridFilterStyles}>
 		<slot>
 			{#each columns as col, i}

@@ -116,11 +116,10 @@
 										</a>
 									</li>
 								</ul>
-							</li>	
+							</li>
 						</ul>
 					</nav>
 				</div>
-        
 			</div>
 		</div>
 	</div>

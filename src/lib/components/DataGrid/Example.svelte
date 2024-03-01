@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { DataGrid, type DataGridColumnConfig } from '.';
-	import jsondata from '../_Example/jsondata.ts.old';
+	import { jsondata } from '../_Example/jsondata';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { DataGridHeader } from '../DataGridHeader';
@@ -11,10 +11,7 @@
 	import { DataGridHeaderCell } from '../DataGridHeaderCell';
 	import { DataGridSearch } from '../DataGridSearch';
 	import Section from '../_Example/Section.svelte';
-	import { fade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import { cubicIn } from 'svelte/easing';
-	import { dndzone, SHADOW_ITEM_MARKER_PROPERTY_NAME } from 'svelte-dnd-action';
 
 	const title = 'DataGrid';
 	const description = 'Themed table with responsive layout.';
@@ -26,24 +23,14 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'frame' as ThemeColor,
-		transitioned: false as boolean // ThemeTransitioned,
+		transitioned: false as boolean, // ThemeTransitioned,
+		stacked: true,
+		divided: false
 	};
 
 	type Data = (typeof jsondata)[number];
 	let data = jsondata; // .slice(0, 15);
 
-	// const existing = [] as number[];
-
-	// for (const [i, v] of data.entries()) {
-	// 	if (existing.includes(v.id)) {
-	// 		v.id = Math.round(v.id + Math.random());
-	// 		data[i] = v;
-	// 	} else {
-	// 		existing.push(v.id);
-	// 	}
-	// }
-
-	// const columns = ['id', 'title', 'description', 'category', 'price'] as (keyof Item)[];
 	const columns = [
 		{ accessor: 'id', label: 'ID', width: '75px' },
 		{ accessor: 'title', width: '100px', filterable: true },
@@ -53,19 +40,6 @@
 	] as DataGridColumnConfig<Data>[];
 
 	const flipDurationMs = 300;
-
-	function handleDndConsiderColumn(e: any) {
-		console.log('consider', e.detail);
-		// columns = e.detail.items;
-	}
-	function handleDndFinalizeColumn(e: any) {
-		console.log('final', e.detail);
-		// columns = e.detail.items;
-	}
-
-	const getClasses = (item: any) => {
-		return item[SHADOW_ITEM_MARKER_PROPERTY_NAME] ? 'dragging' : '';
-	};
 </script>
 
 <ExamplePage {title} {description}>
@@ -79,31 +53,29 @@
 		</ul>
 	</Section>
 
-	<DataGrid {...props} {columns} items={data} let:rows let:columns>
+	<DataGrid
+		{...props}
+		{columns}
+		items={data}
+		class={props.stacked ? 'max-w-screen-sm m-auto' : ''}
+		let:rows
+		let:columns
+		let:stacked
+	>
 		<DataGridSearch />
 
-		<div
-			use:dndzone={{ items: columns, flipDurationMs, dropTargetStyle: {} }}
-			on:consider={handleDndConsiderColumn}
-			on:finalize={handleDndFinalizeColumn}
-		>
-			<DataGridHeader>
-				{#each columns as column (column.id)}
-					<div animate:flip={{ duration: flipDurationMs }} class={getClasses(column)}>
-						<DataGridHeaderCell accessor={column.accessor} let:sort let:sortdir>
-							<button on:click={sort} class="outline-none">{column.label} ({sortdir})</button>
-						</DataGridHeaderCell>
-						{#if column[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
-							<div in:fade={{ duration: 200, easing: cubicIn }} class="placeholder" />
-						{/if}
-					</div>
-				{/each}
-
-				<svelte:fragment slot="filter">
-					<DataGridFilter />
-				</svelte:fragment>
-			</DataGridHeader>
-		</div>
+		<DataGridHeader>
+			{#each columns as { accessor, label }, index (index)}
+				<div animate:flip={{ duration: 300 }}>
+					<DataGridHeaderCell {accessor} let:sort let:sortdir>
+						<button on:click={sort} class="outline-none">{label} ({sortdir})</button>
+					</DataGridHeaderCell>
+				</div>
+			{/each}
+			<svelte:fragment slot="filter">
+				<DataGridFilter />
+			</svelte:fragment>
+		</DataGridHeader>
 
 		<!-- <DataGridFilter /> -->
 
@@ -111,10 +83,17 @@
 			{#each rows as row (row.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
 					<DataGridRow>
-						{#each columns as { accessor, id } (id)}
-							<div animate:flip={{ duration: flipDurationMs }}>
-								<DataGridCell {accessor}>{row[accessor]}</DataGridCell>
-							</div>
+						{#each columns as { accessor, label }}
+							<DataGridCell {accessor}>
+								{#if stacked}
+									<div class="grid grid-flow-col auto-cols-max gap-2">
+										<div class="capitalize min-w-20">{label}:</div>
+										<div class="ml-4 max-w-64 flex-wrap">{row[accessor]}</div>
+									</div>
+								{:else}
+									{row[accessor]}
+								{/if}
+							</DataGridCell>
 						{/each}
 					</DataGridRow>
 				</div>

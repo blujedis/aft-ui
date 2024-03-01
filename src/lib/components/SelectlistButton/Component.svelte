@@ -60,9 +60,9 @@
 
 	const th = themer($themeStore);
 
-	$: selected = $context.selected.map((v) =>
-		$context.items.find((item) => v === item.value)
-	).filter(v => typeof v !== 'undefined') as SelectListItem[];
+	$: selected = $context.selected
+		.map((v) => $context.items.find((item) => v === item.value))
+		.filter((v) => typeof v !== 'undefined') as SelectListItem[];
 
 	$: labels = selected.map((i) => i.label) as string[];
 
@@ -153,7 +153,6 @@
 		.compile();
 
 	async function handleRemoveTag(item?: SelectListItem) {
-
 		if (!removable) return;
 		let shouldRemove = false;
 
@@ -166,25 +165,21 @@
 
 		$context.input?.focus();
 		return shouldRemove;
-
 	}
 
 	async function handleAddTag(value: string) {
-
 		if (!$context.input) return;
 		const item = await onBeforeAdd(value, $context.input);
-	
+
 		if (item) {
 			item.selected = true;
 			context.add(item);
 			$context.input.value = '';
 		}
 		$context.input.focus();
-
 	}
 
 	async function handleFilter(query = '', key = '') {
-	
 		if (!$context.filtering && !multiple) {
 			context.update((s) => {
 				return { ...s, persisted: [...s.selected], selected: [] };
@@ -192,32 +187,25 @@
 			$context.filtering = true;
 		}
 
-			if (!$context.visible) {
-					
-				context.open(); // do this to ensure focus after opening dropdown.
+		if (!$context.visible) {
+			context.open(); // do this to ensure focus after opening dropdown.
 
-				setTimeout(() => {
-					if ($context.input) {
-						if (key.length === 1) $context.input.value = key;
-						$context.input.focus();
-					}
-				});
-
-	
+			setTimeout(() => {
+				if ($context.input) {
+					if (key.length === 1) $context.input.value = key;
+					$context.input.focus();
+				}
+			});
+		} else {
+			context.filter(query);
 		}
-
-		else {
-				context.filter(query);
-			}
-
 	}
 
 	function handleClick(e: MouseEvent) {
 		context.toggle();
 		setTimeout(() => {
-				// if ($context.trigger && !$context.visible)
-				if (!$context.visible)
-					$context.input?.focus();
+			// if ($context.trigger && !$context.visible)
+			if (!$context.visible) $context.input?.focus();
 		});
 	}
 
@@ -225,15 +213,12 @@
 		if (!multiple && !filterable) {
 			context.toggle();
 			setTimeout(() => {
-				if ($context.trigger && !$context.visible)
-					$context.trigger.focus();
-		});
-		}
-		else if (!filterable && !$context.visible) {
+				if ($context.trigger && !$context.visible) $context.trigger.focus();
+			});
+		} else if (!filterable && !$context.visible) {
 			e.preventDefault();
 			context.toggle();
-		}
-		else if (multiple) {
+		} else if (multiple) {
 			$context.filtering = true;
 		}
 	}
@@ -243,22 +228,19 @@
 		e: Event & {
 			currentTarget: EventTarget | HTMLInputElement;
 		}
-	) {
-	}
+	) {}
 
 	async function handleInputKeydown(
 		e: {
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-
 		if (multiple && $context.input && ['Backspace', 'Enter'].includes(e?.key || '')) {
-	
 			// Nothing to new reset input.
 			if (e.key === 'Enter' && !newable) {
 				$context.input.value = '';
-			} 
-			
+			}
+
 			// Should remove tag?
 			else if (
 				e.key === 'Backspace' &&
@@ -266,7 +248,6 @@
 				$context.selected.length &&
 				!$context.input.value.length
 			) {
-
 				e.preventDefault();
 				const last = selected.slice(-1)[0];
 
@@ -277,31 +258,29 @@
 						context.close();
 					}
 				}
-
-			} 
+			}
 			// Should create new tag?
 			else if (multiple && e.key === 'Enter' && $context.input.value && newable) {
-
 				const value = $context.input.value || '';
 
 				if (value) {
 					e.preventDefault();
 					handleAddTag(value);
 				}
-
 			}
 		} else if ($context.input && filterable) {
-
 			// Always focus on first, focus trap at Panel will
 			// apply focus if an element is selected.
 			if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
 				e.preventDefault();
 				if (!$context.visible) context.open();
 				const container = $context.panel?.firstChild as HTMLDivElement;
-				const children = !container?.children ? [] : Array.from(container.children) as HTMLElement[];
+				const children = !container?.children
+					? []
+					: (Array.from(container.children) as HTMLElement[]);
 				if (children[0]) children[0].focus();
-			} 
-		
+			}
+
 			// If in filter mode and Enter key exit filter mode rerun query/filter.
 			else if (['Enter'].includes(e.key)) {
 				if ($context.filtering) {
@@ -317,8 +296,7 @@
 				let query = $context.input?.value || '';
 				if (e.key.length === 1) query += e.key;
 				handleFilter(query, e.key);
-			} 
-
+			}
 		}
 	}
 
@@ -327,22 +305,25 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-
 		if (['Backspace'].includes(e.key)) {
 			handleFilter($context.input?.value);
 		}
-
 	}
 
 	function setInitialValue(el: HTMLInputElement) {
-		if (!multiple && labels.length) 
-			el.value = labels[0] + '';
+		if (!multiple && labels.length) el.value = labels[0] + '';
 	}
 </script>
 
 <!-- <div> -->
 <Flushed disabled={variant !== 'flushed'} {theme} {focused} group>
-	<div 	bind:this={$context.trigger} role="button" tabindex="-1" aria-disabled={disabled} class={containerClasses}>
+	<div
+		bind:this={$context.trigger}
+		role="button"
+		tabindex="-1"
+		aria-disabled={disabled}
+		class={containerClasses}
+	>
 		<div class={contentWrapperClasses}>
 			{#if multiple && selected.length}
 				<slot name="tags" {handleRemoveTag}>

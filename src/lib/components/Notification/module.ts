@@ -1,4 +1,3 @@
-
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 
@@ -24,5 +23,5 @@ export const notificationDefaults: Partial<NotificationProps> = {
 	dismissible: true,
 	group: 'default',
 	rounded: 'sm',
-	shadowed: 'md',
+	shadowed: 'md'
 };

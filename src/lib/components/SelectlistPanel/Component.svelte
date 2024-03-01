@@ -54,17 +54,21 @@
 
 	function onInit(items = [] as HTMLElement[]) {
 		if (!items.length || $context.filtering) return;
-		activeItem = items.reduce((a,c, i) => {
-			if (c.classList.contains('select-list-option-selected')){
-				a.el = c;
-				a.index = Math.max(0, i-1)
-			}
-			return a;
-		}, {el: undefined, index: undefined} as ActiveItem);
+		activeItem = items.reduce(
+			(a, c, i) => {
+				if (c.classList.contains('select-list-option-selected')) {
+					a.el = c;
+					a.index = Math.max(0, i - 1);
+				}
+				return a;
+			},
+			{ el: undefined, index: undefined } as ActiveItem
+		);
 
-		if (!activeItem.el) // just focus on first option item if none selected.
-			activeItem = { el: items[0], index: 0 }
-			activeItem.el?.focus();
+		if (!activeItem.el)
+			// just focus on first option item if none selected.
+			activeItem = { el: items[0], index: 0 };
+		activeItem.el?.focus();
 	}
 
 	function onNavigate(el: HTMLElement | undefined, index: number) {
@@ -76,7 +80,7 @@
 		const key = el.dataset.key as string;
 		if (!multiple && $context.input) {
 			context.toggle();
-			context.restoreSelected(key, false)
+			context.restoreSelected(key, false);
 			setTimeout(() => {
 				if ($context.input) {
 					const nextValue = $context.items.find((i) => key === i.value)?.label || '';
@@ -94,8 +98,7 @@
 
 	function onFind(items: HTMLElement[]) {
 		let found = items.find((el) => el.classList.contains('select-list-option-selected'));
-		if (!found)
-			found = items.find((el) => el.classList.contains('select-list-option'));
+		if (!found) found = items.find((el) => el.classList.contains('select-list-option'));
 		return found as HTMLElement;
 	}
 </script>
@@ -112,7 +115,7 @@
 		class={panelClasses}
 	>
 		<div class="py-1" role="none">
-			<slot currentElement={activeItem.el} currentIndex={activeItem.index}/>
+			<slot currentElement={activeItem.el} currentIndex={activeItem.index} />
 		</div>
 	</div>
 {/if}

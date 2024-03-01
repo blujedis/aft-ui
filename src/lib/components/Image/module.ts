@@ -1,4 +1,10 @@
-import type { ThemeObjectFit, ThemeObjectPosition, ThemeRounded, ThemeShadowed, ElementProps } from '$lib/types';
+import type {
+	ThemeObjectFit,
+	ThemeObjectPosition,
+	ThemeRounded,
+	ThemeShadowed,
+	ElementProps
+} from '$lib/types';
 import type { LazyImageOptions } from '$lib/utils/lazyImage';
 
 export type ImageProps = ElementProps<'img'> & {

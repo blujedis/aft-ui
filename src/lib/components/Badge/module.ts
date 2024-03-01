@@ -1,11 +1,6 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-export type BadgeVariant = 'filled' | 'outlined' | 'soft'; 
+export type BadgeVariant = 'filled' | 'outlined' | 'soft';
 
 export type BadgeProps = {
 	full?: boolean;

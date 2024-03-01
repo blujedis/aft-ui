@@ -11,5 +11,5 @@ export type FlushedProps = {
 };
 
 export const flushedDefaults: Partial<FlushedProps> = {
-	peer: true,
+	peer: true
 };

@@ -32,7 +32,7 @@ export default defineConfig({
 		include: ['src/**/*.{test,spec}.{js,ts}'],
 		coverage: {
 			provider: 'istanbul', // or 'v8'
-			reporter: ['text', 'json', 'html'],
-		},
+			reporter: ['text', 'json', 'html']
+		}
 	}
 });

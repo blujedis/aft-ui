@@ -1,9 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { PaginatorOptions, PaginatorStore } from '$lib/stores/paginator';
 
 export type PaginationContext<T extends Record<string, any> = Record<string, any>> =
@@ -20,7 +15,7 @@ export type PaginationContext<T extends Record<string, any> = Record<string, any
 		};
 	};
 
-export type PaginationVariant = 'filled' | 'flushed' | 'soft'; 
+export type PaginationVariant = 'filled' | 'flushed' | 'soft';
 
 export interface PaginationProps<T extends Record<string, any> = Record<string, any>>
 	extends PaginatorOptions<T> {

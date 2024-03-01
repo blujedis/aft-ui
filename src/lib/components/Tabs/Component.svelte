@@ -28,9 +28,8 @@
 		...defaults
 	} as Required<$$Props>;
 
-
 	const store = writable<TabsStore>({ tabs: [], selected: undefined, currentIndex: -1 });
-	
+
 	const globals = cleanObj({
 		focused,
 		full,
@@ -51,8 +50,8 @@
 
 	const th = themer($themeStore);
 
-		$: tabsClasses = th
-		.create("TabsWrapper")
+	$: tabsClasses = th
+		.create('TabsWrapper')
 		.option('common', 'formBorder', variant === 'flushed')
 		.option('common', 'divided', ['filled'].includes(variant))
 		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
@@ -67,17 +66,17 @@
 		.append($$restProps.class, true)
 		.compile();
 
-		$: selectClasses = th
+	$: selectClasses = th
 		.create('TabsSelect')
 		.prepend(`tabs-${variant}`, true)
 		.prepend('tabs', true)
 		.append('sr-only mb-4', true)
 		.compile();
 
-		function mount(node: HTMLElement) {
-			const destroy = context.subscribe((s) => {
-				if (s.selected) node.replaceChildren(s.selected as HTMLElement);
-			});
+	function mount(node: HTMLElement) {
+		const destroy = context.subscribe((s) => {
+			if (s.selected) node.replaceChildren(s.selected as HTMLElement);
+		});
 		return { destroy };
 	}
 </script>
@@ -86,13 +85,23 @@
 	<ul {...$$restProps} class={tabsClasses} role="tablist">
 		<slot />
 	</ul>
-	<select aria-controls={`tab-panel-${$context.currentIndex}`} class={selectClasses} on:change={(e) => {
-		const index = e.currentTarget.selectedIndex
-		$context.tabs[index].$select();
-	}}>
-		{#each $context.tabs as tab, i} 
+	<select
+		aria-controls={`tab-panel-${$context.currentIndex}`}
+		class={selectClasses}
+		on:change={(e) => {
+			const index = e.currentTarget.selectedIndex;
+			$context.tabs[index].$select();
+		}}
+	>
+		{#each $context.tabs as tab, i}
 			<option value={tab.innerText} selected={i === $context.currentIndex}>{tab.innerText}</option>
 		{/each}
 	</select>
-	<div bind:this={panel} role="tabpanel" aria-labelledby={`tab-${$context.currentIndex}`} use:mount class="flex"></div>
+	<div
+		bind:this={panel}
+		role="tabpanel"
+		aria-labelledby={`tab-${$context.currentIndex}`}
+		use:mount
+		class="flex"
+	></div>
 </div>

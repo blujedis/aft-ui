@@ -62,7 +62,7 @@ export const fieldLeading = {
 	md: fontLeadings.lg, // 'sm:leading-6',
 	lg: fontLeadings.xl, // 'sm:leading-7',
 	xl: fontLeadings.xl2, // 'sm:leading-8',
-	xl2: fontLeadings.xl3, //  'sm:leading-9'
+	xl2: fontLeadings.xl3 //  'sm:leading-9'
 };
 
 export const fontSizes = {
@@ -145,21 +145,25 @@ export const boxPadding = {
 
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
 
-export const buttonPadding = mergeConfigs(fieldPaddingY, {
-	unstyled: '',
-	xs: 'px-3',
-	sm: 'px-3.5',
-	md: 'px-5',
-	lg: 'px-6',
-	xl: 'px-7',
-	xl2: 'px-8'
-	// xs: 'px-2.5',
-	// sm: 'px-3',
-	// md: 'px-4',
-	// lg: 'px-5',
-	// xl: 'px-6',
-	// xl2: 'px-8'
-}, fieldLeading);
+export const buttonPadding = mergeConfigs(
+	fieldPaddingY,
+	{
+		unstyled: '',
+		xs: 'px-3',
+		sm: 'px-3.5',
+		md: 'px-5',
+		lg: 'px-6',
+		xl: 'px-7',
+		xl2: 'px-8'
+		// xs: 'px-2.5',
+		// sm: 'px-3',
+		// md: 'px-4',
+		// lg: 'px-5',
+		// xl: 'px-6',
+		// xl2: 'px-8'
+	},
+	fieldLeading
+);
 
 export const menuPadding = mergeConfigs(fieldPaddingTightY, {
 	unstyled: '',
@@ -274,8 +278,6 @@ export const resizes = {
 	both: 'resize-both'
 };
 
-
-
 export const gridgaps = {
 	unstyled: '',
 	none: 'gap-0',
@@ -321,6 +323,6 @@ export const hovered = {
 	soft: _hovered,
 	panel: {
 		...placeholder,
-		$base: 'hover:brightness-105 dark:hover:brightness-115',
+		$base: 'hover:brightness-105 dark:hover:brightness-115'
 	}
 };

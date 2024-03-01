@@ -6,7 +6,7 @@
 	import type { ButtonGroupContext } from '../ButtonGroup';
 	import type { SelectStoreValue } from '$lib/stores/select';
 	import { cleanObj } from '$lib/utils';
-	import { ConditionalElement, Flushed, Button, type ButtonVariant } from '$lib/components';
+	import { ConditionalComponent, Flushed, Button, type ButtonVariant } from '$lib/components';
 
 	type $$Props = ButtonGroupItemProps & ElementProps<'button'>;
 
@@ -70,10 +70,7 @@
 		.append('px-1', variant === 'flushed')
 		.append('flex-1', full)
 		.append('first:rounded-r-none last:rounded-l-none -ml-px', variant !== 'ghost')
-		.append(
-			'relative first:ml-0 focus:z-10 aria-checked:pointer-events-none',
-			true
-		)
+		.append('relative first:ml-0 focus:z-10 aria-checked:pointer-events-none', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -83,16 +80,14 @@
 	}
 </script>
 
-<ConditionalElement
+<ConditionalComponent
 	as={Flushed}
 	condition={variant === 'flushed'}
-	props={{
-		selected: isSelected,
-		theme,
-		group: true,
-		hovered,
-		focused
-	}}
+	selected={isSelected}
+	group={true}
+	{theme}
+	{hovered}
+	{focused}
 >
 	<svelte:component
 		this={Button}
@@ -106,4 +101,4 @@
 	>
 		<slot />
 	</svelte:component>
-</ConditionalElement>
+</ConditionalComponent>

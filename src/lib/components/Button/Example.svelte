@@ -26,11 +26,11 @@
 <ExamplePage {title} {description}>
 	{#each colors as color}
 		<!-- <div class="grid grid-cols-5 gap-4 mb-4"> -->
-				<Button {...props} variant="filled" theme={color}>Button</Button>
-				<Button {...props} variant="outlined" theme={color}>Button</Button>
-				<Button {...props} variant="soft" theme={color}>Button</Button>
-				<Button {...props} variant="ghost" theme={color}>Button</Button>
-				<Button {...props} variant="text" theme={color}>Button</Button>
+		<Button {...props} variant="filled" theme={color}>Button</Button>
+		<Button {...props} variant="outlined" theme={color}>Button</Button>
+		<Button {...props} variant="soft" theme={color}>Button</Button>
+		<Button {...props} variant="ghost" theme={color}>Button</Button>
+		<Button {...props} variant="text" theme={color}>Button</Button>
 		<!-- </div> -->
 	{/each}
 </ExamplePage>

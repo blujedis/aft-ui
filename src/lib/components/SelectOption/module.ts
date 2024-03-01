@@ -1,6 +1,6 @@
 import type { ThemeColor, ThemeSize } from '$lib/types';
 
-export type SelectOptionVariant = 'outlined'; 
+export type SelectOptionVariant = 'outlined';
 
 export type SelectOptionProps = {
 	disabled?: boolean;

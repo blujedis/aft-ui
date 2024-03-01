@@ -1,4 +1,4 @@
-import type { ThemeColor,  ThemeShadowed, ThemeSize } from '$lib/types';
+import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type SwitchProps = {
 	position?: 'right' | 'left' | 'top' | 'bottom'; // relative to slot element

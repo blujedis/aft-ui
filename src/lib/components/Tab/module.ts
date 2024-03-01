@@ -1,16 +1,11 @@
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeSize
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '$lib/types';
 
-export type TabVariant = 'flushed' | 'filled' | 'pills' | 'text'; 
+export type TabVariant = 'flushed' | 'filled' | 'pills' | 'text';
 
 export type TabProps<Tag extends 'a' | 'button' = 'button'> = {
 	as?: Tag;
 	disabled?: boolean;
-	focused?: ThemeFocused; 
+	focused?: ThemeFocused;
 	hovered?: boolean;
 	id?: string | null;
 	full?: boolean;

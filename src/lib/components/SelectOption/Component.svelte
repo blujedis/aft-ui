@@ -13,29 +13,28 @@
 		...defaults
 	} as Required<$$Props>;
 
-	const context = getContext<SelectContext>('SelectContext');
+	// const context = getContext<SelectContext>('SelectContext');
 
 	const th = themer($themeStore);
 
 	$: inputClasses = th
 		.create('SelectOption')
-		.variant('selectOption', variant, theme, variant)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
 		.option('common', 'disabled', disabled)
-		.append('flex items-center justify-center', true) // always pad right for caret.
+		.append('flex items-center', true) // always pad right for caret.
 		.append($$restProps.class, true)
 		.compile();
 
-	function handleClick(e: MouseEvent) {
-		e.preventDefault();
-		context.select(value);
-	}
+	// function handleClick(e: MouseEvent) {
+	// 	e.preventDefault();
+	// 	context.select(value);
+	// }
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<option {...$$restProps} use:forwardedEvents {value} class={inputClasses} on:click={handleClick}>
-	<slot selected={() => context.isSelected(value)} />
+<option use:forwardedEvents {...$$restProps} {value} class={inputClasses}>
+	<slot />
 </option>

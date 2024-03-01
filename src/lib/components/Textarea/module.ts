@@ -4,10 +4,10 @@ import type {
 	ThemeResize,
 	ThemeRounded,
 	ThemeShadowed,
-	ThemeSize,
+	ThemeSize
 } from '$lib/types';
 
-export type TextareaVariant = 'outlined' | 'soft' | 'text';  
+export type TextareaVariant = 'outlined' | 'soft' | 'text';
 
 export type TextareaProps = {
 	disabled?: boolean;

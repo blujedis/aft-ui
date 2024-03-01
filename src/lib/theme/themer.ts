@@ -60,13 +60,15 @@ export interface ThemerApi<C extends ThemeConfig> {
 	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
 		keys: K[],
 		prop: PropsWithoutPrefix<P, '$'> | undefined,
-		when: Primitive): ThemerApi<C>;
+		when: Primitive
+	): ThemerApi<C>;
 
 	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
 		keys: K[],
 		extend: Record<string, any>,
 		prop: PropsWithoutPrefix<P, '$'> | undefined,
-		when: Primitive): ThemerApi<C>;
+		when: Primitive
+	): ThemerApi<C>;
 
 	/**
 	 * Removes class strings, called ONLY after classnames() is called
@@ -107,22 +109,18 @@ export interface ThemerApi<C extends ThemeConfig> {
 		prepended: classnames.ArgumentArray;
 		appended: classnames.ArgumentArray;
 	};
-
 }
 
 export type ThemerInstance<C extends ThemeConfig> = {
-
 	/**
 	 * Creates a new instance for generating themes.
 	 *
 	 * @param instanceName simply gives you a reference in console on where the Themer failed.
 	 */
 	create: (instanceName: string) => ThemerApi<C>;
-
 };
 
 export function themer<C extends ThemeConfig>(themeConfig: C) {
-
 	type Components = typeof themeConfig.components;
 	type Options = typeof themeConfig.options;
 	type Component = keyof Components;
@@ -156,7 +154,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			when?: Primitive
 		) {
 			if (typeof themeConfig === 'undefined') return api;
-			const comp = _components[name] || {} as any;
+			const comp = _components[name] || ({} as any);
 			if (!comp || !variant) return api;
 			const conf = comp[variant] as Record<string, string>;
 			if (!colors.includes(theme as any)) {
@@ -201,26 +199,31 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			keys: K[],
 			extendOrProp: Record<string, any> | PropsWithoutPrefix<P, '$'> | undefined,
 			propOrWhen: PropsWithoutPrefix<P, '$'> | undefined | Primitive,
-			when?: Primitive) {
+			when?: Primitive
+		) {
 			if (typeof themeConfig === 'undefined') return api;
 			let prop: PropsWithoutPrefix<P, '$'> | undefined;
 			let extend: Record<string, any> | undefined;
 			if (arguments.length === 4) {
 				extend = extendOrProp as Record<string, any>;
 				prop = propOrWhen as PropsWithoutPrefix<P, '$'> | undefined;
-			}
-			else {
+			} else {
 				when = propOrWhen as Primitive;
 				prop = extendOrProp as PropsWithoutPrefix<P, '$'> | undefined;
 				extend = {};
 			}
 			if (typeof prop === 'undefined' || !when) return api;
-			let merged = keys.reduce((result, k) => {
-				const opt = _options[k];
-				if (typeof opt === 'undefined')
-					throw new Error(`${instanceName} option ${k} using property ${prop as string} was NOT found.`);
-				return mergeConfigs(result, opt as any); // TODO: fix types.
-			}, {} as Record<string, any>);
+			let merged = keys.reduce(
+				(result, k) => {
+					const opt = _options[k];
+					if (typeof opt === 'undefined')
+						throw new Error(
+							`${instanceName} option ${k} using property ${prop as string} was NOT found.`
+						);
+					return mergeConfigs(result, opt as any); // TODO: fix types.
+				},
+				{} as Record<string, any>
+			);
 			merged = mergeConfigs(merged, extend);
 			const baseValue = merged.$base || '';
 			const value = merged[prop as string] || '';
@@ -229,10 +232,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			return api;
 		}
 
-		function remove(
-			classes: string | string[],
-			when?: Primitive
-		) {
+		function remove(classes: string | string[], when?: Primitive) {
 			if (typeof themeConfig === 'undefined' || !when) return api;
 			classes = typeof classes === 'string' ? classes.trim().split(' ') : classes;
 			removed = [...removed, ...(classes as string[])];
@@ -299,11 +299,9 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		}
 
 		return api;
-
 	}
 
 	return {
 		create
 	};
-
 }

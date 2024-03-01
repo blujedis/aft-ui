@@ -1,11 +1,6 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-export type EmptyVariant = 'outlined'; 
+export type EmptyVariant = 'outlined';
 
 export type EmptyProps = {
 	as?: 'button' | 'link' | 'div' | 'span' | 'label';

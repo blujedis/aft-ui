@@ -11,11 +11,12 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { action, focused, method, rounded, size, strategy, theme } = {
+	export let { action, focused, method, rounded, size, stacked, strategy, theme } = {
 		...defaults,
 		focused: context.globals?.focused,
 		rounded: context.globals?.rounded,
 		size: context.globals?.size,
+		stacked: context.globals?.stacked,
 		theme: context.globals?.theme
 	} as Required<$$Props>;
 
@@ -32,7 +33,7 @@
 		.option('outlineFocusVisible', theme, focused)
 		.prepend('datagrid-search-input', true)
 		.append(
-			'outline-none px-4 py-2 pl-10 w-full rounded-b-none bg-transparent hover:bg-transparent !font-dark !dark:font-light ',
+			'outline-none px-4 py-2 pl-10 w-full rounded-b-none bg-transparent hover:bg-transparent !font-dark !dark:font-light',
 			true
 		)
 		.compile();
@@ -74,7 +75,7 @@
 			<div class="flex items-center">
 				<div class="flex-1 relative p-1">
 					<svg
-						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-2"
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-3 mr-1"
 						viewBox="0 0 20 20"
 						fill="currentColor"
 						aria-hidden="true"
@@ -89,7 +90,7 @@
 						<input
 							type="search"
 							name="search"
-							placeholder="Search Records"
+							placeholder="Search All Records"
 							class={gridSearchInputClasses}
 							on:input={handleSearchInput}
 						/>
@@ -97,7 +98,7 @@
 						<input
 							type="search"
 							name="search"
-							placeholder="Search Records"
+							placeholder="Search All Records"
 							class={gridSearchInputClasses}
 						/>
 					{/if}

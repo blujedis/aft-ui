@@ -1,32 +1,29 @@
 import type { ResizerPosition, ResizerRectangle } from '$lib/hooks';
 import type { SelectStore } from '$lib/stores';
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import { searchArray, sortArray, type SortAccessor, type Primer } from '$lib/utils';
 
 export type SortToken = 'asc' | 'desc' | 0 | 1 | '' | null;
 
-export type DataGridDataItem = Record<string, any>;
+export type DataGridDataItem = Record<string, unknown>;
 
 export type DataGridColumnConfig<D = DataGridDataItem> = {
+	id?: string | number;
 	label?: string;
 	accessor: keyof D;
 	sortable?: boolean;
 	filterable?: boolean;
 	width?: string; // ex: 50px will be converted to template columns.
 	resizeable?: boolean;
-} & Record<string, any>;
+} & Record<string, unknown>;
 
 export type DataGridStore<C, D> = {
+	sorting: boolean;
 	sort: SortAccessor<D>[];
 	columns: Required<C>[];
 	items: D[];
 	filtered: D[];
+	unsorted: D[];
 	datagrid?: HTMLDivElement;
 };
 
@@ -54,7 +51,13 @@ export type DataGridContext<C = DataGridColumnConfig, D = DataGridDataItem> = Se
 	filter(query: string, ...accessors: (keyof D)[]): void;
 	remove(rowkey: string): void;
 	reset(): void;
-	updateColumn: (accessor: string, config: Partial<DataGridColumnConfig>, done?: (columns: Required<DataGridColumnConfig>[]) => any) => void;
+	updateColumn: (
+		accessor: string,
+		config: Partial<DataGridColumnConfig>,
+		done?: (columns: Required<DataGridColumnConfig>[]) => any
+	) => void;
+	// swapColumns: (source: string, target: string) => void;
+	swapColumns: (source: number, target: number) => void;
 	getDataGridTemplate(columns?: C[]): string;
 	getSortToken(accessor: keyof D): number;
 	globals: DataGridContextProps<C, D>;
@@ -63,6 +66,7 @@ export type DataGridContext<C = DataGridColumnConfig, D = DataGridDataItem> = Se
 export type DataGridProps<C, D> = Partial<DataGridContextProps<C, D>> & {
 	columns: C[];
 	filter?(query: string, items: D[], ...accessors: (keyof D)[]): D[] | Promise<D[]>;
+	sortMultiple?: boolean;
 	sorter?: (items: D[], accessors: (keyof D)[], primer?: Primer) => D[] | Promise<D[]>;
 	items?: D[] | Promise<D[]>;
 	onAfterResize?: (props: ResizerPosition & ResizerRectangle) => any;

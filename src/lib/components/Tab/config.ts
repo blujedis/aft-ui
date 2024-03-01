@@ -1,7 +1,5 @@
 export const tab = {
-	soft: {
-
-	},
+	soft: {},
 	flushed: {
 		$base: 'border-transparent border-b-2 border-x-0 border-t-0 rounded-br-none rounded-bl-none'
 	},

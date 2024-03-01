@@ -456,7 +456,6 @@ const CONFIG_DEFAULTS = {
 	shift: 4
 };
 
-
 export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popover>(
 	settings = {} as PopoverInitOptions<C>
 ) => {
@@ -513,7 +512,6 @@ export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popove
 	};
 
 	return [tooltip] as [typeof tooltip];
-
 };
 
 export const usePopover = (settings = {} as PopoverTriggerOptions) => {

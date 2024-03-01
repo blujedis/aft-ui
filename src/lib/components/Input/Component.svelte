@@ -42,8 +42,8 @@
 			variant === 'soft'
 		)
 		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
-		.option('common', 'focusedOutline', focused && variant === 'outlined')
-		.option('outlineFocus', theme, focused && variant === 'outlined')
+		.option('common', 'focusedOutline', focused && variant !== 'flushed') // variant === 'outlined'
+		.option('outlineFocus', theme, focused && variant !== 'flushed')
 		.bundle(['inputText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
@@ -65,8 +65,8 @@
 
 {#if variant === 'flushed'}
 	<svelte:component this={Flushed} {theme} {focused}>
-		<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
+		<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} on:input />
 	</svelte:component>
 {:else}
-	<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} />
+	<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} on:input />
 {/if}

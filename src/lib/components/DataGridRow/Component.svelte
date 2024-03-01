@@ -35,8 +35,7 @@
 		.prepend('datagrid-row', true)
 		.append('divide-x', divided)
 		.append('grid grid-flow-col w-full', !stacked)
-		.append('grid grid-flow-row w-full', stacked)
-		.append(stacked ? 'auto-rows-fr' : 'auto-cols-fr', autocols)
+		.append(stacked ? 'auto-rows-fr py-1.5' : 'auto-cols-fr', autocols)
 		.append($$restProps.class, true)
 		.compile();
 </script>

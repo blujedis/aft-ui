@@ -31,10 +31,8 @@
 	<div class="grid grid-cols-3 gap-4 p-4">
 		<label>
 			<div class="text-sm mb-4">Default Using Title Attribute (Trigger: hover)</div>
-			<button
-				class={classes}
-				use:tooltip={{ content: 'Hello My Tooltip' }}
-				title="Hello Tooltip">Basic Tooltip</button
+			<button class={classes} use:tooltip={{ content: 'Hello My Tooltip' }} title="Hello Tooltip"
+				>Basic Tooltip</button
 			>
 		</label>
 

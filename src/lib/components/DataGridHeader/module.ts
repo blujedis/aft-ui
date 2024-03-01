@@ -9,6 +9,7 @@ export type DataGridHeaderProps = {
 	focused?: ThemeFocused;
 	rounded?: ThemeRounded;
 	size?: ThemeSize;
+	stacked?: boolean;
 	sticky?: boolean;
 	theme?: ThemeColor;
 	onAfterResize?: (props: ResizerPosition & ResizerRectangle) => any;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useResizer } from '$lib/hooks';
 	import { setContext } from 'svelte';
-	import { cleanObj, type SortAccessor, boolToMapValue } from '$lib/utils';
+	import { cleanObj, type SortAccessor, boolToMapValue, uniqid } from '$lib/utils';
 	import { themeStore, themer } from '$lib/theme';
 	import { useSelect } from '$lib/stores';
 	import {
@@ -31,6 +31,7 @@
 		rowkey,
 		shadowed,
 		size,
+		sortMultiple,
 		sorter,
 		sticky,
 		stacked,
@@ -46,10 +47,12 @@
 
 	export const store = useSelect<DataGridStore<Column, Data>>({
 		datagrid: datagrid,
+		sorting: false,
 		sort: [],
 		selected: [],
 		filtered: [],
 		items: [],
+		unsorted: [],
 		columns: normalizeColumns(columns)
 	});
 
@@ -77,7 +80,8 @@
 		remove,
 		getDataGridTemplate,
 		getSortToken,
-		updateColumn
+		updateColumn,
+		swapColumns
 	};
 
 	setContext('DataGrid', {
@@ -100,7 +104,7 @@
 		.append('w-full', full)
 		.append('relative', sticky)
 		.append('border', divided)
-		.append('overflow-clip flow-root', true)
+		.append('flow-root', true) // overflow-clip
 		.append($$restProps.class, true)
 		.compile();
 
@@ -129,21 +133,66 @@
 		});
 	}
 
-	function updateSort(stored: SortAccessor<Data>[], accessors: SortAccessor<Data>[]) {
+	function swapColumns(source: number, target: number) {
+		const cols = [...$store.columns];
+		// const sIndex = cols.findIndex((c) => c.accessor === source);
+		// const tIndex = cols.findIndex((c) => c.accessor === target);
+		const sourceCol = cols[source];
+		const targetCol = cols[target];
+		cols[source] = targetCol;
+		cols[target] = sourceCol;
+		store.update((s) => {
+			return { ...s, columns: cols };
+		});
+	}
+
+	/**
+	 * Normalizes the sort array preparing for sorting.
+	 * If the previous sort array contained ['category'] it's next state would be ['-category']
+	 * the next after that would be [] covering all three states.
+	 *
+	 * @param stored
+	 * @param accessors
+	 */
+	function prepareSortArray(stored: SortAccessor<Data>[], accessors: SortAccessor<Data>[]) {
 		let clone = [...accessors];
+
 		const shouldPurge = accessors.filter((a) => a.charAt(0) === '-' && stored.includes(a));
+
 		stored.forEach((s) => {
 			if (!clone.includes(s) && !clone.includes(('-' + s) as any)) clone.unshift(s);
 		});
+
 		clone = clone.filter((c) => !shouldPurge.includes(c) && !!c);
-		return [...clone];
+
+		return clone;
 	}
 
 	function sortby(...accessors: SortAccessor<Data>[]) {
-		const nextSort = updateSort($store.sort, accessors);
+		const nextSort = prepareSortArray(
+			sortMultiple ? [...$store.sort] : [$store.sort[0]],
+			accessors
+		);
 
-		Promise.resolve(sorter($store.filtered, nextSort))
-			.then((filtered) => store.update((s) => ({ ...s, filtered, sort: nextSort })))
+		const collection = !nextSort.length ? $store.unsorted : $store.filtered;
+		const obj = { sort: nextSort } as any;
+
+		if (!$store.sorting) {
+			obj.sorting = true;
+			obj.unsorted = [...$store.filtered];
+		}
+
+		if (!nextSort.length) {
+			obj.sorting = false;
+			obj.unsorted = [];
+		}
+
+		Promise.resolve(sorter(collection, nextSort))
+			.then((filtered) =>
+				store.update((s) => {
+					return { ...s, filtered, ...obj };
+				})
+			)
 			.catch((ex) => console.warn((ex as Error).message));
 	}
 
@@ -178,17 +227,26 @@
 	function normalizeColumns(cols: Column[]) {
 		return cols.map((c) => {
 			c.label = c.label || c.accessor;
+			c.id = c.id || uniqid();
 			return c;
 		}) as Required<Column>[];
 	}
 
 	Promise.resolve(items).then((i) => {
 		store.update((s) => {
-			return { ...s, items: i.sort(), filtered: [...i] };
+			return { ...s, items: [...i], filtered: [...i], unsorted: [...i] };
 		});
 	});
 </script>
 
 <div bind:this={datagrid} {...$$restProps} class={gridClasses}>
-	<slot rows={$store.filtered} columns={$store.columns} {remove} {filter} {reset} {sortby} />
+	<slot
+		rows={$store.filtered}
+		columns={$store.columns}
+		{remove}
+		{filter}
+		{reset}
+		{sortby}
+		{stacked}
+	/>
 </div>

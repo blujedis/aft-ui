@@ -5,8 +5,6 @@ import type { BadgeProps, BadgeVariant } from '../Badge';
 
 export type SelectListVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text';
 
-
-
 export type SelectListButtonProps = InputProps & {
 	badgeProps?: BadgeProps;
 	caret?: string | IconifyIcon;

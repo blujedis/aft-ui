@@ -56,7 +56,6 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 			if (typeof themeConfig === 'undefined') return api;
 			if (!when) return api;
 			if (styles.some((v) => v.startsWith(key)))
-
 				throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
 			styles.push(key + ': ' + value);
 			return api;
@@ -76,13 +75,14 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 				throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
 			const [prefix, opacity] = value.split('/');
 			const cleaned = prefix.replace(/^--color-/, '');
-			if (!['#', 'rgb', 'hsl'].some(v => value.startsWith(v))) { // statically defined color.
-				if (opacity) { // note using rgba(var(--some-color), 0.2) won't work use "/"
+			if (!['#', 'rgb', 'hsl'].some((v) => value.startsWith(v))) {
+				// statically defined color.
+				if (opacity) {
+					// note using rgba(var(--some-color), 0.2) won't work use "/"
 					const alpha = opacity.includes('.') ? opacity : Number(opacity) / 100;
-					value = `rgba(var(--color-${cleaned})/${alpha})`
-				}
-				else {
-					value = `rgb(var(--color-${cleaned}))`
+					value = `rgba(var(--color-${cleaned})/${alpha})`;
+				} else {
+					value = `rgb(var(--color-${cleaned}))`;
 				}
 			}
 			add(key, value, when);

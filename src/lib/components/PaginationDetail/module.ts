@@ -1,12 +1,6 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-
-export type PaginationDetailVariant = 'filled' | 'flushed' | 'soft'; 
+export type PaginationDetailVariant = 'filled' | 'flushed' | 'soft';
 
 export type PaginationDetailProps = {
 	full?: boolean;

@@ -4,7 +4,11 @@ import type { SelectListVariant, SelectListButtonProps } from '../SelectListButt
 import type { BadgeProps } from '../Badge/module';
 
 export type SelectListItemKey = string | number;
-export type FilterQuery<T = SelectListItem> = (query: string, items: Required<T>[], selected: SelectListItemKey[]) => Required<T>[] | Promise<Required<T>[]>;
+export type FilterQuery<T = SelectListItem> = (
+	query: string,
+	items: Required<T>[],
+	selected: SelectListItemKey[]
+) => Required<T>[] | Promise<Required<T>[]>;
 
 export type SelectListItem = {
 	label?: string;
@@ -35,7 +39,10 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 		remove(key: SelectListItemKey): void;
 		remove(item: T): void;
 		restoreSelected(restoreInput?: boolean): void;
-		restoreSelected(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+		restoreSelected(
+			selectedItems: SelectListItemKey | SelectListItemKey[],
+			restoreInput?: boolean
+		): void;
 		filter(query?: string): void;
 		globals: SelectListContextProps;
 	};
@@ -43,14 +50,14 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 export type SelectListContextProps = {
 	badgeProps?: BadgeProps;
 	disabled?: boolean;
-	filterable?: boolean
+	filterable?: boolean;
 	full?: boolean;
 	focused?: boolean;
 	hovered?: boolean;
 	multiple?: boolean; // multiple tags mode.
-	newable?: boolean;			// can add new tags
+	newable?: boolean; // can add new tags
 	placeholder?: string;
-	removable?: boolean;		// can remote tags
+	removable?: boolean; // can remote tags
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
@@ -71,12 +78,14 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-{
-	autoclose: true,
-	escapable: true,
-	filter: (q, i) => i.filter(
-		(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)),
-	size: 'md',
-	theme: 'frame',
-	variant: 'outlined'
-};
+	{
+		autoclose: true,
+		escapable: true,
+		filter: (q, i) =>
+			i.filter(
+				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+			),
+		size: 'md',
+		theme: 'frame',
+		variant: 'outlined'
+	};

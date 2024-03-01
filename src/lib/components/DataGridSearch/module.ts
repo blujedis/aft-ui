@@ -6,6 +6,8 @@ export type DataGridSearchProps = {
 	method?: string;
 	rounded?: ThemeSize;
 	size?: ThemeSize;
+	stacked?: boolean;
+	// filter strategy using on:submit or on:input, ignored when method/action provided.
 	strategy?: 'input' | 'submit';
 	theme?: ThemeColor;
 };

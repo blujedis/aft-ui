@@ -40,5 +40,5 @@ export type MenuProps = {
 export const menuDefaults: Partial<MenuProps & MenuGlobalProps> = {
 	autoclose: true,
 	escapable: true,
-	size: 'md',
+	size: 'md'
 };

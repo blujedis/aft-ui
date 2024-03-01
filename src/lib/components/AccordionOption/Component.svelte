@@ -76,7 +76,7 @@
 		.append('focus:z-10', true)
 		.append('border-l border-r border-t', isBordered && variant === 'outlined')
 		.append('border-b', detached && isSelected && ['outlined'].includes(variant))
-		.append('last:border-b', [ 'outlined'].includes(variant))
+		.append('last:border-b', ['outlined'].includes(variant))
 		.append('relative overflow-clip outline-none transition-[margin]', true)
 		.append($$restProps.class, true)
 		.compile();

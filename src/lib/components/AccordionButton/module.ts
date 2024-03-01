@@ -5,7 +5,10 @@ import type { ButtonProps } from '../Button';
 
 export type AccordionVariant = 'filled' | 'outlined' | 'text'; // keyof typeof accordionButton;
 
-export type AccordianButtonProps<Tag extends HTMLTag> = Omit<ButtonProps<'button'>, 'as' | 'variant' | 'full' | 'focused' | 'underlined' | 'rounded' | 'shadowed' | 'href'> & {
+export type AccordianButtonProps<Tag extends HTMLTag> = Omit<
+	ButtonProps<'button'>,
+	'as' | 'variant' | 'full' | 'focused' | 'underlined' | 'rounded' | 'shadowed' | 'href'
+> & {
 	as?: Tag;
 	caret?: Iconify; // AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
 	roticon?: boolean | string; // when true rotate expand icon ignore collapse.
@@ -23,5 +26,5 @@ export const accordionButtonDefaults: Partial<AccordianButtonProps<'button'>> = 
 	caret: 'octicon:chevron-down-24',
 	roticon: true,
 	rotiangle: 180,
-	size: 'sm',
+	size: 'sm'
 };

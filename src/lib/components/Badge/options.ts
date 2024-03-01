@@ -16,7 +16,7 @@ export const badgeInnerMargin = {
 	lg: 'my-0.5 mx-2.5',
 	xl: 'my-1 mx-3',
 	xl2: 'my-1 mx-3.5'
-}
+};
 
 // export const badgePadding = {
 // 	unstyled: '',

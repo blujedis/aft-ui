@@ -1,10 +1,4 @@
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type RangeProps = {
 	focused?: ThemeFocused;
@@ -18,5 +12,5 @@ export type RangeProps = {
 
 export const rangeDefaults: RangeProps = {
 	size: 'md',
-	theme: 'frame',
+	theme: 'frame'
 };

@@ -22,7 +22,19 @@
 
 	const context = getContext('Pagination') as PaginationContext;
 
-	export let { as, focused, hovered, next, previous, rounded, size, theme, transitioned, value, variant } = {
+	export let {
+		as,
+		focused,
+		hovered,
+		next,
+		previous,
+		rounded,
+		size,
+		theme,
+		transitioned,
+		value,
+		variant
+	} = {
 		...defaults,
 		focused: context.globals?.focused,
 		hovered: context.globals?.hovered,
@@ -39,12 +51,26 @@
 
 	$: paginationPageClasses = th
 		.create('PaginationPage')
-		.bundle(['selectedBgAriaSelected'], { $base: 'aria-selected:text-white dark:aria-selected:text-white' }, theme, variant === 'filled')
-		.bundle(['selectedSoftBgAriaSelected'], { $base: 'aria-selected:text-current dark:aria-selected:text-white'}, theme, variant === 'soft')
-		.bundle(['selectedBorderAriaSelected'], { 
-			$base: 'aria-selected:text-current dark:aria-selected:text-white'
-
-		}, theme, variant === 'flushed')
+		.bundle(
+			['selectedBgAriaSelected'],
+			{ $base: 'aria-selected:text-white dark:aria-selected:text-white' },
+			theme,
+			variant === 'filled'
+		)
+		.bundle(
+			['selectedSoftBgAriaSelected'],
+			{ $base: 'aria-selected:text-current dark:aria-selected:text-white' },
+			theme,
+			variant === 'soft'
+		)
+		.bundle(
+			['selectedBorderAriaSelected'],
+			{
+				$base: 'aria-selected:text-current dark:aria-selected:text-white'
+			},
+			theme,
+			variant === 'flushed'
+		)
 		.option('common', 'mutedText', true)
 		.option('fieldFontSizes', size, size)
 		.option('paginationGroupedPadding', size, size && ['filled', 'soft'].includes(variant))
@@ -64,7 +90,10 @@
 			variant === 'flushed'
 		)
 		.append('z-10', ['filled', 'soft'].includes(variant) && selected)
-		.append('hover:border-frame-300 dark:hover:border-frame-600', variant === 'flushed' && !selected)
+		.append(
+			'hover:border-frame-300 dark:hover:border-frame-600',
+			variant === 'flushed' && !selected
+		)
 		.append('pointer-events-none', value === '...' || selected)
 		.append('px-2', (previous || next) as any)
 		.append('rounded-r-none', previous as any)

@@ -1,13 +1,8 @@
 import type { SelectStoreValue } from '$lib/stores/select';
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeSize,
-} from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 
-export type PaginationPageVariant = 'filled' | 'flushed' | 'soft'; 
+export type PaginationPageVariant = 'filled' | 'flushed' | 'soft';
 
 export type PaginationPageProps<Tag> = {
 	as?: Tag;

@@ -5,7 +5,7 @@ import { createStoreInternal, createStore } from './store';
 
 const defaultTheme = {
 	options: defaultOptions,
-	defaults: defaultSettings,
+	defaults: defaultSettings
 	//components: defaultComponents
 };
 

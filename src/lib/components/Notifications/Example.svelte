@@ -13,7 +13,7 @@
 		position: 'top-right' as NotificationPosition,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
-		size: 'md' as ThemeSize,
+		size: 'md' as ThemeSize
 	};
 
 	const themes = [

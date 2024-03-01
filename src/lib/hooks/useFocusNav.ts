@@ -1,4 +1,3 @@
-
 type FindHandler<T extends HTMLElement> = (items: T[], e: KeyboardEvent) => T;
 type SelectedHandler<T extends HTMLElement> = (el: T, e: KeyboardEvent) => any;
 type InitHandler<T extends HTMLElement> = (items: T[]) => void;
@@ -7,23 +6,24 @@ type NavigateHandler<T extends HTMLElement> = (item: T | undefined, index: numbe
 export interface FocusNavOptions<T extends HTMLElement> {
 	selectedClass?: string;
 	allowedClass?: string;
-	onFind?: FindHandler<T>,
+	onFind?: FindHandler<T>;
 	onSelected?: SelectedHandler<T>;
 	onNavigate?: NavigateHandler<T>;
 	onInit?: InitHandler<T>;
 }
 
 const defaults = {
-
-			onFind: <T>(_items: T[]) => null as T | null | undefined,
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		onSelected: <T>(_node: T) => { },
-		onInit: <T>(_items: T[]) => { },
-		onNavigate: <T>(_item: T, _index: number) => {},
+	onFind: <T>(_items: T[]) => null as T | null | undefined,
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	onSelected: <T>(_node: T) => {},
+	onInit: <T>(_items: T[]) => {},
+	onNavigate: <T>(_item: T, _index: number) => {}
 };
 
-export function useFocusNav<T extends HTMLElement>(root?: HTMLElement | ChildNode | null, options?: FocusNavOptions<T>) {
-
+export function useFocusNav<T extends HTMLElement>(
+	root?: HTMLElement | ChildNode | null,
+	options?: FocusNavOptions<T>
+) {
 	const _options = {
 		...defaults,
 		...options
@@ -39,7 +39,6 @@ export function useFocusNav<T extends HTMLElement>(root?: HTMLElement | ChildNod
 	}
 
 	function onKeydown(e: KeyboardEvent, preventDefault = false) {
-
 		if (e.repeat || !['ArrowUp', 'ArrowDown', ' ', 'Enter'].includes(e.key)) return;
 
 		const items = getItems();
@@ -60,7 +59,6 @@ export function useFocusNav<T extends HTMLElement>(root?: HTMLElement | ChildNod
 		// User is navigating options.
 		//////////////////////////////////////////////
 		else {
-
 			let currentNode: HTMLElement | undefined;
 			e.preventDefault(); // otherwise overflow will cause scroll jumping.
 
@@ -72,7 +70,7 @@ export function useFocusNav<T extends HTMLElement>(root?: HTMLElement | ChildNod
 				if (nextIndex < 0 || nextIndex > items.length - 1) return;
 				// Otherwise set the current node to the new index.
 				currentNode = items[nextIndex];
-				_options.onNavigate(currentNode as T, Math.max(0, nextIndex -1));
+				_options.onNavigate(currentNode as T, Math.max(0, nextIndex - 1));
 			} else {
 				// dropdown expanded start at first or selected node.
 				currentNode = _options.onFind(items, e);
