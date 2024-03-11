@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ColorMode } from '../ColorMode';
-	import { Switch } from '../Switch';
+	// import { ColorMode } from '../ColorMode';
+	// import { Switch } from '../Switch';
 	// import Highlight from 'svelte-highlight';
 	// import typescript from 'svelte-highlight/languages/typescript';
 	// import github from 'svelte-highlight/styles/github';
@@ -15,9 +15,9 @@
 	{@html github}
 </svelte:head> -->
 
-<ColorMode let:checked let:toggle>
+<!-- <ColorMode let:checked let:toggle>
 	<Switch {checked} on:change={toggle} shadowed="lg" class="fixed bottom-4 right-6 z-30" />
-</ColorMode>
+</ColorMode> -->
 
 <div class="h-full">
 	<div class="text-xl font-semibold mb-4">

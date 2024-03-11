@@ -1,21 +1,16 @@
 <script lang="ts">
-	import { type ColormodeProps, colormodDefaults as defaults } from './module';
-	import type { ElementProps } from '$lib/types';
 	import { useColorMode, type ColorModeHook } from '$lib/hooks';
 	import type { Unsubscriber } from 'svelte/store';
 
-	type $$Props = ColormodeProps & ElementProps<'input'>;
+	export let prefers = undefined as 'light' | 'dark' | undefined;
+	export let init = false;
 
-	export let { modeKey, preferKey } = {
-		...defaults
-	} as Required<ColormodeProps>;
-
-	const store = useColorMode();
-	const { toggle, reset } = store;
+	const store = useColorMode(init, prefers);
+	const { set, toggle, reset } = store;
 
 	function subscribe(fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) {
 		return store.subscribe((s) => fn(s, store));
 	}
 </script>
 
-<slot {store} checked={$store} {toggle} {reset} {subscribe} />
+<slot {store} dark={$store} {set} {toggle} {reset} {subscribe} />

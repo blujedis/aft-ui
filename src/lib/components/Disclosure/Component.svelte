@@ -10,9 +10,8 @@
 	import { useDisclosure, type DisclosureStore } from '$lib/stores';
 
 	type Tag = $$Generic<HTMLTag>;
-	type Store = $$Generic<DisclosureStore>;
 
-	type $$Props = DisclosureProps<Store, HTMLTag> & DisclosureNativeProps<HTMLTag>;
+	type $$Props = DisclosureProps<DisclosureStore, HTMLTag> & DisclosureNativeProps<HTMLTag>;
 
 	export let {
 		as,
@@ -23,11 +22,13 @@
 		transition
 	} = { ...defaults } as Required<$$Props>;
 
+	let disclosure: HTMLElement | undefined;
+
 	// prevents TS complaint about custom events.
 	// should we limit to handful of tags like div, ul, article etc.?
 	const element = as as 'div';
 
-	export const store = (initStore || useDisclosure({ visible: opened })) as Store;
+	export const store = useDisclosure({ visible: opened });
 
 	setContext('Disclosure', {
 		...store,
@@ -40,25 +41,42 @@
 		);
 	});
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	function handleClose(e?: Event) {
+	function handleOpen() {
+		store.open();
+		setTimeout(() => {
+			disclosure?.focus();
+		});
+	}
+
+	function handleClose() {
 		store.close();
 	}
 
+	function handleToggle() {
+		if ($store.visible) handleClose();
+		else handleOpen();
+	}
+
 	function handleKeydown(e: KeyboardEvent) {
-		if (!e.repeat && e.key === 'Escape' && escapable) {
+		if (!$store.visible || e.repeat) return;
+		const target = e.target as HTMLElement;
+		if (e.key === 'Escape' && escapable && (target.matches('body') || target === disclosure)) {
+			e.preventDefault();
 			store.close();
 		}
 	}
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <svelte:element
 	this={element}
+	tabindex="-1"
 	role="presentation"
 	{...$$restProps}
+	bind:this={disclosure}
 	use:clickOutside
 	on:click_outside={handleClose}
-	on:keydown={handleKeydown}
 >
-	<slot open={store?.open} close={store?.close} toggle={store?.toggle} visible={$store?.visible} />
+	<slot open={handleOpen} close={handleClose} toggle={handleToggle} visible={$store?.visible} />
 </svelte:element>

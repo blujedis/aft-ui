@@ -40,8 +40,8 @@ type TokenConfHandler = (tokens: TokenMap) => string | TokenConfInit;
 type TokenConfInit =
 	| string
 	| (Partial<Record<ThemeColor, TokenValue>> & {
-			$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
-	  });
+		$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
+	});
 
 type TokenConf = Record<ThemeColor, TokenValue> & {
 	$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
@@ -70,8 +70,8 @@ interface GenerateOptions {
 	softSelectedOpacity: TokenOpacity;
 	disabledOpacity: TokenOpacity;
 
-	gridOpacity: TokenOpacity;
-	gridColor: ThemeColorBase | 'black';
+	// gridOpacity: TokenOpacity;
+	// gridColor: ThemeColorBase | 'black';
 
 	focusOffset: TokenWidth;
 	focusWidth: TokenWidth;
@@ -81,6 +81,9 @@ interface GenerateOptions {
 
 	panelBgLight: ThemeColorBase;
 	panelBgDark: ThemeColorBase;
+
+	panelContainerBgLight: ThemeColorBase;
+	panelContainerBgDark: ThemeColorBase;
 }
 const colors = ['white', 'black', ...baseColors] as ThemeColor[];
 
@@ -139,23 +142,23 @@ export const defaultOptions = {
 
 	defaultShade: 500,
 
-	softOpacity: 10,
+	softOpacity: 20,
 	hoverOpacity: 20,
 	focusOpacity: 50,
 	softSelectedOpacity: 40,
 	disabledOpacity: 60,
 
-	gridColor: 'frame-950',
-	gridOpacity: 40,
-
 	focusOffset: 0,
-	focusWidth: 3,
+	focusWidth: 2,
 
 	formBorderColorLight: 'frame-300',
 	formBorderColorDark: 'frame-700',
 
-	panelBgLight: 'frame-100',
-	panelBgDark: 'frame-700'
+	panelBgLight: 'frame-200',
+	panelBgDark: 'frame-700',
+
+	panelContainerBgLight: 'frame-200',
+	panelContainerBgDark: 'frame-900'
 } as GenerateOptions;
 
 function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colors) {
@@ -169,7 +172,8 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		focusOpacity,
 		panelBgDark,
 		panelBgLight,
-		gridOpacity
+		panelContainerBgDark,
+		panelContainerBgLight,
 	} = options;
 
 	return {
@@ -192,13 +196,17 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 				'peer-focus:border',
 				'peer-hover:border'
 			],
-			colors: () => createColorMap(themeColors, defaultShade, true)
+			colors: () => createColorMap(themeColors, defaultShade, true, {
+				frame: [300, 700]
+			})
 		},
 
 		bgSoft: {
 			variant: 'soft',
 			modifiers: ['bg'],
-			colors: createColorMap(themeColors, `${defaultShade}/${softOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${softOpacity}`, true, {
+				frame: 'bg-frame-100 dark:bg-frame-500/20'
+			})
 		},
 
 		bgPanel: {
@@ -206,6 +214,14 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			modifiers: ['bg'],
 			colors: {
 				$base: `bg-${panelBgLight} dark:bg-${panelBgDark}`
+			}
+		},
+
+		bgPanelContainer: {
+			variant: 'panelContainer',
+			modifiers: ['bg'],
+			colors: {
+				$base: `bg-${panelContainerBgLight} dark:bg-${panelContainerBgDark}`
 			}
 		},
 
@@ -250,7 +266,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'panel',
 			modifiers: ['hover:bg'],
 			colors: {
-				$base: 'hover:bg-frame-300/50 hover:dark:bg-frame-800/50'
+				$base: 'hover:bg-frame-300/70 hover:dark:bg-frame-900/80'
 			}
 		},
 
@@ -440,8 +456,6 @@ function getCommon(options: Required<GenerateOptions>) {
 	options.formBorderColorDark = options.formBorderColorDark || options.formBorderColorLight;
 
 	const {
-		gridColor,
-		gridOpacity,
 		formBorderColorLight,
 		formBorderColorDark,
 		disabledOpacity,
@@ -453,23 +467,23 @@ function getCommon(options: Required<GenerateOptions>) {
 		bodyTextLight
 	} = options as Required<GenerateOptions>;
 
-	const gridOpacityLight = getMin(gridOpacity, -30, 20);
-
 	const common = {
 		transitioned: 'transition motion-reduce:transition-none',
-		// ringed: `ring-${gridColor}/${gridOpacityLight} dark:ring-${gridColor}/${gridOpacity}`,
-		// bordered: `border-${gridColor}/${gridOpacityLight} dark:border-${gridColor}/${gridOpacity}`,
-		// divided: `divide-${gridColor}/${gridOpacityLight} dark:divide-${gridColor}/${gridOpacity}`,
 		ringed: `ring-${formBorderColorLight} dark:ring-${formBorderColorDark}`,
 		bordered: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,
 		divided: `divide-${formBorderColorLight} dark:divide-${formBorderColorDark}`,
 		disabled: `disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
+
 		focusedOutline: `outline-none focus:outline-${focusWidth} focus:outline-offset-${focusOffset}`,
 		focusedOutlineVisible: `outline-none focus-visible:outline-${focusWidth} focus-visible:outline-offset-${focusOffset}`,
 		focusedOutlineWithin: `outline-none focus-within:outline-${focusWidth} focus-within:outline-offset-${focusOffset}`,
+
+		focusedOutlineWithinVisible: `outline-none focus-within:[&:has(:focus-visible)]:outline-${focusWidth} focus-within:[&:has(:focus-visible)]:outline-offset-${focusOffset}`,
+
 		focusedRing: `outline-none focus:outline-${focusWidth} focus:ring-offset-${focusOffset}`,
 		focusedRingVisible: `outline-none focus-visible:ring-${focusWidth} focus-visible:ring-offset-${focusOffset}`,
 		focusedRingWithin: `outline-none focus-within:ring-${focusWidth} focus-within:ring-offset-${focusOffset}`,
+
 		muteSelected: `aria-selected:opacity-${disabledOpacity}`,
 		mutedText: `text-${bodyTextLight}/60 dark:text-${bodyTextDark}/40`,
 		formBorder: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,

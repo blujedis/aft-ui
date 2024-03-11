@@ -10,7 +10,7 @@
 
 	type $$Props = ConditionalComponentProps<Tag> & SvelteConstructorProps<Tag>;
 
-	export let { as, condition, props } = {
+	export let { as, condition } = {
 		...defaults
 	} as $$Props;
 
@@ -18,7 +18,7 @@
 </script>
 
 {#if wrap}
-	<svelte:component this={as} {...props}>
+	<svelte:component this={as} {...$$restProps}>
 		<slot />
 	</svelte:component>
 {:else}

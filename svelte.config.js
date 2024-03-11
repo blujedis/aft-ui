@@ -9,20 +9,18 @@ const config = {
 	// 	postcss: true
 	// }),
 	preprocess: [
-		vitePreprocess({
-			postcss: true
-		})
+		vitePreprocess()
 	],
 
 	kit: {
 		adapter: adapter()
 	},
-	onwarn: (warning, handler) => {
-		if (warning.code.startsWith('a11y-')) {
-			return;
-		}
-		handler(warning);
-	}
+	// onwarn: (warning, handler) => {
+	// 	if (warning.code.startsWith('a11y-')) {
+	// 		return;
+	// 	}
+	// 	handler(warning);
+	// }
 };
 
 export default config;

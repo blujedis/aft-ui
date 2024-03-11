@@ -315,12 +315,21 @@ const _hovered = {
 
 export const hovered = {
 	text: _hovered,
-	filled: _hovered,
-	outlined: _hovered,
+	filled: {
+		..._hovered,
+		frame: 'hover:brightness-102 dark:hover:brightness-115'
+	},
+	outlined: {
+		..._hovered,
+		frame: 'hover:brightness-102 dark:hover:brightness-115'
+	},
 	ghost: _hovered,
 	flushed: _hovered,
 	simple: _hovered,
-	soft: _hovered,
+	soft: {
+		..._hovered,
+		frame: 'hover:brightness-102 dark:hover:brightness-115'
+	},
 	panel: {
 		...placeholder,
 		$base: 'hover:brightness-105 dark:hover:brightness-115'

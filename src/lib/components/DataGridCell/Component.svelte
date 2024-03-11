@@ -27,6 +27,6 @@
 		.compile();
 </script>
 
-<div {...$$restProps} class={gridCellClasses}>
+<div role="gridcell" {...$$restProps} class={gridCellClasses}>
 	<slot />
 </div>

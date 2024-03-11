@@ -6,7 +6,6 @@ export type SelectStoreValue =
 	| number
 	| Date
 	| boolean
-	| symbol
 	| bigint
 	| null
 	| undefined

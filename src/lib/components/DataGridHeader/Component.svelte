@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type DataGridHeaderProps, gridHeaderDefaults as defaults } from './module';
-	import { themeStore, pickCleanProps, styler, themer } from '$lib/theme';
+	import { themeStore, styler, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
 	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
@@ -33,22 +33,14 @@
 
 	$: gridHeaderWrapperClasses = th
 		.create('DataGridHeaderWrapper')
-		.option('common', 'divided', divided && $$slots.filter)
-		.option('common', 'bordered', true)
+		.option('common', 'bordered', divided)
+		.option('common', 'divided', divided)
 		.prepend('datagrid-header', true)
-		.append('divide-y', divided && $$slots.filter)
-		.append('sticky top-0 z-10', sticky) // add overflow-clip & "rounded" to keep top rounding
-		.append('!border-b -mb-px', sticky && divided) // must be !important b/c of divide-y
+		.append('divide-y', divided)
+		.append('sticky top-0 z-10 overflow-clip', sticky) // add overflow-clip & "rounded" to keep top rounding
+		//.append('!border-b -mb-px', sticky && divided) // must be !important b/c of divide-y
 		.append('rounded-b-none', rounded)
 		.append('shadow-sm', sticky)
-		.compile();
-
-	$: gridHeaderClasses = th
-		.create('DataGridHeader')
-		.append('auto-cols-fr', autocols)
-		.prepend('datagrid-header-row', true)
-		.append('grid grid-flow-col w-full body-light dark:body-dark', true)
-		.append($$restProps.class, true)
 		.compile();
 
 	function init(node: HTMLDivElement) {
@@ -65,10 +57,7 @@
 
 			const [resizer] = useResizer({
 				onResizing: ({ newWidth }) => {
-					context.updateColumn(col.accessor, { width: newWidth + 'px' }, (columns) => {
-						// manually update local columns.
-						gridHeaderStyles = `--template-columns: ${context.getDataGridTemplate(columns)}`;
-					});
+					context.updateColumn(col.accessor, { width: newWidth + 'px' });
 				},
 				onResized: onAfterResize,
 				handles: {
@@ -83,15 +72,6 @@
 
 {#if $$slots.default && !stacked}
 	<div use:init class={gridHeaderWrapperClasses}>
-		<div {...$$restProps} class={gridHeaderClasses} style={gridHeaderStyles}>
-			<slot {stacked} />
-		</div>
-		<slot name="filter" />
+		<slot />
 	</div>
 {/if}
-
-<style>
-	.datagrid-header-row {
-		grid-template-columns: var(--template-columns);
-	}
-</style>

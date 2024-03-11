@@ -23,7 +23,7 @@ export * from './ConditionalRender';
 export * from './DataGrid';
 export * from './DataGridBody';
 export * from './DataGridCell';
-export * from './DataGridFilter';
+export * from './DataGridFilterCell';
 export * from './DataGridHeader';
 export * from './DataGridHeaderCell';
 export * from './DataGridRow';

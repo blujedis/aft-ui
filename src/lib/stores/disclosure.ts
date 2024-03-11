@@ -1,4 +1,4 @@
-import { writable, get, type Writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
 interface DisclosureBaseOptions {
 	visible?: boolean;
@@ -24,30 +24,28 @@ export function useDisclosure<P extends Record<string, unknown> = Record<string,
 ) {
 	const store = writable({ visible: false, ...props } as Required<DisclosureStoreOptions<P>>);
 
-	function getStore() {
-		return get(store);
-	}
-
-	function handleUpdate(newStore: DisclosureStoreOptions<P>) {
-		// Placeholder.
-		return newStore as Required<DisclosureStoreOptions<P>>;
-	}
-
 	function open() {
-		store.update((s) => handleUpdate({ ...s, visible: true }));
+		store.update(s => {
+			return { ...s, visible: true };
+		});
 	}
 
 	function close() {
-		store.update((s) => handleUpdate({ ...s, visible: false }));
+		store.update(s => {
+			return { ...s, visible: false };
+		});
 	}
 
 	function toggle() {
-		const visible = getStore().visible;
-		store.update((s) => handleUpdate({ ...s, visible: !visible }));
+		store.update(s => {
+			return { ...s, visible: !s.visible };
+		});
 	}
 
 	function modify(values: Partial<DisclosureStoreOptions<P>>) {
-		store.update((s) => handleUpdate({ ...s, ...values }));
+		store.update(s => {
+			return { ...s, ...values };
+		});
 	}
 
 	return {

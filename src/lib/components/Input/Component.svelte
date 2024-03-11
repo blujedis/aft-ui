@@ -29,7 +29,14 @@
 
 	$: inputClasses = th
 		.create('Input')
-		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['mainBg', 'whiteText', 'filledPlaceholder'],
+			{
+				frame: 'text-body-light'
+			},
+			theme,
+			variant === 'filled'
+		)
 		.bundle(
 			['inputText', 'mainRing'],
 			{ $base: 'ring-1 ring-inset' },

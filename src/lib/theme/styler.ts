@@ -7,7 +7,6 @@ import type {
 	ThemeOption,
 	ThemeOptions
 } from '../types/theme';
-import { uniqid } from '$lib/utils';
 
 type Primitive = boolean | string | number | undefined | Primitive[];
 

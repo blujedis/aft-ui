@@ -1,14 +1,12 @@
 <script lang="ts">
+	import { writable } from 'svelte/store';
+
 	import { uniqid } from '$lib/utils';
 
 	import { getContext } from 'svelte';
 	import { type DataGridHeaderCellProps, gridHeaderCellDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib/theme';
-	import type {
-		DataGridColumnConfig,
-		DataGridContext,
-		DataGridDataItem
-	} from '$lib/components/DataGrid';
+	import type { DataGridContext, DataGridDataItem } from '$lib/components/DataGrid';
 	import type { ElementProps } from '$lib/types';
 
 	type DragHandlerEvent = DragEvent & {
@@ -22,25 +20,43 @@
 	const context = getContext('DataGrid') as DataGridContext;
 	const id = uniqid();
 
-	export let { accessor, focused, size, stacked, theme } = {
+	// const dragEl = writable<undefined | HTMLDivElement>();
+	//	let el = undefined as undefined | HTMLDivElement;
+	let dragging = false;
+	let focusing = false;
+
+	export let { accessor, draggable, focused, size, stacked, theme } = {
 		...defaults,
 		focused: context.globals?.focused,
 		size: context.globals?.size,
 		stacked: context.globals?.stacked,
-		theme: context.globals?.theme
+		theme: context.globals?.theme,
+		draggable: true
 	} as Required<$$Props>;
+
+	const th = themer($themeStore);
 
 	$: sortkey = $context?.sort.find((v) => [accessor, '-' + accessor].includes(v));
 	$: sortdir = typeof sortkey === 'undefined' ? 0 : sortkey.charAt(0) === '-' ? -1 : 1;
+	$: isLast =
+		$context.columns.findIndex((c) => c.accessor === accessor) === $context.columns.length - 1;
 
-	$: gridHeaderCellClasses = themer($themeStore)
+	$: gridHeaderCellClasses = th
 		.create('DataGridHeaderCell')
 		.option('gridHeaderPadding', size, size)
-		.option('common', 'focusedOutlineWithin', focused)
-		.option('outlineFocusWithin', theme, focused)
+		.option('common', 'focusedRingWithin', focused && !dragging)
+		.option('ringFocusWithin', theme, focused)
 		.prepend('datagrid-cell datagrid-header-cell', true)
-		.append('select-none outline-inset', true)
+		.append('group-[.dragging]:bg-secondary peer', true)
+		.append('select-none focus:ring-inset', true)
 		.append($$restProps.class, true)
+		.compile();
+
+	$: dividerClasses = th
+		.create('DataGridHeaderCellDivider')
+		.option('panelBg', theme, theme)
+		.prepend('datagrid-header-cell-divider', true)
+		.append('w-0.5 h-1/2 absolute z-0 top-1/4 right-0', true)
 		.compile();
 
 	function sort() {
@@ -48,8 +64,12 @@
 		context.sortby(key);
 	}
 
+	// Below is basic drag and drop it does not work
+	// well with animation but gets the job done for now
+	// may improve in the future.
+
 	function getHeaderChildren(child: HTMLElement) {
-		const children = child.closest('.datagrid-header-row')?.children;
+		const children = child.closest('.datagrid-row')?.children;
 		if (!children) return null;
 		return Array.from(children);
 	}
@@ -76,7 +96,7 @@
 			return;
 		}
 		event.dataTransfer.setData('text/plain', index + '');
-		event.currentTarget.style.backgroundColor = 'rgb(var(--frame-400))';
+		dragging = true;
 	}
 
 	function onDragOver(event: DragHandlerEvent) {
@@ -84,10 +104,12 @@
 	}
 
 	function onDrop(event: DragHandlerEvent) {
+		dragging = false;
 		if (!event.dataTransfer || !event.target) {
 			console.warn(`Column reorder on DROP failed, invalid target.`);
 			return;
 		}
+		const target = event.target as HTMLElement;
 		const sourceIndex = Number(event.dataTransfer.getData('text'));
 		const targetIndex = getIndex(event.target as HTMLElement);
 
@@ -97,19 +119,35 @@
 		}
 		event.dataTransfer.clearData();
 		context.swapColumns(sourceIndex, targetIndex);
+		target.focus(); // put focus where we dropped.
 	}
 </script>
 
-<div
-	role="presentation"
-	{id}
-	{...$$restProps}
-	data-accessor={accessor}
-	class={gridHeaderCellClasses}
-	draggable="true"
-	on:dragstart={onDragStart}
-	on:dragover={onDragOver}
-	on:drop={onDrop}
->
-	<slot {sort} {sortdir} />
+<div class="relative group" class:dragging>
+	{#if draggable}
+		<div
+			role="columnheader"
+			{id}
+			tabindex="-1"
+			{...$$restProps}
+			aria-grabbed={dragging}
+			class={gridHeaderCellClasses}
+			{draggable}
+			on:dragstart={onDragStart}
+			on:dragover={onDragOver}
+			on:drop={onDrop}
+			on:dragend={() => (dragging = false)}
+			on:focusin={() => (focusing = true)}
+			on:focusout={() => (focusing = false)}
+		>
+			<slot {sort} {sortdir} />
+		</div>
+	{:else}
+		<div role="columnheader" {id} {...$$restProps} class={gridHeaderCellClasses}>
+			<slot {sort} {sortdir} />
+		</div>
+	{/if}
+	{#if !dragging && !isLast}
+		<div class={dividerClasses} class:hidden={focusing}></div>
+	{/if}
 </div>

@@ -5,9 +5,20 @@
 	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 
-	type $$Props = LabelProps & Omit<ElementProps<'span'>, 'size'>;
+	type $$Props = LabelProps & Omit<ElementProps<'label'>, 'size'>;
 
-	export let { dropshadowed, hovered, full, rounded, shadowed, size, theme, transitioned } = {
+	export let {
+		dropshadowed,
+		hovered,
+		full,
+		rounded,
+		shadowed,
+		reversed,
+		size,
+		theme,
+		transitioned,
+		visible
+	} = {
 		...defaults
 	} as Required<$$Props>;
 
@@ -23,13 +34,16 @@
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.option('hovered', 'text', theme, hovered)
 		.append('w-full', full)
-		.append('flex items-center justify-center', true)
 		.append($$restProps.class, true)
 		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+{#if visible}
+	<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+		<slot />
+	</label>
+{:else}
 	<slot />
-</label>
+{/if}

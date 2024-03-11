@@ -6,12 +6,14 @@ export type RadioProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	group?: any;
 	hovered?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;
+	value?: any;
 	variant?: RadioVariant;
 	unstyled?: boolean;
 };

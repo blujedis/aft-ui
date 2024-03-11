@@ -8,7 +8,7 @@ import type {
 } from '../constants/options';
 import type * as sharedOptions from '../constants/options';
 import type * as componentOptions from '../components/options';
-import type * as configs from '../components/configs';
+// import type * as configs from '../components/configs';
 import type { colors, shades } from '../constants/colors';
 import type { namedcolors, tailwindcolors } from '../theme/palettes';
 
@@ -54,10 +54,8 @@ export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Re
 		? T[P]
 		: never;
 
-/**
- * Maintains code help while allowing arbitrary values/string.
- */
-export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
+
+// export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
 export type ColorType =
 	| `${'#'}${string}`
@@ -75,7 +73,7 @@ export type ThemeColor = ThemeColorBase | 'white' | 'black' | 'unstyled';
 export interface ThemeConfig {
 	options: ThemeOptions;
 	defaults: ThemeDefaults;
-	components: ThemeComponents;
+	// components: ThemeComponents;
 }
 
 export type ThemeOptions = typeof sharedOptions & typeof componentOptions;
@@ -91,8 +89,9 @@ export type ThemeDefaults = {
 		transitioned: boolean;
 	};
 };
-export type ThemeComponents = typeof configs;
-export type ThemeComponent = keyof ThemeComponents;
+
+// export type ThemeComponents = typeof configs;
+// export type ThemeComponent = keyof ThemeComponents;
 
 export type ThemeVariant = 'text' | 'filled' | 'outlined' | 'flushed' | 'ghost';
 export type ThemeVariantExt = ThemeVariant | 'panel' | 'bordered' | 'activated';

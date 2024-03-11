@@ -36,14 +36,18 @@ export function ensureArray<T = any>(value?: null | T | T[], clean = true) {
  * @param items an array of items to apply the search to.
  * @param accessors optional accessor keys applying search to only these keys.
  */
-export function searchArray<T extends Record<string, any>>(
+export function searchArray<T extends Record<string, unknown>>(
 	query: string,
 	items: T[],
-	...accessors: (keyof T)[]
+	accessors: (keyof T | { accessor: keyof T } & Record<string, unknown>)[]
 ): T[] {
 	if (!accessors.length)
 		return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
-	return items.filter((item) => accessors.some((key) => isLike(query, item[key])));
+	if (typeof accessors[0] === 'string') {
+		const _accessors = accessors as (keyof T)[];
+		return items.filter((item) => _accessors.some((key) => isLike(query, item[key])));
+	}
+	return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
 }
 
 export type SortAccessor<T> = Extract<keyof T, string> | `-${Extract<keyof T, string>}`;
@@ -54,7 +58,7 @@ function defaultComparator(a: any, b: any) {
 	return a == b ? 0 : a > b ? 1 : -1;
 }
 
-function defaultPrimer(value: unknown, accessor: any) {
+function defaultPrimer(value: unknown) {
 	const isDate = value instanceof Date;
 	if (typeof value !== 'string' && !isDate && typeof value !== 'number') return value;
 	if (isDate) return (value as Date).getTime();

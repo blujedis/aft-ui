@@ -18,6 +18,8 @@
 	const title = 'SelectList';
 	const description = 'Comprehensive component for single and multi selection.';
 
+	const selected = 'javascript'
+
 	const sourceItems = [
 		{
 			value: 'java',
@@ -74,7 +76,7 @@
 			<label for="filled">
 				<SelectList
 					{...props}
-					removable
+					removable 
 					items={sourceItems}
 					placeholder="Please Select"
 					theme={color}
@@ -187,6 +189,7 @@
 			{...shared}
 			rounded="none"
 			variant="outlined"
+			value={selected}
 			items={sourceItems}
 			placeholder="Filter..."
 			theme="primary"

@@ -1,7 +1,7 @@
 import type { IconifyIcon } from '@iconify/svelte';
 import { type InputProps, inputDefaults } from '../Input';
 import type { SelectListItem } from '../SelectList';
-import type { BadgeProps, BadgeVariant } from '../Badge';
+import type { BadgeProps } from '../Badge';
 
 export type SelectListVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text';
 

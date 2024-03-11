@@ -3,6 +3,7 @@ import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize }
 export type CheckboxVariant = 'outlined';
 
 export type CheckboxProps = {
+	checked?: boolean;
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;

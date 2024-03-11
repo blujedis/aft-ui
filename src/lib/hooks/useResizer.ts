@@ -84,22 +84,12 @@ const cursorMap = {
 	bottomRight: 'se-resize'
 };
 
-const debugCorner = {
-	height: '20px',
-	width: '20px',
-	borderRadius: '100%'
-};
-
-const debugSide = {
-	background: 'dodgerblue'
-};
-
 const defaults: ResizerOptions = {
 	classname: 'resizer',
 	handles: {},
-	onResizing: () => {},
-	onResized: () => {},
-	onDestroy: () => {}
+	onResizing: () => { },
+	onResized: () => { },
+	onDestroy: () => { }
 };
 
 function bindStyles(el: ResizerElement, props: Record<string, string>) {
@@ -117,7 +107,7 @@ function createHandles(classname: string, handles: ResizerHandles, debug = false
 		if (value === true) {
 			let el = document.createElement('div') as unknown as ResizerElement;
 			el.$direction = directionMap[key as keyof typeof directionMap] as ResizerDirection;
-			el.classList.add(classname, classMap[key as keyof typeof classMap]);
+			el.classList.add(classname, `${classname}-${classMap[key as keyof typeof classMap]}`);
 
 			const barSize = 10;
 			const barOffset = barSize / 2;
@@ -127,8 +117,8 @@ function createHandles(classname: string, handles: ResizerHandles, debug = false
 			const background = !debug
 				? ''
 				: ['top', 'left', 'right', 'bottom'].includes(key)
-					? 'dodgerblue'
-					: 'lightskyblue';
+					? 'bluegray'
+					: 'gray';
 
 			if (['left', 'right'].includes(key)) {
 				el = bindStyles(el, {
@@ -202,6 +192,8 @@ export function useResizer(options = {} as ResizerOptions) {
 
 		// Start resizing.
 		function onMousedown(event: MouseEvent) {
+			event.preventDefault();
+			if (event.button === 2) return;
 			active = event.target as ResizerElement;
 
 			const rect = element.getBoundingClientRect();
@@ -225,6 +217,7 @@ export function useResizer(options = {} as ResizerOptions) {
 		// Actively resizing.
 		function onMove(event: MouseEvent) {
 			if (!active || !initialPos || !initialRect || !parent) return;
+			event.preventDefault();
 
 			const direction = active.$direction;
 
@@ -269,8 +262,9 @@ export function useResizer(options = {} as ResizerOptions) {
 		}
 
 		// End resizing.
-		function onMouseup(_event: MouseEvent) {
+		function onMouseup(event: MouseEvent) {
 			if (!active || !parent) return;
+			event?.preventDefault();
 
 			const newRect = element.getBoundingClientRect();
 
@@ -299,7 +293,7 @@ export function useResizer(options = {} as ResizerOptions) {
 		return {
 			destroy() {
 				window.removeEventListener('mousemove', onMove);
-				window.removeEventListener('mousemove', onMousedown);
+				window.removeEventListener('mousedown', onMousedown);
 				_handles.forEach((handle) => element.removeChild(handle));
 				onDestroy();
 			}

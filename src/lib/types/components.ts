@@ -16,7 +16,11 @@ export type PrimitiveValue = string | number | boolean | undefined | null;
 export type ClassArgument = PrimitiveValue | Record<string, unknown>;
 export type HTMLTag = keyof SvelteHTMLElements;
 export type ElementProps<K extends HTMLTag> = SvelteHTMLElements[K];
-export type TypeOrKey<Keys extends string | number | symbol> = Keys | (string & { value?: any });
+
+/**
+ * Maintains code help while allowing arbitrary values/string.
+ */
+export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
 export type ElementHandler<
 	T extends HTMLElement,

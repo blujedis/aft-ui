@@ -35,6 +35,7 @@
 		size,
 		store: initStore,
 		theme,
+		value,
 		variant,
 		visible,
 		transitioned,
@@ -44,13 +45,11 @@
 		...(defaults as any)
 	} as Required<$$Props>;
 
-	let sel: HTMLSelectElement;
-
 	export const store = (initStore ||
 		useSelect({
 			multiple,
 			visible,
-			selected: [],
+			selected: ensureArray(value),
 			items: [],
 			filtered: [],
 			persisted: []
@@ -284,7 +283,7 @@
 		</div>
 
 		<slot name="select">
-			<select bind:this={sel} class="sr-only" {...restProps} {multiple}>
+			<select tabindex="-1" class="sr-only" {...restProps} {value} {multiple}>
 				{#if groupKeys.length}
 					{#each Object.entries(groups) as [group, items]}
 						<optgroup>{group}</optgroup>

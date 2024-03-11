@@ -28,7 +28,8 @@ export type PopoverEventTuple = [keyof HTMLElementEventMap, (...args: any[]) => 
 
 export type PopoverTriggerOptions = Omit<
 	PopoverInitOptions<any>,
-	'abortable' | 'escapable' | 'content' | 'events' | 'Component' | 'props'
+	'escapable' | 'content' | 'events' | 'Component' | 'props'
+// 'abortable' | 'escapable' | 'content' | 'events' | 'Component' | 'props'
 >;
 
 export type PopoverComponentProps<C extends typeof SvelteComponent> = SvelteConstructorProps<C> & {
@@ -38,7 +39,7 @@ export type PopoverComponentProps<C extends typeof SvelteComponent> = SvelteCons
 type ComputeMiddleware = false | null | undefined | Middleware;
 
 export type PopoverOptions<C extends typeof SvelteComponent> = {
-	abortable?: boolean;
+	// abortable?: boolean;
 	anchored?: boolean;
 	arrow?: string | null;
 	attributes?: string | null; // default for tooltip is "title"
@@ -478,7 +479,7 @@ export const useTooltip = <C extends typeof SvelteComponent<any> = typeof Popove
 	const rootOptions = {
 		arrow: '#arrow',
 		Component: Popover,
-		abortable: true,
+		// abortable: true,
 		escapable: true,
 		content: '#popover',
 		describedby: true,

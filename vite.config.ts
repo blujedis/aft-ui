@@ -8,7 +8,7 @@ export default defineConfig({
 		sveltekit(),
 		{
 			name: 'prebuild-commands',
-			handleHotUpdate: () => buildTokens(),
+			// handleHotUpdate: () => buildTokens(),
 			buildStart: () => buildTokens()
 		}
 	],

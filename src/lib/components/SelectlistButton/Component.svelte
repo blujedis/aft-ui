@@ -74,7 +74,9 @@
 		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
 		.bundle(
 			['inputText', 'mainRing'],
-			{ $base: 'ring-1 ring-inset' },
+			{
+				$base: 'ring-1 ring-inset'
+			},
 			theme,
 			variant === 'outlined'
 		)
@@ -94,7 +96,7 @@
 		.option('common', 'disabled', disabled)
 		.prepend('select-list-button', true)
 		.append('w-full', full)
-		.append('relative peer flex items-center min-w-[176px]', true)
+		.append('relative peer flex items-center min-w-[176px] outline-none', true)
 		.append('outline-none', focused && variant !== 'flushed')
 		.append('border-0', variant === 'flushed')
 		.append($$restProps.class, true)
@@ -202,18 +204,21 @@
 	}
 
 	function handleClick(e: MouseEvent) {
+		const isOpen = $context.visible;
 		context.toggle();
 		setTimeout(() => {
-			// if ($context.trigger && !$context.visible)
-			if (!$context.visible) $context.input?.focus();
+			if (isOpen) $context.input?.focus();
 		});
 	}
 
 	function handleInputClick(e: MouseEvent & { currentTarget: EventTarget | HTMLInputElement }) {
 		if (!multiple && !filterable) {
+			const isOpen = $context.visible;
 			context.toggle();
 			setTimeout(() => {
-				if ($context.trigger && !$context.visible) $context.trigger.focus();
+				if ($context.trigger && isOpen) {
+					$context.input?.focus();
+				}
 			});
 		} else if (!filterable && !$context.visible) {
 			e.preventDefault();
@@ -262,7 +267,6 @@
 			// Should create new tag?
 			else if (multiple && e.key === 'Enter' && $context.input.value && newable) {
 				const value = $context.input.value || '';
-
 				if (value) {
 					e.preventDefault();
 					handleAddTag(value);
@@ -317,13 +321,7 @@
 
 <!-- <div> -->
 <Flushed disabled={variant !== 'flushed'} {theme} {focused} group>
-	<div
-		bind:this={$context.trigger}
-		role="button"
-		tabindex="-1"
-		aria-disabled={disabled}
-		class={containerClasses}
-	>
+	<div bind:this={$context.trigger} role="button" aria-disabled={disabled} class={containerClasses}>
 		<div class={contentWrapperClasses}>
 			{#if multiple && selected.length}
 				<slot name="tags" {handleRemoveTag}>
@@ -366,7 +364,7 @@
 				</slot>
 			</div>
 		</div>
-		<button on:click={handleClick} class={triggerClasses}>
+		<button tabindex="-1" on:click={handleClick} class={triggerClasses}>
 			<slot name="caret" handleCaretClick={handleClick}>
 				<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
 			</slot>

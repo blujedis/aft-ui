@@ -8,6 +8,7 @@
 	type $$Props = CheckboxProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
+		checked,
 		disabled,
 		focused,
 		full,
@@ -46,4 +47,4 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} type="checkbox" use:forwardedEvents class={checkboxClasses} />
+<input use:forwardedEvents {...$$restProps} bind:checked type="checkbox" class={checkboxClasses} />

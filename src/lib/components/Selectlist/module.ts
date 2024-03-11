@@ -1,9 +1,9 @@
-import type { SelectStore } from '$lib/stores';
+import type { SelectStore, SelectStoreValue } from '$lib/stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
 import type { BadgeProps } from '../Badge/module';
 
-export type SelectListItemKey = string | number;
+export type SelectListItemKey = SelectStoreValue;
 export type FilterQuery<T = SelectListItem> = (
 	query: string,
 	items: Required<T>[],
@@ -73,19 +73,21 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 	escapable?: boolean; // close panel on escape key.
 	items: T[]; // | Promise<T[]>;
 	store?: SelectStore<SelectListStore>; // custom store.
+	value?: any;
 	visible?: boolean;
 	filter?: FilterQuery<T>; // filter used to find items in list.
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-	{
-		autoclose: true,
-		escapable: true,
-		filter: (q, i) =>
-			i.filter(
-				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-			),
-		size: 'md',
-		theme: 'frame',
-		variant: 'outlined'
-	};
+{
+	autoclose: true,
+	escapable: true,
+	filter: (q, i) =>
+		i.filter(
+			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+		),
+	size: 'md',
+	theme: 'frame',
+	value: '',
+	variant: 'outlined'
+};

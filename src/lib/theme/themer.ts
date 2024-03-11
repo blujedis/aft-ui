@@ -1,14 +1,11 @@
 import { twMerge, type ClassNameValue } from 'tailwind-merge';
 import { ensureArray, mergeConfigs } from '$lib/theme';
 import classnames from 'classnames';
-import { colors } from '../constants/colors';
-// import { browser } from '$app/environment';
 import type {
 	PropsWithoutPrefix,
 	ThemeConfig,
 	ThemeOption,
 	ThemeOptions,
-	ThemeColor
 } from '../types/theme';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
@@ -16,18 +13,18 @@ type PrimitiveBase = boolean | string | number | undefined | null;
 type Primitive = PrimitiveBase | Record<string, any> | PrimitiveBase[];
 
 export interface ThemerApi<C extends ThemeConfig> {
-	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
-		name: N,
-		variant: V,
-		when?: Primitive
-	): ThemerApi<C>;
+	// variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
+	// 	name: N,
+	// 	variant: V,
+	// 	when?: Primitive
+	// ): ThemerApi<C>;
 
-	variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
-		name: N,
-		variant: V,
-		theme?: ThemeColor,
-		when?: Primitive
-	): ThemerApi<C>;
+	// variant<N extends keyof C['components'], V extends keyof C['components'][N]>(
+	// 	name: N,
+	// 	variant: V,
+	// 	theme?: ThemeColor,
+	// 	when?: Primitive
+	// ): ThemerApi<C>;
 
 	/**
 	 * Adds an option to themed classes to be compiled.
@@ -121,12 +118,12 @@ export type ThemerInstance<C extends ThemeConfig> = {
 };
 
 export function themer<C extends ThemeConfig>(themeConfig: C) {
-	type Components = typeof themeConfig.components;
+	// type Components = typeof themeConfig.components;
 	type Options = typeof themeConfig.options;
-	type Component = keyof Components;
-	type Variant<K extends Component> = keyof Components[K];
+	// type Component = keyof Components;
+	// type Variant<K extends Component> = keyof Components[K];
 
-	const _components: Components = themeConfig?.components || {};
+	// const _components: Components = themeConfig?.components || {};
 	const _options: Options = themeConfig?.options || {};
 
 	function create(instanceName = ''): ThemerApi<C> {
@@ -137,7 +134,7 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		let appended = [] as classnames.ArgumentArray;
 
 		const api = {
-			variant: getVariant,
+			// variant: getVariant,
 			option,
 			bundle,
 			remove,
@@ -147,27 +144,27 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			classes
 		};
 
-		function getVariant<N extends Component, V extends Variant<N>>(
-			name: N,
-			variant: V,
-			theme?: ThemeColor | Primitive,
-			when?: Primitive
-		) {
-			if (typeof themeConfig === 'undefined') return api;
-			const comp = _components[name] || ({} as any);
-			if (!comp || !variant) return api;
-			const conf = comp[variant] as Record<string, string>;
-			if (!colors.includes(theme as any)) {
-				when = theme as Primitive;
-				theme = '';
-			}
-			if (!when || !conf) return api;
-			const baseVal = conf.$base || '';
-			const themeVal = conf[theme as ThemeColor] || '';
-			if (baseVal && theme !== 'unstyled') base.push(baseVal);
-			if (themeVal) themed.push(themeVal);
-			return api;
-		}
+		// function getVariant<N extends Component, V extends Variant<N>>(
+		// 	name: N,
+		// 	variant: V,
+		// 	theme?: ThemeColor | Primitive,
+		// 	when?: Primitive
+		// ) {
+		// 	if (typeof themeConfig === 'undefined') return api;
+		// 	const comp = _components[name] || ({} as any);
+		// 	if (!comp || !variant) return api;
+		// 	const conf = comp[variant] as Record<string, string>;
+		// 	if (!colors.includes(theme as any)) {
+		// 		when = theme as Primitive;
+		// 		theme = '';
+		// 	}
+		// 	if (!when || !conf) return api;
+		// 	const baseVal = conf.$base || '';
+		// 	const themeVal = conf[theme as ThemeColor] || '';
+		// 	if (baseVal && theme !== 'unstyled') base.push(baseVal);
+		// 	if (themeVal) themed.push(themeVal);
+		// 	return api;
+		// }
 
 		function option<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
 			key: K,

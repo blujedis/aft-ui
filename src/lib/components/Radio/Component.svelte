@@ -3,20 +3,24 @@
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { Label } from '$lib/components';
 	import type { ElementProps } from '$lib/types';
 
 	type $$Props = RadioProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
+		checked,
 		disabled,
 		focused,
 		full,
+		group,
 		hovered,
 		rounded,
 		shadowed,
 		size,
 		theme,
 		transitioned,
+		value,
 		variant,
 		unstyled
 	} = {
@@ -24,6 +28,12 @@
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
+
+	$: labelClasses = th
+		.create('RadioLabel')
+		.prepend('radio-label', true)
+		.append('flex items-center', true)
+		.compile();
 
 	$: radioClasses = th
 		.create('Radio')
@@ -43,10 +53,14 @@
 			'flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent',
 			true
 		)
+		.append('mr-2', $$slots.default)
 		.append($$restProps.class, true)
 		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} type="radio" use:forwardedEvents class={radioClasses} />
+<Label for={value} visible={$$slots.default} class={labelClasses}>
+	<input use:forwardedEvents {...$$restProps} bind:group type="radio" {value} class={radioClasses} />
+	<slot />
+</Label>

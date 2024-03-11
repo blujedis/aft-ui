@@ -8,7 +8,7 @@
 
 	type $$Props = ConditionalElementProps<Tag> & ElementProps<Tag>; // AdditionalProps;
 
-	export let { as, condition, props } = {
+	export let { as, condition } = {
 		...defaults
 	} as $$Props;
 
@@ -18,7 +18,7 @@
 </script>
 
 {#if wrap}
-	<svelte:element this={as} use:forwardedEvents {...$$restProps} {...props}>
+	<svelte:element this={as} use:forwardedEvents {...$$restProps}>
 		<slot />
 	</svelte:element>
 {:else}

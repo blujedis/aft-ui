@@ -1,16 +1,14 @@
 import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
 import type { DataGridColumnConfig } from '../DataGrid/module';
 
-export type DataGridFilterProps = {
-	autocols?: boolean;
-	columns?: DataGridColumnConfig[];
+export type DataGridFilterCellProps = {
+	column?: DataGridColumnConfig;
 	focused?: ThemeFocused;
 	size?: ThemeSize;
 	stacked?: boolean;
 	theme?: ThemeColor;
 };
 
-export const gridFilterDefaults: Partial<DataGridFilterProps> = {
-	autocols: true,
+export const gridFilterCellDefaults: Partial<DataGridFilterCellProps> = {
 	focused: true
 };

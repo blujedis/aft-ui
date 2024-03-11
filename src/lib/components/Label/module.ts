@@ -6,12 +6,13 @@ export type LabelProps = {
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	dropshadowed?: ThemeShadowed;
+	reversed?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;
+	visible?: boolean;
 };
 
 export const labelDefaults: Partial<LabelProps> = {
-	rounded: 'full',
-	size: 'md'
+	visible: true
 };

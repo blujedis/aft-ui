@@ -3,77 +3,93 @@ import { browser } from '$app/environment';
 
 export type ColorModeHook = ReturnType<typeof useColorMode>;
 
-export interface UseColorModeOptions {
-	key?: string;
-}
+const key = 'darkmode';
 
-let _instance: any = null;
+const store = writable<boolean>((browser && JSON.parse(localStorage.getItem(key) || 'false')) || false);
+const prefersDark = browser && window.matchMedia('(prefers-color-scheme: dark)').matches || false;
 
-export function useColorMode(key = 'dark') {
+export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
+
 	type ColorModeInstance = Writable<boolean> & typeof methods;
 
-	if (_instance) return _instance as ColorModeInstance;
-
-	const store = writable<boolean>(getMountedValue());
+	if (typeof prefers === 'undefined')
+		prefers = prefersDark ? 'dark' : 'light';
 
 	const methods = {
 		getRoot,
 		getLocalValue,
 		setLocalValue,
-		enable,
+		set,
 		toggle,
 		reset
 	};
-
-	function getMountedValue() {
-		if (!browser) return false;
-		return JSON.parse(localStorage.getItem(key) || 'false');
-	}
 
 	function getRoot() {
 		if (typeof document === 'undefined') return null;
 		return document.documentElement;
 	}
 
-	function getLocalValue(): boolean {
-		if (typeof localStorage === 'undefined' || !key) return false;
-		return JSON.parse(localStorage.getItem(key) || '');
+	function getLocalValue(): boolean | null {
+		if (typeof localStorage === 'undefined' || !key) return null;
+		const currentValue = JSON.parse(localStorage.getItem(key) || '');
+		if (!currentValue) return null;
+		return currentValue;
 	}
 
-	function setLocalValue(value: any) {
+	function setLocalValue(value: boolean) {
 		if (typeof localStorage === 'undefined') return;
-		if (value) localStorage.setItem(key, JSON.stringify(value));
+		localStorage.setItem(key, JSON.stringify(value));
 	}
 
-	function enable(mode: 'light' | 'dark') {
-		store.update((_s) => (mode === 'light' ? false : true));
+	function applyMode(value: boolean) {
+		const root = getRoot();
+		if (!root) return;
+		if (value)
+			root.classList.add('dark')
+		else
+			root.classList.remove('dark');
+		setLocalValue(value);
+	}
+
+	function set(isDark = false) {
+		const root = getRoot();
+		if (!root) return;
+		store.update((_s) => {
+			applyMode(isDark);
+			return isDark;
+		});
 	}
 
 	function toggle() {
 		const root = getRoot();
 		if (!root) return;
-		const isDark = getStore(store);
-		if (!isDark) {
-			root.classList.add('dark');
-			setLocalValue(true);
-		} else {
-			root.classList.remove('dark');
-			setLocalValue(false);
-		}
-		store.update((_s) => !isDark);
+		store.update(isDark => {
+			const nextValue = !isDark;
+			applyMode(nextValue);
+			return nextValue;
+		});
 	}
 
 	function reset() {
+		const root = getRoot();
+		if (root)
+			root.classList.remove('dark');
 		localStorage.removeItem(key);
 		store.update((_s) => false);
 	}
+
+	function init() {
+		if (!shouldInit) return;
+		set(prefers === 'light' ? false : true);
+	}
+
+	init();
 
 	const api = {
 		...methods,
 		...store
 	};
 
-	if (!_instance) _instance = api;
+	return api as ColorModeInstance;
 
-	return _instance as ColorModeInstance;
 }

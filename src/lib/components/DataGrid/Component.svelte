@@ -10,7 +10,10 @@
 		type DataGridColumnConfig,
 		type DataGridStore,
 		type DataGridContextProps,
-		type DataGridDataItem
+		type DataGridDataItem,
+
+		type FilterAccessor
+
 	} from './module';
 	import type { ElementProps } from '$lib/types';
 
@@ -108,15 +111,19 @@
 		.append($$restProps.class, true)
 		.compile();
 
-	async function remove(key: string) {
-		const item = $store.items.find((item) => item[rowkey] === key);
-		const shouldRemove = await Promise.resolve(onBeforeRemove(item));
-		if (!shouldRemove) return;
-		store.update((s) => {
-			const newItems = s.items.filter((item) => item[rowkey] !== key);
-			const newFiltered = s.filtered.filter((item) => item[rowkey] !== key);
-			return { ...s, items: newItems, filtered: newFiltered };
-		});
+	function getDataGridTemplate(cols: Column[]) {
+		cols = cols || $store.columns;
+		const values = cols.map((c) => c.width);
+		return values.join(' ') + '';
+	}
+
+	function normalizeColumns(cols: Column[]) {
+		return cols.map((c) => {
+			c.label = c.label || c.accessor;
+			c.id = c.id || uniqid();
+			c.width = c.width || '1fr';
+			return c;
+		}) as Required<Column>[];
 	}
 
 	function updateColumn(
@@ -135,8 +142,6 @@
 
 	function swapColumns(source: number, target: number) {
 		const cols = [...$store.columns];
-		// const sIndex = cols.findIndex((c) => c.accessor === source);
-		// const tIndex = cols.findIndex((c) => c.accessor === target);
 		const sourceCol = cols[source];
 		const targetCol = cols[target];
 		cols[source] = targetCol;
@@ -145,7 +150,6 @@
 			return { ...s, columns: cols };
 		});
 	}
-
 	/**
 	 * Normalizes the sort array preparing for sorting.
 	 * If the previous sort array contained ['category'] it's next state would be ['-category']
@@ -166,6 +170,12 @@
 		clone = clone.filter((c) => !shouldPurge.includes(c) && !!c);
 
 		return clone;
+	}
+
+	function getSortToken(accessor: Extract<keyof Data, string>) {
+		const token = $store.sort.filter((k) => [accessor, `-${accessor}`].includes(k));
+		if (!token[0]) return 0;
+		return token[0].charAt(0) === '-' ? -1 : 1;
 	}
 
 	function sortby(...accessors: SortAccessor<Data>[]) {
@@ -196,14 +206,9 @@
 			.catch((ex) => console.warn((ex as Error).message));
 	}
 
-	function getSortToken(accessor: Extract<keyof Data, string>) {
-		const token = $store.sort.filter((k) => [accessor, `-${accessor}`].includes(k));
-		if (!token[0]) return 0;
-		return token[0].charAt(0) === '-' ? -1 : 1;
-	}
-
-	function filter(query: string, ...accessors: (keyof Data)[]) {
-		Promise.resolve(initFilter(query, $store.items as any, ...accessors))
+	function filter(query: string, accessor: FilterAccessor<Data> | FilterAccessor<Data>[], ...accessors: FilterAccessor<Data>[]) {
+		const _accessors = Array.isArray(accessor) ? accessor : [accessor, ...accessors];
+		Promise.resolve(initFilter(query, $store.items as any, _accessors))
 			.then((filtered) => {
 				store.update((s) => {
 					return { ...s, filtered };
@@ -218,18 +223,15 @@
 		});
 	}
 
-	function getDataGridTemplate(cols: Column[]) {
-		cols = cols || $store.columns;
-		const values = cols.map((c) => c.width);
-		return values.join(' ') + '';
-	}
-
-	function normalizeColumns(cols: Column[]) {
-		return cols.map((c) => {
-			c.label = c.label || c.accessor;
-			c.id = c.id || uniqid();
-			return c;
-		}) as Required<Column>[];
+	async function remove(key: string) {
+		const item = $store.items.find((item) => item[rowkey] === key);
+		const shouldRemove = await Promise.resolve(onBeforeRemove(item));
+		if (!shouldRemove) return;
+		store.update((s) => {
+			const newItems = s.items.filter((item) => item[rowkey] !== key);
+			const newFiltered = s.filtered.filter((item) => item[rowkey] !== key);
+			return { ...s, items: newItems, filtered: newFiltered };
+		});
 	}
 
 	Promise.resolve(items).then((i) => {
