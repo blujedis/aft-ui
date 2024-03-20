@@ -96,7 +96,7 @@
 	}
 
 	function handleChange(data: typeof filterData) {
-		// filterData = { ...data };
+		filterData = { ...data };
 		handleFilter();
 	}
 </script>

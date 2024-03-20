@@ -17,10 +17,11 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { full, multiple, origin, position, rounded, shadowed, theme, transition } = {
+	export let { full, origin, position, recordless, rounded, shadowed, tags, theme, transition } = {
 		...defaults,
 		full: context.globals?.full,
-		multiple: context.globals?.multiple,
+		tags: context.globals?.tags,
+		recordless: context.globals?.recordless,
 		rounded: context.globals?.rounded,
 		shadowed: context.globals?.shadowed,
 		theme: context.globals?.theme
@@ -37,6 +38,8 @@
 
 	$: activeItem = { el: undefined, index: undefined } as ActiveItem;
 
+	$: recordlessMsg = typeof recordless === 'string' ? recordless : `No options available.`;
+
 	$: panelClasses = th
 		.create('SelectListPanel')
 		.option('panelBg', theme, theme)
@@ -51,6 +54,12 @@
 		.append('origin-center', origin === 'center')
 		.append('min-w-full', full)
 		.append($$restProps.class, true)
+		.compile();
+
+	$: recordlessClasses = th
+		.create('SelectListPanelRecordless')
+		.option('menuPadding', context.globals?.size, context.globals?.size)
+		.option('fieldFontSizes', context.globals?.size, context.globals?.size)
 		.compile();
 
 	function onInit(items = [] as HTMLElement[]) {
@@ -79,7 +88,7 @@
 	function onSelected(el: HTMLElement, e: KeyboardEvent) {
 		e.preventDefault(); // prevent or will bubble for option select event.
 		const key = el.dataset.key as string;
-		if (!multiple && $context.input) {
+		if (!tags && $context.input) {
 			context.toggle();
 			context.restore(key, false);
 			setTimeout(() => {
@@ -116,7 +125,19 @@
 		class={panelClasses}
 	>
 		<div class="py-1" role="none">
-			<slot currentElement={activeItem.el} currentIndex={activeItem.index} />
+			{#if recordless && !$context.filtered.length}
+				<slot name="recordless">
+					<div class={recordlessClasses}>
+						{#if typeof recordless === 'string'}
+							<span>{recordless}</span>
+						{:else}
+							<span>{recordlessMsg}</span>
+						{/if}
+					</div>
+				</slot>
+			{:else}
+				<slot {activeItem} />
+			{/if}
 		</div>
 	</div>
 {/if}

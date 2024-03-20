@@ -62,6 +62,7 @@ export type SelectListContextProps = {
 	max?: number; // max tags allowed.
 	newable?: boolean; // can add new tags
 	placeholder?: string;
+	recordless?: boolean | string; // display no records panel when filtered is empty.
 	removable?: boolean; // can remote tags
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
@@ -92,6 +93,7 @@ export const selectListDefaults: Partial<SelectListProps<SelectListItem> & Selec
 		i.filter(
 			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
 		),
+	recordless: false,
 	size: 'md',
 	theme: 'frame',
 	value: '',

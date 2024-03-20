@@ -37,20 +37,20 @@
 
 	function handleChange(e?: any) {
 		setTimeout(() => {
-			onChange(data);
+			// onChange(data);
 		});
 	}
 
 	function handleInputChange(e?: any) {
-		// if (!e.target.value) {
-		// 	selectTwo.store.restore();
-		// 	return;
-		// }
-		if (!data.criteriaTwo && data.valueTwo) {
+		console.log(typeof data.valueTwo);
+		if (typeof data.valueTwo === 'string' && !data.valueTwo.length) {
+			//	selectTwo.context.select('like');
 			data.criteriaTwo = 'like';
-			// selectTwo.store.select('like');
-			handleChange();
+			onChange(data);
 		}
+		// if (!data.criteriaTwo && data.valueTwo) {
+		// 	handleChange();
+		// }
 	}
 </script>
 

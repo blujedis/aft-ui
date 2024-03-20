@@ -51,9 +51,15 @@
 		}
 	];
 
+	type SourceItem = (typeof sourceItems)[number];
+
 	const selected = 'javascript';
 
-	let selectedObj = sourceItems[2];
+	let selectList: SelectList<SourceItem>;
+
+	function updateSelectList() {
+		selectList.context.select('python');
+	}
 
 	const props = {
 		full: false,
@@ -185,27 +191,33 @@
 	</div> -->
 	<div class="mt-8 mb-2 max-w-52">
 		<SelectList
+			bind:this={selectList}
 			{...props}
 			{...shared}
 			rounded="none"
-			variant="filled"
+			variant="outlined"
 			value={selected}
 			items={sourceItems}
 			placeholder="Filter..."
 			theme="primary"
 			filterable
 			exclusive
+			recordless
 			let:filtered
 			let:filtering
 			let:selectedItems
 		>
 			<SelectListButton />
 			<SelectListPanel let:currentIndex>
-				{#each filtered as item}
-					<SelectListOption as="button" key={item.value} let:active>
-						{item.label}
-					</SelectListOption>
-				{/each}
+				{#if filtered.length}
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value} let:active>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				{:else}
+					<div class="px-4"></div>
+				{/if}
 
 				<!-- {#each filtered as item}
 						{#if !selectedItems.includes(item.value)}
@@ -228,4 +240,6 @@
 			<option value={item}>{item.label}</option>
 		{/each}
 	</select> -->
+
+	<button on:click={updateSelectList}>Update</button>
 </ExamplePage>

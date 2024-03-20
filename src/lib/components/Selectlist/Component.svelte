@@ -31,6 +31,7 @@
 		max,
 		newable,
 		placeholder,
+		recordless,
 		removable,
 		rounded,
 		shadowed,
@@ -82,6 +83,7 @@
 		newable,
 		removable,
 		placeholder,
+		recordless,
 		rounded,
 		shadowed,
 		size,
@@ -188,10 +190,21 @@
 		}
 	}
 
+	function setLabel(item: Required<Item>) {
+		if (tags && $context.input) {
+			//
+		}
+		else if ($context.input) {
+			$context.input.value = item.label;
+		}
+	}
+
 	function select(itemOrKey: Item | SelectListItemKey) {
 		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
+
 		store.select(key);
+		if (exclusive) filter('');
 	}
 
 	function remove(itemOrKey: Item | SelectListItemKey) {
@@ -201,6 +214,9 @@
 			const filteredSelected = s.selected.filter((v: any) => v !== key);
 			return { ...s, selected: filteredSelected };
 		});
+		// really should breakout filter below to return only values
+		// then create "filterUpdateStore" or something.
+		if (exclusive) filter('');
 	}
 
 	function restore(

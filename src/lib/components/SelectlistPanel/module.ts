@@ -1,10 +1,11 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
 export type SelectListPanelProps = {
 	full?: boolean;
-	multiple?: boolean;
+	tags?: boolean;
 	origin?: 'left' | 'right' | 'center';
+	recordless?: boolean; // when no records are present as options e.g filtered is empty.
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;

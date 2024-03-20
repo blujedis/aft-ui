@@ -63,7 +63,6 @@
 	$: selected = $context.selected
 		.map((v: any) => $context.items.find((item) => v === item.value))
 		.filter((v: any) => typeof v !== 'undefined') as SelectListItem[];
-	// $: labels = selected.map((i) => i.label) as string[];
 	$: labels = $context.items.filter((i) => $context.selected.includes(i.value)).map((i) => i.label);
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
