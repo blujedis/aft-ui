@@ -1,7 +1,8 @@
 export declare const rangeTrackBackground: {
     filled: {
-        default: string;
-        dark: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +14,9 @@ export declare const rangeTrackBackground: {
 };
 export declare const rangeTrackAccent: {
     filled: {
-        default: string;
-        dark: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -26,21 +28,9 @@ export declare const rangeTrackAccent: {
 };
 export declare const rangeThumbBorder: {
     filled: {
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
-};
-export declare const rangeThumbBackground: {
-    filled: {
-        default: string;
-        dark: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

@@ -87,9 +87,9 @@ const cursorMap = {
 const defaults: ResizerOptions = {
 	classname: 'resizer',
 	handles: {},
-	onResizing: () => { },
-	onResized: () => { },
-	onDestroy: () => { }
+	onResizing: () => {},
+	onResized: () => {},
+	onDestroy: () => {}
 };
 
 function bindStyles(el: ResizerElement, props: Record<string, string>) {

@@ -6,18 +6,18 @@ declare const __propDef: {
             open: () => void;
             close: () => void;
             toggle: () => void;
-            modify: (values: Partial<import("../..").DisclosureStoreOptions<{
+            modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
             }>>) => void;
-            set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
+            set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
             }>>): void;
-            update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
+            update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
             }>>>): void;
-            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
+            subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
-            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
+            }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
@@ -43,18 +43,18 @@ export default class Component extends SvelteComponent<ComponentProps, Component
         open: () => void;
         close: () => void;
         toggle: () => void;
-        modify: (values: Partial<import("../..").DisclosureStoreOptions<{
+        modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
             visible: boolean;
         }>>) => void;
-        set(this: void, value: Required<import("../..").DisclosureStoreOptions<{
+        set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
             visible: boolean;
         }>>): void;
-        update(this: void, updater: import("svelte/store").Updater<Required<import("../..").DisclosureStoreOptions<{
+        update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
             visible: boolean;
         }>>>): void;
-        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../..").DisclosureStoreOptions<{
+        subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
             visible: boolean;
-        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../..").DisclosureStoreOptions<{
+        }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
             visible: boolean;
         }>>> | undefined): import("svelte/store").Unsubscriber;
     };

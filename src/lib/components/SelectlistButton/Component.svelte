@@ -25,7 +25,7 @@
 		full,
 		hovered,
 		name,
-		multiple,
+		tags,
 		newable,
 		placeholder,
 		removable,
@@ -46,7 +46,7 @@
 		full: context.globals?.full,
 		focused: context.globals?.focused,
 		hovered: context.globals?.hovered,
-		multiple: context.globals?.multiple,
+		tags: context.globals?.tags,
 		newable: context.globals?.newable,
 		placeholder: context.globals?.placeholder,
 		removable: context.globals?.removable,
@@ -61,17 +61,24 @@
 	const th = themer($themeStore);
 
 	$: selected = $context.selected
-		.map((v) => $context.items.find((item) => v === item.value))
-		.filter((v) => typeof v !== 'undefined') as SelectListItem[];
-
-	$: labels = selected.map((i) => i.label) as string[];
-
+		.map((v: any) => $context.items.find((item) => v === item.value))
+		.filter((v: any) => typeof v !== 'undefined') as SelectListItem[];
+	// $: labels = selected.map((i) => i.label) as string[];
+	$: labels = $context.items.filter((i) => $context.selected.includes(i.value)).map((i) => i.label);
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
+	$: useInput = filterable || newable;
 
 	$: containerClasses = th
 		.create('SelectListButton')
-		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['mainBg', 'whiteText', 'filledPlaceholder'],
+			{
+				frame: 'text-dark dark:text-light'
+			},
+			theme,
+			variant === 'filled'
+		)
 		.bundle(
 			['inputText', 'mainRing'],
 			{
@@ -99,6 +106,7 @@
 		.append('relative peer flex items-center min-w-[176px] outline-none', true)
 		.append('outline-none', focused && variant !== 'flushed')
 		.append('border-0', variant === 'flushed')
+		.append('max-w-[176px]', tags && !$context.selected.length)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -114,7 +122,8 @@
 		.create('SelectListInput')
 		.prepend('select-list-input-wrapper', true)
 		.append('relative pl-1', true)
-		.append('min-w-12 max-w-fit', multiple)
+		.append('min-w-12 max-w-min overflow-hidden', tags)
+		.append('max-w-fit', tags && !$context.selected.length)
 		.compile();
 
 	$: badgeButtonClasses = th
@@ -134,8 +143,11 @@
 		.prepend('select-list-input', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
 		.append('caret-transparent', !filterable) // caret not need if can't filter.
-		.append('relative group peer inline w-full bg-transparent outline-none border-none', true)
-		.append('cursor-pointer', !multiple && !filterable)
+		.append(
+			'relative group peer inline w-full flex-1 bg-transparent outline-none border-none',
+			true
+		)
+		.append('cursor-pointer', !useInput)
 		.compile();
 
 	$: triggerClasses = th
@@ -172,7 +184,6 @@
 	async function handleAddTag(value: string) {
 		if (!$context.input) return;
 		const item = await onBeforeAdd(value, $context.input);
-
 		if (item) {
 			item.selected = true;
 			context.add(item);
@@ -182,16 +193,14 @@
 	}
 
 	async function handleFilter(query = '', key = '') {
-		if (!$context.filtering && !multiple) {
+		if (!$context.filtering && !tags) {
 			context.update((s) => {
 				return { ...s, persisted: [...s.selected], selected: [] };
 			});
 			$context.filtering = true;
 		}
-
 		if (!$context.visible) {
 			context.open(); // do this to ensure focus after opening dropdown.
-
 			setTimeout(() => {
 				if ($context.input) {
 					if (key.length === 1) $context.input.value = key;
@@ -212,7 +221,7 @@
 	}
 
 	function handleInputClick(e: MouseEvent & { currentTarget: EventTarget | HTMLInputElement }) {
-		if (!multiple && !filterable) {
+		if (!tags && !filterable) {
 			const isOpen = $context.visible;
 			context.toggle();
 			setTimeout(() => {
@@ -223,7 +232,7 @@
 		} else if (!filterable && !$context.visible) {
 			e.preventDefault();
 			context.toggle();
-		} else if (multiple) {
+		} else if (tags) {
 			$context.filtering = true;
 		}
 	}
@@ -240,7 +249,7 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-		if (multiple && $context.input && ['Backspace', 'Enter'].includes(e?.key || '')) {
+		if (tags && $context.input && ['Backspace', 'Enter'].includes(e?.key || '')) {
 			// Nothing to new reset input.
 			if (e.key === 'Enter' && !newable) {
 				$context.input.value = '';
@@ -265,7 +274,7 @@
 				}
 			}
 			// Should create new tag?
-			else if (multiple && e.key === 'Enter' && $context.input.value && newable) {
+			else if (tags && e.key === 'Enter' && $context.input.value && newable) {
 				const value = $context.input.value || '';
 				if (value) {
 					e.preventDefault();
@@ -288,10 +297,20 @@
 			// If in filter mode and Enter key exit filter mode rerun query/filter.
 			else if (['Enter'].includes(e.key)) {
 				if ($context.filtering) {
-					const current = $context.selected[0];
-					if (current) context.select(current);
+					const current = $context.items.find((i) => i.value === $context.selected[0]);
+					if (current) {
+						e.currentTarget.value = current.label as string;
+						context.select(current);
+					} else {
+						//
+					}
 					$context.filtering = false;
-					handleFilter('', e.key);
+					setTimeout(() => {
+						context.close();
+						context.filter('');
+					});
+				} else {
+					console.log('not filtering');
 				}
 			}
 
@@ -315,7 +334,7 @@
 	}
 
 	function setInitialValue(el: HTMLInputElement) {
-		if (!multiple && labels.length) el.value = labels[0] + '';
+		if (!tags && labels.length) el.value = labels[0] + '';
 	}
 </script>
 
@@ -323,7 +342,7 @@
 <Flushed disabled={variant !== 'flushed'} {theme} {focused} group>
 	<div bind:this={$context.trigger} role="button" aria-disabled={disabled} class={containerClasses}>
 		<div class={contentWrapperClasses}>
-			{#if multiple && selected.length}
+			{#if tags && selected.length}
 				<slot name="tags" {handleRemoveTag}>
 					{#each selected as item}
 						<button on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
@@ -354,7 +373,7 @@
 						aria-haspopup="true"
 						aria-disabled={disabled}
 						{disabled}
-						placeholder={!multiple || (!selected.length && placeholder) ? placeholder || '' : ''}
+						placeholder={!tags || (!selected.length && placeholder) ? placeholder || '' : ''}
 						class={inputClasses}
 						on:input={handleInputUpdate}
 						on:keydown={handleInputKeydown}

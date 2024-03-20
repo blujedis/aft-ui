@@ -1,4 +1,4 @@
-<script>import { CardElement } from "../CardElement";
+<script>import { CardElement } from "..";
 import { cardFooterDefaults as defaults } from "./module";
 export let { size } = {
   ...defaults

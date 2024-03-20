@@ -1,8 +1,24 @@
 export declare const tabs: {
+    soft: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
     flushed: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,8 +29,10 @@ export declare const tabs: {
     };
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -23,10 +41,12 @@ export declare const tabs: {
         success: string;
         info: string;
     };
-    grouped: {
+    outlined: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -35,10 +55,12 @@ export declare const tabs: {
         success: string;
         info: string;
     };
-    labeled: {
+    text: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

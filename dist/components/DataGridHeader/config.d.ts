@@ -1,21 +1,11 @@
 export declare const gridHeader: {
-    filled: {
-        [x: string]: string | string[];
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
+    filled: any;
     outlined: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -24,17 +14,5 @@ export declare const gridHeader: {
         success: string;
         info: string;
     };
-    ghost: {
-        [x: string]: string | string[];
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
+    ghost: any;
 };

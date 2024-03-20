@@ -7,6 +7,7 @@ declare class __sveltets_Render<Tag extends 'a' | 'button'> {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
+        label: {};
         default: {};
     };
 }

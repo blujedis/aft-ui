@@ -1,22 +1,22 @@
 import type { SelectStoreValue, SelectStore } from '../../stores/select';
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-import type { select } from './config';
-export type SelectVariant = keyof typeof select;
+export type SelectVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text';
+export type SelectValue = string | number;
 export type SelectContext = SelectStore & {};
 export type SelectProps = {
     disabled?: boolean;
     focused?: ThemeFocused;
     full?: boolean;
+    hovered?: boolean;
     multiple?: boolean;
     placeholder?: boolean | string;
     rows?: number;
     rounded?: ThemeRounded;
-    selected?: SelectStoreValue | SelectStoreValue[];
+    value?: SelectStoreValue | SelectStoreValue[];
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
     transitioned?: boolean;
     variant?: SelectVariant;
-    unstyled?: boolean;
 };
 export declare const selectDefaults: Partial<SelectProps>;

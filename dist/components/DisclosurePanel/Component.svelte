@@ -1,5 +1,5 @@
 <script>import { transitioner } from "../Disclosure/module";
-import { getContext, onMount } from "svelte";
+import { getContext } from "svelte";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
 import { disclosurePanelDefaults as defaults } from "./module";

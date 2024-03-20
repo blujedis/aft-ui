@@ -1,7 +1,7 @@
 import { SvelteComponent } from "svelte";
 import { type LabelProps } from './module';
 declare const __propDef: {
-    props: LabelProps & Omit<import("svelte/elements").HTMLAttributes<HTMLSpanElement>, "size">;
+    props: LabelProps & Omit<import("svelte/elements").HTMLLabelAttributes, "size">;
     events: {
         [evt: string]: CustomEvent<any>;
     };

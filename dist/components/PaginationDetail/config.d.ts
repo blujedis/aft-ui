@@ -2,10 +2,12 @@ export declare const paginationDetail: {
     filled: {
         $base: string;
     };
-    outlined: {
+    flushed: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,4 +16,5 @@ export declare const paginationDetail: {
         success: string;
         info: string;
     };
+    ghost: {};
 };

@@ -1,17 +1,19 @@
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '../../types';
-import type { tab } from './config';
-export type TabVariant = keyof typeof tab;
-export type TabProps<Tag = 'a'> = {
-    as: Tag;
+export type TabVariant = 'flushed' | 'filled' | 'pills' | 'text';
+export type TabProps<Tag extends 'a' | 'button' = 'button'> = {
+    as?: Tag;
     disabled?: boolean;
     focused?: ThemeFocused;
+    hovered?: boolean;
+    id?: string | null;
     full?: boolean;
     rounded?: ThemeRounded;
+    selected?: boolean;
     size?: ThemeSize;
+    label: string | number;
     transitioned?: boolean;
     theme?: ThemeColor;
-    value: string | number;
     variant?: TabVariant;
     underlined?: boolean;
 };
-export declare const tabDefaults: Partial<TabProps<any>>;
+export declare const tabDefaults: Partial<TabProps<'button'>>;

@@ -54,7 +54,6 @@ export type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Re
 		? T[P]
 		: never;
 
-
 // export type TypeOrValue<Keys extends string | number | symbol> = Keys | (string & { value?: any });
 
 export type ColorType =

@@ -1,8 +1,7 @@
 export const selectDefaults = {
     focused: true,
-    placeholder: true,
-    rounded: 'sm',
     size: 'md',
-    theme: 'default',
-    variant: 'outlined'
+    theme: 'frame',
+    variant: 'outlined',
+    value: ''
 };

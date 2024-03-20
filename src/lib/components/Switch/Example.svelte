@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Switch } from '.';
+	import { Switch, Label } from '$lib/components';
 	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { colors } from '$lib/constants';
@@ -20,15 +20,13 @@
 <ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
 		{#each colors as color}
-			<Switch {...props} bind:checked theme={color} size="md" />
+			<Label tabindex={-1}>
+				<Switch {...props} bind:checked theme={color} size="md" />
+			</Label>
 		{/each}
 	</div>
 
-	<!-- <div class="grid grid-cols-3 gap-4">
-		{#each colors as color}
-			<label for={color}>
-				<Switch {...props} bind:checked theme={color} />
-			</label>
-		{/each}
-	</div> -->
+	<Label>
+		<Switch {...props} bind:checked theme="primary" size="md" />
+	</Label>
 </ExamplePage>

@@ -10,20 +10,22 @@
 
 	export let {
 		as,
+		bordered,
 		disabled,
 		focused,
 		full,
 		hovered,
 		rounded,
 		shadowed,
+		dropshadowed,
 		size,
 		theme,
 		transitioned,
 		variant,
 		underlined
 	} = {
-		...defaults,
-		...$themeStore?.defaults?.component
+		...$themeStore?.defaults?.component,
+		...defaults
 	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
@@ -32,7 +34,12 @@
 	$: buttonClasses = th
 		.create('Button')
 		.bundle(['mainText'], theme, variant === 'text')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(
+			['mainBg', 'whiteText'],
+			{ frame: 'text-dark dark:text-light' },
+			theme,
+			variant === 'filled'
+		)
 		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
 		.bundle(['mainText', 'ghostBgHover'], { dark: 'hover:text-white' }, theme, variant === 'ghost')
 		.bundle(['softText', 'softBg'], theme, variant === 'soft')
@@ -40,17 +47,23 @@
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
+		.option('common', 'ringed', bordered)
 		.option('fieldFontSizes', size, size)
 		.option('fieldLeading', size, size)
 		.option('buttonPadding', size, size && variant !== 'text')
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
-		.option('dropshadows', boolToMapValue(shadowed), shadowed && variant === 'text')
+		.option(
+			'dropshadows',
+			boolToMapValue(shadowed && variant === 'text' ? shadowed : dropshadowed),
+			(shadowed && variant === 'text') || dropshadowed
+		)
 		.option('common', 'disabled', disabled)
 		.append('underline', underlined && underlined !== 'hover')
 		.append('hover:underline', underlined === 'hover')
-		.append('max-w-min', !full)
+		.append('max-w-fit', !full)
 		.append('w-full', full)
+		.append('ring-1', bordered)
 		.append('inline-flex items-center justify-center cursor-pointer outline-none', true)
 		.append($$restProps.class, true)
 		.compile();

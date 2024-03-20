@@ -7,29 +7,31 @@ const code = `
   `;
 const props = {
   full: false,
-  rounded: "none",
+  rounded: "full",
   shadowed: "none",
   size: "md",
   theme: "default",
+  hovered: true,
+  focused: true,
   transitioned: false,
   variant: "filled"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="grid grid-cols-8 gap-2 mb-4">
+		<div class="grid grid-cols-4 gap-2 mb-4">
 			<label for="filled">
-				<Badge {...props} theme={color}>React</Badge>
+				<Badge {...props} theme={color}>Badge</Badge>
 			</label>
-
 			<label for="outlined">
-				<Badge {...props} variant="outlined" theme={color}>react</Badge>
+				<Badge {...props} variant="outlined" theme={color}>Badge</Badge>
 			</label>
-
-			<label for="ghost">
-				<Badge {...props} variant="ghost" theme={color}>React</Badge>
+			<label for="soft">
+				<Badge {...props} variant="soft" theme={color}>Badge</Badge>
 			</label>
 		</div>
 	{/each}
+	<!-- <Badge {...props} variant="filled" theme="primary" size="xl2">1</Badge>
+	<Badge {...props} variant="filled" theme="primary" rounded="full" size="xl2">1</Badge> -->
 </ExamplePage>

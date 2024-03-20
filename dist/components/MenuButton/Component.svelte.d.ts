@@ -1,23 +1,23 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        strong?: boolean | undefined;
-        hovered?: boolean | undefined;
-        unstyled?: boolean | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
+        hovered?: boolean | undefined;
         full?: boolean | undefined;
-        disabled?: boolean | undefined;
-        transitioned?: boolean | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
-        variant?: "text" | "filled" | "outlined" | "ghost" | undefined;
+        theme?: import("../../types").ThemeColor | undefined;
+        transitioned?: boolean | undefined;
+        bordered?: boolean | undefined;
+        disabled?: boolean | undefined;
+        variant?: import("..").ButtonVariant | undefined;
+        dropshadowed?: import("../../types").ThemeShadowed | undefined;
         href?: string | null | undefined;
         underlined?: boolean | "hover" | undefined;
     } & {
         caret?: string | import("@iconify/svelte").IconifyIcon | null | undefined;
         roticon?: boolean | undefined;
-        variant?: "text" | "filled" | "outlined" | "ghost" | undefined;
+        variant?: import("..").ButtonVariant | undefined;
     } & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events: {
         [evt: string]: CustomEvent<any>;

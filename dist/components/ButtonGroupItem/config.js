@@ -1,7 +1,10 @@
-import { placeholder } from '../../constants/statez';
+import { placeholder } from '../../constants/options';
 import { variantItemChecked, variantItemCheckedFilled, variantOutlinedHoverless, variantItemCheckedGhost } from '../../constants/variants';
 import { mergeConfigs } from '../../theme';
 export const buttonGroupItem = {
+    text: {
+        ...placeholder
+    },
     filled: {
         ...variantItemCheckedFilled
     },
@@ -9,7 +12,7 @@ export const buttonGroupItem = {
     ghost: {
         ...variantItemCheckedGhost
     },
-    text: {
+    soft: {
         ...placeholder
     }
 };

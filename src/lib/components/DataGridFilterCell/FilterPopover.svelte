@@ -6,41 +6,25 @@
 		SelectListOption,
 		SelectListPanel,
 		Input,
-		Radio
+		Radio,
+		filterPopoverDefaults
 	} from '$lib/components';
 	import { themeStore, themer } from '$lib/theme';
 	import { useColorMode, useFocusTrap } from '$lib/hooks';
+	import type { DataGridFilterListItem } from '../DataGrid/filter';
 
-	export let onChange = (data: Record<string, any>) => {};
 	export let rounded = 'none' as ThemeRounded;
-	export let queryByOne = '=';
-	export let queryValueOne: string;
-	export let queryByTwo = '=';
-	export let queryValueTwo = '';
-	export let queryAndOr = 'and';
+	export let filters = [] as DataGridFilterListItem[];
+	export let data = {
+		...filterPopoverDefaults
+	};
+	export let onChange = (value: typeof data) => {};
 
 	let theme = 'frame' as ThemeColor;
+	let selectTwo: SelectList<DataGridFilterListItem>;
 
 	const [bindFocusTrap, handleFocusTrap] = useFocusTrap();
 	const isDark = useColorMode();
-
-	const items = [
-		{ label: 'Equal', value: '=' },
-		{ label: 'Not Equal', value: '!=' },
-		{ label: 'Greater than', value: '>' },
-		{ label: 'Greater than or equal', value: '>=' },
-		{ label: 'Less than', value: '<' },
-		{ label: 'Less than or equal', value: '<=' },
-		{ label: 'Empty', value: '0' }, // should we do null char? '\0'
-		{ label: 'Not Empty', value: '!0' }
-	];
-
-	$: data = {
-		byOne: '=',
-		valueOne: queryValueOne,
-		byTwo: '=',
-		valueTwo: ''
-	};
 
 	const th = themer($themeStore);
 
@@ -51,9 +35,23 @@
 		.append('absolute popover flex-col items-center w-56 p-4 shadow-sm border', true)
 		.compile();
 
-		function handleChange() {
+	function handleChange(e?: any) {
+		setTimeout(() => {
 			onChange(data);
+		});
+	}
+
+	function handleInputChange(e?: any) {
+		// if (!e.target.value) {
+		// 	selectTwo.store.restore();
+		// 	return;
+		// }
+		if (!data.criteriaTwo && data.valueTwo) {
+			data.criteriaTwo = 'like';
+			// selectTwo.store.select('like');
+			handleChange();
 		}
+	}
 </script>
 
 <svelte:window on:keydown={handleFocusTrap} />
@@ -61,68 +59,92 @@
 <div class={containerClasses} use:bindFocusTrap>
 	<div class="flex-col items-center space-y-2">
 		<SelectList
-			{items}
+			items={filters}
 			size="sm"
 			{rounded}
 			hovered
 			focused
 			placeholder="Please Select"
 			variant={$isDark ? 'soft' : 'outlined'}
-			bind:value={data.byOne}
+			bind:value={data.criteriaOne}
 			let:filtered
+			onChange={handleChange}
 		>
 			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
 			<SelectListPanel shadowed="md" full class={!$isDark ? 'bg-white' : ''}>
-				{#each filtered as item}
+				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
 					</SelectListOption>
 				{/each}
 			</SelectListPanel>
 		</SelectList>
-		<Input
-			type="text"
-			bind:value={data.valueOne}
-			size="sm"
-			{rounded}
-			focused
-			full
-			variant={$isDark ? 'soft' : 'outlined'}
-		/>
+		{#if !['empty', '!empty'].includes(data.criteriaOne)}
+			<Input
+				type="text"
+				bind:value={data.valueOne}
+				size="sm"
+				{rounded}
+				focused
+				full
+				variant={$isDark ? 'soft' : 'outlined'}
+				on:change={handleChange}
+			/>
+		{/if}
 	</div>
 	<div class="flex items-center space-x-4 my-2">
-		<Radio name="andor" value="and" bind:group={queryAndOr} focused theme="secondary">AND</Radio>
-		<Radio name="andor" value="or" bind:group={queryAndOr} focused theme="secondary">OR</Radio>
+		<Radio
+			name="andor"
+			value="and"
+			bind:group={data.join}
+			focused
+			theme="secondary"
+			on:change={handleChange}>AND</Radio
+		>
+		<Radio
+			name="andor"
+			value="or"
+			bind:group={data.join}
+			focused
+			theme="secondary"
+			on:change={handleChange}>OR</Radio
+		>
 	</div>
 	<div class="flex-col items-center space-y-2">
 		<SelectList
-			{items}
+			bind:this={selectTwo}
+			items={filters}
 			size="sm"
 			{rounded}
 			hovered
 			focused
 			placeholder="Please Select"
 			variant={$isDark ? 'soft' : 'outlined'}
-			bind:value={data.byTwo}
+			bind:value={data.criteriaTwo}
 			let:filtered
+			onChange={handleChange}
 		>
 			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
 			<SelectListPanel shadowed="md" full class={!$isDark ? 'bg-white' : ''}>
-				{#each filtered as item}
+				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
 					</SelectListOption>
 				{/each}
 			</SelectListPanel>
 		</SelectList>
-		<Input
-			type="text"
-			bind:value={data.valueTwo}
-			size="sm"
-			{rounded}
-			focused
-			full
-			variant={$isDark ? 'soft' : 'outlined'}
-		/>
+		{#if !['empty', '!empty'].includes(data.criteriaTwo)}
+			<Input
+				type="text"
+				bind:value={data.valueTwo}
+				size="sm"
+				{rounded}
+				focused
+				full
+				variant={$isDark ? 'soft' : 'outlined'}
+				on:change={handleInputChange}
+			/>
+		{/if}
 	</div>
 </div>
+<kbd></kbd>

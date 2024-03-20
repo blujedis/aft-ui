@@ -1,5 +1,6 @@
 <script>import { Checkbox } from ".";
 import ExamplePage from "../_Example/ExamplePage.svelte";
+import { colors } from "../../constants/colors";
 const title = "Checkboxes";
 const description = "Themed Checkbox component.";
 const code = `
@@ -7,20 +8,20 @@ const code = `
 const props = {
   disabled: false,
   full: false,
-  rounded: "none",
+  rounded: "md",
   shadowed: "none",
   size: "md",
-  theme: "default",
   transitioned: false,
   variant: "outlined"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Checkbox {...props} />
-		</label>
+<ExamplePage {title} {description}>
+	<div class="grid grid-cols-8 gap-2">
+		{#each colors as color}
+			<label for="outlined">
+				<Checkbox {...props} theme={color} />
+			</label>
+		{/each}
 	</div>
 </ExamplePage>

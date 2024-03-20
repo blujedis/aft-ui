@@ -7,18 +7,7 @@
 
 	type $$Props = LabelProps & Omit<ElementProps<'label'>, 'size'>;
 
-	export let {
-		dropshadowed,
-		hovered,
-		full,
-		rounded,
-		shadowed,
-		reversed,
-		size,
-		theme,
-		transitioned,
-		visible
-	} = {
+	export let { dropshadowed, inline, full, reversed, rounded, size, theme, visible } = {
 		...defaults
 	} as Required<$$Props>;
 
@@ -27,13 +16,14 @@
 	$: labelClasses = th
 		.create('Label')
 		.bundle(['mainText'], theme, true)
-		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
-		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.option('dropshadows', boolToMapValue(shadowed), shadowed)
-		.option('hovered', 'text', theme, hovered)
+		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
+		.prepend(`label-${theme}`, theme)
+		.prepend(`label`, true)
 		.append('w-full', full)
+		.append('flex items-center space-x-2', inline)
+		.append('space-x-reverse flex-row-reverse', inline && reversed)
 		.append($$restProps.class, true)
 		.compile();
 

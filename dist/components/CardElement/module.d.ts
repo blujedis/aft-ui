@@ -1,6 +1,5 @@
 import type { ThemeColor, ThemeSize } from '../../types';
-import type { cardElement } from './config';
-export type CardVariant = keyof typeof cardElement;
+export type CardVariant = 'text' | 'filled' | 'outlined' | 'soft';
 export type CardElementProps = {
     horizontal?: boolean;
     size?: ThemeSize;

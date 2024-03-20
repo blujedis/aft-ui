@@ -1,6 +1,7 @@
 export const colors = [
-    'default',
-    'dark',
+    // 'default',
+    // 'dark',
+    'frame',
     'primary',
     'secondary',
     'tertiary',

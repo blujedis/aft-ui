@@ -17,8 +17,7 @@ declare const __propDef: {
             dismissible?: boolean | undefined;
             duration?: number | undefined;
             title?: string | undefined;
-            theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
-            variant?: "filled" | undefined;
+            theme?: import("../../types").ThemeColor | undefined;
         };
     };
 };

@@ -3,17 +3,15 @@ import { RatingItem } from "../RatingItem";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 const title = "Ratings";
 const description = "Rating component that supports custom icons.";
-const code = `
-  `;
 let count = 5;
 const props = {
-  fill: "success-200",
+  fill: "success-300",
   shadowed: "none",
   size: "sm"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4">
 		<label for="auto">
 			<div class="text-sm mb-1">Default:</div>
@@ -43,7 +41,7 @@ const props = {
 
 		<label for="custom-icon">
 			<div class="text-sm mb-1">Custom Icon:</div>
-			<Rating let:mouseover let:mouseleave let:select fill="darkred" score={2.7}>
+			<Rating let:mouseover let:mouseleave let:select fill="firebrick" score={2.7}>
 				{#each Array(count) as r, index}
 					<RatingItem {index} let:uid let:stops let:classes let:styles let:fill let:stroke>
 						<!-- svelte-ignore a11y-mouse-events-have-key-events -->

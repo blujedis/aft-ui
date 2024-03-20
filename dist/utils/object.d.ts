@@ -3,7 +3,7 @@
  *
  * @param obj the object to be cleaned.
  */
-export declare function cleanObj<T>(obj?: T): Partial<T>;
+export declare function cleanObj<T extends Record<string, unknown>, K extends keyof T>(obj?: T, exclude?: K[]): Omit<Partial<T>, K>;
 /**
  * Converts object into simple object literal using JSON.parse, JSON.stringify.
  *

@@ -4,7 +4,7 @@
 		HTMLBaseAttributes,
 		HTMLButtonAttributes
 	} from 'svelte/elements';
-	import type { SelectStoreValue } from '$lib/stores/select';
+	import type { SelectStoreValue } from '$lib/stores/select.old';
 	import { type PaginationContext, Icon } from '$lib/components';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
@@ -108,7 +108,7 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	function handleSelect(value: SelectStoreValue) {
+	function handleSelect(value: string | number) {
 		if (previous) context.prev();
 		else if (next) context.next();
 		else context.goto(value);

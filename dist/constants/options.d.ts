@@ -1,3 +1,17 @@
+export declare const placeholder: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
 export declare const borderSizes: {
     unstyled: string;
     transparent: string;
@@ -17,6 +31,67 @@ export declare const borderStyles: {
     dotted: string;
     double: string;
     hidden: string;
+};
+export declare const fontLeadings: {
+    unstyled: string;
+    none: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+    xl3: string;
+    xl4: string;
+    tight: string;
+    snug: string;
+    normal: string;
+    relaxed: string;
+    loose: string;
+};
+export declare const fieldLeading: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
+export declare const fontSizes: {
+    unstyled: string;
+    base: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+    xl3: string;
+    xl4: string;
+    xl5: string;
+    xl6: string;
+    xl7: string;
+    xl8: string;
+    xl9: string;
+};
+export declare const fieldPaddingX: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
+export declare const fieldFontSizes: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
 };
 export declare const fieldPaddingY: {
     unstyled: string;
@@ -45,7 +120,7 @@ export declare const fieldUpperPaddingY: {
     xl: string;
     xl2: string;
 };
-export declare const fieldPaddingX: {
+export declare const boxPadding: {
     unstyled: string;
     xs: string;
     sm: string;
@@ -70,7 +145,15 @@ export declare const fieldPadding: {
     lg: string;
     xl: string;
     xl2: string;
-} & import("../theme").StringMap;
+} & {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+} & import("../theme/utils").StringMap;
 export declare const buttonPadding: {
     unstyled: string;
     xs: string;
@@ -87,7 +170,15 @@ export declare const buttonPadding: {
     lg: string;
     xl: string;
     xl2: string;
-} & import("../theme").StringMap;
+} & {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+} & import("../theme/utils").StringMap;
 export declare const menuPadding: {
     unstyled: string;
     xs: string;
@@ -104,7 +195,7 @@ export declare const menuPadding: {
     lg: string;
     xl: string;
     xl2: string;
-} & import("../theme").StringMap;
+} & import("../theme/utils").StringMap;
 export declare const iconCaretSizes: {
     unstyled: string;
     xs: string;
@@ -150,41 +241,21 @@ export declare const roundeds: {
     xl: string;
     xl2: string;
     full: string;
+    true: string;
+    false: string;
 };
-export declare const fontSizes: {
+export declare const sizeStepdown: {
     unstyled: string;
-    base: string;
+    none: string;
     xs: string;
     sm: string;
     md: string;
     lg: string;
     xl: string;
     xl2: string;
-    xl3: string;
-    xl4: string;
-    xl5: string;
-    xl6: string;
-    xl7: string;
-    xl8: string;
-    xl9: string;
-};
-export declare const fieldFontSizes: {
-    unstyled: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
-};
-export declare const boxPadding: {
-    unstyled: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
+    full: string;
+    true: string;
+    false: string;
 };
 export declare const shadows: {
     unstyled: string;
@@ -196,6 +267,8 @@ export declare const shadows: {
     lg: string;
     xl: string;
     xl2: string;
+    true: string;
+    false: string;
 };
 export declare const dropshadows: {
     unstyled: string;
@@ -207,6 +280,8 @@ export declare const dropshadows: {
     lg: string;
     xl: string;
     xl2: string;
+    true: string;
+    false: string;
 };
 export declare const resizes: {
     unstyled: string;
@@ -214,23 +289,6 @@ export declare const resizes: {
     x: string;
     y: string;
     both: string;
-};
-export declare const fontLeadings: {
-    unstyled: string;
-    none: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
-    xl3: string;
-    xl4: string;
-    tight: string;
-    snug: string;
-    normal: string;
-    relaxed: string;
-    loose: string;
 };
 export declare const gridgaps: {
     unstyled: string;
@@ -251,39 +309,116 @@ export declare const animate: {
     spin: string;
 };
 export declare const hovered: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const selected: {
-    $base: string;
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const common: {
-    active: string;
-    focused: string;
-    focusedVisible: string;
-    focusedWithin: string;
-    unfocused: string;
-    ringed: string;
-    bordered: string;
-    divided: string;
-    disabled: string;
-    transitioned: string;
-    selected: string;
+    text: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    filled: {
+        frame: string;
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    outlined: {
+        frame: string;
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    ghost: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    flushed: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    simple: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    soft: {
+        frame: string;
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
+    panel: {
+        $base: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
+        primary: string;
+        secondary: string;
+        tertiary: string;
+        danger: string;
+        warning: string;
+        success: string;
+        info: string;
+    };
 };

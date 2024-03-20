@@ -3,7 +3,7 @@
 export const progressBar = {
     filled: {
         $base: 'bg-frame-100 [&::-webkit-progress-bar]:bg-frame-200/50 dark:bg-frame-600 dark:[&::-webkit-progress-bar]:bg-frame-600', // required for firefox.
-        light: '[&::-webkit-progress-value]:bg-frame-300 [&::-moz-progress-bar]:bg-frame-300',
+        frame: '[&::-webkit-progress-value]:bg-frame-300 [&::-moz-progress-bar]:bg-frame-300',
         dark: '[&::-webkit-progress-value]:bg-frame-600 [&::-moz-progress-bar]:bg-frame-600 dark[&::-webkit-progress-value]:bg-frame-700 dark[&::-moz-progress-bar]:bg-frame-700',
         primary: '[&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500',
         secondary: '[&::-webkit-progress-value]:bg-secondary-500 [&::-moz-progress-bar]:bg-secondary-500',

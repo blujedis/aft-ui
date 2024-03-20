@@ -26,19 +26,13 @@
 	const st = styler($themeStore);
 	const th = themer($themeStore);
 
-	$: gridHeaderStyles = st
-		.create('DataGridHeader')
-		.add('--template-columns', context.getDataGridTemplate(), autocols)
-		.compile();
-
 	$: gridHeaderWrapperClasses = th
 		.create('DataGridHeaderWrapper')
-		.option('common', 'bordered', divided)
+		// .option('common', 'bordered', false)
 		.option('common', 'divided', divided)
 		.prepend('datagrid-header', true)
 		.append('divide-y', divided)
 		.append('sticky top-0 z-10 overflow-clip', sticky) // add overflow-clip & "rounded" to keep top rounding
-		//.append('!border-b -mb-px', sticky && divided) // must be !important b/c of divide-y
 		.append('rounded-b-none', rounded)
 		.append('shadow-sm', sticky)
 		.compile();

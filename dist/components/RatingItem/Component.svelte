@@ -21,7 +21,7 @@ const st = styler($themeStore);
 $:
   ratingStyles = st.create("RatingStyles").add("color", "transparent", true).add("outline-color", initFill, true).append($$restProps.style, true).compile();
 $:
-  ratingClasses = th.create("Rating").option("ratingSizes", size, size).append("pointer-events-none", $context.readonly).append("z-10 focus-visible:outline outline-2", true).append("hover:scale-125", true).append($$restProps.class, true).compile(true);
+  ratingClasses = th.create("Rating").option("ratingSizes", size, size).append("pointer-events-none", $context.readonly).append("z-10 focus-visible:outline outline-2", true).append("hover:scale-125", true).append($$restProps.class, true).compile();
 $:
   stops = [
     { offset: `0%`, "stop-color": initFill, "stop-opacity": "1" },

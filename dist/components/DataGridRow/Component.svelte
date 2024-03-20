@@ -1,34 +1,85 @@
 <script>import { gridRowDefaults as defaults } from "./module";
-import { themeStore, pickCleanProps, styler, themer } from "../..";
+import { themeStore, styler, themer } from "../../theme";
 import { getContext } from "svelte";
+import { flip } from "svelte/animate";
 const context = getContext("DataGrid");
-export let { autocols, columns, divided, size, striped, stacked, theme, variant } = {
+let dragging = false;
+export let { autocols, columns, divided, size, striped, stacked, theme } = {
   ...defaults,
-  ...pickCleanProps(
-    context?.globals,
-    "autocols",
-    "columns",
-    "divided",
-    "size",
-    "stacked",
-    "striped",
-    "theme",
-    "variant"
-  )
+  autocols: context.globals?.autocols,
+  columns: context.globals?.columns,
+  divided: context.globals?.divided,
+  size: context.globals?.size,
+  stacked: context.globals?.stacked,
+  striped: context.globals?.striped,
+  theme: context.globals?.theme
 };
 const st = styler($themeStore);
 $:
   gridRowStyles = st.create("DataGridRow").add("--template-columns", context.getDataGridTemplate(), autocols).append($$restProps.style, true).compile();
 $:
-  gridRowClasses = themer($themeStore).create("DataGridRow").option("common", "divided", divided).append("divide-x", divided).append("grid grid-flow-col w-full", !stacked).append("grid grid-flow-row w-full", stacked).append(stacked ? "auto-rows-fr" : "auto-cols-fr", autocols).append("grid__row", true).append($$restProps.class, true).compile(true);
+  gridRowClasses = themer($themeStore).create("DataGridRow").option("common", "divided", divided).prepend("datagrid-row", true).append("divide-x", divided).append("grid grid-flow-col w-full", !stacked).append(stacked ? "auto-rows-fr py-1.5" : "auto-cols-fr", autocols).append($$restProps.class, true).compile();
+function getHeaderChildren(child) {
+  const children = child.closest(".datagrid-row")?.children;
+  if (!children)
+    return null;
+  return Array.from(children);
+}
+function getIndex(el) {
+  const children = getHeaderChildren(el);
+  if (!children || !children.length)
+    return null;
+  const nodes = Array.from(children);
+  let index = null;
+  nodes.forEach((n, i) => {
+    if (n.contains(el))
+      index = i;
+  });
+  return index;
+}
+function onDragStart(event) {
+  if (!event.dataTransfer) {
+    console.warn(`Column reorder on DRAG START failed, invalid target.`);
+    return;
+  }
+  const index = getIndex(event.target);
+  if (index === null) {
+    console.warn(`Column reorder failed, cannot find index.`);
+    return;
+  }
+  event.dataTransfer.setData("text/plain", index + "");
+  dragging = true;
+}
+function onDragOver(event) {
+  event.preventDefault();
+}
+function onDrop(event) {
+  dragging = false;
+  if (!event.dataTransfer || !event.target) {
+    console.warn(`Column reorder on DROP failed, invalid target.`);
+    return;
+  }
+  const target = event.target;
+  const sourceIndex = Number(event.dataTransfer.getData("text"));
+  const targetIndex = getIndex(event.target);
+  if (targetIndex === null) {
+    console.warn(`Column reorder event DROP failed, unknown target index.`);
+    return;
+  }
+  event.dataTransfer.clearData();
+  context.swapColumns(sourceIndex, targetIndex);
+  target.focus();
+}
 </script>
 
-<div {...$$restProps} class={gridRowClasses} style={gridRowStyles}>
-	<slot />
-</div>
+{#if $$slots.default}
+	<div role="row" {...$$restProps} class={gridRowClasses} style={gridRowStyles}>
+		<slot />
+	</div>
+{/if}
 
 <style>
-	.grid__row {
+	.datagrid-row {
 		grid-template-columns: var(--template-columns);
 	}
 </style>

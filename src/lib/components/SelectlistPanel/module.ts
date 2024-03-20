@@ -17,5 +17,5 @@ export const selectListPanelDefaults = {
 	position: 'left',
 	shadowed: 'md',
 	theme: 'frame',
-	transition: { start: 0.95, type: 'scale' },
+	transition: { start: 0.95, type: 'scale' }
 };

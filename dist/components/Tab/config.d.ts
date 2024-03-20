@@ -1,4 +1,5 @@
 export declare const tab: {
+    soft: {};
     flushed: {
         $base: string;
     };
@@ -6,11 +7,11 @@ export declare const tab: {
         default: string;
         $base: string;
     };
-    grouped: {
+    outlined: {
         $base: string;
         default: string;
     };
-    labeled: {
+    text: {
         $base: string;
         default: string;
         dark: string;

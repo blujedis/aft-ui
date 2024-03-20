@@ -3,8 +3,11 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/ty
 export type TileVariant = 'filled' | 'outlined' | 'soft';
 
 export type TileProps = {
+	bordered?: boolean;
+	dropshadowed?: ThemeShadowed;
 	focused?: boolean;
 	full?: boolean;
+	href?: string;
 	hovered?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;

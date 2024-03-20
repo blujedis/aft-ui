@@ -18,20 +18,20 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { as, focused, hovered, multiple, removable, size, theme, key } = {
+	export let { as, focused, hovered, tags, removable, size, theme, key } = {
 		...defaults,
 		focused: context.globals?.focused,
 		hovered: context.globals?.hovered,
-		multiple: context.globals?.multiple,
+		tags: context.globals?.tags,
 		size: context.globals?.size,
 		theme: context.globals?.theme
 	} as Required<SelectListOptionProps<Tag>>;
 
 	const th = themer($themeStore);
 
-	$: selected = $context.selected.map((v) =>
-		$context.items.find((item) => item.value === v)
-	) as SelectListItem[];
+	// $: selected = $context.selected.map((v: any) =>
+	// 	$context.items.find((item) => item.value === v)
+	// ) as SelectListItem[];
 
 	$: optionClasses = th
 		.create('SelectListOption')
@@ -50,9 +50,9 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
-		if (!multiple && $context.input) {
+		if (!tags && $context.input) {
 			context.toggle();
-			if ($context.filtering) context.restoreSelected(key, false);
+			if ($context.filtering) context.restore(key, false);
 			else context.select(key);
 			setTimeout(() => {
 				if ($context.input) {

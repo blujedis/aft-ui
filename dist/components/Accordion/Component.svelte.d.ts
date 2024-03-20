@@ -6,23 +6,27 @@ declare class __sveltets_Render<Tag extends HTMLTag> {
             multiple: boolean;
             selected: import("../../stores/select").SelectStoreValue[];
         }> | undefined;
-    } & Omit<import("..").AccordianOptionProps, "key" | "variant" | "as" | "value"> & {
+    } & Omit<import("../..").AccordianOptionProps, "key" | "selected" | "as" | "variant" | "value"> & {
         as?: Tag | undefined;
+        focused?: boolean | undefined;
+        hovered?: boolean | undefined;
         multiple?: boolean | undefined;
         selected?: import("../../stores/select").SelectStoreValue[] | undefined;
+        selectable?: boolean | undefined;
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
-        variant?: "flushed" | "filled" | "outlined" | undefined;
+        transitioned?: boolean | undefined;
+        variant?: import("../..").AccordionVariant | undefined;
     } & ElementProps<Tag>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
         default: {
-            select: (value?: import("../../stores/select").SelectStoreValue | undefined) => void;
-            unselect: (value?: import("../../stores/select").SelectStoreValue | undefined) => void;
+            select: (value?: import("../../stores/select").SelectStoreValue) => void;
+            unselect: (value?: import("../../stores/select").SelectStoreValue) => void;
             reset: () => void;
-            isSelected: (value?: import("../../stores/select").SelectStoreValue | undefined) => boolean;
+            isSelected: (value?: import("../../stores/select").SelectStoreValue) => boolean;
             selectedItems: import("../../stores/select").SelectStoreValue[];
         };
     };

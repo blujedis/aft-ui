@@ -19,10 +19,11 @@
 		size,
 		theme,
 		transitioned,
+		value,
 		variant
 	} = {
+		...$themeStore.defaults?.component,
 		...defaults
-		//...$themeStore.defaults?.component
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
@@ -66,14 +67,13 @@
 		.append('inline-flex items-center justify-center outline-none', true)
 		.append($$restProps.class, true)
 		.compile();
-
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 {#if variant === 'flushed'}
 	<svelte:component this={Flushed} {theme} {focused}>
-		<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} on:input />
+		<input {...$$restProps} use:forwardedEvents bind:value size={chars} class={inputClasses} on:input />
 	</svelte:component>
 {:else}
-	<input {...$$restProps} use:forwardedEvents size={chars} class={inputClasses} on:input />
+	<input {...$$restProps} use:forwardedEvents bind:value size={chars} class={inputClasses} on:input />
 {/if}

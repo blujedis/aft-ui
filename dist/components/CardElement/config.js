@@ -2,5 +2,5 @@ import { variantFilled, variantOutlined, variantGhost } from '../../constants/va
 export const cardElement = {
     filled: { ...variantFilled },
     outlined: { ...variantOutlined },
-    ghost: { ...variantGhost }
+    soft: { ...variantGhost }
 };

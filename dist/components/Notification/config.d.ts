@@ -1,8 +1,10 @@
 export declare const notification: {
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -17,8 +19,10 @@ export declare const notification: {
 export declare const notificationIcon: {
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -31,8 +35,10 @@ export declare const notificationIcon: {
 export declare const notificationTitle: {
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

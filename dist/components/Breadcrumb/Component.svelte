@@ -2,33 +2,34 @@
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { onMount, setContext } from "svelte";
-import { cleanObj, forwardEventsBuilder } from "../../utils";
+import { cleanObj, forwardEventsBuilder, boolToMapValue } from "../../utils";
 import { BreadcrumbOption } from "../BreadcrumbOption";
 import { breadcrumbDefaults as defaults } from "./module";
-export let { full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+export let { focused, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+  ...cleanObj($themeStore.defaults?.component),
   ...defaults
 };
-const globals = cleanObj({
-  rounded,
-  shadowed,
-  size,
-  theme,
-  transitioned,
-  variant
-});
 setContext("Breadcrumb", {
-  globals
+  globals: {
+    focused,
+    rounded,
+    shadowed,
+    size,
+    theme,
+    transitioned,
+    variant
+  }
 });
 const th = themer($themeStore);
 $:
   items = generateBreadcrumbs();
 $:
-  breadcrumbNavClasses = th.create("Breadcrumb").variant("breadcrumb", variant, theme, variant).option("textSoft", theme, variant !== "text").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append(
+  breadcrumbNavClasses = th.create("Breadcrumb").bundle(["mainBg", "whiteText"], theme, variant === "filled").bundle(["mainText"], theme, variant === "text").bundle(["softBg", "mainText"], {}, theme, variant === "soft").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("breadcrumb", true).append("w-full", full).append(
     "px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center",
     true
-  ).append("!pl-0", variant === "text").append($$restProps.class, true).compile(true);
+  ).append("!pl-0", variant === "text").append($$restProps.class, true).compile();
 $:
-  breadcrumbListClasses = th.create("Breadcrumb").option("fieldFontSizes", size, size).option("breadcrumbSpacings", size, size).append("inline-flex items-center", true).compile(true);
+  breadcrumbListClasses = th.create("Breadcrumb").option("fieldFontSizes", size, size).option("breadcrumbSpacings", size, size).append("inline-flex items-center", true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 function generateBreadcrumbs() {
   const split = ($page.route?.id || "").slice(1).split("/").filter((v) => v !== "");

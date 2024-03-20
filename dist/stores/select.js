@@ -26,7 +26,7 @@ export function useSelect(props = {}) {
             return { ...s, selected: s.selected.filter((v) => v !== value) };
         });
     }
-    function swap(value) {
+    function toggle(value) {
         if (typeof value === 'undefined')
             return;
         store.update((s) => {
@@ -40,7 +40,7 @@ export function useSelect(props = {}) {
             return { ...s, selected };
         });
     }
-    function resetSelected(...selected) {
+    function restore(...selected) {
         store.update((s) => {
             return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
         });
@@ -52,10 +52,10 @@ export function useSelect(props = {}) {
     }
     return {
         ...store,
-        resetSelected,
+        restore,
         select,
         unselect,
-        toggle: swap,
+        toggle,
         isSelected
     };
 }

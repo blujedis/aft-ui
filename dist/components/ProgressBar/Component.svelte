@@ -2,8 +2,7 @@
 import { progressBarDefaults as defaults } from "./module";
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
-import { forwardEventsBuilder } from "../../utils";
-import { onMount } from "svelte";
+import { forwardEventsBuilder, boolToMapValue } from "../../utils";
 export let {
   animate,
   delay,
@@ -28,7 +27,7 @@ export const store = tweened(value, {
   interpolate
 });
 $:
-  progressClasses = themer($themeStore).create("ProgressBar").variant("progressBar", variant, theme, true).option("progressBarSizes", size, size).option("progressBarRoundedBar", rounded, rounded).option("progressBarRoundedValue", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile(true);
+  progressClasses = themer($themeStore).create("ProgressBar").bundle(["progressBgWebkitProgressValue", "progressBgMozProgressBar"], theme, true).option("progressBarSizes", size, size).option("progressBarRoundedBar", boolToMapValue(rounded), rounded).option("progressBarRoundedValue", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

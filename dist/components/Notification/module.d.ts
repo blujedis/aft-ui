@@ -1,7 +1,5 @@
-import type { notification } from './config';
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { IconifyIcon } from '@iconify/svelte';
-export type NotificationVariant = keyof typeof notification;
 export type Notification = {
     key?: string;
     group?: string;
@@ -11,9 +9,8 @@ export type Notification = {
     duration?: number;
     title?: string;
     theme?: ThemeColor;
-    variant?: NotificationVariant;
 };
-export interface NotificationProps extends Notification {
+export interface NotificationProps extends Omit<Notification, 'duration'> {
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
 }

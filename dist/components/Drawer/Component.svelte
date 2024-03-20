@@ -8,6 +8,7 @@
 import { themer, themeStore } from "../../theme";
 import { fade, fly } from "svelte/transition";
 import { useDisclosure } from "../../stores";
+import { boolToMapValue } from "../../utils";
 import Placeholder from "./Placeholder.svelte";
 export let {
   backdrop,
@@ -26,11 +27,11 @@ export const store = useDisclosure({ visible: false });
 let panel;
 const th = themer($themeStore);
 $:
-  drawerSizeClasses = th.create("DrawerSize").append(drawerSizeMap[size], size).append("pointer-events-auto w-screen", true).compile(true);
+  drawerSizeClasses = th.create("DrawerSize").append(drawerSizeMap[size], size).append("pointer-events-auto w-screen", true).compile();
 $:
-  drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile(true);
+  drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile();
 $:
-  drawerClasses = th.create("DrawerWrapper").option("shadows", shadowed, shadowed).append("flex h-full flex-col overflow-y-scroll z-20 bg-white", true).append($$restProps.class, true).compile(true);
+  drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll z-20 bg-white", true).append($$restProps.class, true).compile();
 function handleClose() {
   store.close();
 }

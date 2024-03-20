@@ -9,19 +9,19 @@ export const rangeTrackSizes = {
 };
 export const rangeThumbSizes = {
     unstyled: '',
-    xs: '14px',
-    sm: '17px',
-    md: '22px',
-    lg: '26px',
-    xl: '32px',
-    xl2: '38px'
+    xs: '8px',
+    sm: '10px',
+    md: '14px',
+    lg: '20px',
+    xl: '28px',
+    xl2: '34px'
 };
 export const rangeBorderSizes = {
     unstyled: '',
-    xs: '2px',
-    sm: '2px',
-    md: '3px',
-    lg: '3px',
-    xl: '4px',
-    xl2: '4px'
+    xs: '.1rem',
+    sm: '.1rem',
+    md: '.1rem',
+    lg: '.15rem',
+    xl: '.2rem',
+    xl2: '.2rem'
 };

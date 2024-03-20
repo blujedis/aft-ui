@@ -1,9 +1,11 @@
 import { SvelteComponent } from "svelte";
-import { type ColormodeProps } from './module';
 import { type ColorModeHook } from '../../hooks';
 import type { Unsubscriber } from 'svelte/store';
 declare const __propDef: {
-    props: ColormodeProps & import("svelte/elements").HTMLInputAttributes;
+    props: {
+        prefers?: "dark" | "light" | undefined;
+        init?: boolean | undefined;
+    };
     events: {
         [evt: string]: CustomEvent<any>;
     };
@@ -11,13 +13,14 @@ declare const __propDef: {
         default: {
             store: import("svelte/store").Writable<boolean> & {
                 getRoot: () => HTMLElement | null;
-                getLocalValue: () => boolean;
-                setLocalValue: (value: any) => void;
-                enable: (mode: "dark" | "light") => void;
+                getLocalValue: () => boolean | null;
+                setLocalValue: (value: boolean) => void;
+                set: (isDark?: boolean) => void;
                 toggle: () => void;
                 reset: () => void;
             };
-            checked: boolean;
+            dark: boolean;
+            set: ((this: void, value: boolean) => void) & ((isDark?: boolean) => void);
             toggle: () => void;
             reset: () => void;
             subscribe: (fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) => Unsubscriber;

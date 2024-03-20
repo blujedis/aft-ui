@@ -1,10 +1,10 @@
 const component = {
     focused: true,
     hovered: true,
-    rounded: 'none',
+    rounded: 'sm',
     shadowed: 'none',
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     transitioned: true
 };
 const defaults = {

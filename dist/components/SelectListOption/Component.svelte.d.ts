@@ -7,7 +7,9 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
-        default: {};
+        default: {
+            active: boolean;
+        };
     };
 }
 export type ComponentProps<Tag extends 'button' | 'a'> = ReturnType<__sveltets_Render<Tag>['props']>;

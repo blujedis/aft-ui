@@ -1,8 +1,9 @@
 export const accordionButtonDefaults = {
-    caret: 'octicon:chevron-down-24', // ['octicon:chevron-down-24', 'octicon:chevron-up-24'],
-    focused: true,
+    as: 'button',
+    // ['octicon:chevron-down-24', 'octicon:chevron-up-24'], 180 example
+    // [ 'octicon:chevron-right-24'] set rotiangle to 90 which gives you ▶ to ▼
+    caret: 'octicon:chevron-down-24',
     roticon: true,
-    size: 'sm',
-    theme: 'default',
-    variant: 'outlined'
+    rotiangle: 180,
+    size: 'sm'
 };

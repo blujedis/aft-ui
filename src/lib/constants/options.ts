@@ -135,12 +135,12 @@ export const fieldUpperPaddingY = {
 
 export const boxPadding = {
 	unstyled: '',
-	xs: 'p-3',
-	sm: 'p-4',
-	md: 'p-6',
-	lg: 'p-8',
-	xl: 'p-10',
-	xl2: 'px-12'
+	xs: 'py-1.5 px-3',
+	sm: 'py-3 px-4',
+	md: 'py-3 px-6',
+	lg: 'py-4 px-8',
+	xl: 'py-5 px-10',
+	xl2: 'py-6 px-12'
 };
 
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
@@ -155,12 +155,6 @@ export const buttonPadding = mergeConfigs(
 		lg: 'px-6',
 		xl: 'px-7',
 		xl2: 'px-8'
-		// xs: 'px-2.5',
-		// sm: 'px-3',
-		// md: 'px-4',
-		// lg: 'px-5',
-		// xl: 'px-6',
-		// xl2: 'px-8'
 	},
 	fieldLeading
 );
@@ -246,7 +240,7 @@ export const shadows = {
 	unstyled: '',
 	inner: 'shadow-inner',
 	none: 'shadow-none',
-	xs: 'shadow-sm',
+	xs: 'shadow-xs',
 	sm: 'shadow',
 	md: 'shadow-md',
 	lg: 'shadow-lg',

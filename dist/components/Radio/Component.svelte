@@ -1,27 +1,45 @@
 <script>import { radioDefaults as defaults } from "./module";
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
-import { forwardEventsBuilder } from "../../utils";
+import { forwardEventsBuilder, boolToMapValue } from "../../utils";
+import { Label } from "..";
 export let {
+  checked,
   disabled,
   focused,
   full,
+  group,
+  hovered,
   rounded,
   shadowed,
   size,
   theme,
   transitioned,
+  value,
   variant,
   unstyled
 } = {
   ...defaults
 };
+const th = themer($themeStore);
 $:
-  checkboxClasses = themer($themeStore).create("Radio").variant("radio", variant, theme, variant).option("focusedRing", theme, focused).option("common", "transitioned", transitioned).option("iconSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("common", "disabled", disabled).append("w-full", full).append(
-    "flex items-center justify-center form-radio focus:outline-none focus:ring-2 focus:ring-offset-2",
+  labelClasses = th.create("RadioLabel").prepend("radio-label", true).append("flex items-center", true).compile();
+$:
+  radioClasses = th.create("Radio").option("iconSizes", size, size).bundle(["defaultText"], theme, true).option("hovered", variant, theme, hovered).option("common", "focusedOutline", focused).option("outlineFocus", theme, focused).option("common", "transitioned", transitioned).option("common", "formBorder", true).option("checkboxSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).append("w-full", full).append(
+    "flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent",
     true
-  ).append($$restProps.class, true).compile(true);
+  ).append("mr-2", $$slots.default).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} type="radio" use:forwardedEvents class={checkboxClasses} />
+<Label for={value} visible={$$slots.default} class={labelClasses}>
+	<input
+		use:forwardedEvents
+		{...$$restProps}
+		bind:group
+		type="radio"
+		{value}
+		class={radioClasses}
+	/>
+	<slot />
+</Label>

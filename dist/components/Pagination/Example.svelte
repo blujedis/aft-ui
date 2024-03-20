@@ -1,13 +1,13 @@
 <script>import ExamplePage from "../_Example/ExamplePage.svelte";
 import { Pagination } from ".";
 import { PaginationPage } from "../PaginationPage";
-import jsondata from "../_Example/jsondata";
+import jsondata from "../_Example/jsondata.ts.old";
 import { colors } from "../../constants";
 const title = "Pagination";
 const description = "Pager for data tables and record sets.";
-const code = `
-  `;
 const props = {
+  focused: true,
+  hovered: true,
   rounded: "none",
   shadowed: "none",
   size: "md",
@@ -18,7 +18,7 @@ const props = {
 let pagination = null;
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-3 gap-2 mb-8">
 			<div>
@@ -68,7 +68,7 @@ let pagination = null;
 				<Pagination
 					{...props}
 					bind:this={pagination}
-					variant="glass"
+					variant="soft"
 					items={jsondata.length}
 					page={1}
 					pageSize={5}

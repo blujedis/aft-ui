@@ -1,10 +1,10 @@
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-import type { input } from './config';
-export type InputVariant = keyof typeof input;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+export type InputVariant = 'outlined' | 'filled' | 'flushed' | 'soft' | 'text';
 export type InputProps = {
     disabled?: boolean;
-    focused?: ThemeFocused;
+    focused?: boolean;
     full?: boolean;
+    hovered?: boolean;
     chars?: number;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
@@ -12,6 +12,5 @@ export type InputProps = {
     theme?: ThemeColor;
     transitioned?: boolean;
     variant?: InputVariant;
-    unstyled?: boolean;
 };
 export declare const inputDefaults: Partial<InputProps>;

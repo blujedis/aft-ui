@@ -25,25 +25,25 @@ export function useDisclosure<P extends Record<string, unknown> = Record<string,
 	const store = writable({ visible: false, ...props } as Required<DisclosureStoreOptions<P>>);
 
 	function open() {
-		store.update(s => {
+		store.update((s) => {
 			return { ...s, visible: true };
 		});
 	}
 
 	function close() {
-		store.update(s => {
+		store.update((s) => {
 			return { ...s, visible: false };
 		});
 	}
 
 	function toggle() {
-		store.update(s => {
+		store.update((s) => {
 			return { ...s, visible: !s.visible };
 		});
 	}
 
 	function modify(values: Partial<DisclosureStoreOptions<P>>) {
-		store.update(s => {
+		store.update((s) => {
 			return { ...s, ...values };
 		});
 	}

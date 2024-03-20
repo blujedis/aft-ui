@@ -6,7 +6,11 @@
 	import { getContext } from 'svelte';
 	import { type DataGridHeaderCellProps, gridHeaderCellDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib/theme';
-	import type { DataGridContext, DataGridDataItem } from '$lib/components/DataGrid';
+	import type {
+		DataGridColumnConfig,
+		DataGridContext,
+		DataGridDataItem
+	} from '$lib/components/DataGrid';
 	import type { ElementProps } from '$lib/types';
 
 	type DragHandlerEvent = DragEvent & {
@@ -20,22 +24,21 @@
 	const context = getContext('DataGrid') as DataGridContext;
 	const id = uniqid();
 
-	// const dragEl = writable<undefined | HTMLDivElement>();
-	//	let el = undefined as undefined | HTMLDivElement;
 	let dragging = false;
 	let focusing = false;
 
-	export let { accessor, draggable, focused, size, stacked, theme } = {
+	export let { accessor, focused, size, theme } = {
 		...defaults,
 		focused: context.globals?.focused,
 		size: context.globals?.size,
-		stacked: context.globals?.stacked,
-		theme: context.globals?.theme,
-		draggable: true
+		theme: context.globals?.theme
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
+	$: config = $context.columns.find((v) => v.accessor === accessor) as Required<
+		DataGridColumnConfig<DataGridDataItem>
+	>;
 	$: sortkey = $context?.sort.find((v) => [accessor, '-' + accessor].includes(v));
 	$: sortdir = typeof sortkey === 'undefined' ? 0 : sortkey.charAt(0) === '-' ? -1 : 1;
 	$: isLast =
@@ -47,16 +50,23 @@
 		.option('common', 'focusedRingWithin', focused && !dragging)
 		.option('ringFocusWithin', theme, focused)
 		.prepend('datagrid-cell datagrid-header-cell', true)
-		.append('group-[.dragging]:bg-secondary peer', true)
+		.append(
+			'group-hover:bg-primary-950/5 dark:group-hover:bg-primary-950/20 group-hover:cursor-move',
+			config.reorderable
+		)
+		.append(
+			'group-[.dragging]:bg-primary-500/70 group-[.dragging]:text-white dark:group-[.dragging]:bg-primary-800/80',
+			config.reorderable
+		)
 		.append('select-none focus:ring-inset', true)
 		.append($$restProps.class, true)
 		.compile();
 
 	$: dividerClasses = th
 		.create('DataGridHeaderCellDivider')
-		.option('panelBg', theme, theme)
+		.option('dividerBg', theme, theme)
 		.prepend('datagrid-header-cell-divider', true)
-		.append('w-0.5 h-1/2 absolute z-0 top-1/4 right-0', true)
+		.append('w-0.5 h-1/2 absolute z-0 top-1/4 -right-[1.5px]', true)
 		.compile();
 
 	function sort() {
@@ -124,7 +134,7 @@
 </script>
 
 <div class="relative group" class:dragging>
-	{#if draggable}
+	{#if config.reorderable}
 		<div
 			role="columnheader"
 			{id}
@@ -132,7 +142,7 @@
 			{...$$restProps}
 			aria-grabbed={dragging}
 			class={gridHeaderCellClasses}
-			{draggable}
+			draggable={config.reorderable}
 			on:dragstart={onDragStart}
 			on:dragover={onDragOver}
 			on:drop={onDrop}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DataGrid, type DataGridColumnConfig } from '.';
+	import { DataGrid, type DataGridColumnConfig, type DataGridProps } from '.';
 	import { jsondata } from '../_Example/jsondata';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
@@ -11,7 +11,10 @@
 	import { DataGridSearch } from '../DataGridSearch';
 	import Section from '../_Example/Section.svelte';
 	import { flip } from 'svelte/animate';
-	import { DataGridFilterCell } from '..';
+	import { DataGridFilterCell } from '../DataGridFilterCell';
+
+	type Data = (typeof jsondata)[number];
+	type Column = DataGridColumnConfig<Data>;
 
 	const title = 'DataGrid';
 	const description = 'Themed table with responsive layout.';
@@ -26,10 +29,15 @@
 		transitioned: false as boolean, // ThemeTransitioned,
 		stacked: false,
 		autocols: true,
-		divided: true
-	};
+		divided: true,
+		sticky: false,
+		resizeable: true,
+		reorderable: true,
+		rowkey: 'id'
+	} as DataGridProps<Column, Data>;
 
-	type Data = (typeof jsondata)[number];
+	let datagrid: DataGrid<Column, Data>;
+
 	let data = jsondata; // .slice(0, 15);
 
 	const initColumns = [
@@ -56,14 +64,15 @@
 	</Section>
 
 	<DataGrid
+		bind:this={datagrid}
 		{...props}
 		columns={initColumns}
-		items={data}
-		class={props.stacked ? 'max-w-screen-md m-auto' : ''}
+		rows={data}
 		let:rows
 		let:columns
+		let:remove
 	>
-		<DataGridSearch />
+		<!-- <DataGridSearch /> -->
 
 		<DataGridHeader>
 			<DataGridRow divided={false}>
@@ -85,9 +94,6 @@
 					<DataGridFilterCell {column} />
 				{/each}
 			</DataGridRow>
-			<!-- <svelte:fragment slot="filter">
-				<DataGridFilter />
-			</svelte:fragment> -->
 		</DataGridHeader>
 
 		<!-- <DataGridFilter /> -->
@@ -130,21 +136,3 @@
 		</DataGridBody>
 	</DataGrid>
 </ExamplePage>
-
-<style>
-	.dragging {
-		background: whitesmoke;
-		opacity: 0.8;
-	}
-	.placeholder {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		visibility: visible;
-		background-color: #edf2f7;
-		border: 3px dashed #cbd5e0;
-		margin: 0;
-	}
-</style>

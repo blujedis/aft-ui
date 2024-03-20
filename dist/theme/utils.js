@@ -30,7 +30,7 @@ export function isCssColor(color) {
 export function isThemeColor(color) {
     const [name, shade] = (color || '').replace(/^(--|--color)/, '').split('-');
     const normalizedShade = typeof shade === 'undefined' ? 500 : parseInt(shade);
-    const hasColor = colors.includes(name.toLowerCase());
+    const hasColor = ['white', 'black', ...colors].includes(name.toLowerCase());
     const hasShade = shades.includes(normalizedShade);
     if (hasShade && hasColor)
         return color;

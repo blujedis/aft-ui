@@ -4,7 +4,9 @@ export type ButtonVariant = 'text' | 'filled' | 'outlined' | 'ghost' | 'soft';
 
 export type ButtonProps<Tag extends 'button' | 'a'> = {
 	as?: Tag;
+	bordered?: boolean;
 	disabled?: boolean;
+	dropshadowed?: ThemeShadowed;
 	focused?: ThemeFocused;
 	full?: boolean;
 	hovered?: boolean;
@@ -20,8 +22,5 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
 
 export const buttonDefaults: Partial<ButtonProps<'button'>> = {
 	as: 'button',
-	hovered: true,
-	size: 'md',
-	theme: 'frame',
 	variant: 'filled'
 };

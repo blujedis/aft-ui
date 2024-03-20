@@ -7,6 +7,7 @@ const code = `
   `;
 const props = {
   full: false,
+  hovered: true,
   rounded: "md",
   shadowed: "none",
   size: "md",
@@ -17,17 +18,17 @@ const props = {
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-3 gap-4 mb-4">
 			<label for="filled">
 				<Kbd {...props} variant="filled" theme={color}>space</Kbd>
 			</label>
 			<label for="filled">
-				<Kbd {...props} variant="outline" theme={color}>cmd + i</Kbd>
+				<Kbd {...props} variant="outlined" theme={color}>cmd + i</Kbd>
 			</label>
 			<label for="filled">
-				<Kbd {...props} variant="glass" theme={color}>ctrl + shift</Kbd>
+				<Kbd {...props} variant="soft" theme={color}>ctrl + shift</Kbd>
 			</label>
 		</div>
 	{/each}

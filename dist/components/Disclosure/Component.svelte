@@ -12,8 +12,9 @@ export let {
   store: initStore,
   transition
 } = { ...defaults };
+let disclosure;
 const element = as;
-export const store = initStore || useDisclosure({ visible: opened });
+export const store = useDisclosure({ visible: opened });
 setContext("Disclosure", {
   ...store,
   transition
@@ -21,23 +22,42 @@ setContext("Disclosure", {
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
-function handleClose(e) {
+function handleOpen() {
+  store.open();
+  setTimeout(() => {
+    disclosure?.focus();
+  });
+}
+function handleClose() {
   store.close();
 }
+function handleToggle() {
+  if ($store.visible)
+    handleClose();
+  else
+    handleOpen();
+}
 function handleKeydown(e) {
-  if (!e.repeat && e.key === "Escape" && escapable) {
+  if (!$store.visible || e.repeat)
+    return;
+  const target = e.target;
+  if (e.key === "Escape" && escapable && (target.matches("body") || target === disclosure)) {
+    e.preventDefault();
     store.close();
   }
 }
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <svelte:element
 	this={element}
+	tabindex="-1"
 	role="presentation"
 	{...$$restProps}
+	bind:this={disclosure}
 	use:clickOutside
 	on:click_outside={handleClose}
-	on:keydown={handleKeydown}
 >
-	<slot open={store?.open} close={store?.close} toggle={store?.toggle} visible={$store?.visible} />
+	<slot open={handleOpen} close={handleClose} toggle={handleToggle} visible={$store?.visible} />
 </svelte:element>

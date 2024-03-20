@@ -1,23 +1,19 @@
 import { writable, get as getStore } from 'svelte/store';
 import { browser } from '$app/environment';
-let _instance = null;
-export function useColorMode(key = 'dark') {
-    if (_instance)
-        return _instance;
-    const store = writable(getMountedValue());
+const key = 'darkmode';
+const store = writable((browser && JSON.parse(localStorage.getItem(key) || 'false')) || false);
+const prefersDark = (browser && window.matchMedia('(prefers-color-scheme: dark)').matches) || false;
+export function useColorMode(shouldInit = false, prefers) {
+    if (typeof prefers === 'undefined')
+        prefers = prefersDark ? 'dark' : 'light';
     const methods = {
         getRoot,
         getLocalValue,
         setLocalValue,
-        enable,
+        set,
         toggle,
         reset
     };
-    function getMountedValue() {
-        if (!browser)
-            return false;
-        return JSON.parse(localStorage.getItem(key) || 'false');
-    }
     function getRoot() {
         if (typeof document === 'undefined')
             return null;
@@ -25,42 +21,62 @@ export function useColorMode(key = 'dark') {
     }
     function getLocalValue() {
         if (typeof localStorage === 'undefined' || !key)
-            return false;
-        return JSON.parse(localStorage.getItem(key) || '');
+            return null;
+        const currentValue = JSON.parse(localStorage.getItem(key) || '');
+        if (!currentValue)
+            return null;
+        return currentValue;
     }
     function setLocalValue(value) {
         if (typeof localStorage === 'undefined')
             return;
-        if (value)
-            localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));
     }
-    function enable(mode) {
-        store.update((_s) => (mode === 'light' ? false : true));
+    function applyMode(value) {
+        const root = getRoot();
+        if (!root)
+            return;
+        if (value)
+            root.classList.add('dark');
+        else
+            root.classList.remove('dark');
+        setLocalValue(value);
+    }
+    function set(isDark = false) {
+        const root = getRoot();
+        if (!root)
+            return;
+        store.update((_s) => {
+            applyMode(isDark);
+            return isDark;
+        });
     }
     function toggle() {
         const root = getRoot();
         if (!root)
             return;
-        const isDark = getStore(store);
-        if (!isDark) {
-            root.classList.add('dark');
-            setLocalValue(true);
-        }
-        else {
-            root.classList.remove('dark');
-            setLocalValue(false);
-        }
-        store.update((_s) => !isDark);
+        store.update((isDark) => {
+            const nextValue = !isDark;
+            applyMode(nextValue);
+            return nextValue;
+        });
     }
     function reset() {
+        const root = getRoot();
+        if (root)
+            root.classList.remove('dark');
         localStorage.removeItem(key);
         store.update((_s) => false);
     }
+    function init() {
+        if (!shouldInit)
+            return;
+        set(prefers === 'light' ? false : true);
+    }
+    init();
     const api = {
         ...methods,
         ...store
     };
-    if (!_instance)
-        _instance = api;
-    return _instance;
+    return api;
 }

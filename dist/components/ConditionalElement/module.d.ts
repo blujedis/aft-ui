@@ -1,6 +1,5 @@
 import type { HTMLTag } from '../../types';
-import type { SvelteComponent } from 'svelte';
-export type ConditionalElementProps<T extends HTMLTag | typeof SvelteComponent<any, any>> = {
+export type ConditionalElementProps<T extends HTMLTag> = {
     as: T;
     condition: boolean | ((...args: any[]) => boolean);
 };

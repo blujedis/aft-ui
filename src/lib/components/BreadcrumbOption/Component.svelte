@@ -33,13 +33,13 @@
 
 	$: breadcrumbOptionClasses = th
 		.create('BreadcrumbOption')
-		.variant('breadcrumbOption', variant, theme, variant)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'muteSelected', true)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
+		.prepend('breadcrumb-option', true)
 		.append('aria-selected:pointer-events-none outline-none', true)
 		.append($$restProps.class, true)
 		.compile();
@@ -47,12 +47,14 @@
 	$: breadcrumbOptionWrapperClasses = th
 		.create('BreadcrumbOptionWrapper')
 		.option('breadcrumbFilledHeight', size, size)
+		.prepend('breadcrumb-option-wrapper', true)
 		.append('flex items-center', true)
 		.compile();
 
 	$: breadcrumbIconClasses = th
 		.create('BreadcrumbIcon')
 		.option('breadcrumbFilledIconWidth', size, size)
+		.prepend('breadcrumb-option-icon', true)
 		.append('opacity-40', true) // mutes icon separators
 		.append('h-full flex-shrink-0 pointer-events-none', true)
 		.compile();

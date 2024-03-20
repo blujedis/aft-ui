@@ -1,1 +1,3 @@
-export const gridRowDefaults = {};
+export const gridRowDefaults = {
+    divided: false
+};

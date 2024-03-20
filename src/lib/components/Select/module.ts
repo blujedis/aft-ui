@@ -27,6 +27,7 @@ export type SelectProps = {
 };
 
 export const selectDefaults: Partial<SelectProps> = {
+	focused: true,
 	size: 'md',
 	theme: 'frame',
 	variant: 'outlined',

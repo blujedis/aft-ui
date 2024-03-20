@@ -5,8 +5,9 @@ export class NotificationsComponent extends SvelteComponent {
 export const notificationsDefaults = {
     Component: Notification,
     group: 'default',
-    duration: 3500,
-    position: 'top-right'
+    duration: 4000,
+    position: 'top-right',
+    transition: 'reveal'
 };
 export const notificationsPosition = {
     'bottom-right': { x: 400, y: 0 },

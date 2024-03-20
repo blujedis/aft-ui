@@ -2,17 +2,17 @@
 	import ExamplePage from './ExamplePage.svelte';
 	import defaults from '../../theme/defaults';
 	import * as defaultOptions from '../../components/options';
-	import * as defaultComponents from '../../components/configs';
+	// import * as defaultComponents from '../../components/configs';
 	import Section from './Section.svelte';
 	import { colors } from '$lib/constants';
 	import { themer } from '$lib/theme';
 	import { themeStore } from '$lib/theme';
-	import {
-		variantFilled,
-		variantOutlined,
-		variantFilledHover,
-		variantOutlinedHover
-	} from '$lib/constants';
+	// import {
+	// 	variantFilled,
+	// 	variantOutlined,
+	// 	variantFilledHover,
+	// 	variantOutlinedHover
+	// } from '$lib/constants';
 	import classNames from 'classnames';
 
 	const title = 'Downloads';
@@ -21,8 +21,8 @@
 	const defaultTheme = JSON.stringify(
 		{
 			options: defaultOptions,
-			defaults,
-			components: defaultComponents
+			defaults
+			// components: defaultComponents
 		},
 		null,
 		2
@@ -52,9 +52,9 @@
 		<div>Filled</div>
 		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-4 py-8')}>
+				<!-- <div class={classNames(variantFilled.$base, variantFilled[color], 'p-4 py-8')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -63,9 +63,9 @@
 		<div>Filled Hover</div>
 		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantFilledHover.$base, variantFilledHover[color], 'p-4')}>
+				<!-- <div class={classNames(variantFilledHover.$base, variantFilledHover[color], 'p-4')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -73,9 +73,9 @@
 	<Section>
 		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4')}>
+				<!-- <div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -83,9 +83,9 @@
 	<Section>
 		<div class="grid grid-cols-9 gap-2 text-center">
 			{#each colors as color}
-				<div class={classNames(variantOutlinedHover.$base, variantOutlinedHover[color], 'p-4')}>
+				<!-- <div class={classNames(variantOutlinedHover.$base, variantOutlinedHover[color], 'p-4')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>

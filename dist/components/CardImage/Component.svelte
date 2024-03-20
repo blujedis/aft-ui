@@ -1,12 +1,12 @@
 <script>import { cardImageDefaults as defaults } from "./module";
 import { themer, themeStore } from "../../theme";
-import { Image } from "../Image";
+import { Image } from "..";
 export let { fit, full, imageClasses } = {
   ...defaults
 };
 const th = themer($themeStore);
 $:
-  cardImageClasses = th.create("CardImage").append($$restProps.class, true).compile(true);
+  cardImageClasses = th.create("CardImage").append($$restProps.class, true).compile();
 </script>
 
 <div class={cardImageClasses}>

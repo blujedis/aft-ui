@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { usePopover } from '$lib/hooks';
-	import { type DataGridFilterCellProps, gridFilterCellDefaults as defaults } from './module';
+	import {
+		type DataGridFilterCellProps,
+		gridFilterCellDefaults as defaults,
+		filterPopoverDefaults
+	} from './module';
 	import { themeStore, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import type { DataGridContext, DataGridDataItem, FilterAccessor } from '$lib/components/DataGrid';
+	import type { DataGridContext, DataGridDataItem } from '$lib/components/DataGrid';
+	import { type DataGridFilterCriteria } from '../DataGrid/filter';
 	import { getContext } from 'svelte';
 	import { DataGridCell } from '$lib/components/DataGridCell';
 	import { debounce } from '$lib/utils';
@@ -22,13 +27,11 @@
 		theme: context.globals?.theme
 	} as Required<$$Props>;
 
-	$: queryByOne = '=';
-	$: queryValueOne = '';
-	$: queryByTwo = '=';
-	$: queryValueTwo = '';
-	$: queryAndOr = 'and';
+	const filters = context.globals?.filters;
 
-	$: console.log(queryValueOne);
+	let filterData = {
+		...filterPopoverDefaults
+	};
 
 	const th = themer($themeStore);
 	const [trigger, content] = usePopover({
@@ -50,11 +53,51 @@
 		.append('outline-none bg-transparent relative w-full pr-8', true)
 		.compile();
 
-	function handleFilter(value: any, accessor?: FilterAccessor<DataGridDataItem>): void {
-		if (!accessor) return;
+	function lookupFilterHandler(criteria: string) {
+		return (context.globals?.filters || []).find((f) => f.value === criteria)?.handler;
+	}
+
+	function resetFilters(values?: typeof filterData) {
+		if (values)
+			filterData = {
+				...values
+			};
+		else
+			filterData = {
+				...filterPopoverDefaults
+			};
+	}
+
+	function handleFilter(): void {
+		if (!filterData.valueOne) resetFilters();
+		const criteria = [
+			{
+				accessor: column.accessor,
+				condition: filterData.criteriaOne,
+				query: filterData.valueOne,
+				handler: lookupFilterHandler(filterData.criteriaOne)
+			}
+		] as DataGridFilterCriteria<any>[];
+		if (
+			(filterData.criteriaTwo && filterData.valueTwo) ||
+			['empty', '!empty'].includes(filterData.criteriaTwo)
+		) {
+			criteria.push({
+				accessor: column.accessor,
+				condition: filterData.criteriaTwo,
+				query: filterData.valueTwo,
+				join: filterData.join,
+				handler: lookupFilterHandler(filterData.criteriaTwo)
+			});
+		}
 		debounce(() => {
-			context.filter(value, accessor);
+			context.filter(...criteria);
 		})();
+	}
+
+	function handleChange(data: typeof filterData) {
+		// filterData = { ...data };
+		handleFilter();
 	}
 </script>
 
@@ -66,8 +109,8 @@
 					type="text"
 					placeholder="filter"
 					class={gridFilterInputClasses}
-					bind:value={queryValueOne}
-					on:input={(e) => handleFilter(e.currentTarget?.value, column.accessor)}
+					bind:value={filterData.valueOne}
+					on:input={(e) => handleFilter()}
 				/>
 			</slot>
 			<slot name="icon">
@@ -89,13 +132,7 @@
 					</button>
 
 					<div use:content class:invisible={!visible}>
-						<FilterPopover
-							bind:queryByOne
-							bind:queryValueOne
-							bind:queryByTwo
-							bind:queryValueTwo
-							bind:queryAndOr
-						/>
+						<FilterPopover bind:data={filterData} {filters} onChange={handleChange} />
 					</div>
 				</Disclosure>
 			</slot>

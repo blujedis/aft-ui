@@ -3,11 +3,15 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../t
 import type { MenuButtonVariant } from '../MenuButton';
 export type MenuStore = {};
 export type MenuGlobalProps = {
+    disabled?: boolean;
     full?: boolean;
+    focused?: boolean;
+    hovered?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
     theme?: ThemeColor;
+    transitioned?: boolean;
     underlined?: boolean;
     variant?: MenuButtonVariant;
 };
@@ -17,8 +21,12 @@ export type MenuContext = DisclosureStore<MenuStore> & {
 export type MenuProps = {
     autoclose?: boolean;
     escapable?: boolean;
+    disabled?: boolean;
+    focused?: boolean;
+    hovered?: boolean;
     store?: DisclosureStore;
     theme?: ThemeColor;
+    transitioned?: boolean;
     variant?: MenuButtonVariant;
     visible?: boolean;
 };

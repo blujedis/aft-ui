@@ -1,14 +1,14 @@
+import type { ResizerPosition, ResizerRectangle } from '../../hooks';
 import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '../../types';
-import type { DataGridColumnConfig, DataGridVariant } from '../DataGrid/module';
 export type DataGridHeaderProps = {
     autocols?: boolean;
-    columns?: DataGridColumnConfig[];
     divided?: boolean;
     focused?: ThemeFocused;
     rounded?: ThemeRounded;
     size?: ThemeSize;
+    stacked?: boolean;
     sticky?: boolean;
     theme?: ThemeColor;
-    variant?: DataGridVariant;
+    onAfterResize?: (props: ResizerPosition & ResizerRectangle) => any;
 };
 export declare const gridHeaderDefaults: Partial<DataGridHeaderProps>;

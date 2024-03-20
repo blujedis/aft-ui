@@ -21,6 +21,7 @@
 		variant,
 		unstyled
 	} = {
+		...$themeStore?.defaults?.component,
 		...defaults
 	} as Required<$$Props>;
 

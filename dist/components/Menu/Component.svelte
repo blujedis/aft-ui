@@ -1,16 +1,21 @@
 <script>import { menuDefaults as defaults } from "./module";
-import { themeStore, themer, useDisclosure } from "../..";
+import { themeStore, themer } from "../../theme";
+import { useDisclosure } from "../../stores";
 import { setContext } from "svelte";
 import { cleanObj, createCustomEvent } from "../../utils";
 export let {
   autoclose,
   escapable,
+  disabled,
   full,
+  focused,
+  hovered,
   rounded,
   shadowed,
   size,
   store: initStore,
   theme,
+  transitioned,
   underlined,
   variant,
   visible
@@ -23,11 +28,15 @@ export const store = initStore || useDisclosure({
 const th = themer($themeStore);
 let div;
 const globals = cleanObj({
+  disabled,
   full,
+  focused,
+  hovered,
   rounded,
   shadowed,
   size,
   theme,
+  transitioned,
   underlined,
   variant
 });
@@ -36,7 +45,7 @@ setContext("Menu", {
   globals
 });
 $:
-  menuClasses = th.create("Menu").append("w-full", full).append("relative inline-block clear-both", true).append($$restProps.class, true).compile(true);
+  menuClasses = th.create("Menu").append("w-full", full).append("relative inline-block clear-both", true).append($$restProps.class, true).compile();
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });

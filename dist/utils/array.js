@@ -1,4 +1,5 @@
 import { getProperty } from 'dot-prop';
+import { isLike, isNumeric } from './is';
 /**
  * Inserts a new item into an array without mutating.
  *
@@ -17,22 +18,14 @@ export function arrayInsert(arr, index, newItem) {
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *
  * @param value the value to inspect as any array.
+ * @param clean when true and is array clean any undefined.
  */
-export function ensureArray(value) {
+export function ensureArray(value, clean = true) {
     if (typeof value === 'undefined' || value === null || value === '')
         return [];
     if (Array.isArray(value))
-        return value;
+        return (clean ? value.filter((v) => typeof v !== 'undefined') : value);
     return [value];
-}
-/**
- * Simple function using indexOf for SQL LIKE evaluation.
- *
- * @param query the search query.
- * @param value the value to apply search query against.
- */
-export function isLike(query, value) {
-    return (value + '').toLowerCase().indexOf(query.toLowerCase()) > -1;
 }
 /**
  * Rudamentary search filter applying indexOf checking against all or specified accessor fields.
@@ -41,13 +34,27 @@ export function isLike(query, value) {
  * @param items an array of items to apply the search to.
  * @param accessors optional accessor keys applying search to only these keys.
  */
-export function searchArray(query, items, ...accessors) {
+export function searchArray(query, items, accessors) {
     if (!accessors.length)
         return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
-    return items.filter((item) => accessors.some((key) => isLike(query, item[key])));
+    if (typeof accessors[0] === 'string') {
+        const _accessors = accessors;
+        return items.filter((item) => _accessors.some((key) => isLike(query, item[key])));
+    }
+    return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
 }
 function defaultComparator(a, b) {
     return a == b ? 0 : a > b ? 1 : -1;
+}
+function defaultPrimer(value) {
+    const isDate = value instanceof Date;
+    if (typeof value !== 'string' && !isDate && typeof value !== 'number')
+        return value;
+    if (isDate)
+        return value.getTime();
+    if (isNumeric(value, true))
+        return Number(value);
+    return value;
 }
 /**
  * Create a sort comparator function with optional primer so that values can be
@@ -56,10 +63,15 @@ function defaultComparator(a, b) {
  * @example
  * createComparator('-name', ('Bob Smith', name) => 'bob smith')
  *
+ * @example
+ * This is done so values can be properly compared here we convert a date to an
+ * epoch or number which can be easily evaluated.
+ * primer = (value = '01/01/1999') => 915177600
+ *
  * @param accessor the property that is to be primed if required.
- * @param primer the function for priming the value.
+ * @param primer the function for priming the value convert to type etc.
  */
-function createComparator(accessor, primer) {
+function createComparator(accessor, primer = defaultPrimer) {
     const isDesc = accessor.charAt(0) === '-';
     const key = isDesc ? accessor.slice(1) : accessor;
     let comparator = defaultComparator;

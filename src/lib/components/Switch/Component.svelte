@@ -4,24 +4,25 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
-	import classNames from 'classnames';
+	import { Label } from '../Label';
 
-	type $$Props = SwitchProps & Omit<ElementProps<'input'>, 'size'>;
+	type $$Props = SwitchProps &
+		Omit<ElementProps<'input'>, 'size'> & { for?: ElementProps<'label'>['for'] };
 
 	export let {
 		checked,
-		classBackdrop,
-		classFill,
 		classHandle,
+		classSlider,
 		disabled,
 		focused,
+		for: labelFor,
 		hovered,
-		position,
 		shadowed,
 		size,
 		srtext,
 		theme,
-		transitioned
+		transitioned,
+		unlabeled
 	} = {
 		...defaults
 	} as Required<$$Props>;
@@ -30,13 +31,15 @@
 
 	const th = themer($themeStore);
 
-	// focus:ring-2 focus:outline-none
 	$: labelClasses = th
 		.create('SwitchLabel')
 		.option('switchButtonSizes', size, size)
-		.append('pointer-events-none', disabled)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
 		.option('hovered', 'filled', theme, hovered)
 		.option('common', 'transitioned', transitioned)
+
+		.append('pointer-events-none', disabled)
 		.append(
 			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full',
 			true
@@ -45,26 +48,23 @@
 
 	$: backdropClasses = th
 		.create('SwitchBackdrop')
+		.prepend('switch-backdrop', true)
 		.append('pointer-events-none absolute h-full w-full rounded-md', true)
-		.append(classBackdrop, true)
 		.compile();
 
 	// enabled: bg-indigo-600 / bg-gray-200 - h-4 w-9
-	// focus:outline-none focus:ring-2 focus:ring-offset-2
 	$: fillClasses = th
 		.create('SwitchFill')
 		.bundle(['switchBgAriaChecked'], theme, true)
 		.option('switchFillSizes', size, size)
-		.option('common', 'focusedOutline', focused)
-		.option('outlineGroupFocus', theme, focused)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
-		.option('common', 'ringed', true)
+		.prepend('switch-slider', true)
 		.append(
 			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out ring-0',
 			true
 		)
-		.append(classFill, true)
+		.append(classSlider, true)
 		.compile();
 
 	// enabled: translate-x-5 / 0 - border-gray-200 bg-white - h-5 w-5
@@ -72,6 +72,7 @@
 		.create('SwitchHandle')
 		.option('switchHandleSizes', size, size)
 		.option('common', 'disabled', disabled)
+		.prepend('switch-handle', true)
 		.append('bg-white border-frame-300', true)
 		.append(
 			'pointer-events-none absolute left-0 inline-block transform rounded-full border shadow ring-0 transition-transform duration-200 ease-in-out',
@@ -89,29 +90,33 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<label for={$$restProps.id} class={classNames('flickerless not-sr-only', $$restProps.class)}>
-	<span
-		role="switch"
-		tabindex="-1"
-		class={labelClasses}
-		aria-checked={checked}
-		aria-disabled={disabled}
-	>
-		<span class="sr-only">{srtext}</span>
-		<span aria-hidden="true" class={backdropClasses} />
-		<span aria-hidden="true" class={fillClasses} aria-checked={checked} />
-		<span aria-hidden="true" class={handleClasses} />
-		<input
-			{...$$restProps}
-			bind:this={ref}
-			type="checkbox"
-			use:forwardedEvents
-			bind:checked
-			class={inputClasses}
-			{disabled}
-		/>
+<Label for={labelFor} visible={unlabeled !== false} class={$$restProps.class}>
+	<span class="switch-wrapper flickerless">
+		<slot />
+		<span
+			role="switch"
+			tabindex="0"
+			class={labelClasses}
+			aria-checked={checked}
+			aria-disabled={disabled}
+		>
+			<span class="sr-only">{srtext}</span>
+			<span aria-hidden="true" class={backdropClasses} />
+			<span aria-hidden="true" class={fillClasses} aria-checked={checked} />
+			<span aria-hidden="true" class={handleClasses} />
+			<input
+				{...$$restProps}
+				tabindex="-1"
+				bind:this={ref}
+				type="checkbox"
+				use:forwardedEvents
+				bind:checked
+				class={inputClasses}
+				{disabled}
+			/>
+		</span>
 	</span>
-</label>
+</Label>
 
 <style>
 	.flickerless {

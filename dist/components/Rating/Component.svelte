@@ -3,8 +3,9 @@ import { RatingItem } from "../RatingItem";
 import {
   ratingControllerDefaults as defaults
 } from "./module";
-import { onMount, setContext } from "svelte";
+import { setContext } from "svelte";
 import { writable } from "svelte/store";
+import { boolToMapValue } from "../../utils";
 export let {
   arrowable,
   background,
@@ -37,7 +38,7 @@ setContext("Rating", {
 let ref;
 const th = themer($themeStore);
 $:
-  ratingControllerClasses = th.create("RatingController").option("dropshadows", shadowed, shadowed).append("inline-flex spacing-x-0", true).append($$restProps.class, true).compile(true);
+  ratingControllerClasses = th.create("RatingController").option("dropshadows", boolToMapValue(shadowed), shadowed).append("inline-flex spacing-x-0", true).append($$restProps.class, true).compile();
 function handleSelect(selected, e) {
   if (readonly)
     return;

@@ -61,6 +61,14 @@
 </script>
 
 <Label for={value} visible={$$slots.default} class={labelClasses}>
-	<input use:forwardedEvents {...$$restProps} bind:group type="radio" {value} class={radioClasses} />
+	<input
+		use:forwardedEvents
+		on:change
+		{...$$restProps}
+		bind:group
+		{value}
+		type="radio"
+		class={radioClasses}
+	/>
 	<slot />
 </Label>

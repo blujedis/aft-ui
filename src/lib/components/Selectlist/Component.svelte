@@ -13,62 +13,79 @@
 	import { cleanObj, createCustomEvent, ensureArray } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
-	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size'>;
+	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size' | 'multiple'>;
 
 	export let {
 		autoclose,
 		badgeProps,
 		disabled,
 		escapable,
+		exclusive,
 		items,
 		filterable,
 		filter: initFilter,
 		full,
 		focused,
 		hovered,
-		multiple,
+		min,
+		max,
 		newable,
 		placeholder,
 		removable,
 		rounded,
 		shadowed,
 		size,
-		store: initStore,
+		tags,
 		theme,
 		value,
 		variant,
 		visible,
 		transitioned,
 		onBeforeAdd,
-		onBeforeRemove
+		onBeforeRemove,
+		onChange
 	} = {
-		...(defaults as any)
+		...(defaults as any) // TODO: fix/review types here.
 	} as Required<$$Props>;
 
-	export const store = (initStore ||
-		useSelect({
-			multiple,
-			visible,
-			selected: ensureArray(value),
-			items: [],
-			filtered: [],
-			persisted: []
-		})) as SelectStore<SelectListStore<Item>>;
+	if (newable) tags = true;
+	if (removable) tags = true;
+	if (min) tags = true;
+	if (max) tags = true;
+
+	export const store = useSelect({
+		visible,
+		selected: ensureArray(value),
+		min,
+		max,
+		mode: tags ? 'multiple' : 'single-array',
+		items: [],
+		filtered: [],
+		persisted: [],
+		onChange: (selected) => {
+			const changedValue = tags ? selected : selected[0];
+			value = changedValue;
+			if (typeof onChange === 'function') onChange(changedValue);
+		}
+	}) as SelectStore<SelectListStore<Item>>;
 
 	const globals = cleanObj({
 		badgeProps,
 		disabled,
+		exclusive,
 		filterable,
 		full,
 		focused,
 		hovered,
-		newable: multiple ? newable : false,
-		multiple,
+		min,
+		max,
+		newable,
+		removable,
 		placeholder,
-		removable: multiple ? removable : false,
 		rounded,
 		shadowed,
 		size,
+		tags,
 		theme,
 		variant,
 		transitioned,
@@ -80,14 +97,15 @@
 
 	export const context = setContext('SelectListContext', {
 		...store,
-		open,
-		close,
 		isSelected,
 		add,
-		toggle,
+		select,
 		remove,
-		restoreSelected,
 		filter,
+		restore,
+		open,
+		close,
+		toggle,
 		globals
 	}) as SelectListContext;
 
@@ -113,6 +131,23 @@
 		.append(classes, true)
 		.compile();
 
+	async function resolveItems(query?: string) {
+		if (!query) return $context.items as Required<Item>[];
+		return Promise.resolve(
+			initFilter(
+				query,
+				$context.items as Required<Item>[],
+				$context.selected as SelectListItemKey[]
+			)
+		);
+	}
+
+	function isSelected(itemOrKey: Item | SelectListItemKey) {
+		let key = itemOrKey as SelectListItemKey;
+		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
+		return $store.selected.includes(key);
+	}
+
 	function open() {
 		store.update((s) => ({ ...s, visible: true }));
 	}
@@ -135,58 +170,40 @@
 				const items = [...s.items, { value, label, group } as Required<Item>];
 				let selectedItems = [...s.selected];
 				if (selected && !selectedItems.includes(value)) {
-					if (selected && selectedItems.length && multiple) selectedItems.push(value);
+					// if (selected && selectedItems.length && multiple) selectedItems.push(value);
+					// else selectedItems = [value];
+					if (tags) selectedItems.push(value);
 					else selectedItems = [value];
 				}
+				const filteredItems = !exclusive
+					? items
+					: items.filter((v) => !selectedItems.includes(v.value));
 				return {
 					...s,
 					items,
-					filtered: [...items],
+					filtered: filteredItems, // [...items],
 					selected: selectedItems
 				};
 			});
 		}
 	}
 
+	function select(itemOrKey: Item | SelectListItemKey) {
+		let key = itemOrKey as SelectListItemKey;
+		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
+		store.select(key);
+	}
+
 	function remove(itemOrKey: Item | SelectListItemKey) {
 		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
 		store.update((s) => {
-			const filteredSelected = s.selected.filter((v) => v !== key);
+			const filteredSelected = s.selected.filter((v: any) => v !== key);
 			return { ...s, selected: filteredSelected };
 		});
 	}
 
-	async function resolveItems(query?: string) {
-		if (!query) return $context.items as Required<Item>[];
-		return Promise.resolve(
-			initFilter(
-				query,
-				$context.items as Required<Item>[],
-				$context.selected as SelectListItemKey[]
-			)
-		);
-	}
-
-	async function filter(query?: string) {
-		const filtered = await resolveItems(query);
-		const filteredValue = !query ? [] : filtered[0] ? [filtered[0].value] : [];
-		store.update((s) => {
-			return {
-				...s,
-				filtered: [...filtered],
-				selected: multiple ? s.selected : filtered.length ? filteredValue : []
-			};
-		});
-	}
-
-	function isSelected(itemOrKey: Item | SelectListItemKey) {
-		let key = itemOrKey as SelectListItemKey;
-		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
-		return $store.selected.includes(key);
-	}
-
-	function restoreSelected(
+	function restore(
 		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
 		restoreInput?: boolean
 	) {
@@ -198,7 +215,7 @@
 		}
 
 		if ($context.input && restoreInput) {
-			if (!multiple) {
+			if (!tags) {
 				const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
 				if (label) $context.input.value = label || '';
 			} else {
@@ -209,7 +226,7 @@
 		const normalizedItems =
 			typeof selectedItemsOrRestoreInput !== 'undefined'
 				? ensureArray(selectedItemsOrRestoreInput)
-				: !multiple
+				: !tags
 					? $context.persisted
 					: $context.selected;
 
@@ -224,16 +241,29 @@
 		});
 	}
 
+	async function filter(query?: string) {
+		let filtered = await resolveItems(query);
+		const filteredValue = !query ? [] : filtered[0] ? [filtered[0].value] : [];
+		store.update((s) => {
+			filtered = !exclusive ? filtered : filtered.filter((v) => !s.selected.includes(v.value));
+			return {
+				...s,
+				filtered: [...filtered],
+				selected: tags ? s.selected : filtered.length ? filteredValue : []
+			};
+		});
+	}
+
 	function handleClose(_e?: Event) {
 		context.close();
 	}
 
 	const clickOutside = createCustomEvent('click', 'click_outside', (e, n) => {
-		if (multiple) {
-			restoreSelected(true);
-		} else if (!multiple && filterable) {
+		if (tags) {
+			restore(true);
+		} else if (!tags && filterable) {
 			if ($context.input && $context.filtering) {
-				restoreSelected(true);
+				restore(true);
 			}
 		}
 		return (
@@ -244,7 +274,7 @@
 	function handleKeydown(e: KeyboardEvent) {
 		if ((e.key === 'Escape' && escapable) || (e.key === 'Tab' && $store.visible)) {
 			e.preventDefault();
-			restoreSelected(true);
+			restore(true);
 			context.close();
 			setTimeout(() => {
 				$context.input?.focus();
@@ -275,15 +305,15 @@
 				selectedItems={$store.selected}
 				filtered={$store.filtered}
 				filtering={$store.filtering}
-				isSelected={context.isSelected}
 				open={context.open}
 				close={context.close}
 				toggle={store.toggle}
+				select={store.select}
 			/>
 		</div>
 
 		<slot name="select">
-			<select tabindex="-1" class="sr-only" {...restProps} {value} {multiple}>
+			<select tabindex="-1" class="sr-only" {...restProps} multiple={tags} {value}>
 				{#if groupKeys.length}
 					{#each Object.entries(groups) as [group, items]}
 						<optgroup>{group}</optgroup>
@@ -293,9 +323,7 @@
 					{/each}
 				{:else}
 					{#each $store.items as item}
-						<option value={item.value} selected={$store.selected.includes(item.value)}
-							>{item.label}</option
-						>
+						<option value={item.value} selected={isSelected(item.value)}>{item.label}</option>
 					{/each}
 				{/if}
 			</select>

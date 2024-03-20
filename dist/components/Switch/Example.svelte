@@ -1,40 +1,28 @@
-<script>import { Switch } from ".";
+<script>import { Switch, Label } from "..";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 import { colors } from "../../constants";
 const title = "Switch";
 const description = "Toggle switch component.";
-const code = `
-  `;
 let checked = true;
 const props = {
   disabled: false,
   focused: true,
   shadowed: "none",
-  size: "lg",
-  theme: "dark",
   transitioned: false
   // ThemeTransitioned,
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
-		<Switch {...props} bind:checked theme="default" size="xs" />
-		<Switch {...props} bind:checked theme="dark" size="sm" />
-		<Switch {...props} bind:checked theme="primary" size="md" />
-		<Switch {...props} bind:checked theme="secondary" size="lg" />
-		<Switch {...props} bind:checked theme="tertiary" size="xl" />
-		<Switch {...props} bind:checked theme="danger" size="xl2" />
-		<Switch {...props} bind:checked theme="warning" size="xl2" />
-		<Switch {...props} bind:checked theme="success" size="xl2" />
-		<Switch {...props} bind:checked theme="info" size="xl2" />
+		{#each colors as color}
+			<Label tabindex={-1}>
+				<Switch {...props} bind:checked theme={color} size="md" />
+			</Label>
+		{/each}
 	</div>
 
-	<!-- <div class="grid grid-cols-3 gap-4">
-		{#each colors as color}
-			<label for={color}>
-				<Switch {...props} bind:checked theme={color} />
-			</label>
-		{/each}
-	</div> -->
+	<Label>
+		<Switch {...props} bind:checked theme="primary" size="md" />
+	</Label>
 </ExamplePage>

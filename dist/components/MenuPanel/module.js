@@ -1,8 +1,7 @@
 export const menuPanelDefaults = {
     origin: 'center',
     position: 'left',
-    shadowed: 'md',
+    shadowed: 'sm',
     theme: 'default',
-    transition: { start: 0.95, type: 'scale' },
-    variant: 'outlined'
+    transition: { start: 0.95, type: 'scale' }
 };

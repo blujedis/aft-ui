@@ -11,21 +11,21 @@
 
 	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 
-	export let { full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+	export let { focused, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<BreadcrumbProps>;
 
-	const globals = cleanObj({
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transitioned,
-		variant
-	});
-
 	setContext('Breadcrumb', {
-		globals
+		globals: {
+			focused,
+			rounded,
+			shadowed,
+			size,
+			theme,
+			transitioned,
+			variant
+		}
 	});
 
 	const th = themer($themeStore);
@@ -39,6 +39,7 @@
 		.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('breadcrumb', true)
 		.append('w-full', full)
 		.append(
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',

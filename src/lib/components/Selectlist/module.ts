@@ -29,17 +29,19 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
 };
 
 export type SelectListContext<T extends SelectListItem = SelectListItem> =
-	SelectStore<SelectListStore> & {
+	Omit<SelectStore<SelectListStore>, 'select' | 'toggle' | 'restore'> & {
 		open(): void;
 		close(): void;
 		toggle(): void;
 		isSelected(key: SelectListItemKey): boolean;
 		isSelected(item: T): boolean;
 		add({ value, label, group, selected }: T): void;
+		select(key: SelectListItemKey): void;
+		select(item: T): void;
 		remove(key: SelectListItemKey): void;
 		remove(item: T): void;
-		restoreSelected(restoreInput?: boolean): void;
-		restoreSelected(
+		restore(restoreInput?: boolean): void;
+		restore(
 			selectedItems: SelectListItemKey | SelectListItemKey[],
 			restoreInput?: boolean
 		): void;
@@ -50,11 +52,14 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> =
 export type SelectListContextProps = {
 	badgeProps?: BadgeProps;
 	disabled?: boolean;
+	exclusive?: boolean;
 	filterable?: boolean;
 	full?: boolean;
 	focused?: boolean;
 	hovered?: boolean;
-	multiple?: boolean; // multiple tags mode.
+	tags?: boolean; // multiple tags mode.
+	min?: number;	// min tags required.
+	max?: number; // max tags allowed.
 	newable?: boolean; // can add new tags
 	placeholder?: string;
 	removable?: boolean; // can remote tags
@@ -72,16 +77,17 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 	autoclose?: boolean; // on click outside menu close.
 	escapable?: boolean; // close panel on escape key.
 	items: T[]; // | Promise<T[]>;
-	store?: SelectStore<SelectListStore>; // custom store.
 	value?: any;
 	visible?: boolean;
 	filter?: FilterQuery<T>; // filter used to find items in list.
+	onChange?: (values: SelectStoreValue | SelectStoreValue[]) => any;
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
 {
 	autoclose: true,
 	escapable: true,
+	filterable: false,
 	filter: (q, i) =>
 		i.filter(
 			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)

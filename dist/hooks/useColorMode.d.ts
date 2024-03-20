@@ -1,14 +1,11 @@
 /// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
 export type ColorModeHook = ReturnType<typeof useColorMode>;
-export interface UseColorModeOptions {
-    key?: string;
-}
-export declare function useColorMode(key?: string): Writable<boolean> & {
+export declare function useColorMode(shouldInit?: boolean, prefers?: 'light' | 'dark'): Writable<boolean> & {
     getRoot: () => HTMLElement | null;
-    getLocalValue: () => boolean;
-    setLocalValue: (value: any) => void;
-    enable: (mode: 'light' | 'dark') => void;
+    getLocalValue: () => boolean | null;
+    setLocalValue: (value: boolean) => void;
+    set: (isDark?: boolean) => void;
     toggle: () => void;
     reset: () => void;
 };

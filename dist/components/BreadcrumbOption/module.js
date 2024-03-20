@@ -2,7 +2,7 @@ export const breadcrumbOptionDefaults = {
     focused: true,
     size: 'md',
     separator: 'mdi-light:chevron-right',
-    theme: 'default',
+    theme: 'frame',
     variant: 'text'
 };
 // export const variantMap = {

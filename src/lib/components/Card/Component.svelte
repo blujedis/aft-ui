@@ -7,7 +7,19 @@
 
 	type $$Props = CardProps & ElementProps<'div'>;
 
-	export let { divided, full, horizontal, maxwidth, rounded, shadowed, size, theme, variant } = {
+	export let {
+		divided,
+		dropshadowed,
+		full,
+		horizontal,
+		href,
+		maxwidth,
+		rounded,
+		shadowed,
+		size,
+		theme,
+		variant
+	} = {
 		...defaults
 	} as Required<CardProps>;
 
@@ -29,14 +41,18 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('common', 'ringed', divided || variant === 'outlined')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
 		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')
 		.append('h-full', full)
+		.append('cursor-pointer', href)
 		.append(horizontal ? 'flex' : 'flex flex-col', true)
 		.append('overflow-hidden', true)
 		.append($$restProps.class, true)
 		.compile();
+
+	if (href) $$restProps.href = href;
 </script>
 
-<div {...$$restProps} class={cardClasses}>
+<svelte:element this={href ? 'a' : 'div'} {...$$restProps} class={cardClasses}>
 	<slot />
-</div>
+</svelte:element>

@@ -9,7 +9,7 @@ declare const __propDef: {
         rounded?: import("../../types").ThemeRounded | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
-        theme?: "default" | "dark" | "primary" | "secondary" | "tertiary" | "danger" | "success" | "warning" | "info" | undefined;
+        theme?: import("../../types").ThemeColor | undefined;
         value?: any;
         variant?: "filled" | undefined;
     } & Omit<import("svelte/elements").HTMLProgressAttributes, "size">;

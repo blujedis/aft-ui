@@ -1,9 +1,11 @@
 <script>import { modalDefaults as defaults } from "./module";
-import { themeStore, themer, transitioner } from "../..";
+import { themeStore, themer } from "../../theme";
+import { transitioner } from "../Disclosure";
 import { useDisclosure } from "../../stores";
 import { fade } from "svelte/transition";
 import Placeholder from "./Placeholder.svelte";
 import { useFocusTrap } from "../../hooks";
+import { boolToMapValue } from "../../utils";
 export let {
   abortable,
   backdrop,
@@ -30,14 +32,14 @@ let panel = null;
 $:
   modalStyles = $store.visible ? $$restProps.style || " display:block" : !unmount && "display: none";
 $:
-  wrapperClasses = th.create("ModalWrapper").append("fixed inset-0 z-10 overflow-y-auto", true).append($$restProps.class, true).compile(true);
+  wrapperClasses = th.create("ModalWrapper").append("fixed inset-0 z-10 overflow-y-auto", true).append($$restProps.class, true).compile();
 $:
-  containerClasses = th.create("ModalContainer").append("flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0", true).append("sm:items-start", ["top", "top-center"].includes(position)).append("sm:items-end", ["bottom", "bottom-center"].includes(position)).append("sm:items-start sm:justify-end", position === "top-right").append("sm:items-end sm:justify-end", position === "bottom-right").append("sm:items-start sm:justify-start", position === "top-left").append("sm:items-end sm:justify-start", position === "bottom-left").compile(true);
+  containerClasses = th.create("ModalContainer").append("flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0", true).append("sm:items-start", ["top", "top-center"].includes(position)).append("sm:items-end", ["bottom", "bottom-center"].includes(position)).append("sm:items-start sm:justify-end", position === "top-right").append("sm:items-end sm:justify-end", position === "bottom-right").append("sm:items-start sm:justify-start", position === "top-left").append("sm:items-end sm:justify-start", position === "bottom-left").compile();
 $:
-  contentClasses = th.create("ModalContent").option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append(
+  contentClasses = th.create("ModalContent").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).append(
     "bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6",
     true
-  ).compile(true);
+  ).compile();
 function handleClose() {
   store.close();
 }

@@ -1,5 +1,5 @@
 export const selectOptionDefaults = {
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'outlined'
 };

@@ -2,11 +2,9 @@ import { searchArray, sortArray } from '../../utils';
 const defaultBeforeRemove = (_item) => true;
 export const gridDefaults = {
     autocols: true,
-    divided: true,
+    divided: false,
     size: 'md',
-    sticky: true,
-    theme: 'default',
-    variant: 'outlined',
+    theme: 'frame',
     filter: searchArray,
     sorter: sortArray,
     onBeforeRemove: defaultBeforeRemove

@@ -1,20 +1,17 @@
 <script lang="ts">
-	import { useResizer } from '$lib/hooks';
 	import { setContext } from 'svelte';
 	import { cleanObj, type SortAccessor, boolToMapValue, uniqid } from '$lib/utils';
 	import { themeStore, themer } from '$lib/theme';
-	import { useSelect } from '$lib/stores';
+	import { useSelect } from '$lib/stores/select';
 	import {
 		type DataGridProps,
 		gridDefaults as defaults,
 		type DataGridColumnConfig,
 		type DataGridStore,
 		type DataGridContextProps,
-		type DataGridDataItem,
-
-		type FilterAccessor
-
+		type DataGridDataItem
 	} from './module';
+	import type { DataGridFilterCriteria } from './filter';
 	import type { ElementProps } from '$lib/types';
 
 	type Column = $$Generic<DataGridColumnConfig>;
@@ -26,10 +23,13 @@
 		autocols,
 		columns,
 		divided,
+		filters,
 		filter: initFilter,
 		focused,
 		full,
-		items,
+		reorderable,
+		resizeable,
+		rows,
 		rounded,
 		rowkey,
 		shadowed,
@@ -50,12 +50,14 @@
 
 	export const store = useSelect<DataGridStore<Column, Data>>({
 		datagrid: datagrid,
+		appliedFilters: [],
+		mode: 'multiple',
 		sorting: false,
-		sort: [],
-		selected: [],
-		filtered: [],
-		items: [],
-		unsorted: [],
+		sort: [], // sorted accessor keys.
+		rows: [], // source rows.
+		selected: [], // selected rows.
+		filtered: [], // current filtered rows.
+		unsorted: [], // previous unsorted rows.
 		columns: normalizeColumns(columns)
 	});
 
@@ -63,8 +65,11 @@
 		autocols,
 		columns,
 		divided,
+		filters,
 		focused,
 		full,
+		reorderable,
+		resizeable,
 		rounded,
 		rowkey,
 		shadowed,
@@ -90,7 +95,7 @@
 	setContext('DataGrid', {
 		...store,
 		...api,
-		globals: cleanObj(globals)
+		globals: cleanObj(globals as any)
 	});
 
 	const th = themer($themeStore);
@@ -107,6 +112,7 @@
 		.append('w-full', full)
 		.append('relative', sticky)
 		.append('border', divided)
+		.append('max-w-screen-md m-auto', stacked)
 		.append('flow-root', true) // overflow-clip
 		.append($$restProps.class, true)
 		.compile();
@@ -118,12 +124,23 @@
 	}
 
 	function normalizeColumns(cols: Column[]) {
-		return cols.map((c) => {
+		const foundKeys = [] as string[];
+		const normalized = cols.map((c) => {
 			c.label = c.label || c.accessor;
 			c.id = c.id || uniqid();
 			c.width = c.width || '1fr';
+			c.transform = c.transform || ((v: any) => v);
+			// only allow row key to update on first init
+			let curKey = c.rowkey as string;
+			if (typeof curKey === 'undefined' && rowkey === c.accessor) curKey = rowkey;
+			if (typeof curKey !== 'undefined' && !foundKeys.includes(curKey)) foundKeys.push(curKey);
+			// set resizeable and reorderable if not specified by column config.
+			if (typeof c.reorderable === 'undefined' && reorderable) c.reorderable = true;
+			if (typeof c.resizeable === 'undefined' && resizeable) c.resizeable = true;
 			return c;
 		}) as Required<Column>[];
+		rowkey = foundKeys[0];
+		return normalized;
 	}
 
 	function updateColumn(
@@ -133,8 +150,9 @@
 	) {
 		const index = $store.columns.findIndex((c) => c.accessor == accessor);
 		store.update((s) => {
-			const columns = [...s.columns];
+			let columns = [...s.columns];
 			columns[index] = { ...columns[index], ...config };
+			columns = normalizeColumns(columns);
 			if (done) done(columns);
 			return { ...s, columns };
 		});
@@ -206,38 +224,52 @@
 			.catch((ex) => console.warn((ex as Error).message));
 	}
 
-	function filter(query: string, accessor: FilterAccessor<Data> | FilterAccessor<Data>[], ...accessors: FilterAccessor<Data>[]) {
-		const _accessors = Array.isArray(accessor) ? accessor : [accessor, ...accessors];
-		Promise.resolve(initFilter(query, $store.items as any, _accessors))
-			.then((filtered) => {
-				store.update((s) => {
-					return { ...s, filtered };
-				});
-			})
-			.catch((ex) => console.warn((ex as Error).message));
+	async function filter(...criteria: DataGridFilterCriteria<Data>[]) {
+		try {
+			const filtered = await Promise.resolve(initFilter(criteria, $store.rows, $store.columns));
+			store.update((s) => {
+				return { ...s, filtered };
+			});
+		} catch (ex) {
+			const err = ex as Error;
+			console.warn(err.message);
+		}
 	}
+
+	// function filter(
+	// 	query: string,
+	// 	accessor: DataGridFilterCriteria<Data> | DataGridFilterCriteria<Data>[],
+	// 	...accessors: DataGridFilterCriteria<Data>[]
+	// ) {
+	// 	const _accessors = Array.isArray(accessor) ? accessor : [accessor, ...accessors];
+	// 	Promise.resolve(initFilter(query, $store.rows as any, _accessors))
+	// 		.then((filtered) => {
+	// 			store.update((s) => {
+	// 				return { ...s, filtered };
+	// 			});
+	// 		})
+	// 		.catch((ex) => console.warn((ex as Error).message));
+	// }
 
 	function reset() {
 		store.update((s) => {
-			return { ...s, filtered: [...s.items], sort: [] };
+			return { ...s, filtered: [...s.rows], sort: [], selected: [], unsorted: [...s.rows] };
 		});
 	}
 
 	async function remove(key: string) {
-		const item = $store.items.find((item) => item[rowkey] === key);
+		const item = $store.rows.find((item) => item[rowkey] === key);
 		const shouldRemove = await Promise.resolve(onBeforeRemove(item));
 		if (!shouldRemove) return;
 		store.update((s) => {
-			const newItems = s.items.filter((item) => item[rowkey] !== key);
+			const newItems = s.rows.filter((item) => item[rowkey] !== key);
 			const newFiltered = s.filtered.filter((item) => item[rowkey] !== key);
-			return { ...s, items: newItems, filtered: newFiltered };
+			return { ...s, rows: newItems, filtered: newFiltered };
 		});
 	}
 
-	Promise.resolve(items).then((i) => {
-		store.update((s) => {
-			return { ...s, items: [...i], filtered: [...i], unsorted: [...i] };
-		});
+	store.update((s) => {
+		return { ...s, rows: [...rows], filtered: [...rows], unsorted: [...rows] };
 	});
 </script>
 

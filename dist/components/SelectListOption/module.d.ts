@@ -1,12 +1,14 @@
 import type { ThemeColor, ThemeSize } from '../../types';
 import type { SelectListItemKey } from '../SelectList';
-import type { selectListOption } from './config';
-export type SelectListOptionVariant = keyof typeof selectListOption;
 export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
+    activeStyles?: boolean;
     as?: Tag;
+    focused?: boolean;
+    hovered?: boolean;
+    multiple?: boolean;
+    removable?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;
     key?: SelectListItemKey;
-    variant?: SelectListOptionVariant;
 };
 export declare const selectListOptionDefaults: SelectListOptionProps<'a'>;

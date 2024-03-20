@@ -1,9 +1,10 @@
 export declare const breadcrumbOption: {
     text: {
-        [x: string]: string | string[];
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -14,8 +15,10 @@ export declare const breadcrumbOption: {
     };
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -23,22 +26,13 @@ export declare const breadcrumbOption: {
         warning: string;
         success: string;
         info: string;
-    } & {
+    };
+    soft: {
         $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & import("../../theme").StringMap;
-    ghost: {
-        $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

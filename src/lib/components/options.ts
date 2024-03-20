@@ -1,5 +1,4 @@
 export * from '../constants/options';
-export * from '../constants/statez';
 export * from '../constants/states';
 
 // Component Options

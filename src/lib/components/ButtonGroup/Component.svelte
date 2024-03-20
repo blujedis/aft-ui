@@ -25,30 +25,30 @@
 		transitioned,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<ButtonGroupProps>;
 
-	export const store = useSelect({ selected: ensureArray(selected), multiple });
-
-	const globals = cleanObj({
-		focused,
-		full,
-		hovered,
-		rounded,
-		size,
-		theme,
-		transitioned,
-		variant
-	});
+	export const store = useSelect({ selected: ensureArray(selected), mode: 'multiple' });
 
 	setContext<ButtonGroupContext>('ButtonGroup', {
 		...store,
-		globals: globals as any
+		globals: {
+			focused,
+			full,
+			hovered,
+			rounded,
+			size,
+			theme,
+			transitioned,
+			variant
+		}
 	});
 
 	$: buttonGroupClasses = themer($themeStore)
 		.create('ButtonGroup')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('button-group', true)
 		.append('w-full', full)
 		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant !== 'ghost')
 		.append('isolate inline-flex', true)
@@ -66,6 +66,5 @@
 		reset={handleReset}
 		select={store.select}
 		unselect={store.unselect}
-		isSelected={store.isSelected}
 	/>
 </span>

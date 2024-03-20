@@ -12,7 +12,7 @@ export const context = setContext("AvatarStack", {
 });
 let stack;
 $:
-  avatarStackClasses = themer($themeStore).create("AvatarStack").append("flex -space-x-2 overflow-hidden", true).append("isolate ", direction === "down").append($$restProps.class, true).compile(true);
+  avatarStackClasses = themer($themeStore).create("AvatarStack").prepend("avatar-stack", true).append("flex -space-x-2 overflow-hidden", true).append("isolate ", direction === "down").append($$restProps.class, true).compile();
 onMount(() => {
   if (direction !== "down")
     return;

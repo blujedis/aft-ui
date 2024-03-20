@@ -3,7 +3,7 @@ import { type RatingStoreValue } from './module';
 declare const __propDef: {
     props: {
         store?: import("svelte/store").Writable<RatingStoreValue> | undefined;
-    } & Omit<import("../RatingItem").RatingItemProps, "index"> & {
+    } & Omit<import("../RatingItem/module").RatingItemProps, "index"> & {
         arrowable?: boolean | undefined;
         hoverable?: boolean | undefined;
         count?: number | undefined;

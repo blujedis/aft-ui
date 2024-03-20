@@ -1,10 +1,8 @@
 import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type SwitchProps = {
-	position?: 'right' | 'left' | 'top' | 'bottom'; // relative to slot element
 	classHandle?: string;
-	classFill?: string;
-	classBackdrop?: string;
+	classSlider?: string;
 	disabled?: boolean;
 	focused?: boolean;
 	hovered?: boolean;
@@ -13,11 +11,11 @@ export type SwitchProps = {
 	srtext?: string;
 	theme?: ThemeColor;
 	transitioned?: boolean;
+	unlabeled?: boolean;
 };
 
 export const switchDefaults: Partial<SwitchProps> = {
 	size: 'md',
-	srtext: 'Use Switch',
-	theme: 'frame',
-	position: 'right'
+	srtext: 'Toggle Switch',
+	theme: 'frame'
 };

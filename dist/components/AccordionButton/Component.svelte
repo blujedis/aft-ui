@@ -5,14 +5,14 @@ import { accordionButtonDefaults as defaults } from "./module";
 const context = getContext("Accordion");
 const optionContext = getContext("AccordionOption");
 export let {
+  as,
   caret,
   disabled,
-  focused,
   hovered,
   key,
   roticon,
-  rounded,
-  shadowed,
+  rotiangle,
+  selectable,
   size,
   theme,
   transitioned,
@@ -20,11 +20,11 @@ export let {
 } = {
   ...defaults,
   key: optionContext.key,
-  rounded: context.globals.rounded,
-  shadowed: context.globals.shadowed,
-  size: context.globals.size,
-  theme: context.globals.theme,
-  variant: context.globals.variant
+  hovered: context.globals?.hovered,
+  selectable: context.globals?.selectable,
+  size: context.globals?.size,
+  theme: context.globals?.theme,
+  variant: context.globals?.variant
 };
 $:
   isSelected = $context.selected?.includes(key);
@@ -34,23 +34,33 @@ $:
   activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 const th = themer($themeStore);
 $:
-  accordionButtonClasses = th.create("AccordionButton").variant("accordionButton", variant, theme, variant).option("common", "focusedVisible", focused).option("hovered", theme, hovered).option("common", "transitioned", transitioned).option("common", "bordered", ["outlined", "flushed"].includes(variant)).option("common", "disabled", disabled).option("roundeds", rounded, rounded).option("fieldFontSizes", size, size).option("buttonPadding", size, size).option("shadows", shadowed, shadowed && variant !== "flushed").append("rounded-none border-0 border-b ", variant === "flushed").append("aria-expanded:border-b", variant === "outlined").append("mb-1 aria-expanded:mb-0", variant === "filled").append(
-    "inline-flex items-center justify-between focus:outline-none w-full aria-expanded:font-medium outline-0",
-    true
-  ).append($$restProps.class, true).compile(true);
+  accordionButtonClasses = th.create("AccordionButton").bundle(
+    ["selectedBgAriaExpanded", "selectedWhiteTextAriaExpanded"],
+    theme,
+    variant === "filled" && selectable
+  ).bundle(["selectedTextAriaExpanded"], theme, selectable && variant !== "filled").option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("panelBg", theme, variant === "filled").option("panelBgHover", theme, hovered && !isSelected).option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend("accordion-button", true).append("inline-flex items-center justify-between w-full focus:outline-none", true).append($$restProps.class, true).compile();
 $:
-  iconClasses = th.create("DropdownButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", roticon).append(typeof roticon === "string" ? roticon : "-rotate-180", isSelected && roticon).compile();
+  iconClasses = th.create("DropdownButtonIcon").option("iconCaretSizes", size, true).prepend("accordion-caret", true).append("transition-transform duration-300 origin-center", roticon).append(
+    typeof roticon === "string" ? roticon : rotiangle === 180 ? "-rotate-180" : "rotate-90",
+    isSelected && roticon
+  ).compile();
+const additionalProps = {
+  disabled
+};
 </script>
 
-<button
+<svelte:element
+	this={as}
 	id={`${key}-accordion-heading`}
 	aria-controls={`${key}-accordion-option`}
+	role="button"
+	tabindex={-1}
 	{...$$restProps}
-	on:click={() => context.toggle(key)}
-	class={accordionButtonClasses}
-	{disabled}
+	{...additionalProps}
 	aria-expanded={isSelected}
 	aria-disabled={disabled}
+	class={accordionButtonClasses}
+	on:click={() => context.toggle(key)}
 >
 	<div>
 		<slot />
@@ -60,4 +70,4 @@ $:
 			<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
 		</slot>
 	{/if}
-</button>
+</svelte:element>

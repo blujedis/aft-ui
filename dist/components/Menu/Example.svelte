@@ -60,17 +60,18 @@ const sourceItems = [
   }
 ];
 const props = {
+  hovered: true,
   disabled: false,
   full: false,
   rounded: "none",
-  shadowed: "none",
+  // shadowed: 'none' as ThemeShadowed,
   size: "md",
   theme: "default",
   variant: "filled"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#key props}
 		{#each colors as color}
 			<div class="grid grid-cols-5 gap-2 mb-4">
@@ -84,6 +85,7 @@ const props = {
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
 					<Menu {...props} variant="outlined" theme={color}>
 						<MenuButton>Languages</MenuButton>
@@ -94,8 +96,9 @@ const props = {
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
-					<Menu {...props} variant="text" theme={color}>
+					<Menu {...props} variant="soft" theme={color}>
 						<MenuButton>Languages</MenuButton>
 						<MenuPanel>
 							{#each sourceItems as item}
@@ -104,8 +107,20 @@ const props = {
 						</MenuPanel>
 					</Menu>
 				</label>
+
 				<label for={color}>
 					<Menu {...props} variant="ghost" theme={color}>
+						<MenuButton>Languages</MenuButton>
+						<MenuPanel>
+							{#each sourceItems as item}
+								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+							{/each}
+						</MenuPanel>
+					</Menu>
+				</label>
+
+				<label for={color}>
+					<Menu {...props} variant="text" theme={color}>
 						<MenuButton>Languages</MenuButton>
 						<MenuPanel>
 							{#each sourceItems as item}

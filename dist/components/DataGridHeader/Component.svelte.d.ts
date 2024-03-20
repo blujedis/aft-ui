@@ -7,7 +7,6 @@ declare const __propDef: {
     };
     slots: {
         default: {};
-        filter: {};
     };
 };
 export type ComponentProps = typeof __propDef.props;

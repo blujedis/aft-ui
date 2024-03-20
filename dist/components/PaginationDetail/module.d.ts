@@ -1,6 +1,5 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-import type { paginationDetail } from './config';
-export type PaginationDetailVariant = keyof typeof paginationDetail;
+export type PaginationDetailVariant = 'filled' | 'flushed' | 'soft';
 export type PaginationDetailProps = {
     full?: boolean;
     rounded?: ThemeRounded;

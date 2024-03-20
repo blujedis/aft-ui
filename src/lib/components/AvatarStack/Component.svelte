@@ -21,6 +21,7 @@
 
 	$: avatarStackClasses = themer($themeStore)
 		.create('AvatarStack')
+		.prepend('avatar-stack', true)
 		.append('flex -space-x-2 overflow-hidden', true)
 		.append('isolate ', direction === 'down')
 		.append($$restProps.class, true)

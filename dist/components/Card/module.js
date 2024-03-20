@@ -1,4 +1,3 @@
 export const cardDefaults = {
-    size: 'md',
-    theme: 'default'
+    size: 'md'
 };

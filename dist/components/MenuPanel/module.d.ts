@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeVariant } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 export type MenuPanelProps = {
     origin?: 'left' | 'right' | 'center';
@@ -9,7 +9,6 @@ export type MenuPanelProps = {
     transition?: DisclosureTransitionOption | (Record<string, any> & {
         type: DisclosureTransition;
     });
-    variant?: Exclude<ThemeVariant, 'flushed'>;
 };
 export declare const menuPanelDefaults: {
     origin: string;
@@ -20,5 +19,4 @@ export declare const menuPanelDefaults: {
         start: number;
         type: string;
     };
-    variant: string;
 };

@@ -10,15 +10,9 @@ export declare function arrayInsert(arr: any[], index: number, newItem: any): an
  * If undefined empty array is returned otherwise the array or value wrapped as array is.
  *
  * @param value the value to inspect as any array.
+ * @param clean when true and is array clean any undefined.
  */
-export declare function ensureArray<T = any>(value?: null | T | T[]): T[];
-/**
- * Simple function using indexOf for SQL LIKE evaluation.
- *
- * @param query the search query.
- * @param value the value to apply search query against.
- */
-export declare function isLike(query: string, value: any): boolean;
+export declare function ensureArray<T = any>(value?: null | T | T[], clean?: boolean): T[];
 /**
  * Rudamentary search filter applying indexOf checking against all or specified accessor fields.
  *
@@ -26,7 +20,9 @@ export declare function isLike(query: string, value: any): boolean;
  * @param items an array of items to apply the search to.
  * @param accessors optional accessor keys applying search to only these keys.
  */
-export declare function searchArray<T extends Record<string, any>>(query: string, items: T[], ...accessors: (keyof T)[]): T[];
+export declare function searchArray<T extends Record<string, unknown>>(query: string, items: T[], accessors: (keyof T | ({
+    accessor: keyof T;
+} & Record<string, unknown>))[]): T[];
 export type SortAccessor<T> = Extract<keyof T, string> | `-${Extract<keyof T, string>}`;
 export type Primer = <T>(value: any, accessor: keyof T) => any;
 export type Comparator = (a: any, b: any) => number;

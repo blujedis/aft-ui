@@ -3,16 +3,12 @@ import notification from "../../stores/notification";
 import ExamplePage from "../_Example/ExamplePage.svelte";
 const title = "Notifications";
 const description = "Alert notifications with 6 optional positions.";
-const code = `
-  `;
 let textarea;
 const props = {
   position: "top-right",
   rounded: "none",
   shadowed: "none",
-  size: "md",
-  theme: "default",
-  variant: "filled"
+  size: "md"
 };
 const themes = [
   "light",
@@ -40,7 +36,7 @@ function notify() {
 }
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
 		<div>
 			<label for="notification" class="flex flex-col"

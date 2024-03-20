@@ -7,16 +7,18 @@ const optionContext = getContext("AccordionOption");
 export let { as, key, size, theme, transition, variant } = {
   ...defaults,
   key: optionContext?.key,
-  size: context?.globals.size,
-  theme: context?.globals.theme,
-  variant: context?.globals.variant
+  size: context.globals?.size,
+  theme: context.globals?.theme,
+  variant: context.globals?.variant
 };
+$:
+  isSelected = $context.selected.includes(key);
 const th = themer($themeStore);
 $:
-  accordionContentClasses = th.create("AccordionContent").variant("accordionContent", variant, theme, variant).option("fieldFontSizes", size, size).option("fieldPadding", size, size).append($$restProps.class, true).compile(true);
+  accordionContentClasses = th.create("AccordionContent").option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend(`accordion-content`, true).append($$restProps.class, true).compile();
 </script>
 
-{#if $context.selected.includes(key)}
+{#if isSelected}
 	<svelte:element
 		this={as}
 		{...$$restProps}

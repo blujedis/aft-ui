@@ -364,13 +364,14 @@ export const useTooltip = (settings = {}) => {
     const rootOptions = {
         arrow: '#arrow',
         Component: Popover,
-        abortable: true,
+        // abortable: true,
         escapable: true,
         content: '#popover',
         describedby: true,
         events: ['hover', 'focus'],
         ...initOptions
     };
+    // TODO: Types aren't quite right here.
     const tooltip = (node, props = {}) => {
         props = {
             arrowed: true,

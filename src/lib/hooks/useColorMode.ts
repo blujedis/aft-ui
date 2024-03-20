@@ -5,15 +5,15 @@ export type ColorModeHook = ReturnType<typeof useColorMode>;
 
 const key = 'darkmode';
 
-const store = writable<boolean>((browser && JSON.parse(localStorage.getItem(key) || 'false')) || false);
-const prefersDark = browser && window.matchMedia('(prefers-color-scheme: dark)').matches || false;
+const store = writable<boolean>(
+	(browser && JSON.parse(localStorage.getItem(key) || 'false')) || false
+);
+const prefersDark = (browser && window.matchMedia('(prefers-color-scheme: dark)').matches) || false;
 
 export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
-
 	type ColorModeInstance = Writable<boolean> & typeof methods;
 
-	if (typeof prefers === 'undefined')
-		prefers = prefersDark ? 'dark' : 'light';
+	if (typeof prefers === 'undefined') prefers = prefersDark ? 'dark' : 'light';
 
 	const methods = {
 		getRoot,
@@ -44,10 +44,8 @@ export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
 	function applyMode(value: boolean) {
 		const root = getRoot();
 		if (!root) return;
-		if (value)
-			root.classList.add('dark')
-		else
-			root.classList.remove('dark');
+		if (value) root.classList.add('dark');
+		else root.classList.remove('dark');
 		setLocalValue(value);
 	}
 
@@ -63,7 +61,7 @@ export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
 	function toggle() {
 		const root = getRoot();
 		if (!root) return;
-		store.update(isDark => {
+		store.update((isDark) => {
 			const nextValue = !isDark;
 			applyMode(nextValue);
 			return nextValue;
@@ -72,8 +70,7 @@ export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
 
 	function reset() {
 		const root = getRoot();
-		if (root)
-			root.classList.remove('dark');
+		if (root) root.classList.remove('dark');
 		localStorage.removeItem(key);
 		store.update((_s) => false);
 	}
@@ -91,5 +88,4 @@ export function useColorMode(shouldInit = false, prefers?: 'light' | 'dark') {
 	};
 
 	return api as ColorModeInstance;
-
 }

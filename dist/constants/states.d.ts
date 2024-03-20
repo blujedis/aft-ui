@@ -1,18 +1,31 @@
-export declare const filledBg: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
+export declare const common: {
+    transitioned: string;
+    ringed: string;
+    bordered: string;
+    divided: string;
+    disabled: string;
+    focusedOutline: string;
+    focusedOutlineVisible: string;
+    focusedOutlineWithin: string;
+    focusedOutlineWithinVisible: string;
+    focusedRing: string;
+    focusedRingVisible: string;
+    focusedRingWithin: string;
+    muteSelected: string;
+    mutedText: string;
+    formBorder: string;
+    neutralBg: string;
+    rangeBg: string;
+    rangeValue: string;
+    rangeThumb: string;
+    placeholderFilled: string;
 };
-export declare const filledBgAriaCurrent: {
+export declare const iconText: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -21,10 +34,12 @@ export declare const filledBgAriaCurrent: {
     success: string;
     info: string;
 };
-export declare const filledBgAriaExpanded: {
+export declare const iconFill: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -33,10 +48,12 @@ export declare const filledBgAriaExpanded: {
     success: string;
     info: string;
 };
-export declare const filledBgAriaSelected: {
+export declare const iconStroke: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -45,10 +62,12 @@ export declare const filledBgAriaSelected: {
     success: string;
     info: string;
 };
-export declare const filledBgDarkAriaCurrent: {
+export declare const mainBg: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -57,10 +76,12 @@ export declare const filledBgDarkAriaCurrent: {
     success: string;
     info: string;
 };
-export declare const filledBgDarkAriaExpanded: {
+export declare const mainBgEven: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -69,10 +90,12 @@ export declare const filledBgDarkAriaExpanded: {
     success: string;
     info: string;
 };
-export declare const filledBgDarkAriaSelected: {
+export declare const mainBgOdd: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -81,54 +104,12 @@ export declare const filledBgDarkAriaSelected: {
     success: string;
     info: string;
 };
-export declare const filledBgEven: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledBgOdd: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledFill: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledStroke: {
-    default: string;
-    dark: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
-export declare const filledText: {
+export declare const mainRing: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -137,10 +118,12 @@ export declare const filledText: {
     success: string;
     info: string;
 };
-export declare const filledTextAriaCurrent: {
+export declare const mainBorder: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -149,10 +132,12 @@ export declare const filledTextAriaCurrent: {
     success: string;
     info: string;
 };
-export declare const filledTextAriaExpanded: {
+export declare const mainOutline: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -161,10 +146,124 @@ export declare const filledTextAriaExpanded: {
     success: string;
     info: string;
 };
-export declare const filledTextAriaSelected: {
+export declare const mainBorderGroupHover: {
     $base: string;
-    default: string;
-    dark: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const mainBorderPeerFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const mainBorderPeerHover: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const softBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const panelBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const panelContainerBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const notificationBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const tooltipBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const panelAccordionBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -174,8 +273,11 @@ export declare const filledTextAriaSelected: {
     info: string;
 };
 export declare const ghostBgHover: {
-    default: string;
-    dark: string;
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -184,9 +286,12 @@ export declare const ghostBgHover: {
     success: string;
     info: string;
 };
-export declare const ghostOutlineFocus: {
-    default: string;
-    dark: string;
+export declare const softBgHover: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -195,9 +300,12 @@ export declare const ghostOutlineFocus: {
     success: string;
     info: string;
 };
-export declare const ghostOutlineFocusVisible: {
-    default: string;
-    dark: string;
+export declare const panelBgHover: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -206,9 +314,12 @@ export declare const ghostOutlineFocusVisible: {
     success: string;
     info: string;
 };
-export declare const ghostOutlineFocusWithin: {
-    default: string;
-    dark: string;
+export declare const panelAccordionBgHover: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -217,9 +328,12 @@ export declare const ghostOutlineFocusWithin: {
     success: string;
     info: string;
 };
-export declare const ghostOutlineGroupFocus: {
-    default: string;
-    dark: string;
+export declare const selectedBgAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -228,9 +342,12 @@ export declare const ghostOutlineGroupFocus: {
     success: string;
     info: string;
 };
-export declare const ghostOutlineGroupFocusWithin: {
-    default: string;
-    dark: string;
+export declare const selectedBgAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -239,9 +356,12 @@ export declare const ghostOutlineGroupFocusWithin: {
     success: string;
     info: string;
 };
-export declare const ghostOutlinePeerFocus: {
-    default: string;
-    dark: string;
+export declare const selectedBgAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -250,9 +370,12 @@ export declare const ghostOutlinePeerFocus: {
     success: string;
     info: string;
 };
-export declare const ghostText: {
-    default: string;
-    dark: string;
+export declare const selectedBgAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -261,9 +384,12 @@ export declare const ghostText: {
     success: string;
     info: string;
 };
-export declare const outlinedBorder: {
-    default: string;
-    dark: string;
+export declare const selectedBorderAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -272,9 +398,12 @@ export declare const outlinedBorder: {
     success: string;
     info: string;
 };
-export declare const outlinedOutline: {
-    default: string;
-    dark: string;
+export declare const selectedAccentBgAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -283,9 +412,12 @@ export declare const outlinedOutline: {
     success: string;
     info: string;
 };
-export declare const outlinedRing: {
-    default: string;
-    dark: string;
+export declare const selectedAccentBgAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -294,9 +426,12 @@ export declare const outlinedRing: {
     success: string;
     info: string;
 };
-export declare const outlinedText: {
-    default: string;
-    dark: string;
+export declare const selectedAccentBgAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -305,9 +440,12 @@ export declare const outlinedText: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocus: {
-    default: string;
-    dark: string;
+export declare const selectedAccentBgAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -316,9 +454,12 @@ export declare const filledOutlineFocus: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocusVisible: {
-    default: string;
-    dark: string;
+export declare const selectedGhostBgAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -327,9 +468,12 @@ export declare const filledOutlineFocusVisible: {
     success: string;
     info: string;
 };
-export declare const filledOutlineFocusWithin: {
-    default: string;
-    dark: string;
+export declare const selectedGhostBgAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -338,9 +482,12 @@ export declare const filledOutlineFocusWithin: {
     success: string;
     info: string;
 };
-export declare const filledOutlineGroupFocus: {
-    default: string;
-    dark: string;
+export declare const selectedGhostBgAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -349,9 +496,12 @@ export declare const filledOutlineGroupFocus: {
     success: string;
     info: string;
 };
-export declare const filledOutlineGroupFocusWithin: {
-    default: string;
-    dark: string;
+export declare const selectedGhostBgAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -360,9 +510,12 @@ export declare const filledOutlineGroupFocusWithin: {
     success: string;
     info: string;
 };
-export declare const filledOutlinePeerFocus: {
-    default: string;
-    dark: string;
+export declare const selectedSoftBgAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -371,9 +524,12 @@ export declare const filledOutlinePeerFocus: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlineFocus: {
-    default: string;
-    dark: string;
+export declare const selectedSoftBgAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -382,9 +538,12 @@ export declare const outlinedOutlineFocus: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlineFocusVisible: {
-    default: string;
-    dark: string;
+export declare const selectedSoftBgAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -393,9 +552,12 @@ export declare const outlinedOutlineFocusVisible: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlineFocusWithin: {
-    default: string;
-    dark: string;
+export declare const selectedSoftBgAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -404,9 +566,12 @@ export declare const outlinedOutlineFocusWithin: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlineGroupFocus: {
-    default: string;
-    dark: string;
+export declare const progressBgWebkitProgressValue: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -415,9 +580,12 @@ export declare const outlinedOutlineGroupFocus: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlineGroupFocusWithin: {
-    default: string;
-    dark: string;
+export declare const progressBgMozProgressBar: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;
@@ -426,9 +594,502 @@ export declare const outlinedOutlineGroupFocusWithin: {
     success: string;
     info: string;
 };
-export declare const outlinedOutlinePeerFocus: {
-    default: string;
-    dark: string;
+export declare const rangeBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const switchBgAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const progressFill: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const progressStroke: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const mainText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const whiteText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const tooltipText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const softText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledPlaceholder: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const notificationText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const defaultText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const inputText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedTextAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedTextAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedTextAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedTextAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedWhiteTextAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedWhiteTextAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedWhiteTextAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedWhiteTextAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedGhostTextAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedGhostTextAriaExpanded: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedGhostTextAriaCurrent: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const selectedGhostTextAriaChecked: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlineFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlineFocusVisible: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlineFocusWithin: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlinePeerFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlineGroupFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const outlineGroupFocusWithin: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringFocusVisible: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringFocusWithin: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringPeerFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringGroupFocus: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const ringGroupFocusWithin: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
     primary: string;
     secondary: string;
     tertiary: string;

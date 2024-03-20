@@ -1,7 +1,6 @@
 <script>import { Button } from ".";
 import { colors } from "../../constants";
 import ExamplePage from "../_Example/ExamplePage.svelte";
-import { Flushed } from "../Flushed";
 const title = "Buttons";
 const description = "Themed Buttons with variants.";
 const code = `
@@ -12,7 +11,7 @@ const props = {
   rounded: "none",
   shadowed: "none",
   size: "md",
-  variant: "filled",
+  strong: false,
   underlined: false,
   hovered: true,
   focused: true,
@@ -20,21 +19,14 @@ const props = {
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
 		<div class="grid grid-cols-5 gap-4 mb-4">
-			<label for="filled">
-				<Button {...props} theme={color}>button</Button>
-			</label>
-			<label for="outline">
-				<Button {...props} variant="outlined" theme={color}>button</Button>
-			</label>
-			<label for="link">
-				<Button {...props} variant="text" theme={color}>button</Button>
-			</label>
-			<label for="ghost">
-				<Button {...props} variant="ghost" theme={color}>button</Button>
-			</label>
+			<Button {...props} variant="filled" theme={color}>Button</Button>
+			<Button {...props} variant="outlined" theme={color}>Button</Button>
+			<Button {...props} variant="soft" theme={color}>Button</Button>
+			<Button {...props} variant="ghost" theme={color}>Button</Button>
+			<Button {...props} variant="text" theme={color}>Button</Button>
 		</div>
 	{/each}
 </ExamplePage>

@@ -1,8 +1,10 @@
 export declare const progressCircleTrack: {
     filled: {
         $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;
@@ -13,33 +15,8 @@ export declare const progressCircleTrack: {
     };
 };
 export declare const progressCircleValue: {
-    filled: {
-        $base: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        dark: string;
-    } & import("../../theme").StringMap;
+    filled: any;
 };
 export declare const progressCircleText: {
-    filled: {
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    } & {
-        $base: string;
-    } & import("../../theme").StringMap;
+    filled: any;
 };

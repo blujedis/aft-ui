@@ -1,5 +1,5 @@
 export const breadcrumbDefaults = {
     size: 'md',
-    theme: 'default',
+    theme: 'frame',
     variant: 'text'
 };

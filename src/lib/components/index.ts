@@ -65,7 +65,6 @@ export * from './SelectListButton';
 export * from './SelectListOption';
 export * from './SelectListPanel';
 export * from './Switch';
-export * from './DataGrid';
 export * from './Tab';
 export * from './Tabs';
 export * from './Textarea';

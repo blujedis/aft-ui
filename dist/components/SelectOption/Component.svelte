@@ -6,19 +6,12 @@ import { getContext } from "svelte";
 export let { disabled, size, theme, transitioned, value, variant, unstyled } = {
   ...defaults
 };
-const context = getContext("SelectContext");
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("SelectOption").variant("selectOption", variant, theme, variant).option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center justify-center", true).append($$restProps.class, true).compile(true);
+  inputClasses = th.create("SelectOption").option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<option
-	{...$$restProps}
-	use:forwardedEvents
-	{value}
-	class={inputClasses}
-	on:click={() => context.select(value)}
->
-	<slot selected={() => context.isSelected(value)} />
+<option use:forwardedEvents {...$$restProps} {value} class={inputClasses}>
+	<slot />
 </option>

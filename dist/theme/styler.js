@@ -47,7 +47,7 @@ export function styler(themeConfig) {
          * Adds a new key and value to the styles array.
          *
          * @param key the color key to be added.
-         * @param as set color as variable name.
+         * @param value set color as variable name.
          * @param when if true the key/value are added.
          */
         function color(key, value, when) {
@@ -57,8 +57,18 @@ export function styler(themeConfig) {
                 return api;
             if (styles.some((v) => v.startsWith(key)))
                 throw new Error(`Styler "${instanceName}" cannot add duplicate style key "${key}".`);
+            const [prefix, opacity] = value.split('/');
+            const cleaned = prefix.replace(/^--color-/, '');
             if (!['#', 'rgb', 'hsl'].some((v) => value.startsWith(v))) {
-                value = 'rgb(var(--color-' + value.replace(/^--color-/, '') + '))';
+                // statically defined color.
+                if (opacity) {
+                    // note using rgba(var(--some-color), 0.2) won't work use "/"
+                    const alpha = opacity.includes('.') ? opacity : Number(opacity) / 100;
+                    value = `rgba(var(--color-${cleaned})/${alpha})`;
+                }
+                else {
+                    value = `rgb(var(--color-${cleaned}))`;
+                }
             }
             add(key, value, when);
             return api;
@@ -99,40 +109,12 @@ export function styler(themeConfig) {
             if (!opt)
                 throw new Error(`${instanceName} option using property ${path} was NOT found.`);
             const baseValue = opt.$base || '';
-            if (baseValue)
+            if (baseValue && key !== 'unstyled')
                 append(baseValue, true);
             const value = opt[path] || '';
             add(key, value, true);
             return api;
         }
-        /**
-         * Adds palette color/shade to be compiled.
-         *
-         * @param theme the theme color.
-         * @param shade the theme color shade.
-         * @param key the key name of the style to be added.
-         * @param when if value is truthy add value otherwise reject.
-         */
-        // function palette(
-        // 	theme: ThemeColor,
-        // 	shade: ThemeColorShade | 'DEFAULT' | null | undefined,
-        // 	key: string,
-        // 	when: Primitive
-        // ) {
-        // 	if (typeof themeConfig === 'undefined') return api;
-        // 	if (!when) return api;
-        // 	if (theme === 'white') return add(key, '#fff', true);
-        // 	const shades = (_palette[theme as keyof typeof _palette] || {}) as Record<
-        // 		ThemeColorShade | 'DEFAULT',
-        // 		string
-        // 	>;
-        // 	if (!shades || shade === null)
-        // 		throw new Error(`${instanceName} color palette using theme ${theme} was NOT found.`);
-        // 	const value = shades[shade as ThemeColorShade] || '';
-        // 	if (!value) throw new Error(`${instanceName} color using shade ${shade} was NOT found.`);
-        // 	add(key, value, true);
-        // 	return api;
-        // }
         /**
          * Creates style key/value using value picked from map.
          *

@@ -18,6 +18,7 @@
 		transitioned,
 		variant
 	} = {
+		...$themeStore.defaults?.component,
 		...defaults
 	} as Required<BadgeProps>;
 
@@ -26,7 +27,12 @@
 
 	$: badgeClasses = th
 		.create('Badge')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(
+			['mainBg', 'whiteText'],
+			{ frame: 'text-dark dark:text-light' },
+			theme,
+			variant === 'filled'
+		)
 		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
 		.bundle(['softBg', 'softText'], {}, theme, variant === 'soft')
 		.option('common', 'transitioned', transitioned)
@@ -35,6 +41,7 @@
 		.option('badgeFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('badge', true)
 		.prepend('badge-removable', removable)
 		.append('w-full', full)
 		.append('z-20 badge', true)

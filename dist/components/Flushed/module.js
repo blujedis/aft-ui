@@ -1,4 +1,3 @@
 export const flushedDefaults = {
-    peer: true,
-    theme: 'default'
+    peer: true
 };

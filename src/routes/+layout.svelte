@@ -5,14 +5,13 @@
 
 <svelte:head>
 	<script>
-		const key = 'darkmode';
 		let darkMode = false;
-		let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-		if (localStorage.darkmode === 'true' || (!(key in localStorage) && prefersDark)) {
+		if (localStorage.darkmode === 'true' || (!('darkmode' in localStorage) && prefersDark)) {
 			darkMode = true;
 		} else {
-			const currentDark = JSON.parse(localStorage[key] || 'false');
+			const currentDark = JSON.parse(localStorage['darkmode'] || 'false');
 			if (currentDark) darkMode = true;
 			else darkMode = false;
 		}
@@ -20,7 +19,7 @@
 		if (darkMode) document.documentElement.classList.add('dark');
 		else document.documentElement.classList.remove('dark');
 		localStorage.setItem('preferdark', prefersDark);
-		localStorage.setItem(key, darkMode);
+		localStorage.setItem('darkmode', darkMode);
 	</script>
 </svelte:head>
 
@@ -32,6 +31,6 @@
 		on:change={toggle}
 		shadowed="md"
 		size="sm"
-		class="fixed bottom-4 right-6 z-30"
+		class="fixed top-4 right-6 z-50"
 	/>
 </ColorMode>

@@ -10,31 +10,31 @@ const props = {
   focused: true,
   // true: focus-visible.
   full: false,
-  rounded: "none",
+  rounded: "md",
   shadowed: "none",
   size: "md",
   theme: "default",
   transitioned: false,
   // ThemeTransitioned,
-  variant: "outlined",
-  placeholder: "Example text use bind:value={some_property}"
+  variant: "outlined"
+  // placeholder: 'Enter text here...'
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-4 gap-4 mb-4">
-		{#each colors as color}
-			<Textarea {...props} variant="filled" theme={color}>Placeholder Text</Textarea>
-		{/each}
-	</div>
-	<div class="grid grid-cols-4 gap-4 mb-4">
-		{#each colors as color}
-			<Textarea {...props} variant="ghost" theme={color}>Placeholder Text</Textarea>
-		{/each}
-	</div>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4 mb-4">
 		{#each colors as color}
 			<Textarea {...props} variant="outlined" theme={color}>Placeholder Text</Textarea>
+		{/each}
+	</div>
+	<div class="grid grid-cols-4 gap-4 mb-4">
+		{#each colors as color}
+			<Textarea {...props} variant="soft" theme={color}>Placeholder Text</Textarea>
+		{/each}
+	</div>
+	<div class="grid grid-cols-4 gap-4 mb-4">
+		{#each colors as color}
+			<Textarea {...props} variant="text" theme={color}>Placeholder Text</Textarea>
 		{/each}
 	</div>
 </ExamplePage>

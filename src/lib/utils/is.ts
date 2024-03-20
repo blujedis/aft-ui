@@ -14,15 +14,10 @@ export function getTypeOf(value: unknown) {
  */
 export function getType(value: unknown) {
 	const type = getTypeOf(value);
-
 	if (type !== 'object') return type;
-
 	if (isArray(value)) return 'array';
-
 	if (isNull(value)) return 'null';
-
 	if (isDate(value)) return 'date';
-
 	return 'object';
 }
 
@@ -68,11 +63,13 @@ export function isConstructorType(value: unknown, compare: string) {
 /**
  * Simple function using indexOf for SQL LIKE evaluation.
  *
- * @param query the search query.
- * @param value the value to apply search query against.
+ * @param value the value to compare.
+ * @param compare the value to inspect as like above value.
  */
-export function isLike(query: string, value: any): boolean {
-	return (value + '').toLowerCase().indexOf(query.toLowerCase()) > -1;
+export function isLike(value: string, compare: string): boolean {
+	value = value.toLowerCase();
+	compare = compare.toLowerCase();
+	return compare.indexOf(value) > -1;
 }
 
 /**
@@ -287,7 +284,7 @@ export function isNotDeepEqual(value: unknown, compare: unknown) {
 }
 
 /**
- * Checks if string, array or object is empty object.
+ * Checks if string, array or object is empty.
  *
  * @param value the value to inspect as empty string, array or object.
  */
@@ -297,6 +294,56 @@ export function isEmpty(value: unknown) {
 		(isArray(value) && isEqual((value as any[]).length, 0)) ||
 		(isPlainObject(value) && isEqual(Object.keys(value as object).length, 0))
 	);
+}
+
+/**
+ * Checks if string, array or object is not empty.
+ *
+ * @param value the value to inspect as not empty string, array or object.
+ */
+export function isNotEmpty(value: unknown) {
+	return !isEmpty(value);
+}
+
+/**
+ * Checks if value is greater than compare.
+ * 
+ * @param value the value to inspect as greater than compare.
+ * @param compare the value to inspect as less than value.
+ */
+export function isGreaterThan(value: any, compare: any) {
+	return value > compare;
+}
+
+/**
+ * Checks if value is greater than or equal to compare.
+ * 
+ * @param value the value to inspect as greater than or equal to compare.
+ * @param compare the value to inspect as less than or equal to value.
+ */
+export function isGreaterThanOrEqual(value: any, compare: any) {
+	return value >= compare;
+}
+
+
+/**
+ * Checks if value is less than compare.
+ * 
+ * @param value the value to inspect as less than compare.
+ * @param compare the value to inspect as greater than value.
+ */
+export function isLessThan(value: any, compare: any) {
+	return value < compare;
+}
+
+/**
+ * Checks if value is less than or equal to compare.
+ * 
+ * @param value the value to inspect as less than or equal to compare.
+ * @param compare the value to inspect as greater than or equal to value.
+ */
+export function isLessThanOrEqual(value: any, compare: any) {
+	return value <= compare;
 }
 
 /**
@@ -327,7 +374,7 @@ export function isValue(value: unknown) {
  * @param value the value to inspect as true.
  * @param loose when true, returns true if true, 1 or 'yes'.
  */
-export function isTrue(value: unknown, loose = false) {
+export function isTrue(value: unknown, loose = false): value is true {
 	if (!loose) return value === true;
 	return value === 1 || value === 'true' || value === 'yes';
 }
@@ -338,7 +385,7 @@ export function isTrue(value: unknown, loose = false) {
  * @param value the value to inspect as false.
  * @param loose when true, returns false if false, 0 or 'no'.
  */
-export function isFalse(value: unknown, loose = false) {
+export function isFalse(value: unknown, loose = false): value is false {
 	if (!loose) return value === true;
 	return value === 0 || value === 'false' || value === 'no';
 }

@@ -4,7 +4,6 @@ import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeSize } from '$lib/typ
 
 export type DataGridHeaderProps = {
 	autocols?: boolean;
-	// columns?: DataGridColumnConfig[];
 	divided?: boolean;
 	focused?: ThemeFocused;
 	rounded?: ThemeRounded;

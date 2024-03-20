@@ -47,14 +47,14 @@
 		class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 mr-2 font-medium uppercase text-sm inline-flex items-center"
 		on:click={() => (window.location.href = '/')}>Reload Page</button
 	>
-	<a
+	<!-- <a
 		href="/util/generate"
 		class="inline-flex items-center bg-indigo-500 text-white px-4 py-1.5 mr-2 font-medium uppercase text-sm"
 		>Generator</a
-	>
-	<a
+	> -->
+	<!-- <a
 		href="/util/download"
 		class="bg-frame-600 dark:bg-frame-900 text-white px-4 py-1.5 font-medium uppercase text-sm inline-flex items-center"
 		>Download Theme</a
-	>
+	> -->
 </div>

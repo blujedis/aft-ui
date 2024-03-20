@@ -1,6 +1,6 @@
 export const buttonGroupDefaults = {
+    hovered: true,
     rounded: 'none',
     shadowed: 'none',
-    theme: 'default',
     variant: 'filled'
 };

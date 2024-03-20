@@ -1,6 +1,6 @@
 /// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
-export type SelectStoreValue = string | number;
+export type SelectStoreValue = string | number | Date | boolean | bigint | null | undefined | HTMLElement;
 export interface SelectStoreOptions {
     max?: number;
     min?: number;
@@ -11,7 +11,7 @@ export type SelectInitProps = SelectStoreOptions & {
     selected?: SelectStoreValue | SelectStoreValue[];
 };
 export interface SelectStoreMethods {
-    resetSelected(...selected: SelectStoreValue[]): void;
+    restore(...selected: SelectStoreValue[]): void;
     select(value?: SelectStoreValue): void;
     unselect(value?: SelectStoreValue): void;
     toggle(value?: SelectStoreValue): void;
@@ -19,5 +19,5 @@ export interface SelectStoreMethods {
 }
 export type SelectStore<P extends Record<string, any> = Record<string, any>> = Writable<SelectStoreOptions & P> & SelectStoreMethods;
 export declare function useSelect<P extends Record<string, any> = Record<string, any>>(props?: P & SelectStoreOptions & {
-    selected?: SelectStoreValue | SelectStoreValue[] | undefined;
+    selected?: SelectStoreValue | SelectStoreValue[];
 }): SelectStore<P>;

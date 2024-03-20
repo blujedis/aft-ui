@@ -1,27 +1,25 @@
 <script>import { gridSearchDefaults as defaults } from "./module";
-import { themeStore, bem, pickCleanProps, themer } from "../..";
+import { themeStore, themer } from "../../theme";
 import { getContext } from "svelte";
 import { DataGridCell } from "../DataGridCell";
-import { debounce } from "../../utils";
+import { debounce, boolToMapValue } from "../../utils";
 const context = getContext("DataGrid");
-export let { action, focused, method, rounded, size, strategy, theme, variant } = {
+export let { action, focused, method, rounded, size, stacked, strategy, theme } = {
   ...defaults,
-  ...pickCleanProps(
-    context?.globals,
-    "autocols",
-    "columns",
-    "focused",
-    "rounded",
-    "size",
-    "theme",
-    "variant"
-  )
+  focused: context.globals?.focused,
+  rounded: context.globals?.rounded,
+  size: context.globals?.size,
+  stacked: context.globals?.stacked,
+  theme: context.globals?.theme
 };
 const th = themer($themeStore);
 $:
-  gridSearchClasses = th.create("DataGridSearch").prepend("datagrid__search", true).compile(true);
+  gridSearchClasses = th.create("DataGridSearch").prepend("datagrid-search", true).compile();
 $:
-  gridSearchInputClasses = th.create("DataGridSearchInput").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("focusedOutline", typeof focused === "string" ? focused : theme, focused).option("roundeds", rounded, rounded).prepend("datagrid__search_input", true).append("pl-10 focus:outline-none bg-transparent px-4 py-2 w-full rounded-b-none", true).compile();
+  gridSearchInputClasses = th.create("DataGridSearchInput").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).prepend("datagrid-search-input", true).append(
+    "outline-none px-4 py-2 pl-10 w-full rounded-b-none bg-transparent hover:bg-transparent !font-dark !dark:font-light",
+    true
+  ).compile();
 function handleSearchSubmit(e) {
   if (strategy !== "submit" || method || action)
     return;
@@ -50,7 +48,7 @@ function handleSearchInput(e) {
 			<div class="flex items-center">
 				<div class="flex-1 relative p-1">
 					<svg
-						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-4"
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-3 mr-1"
 						viewBox="0 0 20 20"
 						fill="currentColor"
 						aria-hidden="true"
@@ -65,7 +63,7 @@ function handleSearchInput(e) {
 						<input
 							type="search"
 							name="search"
-							placeholder="filter"
+							placeholder="Search All Records"
 							class={gridSearchInputClasses}
 							on:input={handleSearchInput}
 						/>
@@ -73,7 +71,7 @@ function handleSearchInput(e) {
 						<input
 							type="search"
 							name="search"
-							placeholder="filter"
+							placeholder="Search All Records"
 							class={gridSearchInputClasses}
 						/>
 					{/if}

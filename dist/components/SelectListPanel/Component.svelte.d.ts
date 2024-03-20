@@ -6,7 +6,10 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        default: {};
+        default: {
+            currentElement: HTMLElement | undefined;
+            currentIndex: number | undefined;
+        };
     };
 };
 export type ComponentProps = typeof __propDef.props;

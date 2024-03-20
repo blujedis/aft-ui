@@ -1,10 +1,12 @@
 <script>import { menuPanelDefaults as defaults } from "./module";
-import { themeStore, themer, transitioner } from "../..";
+import { themeStore, themer } from "../../theme";
+import { transitioner } from "../Disclosure";
 import { getContext } from "svelte";
 import { useFocusNav } from "../../hooks";
+import { boolToMapValue } from "../../utils";
 import { writable } from "svelte/store";
 const context = getContext("Menu");
-export let { origin, position, rounded, shadowed, theme, transition, variant } = {
+export let { origin, position, rounded, shadowed, theme, transition } = {
   ...defaults,
   ...context?.globals
 };
@@ -14,7 +16,7 @@ $:
 $:
   nav = useFocusNav($ref?.firstChild);
 $:
-  panelClasses = th.create("MenuPanel").variant("menuPanel", variant, theme, variant).option("roundeds", rounded === "full" ? "xl2" : rounded, rounded).option("shadows", shadowed, shadowed).append(`dropdown-panel absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append($$restProps.class, true).compile(true);
+  panelClasses = th.create("MenuPanel").bundle(["panelBg"], theme, true).option("common", "ringed", true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("dropdown-panel", true).append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append($$restProps.class, true).compile();
 function setFocus(el) {
   el.focus();
 }

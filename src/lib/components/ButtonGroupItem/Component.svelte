@@ -4,7 +4,7 @@
 	import type { ElementProps } from '$lib/types';
 	import { getContext } from 'svelte';
 	import type { ButtonGroupContext } from '../ButtonGroup';
-	import type { SelectStoreValue } from '$lib/stores/select';
+	import type { SelectStoreValue } from '$lib/stores/select.old';
 	import { cleanObj } from '$lib/utils';
 	import { ConditionalComponent, Flushed, Button, type ButtonVariant } from '$lib/components';
 
@@ -66,6 +66,7 @@
 		)
 		.option('buttonPadding', size, size)
 		.option('common', 'bordered', variant === 'filled')
+		.prepend('button-group-item', true)
 		.append('first:border-l-0 border-l', variant === 'filled')
 		.append('px-1', variant === 'flushed')
 		.append('flex-1', full)

@@ -29,7 +29,7 @@ export type PopoverEventTuple = [keyof HTMLElementEventMap, (...args: any[]) => 
 export type PopoverTriggerOptions = Omit<
 	PopoverInitOptions<any>,
 	'escapable' | 'content' | 'events' | 'Component' | 'props'
-// 'abortable' | 'escapable' | 'content' | 'events' | 'Component' | 'props'
+	// 'abortable' | 'escapable' | 'content' | 'events' | 'Component' | 'props'
 >;
 
 export type PopoverComponentProps<C extends typeof SvelteComponent> = SvelteConstructorProps<C> & {

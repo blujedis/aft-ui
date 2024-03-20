@@ -3,11 +3,16 @@ import { SelectList } from ".";
 import { SelectListButton } from "../SelectListButton";
 import { SelectListOption } from "../SelectListOption";
 import { SelectListPanel } from "../SelectListPanel";
-import { colors } from "../../constants";
+import { Input } from "../Input";
+import { Button } from "../Button";
+import { colors, placeholder } from "../../constants";
+import { Icon } from "../Icon";
+import { themer, themeStore } from "../../theme";
+const th = themer($themeStore);
+const iconClasses = th.create().option("iconCaretSizes", "md", true).compile(false);
 const title = "SelectList";
 const description = "Comprehensive component for single and multi selection.";
-const code = `
-  `;
+const selected = "javascript";
 const sourceItems = [
   {
     value: "java",
@@ -20,7 +25,7 @@ const sourceItems = [
     value: "javascript",
     label: "JavaScript",
     description: "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
-    selected: false,
+    selected: true,
     href: "https://www.javascript.com/"
   },
   {
@@ -34,27 +39,31 @@ const sourceItems = [
     value: "react",
     label: "React",
     description: "React is a JavaScript-based UI development library. Facebook and an open-source developer community run it. Although React is a library rather than a language, it is widely used in web development. The library first appeared in May 2013 and is now one of the most commonly used frontend libraries for web development.",
-    selected: true,
+    selected: false,
     href: "https://react.dev/"
   }
 ];
 const props = {
   full: false,
+  focused: true,
+  hovered: true,
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "default",
+  //theme: 'default' as ThemeColor,
   variant: "outlined"
+};
+const shared = {
+  size: "md"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="grid grid-cols-4 gap-2 mb-4">
+		<div class="grid grid-cols-3 gap-2 mb-4">
 			<label for="filled">
 				<SelectList
 					{...props}
-					tags
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -73,11 +82,11 @@ const props = {
 				</SelectList>
 			</label>
 
-			<label for="glass">
+			<label for="outlined">
 				<SelectList
 					{...props}
-					variant="glass"
-					tags
+					variant="outlined"
+					multiple
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -95,11 +104,11 @@ const props = {
 				</SelectList>
 			</label>
 
-			<label for="outlined">
+			<label for="glass">
 				<SelectList
 					{...props}
-					variant="outlined"
-					tags
+					variant="soft"
+					multiple
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -121,7 +130,28 @@ const props = {
 				<SelectList
 					{...props}
 					variant="flushed"
-					tags
+					multiple
+					removable
+					items={sourceItems}
+					placeholder="Please Select"
+					theme={color}
+					let:filtered
+				>
+					<SelectListButton />
+					<SelectListPanel>
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value}>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					</SelectListPanel>
+				</SelectList>
+			</label>
+
+			<label for="glass">
+				<SelectList
+					{...props}
+					variant="text"
 					removable
 					items={sourceItems}
 					placeholder="Please Select"
@@ -140,4 +170,49 @@ const props = {
 			</label>
 		</div>
 	{/each}
+
+	<div class="mb-2 max-w-52">
+		<SelectList
+			{...props}
+			{...shared}
+			rounded="none"
+			variant="outlined"
+			value={selected}
+			items={sourceItems}
+			placeholder="Filter..."
+			theme="primary"
+			multiple
+			filterable
+			removable
+			exclusive
+			let:filtered
+			let:filtering
+			let:isSelected
+		>
+			<SelectListButton />
+			<SelectListPanel let:currentIndex>
+				{#if !filtered.length}
+					<div class="px-2 text-sm">No Results</div>
+				{:else}
+					<!-- <div class="px-2 text-sm">Current Index: {currentIndex}</div> -->
+					{#each filtered as item}
+						{#if !isSelected(item.value)}
+							<SelectListOption as="button" key={item.value} let:active>
+								<div class="flex justify-between items-center">
+									{item.label}
+									{#if active && !filtering}
+										<Icon icon="mdi:check" class={iconClasses} />
+									{/if}
+								</div>
+							</SelectListOption>
+						{/if}
+					{/each}
+				{/if}
+			</SelectListPanel>
+		</SelectList>
+
+		<!-- <Input {...shared} type="text" placeholder="Enter name" />
+		<Button {...shared}>Hello World</Button> -->
+	</div>
+	<!-- </label> -->
 </ExamplePage>

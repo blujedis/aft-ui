@@ -1,3 +1,4 @@
 export const iconDefaults = {
-    size: 'md'
+    size: 'md',
+    theme: 'unstyled'
 };

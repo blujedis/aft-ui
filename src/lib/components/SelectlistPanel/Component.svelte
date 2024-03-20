@@ -81,7 +81,7 @@
 		const key = el.dataset.key as string;
 		if (!multiple && $context.input) {
 			context.toggle();
-			context.restoreSelected(key, false);
+			context.restore(key, false);
 			setTimeout(() => {
 				if ($context.input) {
 					const nextValue = $context.items.find((i) => key === i.value)?.label || '';

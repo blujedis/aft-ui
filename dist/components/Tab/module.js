@@ -1,5 +1,6 @@
 export const tabDefaults = {
+    as: 'button',
     focused: true,
-    theme: 'default',
+    theme: 'frame',
     variant: 'flushed'
 };

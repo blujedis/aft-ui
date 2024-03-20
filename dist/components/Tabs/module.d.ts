@@ -1,9 +1,12 @@
-import type { SelectStore, SelectStoreValue } from '../../stores/select';
-import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeTransitioned } from '../../types';
+/// <reference types="svelte" />
+import type { SelectStoreValue } from '../../stores/select';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+import { type Writable } from 'svelte/store';
 import type { TabVariant } from '../Tab';
 export type TabsProps = {
     condensed?: boolean;
-    focused?: ThemeFocused;
+    focused?: boolean;
+    hovered?: boolean;
     full?: boolean;
     rounded?: ThemeRounded;
     selected: SelectStoreValue;
@@ -16,14 +19,22 @@ export type TabsProps = {
     navContainerClasses?: string;
     navClasses?: string;
 };
-export type TabsContext = SelectStore & {
+export type TabsStore = {
+    tabs: (HTMLElement & {
+        $select: () => any;
+    })[];
+    selected?: HTMLElement;
+    currentIndex: number;
+};
+export type TabsContext = Writable<TabsStore> & {
     globals: {
-        focused: ThemeFocused;
+        focused?: boolean;
+        hovered: boolean;
         full: boolean;
         rounded: ThemeRounded;
         size: ThemeSize;
         theme: ThemeColor;
-        transitioned: ThemeTransitioned;
+        transitioned: boolean;
         variant: TabVariant;
     };
 };

@@ -2,28 +2,17 @@
 import useNotifications from "../../stores/notification";
 import { themer, themeStore } from "../../theme";
 import { Icon } from "../Icon";
-export let {
-  key,
-  description,
-  dismissible,
-  duration,
-  group,
-  icon,
-  rounded,
-  shadowed,
-  title,
-  theme,
-  variant
-} = {
+import { boolToMapValue } from "../../utils";
+export let { key, description, dismissible, group, icon, rounded, shadowed, title, theme } = {
   ...defaults
 };
 const th = themer($themeStore);
 $:
-  notificationClasses = th.create("Notification").variant("notification", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80", true).append($$restProps.class, true).compile(true);
+  notificationClasses = th.create("Notification").bundle(["notificationBg", "notificationText", "mainBorder"], theme, true).option("common", "ringed", true).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80", true).append($$restProps.class, true).compile();
 $:
-  notificationIconClasses = th.create("NotificationIcon").variant("notificationIcon", variant, theme, true).append("pr-2 pt-1", true).compile(true);
+  notificationIconClasses = th.create("NotificationIcon").append("pr-2 pt-1", true).compile();
 $:
-  notificationTitleClasses = th.create("NotificaionTitle").variant("notificationTitle", variant, theme, true).append("font-semibold", true).compile(true);
+  notificationTitleClasses = th.create("NotificaionTitle").append("font-semibold", true).compile();
 </script>
 
 <div

@@ -1,16 +1,16 @@
-export function useFocusNav(root) {
-    const options = {
-        findActive: (_items) => null,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        onSelected: (_node) => { }
+const defaults = {
+    onFind: (_items) => null,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onSelected: (_node) => { },
+    onInit: (_items) => { },
+    onNavigate: (_item, _index) => { }
+};
+export function useFocusNav(root, options) {
+    const _options = {
+        ...defaults,
+        ...options
     };
-    function onSelected(fn) {
-        options.onSelected = fn;
-    }
-    function onFindActive(fn) {
-        options.findActive = fn;
-    }
-    function getChildren() {
+    function getItems() {
         if (!root)
             return [];
         return (Array.from(root.children) || []);
@@ -22,7 +22,7 @@ export function useFocusNav(root) {
     function onKeydown(e, preventDefault = false) {
         if (e.repeat || !['ArrowUp', 'ArrowDown', ' ', 'Enter'].includes(e.key))
             return;
-        const items = getChildren();
+        const items = getItems();
         if (!items?.length || !root)
             return; // nothing to do aren't any option items.
         const activeNode = document.activeElement;
@@ -32,13 +32,14 @@ export function useFocusNav(root) {
         if ((e.key === ' ' || e.key === 'Enter') && root.contains(activeNode)) {
             if (preventDefault)
                 e.preventDefault();
-            options.onSelected(activeNode);
+            _options.onSelected(activeNode, e);
         }
         //////////////////////////////////////////////
         // User is navigating options.
         //////////////////////////////////////////////
         else {
             let currentNode;
+            e.preventDefault(); // otherwise overflow will cause scroll jumping.
             if (root.contains(activeNode)) {
                 // already navigating child nodes.
                 const currentIndex = items.indexOf(activeNode);
@@ -48,21 +49,21 @@ export function useFocusNav(root) {
                     return;
                 // Otherwise set the current node to the new index.
                 currentNode = items[nextIndex];
+                _options.onNavigate(currentNode, Math.max(0, nextIndex - 1));
             }
             else {
                 // dropdown expanded start at first or selected node.
-                currentNode = options.findActive(items) || items[0];
+                currentNode = _options.onFind(items, e);
+                _options.onNavigate(currentNode, 0);
             }
             if (currentNode)
                 currentNode.focus();
-            e.preventDefault(); // otherwise overflow will cause scroll jumping.
         }
     }
+    _options.onInit(getItems());
     return {
-        getChildren,
+        getItems,
         focusRoot,
-        onSelected,
-        onFindActive,
         onKeydown
     };
 }

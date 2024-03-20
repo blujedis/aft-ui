@@ -1,10 +1,12 @@
 <script>import Label from ".";
 import ExamplePage from "../_Example/ExamplePage.svelte";
+import { colors } from "../../constants/colors";
 const title = "Label";
 const description = "HTML themed form label elements.";
 const code = `
   `;
 const props = {
+  hovered: true,
   full: false,
   rounded: "none",
   shadowed: "none",
@@ -15,11 +17,10 @@ const props = {
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Label {...props} />
-		</label>
+<ExamplePage {title} {description}>
+	<div class="grid grid-cols-8 gap-4">
+		{#each colors as color}
+			<Label {...props} theme={color}>Label</Label>
+		{/each}
 	</div>
 </ExamplePage>

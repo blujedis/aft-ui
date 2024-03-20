@@ -10,10 +10,11 @@ import {
 const context = getContext("DataGrid");
 export let { ellipsis, page, pageSize, pages, size, theme, variant } = {
   ...defaults,
-  ...pickCleanProps(context?.globals, "size", "theme", "variant")
+  size: context.globals?.size,
+  theme: context.globals?.theme
 };
 $:
-  gridPagerClasses = themer($themeStore).create("DataGridPager").append($$restProps.class, true).compile();
+  gridPagerClasses = themer($themeStore).create("DataGridPager").prepend("datagrid-pager", true).append($$restProps.class, true).compile();
 </script>
 
 <Pagination

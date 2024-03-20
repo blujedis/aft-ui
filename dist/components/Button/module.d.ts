@@ -1,14 +1,14 @@
 import type { ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize, ThemeColor } from '../../types';
-import type { button } from './config';
-export type ButtonVariant = keyof typeof button;
+export type ButtonVariant = 'text' | 'filled' | 'outlined' | 'ghost' | 'soft';
 export type ButtonProps<Tag extends 'button' | 'a'> = {
     as?: Tag;
+    bordered?: boolean;
     disabled?: boolean;
+    dropshadowed?: ThemeShadowed;
     focused?: ThemeFocused;
     full?: boolean;
     hovered?: boolean;
     href?: string | null;
-    strong?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
@@ -16,6 +16,5 @@ export type ButtonProps<Tag extends 'button' | 'a'> = {
     transitioned?: boolean;
     variant?: ButtonVariant;
     underlined?: boolean | 'hover';
-    unstyled?: boolean;
 };
 export declare const buttonDefaults: Partial<ButtonProps<'button'>>;

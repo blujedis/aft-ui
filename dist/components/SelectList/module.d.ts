@@ -1,7 +1,9 @@
 import type { SelectStore, SelectStoreValue } from '../../stores';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { SelectListVariant, SelectListButtonProps } from '../SelectListButton';
+import type { BadgeProps } from '../Badge/module';
 export type SelectListItemKey = SelectStoreValue;
+export type FilterQuery<T = SelectListItem> = (query: string, items: Required<T>[], selected: SelectListItemKey[]) => Required<T>[] | Promise<Required<T>[]>;
 export type SelectListItem = {
     label?: string;
     value: SelectListItemKey;
@@ -12,8 +14,11 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
     visible?: boolean;
     items: T[];
     filtered: T[];
+    persisted: SelectListItemKey[];
+    filtering?: boolean;
     input?: HTMLInputElement;
     panel?: HTMLDivElement;
+    trigger?: HTMLDivElement;
 };
 export type SelectListContext<T extends SelectListItem = SelectListItem> = SelectStore<SelectListStore> & {
     open(): void;
@@ -24,31 +29,38 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> = Selec
     add({ value, label, group, selected }: T): void;
     remove(key: SelectListItemKey): void;
     remove(item: T): void;
+    restoreSelected(restoreInput?: boolean): void;
+    restoreSelected(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
     filter(query?: string): void;
-    reset(selectedItems?: SelectListItemKey[]): void;
     globals: SelectListContextProps;
 };
 export type SelectListContextProps = {
+    badgeProps?: BadgeProps;
+    disabled?: boolean;
+    filterable?: boolean;
     full?: boolean;
+    focused?: boolean;
+    hovered?: boolean;
+    multiple?: boolean;
     newable?: boolean;
     placeholder?: string;
     removable?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;
-    tags?: boolean;
     theme?: ThemeColor;
-    underlined?: boolean;
     variant?: SelectListVariant;
+    transitioned?: boolean;
     onBeforeAdd?: SelectListButtonProps['onBeforeAdd'];
     onBeforeRemove?: SelectListButtonProps['onBeforeRemove'];
 };
 export type SelectListProps<T extends SelectListItem> = SelectListContextProps & {
     autoclose?: boolean;
     escapable?: boolean;
-    items: T[] | Promise<T[]>;
+    items: T[];
     store?: SelectStore<SelectListStore>;
+    value?: any;
     visible?: boolean;
-    filter?: (query: string, items: Required<T>[]) => Required<T>[];
+    filter?: FilterQuery<T>;
 };
 export declare const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps>;

@@ -4,10 +4,8 @@
 	import { SelectListButton } from '../SelectListButton';
 	import { SelectListOption } from '../SelectListOption';
 	import { SelectListPanel } from '../SelectListPanel';
-	import { Input } from '../Input';
-	import { Button } from '../Button';
-	import { colors, placeholder } from '$lib/constants';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import { colors } from '$lib/constants';
+	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import { Icon } from '../Icon';
 	import { themer, themeStore } from '../../theme';
 
@@ -17,8 +15,6 @@
 
 	const title = 'SelectList';
 	const description = 'Comprehensive component for single and multi selection.';
-
-	const selected = 'javascript'
 
 	const sourceItems = [
 		{
@@ -55,6 +51,10 @@
 		}
 	];
 
+	const selected = 'javascript';
+
+	let selectedObj = sourceItems[2];
+
 	const props = {
 		full: false,
 		focused: true,
@@ -71,144 +71,144 @@
 </script>
 
 <ExamplePage {title} {description}>
-	{#each colors as color}
-		<div class="grid grid-cols-3 gap-2 mb-4">
-			<label for="filled">
-				<SelectList
-					{...props}
-					removable 
-					items={sourceItems}
-					placeholder="Please Select"
-					theme={color}
-					variant="filled"
-					let:filtered
-				>
-					<SelectListButton />
-					<SelectListPanel>
-						{#each filtered as item}
-							<SelectListOption as="button" key={item.value}>
-								{item.label}
-							</SelectListOption>
-						{/each}
-					</SelectListPanel>
-				</SelectList>
-			</label>
-
-			<label for="outlined">
-				<SelectList
-					{...props}
-					variant="outlined"
-					multiple
-					removable
-					items={sourceItems}
-					placeholder="Please Select"
-					theme={color}
-					let:filtered
-				>
-					<SelectListButton />
-					<SelectListPanel>
-						{#each filtered as item}
-							<SelectListOption as="button" key={item.value}>
-								{item.label}
-							</SelectListOption>
-						{/each}
-					</SelectListPanel>
-				</SelectList>
-			</label>
-
-			<label for="glass">
-				<SelectList
-					{...props}
-					variant="soft"
-					multiple
-					removable
-					items={sourceItems}
-					placeholder="Please Select"
-					theme={color}
-					let:filtered
-				>
-					<SelectListButton />
-					<SelectListPanel>
-						{#each filtered as item}
-							<SelectListOption as="button" key={item.value}>
-								{item.label}
-							</SelectListOption>
-						{/each}
-					</SelectListPanel>
-				</SelectList>
-			</label>
-
-			<label for="flushed">
-				<SelectList
-					{...props}
-					variant="flushed"
-					multiple
-					removable
-					items={sourceItems}
-					placeholder="Please Select"
-					theme={color}
-					let:filtered
-				>
-					<SelectListButton />
-					<SelectListPanel>
-						{#each filtered as item}
-							<SelectListOption as="button" key={item.value}>
-								{item.label}
-							</SelectListOption>
-						{/each}
-					</SelectListPanel>
-				</SelectList>
-			</label>
-
-			<label for="glass">
-				<SelectList
-					{...props}
-					variant="text"
-					removable
-					items={sourceItems}
-					placeholder="Please Select"
-					theme={color}
-					let:filtered
-				>
-					<SelectListButton />
-					<SelectListPanel>
-						{#each filtered as item}
-							<SelectListOption as="button" key={item.value}>
-								{item.label}
-							</SelectListOption>
-						{/each}
-					</SelectListPanel>
-				</SelectList>
-			</label>
-		</div>
-	{/each}
-
-	<div class="mb-2 max-w-52">
+	<!-- <div class="grid grid-cols-8 gap-2 mb-4">
+		{#each colors as color}
+			<SelectList
+				{...props}
+				items={sourceItems}
+				placeholder="Please Select"
+				theme={color}
+				variant="filled"
+				let:filtered
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value}>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				</SelectListPanel>
+			</SelectList>
+		{/each}
+	</div>
+	<div class="grid grid-cols-8 gap-2 mb-4">
+		{#each colors as color}
+			<SelectList
+				{...props}
+				variant="outlined"
+				multiple
+				removable
+				items={sourceItems}
+				placeholder="Please Select"
+				theme={color}
+				let:filtered
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value}>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				</SelectListPanel>
+			</SelectList>
+		{/each}
+	</div>
+	<div class="grid grid-cols-8 gap-2 mb-4">
+		{#each colors as color}
+			<SelectList
+				{...props}
+				variant="soft"
+				multiple
+				removable
+				items={sourceItems}
+				placeholder="Please Select"
+				theme={color}
+				let:filtered
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value}>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				</SelectListPanel>
+			</SelectList>
+		{/each}
+	</div>
+	<div class="grid grid-cols-8 gap-2 mb-4">
+		{#each colors as color}
+			<SelectList
+				{...props}
+				variant="flushed"
+				multiple
+				removable
+				items={sourceItems}
+				placeholder="Please Select"
+				theme={color}
+				let:filtered
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value}>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				</SelectListPanel>
+			</SelectList>
+		{/each}
+	</div>
+	<div class="grid grid-cols-8 gap-2 mb-4">
+		{#each colors as color}
+			<SelectList
+				{...props}
+				variant="text"
+				removable
+				items={sourceItems}
+				placeholder="Please Select"
+				theme={color}
+				let:filtered
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#each filtered as item}
+						<SelectListOption as="button" key={item.value}>
+							{item.label}
+						</SelectListOption>
+					{/each}
+				</SelectListPanel>
+			</SelectList>
+		{/each}
+	</div> -->
+	<div class="mt-8 mb-2 max-w-52">
 		<SelectList
 			{...props}
 			{...shared}
 			rounded="none"
-			variant="outlined"
+			variant="filled"
 			value={selected}
 			items={sourceItems}
 			placeholder="Filter..."
 			theme="primary"
-			multiple
 			filterable
-			removable
 			exclusive
 			let:filtered
 			let:filtering
-			let:isSelected
+			let:selectedItems
 		>
 			<SelectListButton />
 			<SelectListPanel let:currentIndex>
-				{#if !filtered.length}
-					<div class="px-2 text-sm">No Results</div>
-				{:else}
-					<!-- <div class="px-2 text-sm">Current Index: {currentIndex}</div> -->
-					{#each filtered as item}
-						{#if !isSelected(item.value)}
+				{#each filtered as item}
+					<SelectListOption as="button" key={item.value} let:active>
+						{item.label}
+					</SelectListOption>
+				{/each}
+
+				<!-- {#each filtered as item}
+						{#if !selectedItems.includes(item.value)}
 							<SelectListOption as="button" key={item.value} let:active>
 								<div class="flex justify-between items-center">
 									{item.label}
@@ -218,13 +218,14 @@
 								</div>
 							</SelectListOption>
 						{/if}
-					{/each}
-				{/if}
+					{/each} -->
 			</SelectListPanel>
 		</SelectList>
-
-		<!-- <Input {...shared} type="text" placeholder="Enter name" />
-		<Button {...shared}>Hello World</Button> -->
 	</div>
-	<!-- </label> -->
+
+	<!-- <select bind:value={selectedObj} on:change={() => console.log(selectedObj)}>
+		{#each sourceItems as item, index (index)}
+			<option value={item}>{item.label}</option>
+		{/each}
+	</select> -->
 </ExamplePage>

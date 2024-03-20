@@ -1,12 +1,13 @@
 <script>import { tabsDefaults as defaults } from "./module";
 import { themer, themeStore } from "../../theme";
-import { onMount, setContext } from "svelte";
-import { useSelect } from "../../stores/select";
-import { cleanObj, ensureArray } from "../../utils";
+import { setContext } from "svelte";
+import { cleanObj, boolToMapValue } from "../../utils";
+import { writable } from "svelte/store";
 export let {
   condensed,
   focused,
   full,
+  hovered,
   rounded,
   selected,
   shadowed,
@@ -21,10 +22,11 @@ export let {
 } = {
   ...defaults
 };
-const store = useSelect({ selected: ensureArray(selected), multiple: false });
+const store = writable({ tabs: [], selected: void 0, currentIndex: -1 });
 const globals = cleanObj({
   focused,
   full,
+  hovered,
   rounded,
   size,
   theme,
@@ -35,47 +37,42 @@ export const context = setContext("Tabs", {
   ...store,
   globals
 });
+let panel;
 const th = themer($themeStore);
 $:
-  tabControllerlWrapperClasses = th.create("TabsWrapper").append(klass, true).compile();
+  tabsClasses = th.create("TabsWrapper").option("common", "formBorder", variant === "flushed").option("common", "divided", ["filled"].includes(variant)).option("shadows", boolToMapValue(shadowed), shadowed && variant !== "text").prepend(`tabs tabs-${variant}`, true).append("-mb-px", ["flushed", "filled"].includes(variant)).append("divide-x", variant === "filled").append("border-b", variant === "flushed").append("w-full", full).append("space-x-2", ["flushed", "pills"].includes(variant)).append("mb-1", variant === "text").append("not-sr-only isolate inline-flex flex-wrap mb-4", true).append($$restProps.class, true).compile();
 $:
-  tabControllerNavWrapperClasses = th.create("TabsNavWrapper").append("w-full", full).append("hidden sm:flex items-start flex-col", true).append("max-w-min", condensed && !full).append(navWrapperClasses, true).compile(true);
-$:
-  tabControllerNavContainerClasses = th.create("TabsNavContainer").variant("tabs", variant, theme, true).append("w-full", full).append("hidden sm:block", true).append(navContainerClasses, true).compile(true);
-$:
-  tabControllerNavClasses = th.create("TabsNav").option("roundeds", rounded, rounded && !["underlined", "labeled"].includes(variant)).option("shadows", shadowed, shadowed && variant !== "labeled").append("-mb-px", ["underlined", "default"].includes(variant)).append("space-x-4", variant !== "grouped").append("w-full justify-around space-x-0", full).append("isolate flex", true).append("[&>:not(:first-child):not(:last-child)]:rounded-none", variant === "grouped").append(navClasses, true).compile(true);
-function handleReset() {
+  selectClasses = th.create("TabsSelect").prepend(`tabs-${variant}`, true).prepend("tabs", true).append("sr-only mb-4", true).compile();
+function mount(node) {
+  const destroy = context.subscribe((s) => {
+    if (s.selected)
+      node.replaceChildren(s.selected);
+  });
+  return { destroy };
 }
 </script>
 
-<div class={tabControllerlWrapperClasses}>
-	{#if $$slots.mobile}
-		<div class="sm:hidden">
-			<slot name="mobile" />
-		</div>
-	{/if}
-	<div class={tabControllerNavWrapperClasses}>
-		<div class={tabControllerNavContainerClasses}>
-			<nav class={tabControllerNavClasses} aria-label="Tabs">
-				<slot
-					name="tabs"
-					selectedItems={$store.selected}
-					reset={handleReset}
-					select={store.select}
-					unselect={store.unselect}
-					isSelected={store.isSelected}
-				/>
-			</nav>
-		</div>
-		<div class="hidden sm:flex">
-			<slot
-				name="panels"
-				selectedItems={$store.selected}
-				reset={handleReset}
-				select={store.select}
-				unselect={store.unselect}
-				isSelected={store.isSelected}
-			/>
-		</div>
-	</div>
+<div>
+	<ul {...$$restProps} class={tabsClasses} role="tablist">
+		<slot />
+	</ul>
+	<select
+		aria-controls={`tab-panel-${$context.currentIndex}`}
+		class={selectClasses}
+		on:change={(e) => {
+			const index = e.currentTarget.selectedIndex;
+			$context.tabs[index].$select();
+		}}
+	>
+		{#each $context.tabs as tab, i}
+			<option value={tab.innerText} selected={i === $context.currentIndex}>{tab.innerText}</option>
+		{/each}
+	</select>
+	<div
+		bind:this={panel}
+		role="tabpanel"
+		aria-labelledby={`tab-${$context.currentIndex}`}
+		use:mount
+		class="flex"
+	></div>
 </div>

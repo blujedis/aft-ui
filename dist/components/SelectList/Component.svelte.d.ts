@@ -4,24 +4,15 @@ import { type SelectStore } from '../..';
 declare class __sveltets_Render<Item extends SelectListItem> {
     props(): {
         store?: SelectStore<SelectListStore<Item>> | undefined;
-        api?: {
-            open: () => void;
-            close: () => void;
-            isSelected: (itemOrKey: import("../..").SelectStoreValue | Item) => boolean;
-            add: ({ value, label, group, selected }: Item) => void;
-            toggle: () => void;
-            remove: (itemOrKey: import("../..").SelectStoreValue | Item) => void;
-            filter: (query?: string | undefined) => void;
-            reset: (selectedItems?: import("../..").SelectStoreValue[]) => void;
-        } | undefined;
         context?: SelectListContext | undefined;
     } & import("../..").SelectListContextProps & {
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
-        items: Item[] | Promise<Item[]>;
+        items: Item[];
         store?: SelectStore<SelectListStore<SelectListItem>> | undefined;
+        value?: any;
         visible?: boolean | undefined;
-        filter?: ((query: string, items: Required<Item>[]) => Required<Item>[]) | undefined;
+        filter?: import("../..").FilterQuery<Item> | undefined;
     } & Omit<import("svelte/elements").HTMLSelectAttributes, "size">;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
@@ -29,15 +20,16 @@ declare class __sveltets_Render<Item extends SelectListItem> {
     slots(): {
         default: {
             visible: boolean | undefined;
-            selected: import("../..").SelectStoreValue[];
+            selectedItems: import("../..").SelectStoreValue[];
             filtered: Item[];
-            isSelected: ((value?: import("../..").SelectStoreValue | undefined) => boolean) & {
+            filtering: boolean | undefined;
+            isSelected: ((value?: import("../..").SelectStoreValue) => boolean) & {
                 (key: import("../..").SelectStoreValue): boolean;
                 (item: SelectListItem): boolean;
             };
             open: () => void;
             close: () => void;
-            toggle: (value?: import("../..").SelectStoreValue | undefined) => void;
+            toggle: (value?: import("../..").SelectStoreValue) => void;
         };
         select: {};
     };
@@ -47,16 +39,6 @@ export type ComponentEvents<Item extends SelectListItem> = ReturnType<__sveltets
 export type ComponentSlots<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['slots']>;
 export default class Component<Item extends SelectListItem> extends SvelteComponent<ComponentProps<Item>, ComponentEvents<Item>, ComponentSlots<Item>> {
     get store(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<Item>> & import("../..").SelectStoreMethods & import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>>;
-    get api(): {
-        open: () => void;
-        close: () => void;
-        isSelected: (itemOrKey: import("../..").SelectStoreValue | Item) => boolean;
-        add: ({ value, label, group, selected }: Item) => void;
-        toggle: () => void;
-        remove: (itemOrKey: import("../..").SelectStoreValue | Item) => void;
-        filter: (query?: string | undefined) => void;
-        reset: (selectedItems?: import("../..").SelectStoreValue[]) => void;
-    };
     get context(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>> & import("../..").SelectStoreMethods & {
         open(): void;
         close(): void;
@@ -66,8 +48,9 @@ export default class Component<Item extends SelectListItem> extends SvelteCompon
         add({ value, label, group, selected }: SelectListItem): void;
         remove(key: import("../..").SelectStoreValue): void;
         remove(item: SelectListItem): void;
+        restoreSelected(restoreInput?: boolean | undefined): void;
+        restoreSelected(selectedItems: import("../..").SelectStoreValue | import("../..").SelectStoreValue[], restoreInput?: boolean | undefined): void;
         filter(query?: string | undefined): void;
-        reset(selectedItems?: import("../..").SelectStoreValue[] | undefined): void;
         globals: import("../..").SelectListContextProps;
     };
 }

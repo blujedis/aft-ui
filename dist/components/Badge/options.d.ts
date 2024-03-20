@@ -7,26 +7,7 @@ export declare const badgeFontSizes: {
     xl: string;
     xl2: string;
 };
-export declare const badgePadding: {
-    unstyled: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
-};
-export declare const badgeFieldPadding: {
-    $base: string;
-    unstyled: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
-};
-export declare const badgeIconSizes: {
+export declare const badgeInnerMargin: {
     unstyled: string;
     xs: string;
     sm: string;

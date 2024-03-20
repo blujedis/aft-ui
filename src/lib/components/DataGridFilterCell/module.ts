@@ -9,6 +9,14 @@ export type DataGridFilterCellProps = {
 	theme?: ThemeColor;
 };
 
+export const filterPopoverDefaults = {
+	criteriaOne: 'like',
+	valueOne: '',
+	criteriaTwo: '',
+	valueTwo: '',
+	join: 'and' as 'and' | 'or'
+};
+
 export const gridFilterCellDefaults: Partial<DataGridFilterCellProps> = {
 	focused: true
 };

@@ -4,20 +4,24 @@
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";
-import { forwardEventsBuilder } from "../../utils";
+import { forwardEventsBuilder, boolToMapValue, lazyImage, cleanObj } from "../../utils";
 import { Icon } from "../Icon";
 const context = getContext("AvatarStack");
 export let {
   animate,
+  counter,
+  hovered,
   notification,
   placeholder,
   rounded,
   shadowed,
   size,
+  src,
   stacked,
   theme,
   variant
 } = {
+  ...cleanObj($themeStore.defaults?.component, ["transitioned", "focused"]),
   ...defaults,
   ...context?.globals
 };
@@ -27,31 +31,62 @@ if (placeholder === true)
 let _notification = notification;
 if (notification === true)
   _notification = "top-right";
+const lazyload = lazyImage();
 const th = themer($themeStore);
 $:
-  avatarClasses = th.create("Avatar").option("avatarSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]", stacked).append("relative", stacked === "down").append($$restProps.class, true).compile(true);
+  avatarClasses = th.create("Avatar").option("avatarSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("hovered", variant, theme, hovered).prepend("avatar", true).append(
+    "ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]",
+    stacked
+  ).append("relative", stacked === "down").append($$restProps.class, true).compile();
 $:
-  avatarNotificationClasses = notification && th.create("Avatar").variant("avatar", variant, theme, variant).option("avatarNotificationSizes", size, size).option("animate", animate, animate).remove("ring-inset", variant === "outlined").append(
-    "absolute -right-1 -top-1 block rounded-full ring-2 ring-[color:var(--bg-light)] dark:ring-[color:var(--bg-dark)]",
+  avatarPlaceholderClasses = _placeholder && th.create("AvatarPlaceholder").bundle(["mainBg", "whiteText"], theme, variant === "filled").bundle(["mainText", "mainRing"], { $base: "ring-1" }, theme, variant === "outlined").bundle(["softBg", "mainText"], {}, theme, variant === "soft").prepend("avatar avatar-placeholder", true).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("hovered", variant, theme, hovered).option("avatarSizes", size, size).append(
+    "ring-4 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]",
+    stacked
+  ).append("relative", stacked === "down").append("relative inline-flex overflow-hidden", true).compile(true) || "";
+$:
+  avatarNotificationClasses = notification && th.create("Avatar").bundle(["mainBg", "whiteText"], theme, variant === "filled").bundle(["mainText", "mainRing"], theme, variant === "outlined").bundle(["softBg", "mainText"], {}, theme, variant === "soft").prepend("avatar-notification", true).option("avatarNotificationSizes", size, size && typeof counter === "undefined").option("avatarCounterSizes", size, size && typeof counter !== "undefined").option("avatarCounterTextSizes", size, size && typeof counter !== "undefined").option("animate", animate, animate).option("avatarNotificationOffsets", size, size).append(
+    "absolute block rounded-full inline-flex items-center justify-center ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))] ",
     true
+  ).append(
+    "w-auto px-0.5 -right-2",
+    typeof counter !== "undefined" && (counter + "").length > 2
   ).compile(true) || "";
-$:
-  avatarPlaceholderClasses = _placeholder && th.create("AvatarPlaceholder").variant("avatar", variant, theme, variant).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).option("avatarSizes", size, size).option("common", "ringed", typeof variant === "undefined").append('relative inline-flex overflow-hidden"', true).compile(true) || "";
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 {#if _placeholder}
 	<span class={avatarPlaceholderClasses}>
-		<Icon icon={_placeholder} class="h-full w-full" />
-		{#if notification}
-			<span class={avatarNotificationClasses} />
-		{/if}
-	</span>
-{:else if notification}
-	<span class="relative inline-flex max-w-fit">
-		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
-		<span class={avatarNotificationClasses} />
+		<slot>
+			<Icon icon={_placeholder} class="h-full w-full" />
+			{#if notification}
+				<span class={avatarNotificationClasses}>
+					{#if counter}
+						{counter}
+					{/if}
+				</span>
+			{/if}
+		</slot>
 	</span>
 {:else}
-	<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
+	<span class="relative inline-flex max-w-fit">
+		<img
+			use:forwardedEvents
+			use:lazyload={src}
+			alt="Avatar"
+			{...$$restProps}
+			class={avatarClasses}
+		/>
+		{#if notification}
+			<span class={avatarNotificationClasses}>
+				{#if counter}
+					{counter}
+				{/if}
+			</span>
+		{/if}
+	</span>
 {/if}
+<!-- {:else}
+	<span>
+		<img use:forwardedEvents src="" alt="Avatar" {...$$restProps} class={avatarClasses} />
+	</span>
+{/if} -->

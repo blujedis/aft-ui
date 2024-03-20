@@ -10,7 +10,7 @@ export type SelectListButtonProps = InputProps & {
 	caret?: string | IconifyIcon;
 	filterable?: boolean;
 	hovered?: boolean;
-	multiple?: boolean;
+	tags?: boolean;
 	newable?: boolean;
 	placeholder?: string;
 	removable?: boolean;

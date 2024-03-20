@@ -1,18 +1,17 @@
-<script>import { themeStore, themer, styler } from "../..";
+<script>import { themeStore, themer, styler } from "../../theme";
 import { rangeDefaults as defaults } from "./module";
 import { onMount } from "svelte";
-export let { focused, full, rounded, transitioned, shadowed, size, theme, variant } = {
+import { boolToMapValue } from "../../utils";
+export let { focused, full, rounded, transitioned, shadowed, size, theme } = {
   ...defaults
 };
 let ref;
 const th = themer($themeStore);
 const st = styler($themeStore);
 $:
-  components = $themeStore?.components || {};
+  rangeStyles = st.create("RangeStyles").color("--track-background-color", $themeStore.options.common.rangeBg, true).color("--thumb-background-color", `${theme}-${$themeStore.options.common.rangeThumb}`, true).color("--track-accent-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).color("--thumb-border-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
 $:
-  rangeStyles = st.create("RangeStyles").colormap(components?.rangeTrackBackground[variant], theme, "--track-background-color", true).colormap(components?.rangeTrackAccent[variant], theme, "--track-accent-color", true).colormap(components?.rangeThumbBorder[variant], theme, "--thumb-border-color", true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append("--thumb-background-color:#ffffff", true).append($$restProps.style, true).compile();
-$:
-  rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", rounded, rounded).option("shadows", shadowed, shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile(true);
+  rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
 $$restProps.min = $$restProps.min || 0;
 $$restProps.max = $$restProps.max || 100;
 function handleInputChange(e) {
@@ -37,9 +36,9 @@ onMount(() => {
 />
 
 <style>
-	:root {
-		--color-dark: 255 255 255;
-	}
+	/* :root {
+	 --color-range-dark: 255 255 255;
+	} */
 
 	input[type='range'] {
 		background-color: var(--track-background-color);
@@ -62,19 +61,19 @@ onMount(() => {
 		border: solid var(--thumb-border-color);
 		border-width: var(--thumb-border-width);
 		border-radius: 50%;
-		background: var(--thumb-background-color);
+		background-color: var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-webkit-slider-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-moz-range-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']:focus::-ms-thumb {
-		box-shadow: 0px 0px 8px var(--thumb-border-color);
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']::-moz-range-thumb {

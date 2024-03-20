@@ -3,6 +3,8 @@ import { type InputProps } from './module';
 declare const __propDef: {
     props: InputProps & Omit<import("svelte/elements").HTMLInputAttributes, "size">;
     events: {
+        input: Event;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {};

@@ -7,7 +7,7 @@
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
-	import { forwardEventsBuilder, boolToMapValue, lazyImage } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, lazyImage, cleanObj } from '$lib/utils';
 	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { Icon } from '../Icon';
 	import type { AvatarStackContext } from '../AvatarStack';
@@ -31,6 +31,7 @@
 		theme,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component, ['transitioned', 'focused']),
 		...defaults,
 		...context?.globals
 	} as Required<AvatarProps>;
@@ -50,6 +51,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('hovered', variant, theme, hovered)
+		.prepend('avatar', true)
 		.append(
 			'ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]',
 			stacked
@@ -65,6 +67,7 @@
 				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
 				.bundle(['mainText', 'mainRing'], { $base: 'ring-1' }, theme, variant === 'outlined')
 				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.prepend('avatar avatar-placeholder', true)
 				.option('roundeds', boolToMapValue(rounded), rounded)
 				.option('shadows', boolToMapValue(shadowed), shadowed)
 				.option('hovered', variant, theme, hovered)
@@ -85,6 +88,7 @@
 				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled') // white text
 				.bundle(['mainText', 'mainRing'], theme, variant === 'outlined')
 				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.prepend('avatar-notification', true)
 				.option('avatarNotificationSizes', size, size && typeof counter === 'undefined')
 				.option('avatarCounterSizes', size, size && typeof counter !== 'undefined')
 				.option('avatarCounterTextSizes', size, size && typeof counter !== 'undefined')

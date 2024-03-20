@@ -1,33 +1,25 @@
-import { ensureArray } from '$lib/utils';
-import { writable, get, type Writable } from 'svelte/store';
 
-export type SelectStoreValue =
-	| string
-	| number
-	| Date
-	| boolean
-	| bigint
-	| null
-	| undefined
-	| HTMLElement;
+import { ensureArray } from '$lib';
+import { writable, type Writable } from 'svelte/store';
+
+export type SelectStoreValue = any;
 
 export interface SelectStoreOptions {
 	max?: number;
 	min?: number;
-	multiple?: boolean;
-	selected: SelectStoreValue[];
+	selected: any;
+	// single - selected has a single value
+	// single-array - selected is an array with only one value.
+	// multiple - selected is an array iwth multiple values.
+	mode: 'single' | 'multiple' | 'single-array';
+	onChange?: (selected: any) => any;
 }
 
-export type SelectInitProps = SelectStoreOptions & {
-	selected?: SelectStoreValue | SelectStoreValue[];
-};
-
 export interface SelectStoreMethods {
-	restore(...selected: SelectStoreValue[]): void;
+	reset(selected: SelectStoreValue): void;
 	select(value?: SelectStoreValue): void;
 	unselect(value?: SelectStoreValue): void;
 	toggle(value?: SelectStoreValue): void;
-	isSelected(value?: SelectStoreValue): boolean;
 }
 
 export type SelectStore<P extends Record<string, any> = Record<string, any>> = Writable<
@@ -36,63 +28,118 @@ export type SelectStore<P extends Record<string, any> = Record<string, any>> = W
 	SelectStoreMethods;
 
 export function useSelect<P extends Record<string, any> = Record<string, any>>(
-	props = {} as P & SelectInitProps
+	options = {} as P & SelectStoreOptions
 ): SelectStore<P> {
-	const initialSelected = ensureArray(props.selected).filter((v) => typeof v !== 'undefined');
-	const store = writable({ multiple: false, ...props, selected: [...initialSelected] } as Required<
-		P & SelectStoreOptions
-	>);
 
-	function getStore() {
-		return get(store);
+	options = {
+		min: 0,
+		max: 0,
+		...options
+	};
+
+	const isArray =
+		['multiple', 'single-array'].includes('mode') || Array.isArray(options.selected)
+			? true : false;
+	const isSingleArray = options.mode === 'single-array';
+
+	// If multiple selected must be an array.
+	options.selected = isArray ? ensureArray(options.selected) : options.selected;
+
+	const initialSelected = options.selected;
+	const store = writable(options as Required<P & SelectStoreOptions>);
+
+	function canRemove(selected: any) {
+		if (!isArray || isSingleArray) return true;
+		const len = selected.length;
+		if (len - 1 >= (options.min || 0))
+			return true;
+		return false;
+	}
+
+	function canAdd(selected: any) {
+		if (!options.max || !isArray || isSingleArray) return true;
+		const len = selected.length;
+		if (len + 1 <= options.max)
+			return true;
+		return false;
+	}
+
+	function canReset(selected: any) {
+		if (!isArray || isSingleArray || (!options.max && !options.min)) return true;
+		if (options.min && selected.length < options.min) return false;
+		if (options.max && selected.length > options.max) return false;
+		return true;
 	}
 
 	function select(value?: SelectStoreValue) {
-		if (typeof value === 'undefined') return;
 		store.update((s) => {
-			let selected = [] as SelectStoreValue[];
-			const multiple = s.multiple;
-			if (multiple) selected = s.selected.includes(value) ? s.selected : [...s.selected, value];
-			else selected = [value];
-			return { ...s, selected: [...selected] };
+			if (typeof value === 'undefined' || !canRemove(s.selected))
+				return { ...s, selected: isArray ? [] : undefined };
+			let selected = value
+			if (isArray)
+				selected = isSingleArray
+					? [value] : s.selected.includes(value)
+						? s.selected : [...s.selected, value]
+			if (typeof options.onChange === 'function')
+				options.onChange(selected);
+			return { ...s, selected };
 		});
 	}
 
 	function unselect(value?: SelectStoreValue) {
-		if (typeof value === 'undefined') return;
 		store.update((s) => {
-			return { ...s, selected: s.selected.filter((v: SelectStoreValue) => v !== value) };
+			if (!canRemove(s.selected)) return { ...s };
+			let selected = value;
+			if (isArray)
+				selected = isSingleArray ? [] : s.selected.filter((v: any) => v !== value)
+			if (typeof options.onChange === 'function')
+				options.onChange(selected);
+			return { ...s, selected };
 		});
 	}
 
 	function toggle(value?: SelectStoreValue) {
 		if (typeof value === 'undefined') return;
 		store.update((s) => {
-			let selected = [...s.selected];
-			if (selected.includes(value)) selected = selected.filter((v) => v !== value);
-			else if (s.multiple || !selected.length) selected = [...selected, value];
-			else if (!s.multiple) selected = [value];
+			let selected = s.selected;
+			const hasValue = isArray ? selected.includes(value) : value === selected;
+			if (isSingleArray) {
+				selected = hasValue ? [] : [value];
+			}
+			else if (isArray) {
+				if (hasValue && canRemove(selected))
+					selected = selected.filter((v: any) => v !== value);
+				else if (canAdd(selected))
+					selected = [...selected, value];
+			}
+			else {
+				selected = hasValue ? undefined : value;
+			}
+			if (typeof options.onChange === 'function')
+				options.onChange(selected);
 			return { ...s, selected };
 		});
 	}
 
-	function restore(...selected: SelectStoreValue[]) {
+	function reset(selected?: SelectStoreValue) {
 		store.update((s) => {
-			return { ...s, selected: selected.length ? [...selected] : [...initialSelected] };
+			if (!canReset(selected)) {
+				selected = initialSelected;
+				console.warn(`Reset collection is greater than options.max or less than options.min`);
+			}
+			selected = !canReset(selected) ? initialSelected : selected;
+			const _selected = typeof selected === 'undefined' ? initialSelected : selected
+			if (typeof options.onChange === 'function')
+				options.onChange(_selected);
+			return { ...s, selected: _selected };
 		});
-	}
-
-	function isSelected(value?: SelectStoreValue): boolean {
-		if (typeof value === 'undefined') return false;
-		return getStore().selected.includes(value);
 	}
 
 	return {
 		...store,
-		restore,
+		reset,
 		select,
 		unselect,
 		toggle,
-		isSelected
 	};
 }

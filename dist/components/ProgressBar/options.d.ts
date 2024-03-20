@@ -17,6 +17,8 @@ export declare const progressBarRoundedBar: {
     xl: string;
     xl2: string;
     full: string;
+    true: string;
+    false: string;
 } & {
     unstyled: string;
     none: string;
@@ -27,6 +29,8 @@ export declare const progressBarRoundedBar: {
     xl: string;
     xl2: string;
     full: string;
+    true: string;
+    false: string;
 } & import("../../theme").StringMap;
 export declare const progressBarRoundedValue: {
     unstyled: string;
@@ -38,4 +42,6 @@ export declare const progressBarRoundedValue: {
     xl: string;
     xl2: string;
     full: string;
+    true: string;
+    false: string;
 };

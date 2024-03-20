@@ -1,6 +1,4 @@
 import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
-import type { progressCircleTrack } from './config';
-export type ProgressCircleVariant = keyof typeof progressCircleTrack;
 export type ProgressCircleTweenedOptions<T extends number = any> = {
     delay?: number;
     duration?: number | ((from: T, to: T) => number);
@@ -17,6 +15,5 @@ export type ProgressCircleProps<T extends number = any> = ProgressCircleTweenedO
     theme?: ThemeColor;
     tracksize?: ThemeSize | number;
     value?: T;
-    variant?: ProgressCircleVariant;
 };
 export declare const progressCircleDefaults: ProgressCircleProps<any>;

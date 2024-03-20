@@ -1,8 +1,12 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-import type { tile } from './config';
-export type TileVariant = keyof typeof tile;
+export type TileVariant = 'filled' | 'outlined' | 'soft';
 export type TileProps = {
+    bordered?: boolean;
+    dropshadowed?: ThemeShadowed;
+    focused?: boolean;
     full?: boolean;
+    href?: string;
+    hovered?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;

@@ -24,10 +24,6 @@
 		.option('iconStroke', theme, theme && stroke)
 		.option('hovered', 'filled', theme, hovered)
 		.option('common', 'transitioned', transitioned)
-		// .append('text-white', theme === 'white')
-		// .append('text-black', theme === 'black')
-		// .append('stroke-white', stroke && theme === 'white')
-		// .append('stroke-black', stroke && theme === 'black')
 		.append($$restProps.class, true)
 		.compile();
 </script>

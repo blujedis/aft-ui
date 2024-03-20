@@ -24,20 +24,22 @@
 		transitioned,
 		variant
 	} = {
+		...$themeStore?.defaults?.component,
 		...defaults
 	} as Required<$$Props>;
-
-	// const store = useSelect({ multiple, selected: ensureArray(value) });
-
-	// export const context = setContext<SelectContext>('SelectContext', {
-	// 	...store
-	// });
 
 	const th = themer($themeStore);
 
 	$: inputClasses = th
 		.create('Select')
-		.bundle(['mainBg', 'whiteText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['mainBg', 'whiteText', 'filledPlaceholder'],
+			{
+				frame: 'text-dark dark:text-light'
+			},
+			theme,
+			variant === 'filled'
+		)
 		.bundle(
 			['inputText', 'mainRing'],
 			{ $base: 'ring-1 ring-inset' },
@@ -56,12 +58,15 @@
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
-		.prepend(`select select-${variant}`, true)
+		.prepend(`select select-${variant} select-${theme}`, true)
 		.append('min-w-min', true)
-		.append('w-full', full)
+		.append('w-full', full || variant === 'flushed') // flushed container requires full width
 		.append('dark:bg-transparent', ['outlined', 'flushed', 'text', 'ghost'].includes(variant))
 		.append('peer px-2', variant === 'flushed')
-		.append('flex items-center justify-center pr-10 focus:ring-0 outline-none border-0', true) // always pad right for caret.
+		.append(
+			'inline-flex items-center justify-center pr-10 focus:ring-0 outline-none border-0',
+			true
+		) // always pad right for caret.
 		.append($$restProps.multiple ? 'form-multiselect' : 'form-select', true)
 		.append($$restProps.class, true)
 		.compile();
@@ -81,24 +86,8 @@
 	</select>
 </ConditionalComponent>
 
-<!-- {#if variant === 'flushed'}
-	<Flushed {theme}>
-		<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
-			{#if placeholder}
-				<option value="" disabled selected
-					>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
-				>
-			{/if}
-			<slot />
-		</select>
-	</Flushed>
-{:else}
-	<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
-		{#if placeholder}
-			<option value="" disabled selected
-				>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option
-			>
-		{/if}
-		<slot />
-	</select>
-{/if} -->
+<style>
+	.select-filled:not(.select-frame) {
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>');
+	}
+</style>

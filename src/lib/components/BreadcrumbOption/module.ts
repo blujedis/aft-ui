@@ -1,4 +1,4 @@
-import type { ThemeColor, ThemeFocused, ThemeSize, ThemeTransitioned } from '$lib/types';
+import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
 
@@ -23,7 +23,7 @@ export const breadcrumbOptionDefaults: Partial<BreadcrumbOptionProps> = {
 	focused: true,
 	size: 'md',
 	separator: 'mdi-light:chevron-right',
-	theme: 'default',
+	theme: 'frame',
 	variant: 'text'
 };
 

@@ -1,7 +1,6 @@
 <script>import { menuButtonDefaults as defaults } from "./module";
 import { themer, themeStore } from "../../theme";
-import { Button } from "../Button";
-import { Icon } from "../Icon";
+import { Button, Icon } from "..";
 import { getContext } from "svelte";
 const context = getContext("Menu");
 export let { caret, full, rounded, roticon, size, shadowed, theme, variant } = {
@@ -10,14 +9,13 @@ export let { caret, full, rounded, roticon, size, shadowed, theme, variant } = {
 };
 const th = themer($themeStore);
 $:
-  buttonClasses = th.create("MenuButton").append("h-full", true).append($$restProps.class, true).compile(true);
+  buttonClasses = th.create("MenuButton").append("h-full", true).append($$restProps.class, true).compile();
 $:
   iconClasses = th.create("MenuButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", !!caret && roticon).append(
     typeof roticon === "string" ? roticon : "-rotate-180",
     $context.visible && roticon && !!caret
   ).append("ml-2 shrink pointer-events-none pt-px", true).compile();
 function handleClick(e) {
-  console.log("clicked");
   context.toggle();
 }
 </script>

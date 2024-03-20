@@ -3,8 +3,10 @@
  *
  * @param obj the object to be cleaned.
  */
-export function cleanObj(obj = {}) {
+export function cleanObj(obj = {}, exclude = []) {
     return Object.entries(obj).reduce((a, [key, val]) => {
+        if (exclude.includes(key))
+            return a;
         if (typeof val !== 'undefined')
             a[key] = val;
         return a;

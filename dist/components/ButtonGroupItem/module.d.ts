@@ -1,6 +1,5 @@
 import type { ButtonProps } from '../Button/module';
-import type { buttonGroupItem } from './config';
-export type ButtonGroupVariant = keyof typeof buttonGroupItem;
+export type ButtonGroupVariant = 'flushed' | 'filled' | 'outlined' | 'ghost' | 'soft';
 export type ButtonGroupItemProps = Omit<ButtonProps<'button' | 'a'>, 'shadowed' | 'variant'> & {
     value: string | number;
     variant?: ButtonGroupVariant;

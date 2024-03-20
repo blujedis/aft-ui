@@ -9,9 +9,12 @@ export type CardContext = {
     };
 };
 export type CardProps = {
+    bordered?: boolean;
     divided?: boolean;
+    dropshadowed?: ThemeShadowed;
     full?: boolean;
     horizontal?: boolean;
+    href?: string;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
     size?: ThemeSize;

@@ -1,7 +1,7 @@
 <script>import { tweened } from "svelte/motion";
 import { progressCircleDefaults as defaults } from "./module";
-import { themeStore, styler, themer } from "../..";
-import { onMount } from "svelte";
+import { themeStore, styler, themer } from "../../theme";
+import { boolToMapValue } from "../../utils";
 export let {
   animate,
   delay,
@@ -15,7 +15,6 @@ export let {
   textunit,
   theme,
   value,
-  variant,
   tracksize
 } = {
   ...defaults
@@ -38,13 +37,13 @@ const st = styler($themeStore);
 $:
   progressCircleStyles = st.create("ProgressCircleStyles").add("height", diameter, true).add("width", diameter, true).add("transform", "rotate(-90deg)", true).compile();
 $:
-  progressCircleClasses = th.create("ProgressCircle").option("dropshadows", shadowed, shadowed).append($$restProps.class, true).compile(true);
+  progressCircleClasses = th.create("ProgressCircle").option("dropshadows", boolToMapValue(shadowed), shadowed).append($$restProps.class, true).compile();
 $:
-  progressCircleTrackClasses = th.create("ProgressCircleTrack").variant("progressCircleTrack", variant, theme, true).append("fill-transparent", true).compile(true);
+  progressCircleTrackClasses = th.create("ProgressCircleTrack").bundle(["progressStroke"], theme, true).append("fill-transparent", true).compile();
 $:
-  progressCircleValueClasses = th.create("ProgressCircleValue").variant("progressCircleValue", variant, theme, true).append("fill-transparent", true).compile(true);
+  progressCircleValueClasses = th.create("ProgressCircleValue").bundle(["iconStroke"], theme, true).append("fill-transparent", true).compile();
 $:
-  progressCircleTextClasses = th.create("ProgressCircleText").variant("progressCircleText", variant, theme, true).option("progressCircleTextSizes", size, typeof size === "string").compile(true);
+  progressCircleTextClasses = th.create("ProgressCircleText").bundle(["progressFill"], theme, true).option("progressCircleTextSizes", size, typeof size === "string").compile();
 function normalizeSize() {
   let nsize = 0;
   let ntsize = 0;

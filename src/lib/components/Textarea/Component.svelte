@@ -18,7 +18,8 @@
 		size,
 		theme,
 		transitioned,
-		variant
+		variant,
+		value
 	} = {
 		...defaults
 	} as Required<$$Props>;
@@ -51,11 +52,10 @@
 			'flex items-center justify-center form-textarea outline-none border-0 focus:outline-3',
 			true
 		)
-		// .append('border-0 ring-1 ring-black ring-opacity-5', variant === 'filled')
 		.append($$restProps.class, true)
 		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<textarea {...$$restProps} use:forwardedEvents class={textareaClasses} />
+<textarea {...$$restProps} use:forwardedEvents bind:value class={textareaClasses} />

@@ -6,23 +6,23 @@ const description = "New instance empty container.";
 const code = `
   `;
 const props = {
+  focused: true,
   full: false,
+  hovered: true,
   rounded: "none",
   shadowed: "none",
   size: "md",
-  theme: "success",
   transitioned: false,
-  // ThemeTransitioned,
   variant: "outlined"
 };
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4">
 		{#each colors as color}
 			<label for={color}>
 				<div class="text-sm">Outlined:</div>
-				<Empty theme={color}>Empty</Empty>
+				<Empty {...props} tabindex={0} theme={color}>Empty</Empty>
 			</label>
 		{/each}
 	</div>

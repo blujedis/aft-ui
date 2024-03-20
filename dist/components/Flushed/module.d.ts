@@ -4,8 +4,8 @@ export type FlushedProps = {
     focused?: ThemeFocused;
     group?: boolean;
     peer?: boolean;
-    hover?: boolean;
-    active?: boolean;
+    hovered?: boolean;
+    selected?: boolean;
     theme?: ThemeColor;
 };
 export declare const flushedDefaults: Partial<FlushedProps>;

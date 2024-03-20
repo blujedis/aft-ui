@@ -1,48 +1,14 @@
 export declare const menuOption: {
-    text: {
-        [x: string]: string | string[];
+    text: any;
+    filled: any;
+    outlined: any;
+    ghost: any;
+    soft: {
         $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
-    filled: {
-        [x: string]: string | string[];
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
-    outlined: {
-        [x: string]: string | string[];
-        $base: string;
-        default: string;
-        dark: string;
-        primary: string;
-        secondary: string;
-        tertiary: string;
-        danger: string;
-        warning: string;
-        success: string;
-        info: string;
-    };
-    ghost: {
-        [x: string]: string | string[];
-        $base: string;
-        default: string;
-        dark: string;
+        unstyled: string;
+        white: string;
+        black: string;
+        frame: string;
         primary: string;
         secondary: string;
         tertiary: string;

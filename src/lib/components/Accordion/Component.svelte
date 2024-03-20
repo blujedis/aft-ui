@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { cleanObj } from '$lib/utils';
-
 	import {
 		type AccordionProps,
 		accordionDefaults as defaults,
@@ -28,12 +27,14 @@
 		size,
 		theme,
 		transition,
+		transitioned,
 		variant
 	} = {
+		...$themeStore.defaults?.component,
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 
-	export const store = useSelect({ multiple, selected });
+	export const store = useSelect({ mode: 'multiple', selected });
 
 	const globals = cleanObj({
 		bordered,
@@ -46,13 +47,14 @@
 		size,
 		theme,
 		transition,
+		transitioned,
 		variant
 	});
 
 	setContext('Accordion', {
 		...store,
 		globals
-	}) as AccordionContext;
+	}) as unknown as AccordionContext; // need to review these types.
 
 	const th = themer($themeStore);
 
@@ -80,7 +82,6 @@
 		select={store.select}
 		unselect={store.unselect}
 		reset={handleReset}
-		isSelected={store.isSelected}
 		selectedItems={$store.selected}
 	/>
 </svelte:element>

@@ -4,13 +4,13 @@ import { forwardEventsBuilder } from "../../utils";
 import { get_current_component } from "svelte/internal";
 import { getContext } from "svelte";
 const context = getContext("Menu");
-export let { active, as, key, size, theme, variant } = {
+export let { active, as, key, focused, hovered, size, theme, transitioned } = {
   ...defaults,
   ...context?.globals
 };
 const th = themer($themeStore);
 $:
-  optionClasses = th.create("MenuOption").variant("menuOption", variant, theme, variant).append("focus:outline outline-frame-400 outline-2", true).option("focusedOutline", theme, true).remove("focus-visible:", true).option("fieldFontSizes", size, size).option("menuPadding", size, size).append("block w-full", true).append($$restProps.class, true).compile(true);
+  optionClasses = th.create("MenuOption").option("panelBgHover", theme, hovered).option("common", "transitioned", transitioned).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("fieldFontSizes", size, size).option("menuPadding", size, size).append("block w-full", true).append("hover:brightness-125", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 function handleClick(e) {
   setTimeout(() => context.close());

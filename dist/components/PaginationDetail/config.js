@@ -3,8 +3,9 @@ export const paginationDetail = {
     filled: {
         $base: 'text-inherit'
     },
-    outlined: {
+    flushed: {
         ...placeholder,
         $base: 'text-inherit'
-    }
+    },
+    ghost: {}
 };

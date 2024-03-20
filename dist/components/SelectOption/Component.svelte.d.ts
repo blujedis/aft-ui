@@ -6,9 +6,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        default: {
-            selected: () => boolean;
-        };
+        default: {};
     };
 };
 export type ComponentProps = typeof __propDef.props;

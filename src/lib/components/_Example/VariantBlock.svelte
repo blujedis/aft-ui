@@ -2,13 +2,13 @@
 	import ExamplePage from './ExamplePage.svelte';
 	import Section from './Section.svelte';
 	import {
-		colors,
-		variantFilled,
-		variantFilledHover,
-		variantGhost,
-		variantGhostHover,
-		variantOutlined,
-		variantOutlinedHover
+		colors
+		// variantFilled,
+		// variantFilledHover,
+		// variantGhost,
+		// variantGhostHover,
+		// variantOutlined,
+		// variantOutlinedHover
 	} from '$lib/constants';
 
 	import classNames from 'classnames';
@@ -23,9 +23,9 @@
 		<div class="text-2xl font-semibold mb-4">Filled</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div class={classNames(variantFilled.$base, variantFilled[color], 'p-4 text-center')}>
+				<!-- <div class={classNames(variantFilled.$base, variantFilled[color], 'p-4 text-center')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -34,11 +34,11 @@
 		<div class="text-2xl font-semibold mb-4">Filled Hover</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div
+				<!-- <div
 					class={classNames(variantFilledHover.$base, variantFilledHover[color], 'p-4 text-center')}
 				>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -47,9 +47,9 @@
 		<div class="text-2xl font-semibold mb-4">Ringed</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4 text-center')}>
+				<!-- <div class={classNames(variantOutlined.$base, variantOutlined[color], 'p-4 text-center')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -58,7 +58,7 @@
 		<div class="text-2xl font-semibold mb-4">Ringed Hover</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div
+				<!-- <div
 					class={classNames(
 						variantOutlinedHover.$base,
 						variantOutlinedHover[color],
@@ -66,7 +66,7 @@
 					)}
 				>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -75,9 +75,9 @@
 		<div class="text-2xl font-semibold mb-4">Ghost</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div class={classNames(variantGhost.$base, variantGhost[color], 'p-4 text-center')}>
+				<!-- <div class={classNames(variantGhost.$base, variantGhost[color], 'p-4 text-center')}>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
@@ -86,11 +86,11 @@
 		<div class="text-2xl font-semibold mb-4">Ghost Hover</div>
 		<div class="grid grid-cols-6 gap-2 items-center justify-center">
 			{#each colors as color}
-				<div
+				<!-- <div
 					class={classNames(variantGhostHover.$base, variantGhostHover[color], 'p-4 text-center')}
 				>
 					{color}
-				</div>
+				</div> -->
 			{/each}
 		</div>
 	</Section>
