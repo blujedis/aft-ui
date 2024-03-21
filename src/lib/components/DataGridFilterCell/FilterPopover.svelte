@@ -7,7 +7,8 @@
 		SelectListPanel,
 		Input,
 		Radio,
-		filterPopoverDefaults
+		filterPopoverDefaults,
+		Button
 	} from '$lib/components';
 	import { themeStore, themer } from '$lib/theme';
 	import { useColorMode, useFocusTrap } from '$lib/hooks';
@@ -18,13 +19,17 @@
 	export let data = {
 		...filterPopoverDefaults
 	};
-	export let onChange = (value: typeof data) => {};
+	export let applyFilter = () => {};
+	export let resetFilter = () => {};
 
 	let theme = 'frame' as ThemeColor;
 	let selectTwo: SelectList<DataGridFilterListItem>;
 
 	const [bindFocusTrap, handleFocusTrap] = useFocusTrap();
 	const isDark = useColorMode();
+
+	$: valueOneHidden = ['empty', '!empty'].includes(data.criteriaOne);
+	$: valueTwoHidden = ['empty', '!empty'].includes(data.criteriaTwo);
 
 	const th = themer($themeStore);
 
@@ -35,22 +40,17 @@
 		.append('absolute popover flex-col items-center w-56 p-4 shadow-sm border', true)
 		.compile();
 
-	function handleChange(e?: any) {
+	function handleApplyFilter() {
 		setTimeout(() => {
-			// onChange(data);
+			applyFilter();
 		});
 	}
 
 	function handleInputChange(e?: any) {
-		console.log(typeof data.valueTwo);
-		if (typeof data.valueTwo === 'string' && !data.valueTwo.length) {
-			//	selectTwo.context.select('like');
+		if (typeof data.valueTwo === 'string' && !data.criteriaTwo) {
 			data.criteriaTwo = 'like';
-			onChange(data);
+			selectTwo.select('like');
 		}
-		// if (!data.criteriaTwo && data.valueTwo) {
-		// 	handleChange();
-		// }
 	}
 </script>
 
@@ -64,14 +64,15 @@
 			{rounded}
 			hovered
 			focused
+			full
 			placeholder="Please Select"
 			variant={$isDark ? 'soft' : 'outlined'}
 			bind:value={data.criteriaOne}
 			let:filtered
-			onChange={handleChange}
+			onChange={handleApplyFilter}
 		>
 			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
-			<SelectListPanel shadowed="md" full class={!$isDark ? 'bg-white' : ''}>
+			<SelectListPanel shadowed="md" full class={!$isDark ? '!bg-white' : ''}>
 				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
@@ -79,18 +80,17 @@
 				{/each}
 			</SelectListPanel>
 		</SelectList>
-		{#if !['empty', '!empty'].includes(data.criteriaOne)}
-			<Input
-				type="text"
-				bind:value={data.valueOne}
-				size="sm"
-				{rounded}
-				focused
-				full
-				variant={$isDark ? 'soft' : 'outlined'}
-				on:change={handleChange}
-			/>
-		{/if}
+		<Input
+			type="text"
+			bind:value={data.valueOne}
+			size="sm"
+			{rounded}
+			focused
+			full
+			variant={$isDark ? 'soft' : 'outlined'}
+			class={valueOneHidden ? 'hidden' : ''}
+			on:input={handleApplyFilter}
+		/>
 	</div>
 	<div class="flex items-center space-x-4 my-2">
 		<Radio
@@ -99,7 +99,7 @@
 			bind:group={data.join}
 			focused
 			theme="secondary"
-			on:change={handleChange}>AND</Radio
+			on:change={handleApplyFilter}>AND</Radio
 		>
 		<Radio
 			name="andor"
@@ -107,7 +107,7 @@
 			bind:group={data.join}
 			focused
 			theme="secondary"
-			on:change={handleChange}>OR</Radio
+			on:change={handleApplyFilter}>OR</Radio
 		>
 	</div>
 	<div class="flex-col items-center space-y-2">
@@ -118,14 +118,15 @@
 			{rounded}
 			hovered
 			focused
+			full
 			placeholder="Please Select"
 			variant={$isDark ? 'soft' : 'outlined'}
 			bind:value={data.criteriaTwo}
 			let:filtered
-			onChange={handleChange}
+			onChange={handleApplyFilter}
 		>
 			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
-			<SelectListPanel shadowed="md" full class={!$isDark ? 'bg-white' : ''}>
+			<SelectListPanel shadowed="md" full class={!$isDark ? '!bg-white' : ''}>
 				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
@@ -133,18 +134,21 @@
 				{/each}
 			</SelectListPanel>
 		</SelectList>
-		{#if !['empty', '!empty'].includes(data.criteriaTwo)}
-			<Input
-				type="text"
-				bind:value={data.valueTwo}
-				size="sm"
-				{rounded}
-				focused
-				full
-				variant={$isDark ? 'soft' : 'outlined'}
-				on:change={handleInputChange}
-			/>
-		{/if}
+		<Input
+			type="text"
+			bind:value={data.valueTwo}
+			size="sm"
+			{rounded}
+			focused
+			full
+			variant={$isDark ? 'soft' : 'outlined'}
+			class={valueTwoHidden ? 'hidden' : ''}
+			on:change={handleInputChange}
+			on:input={handleApplyFilter}
+		/>
+	</div>
+	<div class="flex items-center space-x-2 mt-3 justify-end pr-1">
+		<Button variant="outlined" underlined on:click={resetFilter} size="sm">Reset</Button>
+		<!-- <Button variant="text" underlined on:click={applyFilter}>Apply</Button> -->
 	</div>
 </div>
-<kbd></kbd>

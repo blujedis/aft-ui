@@ -4,8 +4,6 @@
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
-	import type { SelectContext } from '$lib/components/Select';
-	import { getContext } from 'svelte';
 
 	type $$Props = SelectOptionProps & ElementProps<'option'>;
 

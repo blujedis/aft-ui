@@ -9,7 +9,7 @@
 	} from './module';
 	import { themeStore, themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '$lib/types';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { cleanObj, createCustomEvent, ensureArray } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
@@ -54,7 +54,7 @@
 	if (min) tags = true;
 	if (max) tags = true;
 
-	export const store = useSelect({
+	const store = useSelect({
 		visible,
 		selected: ensureArray(value),
 		min,
@@ -63,11 +63,7 @@
 		items: [],
 		filtered: [],
 		persisted: [],
-		onChange: (selected) => {
-			const changedValue = tags ? selected : selected[0];
-			value = changedValue;
-			if (typeof onChange === 'function') onChange(changedValue);
-		}
+		onChange: onChangeHandler
 	}) as SelectStore<SelectListStore<Item>>;
 
 	const globals = cleanObj({
@@ -97,7 +93,7 @@
 
 	const { class: classes, ...restProps } = $$restProps;
 
-	export const context = setContext('SelectListContext', {
+	const context = setContext('SelectListContext', {
 		...store,
 		isSelected,
 		add,
@@ -112,6 +108,15 @@
 	}) as SelectListContext;
 
 	const th = themer($themeStore);
+
+	$: {
+		if (
+			typeof value === 'undefined' ||
+			(Array.isArray(value) && !value.length) ||
+			(typeof value === 'string' && !value.length)
+		)
+			setLabel();
+	}
 
 	$: groups = $store.items.reduce(
 		(a, c) => {
@@ -133,6 +138,13 @@
 		.append(classes, true)
 		.compile();
 
+	function onChangeHandler(selected: any) {
+		const changedValue = tags ? selected : selected[0];
+		value = changedValue;
+		if (!value.length) setLabel(); // if not value update the input which display label.
+		if (typeof onChange === 'function') onChange(changedValue);
+	}
+
 	async function resolveItems(query?: string) {
 		if (!query) return $context.items as Required<Item>[];
 		return Promise.resolve(
@@ -144,90 +156,25 @@
 		);
 	}
 
-	function isSelected(itemOrKey: Item | SelectListItemKey) {
-		let key = itemOrKey as SelectListItemKey;
-		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
-		return $store.selected.includes(key);
-	}
-
-	function open() {
-		store.update((s) => ({ ...s, visible: true }));
-	}
-
-	function close() {
-		store.update((s) => ({ ...s, visible: false }));
-	}
-
-	function toggle() {
-		if ($context.visible) close();
-		else open();
-	}
-
-	function add({ value, label, group, selected }: Item) {
-		if (typeof label === 'undefined') label = value + '';
-		group = group || '';
-		const hasValue = $store.items.find((item) => item.value === value);
-		if (!hasValue) {
-			store.update((s) => {
-				const items = [...s.items, { value, label, group } as Required<Item>];
-				let selectedItems = [...s.selected];
-				if (selected && !selectedItems.includes(value)) {
-					// if (selected && selectedItems.length && multiple) selectedItems.push(value);
-					// else selectedItems = [value];
-					if (tags) selectedItems.push(value);
-					else selectedItems = [value];
-				}
-				const filteredItems = !exclusive
-					? items
-					: items.filter((v) => !selectedItems.includes(v.value));
-				return {
-					...s,
-					items,
-					filtered: filteredItems, // [...items],
-					selected: selectedItems
-				};
-			});
-		}
-	}
-
-	function setLabel(item: Required<Item>) {
-		if (tags && $context.input) {
-			//
-		}
-		else if ($context.input) {
-			$context.input.value = item.label;
-		}
-	}
-
-	function select(itemOrKey: Item | SelectListItemKey) {
-		let key = itemOrKey as SelectListItemKey;
-		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
-
-		store.select(key);
-		if (exclusive) filter('');
-	}
-
-	function remove(itemOrKey: Item | SelectListItemKey) {
-		let key = itemOrKey as SelectListItemKey;
-		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
-		store.update((s) => {
-			const filteredSelected = s.selected.filter((v: any) => v !== key);
-			return { ...s, selected: filteredSelected };
-		});
-		// really should breakout filter below to return only values
-		// then create "filterUpdateStore" or something.
-		if (exclusive) filter('');
+	function getItem(itemOrKey: Item | SelectListItemKey) {
+		if (typeof itemOrKey === 'object' && typeof itemOrKey.value !== 'undefined')
+			return itemOrKey as Item;
+		return $store.items.find((v) => v.value === itemOrKey) as Item;
 	}
 
 	function restore(
 		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
 		restoreInput?: boolean
 	) {
-		if (!$context.filtering) return;
 
 		if (typeof selectedItemsOrRestoreInput === 'boolean') {
 			restoreInput = selectedItemsOrRestoreInput;
 			selectedItemsOrRestoreInput = undefined;
+		}
+
+		if (!$context.filtering) {
+			
+			return;
 		}
 
 		if ($context.input && restoreInput) {
@@ -257,7 +204,80 @@
 		});
 	}
 
-	async function filter(query?: string) {
+	export function isSelected(itemOrKey: Item | SelectListItemKey) {
+		const item = getItem(itemOrKey);
+		const selected = $store.selected.includes(item.value);
+		return selected;
+	}
+
+	export function setLabel(itemOrKey?: Item | SelectListItemKey) {
+		const item = !itemOrKey ? null : getItem(itemOrKey);
+		if ($context.input) {
+			if (item && !tags) $context.input.value = item.label as string;
+			else if (!item) $context.input.value = '';
+		}
+	}
+
+	export function open() {
+		store.update((s) => ({ ...s, visible: true }));
+	}
+
+	export function close() {
+		store.update((s) => ({ ...s, visible: false }));
+	}
+
+	export function toggle() {
+		if ($context.visible) close();
+		else open();
+	}
+
+	export function add({ value, label, group, selected }: Item) {
+		if (typeof label === 'undefined') label = value + '';
+		group = group || '';
+		const hasValue = $store.items.find((item) => item.value === value);
+		if (!hasValue) {
+			store.update((s) => {
+				const items = [...s.items, { value, label, group } as Required<Item>];
+				let selectedItems = [...s.selected];
+				if (selected && !selectedItems.includes(value)) {
+					// if (selected && selectedItems.length && multiple) selectedItems.push(value);
+					// else selectedItems = [value];
+					if (tags) selectedItems.push(value);
+					else selectedItems = [value];
+				}
+				const filteredItems = !exclusive
+					? items
+					: items.filter((v) => !selectedItems.includes(v.value));
+				return {
+					...s,
+					items,
+					filtered: filteredItems, // [...items],
+					selected: selectedItems
+				};
+			});
+		}
+	}
+
+	export function select(itemOrKey: Item | SelectListItemKey) {
+		const item = getItem(itemOrKey);
+		setLabel(item);
+		store.select(item.value);
+		if (exclusive) filter('');
+	}
+
+	export function remove(itemOrKey: Item | SelectListItemKey) {
+		let key = itemOrKey as SelectListItemKey;
+		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
+		store.update((s) => {
+			const filteredSelected = s.selected.filter((v: any) => v !== key);
+			return { ...s, selected: filteredSelected };
+		});
+		// really should breakout filter below to return only values
+		// then create "filterUpdateStore" or something.
+		if (exclusive) filter('');
+	}
+
+	export async function filter(query?: string) {
 		let filtered = await resolveItems(query);
 		const filteredValue = !query ? [] : filtered[0] ? [filtered[0].value] : [];
 		store.update((s) => {
@@ -328,21 +348,39 @@
 			/>
 		</div>
 
+		<!-- Select cannot have a dynamic "multiple when using bind."-->
 		<slot name="select">
-			<select tabindex="-1" class="sr-only" {...restProps} multiple={tags} {value}>
-				{#if groupKeys.length}
-					{#each Object.entries(groups) as [group, items]}
-						<optgroup>{group}</optgroup>
-						{#each items as item}
-							<option value={item.value}>{item.label}</option>
+			{#if tags}
+				<select tabindex="-1" class="sr-only" {...restProps} multiple bind:value>
+					{#if groupKeys.length}
+						{#each Object.entries(groups) as [group, items]}
+							<optgroup>{group}</optgroup>
+							{#each items as item}
+								<option value={item.value}>{item.label}</option>
+							{/each}
 						{/each}
-					{/each}
-				{:else}
-					{#each $store.items as item}
-						<option value={item.value} selected={isSelected(item.value)}>{item.label}</option>
-					{/each}
-				{/if}
-			</select>
+					{:else}
+						{#each $store.items as item}
+							<option value={item.value} selected={isSelected(item.value)}>{item.label}</option>
+						{/each}
+					{/if}
+				</select>
+			{:else}
+				<select tabindex="-1" class="sr-only" {...restProps} bind:value>
+					{#if groupKeys.length}
+						{#each Object.entries(groups) as [group, items]}
+							<optgroup>{group}</optgroup>
+							{#each items as item}
+								<option value={item.value}>{item.label}</option>
+							{/each}
+						{/each}
+					{:else}
+						{#each $store.items as item}
+							<option value={item.value} selected={isSelected(item.value)}>{item.label}</option>
+						{/each}
+					{/if}
+				</select>
+			{/if}
 		</slot>
 	</div>
 </div>

@@ -90,13 +90,10 @@
 		const key = el.dataset.key as string;
 		if (!tags && $context.input) {
 			context.toggle();
-			context.restore(key, false);
+			if (!context.globals?.filterable) context.select(key);
+			else context.restore(key, false);
 			setTimeout(() => {
-				if ($context.input) {
-					const nextValue = $context.items.find((i) => key === i.value)?.label || '';
-					$context.input.value = nextValue;
-					$context.input.focus();
-				}
+				$context.input?.focus();
 			});
 		} else {
 			context.select(key);

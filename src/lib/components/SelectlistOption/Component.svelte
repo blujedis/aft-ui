@@ -10,12 +10,6 @@
 	type Tag = $$Generic<'button' | 'a'>;
 	type $$Props = SelectListOptionProps<Tag> & ElementProps<Tag>;
 
-	// interface $$Slots {
-	// 	default: {
-	// 		active: boolean;
-	// 	};
-	// }
-
 	const context = getContext('SelectListContext') as SelectListContext;
 
 	export let { as, focused, hovered, tags, removable, size, theme, key } = {
@@ -36,14 +30,14 @@
 	$: optionClasses = th
 		.create('SelectListOption')
 		.bundle(['selectedSoftBgAriaSelected'], theme, theme)
-		.option('common', 'focusedOutline', focused)
-		.option('outlineFocus', theme, focused)
+		.option('common', 'focusedRing', focused)
+		.option('ringFocus', theme, focused)
 		.option('panelBgHover', theme, hovered)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
 		.prepend('select-list-option', true)
 		.append('select-list-option-selected', $context.selected.includes(key))
-		.append('block w-full text-left z-40', true)
+		.append('block w-full text-left z-40 focus:ring-inset focus:ring-1', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -56,8 +50,8 @@
 			else context.select(key);
 			setTimeout(() => {
 				if ($context.input) {
-					const nextValue = $context.items.find((i) => key === i.value)?.label || '';
-					$context.input.value = nextValue;
+					// const nextValue = $context.items.find((i) => key === i.value)?.label || '';
+					// $context.input.value = nextValue;
 					$context.input.focus();
 				}
 			});

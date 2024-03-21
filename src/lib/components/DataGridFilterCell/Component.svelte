@@ -57,19 +57,7 @@
 		return (context.globals?.filters || []).find((f) => f.value === criteria)?.handler;
 	}
 
-	function resetFilters(values?: typeof filterData) {
-		if (values)
-			filterData = {
-				...values
-			};
-		else
-			filterData = {
-				...filterPopoverDefaults
-			};
-	}
-
 	function handleFilter(): void {
-		if (!filterData.valueOne) resetFilters();
 		const criteria = [
 			{
 				accessor: column.accessor,
@@ -92,11 +80,19 @@
 		}
 		debounce(() => {
 			context.filter(...criteria);
-		})();
+		}, 200)();
 	}
 
-	function handleChange(data: typeof filterData) {
-		filterData = { ...data };
+	function handleInputChange() {
+		if (!filterData.valueOne) handleResetFilter();
+		else
+			handleFilter();
+	}
+
+	function handleResetFilter() {
+		filterData = {
+			...filterPopoverDefaults
+		};
 		handleFilter();
 	}
 </script>
@@ -110,7 +106,7 @@
 					placeholder="filter"
 					class={gridFilterInputClasses}
 					bind:value={filterData.valueOne}
-					on:input={(e) => handleFilter()}
+					on:input={handleInputChange}
 				/>
 			</slot>
 			<slot name="icon">
@@ -132,7 +128,12 @@
 					</button>
 
 					<div use:content class:invisible={!visible}>
-						<FilterPopover bind:data={filterData} {filters} onChange={handleChange} />
+						<FilterPopover
+							bind:data={filterData}
+							{filters}
+							applyFilter={handleFilter}
+							resetFilter={handleResetFilter}
+						/>
 					</div>
 				</Disclosure>
 			</slot>

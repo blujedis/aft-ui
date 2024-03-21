@@ -53,16 +53,6 @@
 </script>
 
 <ExamplePage {title} {description}>
-	<Section>
-		<ul role="list" class="divide-y divide-gray-200">
-			<li class="py-4">
-				Filter can be after `DataGridHeader` or can be in fragment slot named `filter` inside of
-				`DataGridHeader`
-			</li>
-			<li />
-		</ul>
-	</Section>
-
 	<DataGrid
 		bind:this={datagrid}
 		{...props}

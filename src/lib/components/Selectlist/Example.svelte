@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import { SelectList } from '.';
+	import { SelectList, type SelectListItem } from '.';
 	import { SelectListButton } from '../SelectListButton';
 	import { SelectListOption } from '../SelectListOption';
 	import { SelectListPanel } from '../SelectListPanel';
@@ -51,14 +51,25 @@
 		}
 	];
 
-	type SourceItem = (typeof sourceItems)[number];
+	type SourceItem = SelectListItem & Record<string, unknown>;
 
 	const selected = 'javascript';
 
 	let selectList: SelectList<SourceItem>;
 
 	function updateSelectList() {
-		selectList.context.select('python');
+		selectList.select('python');
+	}
+
+	function handleSubmit(
+		e: SubmitEvent & {
+			currentTarget: EventTarget & HTMLFormElement;
+		}
+	) {
+		e.preventDefault();
+		const data = new FormData(e.currentTarget);
+		const dataObj = Object.fromEntries(data.entries());
+		console.log(dataObj);
 	}
 
 	const props = {
@@ -189,37 +200,39 @@
 			</SelectList>
 		{/each}
 	</div> -->
-	<div class="mt-8 mb-2 max-w-52">
-		<SelectList
-			bind:this={selectList}
-			{...props}
-			{...shared}
-			rounded="none"
-			variant="outlined"
-			value={selected}
-			items={sourceItems}
-			placeholder="Filter..."
-			theme="primary"
-			filterable
-			exclusive
-			recordless
-			let:filtered
-			let:filtering
-			let:selectedItems
-		>
-			<SelectListButton />
-			<SelectListPanel let:currentIndex>
-				{#if filtered.length}
-					{#each filtered as item}
-						<SelectListOption as="button" key={item.value} let:active>
-							{item.label}
-						</SelectListOption>
-					{/each}
-				{:else}
-					<div class="px-4"></div>
-				{/if}
+	<div class="mt-8 mb-2">
+		<form on:submit={handleSubmit}>
+			<SelectList
+				bind:this={selectList}
+				{...props}
+				{...shared}
+				name="language"
+				rounded="none"
+				variant="outlined"
+				value={selected}
+				items={sourceItems}
+				placeholder="Filter..."
+				theme="primary"
+				filterable
+				recordless
+				exclusive
+				let:filtered
+				let:filtering
+				let:selectedItems
+			>
+				<SelectListButton />
+				<SelectListPanel let:currentIndex>
+					{#if filtered.length}
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value} let:active>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					{:else}
+						<div class="px-4"></div>
+					{/if}
 
-				<!-- {#each filtered as item}
+					<!-- {#each filtered as item}
 						{#if !selectedItems.includes(item.value)}
 							<SelectListOption as="button" key={item.value} let:active>
 								<div class="flex justify-between items-center">
@@ -231,8 +244,12 @@
 							</SelectListOption>
 						{/if}
 					{/each} -->
-			</SelectListPanel>
-		</SelectList>
+				</SelectListPanel>
+			</SelectList>
+			<div class="mt-4">
+				<button type="submit">Submit</button>
+			</div>
+		</form>
 	</div>
 
 	<!-- <select bind:value={selectedObj} on:change={() => console.log(selectedObj)}>

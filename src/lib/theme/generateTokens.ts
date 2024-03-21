@@ -152,13 +152,13 @@ export const defaultOptions = {
 	focusWidth: 2,
 
 	formBorderColorLight: 'frame-200',
-	formBorderColorDark: 'frame-700',
+	formBorderColorDark: 'frame-800',
 
 	panelBgLight: 'frame-100',
-	panelBgDark: 'frame-700',
+	panelBgDark: 'frame-800',
 
-	panelContainerBgLight: 'frame-200',
-	panelContainerBgDark: 'frame-900'
+	panelContainerBgLight: 'frame-100',
+	panelContainerBgDark: 'frame-950'
 } as GenerateOptions;
 
 function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colors) {
@@ -322,7 +322,9 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		bgSelectedSoft: {
 			variant: 'selectedSoft',
 			modifiers: [...selectedBgModifiers],
-			colors: createColorMap(themeColors, `${defaultShade}/${softSelectedOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${softSelectedOpacity}`, true, {
+				frame: ['200/80', `${defaultShade}/${softSelectedOpacity}`]
+			})
 		},
 
 		bgProgress: {

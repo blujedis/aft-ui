@@ -68,6 +68,7 @@ export const fieldLeading = {
 export const fontSizes = {
 	unstyled: '',
 	base: 'text-base',
+	xss: 'text-[10px] leading-3',
 	xs: 'text-xs',
 	sm: 'text-sm',
 	md: 'text-base',
@@ -97,6 +98,16 @@ export const fieldFontSizes = {
 	unstyled: '',
 	xs: fontSizes.xs,
 	sm: fontSizes.sm,
+	md: fontSizes.sm,
+	lg: fontSizes.base,
+	xl: fontSizes.lg,
+	xl2: fontSizes.xl
+};
+
+export const fieldButtonSizes = {
+	unstyled: '',
+	xs: fontSizes.xss,
+	sm: fontSizes.xs,
 	md: fontSizes.sm,
 	lg: fontSizes.base,
 	xl: fontSizes.lg,

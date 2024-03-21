@@ -1,8 +1,8 @@
 export const common ={
   transitioned: 'transition motion-reduce:transition-none',
-  ringed: 'ring-frame-200 dark:ring-frame-700',
-  bordered: 'border-frame-200 dark:border-frame-700',
-  divided: 'divide-frame-200 dark:divide-frame-700',
+  ringed: 'ring-frame-200 dark:ring-frame-800',
+  bordered: 'border-frame-200 dark:border-frame-800',
+  divided: 'divide-frame-200 dark:divide-frame-800',
   disabled: 'disabled:opacity-50 aria-disabled:opacity-50 dark:disabled:opacity-60 dark:aria-disabled:opacity-60 pointer-events-none',
   focusedOutline: 'outline-none focus:outline-2 focus:outline-offset-0',
   focusedOutlineVisible: 'outline-none focus-visible:outline-2 focus-visible:outline-offset-0',
@@ -13,7 +13,7 @@ export const common ={
   focusedRingWithin: 'outline-none focus-within:ring-2 focus-within:ring-offset-0',
   muteSelected: 'aria-selected:opacity-60',
   mutedText: 'text-frame-700/60 dark:text-frame-100/40',
-  formBorder: 'border-frame-200 dark:border-frame-700',
+  formBorder: 'border-frame-200 dark:border-frame-800',
   neutralBg: 'bg-frame-500/20 dark:bg-frame-500/20',
   rangeBg: 'frame-500/20',
   rangeValue: '500',
@@ -217,7 +217,7 @@ export const softBg ={
 };
 
 export const panelBg ={
-  $base: 'bg-frame-100 dark:bg-frame-700',
+  $base: 'bg-frame-100 dark:bg-frame-800',
   unstyled: '',
   white: '',
   black: '',
@@ -232,7 +232,7 @@ export const panelBg ={
 };
 
 export const dividerBg ={
-  $base: 'bg-frame-200 dark:bg-frame-700',
+  $base: 'bg-frame-200 dark:bg-frame-800',
   unstyled: '',
   white: '',
   black: '',
@@ -247,7 +247,7 @@ export const dividerBg ={
 };
 
 export const panelContainerBg ={
-  $base: 'bg-frame-200 dark:bg-frame-900',
+  $base: 'bg-frame-100 dark:bg-frame-950',
   unstyled: '',
   white: '',
   black: '',
@@ -262,7 +262,7 @@ export const panelContainerBg ={
 };
 
 export const notificationBg ={
-  $base: 'bg-frame-700 dark:bg-frame-100',
+  $base: 'bg-frame-800 dark:bg-frame-100',
   unstyled: '',
   white: '',
   black: '',
@@ -281,7 +281,7 @@ export const tooltipBg ={
   unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
-  frame: 'bg-frame-700 dark:bg-frame-100',
+  frame: 'bg-frame-800 dark:bg-frame-100',
   primary: 'bg-primary-500 dark:bg-primary-500',
   secondary: 'bg-secondary-500 dark:bg-secondary-500',
   tertiary: 'bg-tertiary-500 dark:bg-tertiary-500',
@@ -566,7 +566,7 @@ export const selectedSoftBgAriaSelected ={
   unstyled: '',
   white: 'aria-selected:bg-white dark:aria-selected:bg-white',
   black: 'aria-selected:bg-black dark:aria-selected:bg-black',
-  frame: 'aria-selected:bg-frame-500/40 dark:aria-selected:bg-frame-500/40',
+  frame: 'aria-selected:bg-frame-200/80 dark:aria-selected:bg-frame-500/40',
   primary: 'aria-selected:bg-primary-500/40 dark:aria-selected:bg-primary-500/40',
   secondary: 'aria-selected:bg-secondary-500/40 dark:aria-selected:bg-secondary-500/40',
   tertiary: 'aria-selected:bg-tertiary-500/40 dark:aria-selected:bg-tertiary-500/40',
@@ -581,7 +581,7 @@ export const selectedSoftBgAriaExpanded ={
   unstyled: '',
   white: 'aria-expanded:bg-white dark:aria-expanded:bg-white',
   black: 'aria-expanded:bg-black dark:aria-expanded:bg-black',
-  frame: 'aria-expanded:bg-frame-500/40 dark:aria-expanded:bg-frame-500/40',
+  frame: 'aria-expanded:bg-frame-200/80 dark:aria-expanded:bg-frame-500/40',
   primary: 'aria-expanded:bg-primary-500/40 dark:aria-expanded:bg-primary-500/40',
   secondary: 'aria-expanded:bg-secondary-500/40 dark:aria-expanded:bg-secondary-500/40',
   tertiary: 'aria-expanded:bg-tertiary-500/40 dark:aria-expanded:bg-tertiary-500/40',
@@ -596,7 +596,7 @@ export const selectedSoftBgAriaCurrent ={
   unstyled: '',
   white: 'aria-current:bg-white dark:aria-current:bg-white',
   black: 'aria-current:bg-black dark:aria-current:bg-black',
-  frame: 'aria-current:bg-frame-500/40 dark:aria-current:bg-frame-500/40',
+  frame: 'aria-current:bg-frame-200/80 dark:aria-current:bg-frame-500/40',
   primary: 'aria-current:bg-primary-500/40 dark:aria-current:bg-primary-500/40',
   secondary: 'aria-current:bg-secondary-500/40 dark:aria-current:bg-secondary-500/40',
   tertiary: 'aria-current:bg-tertiary-500/40 dark:aria-current:bg-tertiary-500/40',
@@ -611,7 +611,7 @@ export const selectedSoftBgAriaChecked ={
   unstyled: '',
   white: 'aria-checked:bg-white dark:aria-checked:bg-white',
   black: 'aria-checked:bg-black dark:aria-checked:bg-black',
-  frame: 'aria-checked:bg-frame-500/40 dark:aria-checked:bg-frame-500/40',
+  frame: 'aria-checked:bg-frame-200/80 dark:aria-checked:bg-frame-500/40',
   primary: 'aria-checked:bg-primary-500/40 dark:aria-checked:bg-primary-500/40',
   secondary: 'aria-checked:bg-secondary-500/40 dark:aria-checked:bg-secondary-500/40',
   tertiary: 'aria-checked:bg-tertiary-500/40 dark:aria-checked:bg-tertiary-500/40',

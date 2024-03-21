@@ -211,7 +211,7 @@
 		}
 	}
 
-	function handleClick(e: MouseEvent) {
+	function handleButtonClick(e: MouseEvent) {
 		const isOpen = $context.visible;
 		context.toggle();
 		setTimeout(() => {
@@ -235,13 +235,6 @@
 			$context.filtering = true;
 		}
 	}
-
-	function handleInputUpdate(
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		e: Event & {
-			currentTarget: EventTarget | HTMLInputElement;
-		}
-	) {}
 
 	async function handleInputKeydown(
 		e: {
@@ -281,6 +274,7 @@
 				}
 			}
 		} else if ($context.input && filterable) {
+			// filterable
 			// Always focus on first, focus trap at Panel will
 			// apply focus if an element is selected.
 			if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -298,18 +292,14 @@
 				if ($context.filtering) {
 					const current = $context.items.find((i) => i.value === $context.selected[0]);
 					if (current) {
-						e.currentTarget.value = current.label as string;
+						//	e.currentTarget.value = current.label as string;
 						context.select(current);
-					} else {
-						//
+						setTimeout(() => {
+							context.close();
+							context.filter('');
+							$context.filtering = false;
+						});
 					}
-					$context.filtering = false;
-					setTimeout(() => {
-						context.close();
-						context.filter('');
-					});
-				} else {
-					console.log('not filtering');
 				}
 			}
 
@@ -327,7 +317,7 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		} & KeyboardEvent
 	) {
-		if (['Backspace'].includes(e.key)) {
+		if (filterable && ['Backspace'].includes(e.key)) {
 			handleFilter($context.input?.value);
 		}
 	}
@@ -344,7 +334,7 @@
 			{#if tags && selected.length}
 				<slot name="tags" {handleRemoveTag}>
 					{#each selected as item}
-						<button on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
+						<button type="button" on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
 							<Badge {rounded} {theme} {size} {...badgeProps} class={badgeClasses}>
 								<span class="pointer-events-none pr-1">
 									{item?.label}
@@ -360,7 +350,7 @@
 				</slot>
 			{/if}
 			<div class={inputWrapperClasses}>
-				<slot name="input" {handleInputUpdate} {handleInputKeydown} {handleInputClick}>
+				<slot name="input" {handleInputKeydown} {handleInputClick}>
 					<input
 						aria-controls={name}
 						{...$$restProps}
@@ -374,7 +364,6 @@
 						{disabled}
 						placeholder={!tags || (!selected.length && placeholder) ? placeholder || '' : ''}
 						class={inputClasses}
-						on:input={handleInputUpdate}
 						on:keydown={handleInputKeydown}
 						on:keyup={handleInputKeyUp}
 						on:click={handleInputClick}
@@ -382,8 +371,8 @@
 				</slot>
 			</div>
 		</div>
-		<button tabindex="-1" on:click={handleClick} class={triggerClasses}>
-			<slot name="caret" handleCaretClick={handleClick}>
+		<button type="button" tabindex="-1" on:click={handleButtonClick} class={triggerClasses}>
+			<slot name="caret" handleCaretClick={handleButtonClick}>
 				<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
 			</slot>
 		</button>

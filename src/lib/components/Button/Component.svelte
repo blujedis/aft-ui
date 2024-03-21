@@ -48,7 +48,7 @@
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'ringed', bordered)
-		.option('fieldFontSizes', size, size)
+		.option('fieldButtonSizes', size, size)
 		.option('fieldLeading', size, size)
 		.option('buttonPadding', size, size && variant !== 'text')
 		.option('roundeds', boolToMapValue(rounded), rounded)
