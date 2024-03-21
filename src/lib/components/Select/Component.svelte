@@ -2,7 +2,7 @@
 	import { type SelectProps, selectDefaults as defaults, type SelectContext } from './module';
 	import { ConditionalComponent, Flushed } from '$lib/components';
 	import { themeStore, themer } from '$lib/theme';
-	// import { setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
@@ -28,9 +28,15 @@
 		...defaults
 	} as Required<$$Props>;
 
+	setContext('Select', {
+		size,
+		theme,
+		variant
+	});
+
 	const th = themer($themeStore);
 
-	$: inputClasses = th
+	$: selectClasses = th
 		.create('Select')
 		.bundle(
 			['mainBg', 'whiteText', 'filledPlaceholder'],
@@ -76,7 +82,7 @@
 </script>
 
 <ConditionalComponent as={component} condition={variant === 'flushed'} {theme}>
-	<select {...$$restProps} use:forwardedEvents size={rows} class={inputClasses} bind:value>
+	<select {...$$restProps} use:forwardedEvents size={rows} class={selectClasses} bind:value>
 		{#if placeholder}
 			<option value="" disabled selected
 				>{typeof placeholder === 'string' ? placeholder : 'Please Select'}</option

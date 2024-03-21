@@ -26,7 +26,7 @@
 	const items = [
 		{ label: 'JavaScript', value: 'javascript' },
 		{ label: 'Java', value: 'java' },
-		{ label: 'Python', value: 'python' },
+		{ label: 'Python', value: 'python', checked: true },
 		{ label: 'React', value: 'react' },
 		{ label: 'Rust', value: 'rust' }
 	];
@@ -37,31 +37,41 @@
 		<div class="grid grid-cols-5 gap-4 mb-4">
 			<Select {...props} variant="filled" value="react" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'react'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
 
 			<Select {...props} variant="outlined" value="react" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'react'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
 
 			<Select {...props} variant="soft" value="java" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'java'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
 
 			<Select {...props} variant="flushed" value="rust" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'rust'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
 
 			<Select {...props} variant="text" value="rust" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'rust'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
 		</div>

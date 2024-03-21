@@ -26,7 +26,7 @@
 	<div class="mb-6">
 		{#if description}
 			<p
-				class="mt-2 mb-4 p-4 bg-frame-100 ring-frame-950/10 dark:ring-frame-700 dark:bg-frame-800 ring-opacity-10 ring-1"
+				class="mt-2 mb-4 p-4 bg-frame-50 ring-frame-950/10 dark:bg-frame-900/40 dark:ring-frame-700/80 ring-1"
 			>
 				{description}
 			</p>

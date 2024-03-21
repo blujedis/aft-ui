@@ -14,7 +14,7 @@
 	import { useColorMode, useFocusTrap } from '$lib/hooks';
 	import type { DataGridFilterListItem } from '../DataGrid/filter';
 
-	export let rounded = 'none' as ThemeRounded;
+	export let rounded = 'sm' as ThemeRounded;
 	export let filters = [] as DataGridFilterListItem[];
 	export let data = {
 		...filterPopoverDefaults
@@ -66,7 +66,7 @@
 			focused
 			full
 			placeholder="Please Select"
-			variant={$isDark ? 'soft' : 'outlined'}
+			variant={$isDark ? 'filled' : 'outlined'}
 			bind:value={data.criteriaOne}
 			let:filtered
 			onChange={handleApplyFilter}
@@ -87,7 +87,7 @@
 			{rounded}
 			focused
 			full
-			variant={$isDark ? 'soft' : 'outlined'}
+			variant={$isDark ? 'filled' : 'outlined'}
 			class={valueOneHidden ? 'hidden' : ''}
 			on:input={handleApplyFilter}
 		/>
@@ -120,7 +120,7 @@
 			focused
 			full
 			placeholder="Please Select"
-			variant={$isDark ? 'soft' : 'outlined'}
+			variant={$isDark ? 'filled' : 'outlined'}
 			bind:value={data.criteriaTwo}
 			let:filtered
 			onChange={handleApplyFilter}
@@ -141,7 +141,7 @@
 			{rounded}
 			focused
 			full
-			variant={$isDark ? 'soft' : 'outlined'}
+			variant={$isDark ? 'filled' : 'outlined'}
 			class={valueTwoHidden ? 'hidden' : ''}
 			on:change={handleInputChange}
 			on:input={handleApplyFilter}

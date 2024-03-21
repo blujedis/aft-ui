@@ -28,7 +28,7 @@ type TokenOpacity =
 	| 95
 	| 100;
 type TokenWidth = 0 | 1 | 2 | 3 | 4 | 8;
-type ThemeColorBase = ThemeColor | `${ThemeColor}-${ThemeShade}`;
+type ThemeColorBase = ThemeColor | `${ThemeColor}-${ThemeShade}` | `${ThemeColor}-${ThemeShade}/${TokenOpacity}`;
 type TokenColor = ThemeColorBase | `${ThemeShade}/${TokenOpacity}`;
 type TokenTuple = [TypeOrValue<TokenColor | ThemeShade>, TypeOrValue<TokenColor | ThemeShade>?];
 type TokenValue = TypeOrValue<TokenColor | ThemeShade> | TokenTuple;
@@ -69,9 +69,6 @@ interface GenerateOptions {
 	focusOpacity: TokenOpacity;
 	softSelectedOpacity: TokenOpacity;
 	disabledOpacity: TokenOpacity;
-
-	// gridOpacity: TokenOpacity;
-	// gridColor: ThemeColorBase | 'black';
 
 	focusOffset: TokenWidth;
 	focusWidth: TokenWidth;
@@ -144,21 +141,21 @@ export const defaultOptions = {
 
 	softOpacity: 20,
 	hoverOpacity: 20,
-	focusOpacity: 50,
+	focusOpacity: 20,
 	softSelectedOpacity: 40,
 	disabledOpacity: 60,
 
 	focusOffset: 0,
 	focusWidth: 2,
 
-	formBorderColorLight: 'frame-200',
-	formBorderColorDark: 'frame-800',
+	formBorderColorLight: 'frame-950/10',
+	formBorderColorDark: 'frame-700/90',
 
 	panelBgLight: 'frame-100',
-	panelBgDark: 'frame-800',
+	panelBgDark: 'frame-700',
 
-	panelContainerBgLight: 'frame-100',
-	panelContainerBgDark: 'frame-950'
+	panelContainerBgLight: 'frame-50',
+	panelContainerBgDark: 'frame-900'
 } as GenerateOptions;
 
 function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colors) {
@@ -190,7 +187,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			modifiers: ['bg', 'even:bg', 'odd:bg'],
 			colors: () =>
 				createColorMap(themeColors, defaultShade, true, {
-					frame: ['200/85', 700]
+					frame: ['200/85', '800/95']
 				})
 		},
 
@@ -206,7 +203,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			],
 			colors: () =>
 				createColorMap(themeColors, defaultShade, true, {
-					frame: [300, 700]
+					frame: [formBorderColorLight, formBorderColorDark]
 				})
 		},
 
@@ -283,7 +280,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'panel',
 			modifiers: ['hover:bg'],
 			colors: {
-				$base: 'hover:bg-frame-200/70 hover:dark:bg-frame-900/80'
+				$base: 'hover:bg-frame-200/50 hover:dark:bg-frame-900/50'
 			}
 		},
 
@@ -334,6 +331,12 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 				createColorMap(themeColors, defaultShade, false, {
 					$base: `bg-frame-${defaultShade}/${softOpacity} [&::-webkit-progress-bar]:bg-frame-${defaultShade}/${softOpacity}`
 				})
+		},
+
+		bgSelectOption: {
+			variant: 'selectOption',
+			modifiers: ['bg'],
+			colors: () => createColorMap(themeColors, defaultShade, false)
 		},
 
 		bgRange: {
@@ -455,7 +458,9 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		outlineFocus: {
 			variant: '',
 			modifiers: [...focusOutlineModifiers],
-			colors: createColorMap(themeColors, `${defaultShade}/${focusOpacity}`, true)
+			colors: createColorMap(themeColors, `${defaultShade}/${focusOpacity}`, true, {
+				frame: [`${defaultShade}/${focusOpacity - 10}`, `${defaultShade}/${focusOpacity + 10}`]
+			})
 		},
 
 		ringFocus: {
@@ -709,7 +714,7 @@ function buildClass(
 	return mergeConfigs(extend, result) as Record<ThemeColor | '$base', string>;
 }
 
-export function generateTokens<T extends TokenMap>(options?: Partial<GenerateOptions>) {
+export function generateTokens(options?: Partial<GenerateOptions>) {
 	options = {
 		...defaultOptions,
 		...options
