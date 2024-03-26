@@ -11,13 +11,13 @@
 	function subscribe(fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) {
 		return store.subscribe((s) => fn(s, store));
 	}
+
 </script>
 
 <svelte:head>
 	<script>
-		let darkMode = false;
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
+		var darkMode = false;
+		var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 		if (localStorage.darkmode === 'true' || (!('darkmode' in localStorage) && prefersDark)) {
 			darkMode = true;
 		} else {
@@ -25,7 +25,6 @@
 			if (currentDark) darkMode = true;
 			else darkMode = false;
 		}
-
 		if (darkMode) document.documentElement.classList.add('dark');
 		else document.documentElement.classList.remove('dark');
 		localStorage.setItem('preferdark', prefersDark);

@@ -52,8 +52,8 @@
 
 	$: tabsClasses = th
 		.create('TabsWrapper')
-		.option('common', 'formBorder', variant === 'flushed')
-		.option('common', 'divided', ['filled'].includes(variant))
+		.option('formBorder', theme, variant === 'flushed')
+		.option('elementDivide', theme, ['filled'].includes(variant))
 		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
 		.prepend(`tabs tabs-${variant}`, true)
 		.append('-mb-px', ['flushed', 'filled'].includes(variant))

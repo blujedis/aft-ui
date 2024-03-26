@@ -28,11 +28,13 @@
 
 	$: gridHeaderWrapperClasses = th
 		.create('DataGridHeaderWrapper')
-		// .option('common', 'bordered', false)
-		.option('common', 'divided', divided)
+		.option('elementDivide', theme, divided)
 		.prepend('datagrid-header', true)
 		.append('divide-y', divided)
-		.append('sticky top-0 z-10 overflow-clip', sticky) // add overflow-clip & "rounded" to keep top rounding
+		.append(
+			'sticky top-0 z-10 bg-[rgb(var(--body-bg-light))] dark:bg-[rgb(var(--body-bg-dark))]',
+			sticky
+		) // add overflow-clip & "rounded" to keep top rounding
 		.append('rounded-b-none', rounded)
 		.append('shadow-sm', sticky)
 		.compile();

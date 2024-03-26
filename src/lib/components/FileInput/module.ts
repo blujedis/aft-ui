@@ -1,6 +1,9 @@
+import { ButtonProps } from '../Button';
+import { EmptyProps } from '../Empty';
+
 export type FileInputReaderType = 'text' | 'url' | 'binary' | 'buffer';
 
-export type FileInputProps = {
+export type FileInputControllerProps = {
 	name?: string;
 	readAs?: FileInputReaderType;
 	onFormData?: (data: FormData | null, files: FileList) => void;
@@ -11,7 +14,18 @@ export type FileInputProps = {
 	) => void;
 };
 
-export const fileInputDefaults: Partial<FileInputProps> = {
+
+export type FileInputFieldProps = ButtonProps & FileInputControllerProps & {
+	//
+}
+
+export type FileInputDropProps = EmptyProps & FileInputControllerProps & {
+	//
+}
+
+
+
+export const fileInputControllerDefaults: Partial<FileInputProps> = {
 	name: 'file',
 	readAs: 'url'
 };

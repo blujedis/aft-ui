@@ -19,7 +19,6 @@
 		rounded,
 		shadowed,
 		size,
-		store: initStore,
 		theme,
 		transitioned,
 		underlined,
@@ -29,11 +28,9 @@
 		...defaults
 	} as Required<$$Props>;
 
-	export const store =
-		initStore ||
-		useDisclosure({
-			visible
-		});
+	export const store = useDisclosure({
+		visible
+	});
 
 	const th = themer($themeStore);
 	let div: HTMLDivElement;
@@ -91,11 +88,5 @@
 	on:keydown={handleKeydown}
 	class={menuClasses}
 >
-	<slot
-		visible={$store.visible}
-		active={$store.active}
-		open={store.open}
-		close={store.close}
-		toggle={store.toggle}
-	/>
+	<slot visible={$store.visible} open={store.open} close={store.close} toggle={store.toggle} />
 </div>

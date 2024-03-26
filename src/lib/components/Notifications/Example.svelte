@@ -17,9 +17,9 @@
 	};
 
 	const themes = [
-		'light',
-		'dark',
-		'smoke',
+		'white',
+		'black',
+		'frame',
 		'primary',
 		'secondary',
 		'tertiary',

@@ -27,13 +27,13 @@
 
 	$: badgeClasses = th
 		.create('Badge')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 		.bundle(
-			['mainBg', 'whiteText'],
-			{ frame: 'text-dark dark:text-light' },
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
 			theme,
-			variant === 'filled'
+			variant === 'outlined'
 		)
-		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
 		.bundle(['softBg', 'softText'], {}, theme, variant === 'soft')
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'focusedOutlineVisible', focused)
@@ -53,12 +53,7 @@
 </script>
 
 <span {...additionalProps} {...$$restProps} class={badgeClasses}>
-	<!-- {#if !removable} -->
-	<!-- <div class:mt-0.5={!['sm', 'xs', 'xl'].includes(size)}> -->
 	<div class={badgeInnerClasses}>
 		<slot />
 	</div>
-	<!-- {:else}
-		<slot />
-	{/if} -->
 </span>

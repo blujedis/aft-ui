@@ -30,29 +30,18 @@
 
 	$: inputClasses = th
 		.create('Input')
+		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
 		.bundle(
-			['mainBg', 'whiteText', 'filledPlaceholder'],
-			{
-				frame: 'text-body-light'
-			},
-			theme,
-			variant === 'filled'
-		)
-		.bundle(
-			['inputText', 'mainRing'],
+			['mainRing', 'unfilledText'],
 			{ $base: 'ring-1 ring-inset' },
 			theme,
 			variant === 'outlined'
 		)
-		.bundle(
-			['mainBorder', 'mainBorderGroupHover', 'softBg', 'inputText'],
-			theme,
-			variant === 'soft'
-		)
-		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'softBg', 'softText'], theme, variant === 'soft')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'unfilledText'], theme, variant === 'flushed')
 		.option('common', 'focusedOutline', focused && variant !== 'flushed') // variant === 'outlined'
 		.option('outlineFocus', theme, focused && variant !== 'flushed')
-		.bundle(['inputText'], theme, variant === 'text')
+		.bundle(['unfilledText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
 		.option('fieldFontSizes', size, size)
@@ -72,8 +61,22 @@
 
 {#if variant === 'flushed'}
 	<svelte:component this={Flushed} {theme} {focused}>
-		<input {...$$restProps} use:forwardedEvents bind:value size={chars} class={inputClasses} on:input />
+		<input
+			{...$$restProps}
+			use:forwardedEvents
+			bind:value
+			size={chars}
+			class={inputClasses}
+			on:input
+		/>
 	</svelte:component>
 {:else}
-	<input {...$$restProps} use:forwardedEvents bind:value size={chars} class={inputClasses} on:input />
+	<input
+		{...$$restProps}
+		use:forwardedEvents
+		bind:value
+		size={chars}
+		class={inputClasses}
+		on:input
+	/>
 {/if}

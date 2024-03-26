@@ -18,7 +18,8 @@
 
 	$: rangeStyles = st
 		.create('RangeStyles')
-		.color('--track-background-color', $themeStore.options.common.rangeBg, true)
+		.color('--track-background-color', $themeStore.options.common.rangeBgLight, true)
+		.color('--track-background-color-dark', $themeStore.options.common.rangeBgDark, true)
 		.color('--thumb-background-color', `${theme}-${$themeStore.options.common.rangeThumb}`, true)
 		.color('--track-accent-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
 		.color('--thumb-border-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
@@ -33,6 +34,7 @@
 		.option('rangeTrackSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('range', true)
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)
@@ -65,9 +67,11 @@
 />
 
 <style>
-	/* :root {
-	 --color-range-dark: 255 255 255;
-	} */
+	/* we could detect dark mode and pass down a single var for track but you end up with 
+	   listeners just to toggle this on off? using html.dark selector globally drawbacks but...*/
+	:global(html.dark .range) {
+		background-color: var(--track-background-color-dark) !important;
+	}
 
 	input[type='range'] {
 		background-color: var(--track-background-color);

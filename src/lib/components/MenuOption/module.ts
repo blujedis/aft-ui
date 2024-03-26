@@ -8,10 +8,10 @@ export type MenuOptionProps<Tag extends 'a' | 'button'> = {
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;
-	key?: string | number;
 };
 
 export const menuOptionDefaults: MenuOptionProps<'a'> = {
 	as: 'a',
+	focused: true,
 	size: 'sm'
 };

@@ -37,13 +37,13 @@
 
 	$: radioClasses = th
 		.create('Radio')
-		.option('iconSizes', size, size)
 		.bundle(['defaultText'], theme, true)
+		.option('formBorder', theme, true)
+		.option('iconSizes', size, size)
 		.option('hovered', variant, theme, hovered)
 		.option('common', 'focusedOutline', focused)
 		.option('outlineFocus', theme, focused)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'formBorder', true)
 		.option('checkboxSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)

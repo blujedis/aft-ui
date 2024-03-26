@@ -11,6 +11,6 @@
 		on:change={toggle}
 		shadowed="md"
 		size="sm"
-		class="fixed top-4 right-6 z-50"
+		class="fixed top-4 right-6 z-30"
 	/>
 </ColorMode>

@@ -64,9 +64,9 @@
 		(_placeholder &&
 			th
 				.create('AvatarPlaceholder')
-				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
-				.bundle(['mainText', 'mainRing'], { $base: 'ring-1' }, theme, variant === 'outlined')
-				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+				.bundle([ 'mainRing', 'unfilledText'], { $base: 'ring-1' }, theme, variant === 'outlined')
+				.bundle(['softBg', 'unfilledText'], {}, theme, variant === 'soft')
 				.prepend('avatar avatar-placeholder', true)
 				.option('roundeds', boolToMapValue(rounded), rounded)
 				.option('shadows', boolToMapValue(shadowed), shadowed)
@@ -85,9 +85,9 @@
 		(notification &&
 			th
 				.create('Avatar')
-				.bundle(['mainBg', 'whiteText'], theme, variant === 'filled') // white text
-				.bundle(['mainText', 'mainRing'], theme, variant === 'outlined')
-				.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+				.bundle(['mainBg', 'filledText'], theme, variant === 'filled') // white text
+				.bundle([ 'mainRing', 'unfilledText'], theme, variant === 'outlined')
+				.bundle(['softBg', 'unfilledText'], {}, theme, variant === 'soft')
 				.prepend('avatar-notification', true)
 				.option('avatarNotificationSizes', size, size && typeof counter === 'undefined')
 				.option('avatarCounterSizes', size, size && typeof counter !== 'undefined')

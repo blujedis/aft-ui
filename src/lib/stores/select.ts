@@ -16,7 +16,7 @@ export interface SelectStoreOptions {
 }
 
 export interface SelectStoreMethods {
-	reset(selected: SelectStoreValue): void;
+	reset(value?: SelectStoreValue): void;
 	select(value?: SelectStoreValue): void;
 	unselect(value?: SelectStoreValue): void;
 	toggle(value?: SelectStoreValue): void;
@@ -34,6 +34,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	options = {
 		min: 0,
 		max: 0,
+		mode: 'single',
 		...options
 	};
 
@@ -75,7 +76,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		store.update((s) => {
 			if (typeof value === 'undefined' || !canRemove(s.selected))
 				return { ...s, selected: isArray ? [] : undefined };
-			let selected = value
+			let selected = value;
 			if (isArray)
 				selected = isSingleArray
 					? [value] : s.selected.includes(value)
@@ -121,17 +122,15 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		});
 	}
 
-	function reset(selected?: SelectStoreValue) {
+	function reset(selected = initialSelected as SelectStoreValue) {
+		if (!canReset(selected)) {
+			console.warn(`Reset collection is greater than options.max or less than options.min`);
+			return;
+		}
 		store.update((s) => {
-			if (!canReset(selected)) {
-				selected = initialSelected;
-				console.warn(`Reset collection is greater than options.max or less than options.min`);
-			}
-			selected = !canReset(selected) ? initialSelected : selected;
-			const _selected = typeof selected === 'undefined' ? initialSelected : selected
 			if (typeof options.onChange === 'function')
 				options.onChange(_selected);
-			return { ...s, selected: _selected };
+			return { ...s, selected };
 		});
 	}
 

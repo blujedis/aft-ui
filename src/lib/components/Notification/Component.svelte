@@ -16,11 +16,18 @@
 
 	$: notificationClasses = th
 		.create('Notification')
-		.bundle(['notificationBg', 'notificationText', 'mainBorder'], theme, true)
-		.option('common', 'ringed', true)
+		.bundle(
+			['notificationBg', 'notificationText', 'mainBorder'],
+			{
+				frame: 'border-frame-300 dark:border-frame-400'
+			},
+			theme,
+			true
+		)
+		.option('elementRing', theme, true)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-4 w-80', true)
+		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-[5px] w-80', true)
 		.append($$restProps.class, true)
 		.compile();
 

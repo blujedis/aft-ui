@@ -15,7 +15,7 @@
 
 	$: labelClasses = th
 		.create('Label')
-		.bundle(['mainText'], theme, true)
+		.bundle(['unfilledText'], theme, true)
 		.option('fieldFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)

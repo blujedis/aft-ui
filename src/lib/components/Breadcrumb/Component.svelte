@@ -34,9 +34,9 @@
 
 	$: breadcrumbNavClasses = th
 		.create('Breadcrumb')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
-		.bundle(['mainText'], theme, variant === 'text')
-		.bundle(['softBg', 'mainText'], {}, theme, variant === 'soft')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+		.bundle(['unfilledText'], theme, variant === 'text')
+		.bundle(['softBg', 'unfilledText'], {}, theme, variant === 'soft')
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.prepend('breadcrumb', true)

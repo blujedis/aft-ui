@@ -1,21 +1,20 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+import type {  PopoverOptions } from '$lib/hooks/usePopover';
+import type { AriaRole } from 'svelte/elements';
 
-// export type PopoverVariant = 'filled';
+export type PopoverVariant = 'filled' | 'outlined' | 'soft';
 
-export type PopoverProps = {
-	close?: () => void;
-	arrowed?: boolean;
-	content?: string;
-	rounded?: ThemeRounded;
-	sanitizer?: (value: string) => string; // only allow @html when sanitized.
-	shadowed?: ThemeShadowed;
-	size?: ThemeSize;
-	theme?: ThemeColor;
-	transitioned?: boolean;
+export type PopoverProps<Tag> = 
+Pick<PopoverOptions, 'events' | 'escapeable' | 'middleware' | 'offset' | 'padding' | 'placement' |  'strategy' | 'sticky'> & {
+	as?: Tag;
+	role?: AriaRole | null | undefined;
+	trigger?: string;
+	onChange?: (state: boolean) => any;
 };
 
-export const popoverDefaults: PopoverProps = {
-	shadowed: 'md',
-	size: 'md',
-	theme: 'frame'
+export const popoverDefaults: Partial<PopoverProps<'div'>> = {
+	arrowed: true,
+	as: 'div',
+	escapeable: true,
+	events: ['hover', 'focus'],
+	role: 'tooltip',
 };

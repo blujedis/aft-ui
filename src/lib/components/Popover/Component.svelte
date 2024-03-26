@@ -1,69 +1,80 @@
 <script lang="ts">
-	import { themer, themeStore } from '$lib/theme';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
-	import { fade } from 'svelte/transition';
+	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
 	import { boolToMapValue } from '$lib/utils';
+	import { onMount } from 'svelte';
+	import { createPopoverInstance } from '$lib/hooks/usePopover';
 
-	type $$Props = PopoverProps & ElementProps<'div'>;
+	type Tag = $$Generic<'div' | 'a'>;
+	type $$Props = PopoverProps<Tag> & Omit<ElementProps<Tag>, 'size'>;
 
 	export let {
-		arrowed,
-		content,
-		close,
-		id,
-		rounded,
-		sanitizer,
-		shadowed,
-		size,
-		theme,
-		transitioned
+		as,
+		escapeable,
+		events,
+		middleware,
+		offset,
+		padding,
+		placement,
+		role,
+		sticky,
+		strategy,
+		trigger,
+		onChange
 	} = {
-		id: 'popover',
 		...defaults
-	} as Required<$$Props>;
+	} as Required<PopoverProps<Tag>>;
 
-	const role = $$restProps.role ?? arrowed ? 'tooltip' : 'region';
+	let popover: ReturnType<typeof createPopoverInstance>;
+	let placeholderRef: HTMLElement;
+	let arrowRef: HTMLElement;
+	let contentRef: HTMLElement;
+	let triggerRef: string | HTMLElement;
+	let visible = false;
+
 	const th = themer($themeStore);
 
 	$: popoverClasses = th
-		.create('Popover')
-		.bundle(['tooltipBg', 'tooltipText'], theme, true)
-		.option('roundeds', boolToMapValue(rounded), rounded)
-		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.option('common', 'transitioned', transitioned)
-		.option('fieldFontSizes', size, size)
-		.option('popoverSizes', size, size)
-		.append('absolute animate-fade-in-down', true)
+		.create('Badge')
+		.prepend('popover', true)
+		.append('z-50', true)
 		.append($$restProps.class, true)
 		.compile();
+
+	function init(node: HTMLElement) {
+		contentRef = node;
+		if (contentRef) popover.registerContent(contentRef, { middleware, placement });
+	}
+
+	onMount(() => {
+		const prevSibling = placeholderRef.previousElementSibling;
+		triggerRef = !trigger && prevSibling ? (prevSibling as HTMLElement) : trigger;
+		popover = createPopoverInstance({
+			events,
+			escapeable,
+			offset,
+			padding,
+			placement,
+			sticky,
+			strategy,
+			onChange: (state) => (visible = state)
+		});
+		if (triggerRef) {
+			popover.registerTrigger(triggerRef);
+		}
+		return () => {
+			if (popover) popover.destroy();
+		};
+	});
 </script>
 
-<div
-	{role}
-	{...$$restProps}
-	{id}
-	class={popoverClasses}
-	transition:fade={{ delay: 250, duration: 500 }}
->
-	<slot {close}>
-		{#if !!sanitizer}
-			{@html sanitizer(content)}
-		{:else}
-			{content || 'Hello Tooltip!'}
-		{/if}
-	</slot>
-	{#if arrowed}
-		<div id="arrow" class="popover__arrow" />
-	{/if}
-</div>
+{#if !triggerRef}
+	<div bind:this={placeholderRef} />
+{/if}
 
-<style>
-	#arrow {
-		position: absolute;
-		background: inherit;
-		width: 8px;
-		height: 8px;
-		transform: rotate(45deg);
-	}
-</style>
+{#if visible && triggerRef}
+	<svelte:element this={as} use:init {...$$restProps} {role} class={popoverClasses}>
+		<slot />
+	</svelte:element>
+{/if}

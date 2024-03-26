@@ -29,7 +29,7 @@
 		...defaults
 	} as Required<RatingProps>;
 
-	export const store = writable({ active: -1, readonly, score, selected: -1 } as RatingStoreValue);
+	const store = writable({ active: -1, readonly, score, selected: -1 } as RatingStoreValue);
 
 	setContext('Rating', {
 		...store,
@@ -125,8 +125,6 @@
 		}
 	}
 
-	// after navigation and if score revert back to
-	// score if no selection has been made.
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleCleanup(e: Event & { currentTarget: EventTarget & HTMLDivElement }) {
 		// const currentTarget = e.currentTarget;

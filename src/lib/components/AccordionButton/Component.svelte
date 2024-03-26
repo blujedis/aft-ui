@@ -45,19 +45,18 @@
 	$: accordionButtonClasses = th
 		.create('AccordionButton')
 		.bundle(
-			['selectedBgAriaExpanded', 'selectedWhiteTextAriaExpanded'],
+			['selectedBgAriaExpanded', 'filledTextAriaExpanded', 'elementBg'],
 			theme,
 			variant === 'filled' && selectable
 		)
-		.bundle(['selectedTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		.bundle(['filledTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		.option('panelBgHover', theme, hovered && !isSelected)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'disabled', disabled)
-		.option('panelBg', theme, variant === 'filled')
-		.option('panelBgHover', theme, hovered && !isSelected)
 		.option('fieldFontSizes', size, size)
 		.option('buttonPadding', size, size)
 		.prepend('accordion-button', true)
-		.append('inline-flex items-center justify-between w-full focus:outline-none', true)
+		.append('inline-flex items-center justify-between w-full outline-none', true)
 		.append($$restProps.class, true)
 		.compile();
 

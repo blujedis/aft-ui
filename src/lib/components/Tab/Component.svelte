@@ -61,11 +61,12 @@
 	$: tabClasses = th
 		.create('TabClass')
 		.bundle(
-			['selectedBgAriaSelected', 'selectedWhiteTextAriaSelected'],
+			['selectedBgAriaSelected', 'filledTextAriaSelected'],
 			theme,
 			['filled', 'pills'].includes(variant) && selected
 		)
-		// .bundle(['selectedTextAriaSelected'], theme, selectable && variant !== 'filled')
+		.option('elementBg', theme, ['filled', 'pills'].includes(variant))
+		.option( 'panelBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
@@ -73,12 +74,7 @@
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
 		.option('fieldLeading', size, size)
-		.option('panelAccordionBg', theme, ['filled', 'pills'].includes(variant))
-		.option(
-			'panelAccordionBgHover',
-			theme,
-			['filled', 'pills'].includes(variant) && hovered && !selected
-		)
+
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.prepend('tab', true)
 		.prepend('tab-selected', selected)

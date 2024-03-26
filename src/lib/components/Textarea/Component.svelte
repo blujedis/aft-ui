@@ -29,13 +29,13 @@
 	$: textareaClasses = th
 		.create('Textarea')
 		.bundle(
-			['inputText', 'mainRing'],
+			['unfilledText', 'mainRing'],
 			{ $base: 'ring-1 ring-inset' },
 			theme,
 			variant === 'outlined'
 		)
-		.bundle(['softBg', 'inputText'], theme, variant === 'soft')
-		.bundle(['inputText'], theme, variant === 'text')
+		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
+		.bundle(['unfilledText'], theme, variant === 'text')
 		.option('common', 'focusedOutline', focused)
 		.option('outlineFocus', theme, focused)
 		.option('common', 'transitioned', transitioned)
@@ -48,10 +48,7 @@
 		.option('common', 'disabled', disabled)
 		.append('w-full', full)
 		.append('dark:bg-transparent', ['outlined', 'text'].includes(variant))
-		.append(
-			'flex items-center justify-center form-textarea outline-none border-0 focus:outline-3',
-			true
-		)
+		.append('flex items-center justify-center  focus:outline-none border-0', true)
 		.append($$restProps.class, true)
 		.compile();
 

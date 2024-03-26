@@ -15,9 +15,14 @@
 
 	$: kbdClasses = th
 		.create('Kbd')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
-		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
-		.bundle(['softBg', 'mainText'], theme, variant === 'soft')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+		.bundle(
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
 		.option('kbdPadding', size, size)

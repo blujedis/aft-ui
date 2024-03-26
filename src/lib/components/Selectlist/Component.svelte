@@ -166,14 +166,12 @@
 		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
 		restoreInput?: boolean
 	) {
-
 		if (typeof selectedItemsOrRestoreInput === 'boolean') {
 			restoreInput = selectedItemsOrRestoreInput;
 			selectedItemsOrRestoreInput = undefined;
 		}
 
 		if (!$context.filtering) {
-			
 			return;
 		}
 

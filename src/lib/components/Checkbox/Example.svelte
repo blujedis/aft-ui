@@ -12,7 +12,7 @@
 	const props = {
 		disabled: false,
 		full: false,
-		rounded: 'md' as ThemeRounded,
+		// rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		transitioned: false,

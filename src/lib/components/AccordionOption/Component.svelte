@@ -59,14 +59,15 @@
 		.append($$restProps.style, true)
 		.compile();
 
-	// first:mt-0 -mt-px
+	$: console.log(rounded);
 
 	$: accordionOptionClasses = th
 		.create('AccordianOption')
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'focusedOutlineVisible', focused)
-		.option('common', 'formBorder', isBordered && variant === 'outlined')
+		.option('elementDivide', theme, isBordered && variant === 'outlined')
+		.option('elementBorder', theme, variant === 'outlined')
 		.option('accordionOptionRoundeds', size, rounded)
 		.prepend(`accordian-option accordion-${variant}`, true)
 		.prepend('accordion-collapsed', !isSelected)

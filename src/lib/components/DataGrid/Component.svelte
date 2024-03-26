@@ -102,10 +102,10 @@
 
 	$: gridClasses = th
 		.create('DataGrid')
+		.option('elementDivide', theme, divided)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.option('common', 'divided', divided)
-		.option('common', 'bordered', divided)
+		.option('elementBorder', theme, divided)
 		.option('fieldFontSizes', size, size)
 		.prepend(`datagrid`, true)
 		.append('divide-y', divided)

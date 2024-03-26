@@ -36,7 +36,7 @@
 
 	$: gridRowClasses = themer($themeStore)
 		.create('DataGridRow')
-		.option('common', 'divided', divided)
+		.option('elementDivide', theme, divided)
 		.prepend('datagrid-row', true)
 		.append('divide-x', divided)
 		.append('grid grid-flow-col w-full', !stacked)

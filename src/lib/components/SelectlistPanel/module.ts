@@ -1,10 +1,10 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
 export type SelectListPanelProps = {
+	bordered?: boolean;
 	full?: boolean;
 	tags?: boolean;
-	origin?: 'left' | 'right' | 'center';
 	recordless?: boolean; // when no records are present as options e.g filtered is empty.
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
@@ -13,10 +13,11 @@ export type SelectListPanelProps = {
 	transition?: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
 };
 
-export const selectListPanelDefaults = {
-	origin: 'center',
+export const selectListPanelDefaults: SelectListPanelProps = {
+	bordered: true,
 	position: 'left',
-	shadowed: 'md',
+	recordless: true,
+	shadowed: 'sm',
 	theme: 'frame',
 	transition: { start: 0.95, type: 'scale' }
 };

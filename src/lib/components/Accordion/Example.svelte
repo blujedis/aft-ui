@@ -128,7 +128,7 @@
 		<div class="text-2xl font-semibold mb-4">Filled (Detached)</div>
 		<div class="grid grid-cols-9 gap-2 items-start mb-4">
 			{#each colors as color}
-				<Accordion {...props} theme={color} variant="filled" rounded="md" detached>
+				<Accordion {...props} theme={color} variant="filled" detached>
 					<AccordionOption key={0}>
 						<AccordionButton>One</AccordionButton>
 						<AccordionContent key={0}>

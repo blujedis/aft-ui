@@ -2,7 +2,8 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
 export type MenuPanelProps = {
-	origin?: 'left' | 'right' | 'center';
+	full?: boolean, 
+	bordered?: boolean;
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
@@ -11,7 +12,7 @@ export type MenuPanelProps = {
 };
 
 export const menuPanelDefaults = {
-	origin: 'center',
+	bordered: true,
 	position: 'left',
 	shadowed: 'sm',
 	theme: 'default',

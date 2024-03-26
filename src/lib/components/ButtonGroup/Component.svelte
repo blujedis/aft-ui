@@ -18,7 +18,7 @@
 		hovered,
 		multiple,
 		rounded,
-		selected,
+		value,
 		shadowed,
 		size,
 		theme,
@@ -29,7 +29,7 @@
 		...defaults
 	} as Required<ButtonGroupProps>;
 
-	export const store = useSelect({ selected: ensureArray(selected), mode: 'multiple' });
+	const store = useSelect({ selected: value, mode: multiple ? 'multiple' : 'single' });
 
 	setContext<ButtonGroupContext>('ButtonGroup', {
 		...store,
@@ -57,13 +57,15 @@
 		.append($$restProps.class, true)
 		.compile();
 
-	function handleReset() {}
+	function handleReset() {
+		store.reset();
+	}
 </script>
 
 <span role="list" class={buttonGroupClasses}>
 	<slot
-		selectedItems={$store.selected}
-		reset={handleReset}
+		selected={$store.selected}
+		reset={store.reset}
 		select={store.select}
 		unselect={store.unselect}
 	/>

@@ -1,4 +1,4 @@
-export const popoverSizes = {
+export const tooltipSizes = {
 	unstyled: '',
 	xs: 'px-1.5 text-[10px]',
 	sm: 'px-2 py-1',

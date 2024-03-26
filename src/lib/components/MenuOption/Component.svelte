@@ -2,7 +2,7 @@
 	import { type MenuOptionProps, menuOptionDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { forwardEventsBuilder } from '$lib/utils';
+	import { forwardEventsBuilder, cleanObj } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
 	import type { MenuContext } from '$lib/components/Menu';
 	import { getContext } from 'svelte';
@@ -12,23 +12,30 @@
 
 	const context = getContext('Menu') as MenuContext;
 
-	export let { active, as, key, focused, hovered, size, theme, transitioned } = {
+	export let { active, as, focused, hovered, size, theme, transitioned } = {
 		...defaults,
-		...context?.globals
+		...cleanObj(context?.globals)
 	} as Required<MenuOptionProps<Tag>>;
 
 	const th = themer($themeStore);
 
 	$: optionClasses = th
 		.create('MenuOption')
+		.option('bgFocus', theme, focused)
+		.bundle(
+			['selectedBgAriaCurrentpage'],
+			{ $base: 'aria-[current="page"]:text-white' },
+			theme,
+			theme
+		)
 		.option('panelBgHover', theme, hovered)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'focusedOutlineVisible', focused)
-		.option('outlineFocusVisible', theme, focused)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
+		.prepend('menu-option', true)
+		.prepend('menu-option-active', active)
 		.append('block w-full', true)
-		.append('hover:brightness-125', true)
+		.append('outline-none [[data-active="true"]]:bg-info-500', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -46,8 +53,7 @@
 		{...$$restProps}
 		use:forwardedEvents
 		on:click={handleClick}
-		aria-current={active}
-		data-key={key}
+		aria-current={active ? 'page' : undefined}
 		class={optionClasses}
 	>
 		<slot />
@@ -55,14 +61,13 @@
 {:else}
 	<a
 		role="menuitem"
-		tabindex="-1"
+		tabindex="0"
 		{...$$restProps}
 		use:forwardedEvents
 		on:click={handleClick}
-		aria-current={active}
+		aria-current={active ? 'page' : undefined}
 		class={optionClasses}
 		href={$$restProps.href}
-		data-key={key}
 	>
 		<slot />
 	</a>

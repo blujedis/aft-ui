@@ -77,7 +77,7 @@
 		focused: true,
 		hovered: true,
 		rounded: 'none' as ThemeRounded,
-		shadowed: 'none' as ThemeShadowed,
+		// shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		//theme: 'default' as ThemeColor,
 		variant: 'outlined' as any
@@ -88,7 +88,7 @@
 </script>
 
 <ExamplePage {title} {description}>
-	<!-- <div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-8 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -114,7 +114,6 @@
 			<SelectList
 				{...props}
 				variant="outlined"
-				multiple
 				removable
 				items={sourceItems}
 				placeholder="Please Select"
@@ -137,7 +136,7 @@
 			<SelectList
 				{...props}
 				variant="soft"
-				multiple
+				tags
 				removable
 				items={sourceItems}
 				placeholder="Please Select"
@@ -160,7 +159,7 @@
 			<SelectList
 				{...props}
 				variant="flushed"
-				multiple
+				tags
 				removable
 				items={sourceItems}
 				placeholder="Please Select"
@@ -199,7 +198,7 @@
 				</SelectListPanel>
 			</SelectList>
 		{/each}
-	</div> -->
+	</div>
 	<div class="mt-8 mb-2">
 		<form on:submit={handleSubmit}>
 			<SelectList
@@ -207,7 +206,48 @@
 				{...props}
 				{...shared}
 				name="language"
-				rounded="none"
+				variant="outlined"
+				value={selected}
+				items={sourceItems}
+				placeholder="Filter..."
+				theme="frame"
+				filterable
+				recordless
+				let:filtered
+				let:filtering
+				let:selectedItems
+			>
+				<SelectListButton />
+				<SelectListPanel>
+					{#if filtered.length}
+						{#each filtered as item}
+							<SelectListOption as="button" key={item.value} let:active>
+								{item.label}
+							</SelectListOption>
+						{/each}
+					{:else}
+						<div class="px-4"></div>
+					{/if}
+
+					<!-- {#each filtered as item}
+				{#if !selectedItems.includes(item.value)}
+					<SelectListOption as="button" key={item.value} let:active>
+						<div class="flex justify-between items-center">
+							{item.label}
+							{#if active && !filtering}
+								<Icon icon="mdi:check" class={iconClasses} />
+							{/if}
+						</div>
+					</SelectListOption>
+				{/if}
+			{/each} -->
+				</SelectListPanel>
+			</SelectList>
+			<SelectList
+				bind:this={selectList}
+				{...props}
+				{...shared}
+				name="language"
 				variant="outlined"
 				value={selected}
 				items={sourceItems}
@@ -215,13 +255,12 @@
 				theme="primary"
 				filterable
 				recordless
-				exclusive
 				let:filtered
 				let:filtering
 				let:selectedItems
 			>
 				<SelectListButton />
-				<SelectListPanel let:currentIndex>
+				<SelectListPanel full>
 					{#if filtered.length}
 						{#each filtered as item}
 							<SelectListOption as="button" key={item.value} let:active>
@@ -246,6 +285,7 @@
 					{/each} -->
 				</SelectListPanel>
 			</SelectList>
+
 			<div class="mt-4">
 				<button type="submit">Submit</button>
 			</div>

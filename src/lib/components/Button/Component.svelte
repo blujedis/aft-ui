@@ -24,7 +24,7 @@
 		variant,
 		underlined
 	} = {
-		...$themeStore?.defaults?.component,
+	  ...$themeStore?.defaults?.component,
 		...defaults
 	} as Required<ButtonProps<Tag>>;
 
@@ -33,21 +33,21 @@
 
 	$: buttonClasses = th
 		.create('Button')
-		.bundle(['mainText'], theme, variant === 'text')
+		.bundle(['unfilledText'], theme, variant === 'text')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 		.bundle(
-			['mainBg', 'whiteText'],
-			{ frame: 'text-dark dark:text-light' },
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
 			theme,
-			variant === 'filled'
+			variant === 'outlined'
 		)
-		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
-		.bundle(['mainText', 'ghostBgHover'], { dark: 'hover:text-white' }, theme, variant === 'ghost')
-		.bundle(['softText', 'softBg'], theme, variant === 'soft')
-		.option('hovered', variant, theme, hovered)
+		.bundle(['ghostBgHover', 'softText'], { dark: 'hover:text-white' }, theme, variant === 'ghost')
+		.bundle(['softBg', 'softText'], theme, variant === 'soft')
+		.option('hovered', variant, theme, hovered && variant !== 'ghost')
+		.option('elementRing', theme, bordered)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'ringed', bordered)
 		.option('fieldButtonSizes', size, size)
 		.option('fieldLeading', size, size)
 		.option('buttonPadding', size, size && variant !== 'text')

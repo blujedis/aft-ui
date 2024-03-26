@@ -1,7 +1,7 @@
 import { twMerge, type ClassNameValue } from 'tailwind-merge';
 import { ensureArray, mergeConfigs } from '$lib/theme';
 import classnames from 'classnames';
-import type { PropsWithoutPrefix, ThemeConfig, ThemeOption, ThemeOptions } from '../types/theme';
+import type { PropsWithoutPrefix, ThemeColor, ThemeConfig, ThemeOption, ThemeOptions } from '../types/theme';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
 
@@ -37,15 +37,15 @@ export interface ThemerApi<C extends ThemeConfig> {
 	): ThemerApi<C>;
 
 	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
-		keys: K[],
+		keys: (K | PropsWithoutPrefix<keyof ThemeOptions['common'], '$'>)[],
 		prop: PropsWithoutPrefix<P, '$'> | undefined,
 		when: Primitive
 	): ThemerApi<C>;
 
 	bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
-		keys: K[],
+		keys: (K | PropsWithoutPrefix<keyof ThemeOptions['common'], '$'>)[],
 		extend: Record<string, any>,
-		prop: PropsWithoutPrefix<P, '$'> | undefined,
+		prop: PropsWithoutPrefix<P, '$'> | undefined | ThemeColor,
 		when: Primitive
 	): ThemerApi<C>;
 
@@ -153,9 +153,9 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 		}
 
 		function bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(
-			keys: K[],
+			keys: (K | PropsWithoutPrefix<keyof ThemeOptions['common'], '$'>)[],
 			extendOrProp: Record<string, any> | PropsWithoutPrefix<P, '$'> | undefined,
-			propOrWhen: PropsWithoutPrefix<P, '$'> | undefined | Primitive,
+			propOrWhen: PropsWithoutPrefix<P, '$'> | undefined | Primitive | ThemeColor,
 			when?: Primitive
 		) {
 			if (typeof themeConfig === 'undefined') return api;
@@ -164,16 +164,22 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			if (arguments.length === 4) {
 				extend = extendOrProp as Record<string, any>;
 				prop = propOrWhen as PropsWithoutPrefix<P, '$'> | undefined;
-			} else {
+			}
+			else {
 				when = propOrWhen as Primitive;
 				prop = extendOrProp as PropsWithoutPrefix<P, '$'> | undefined;
 				extend = {};
 			}
 			if (typeof prop === 'undefined' || !when) return api;
+	
 			let merged = keys.reduce(
 				(result, k) => {
-					const opt = _options[k];
-					if (typeof opt === 'undefined')
+					// top level value in states or value from common options.
+					let opt = _options[k as K] as Record<string, any>;
+					const commonOpt = (_options as any).common[k];
+					if (!opt && commonOpt)
+						opt = { [prop || '$base']: commonOpt };
+					if (typeof opt === 'undefined' && !commonOpt)
 						throw new Error(
 							`${instanceName} option ${k} using property ${prop as string} was NOT found.`
 						);

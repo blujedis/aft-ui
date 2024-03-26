@@ -30,7 +30,6 @@ export type MenuProps = {
 	disabled?: boolean;
 	focused?: boolean;
 	hovered?: boolean;
-	store?: DisclosureStore;
 	theme?: ThemeColor;
 	transitioned?: boolean;
 	variant?: MenuButtonVariant;
@@ -40,5 +39,7 @@ export type MenuProps = {
 export const menuDefaults: Partial<MenuProps & MenuGlobalProps> = {
 	autoclose: true,
 	escapable: true,
+	focused: true,
+	hovered: true,
 	size: 'md'
 };

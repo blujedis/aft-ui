@@ -25,7 +25,6 @@
 
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')
-		// .variant('empty', variant, theme, variant)
 		.option('mainBorder', theme, true)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)

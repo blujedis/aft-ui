@@ -18,9 +18,9 @@
 
 	$: cardElementClasses = th
 		.create('CardContent')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 		.bundle(['softBg'], theme, variant === 'soft')
-		.bundle(['mainText'], theme, ['filled', 'soft'].includes(variant) && type === 'content')
+		.bundle(['unfilledText'], theme, ['filled', 'soft'].includes(variant) && type === 'content')
 		.option('cardPadding', size, size && type === 'content')
 		.option('cardPaddingHeader', size, size && type === 'header')
 		.option('cardPaddingFooter', size, size && type === 'footer')

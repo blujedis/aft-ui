@@ -4,7 +4,7 @@
 	import type { ElementProps } from '$lib/types';
 	import { forwardEventsBuilder } from '$lib/utils';
 	import { get_current_component } from 'svelte/internal';
-	import type { SelectListContext, SelectListItem } from '$lib/components/SelectList';
+	import type { SelectListContext } from '$lib/components/SelectList';
 	import { getContext } from 'svelte';
 
 	type Tag = $$Generic<'button' | 'a'>;
@@ -23,21 +23,18 @@
 
 	const th = themer($themeStore);
 
-	// $: selected = $context.selected.map((v: any) =>
-	// 	$context.items.find((item) => item.value === v)
-	// ) as SelectListItem[];
-
 	$: optionClasses = th
 		.create('SelectListOption')
-		.bundle(['selectedSoftBgAriaSelected'], theme, theme)
-		.option('common', 'focusedRing', focused)
-		.option('ringFocus', theme, focused)
-		.option('panelBgHover', theme, hovered)
+		.bundle(['selectedBgAriaSelected'], { 
+			$base: 'aria-selected:text-white' 
+		}, theme, theme)
+		.option('bgFocus', theme, focused)
+		.option('panelBgHover', theme,  hovered)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
 		.prepend('select-list-option', true)
 		.append('select-list-option-selected', $context.selected.includes(key))
-		.append('block w-full text-left z-40 focus:ring-inset focus:ring-1', true)
+		.append('block w-full text-left z-40 outline-none', true)
 		.append($$restProps.class, true)
 		.compile();
 

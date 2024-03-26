@@ -33,7 +33,6 @@ export const accordionDefaults: Partial<AccordionProps<'div'>> = {
 	...accordionOptionDefaults,
 	as: 'div',
 	multiple: false,
-	selected: []
-	// theme: 'frame',
-	// variant: 'filled'
+	selected: [],
+	variant: 'text'
 };

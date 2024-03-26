@@ -25,7 +25,7 @@
 		.create('NotificationContainer')
 		.append('sm:items-start items-start', position.startsWith('top'))
 		.append('sm:items-end items-end', position.startsWith('bottom'))
-		.append('pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-20', true)
+		.append('pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-50', true)
 		.append($$restProps.class, true)
 		.compile();
 

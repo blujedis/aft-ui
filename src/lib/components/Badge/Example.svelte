@@ -6,8 +6,6 @@
 
 	const title = 'Badges';
 	const description = 'Simple component for displaying tags, notification counts and more.';
-	const code = `
-  `;
 
 	const props = {
 		full: false,
@@ -20,10 +18,11 @@
 		transitioned: false,
 		variant: 'filled' as BadgeVariant
 	};
+	const _colors = [...colors, 'white', 'black'] as ThemeColor[];
 </script>
 
 <ExamplePage {title} {description}>
-	{#each colors as color}
+	{#each _colors as color}
 		<div class="grid grid-cols-4 gap-2 mb-4">
 			<label for="filled">
 				<Badge {...props} theme={color}>Badge</Badge>

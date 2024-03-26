@@ -29,34 +29,27 @@
 	} as Required<$$Props>;
 
 	setContext('Select', {
-		size,
-		theme,
-		variant
+		globals: {
+			size
+		}
 	});
 
 	const th = themer($themeStore);
 
 	$: selectClasses = th
 		.create('Select')
+		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
 		.bundle(
-			['mainBg', 'whiteText', 'filledPlaceholder'],
-			{
-				frame: 'text-dark dark:text-light'
-			},
-			theme,
-			variant === 'filled'
-		)
-		.bundle(
-			['inputText', 'mainRing'],
+			['mainRing', 'unfilledText'],
 			{ $base: 'ring-1 ring-inset' },
 			theme,
 			variant === 'outlined'
 		)
-		.bundle(['softBg', 'inputText'], theme, variant === 'soft')
-		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
+		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'unfilledText'], theme, variant === 'flushed')
 		.option('common', 'focusedOutline', focused && variant !== 'flushed')
 		.option('outlineFocus', theme, focused && variant !== 'flushed')
-		.bundle(['inputText'], theme, variant === 'text')
+		.bundle(['unfilledText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
 		.option('fieldFontSizes', size, size)
@@ -64,7 +57,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
-		.prepend(`select select-${variant} select-${theme}`, true)
+		.prepend(`select select-${variant}`, true)
 		.append('min-w-min', true)
 		.append('w-full', full || variant === 'flushed') // flushed container requires full width
 		.append('dark:bg-transparent', ['outlined', 'flushed', 'text', 'ghost'].includes(variant))

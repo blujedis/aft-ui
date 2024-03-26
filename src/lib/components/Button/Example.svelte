@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, type ButtonVariant } from '.';
-	import type { ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 
@@ -21,10 +21,11 @@
 		focused: true,
 		transitioned: true
 	};
+	const _colors = [...colors, 'white', 'black'] as ThemeColor[];
 </script>
 
 <ExamplePage {title} {description}>
-	{#each colors as color}
+	{#each _colors as color}
 		<div class="grid grid-cols-5 gap-4 mb-4">
 			<Button {...props} variant="filled" theme={color}>Button</Button>
 			<Button {...props} variant="outlined" theme={color}>Button</Button>

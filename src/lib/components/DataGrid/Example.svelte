@@ -30,7 +30,7 @@
 		stacked: false,
 		autocols: true,
 		divided: true,
-		sticky: false,
+		sticky: true,
 		resizeable: true,
 		reorderable: true,
 		rowkey: 'id'

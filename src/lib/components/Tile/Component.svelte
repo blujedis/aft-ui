@@ -28,14 +28,19 @@
 
 	$: tileClasses = th
 		.create('Tile')
-		.bundle(['mainBg', 'whiteText'], theme, variant === 'filled')
-		.bundle(['mainText', 'mainRing'], { $base: 'ring-1 ring-inset' }, theme, variant === 'outlined')
-		.bundle(['softText', 'softBg'], theme, variant === 'soft')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+		.bundle(
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
+		.option('elementBorder', theme, bordered)
 		.option('hovered', variant, theme, hovered)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'bordered', bordered)
 		.option('fieldFontSizes', size, size)
 		.option('boxPadding', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)

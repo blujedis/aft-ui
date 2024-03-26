@@ -52,34 +52,31 @@
 	$: paginationPageClasses = th
 		.create('PaginationPage')
 		.bundle(
-			['selectedBgAriaSelected'],
-			{ $base: 'aria-selected:text-white dark:aria-selected:text-white' },
+			['selectedBgAriaSelected', 'filledTextAriaSelected'],
+			// { $base: 'aria-selected:text-white dark:aria-selected:text-white' },
 			theme,
 			variant === 'filled'
 		)
 		.bundle(
-			['selectedSoftBgAriaSelected'],
-			{ $base: 'aria-selected:text-current dark:aria-selected:text-white' },
+			['selectedSoftBgAriaSelected', 'unfilledTextAriaSelected'],
+			// { $base: 'aria-selected:text-current dark:aria-selected:text-white' },
 			theme,
 			variant === 'soft'
 		)
 		.bundle(
-			['selectedBorderAriaSelected'],
-			{
-				$base: 'aria-selected:text-current dark:aria-selected:text-white'
-			},
+			['selectedBorderAriaSelected', 'unfilledTextAriaSelected'],
+			// {	$base: 'aria-selected:text-current dark:aria-selected:text-white'	},
 			theme,
 			variant === 'flushed'
 		)
-		.option('common', 'mutedText', true)
+		.option('mutedText', theme, true)
+		.option('panelBgHover', theme, hovered && ['filled', 'soft'].includes(variant))
 		.option('fieldFontSizes', size, size)
 		.option('paginationGroupedPadding', size, size && ['filled', 'soft'].includes(variant))
 		.option('paginationFlushedPadding', size, size && variant === 'flushed')
-		// .option('hovered', variant, theme, hovered)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
-		.option('panelAccordionBgHover', theme, hovered && ['filled', 'soft'].includes(variant))
 		.option('roundeds', boolToMapValue(rounded), rounded && ((previous || next) as boolean))
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',

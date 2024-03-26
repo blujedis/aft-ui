@@ -15,9 +15,9 @@ export interface FocusNavOptions<T extends HTMLElement> {
 const defaults = {
 	onFind: <T>(_items: T[]) => null as T | null | undefined,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	onSelected: <T>(_node: T) => {},
-	onInit: <T>(_items: T[]) => {},
-	onNavigate: <T>(_item: T, _index: number) => {}
+	onSelected: <T>(_node: T) => { },
+	onInit: <T>(_items: T[]) => { },
+	onNavigate: <T>(_item: T, _index: number) => { }
 };
 
 export function useFocusNav<T extends HTMLElement>(

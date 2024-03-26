@@ -39,6 +39,7 @@
 		<a href="/tabs">Tabs</a>
 		<a href="/textarea">Textarea</a>
 		<a href="/tile">Tile</a>
+		<a href="/tooltip">Tooltip</a>
 	</div>
 </div>
 

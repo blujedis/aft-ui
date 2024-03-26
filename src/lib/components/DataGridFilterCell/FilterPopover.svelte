@@ -35,8 +35,8 @@
 
 	$: containerClasses = th
 		.create('FilterPopoverContainer')
-		.option('common', 'bordered', true)
-		.option('panelContainerBg', theme, theme)
+		.option('panelBorder', theme, true)
+		.option('panelContainerBg', theme, true)
 		.append('absolute popover flex-col items-center w-56 p-4 shadow-sm border', true)
 		.compile();
 
@@ -66,13 +66,14 @@
 			focused
 			full
 			placeholder="Please Select"
-			variant={$isDark ? 'filled' : 'outlined'}
+			variant="filled"
+			theme="white"
 			bind:value={data.criteriaOne}
 			let:filtered
 			onChange={handleApplyFilter}
 		>
-			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
-			<SelectListPanel shadowed="md" full class={!$isDark ? '!bg-white' : ''}>
+			<SelectListButton />
+			<SelectListPanel shadowed="md" full>
 				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
@@ -87,7 +88,9 @@
 			{rounded}
 			focused
 			full
-			variant={$isDark ? 'filled' : 'outlined'}
+			variant="filled"
+			theme="white"
+			placeholder="Enter value"
 			class={valueOneHidden ? 'hidden' : ''}
 			on:input={handleApplyFilter}
 		/>
@@ -120,13 +123,14 @@
 			focused
 			full
 			placeholder="Please Select"
-			variant={$isDark ? 'filled' : 'outlined'}
+			variant="filled"
+			theme="white"
 			bind:value={data.criteriaTwo}
 			let:filtered
 			onChange={handleApplyFilter}
 		>
-			<SelectListButton class={!$isDark ? 'bg-white' : ''} />
-			<SelectListPanel shadowed="md" full class={!$isDark ? '!bg-white' : ''}>
+			<SelectListButton />
+			<SelectListPanel shadowed="md" full>
 				{#each filtered as item (item)}
 					<SelectListOption as="button" key={item.value}>
 						{item.label}
@@ -141,14 +145,18 @@
 			{rounded}
 			focused
 			full
-			variant={$isDark ? 'filled' : 'outlined'}
+			variant="filled"
+			theme="white"
 			class={valueTwoHidden ? 'hidden' : ''}
+			placeholder="Enter value"
 			on:change={handleInputChange}
 			on:input={handleApplyFilter}
 		/>
 	</div>
-	<div class="flex items-center space-x-2 mt-3 justify-end pr-1">
-		<Button variant="outlined" underlined on:click={resetFilter} size="sm">Reset</Button>
+	<div class="flex items-center space-x-2 mt-4 justify-end pr-1">
+		<Button variant="outlined" theme="frame" underlined on:click={resetFilter} size="sm"
+			>Reset</Button
+		>
 		<!-- <Button variant="text" underlined on:click={applyFilter}>Apply</Button> -->
 	</div>
 </div>

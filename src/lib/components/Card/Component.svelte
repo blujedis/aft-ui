@@ -36,10 +36,10 @@
 
 	$: cardClasses = th
 		.create('Card')
+		.option('elementRing', theme, divided || variant === 'outlined')
 		.option('cardSizes', maxwidth, maxwidth)
-		.option('common', 'divided', divided)
+		.option('elementDivide', theme, divided)
 		.option('roundeds', boolToMapValue(rounded), rounded)
-		.option('common', 'ringed', divided || variant === 'outlined')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
 		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')

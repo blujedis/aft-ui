@@ -48,7 +48,6 @@
 		.create('DataGridHeaderCell')
 		.option('gridHeaderPadding', size, size)
 		.option('common', 'focusedRingWithin', focused && !dragging)
-		.option('ringFocusWithin', theme, focused)
 		.prepend('datagrid-cell datagrid-header-cell', true)
 		.append(
 			'group-hover:bg-primary-950/5 dark:group-hover:bg-primary-950/20 group-hover:cursor-move',

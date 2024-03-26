@@ -47,7 +47,7 @@
 		"postbuild": "node postbuild.cjs"
 	},
 	"dependencies": {
-		"@floating-ui/dom": "^1.5.4",
+		"@floating-ui/dom": "^1.6.3",
 		"classnames": "^2.5.1",
 		"defaults": "^3.0.0",
 		"dot-prop": "^8.0.2",

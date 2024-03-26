@@ -70,31 +70,32 @@
 
 	$: containerClasses = th
 		.create('SelectListButton')
+		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
 		.bundle(
-			['mainBg', 'whiteText', 'filledPlaceholder'],
+			['elementRing'],
 			{
-				frame: 'text-dark dark:text-light'
+				$base: 'ring-1 ring-inset'
 			},
 			theme,
-			variant === 'filled'
+			['filled'].includes(variant) && theme === 'white'
 		)
 		.bundle(
-			['inputText', 'mainRing'],
+			['unfilledText', 'mainRing'],
 			{
 				$base: 'ring-1 ring-inset'
 			},
 			theme,
 			variant === 'outlined'
 		)
-		.bundle(['softBg', 'inputText'], theme, variant === 'soft')
-		.bundle(['mainBorder', 'mainBorderGroupHover', 'inputText'], theme, variant === 'flushed')
+		.bundle(['softBg', 'softText'], theme, variant === 'soft')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'unfilledText'], theme, variant === 'flushed')
 		.option('common', 'focusedOutlineWithin', focused && variant !== 'flushed')
 		.option(
 			'outlineFocusWithin',
 			theme,
 			focused && ['filled', 'outlined', 'ghost', 'soft', 'text'].includes(variant)
 		)
-		.bundle(['inputText'], theme, variant === 'text')
+		.bundle(['unfilledText'], theme, variant === 'text')
 		.option('common', 'transitioned', transitioned)
 		.option('hovered', variant, theme, hovered)
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')

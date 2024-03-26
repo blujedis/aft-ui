@@ -6,11 +6,10 @@
 	import { MenuPanel } from '../MenuPanel';
 	import { colors } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import { Divider } from '..';
 
 	const title = 'Menu';
 	const description = 'Dropdown menu examples.';
-	const code = `
-  `;
 
 	const sourceItems = [
 		{
@@ -87,60 +86,52 @@
 	{#key props}
 		{#each colors as color}
 			<div class="grid grid-cols-5 gap-2 mb-4">
-				<label for={color}>
-					<Menu {...props} theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
+				<Menu {...props} theme={color}>
+					<MenuButton>Languages</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+						<Divider />
+						<MenuOption as="a" href="https://yahoo.com">Yahoo</MenuOption>
+					</MenuPanel>
+				</Menu>
 
-				<label for={color}>
-					<Menu {...props} variant="outlined" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
+				<Menu {...props} variant="outlined" theme={color}>
+					<MenuButton>Languages</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+					</MenuPanel>
+				</Menu>
 
-				<label for={color}>
-					<Menu {...props} variant="soft" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
+				<Menu {...props} variant="soft" theme={color}>
+					<MenuButton>Languages</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+					</MenuPanel>
+				</Menu>
 
-				<label for={color}>
-					<Menu {...props} variant="ghost" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
+				<Menu {...props} variant="ghost" theme={color}>
+					<MenuButton>Languages</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+					</MenuPanel>
+				</Menu>
 
-				<label for={color}>
-					<Menu {...props} variant="text" theme={color}>
-						<MenuButton>Languages</MenuButton>
-						<MenuPanel>
-							{#each sourceItems as item}
-								<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
-							{/each}
-						</MenuPanel>
-					</Menu>
-				</label>
+				<Menu {...props} variant="text" theme={color}>
+					<MenuButton>Languages</MenuButton>
+					<MenuPanel>
+						{#each sourceItems as item}
+							<MenuOption as="a" href={item.href} active={item.active}>{item.label}</MenuOption>
+						{/each}
+					</MenuPanel>
+				</Menu>
 			</div>
 		{/each}
 	{/key}

@@ -2,10 +2,10 @@
 	import { type SelectListPanelProps, selectListPanelDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib/theme';
 	import { transitioner } from '$lib/components/Disclosure';
-	import type { SelectListContext, SelectListItem } from '$lib/components/SelectList';
+	import type { SelectListContext } from '$lib/components/SelectList';
 	import { getContext } from 'svelte';
 	import { useFocusNav } from '$lib/hooks';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 
 	type $$Props = SelectListPanelProps & ElementProps<'div'>;
@@ -17,15 +17,12 @@
 
 	const context = getContext('SelectListContext') as SelectListContext;
 
-	export let { full, origin, position, recordless, rounded, shadowed, tags, theme, transition } = {
-		...defaults,
-		full: context.globals?.full,
-		tags: context.globals?.tags,
-		recordless: context.globals?.recordless,
-		rounded: context.globals?.rounded,
-		shadowed: context.globals?.shadowed,
-		theme: context.globals?.theme
-	} as Required<SelectListPanelProps>;
+	export let { bordered, full, position, recordless, rounded, shadowed, tags, theme, transition } =
+		{
+			...cleanObj($themeStore?.defaults?.component, ['focused', 'hovered', 'size', 'transitioned']),
+			...defaults,
+			...cleanObj(context.globals)
+		} as Required<SelectListPanelProps>;
 
 	const th = themer($themeStore);
 
@@ -42,17 +39,17 @@
 
 	$: panelClasses = th
 		.create('SelectListPanel')
-		.option('panelBg', theme, theme)
+		.option('panelBg', theme, true)
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.option('common', 'bordered', true)
+		.option('elementBorder', theme, bordered)
 		.prepend('select-list-panel', true)
-		.append('outline-none', true)
-		.append(`absolute z-30 mt-1 text-left min-w-32 border`, true)
+		.append('border', bordered)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)
-		.append(origin === 'right' ? 'origin-top-right' : 'origin-top-left', true)
-		.append('origin-center', origin === 'center')
+		.append(position === 'right' ? 'origin-top-right' : 'origin-top-left', true)
+		.append('origin-center', full)
 		.append('min-w-full', full)
+		.append(`absolute mt-1 text-left min-w-32 outline-none z-30`, true)
 		.append($$restProps.class, true)
 		.compile();
 
