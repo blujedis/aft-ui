@@ -4,7 +4,7 @@ export type EmptyVariant = 'outlined';
 
 export type EmptyProps = {
 	as?: 'button' | 'link' | 'div' | 'span' | 'label';
-	focused?: bolean;
+	focused?: boolean;
 	full?: boolean;
 	hovered?: boolean;
 	rounded?: ThemeRounded;
@@ -13,7 +13,6 @@ export type EmptyProps = {
 	theme?: ThemeColor;
 	transitioned?: boolean;
 	variant?: EmptyVariant;
-	unstyled?: boolean;
 };
 
 export const emptyDefaults: Partial<EmptyProps> = {

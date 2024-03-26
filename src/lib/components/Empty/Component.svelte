@@ -7,21 +7,10 @@
 
 	type $$Props = EmptyProps & Omit<ElementProps<'span'>, 'size'>;
 
-	export let {
-		as,
-		focused,
-		full,
-		hovered,
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transitioned,
-		variant,
-		unstyled
-	} = {
-		...defaults
-	} as Required<$$Props>;
+	export let { as, focused, full, hovered, rounded, shadowed, size, theme, transitioned, variant } =
+		{
+			...defaults
+		} as Required<$$Props>;
 
 	$: emptyClasses = themer($themeStore)
 		.create('Empty')

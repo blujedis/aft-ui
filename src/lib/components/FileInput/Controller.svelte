@@ -10,6 +10,12 @@
 
 	let input: HTMLInputElement;
 
+	const states = {
+		0: 'starting',
+		1: 'loading',
+		2: 'finished'
+	};
+
 	function createFormData(files: FileList | null) {
 		if (!files) return null;
 		const data =
@@ -18,10 +24,16 @@
 		return data;
 	}
 
+	function updateState(value: number) {
+		const state = states[String(value) as unknown as keyof typeof states];
+		console.info(`File updload state is: ${state}`);
+	}
+
 	function readFile(file: File): Promise<string | ArrayBuffer | null> {
 		return new Promise((resolve, reject) => {
 			var reader = new FileReader();
 			reader.onload = () => {
+				updateState(reader.readyState);
 				resolve(reader.result);
 			};
 			reader.onerror = reject;
@@ -32,10 +44,10 @@
 		});
 	}
 
-	function handleFiles(files?: FileList | null) {
+	function handleFiles(type: 'form' | 'read', files?: FileList | null) {
 		files = input?.files;
 		if (!files) return;
-		if (typeof onReadFiles !== 'undefined') {
+		if (type === 'read' && typeof onReadFiles !== 'undefined') {
 			const proms = Array.from(files).map(readFile);
 			Promise.all(proms)
 				.then((result) => {
@@ -44,21 +56,20 @@
 				.catch((ex) => {
 					onReadFiles(ex as Error, null, files as FileList);
 				});
-		}
-		if (typeof onFormData !== 'undefined') {
+		} else if (type === 'form' && typeof onFormData !== 'undefined') {
 			onFormData(createFormData(files), files as FileList);
 		}
 	}
 
 	function handleInputChange(e?: any) {
-		handleFiles();
+		handleFiles('form');
 	}
 
 	function handleDrop(e: DragEvent & { currentTarget: EventTarget & HTMLElement }) {
 		e.preventDefault();
 		const files = e?.dataTransfer?.files;
 		if (files) input.files = files;
-		handleFiles(files);
+		handleFiles('read', files);
 	}
 
 	function handleClick() {
