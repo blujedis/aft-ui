@@ -3,7 +3,7 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/ty
 export type EmptyVariant = 'outlined';
 
 export type EmptyProps = {
-	as?: 'button' | 'link' | 'div' | 'span' | 'label';
+	as?: 'button' | 'link' | 'div' | 'span' | 'label' | 'a';
 	focused?: boolean;
 	full?: boolean;
 	hovered?: boolean;

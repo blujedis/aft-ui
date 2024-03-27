@@ -4,6 +4,7 @@ export type TileVariant = 'filled' | 'outlined' | 'soft';
 
 export type TileProps = {
 	bordered?: boolean;
+	centered?: boolean;
 	dropshadowed?: ThemeShadowed;
 	focused?: boolean;
 	full?: boolean;
@@ -18,8 +19,8 @@ export type TileProps = {
 };
 
 export const tileDefaults: Partial<TileProps> = {
+	centered: true,
 	rounded: 'md',
 	size: 'md',
 	theme: 'frame',
-	variant: 'filled'
 };

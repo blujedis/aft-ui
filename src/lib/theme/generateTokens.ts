@@ -105,6 +105,14 @@ const focusOutlineModifiers = [
 	'group-focus-within:outline'
 ];
 
+const focusRingModifiers = [
+	'focus:ring',
+	'focus-visible:ring',
+	'focus-within:ring',
+	'peer-focus:ring',
+	'group-focus:ring',
+	'group-focus-within:ring'
+];
 const selectedBgModifiers = [
 	'aria-selected:bg',
 	'aria-expanded:bg',
@@ -142,7 +150,7 @@ export const defaultOptions = {
 	defaultSelectedShade: 600,
 	softShade: '500/15',
 	softSelectedShade: '500/25',
-	focusShade: '500/30',
+	focusShade: '500/70',
 	hoverShade: '500/20',
 	placeholderShade: 200,
 
@@ -548,6 +556,14 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		outlineFocus: {
 			variant: '',
 			modifiers: [...focusOutlineModifiers],
+			colors: createColorMap(themeColors, `${focusShade}`, true, {
+				frame: [`${focusShade}`, `${focusShade}`]
+			})
+		},
+
+		ringFocus: {
+			variant: '',
+			modifiers: [...focusRingModifiers],
 			colors: createColorMap(themeColors, `${focusShade}`, true, {
 				frame: [`${focusShade}`, `${focusShade}`]
 			})

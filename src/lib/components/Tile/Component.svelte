@@ -9,6 +9,7 @@
 
 	export let {
 		bordered,
+		centered,
 		dropshadowed,
 		focused,
 		full,
@@ -38,8 +39,8 @@
 		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
 		.option('elementBorder', theme, bordered)
 		.option('hovered', variant, theme, hovered)
-		.option('common', 'focusedOutlineVisible', focused)
-		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'focusedRingWithin', focused)
+		.option('ringFocusWithin', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('boxPadding', size, size)
@@ -50,7 +51,8 @@
 		.append('border', bordered)
 		.append('cursor-pointer', href)
 		.append('w-full h-full', full)
-		.append('flex flex-col items-center justify-center', true)
+		.append('flex flex-col items-center justify-center', centered)
+		.append('flex', !centered)
 		.append($$restProps.class, true)
 		.compile();
 
