@@ -11,6 +11,7 @@
 		bordered,
 		centered,
 		dropshadowed,
+		emptied,
 		focused,
 		full,
 		href,
@@ -38,12 +39,13 @@
 		)
 		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
 		.option('elementBorder', theme, bordered)
+		.option('mainBorder', theme, emptied)
 		.option('hovered', variant, theme, hovered)
-		.option('common', 'focusedRingWithin', focused)
-		.option('ringFocusWithin', theme, focused)
+		.option('common', 'focusedOutlineWithin', focused)
+		.option('outlineFocusWithin', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
-		.option('boxPadding', size, size)
+		.option('tilePadding', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
@@ -51,8 +53,9 @@
 		.append('border', bordered)
 		.append('cursor-pointer', href)
 		.append('w-full h-full', full)
-		.append('flex flex-col items-center justify-center', centered)
-		.append('flex', !centered)
+		.append('border-[3px] border-dashed', emptied)
+		.append('inline-flex relative', true)
+		.append('items-center justify-center', centered)
 		.append($$restProps.class, true)
 		.compile();
 

@@ -21,4 +21,5 @@ export * from './ProgressBar/options';
 export * from './ProgressCircle/options';
 export * from './Range/options';
 export * from './Switch/options';
+export * from './Tile/options';
 export * from './Tooltip/options';

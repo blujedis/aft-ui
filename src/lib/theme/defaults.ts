@@ -3,8 +3,8 @@ import type { ThemeDefaults } from '../types/theme';
 const component = {
 	focused: true,
 	hovered: true,
-	rounded: 'md',
-	shadowed: 'none',
+	rounded: 'none',
+	shadowed: '',
 	size: 'md',
 	theme: 'frame',
 	transitioned: true

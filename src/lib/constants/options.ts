@@ -144,15 +144,6 @@ export const fieldUpperPaddingY = {
 	xl2: 'py-3.5'
 };
 
-export const boxPadding = {
-	unstyled: '',
-	xs: 'py-1.5 px-3',
-	sm: 'py-3 px-4',
-	md: 'py-3 px-6',
-	lg: 'py-4 px-8',
-	xl: 'py-5 px-10',
-	xl2: 'py-6 px-12'
-};
 
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
 

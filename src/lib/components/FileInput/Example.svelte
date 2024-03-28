@@ -76,8 +76,10 @@
 				let:onClick
 				let:onDrop
 			>
-				<Empty
+				<Tile
 					theme={uploading === 0 ? 'frame' : uploading === 1 ? 'primary' : 'success'}
+					emptied
+					size="md"
 					as="button"
 					class="text-sm font-medium uppercase"
 					on:click={onClick}
@@ -90,9 +92,11 @@
 					on:end={() => (uploading = 0)}
 				>
 					Upload Files
-				</Empty>
+				</Tile>
 			</FileInput>
-			<input type="file" multiple />
+			<div class="mt-4">
+				<input type="file" multiple />
+			</div>
 		</form>
 	</div>
 </ExamplePage>

@@ -6,6 +6,7 @@ export type TileProps = {
 	bordered?: boolean;
 	centered?: boolean;
 	dropshadowed?: ThemeShadowed;
+	emptied?: boolean;
 	focused?: boolean;
 	full?: boolean;
 	href?: string;
@@ -20,7 +21,6 @@ export type TileProps = {
 
 export const tileDefaults: Partial<TileProps> = {
 	centered: true,
-	rounded: 'md',
 	size: 'md',
 	theme: 'frame',
 };
