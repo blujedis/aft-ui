@@ -31,5 +31,5 @@ export { default as SelectExample } from './Select/Example.svelte';
 export { default as SwitchExample } from './Switch/Example.svelte';
 export { default as TabExample } from './Tabs/Example.svelte';
 export { default as TextareaExample } from './Textarea/Example.svelte';
-export { default as TileExample } from './Tile/Example.svelte';
+export { default as TileExample } from './Box/Example.svelte';
 export { default as TooltipExample } from './Tooltip/Example.svelte';

@@ -5,7 +5,7 @@
 	import { Button } from '../Button';
 	import { Empty } from '../Empty';
 	import { Input } from '../Input';
-	import { Tile } from '../Tile';
+	import { Box } from '../Box';
 
 	const title = 'File Input';
 	const description = 'Component for handling input files.';
@@ -58,12 +58,12 @@
 					let:onClick
 					let:onDrop
 				>
-					<Tile centered={false} size="unstyled" theme="primary" focused>
+					<Box centered={false} size="unstyled" theme="primary" focused>
 						<Button theme="primary" focused={false} on:click={onClick} class="rounded-r-none"
 							>Upload Files</Button
 						>
 						<Input focused={false} class="rounded-l-none" on:click={onClick} bind:value />
-					</Tile>
+					</Box>
 				</FileInput>
 			</div>
 		</form>
@@ -76,7 +76,7 @@
 				let:onClick
 				let:onDrop
 			>
-				<Tile
+				<Box
 					theme={uploading === 0 ? 'frame' : uploading === 1 ? 'primary' : 'success'}
 					emptied
 					size="md"
@@ -92,7 +92,7 @@
 					on:end={() => (uploading = 0)}
 				>
 					Upload Files
-				</Tile>
+				</Box>
 			</FileInput>
 			<div class="mt-4">
 				<input type="file" multiple />

@@ -1,5 +1,5 @@
 
-export const tilePadding = {
+export const boxPadding = {
 	unstyled: '',
 	xs: 'p-4',
 	sm: 'p-8',

@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { type TileProps, tileDefaults as defaults } from './module';
+	import { type BoxProps, boxDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
-	import type { ElementProps } from '$lib/types';
+	import type { ElementProps, ThemeColor } from '$lib/types';
 
-	type $$Props = TileProps & ElementProps<'div'>;
+	type Tag = $$Generic<HTMLTag>;
+	type $$Props = BoxProps<Tag> & ElementProps<Tag>;
 
 	export let {
+		as,
 		bordered,
 		centered,
 		dropshadowed,
@@ -19,17 +21,18 @@
 		rounded,
 		shadowed,
 		size,
+		skeletoned,
 		theme,
 		transitioned,
 		variant
 	} = {
 		...defaults
-	} as Required<$$Props>;
+	} as $$Props;
 
 	const th = themer($themeStore);
 
-	$: tileClasses = th
-		.create('Tile')
+	$: boxClasses = th
+		.create('Box')
 		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 		.bundle(
 			['mainRing', 'unfilledText'],
@@ -40,22 +43,23 @@
 		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
 		.option('elementBorder', theme, bordered)
 		.option('mainBorder', theme, emptied)
-		.option('hovered', variant, theme, hovered)
+		.option('hovered', variant, theme as ThemeColor, hovered)
 		.option('common', 'focusedOutlineWithin', focused)
 		.option('outlineFocusWithin', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
-		.option('tilePadding', size, size)
+		.option('boxPadding', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
-		.prepend('tile', true)
+		.prepend(`box box-${variant}`, true)
 		.append('border', bordered)
 		.append('cursor-pointer', href)
 		.append('w-full h-full', full)
 		.append('border-[3px] border-dashed', emptied)
 		.append('inline-flex relative', true)
 		.append('items-center justify-center', centered)
+		.append('animate-pulse bg-frame-300/20 dark:bg-frame-900/70', skeletoned)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -64,6 +68,17 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<svelte:element this={href ? 'a' : 'div'} {...$$restProps} use:forwardedEvents class={tileClasses}>
+<svelte:element
+	this={as}
+	role="presentation"
+	{...$$restProps}
+	use:forwardedEvents
+	on:click
+	on:drop
+	on:dragover
+	on:dragleave
+	on:dragend
+	class={boxClasses}
+>
 	<slot />
 </svelte:element>
