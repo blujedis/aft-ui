@@ -15,6 +15,8 @@ export type SortToken = 'asc' | 'desc' | 0 | 1 | '' | null;
 
 export type DataGridDataItem = Record<string, unknown>;
 
+export type DataGridVariant = 'text' | 'filled' | 'outlined';
+
 export type DataGridColumnConfig<D = DataGridDataItem> = {
 	accessor: TypeOrValue<keyof D>;
 	filterable?: boolean;

@@ -9,7 +9,6 @@ export { default as CheckboxExample } from './Checkbox/Example.svelte';
 export { default as DataGridExample } from './DataGrid/Example.svelte';
 export { default as DisclosureExample } from './Disclosure/Example.svelte';
 export { default as DrawerExample } from './Drawer/Example.svelte';
-export { default as EmptyExample } from './Empty/Example.svelte';
 export { default as FileInputExample } from './FileInput/Example.svelte';
 export { default as InputExample } from './Input/Example.svelte';
 export { default as IconExample } from './Icon/Example.svelte';

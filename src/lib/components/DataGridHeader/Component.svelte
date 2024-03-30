@@ -5,6 +5,7 @@
 	import type { DataGridContext } from '$lib/components/DataGrid';
 	import { getContext } from 'svelte';
 	import { useResizer } from '$lib/hooks';
+	import { boolToMapValue } from '$lib/utils';
 
 	type $$Props = DataGridHeaderProps & ElementProps<'div'>;
 
@@ -31,13 +32,16 @@
 		.option('elementDivide', theme, divided)
 		.prepend('datagrid-header', true)
 		.append('divide-y', divided)
+		.option('roundeds', boolToMapValue(rounded), rounded)
 		.append(
 			'sticky top-0 z-10 bg-[rgb(var(--body-bg-light))] dark:bg-[rgb(var(--body-bg-dark))]',
 			sticky
-		) // add overflow-clip & "rounded" to keep top rounding
+		)
 		.append('rounded-b-none', rounded)
-		.append('shadow-sm', sticky)
+		.append('shadow-sm overflow-clip', sticky)
 		.compile();
+
+	console.log(rounded);
 
 	function init(node: HTMLDivElement) {
 		if (stacked) return; // can't resize columns when in stacked mode.

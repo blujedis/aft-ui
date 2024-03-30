@@ -63,9 +63,9 @@
 
 	$: accordionClasses = th
 		.create('Accordion')
-		.option('elementDivide', theme,  variant === 'filled')
-		.append('divide-y', variant === 'filled')
-		.prepend(`accordion`, true)
+		.option('elementDivide', theme, variant === 'filled')
+		.append('divide-y', variant === 'filled' && !bordered)
+		.prepend(`accordion accordion-${variant}`, true)
 		.append($$restProps.class, true)
 		.compile();
 

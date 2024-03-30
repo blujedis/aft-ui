@@ -592,7 +592,6 @@ function getCommon(options: Required<GenerateOptions>) {
 		focusOffset,
 		focusWidth,
 		defaultShade,
-		softShade,
 	} = options as Required<GenerateOptions>;
 
 	const common = {

@@ -10,10 +10,9 @@
 
 	const context = getContext('DataGrid') as DataGridContext;
 
-	export let { accessor, full, size, stacked, theme } = {
+	export let { accessor, full, size, theme } = {
 		...defaults,
 		size: context.globals?.size,
-		stacked: context.globals?.stacked,
 		theme: context.globals?.theme
 	} as Required<$$Props>;
 
@@ -22,7 +21,7 @@
 		.option('fieldPadding', size, size)
 		.prepend('datagrid-cell', true)
 		.append('col-span-full', full)
-		.append('py-0.5', stacked)
+		// .append('py-0.5', stacked)
 		.append($$restProps.class, true)
 		.compile();
 </script>

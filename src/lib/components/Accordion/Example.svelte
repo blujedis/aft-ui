@@ -18,6 +18,7 @@
 		multiple: false,
 		hovered: true,
 		rounded: 'none' as ThemeRounded,
+		bordered: true,
 		// shadowed: 'none' as ThemeShadowed,
 		selectable: true,
 		size: 'md' as ThemeSize,

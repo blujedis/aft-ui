@@ -9,7 +9,7 @@
 	} as Required<FileInputProps>;
 
 	let input: HTMLInputElement;
-	let state = 0 as 0 | 1  | 2;
+	let state = 0 as 0 | 1 | 2;
 
 	function createFormData(files: FileList) {
 		const data =
@@ -59,7 +59,7 @@
 		handleFiles(null);
 	}
 
-	function handleDrop(e: DragEvent & { currentTarget: EventTarget & HTMLElement }) {
+	function handleDrop(e: DragEvent) {
 		e.preventDefault();
 		const files = e?.dataTransfer?.files;
 		if (files) input.files = files;

@@ -3,8 +3,6 @@ export type FileInputReaderType = 'text' | 'url' | 'binary' | 'buffer';
 
 export type FileInputProps = {
 	name?: string;
-	droppedTheme?: ThemeColor;
-	droppingTheme?: ThemeColor;
 	readAs?: FileInputReaderType;
 	onFormData?: (err: Error | null, data: FormData | null, files: FileList) => any;
 	onReadFiles?: (

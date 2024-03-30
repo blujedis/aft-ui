@@ -110,10 +110,10 @@
 		.prepend(`datagrid`, true)
 		.append('divide-y', divided)
 		.append('w-full', full)
-		.append('relative', sticky)
 		.append('border', divided)
+		.append('relative', sticky)
 		.append('max-w-screen-md m-auto', stacked)
-		.append('flow-root', true) // overflow-clip
+		.append('flow-root overflow-clip', true) // overflow-clip
 		.append($$restProps.class, true)
 		.compile();
 

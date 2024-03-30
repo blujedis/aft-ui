@@ -41,8 +41,7 @@
 			variant === 'outlined'
 		)
 		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
-		.option('elementBorder', theme, bordered)
-		.option('mainBorder', theme, emptied)
+		.option('mainBorder', theme, bordered || emptied)
 		.option('hovered', variant, theme as ThemeColor, hovered)
 		.option('common', 'focusedOutlineWithin', focused)
 		.option('outlineFocusWithin', theme, focused)
