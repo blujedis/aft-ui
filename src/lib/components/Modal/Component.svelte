@@ -6,7 +6,7 @@
 	import { fade } from 'svelte/transition';
 	import Placeholder from './Placeholder.svelte';
 	import { useFocusTrap } from '$lib/hooks';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
 	type $$Props = ModalProps;
 
@@ -27,6 +27,7 @@
 		unmount,
 		unstyled
 	} = {
+		...cleanObj($themeStore.defaults?.component, ['transitioned', 'focused', 'hovered', 'size']),
 		...defaults
 	} as Required<$$Props>;
 
@@ -49,6 +50,7 @@
 
 	$: containerClasses = th
 		.create('ModalContainer')
+		.prepend(`modal-container`, true)
 		.append('flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0', true)
 		.append('sm:items-start', ['top', 'top-center'].includes(position))
 		.append('sm:items-end', ['bottom', 'bottom-center'].includes(position))
@@ -62,6 +64,7 @@
 		.create('ModalContent')
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`modal-content`, true)
 		.append(
 			'bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6',
 			true
@@ -100,7 +103,7 @@
 		{#if backdrop && $store.visible}
 			<slot name="backdrop">
 				<div
-					class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
+					class="modal-backdrop fixed inset-0 bg-frame-600 bg-opacity-70 transition-opacity"
 					transition:fade={{ duration: 100 }}
 				/>
 			</slot>

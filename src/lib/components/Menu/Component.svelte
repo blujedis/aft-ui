@@ -25,6 +25,7 @@
 		variant,
 		visible
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<$$Props>;
 
@@ -57,6 +58,7 @@
 	$: menuClasses = th
 		.create('Menu')
 		.append('w-full', full)
+		.prepend(`menu menu-${variant} menu-${theme}`, true)
 		.append('relative inline-block clear-both', true)
 		.append($$restProps.class, true)
 		.compile();

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { themeStore, themer, type ElementProps } from '$lib';
 	import { type FlushedProps, flushedDefaults as defaults } from './module';
+	import { cleanObj } from '$lib/utils';
 
 	type $$Props = FlushedProps & ElementProps<'div'>;
 
 	export let { selected, disabled, focused, group, peer, hovered, theme } = {
+		...cleanObj($themeStore.defaults?.component, ['transitioned', 'rounded', 'size', 'shadowed']),
 		...defaults
 	} as Required<$$Props>;
 
@@ -21,6 +23,7 @@
 		.option('mainBorder', theme, true)
 		.option('mainBorderPeerFocus', theme, true)
 		.option('mainBorderGroupHover', theme, true)
+		.prepend(`flushed flushed-${theme}`, true)
 		.append('group-hover:border', hovered)
 		.append('peer-focus:border-t-2', peer)
 		.append('group-focus-within:border-t-2', group)

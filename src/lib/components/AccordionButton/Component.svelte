@@ -49,7 +49,7 @@
 			theme,
 			variant === 'filled' && selectable
 		)
-		.bundle(['filledTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		.bundle(['unfilledTextAriaExpanded'], theme, selectable && variant !== 'filled')
 		.option('panelBgHover', theme, hovered && !isSelected)
 		.option('common', 'transitioned', transitioned)
 		.option('common', 'disabled', disabled)

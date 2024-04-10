@@ -9,6 +9,9 @@
 	type $$Props = NotificationProps & ElementProps<'div'>;
 
 	export let { key, description, dismissible, group, icon, rounded, shadowed, title, theme } = {
+		theme: $themeStore.defaults?.component.theme,
+		shadowed: $themeStore.defaults?.component.shadowed,
+		rounded: $themeStore.defaults?.component.rounded,
 		...defaults
 	} as Required<$$Props>;
 
@@ -27,6 +30,7 @@
 		.option('elementRing', theme, true)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`notification notification-${theme}`, true)
 		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-[5px] w-80', true)
 		.append($$restProps.class, true)
 		.compile();

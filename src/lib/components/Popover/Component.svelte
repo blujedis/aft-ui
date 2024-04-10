@@ -2,7 +2,6 @@
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { boolToMapValue } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { createPopoverInstance } from '$lib/hooks/usePopover';
 
@@ -28,7 +27,6 @@
 
 	let popover: ReturnType<typeof createPopoverInstance>;
 	let placeholderRef: HTMLElement;
-	let arrowRef: HTMLElement;
 	let contentRef: HTMLElement;
 	let triggerRef: string | HTMLElement;
 	let visible = false;

@@ -2,7 +2,7 @@
 	import { type CheckboxProps, checkboxDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 
 	type $$Props = CheckboxProps & Omit<ElementProps<'input'>, 'size'>;
@@ -21,7 +21,7 @@
 		variant,
 		unstyled
 	} = {
-		...$themeStore?.defaults?.component,
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<$$Props>;
 
@@ -36,6 +36,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
+		.prepend(`checkbox checkbox-${variant}`, true)
 		.append('w-full', full)
 		.append(
 			// to remove default styling both ring and ring-offset

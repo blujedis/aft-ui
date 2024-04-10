@@ -72,14 +72,6 @@
 		.create('SelectListButton')
 		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
 		.bundle(
-			['elementRing'],
-			{
-				$base: 'ring-1 ring-inset'
-			},
-			theme,
-			['filled'].includes(variant) && theme === 'white'
-		)
-		.bundle(
 			['unfilledText', 'mainRing'],
 			{
 				$base: 'ring-1 ring-inset'
@@ -101,7 +93,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
-		.prepend('select-list-button', true)
+		.prepend(`select-list-button`, true)
 		.append('w-full', full)
 		.append('relative peer flex items-center min-w-[176px] outline-none', true)
 		.append('outline-none', focused && variant !== 'flushed')

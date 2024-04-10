@@ -12,7 +12,7 @@
 	import { DataGridCell } from '$lib/components/DataGridCell';
 	import { debounce } from '$lib/utils';
 	import FilterPopover from './FilterPopover.svelte';
-	import { Popover } from '$lib/components';
+	import { Icon, Popover } from '$lib/components';
 
 	type Data = $$Generic<DataGridDataItem>;
 	type $$Props = DataGridFilterCellProps & ElementProps<'div'>;
@@ -36,15 +36,16 @@
 
 	$: gridFilterCellClasses = th
 		.create('DataGridFilterInputWrapper')
+		.option('common', 'focusedRingWithin', focused)
+		.option('ringFocusWithin', theme, focused)
 		.prepend('datagrid-filter-cell', true)
-		.append('relative px-0 py-0 flex items-center', true)
+		.append('focus-within:ring-offset-0 focus-within:ring-inset', focused)
+		.append('relative px-0 py-0 flex items-center z-10', true)
 		.compile();
 
 	$: gridFilterInputClasses = th
 		.create('DataGridFilterInput')
 		.option('fieldPadding', size, size)
-		.option('common', 'focusedOutlineVisible', focused)
-		.option('outlineFocusVisible', theme, focused)
 		.prepend('datagrid-filter-input', true)
 		.append('outline-none bg-transparent relative w-full pr-8', true)
 		.compile();
@@ -105,18 +106,10 @@
 				/>
 			</slot>
 			<slot name="icon">
-				<button class="outline-none">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-5 w-5 pointer-events-none"
-						viewBox="0 0 24 24"
-						><path
-							fill="currentColor"
-							d="M15 19.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0L9.29 16.7a.989.989 0 0 1-.29-.83v-5.12L4.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L15 10.75zM7.04 5L11 10.06v5.52l2 2v-7.53L16.96 5z"
-						/></svg
-					>
+				<button class="outline-none absolute right-2">
+					<Icon icon="mdi:filter-outline" theme="frame" size="sm" />
 				</button>
-				<Popover role="dialog" events="click" >
+				<Popover role="dialog" events="click">
 					<FilterPopover
 						bind:data={filterData}
 						{filters}

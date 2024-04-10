@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
+	import { boolToMapValue, forwardEventsBuilder, cleanObj } from '$lib/utils';
 	import { themeStore, themer } from '$lib/theme';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
@@ -24,7 +24,7 @@
 		variant,
 		underlined
 	} = {
-	  ...$themeStore?.defaults?.component,
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<ButtonProps<Tag>>;
 
@@ -59,6 +59,7 @@
 			(shadowed && variant === 'text') || dropshadowed
 		)
 		.option('common', 'disabled', disabled)
+		.prepend(`button button-${variant}`, true)
 		.append('underline', underlined && underlined !== 'hover')
 		.append('hover:underline', underlined === 'hover')
 		.append('max-w-fit', !full)

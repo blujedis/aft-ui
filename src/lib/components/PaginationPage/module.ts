@@ -11,6 +11,7 @@ export type PaginationPageProps<Tag> = {
 	next?: boolean | string | IconifyIcon;
 	previous?: boolean | string | IconifyIcon;
 	rounded?: ThemeRounded;
+	selected?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;

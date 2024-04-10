@@ -25,7 +25,7 @@
 	$: gridBodyClasses = th
 		.create('DataGridBody')
 		.option('elementDivide', theme, divided)
-		.prepend('datagrid-body overflow-y-auto overflow-x-auto', true)
+		.prepend('datagrid-body overflow-y-auto', true)
 		.append('divide-y', divided)
 		.append($$restProps.class, true)
 		.compile();

@@ -48,7 +48,7 @@
 	$: buttonGroupClasses = themer($themeStore)
 		.create('ButtonGroup')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.prepend('button-group', true)
+		.prepend(`button-group button-group-${variant}`, true)
 		.append('w-full', full)
 		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant !== 'ghost')
 		.append('isolate inline-flex', true)

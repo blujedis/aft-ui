@@ -1,13 +1,20 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
 	import { themer, themeStore } from '$lib/theme';
-	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 	import { lazyImage } from '$lib/utils/lazyImage';
 	import { type ImageProps, imageDefaults as defaults } from './module';
 	type $$Props = ImageProps & ElementProps<'img'>;
 
 	export let { alt, fit, full, lazyload, position, rounded, shadowed, src } = {
+		...cleanObj($themeStore.defaults?.component, [
+			'transitioned',
+			'focused',
+			'hovered',
+			'size',
+			'theme'
+		]),
 		...defaults
 	} as Required<ImageProps>;
 
@@ -19,6 +26,7 @@
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('objectFit', position ? 'none' : fit, fit) // if position fit must be none.
 		.option('objectPosition', position, position)
+		.prepend(`image`, true)
 		.append('w-full h-full', full === true)
 		.append('w-full', ['w', 'width'].includes(full as string))
 		.append('h-full', ['h', 'height'].includes(full as string))

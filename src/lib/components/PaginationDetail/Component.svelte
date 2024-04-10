@@ -12,12 +12,12 @@
 
 	$: paginationDetailClasses = themer($themeStore)
 		.create('PaginationDetail')
-		// .variant('paginationDetail', variant, theme, true)
 		.option('common', 'transitioned', transitioned)
 		.option('kbdPadding', size, size)
 		.option('badgeFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`pagination-detail`, true)
 		.append('w-full', full)
 		.append('flex items-center justify-center', true)
 		.append($$restProps.class, true)

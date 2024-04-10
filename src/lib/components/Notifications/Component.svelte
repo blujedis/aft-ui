@@ -23,6 +23,7 @@
 
 	$: notificationContainerClasses = th
 		.create('NotificationContainer')
+		.prepend(`notifications-container`, true)
 		.append('sm:items-start items-start', position.startsWith('top'))
 		.append('sm:items-end items-end', position.startsWith('bottom'))
 		.append('pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-50', true)
@@ -31,6 +32,7 @@
 
 	$: notificationListClasses = th
 		.create('NotificationContainerList')
+		.prepend(`notifications`, true)
 		.append('flex w-full flex-col space-y-2 items-center sm:items-end', true)
 		.append('sm:items-start', position === 'top-left' || position === 'bottom-left')
 		.append('sm:items-center', position === 'top-center' || position === 'bottom-center')

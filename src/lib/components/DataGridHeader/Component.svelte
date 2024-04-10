@@ -30,19 +30,18 @@
 	$: gridHeaderWrapperClasses = th
 		.create('DataGridHeaderWrapper')
 		.option('elementDivide', theme, divided)
-		.prepend('datagrid-header', true)
-		.append('divide-y', divided)
 		.option('roundeds', boolToMapValue(rounded), rounded)
-		.append(
-			'sticky top-0 z-10 bg-[rgb(var(--body-bg-light))] dark:bg-[rgb(var(--body-bg-dark))]',
-			sticky
-		)
+		.option('elementBorder', theme, sticky || divided)
+		.option('elementBg', theme, theme)
+		.prepend('datagrid-header', true)
+		.append('divide-y border-b', divided)
+		.append('sticky top-0 z-10 shadow-sm', sticky)
 		.append('rounded-b-none', rounded)
-		.append('shadow-sm overflow-clip', sticky)
+		.append('max-w-full', true)
 		.compile();
 
-	console.log(rounded);
-
+	// this works but will allow resizing beyond boundary of 
+	// the grid. Needs some work to prevent that.
 	function init(node: HTMLDivElement) {
 		if (stacked) return; // can't resize columns when in stacked mode.
 		const header = node.children[0] as HTMLDivElement;

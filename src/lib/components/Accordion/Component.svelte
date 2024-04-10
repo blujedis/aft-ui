@@ -30,7 +30,7 @@
 		transitioned,
 		variant
 	} = {
-		...$themeStore.defaults?.component,
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 

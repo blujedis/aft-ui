@@ -32,14 +32,12 @@ export type DataGridColumnConfig<D = DataGridDataItem> = {
 } & Record<string, unknown>;
 
 export type DataGridStore<C, D> = {
-	sorting: boolean;
-	appliedFilters: DataGridFilterCriteria<D>[];
+	datagrid?: HTMLDivElement;
+	filters: DataGridFilterCriteria<D>[];
 	sort: SortAccessor<D>[];
 	columns: Required<C>[];
 	rows: D[];
 	filtered: (D & Record<string, unknown>)[];
-	unsorted: D[];
-	datagrid?: HTMLDivElement;
 };
 
 export interface DataGridContextProps<C, D, F = DataGridFilterListItem> {
@@ -55,6 +53,7 @@ export interface DataGridContextProps<C, D, F = DataGridFilterListItem> {
 	rounded: ThemeRounded;
 	shadowed: ThemeShadowed;
 	size: ThemeSize;
+	sortable?: boolean;
 	stacked: boolean;
 	sticky: boolean;
 	striped: boolean;
@@ -65,7 +64,8 @@ export interface DataGridContextProps<C, D, F = DataGridFilterListItem> {
 export type DataGridContext<C = DataGridColumnConfig, D = DataGridDataItem> = SelectStore<
 	DataGridStore<C, D>
 > & {
-	sortby(...accessors: SortAccessor<D>[]): void;
+	sortby(accessors: SortAccessor<D>, clear?: boolean): void;
+	sortby(accessors: SortAccessor<D>[], clear?: boolean): void;
 	filter(criteria: DataGridFilterCriteria<D>): void;
 	filter(...criteria: DataGridFilterCriteria<D>[]): void;
 	remove(rowkey: string): void;
@@ -84,7 +84,6 @@ export type DataGridContext<C = DataGridColumnConfig, D = DataGridDataItem> = Se
 export type DataGridProps<C, D, F = DataGridFilterListItem> = Partial<DataGridContextProps<C, D, F>> & {
 	columns: C[];
 	filter?: (criteria: DataGridFilterCriteria<D>[], rows: D[], columns: C[]) => D[] | Promise<D[]>;
-	sortMultiple?: boolean;
 	sorter?: (items: D[], accessors: (keyof D)[], primer?: Primer) => D[] | Promise<D[]>;
 	rows?: D[];
 	onAfterResize?: (props: ResizerPosition & ResizerRectangle) => any;
@@ -92,7 +91,6 @@ export type DataGridProps<C, D, F = DataGridFilterListItem> = Partial<DataGridCo
 };
 
 const defaultBeforeRemove = <D>(_item: D) => true;
-
 
 export const gridDefaults: Partial<DataGridProps<DataGridColumnConfig, DataGridDataItem>> = {
 	autocols: true,

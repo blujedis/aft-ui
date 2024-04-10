@@ -2,7 +2,7 @@
 	import ExamplePage from '../_Example/ExamplePage.svelte';
 	import { Pagination, type PaginationVariant } from '.';
 	import { PaginationPage } from '../PaginationPage';
-	import jsondata from '../_Example/jsondata.ts.old';
+	import { jsondata } from '../_Example/jsondata';
 	import { colors } from '$lib/constants';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
@@ -37,9 +37,10 @@
 					pages={10}
 					theme={color}
 					let:activePages
+					let:page
 				>
-					{#each activePages as page}
-						<PaginationPage value={page}>{page}</PaginationPage>
+					{#each activePages as pg}
+						<PaginationPage value={pg} selected={page === pg}>{pg}</PaginationPage>
 					{/each}
 				</Pagination>
 			</div>

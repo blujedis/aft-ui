@@ -18,6 +18,7 @@
 
 	$: buttonClasses = th
 		.create('MenuButton')
+		.prepend(`menu-button`, true)
 		.append('h-full', true) // without h-full button won't fill parent.
 		.append($$restProps.class, true)
 		.compile();

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import usePaginator, { getPaginator } from '$lib/stores/paginator';
+	import usePaginator from '$lib/stores/paginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
@@ -56,6 +56,7 @@
 
 	$: paginationControllerClasses = th
 		.create('PagerControllerNav')
+		.prepend(`pagiation pagination-${variant} pagination-${theme}`, true)
 		.option('elementDivide', theme, ['filled', 'soft'].includes(variant))
 		.option('common', 'transitioned', transitioned)
 		.option('roundeds', boolToMapValue(rounded), rounded)
@@ -71,6 +72,7 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
+
 
 <nav
 	use:forwardedEvents

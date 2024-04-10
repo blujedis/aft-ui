@@ -26,8 +26,9 @@ export const tooltipDefaults: Partial<TooltipProps<'div'>> = {
 	as: 'div',
 	escapeable: true,
 	events: ['hover', 'focus'],
+	offset: 2,
 	role: 'tooltip',
 	size: 'md',
-	theme: 'frame',
+	theme: 'secondary',
 	variant: 'filled',
 };

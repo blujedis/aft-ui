@@ -167,7 +167,7 @@ export const defaultOptions = {
 	panelBgLight: 'white',
 	panelBgDark: 'frame-800',
 
-	dividerLight: 'frame-950/10',
+	dividerLight: 'frame-950/15',
 	dividerDark: 'frame-600/60',
 
 	dividerContrastLight: 'frame-950/30',
@@ -179,8 +179,8 @@ export const defaultOptions = {
 	panelBorderLight: 'frame-950/5',
 	panelBorderDark: 'frame-600/60',
 
-	elementBgLight: 'frame-100/70',
-	elementBgDark: 'frame-700/70'
+	elementBgLight: 'frame-50',
+	elementBgDark: 'frame-700'
 } as GenerateOptions;
 
 function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colors) {
@@ -274,7 +274,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'element',
 			modifiers: ['ring'],
 			colors: {
-				$base: [dividerLight, dividerDark]
+				$base: [formBorderLight, formBorderDark]
 			}
 		},
 
@@ -288,7 +288,6 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 					frame: [500, 700]
 				})
 		},
-
 
 		bgSoft: {
 			variant: 'soft',
@@ -420,6 +419,13 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			}
 		},
 
+		bgPanelGroupHover: {
+			variant: 'panel',
+			modifiers: ['group-hover:bg'],
+			colors: {
+				$base: `group-hover:bg-frame-200/50 group-hover:dark:bg-frame-900/40`
+			}
+		},
 
 		bgElement: {
 			variant: 'element',

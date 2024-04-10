@@ -61,11 +61,33 @@
 			</Tab>
 		{/each}
 	</Tabs>
+	<br />
+	<Tabs {...props} variant="filled" theme="primary" selected="Python">
+		{#each tabs as tab}
+			<Tab label={tab.label} selected={tab.value === 'python'}>
+				{tab.description}
+			</Tab>
+		{/each}
+	</Tabs>
+	<br />
+	<Tabs {...props} variant="pills" theme="primary" selected="Python">
+		{#each tabs as tab}
+			<Tab label={tab.label} selected={tab.value === 'python'}>
+				{tab.description}
+			</Tab>
+		{/each}
+	</Tabs>
+	<br />
+	<Tabs {...props} variant="text" theme="primary" selected="Python">
+		{#each tabs as tab}
+			<Tab label={tab.label} selected={tab.value === 'python'}>
+				{tab.description}
+			</Tab>
+		{/each}
+	</Tabs>
 
-	<div class="grid grid-cols-1 mb-4">
-		<!-- {#each colors as color} -->
-
-		<!-- <Tabs {...props} variant="filled" selected="python" theme="frame">
+	<!--
+	<Tabs {...props} variant="filled" selected="python" theme="frame">
 			<svelte:fragment slot="tabs">
 				{#each tabs as tab}
 					<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -76,9 +98,9 @@
 					<TabPanel value={tab.value} class="flex p-4">{tab.description}</TabPanel>
 				{/each}
 			</svelte:fragment>
-		</Tabs> -->
+		</Tabs> 
 
-		<!-- <Tabs {...props} variant="outlined" selected="java" theme="primary">
+		<Tabs {...props} variant="outlined" selected="java" theme="primary">
 			<svelte:fragment slot="tabs">
 				{#each tabs as tab}
 					<Tab as="a" value={tab.value}>{tab.label}</Tab>
@@ -103,7 +125,4 @@
 				{/each}
 			</svelte:fragment>
 		</Tabs> -->
-
-		<!-- {/each} -->
-	</div>
 </ExamplePage>

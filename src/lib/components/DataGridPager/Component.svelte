@@ -1,14 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { type DataGridPagerProps, gridPagerDefaults as defaults } from './module';
-	import {
-		themeStore,
-		pickCleanProps,
-		themer,
-		type DataGridContext,
-		Pagination,
-		PaginationPage
-	} from '$lib';
+	import { themeStore, themer, type DataGridContext, Pagination, PaginationPage } from '$lib';
 	import type { ElementProps } from '$lib/types';
 
 	type Data = $$Generic<DataGridDataItem>;
@@ -32,7 +25,7 @@
 
 <Pagination
 	{variant}
-	items={$context.filtered.length}
+	items={$context.filtered || []}
 	page={1}
 	{pageSize}
 	{pages}

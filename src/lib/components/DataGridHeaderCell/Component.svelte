@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-
 	import { uniqid } from '$lib/utils';
-
+	import { flip } from 'svelte/animate';
 	import { getContext } from 'svelte';
 	import { type DataGridHeaderCellProps, gridHeaderCellDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib/theme';
@@ -40,7 +38,10 @@
 		DataGridColumnConfig<DataGridDataItem>
 	>;
 	$: sortkey = $context?.sort.find((v) => [accessor, '-' + accessor].includes(v));
-	$: sortdir = typeof sortkey === 'undefined' ? 0 : sortkey.charAt(0) === '-' ? -1 : 1;
+	$: sortdir = (typeof sortkey === 'undefined' ? 0 : sortkey.charAt(0) === '-' ? -1 : 1) as
+		| 0
+		| 1
+		| -1;
 	$: isLast =
 		$context.columns.findIndex((c) => c.accessor === accessor) === $context.columns.length - 1;
 
@@ -48,16 +49,14 @@
 		.create('DataGridHeaderCell')
 		.option('gridHeaderPadding', size, size)
 		.option('common', 'focusedRingWithin', focused && !dragging)
+		.option('ringFocusWithin', theme, focused)
 		.prepend('datagrid-cell datagrid-header-cell', true)
-		.append(
-			'group-hover:bg-primary-950/5 dark:group-hover:bg-primary-950/20 group-hover:cursor-move',
-			config.reorderable
-		)
+		.append('group-hover:cursor-move', config.reorderable)
 		.append(
 			'group-[.dragging]:bg-primary-500/70 group-[.dragging]:text-white dark:group-[.dragging]:bg-primary-800/80',
 			config.reorderable
 		)
-		.append('select-none focus:ring-inset', true)
+		.append('select-none outline-none focus-within:ring-offset-0 focus-within:ring-inset', true)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -65,11 +64,11 @@
 		.create('DataGridHeaderCellDivider')
 		.option('dividerBg', theme, theme)
 		.prepend('datagrid-header-cell-divider', true)
-		.append('w-0.5 h-1/2 absolute z-0 top-1/4 -right-[1.5px]', true)
+		.append('w-0.5 h-1/2 absolute z-10 top-1/4 -right-[1.5px]', true)
 		.compile();
 
 	function sort() {
-		const key = sortdir === 0 ? accessor : '-' + accessor;
+		const key = sortdir === 0 ? accessor : sortdir === 1 ? '-' + accessor : '';
 		context.sortby(key);
 	}
 
@@ -132,12 +131,12 @@
 	}
 </script>
 
-<div class="relative group" class:dragging>
+<div class="datagrid-header-cell-wrapper relative group pl-1 pr-0.5" class:dragging>
 	{#if config.reorderable}
 		<div
 			role="columnheader"
 			{id}
-			tabindex="-1"
+			tabindex="0"
 			{...$$restProps}
 			aria-grabbed={dragging}
 			class={gridHeaderCellClasses}

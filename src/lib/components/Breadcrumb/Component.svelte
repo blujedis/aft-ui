@@ -39,7 +39,7 @@
 		.bundle(['softBg', 'unfilledText'], {}, theme, variant === 'soft')
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.prepend('breadcrumb', true)
+		.prepend(`breadcrumb breadcrumb-${variant as string}`, true)
 		.append('w-full', full)
 		.append(
 			'px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center',

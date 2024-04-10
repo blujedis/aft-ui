@@ -50,7 +50,7 @@ export const dividerBg ={
   unstyled: '',
   white: 'bg-white dark:bg-white',
   black: 'bg-black dark:bg-black',
-  frame: 'bg-frame-950/10 dark:bg-frame-600/60',
+  frame: 'bg-frame-950/15 dark:bg-frame-600/60',
   primary: 'bg-primary-500 dark:bg-primary-500',
   secondary: 'bg-secondary-500 dark:bg-secondary-500',
   tertiary: 'bg-tertiary-500 dark:bg-tertiary-500',
@@ -61,7 +61,7 @@ export const dividerBg ={
 };
 
 export const elementBg ={
-  $base: 'bg-frame-100/70 dark:bg-frame-700/70',
+  $base: 'bg-frame-50 dark:bg-frame-700',
   unstyled: '',
   white: '',
   black: '',
@@ -76,7 +76,7 @@ export const elementBg ={
 };
 
 export const elementBorder ={
-  $base: 'border-frame-950/10 dark:border-frame-600/60',
+  $base: 'border-frame-950/15 dark:border-frame-600/60',
   unstyled: '',
   white: '',
   black: '',
@@ -91,7 +91,7 @@ export const elementBorder ={
 };
 
 export const elementDivide ={
-  $base: 'divide-frame-950/10 dark:divide-frame-600/60',
+  $base: 'divide-frame-950/15 dark:divide-frame-600/60',
   unstyled: '',
   white: '',
   black: '',
@@ -106,7 +106,7 @@ export const elementDivide ={
 };
 
 export const elementRing ={
-  $base: 'ring-frame-950/10 dark:ring-frame-600/60',
+  $base: 'ring-frame-950/20 dark:ring-frame-600',
   unstyled: '',
   white: '',
   black: '',
@@ -557,6 +557,21 @@ export const outlinePeerFocus ={
 
 export const panelBg ={
   $base: 'bg-white dark:bg-frame-800',
+  unstyled: '',
+  white: '',
+  black: '',
+  frame: '',
+  primary: '',
+  secondary: '',
+  tertiary: '',
+  danger: '',
+  warning: '',
+  success: '',
+  info: ''
+};
+
+export const panelBgGroupHover ={
+  $base: 'group-hover:bg-frame-200/50 group-hover:dark:bg-frame-900/40',
   unstyled: '',
   white: '',
   black: '',

@@ -3,7 +3,7 @@
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
 	import { themeStore, styler, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, cleanObj} from '$lib/utils';
 
 	type $$Props = ProgressCircleProps & Omit<ElementProps<'svg'>, 'size'>;
 
@@ -22,6 +22,7 @@
 		value,
 		tracksize
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<ProgressCircleProps>;
 
@@ -52,6 +53,7 @@
 	$: progressCircleClasses = th
 		.create('ProgressCircle')
 		.option('dropshadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`progress-circle progress-circle-${theme}`, true)
 		.append($$restProps.class, true)
 		.compile();
 

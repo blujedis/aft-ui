@@ -42,7 +42,8 @@
 		size: context.globals?.size,
 		theme: context.globals?.theme,
 		transitioned: context.globals?.transitioned,
-		variant: context.globals?.variant
+		variant: context.globals?.variant,
+		underlined: context.globals?.underlined
 	} as Required<TabProps<Tag>>;
 
 	let panel: HTMLDivElement | undefined;
@@ -56,8 +57,6 @@
 
 	const th = themer($themeStore);
 
-	// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
-
 	$: tabClasses = th
 		.create('TabClass')
 		.bundle(
@@ -65,8 +64,8 @@
 			theme,
 			['filled', 'pills'].includes(variant) && selected
 		)
-		.option('elementBg', theme, ['filled', 'pills'].includes(variant))
-		.option( 'panelBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
+		.option('unfilledTextAriaSelected', theme, ['flushed', 'text'].includes(variant))
+		// .option('panelBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
@@ -74,13 +73,18 @@
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
 		.option('fieldLeading', size, size)
-
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.prepend('tab', true)
+		.append(
+			'bg-frame-100 dark:bg-frame-700 hover:bg-frame-200/70 dark:bg-frame-900/40',
+			['filled', 'pills'].includes(variant)
+		)
 		.prepend('tab-selected', selected)
 		.append('w-full', full)
+		.append('hover:underline', variant === 'text' && !selected && underlined)
 		// .append('whitespace-nowrap', variant === 'flushed')
-		.append('group-first:pl-0', variant === 'text')
+		// .append('group-first:pl-0', variant === 'text')
+		// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
 		.append('rounded-none group-first:rounded-l group-last:rounded-r', variant === 'filled')
 		.append('inline-flex items-center justify-center outline-none h-full', true)
 		.compile();

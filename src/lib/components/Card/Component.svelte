@@ -20,6 +20,7 @@
 		theme,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<CardProps>;
 
@@ -42,6 +43,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
+		.prepend(`card card-${variant}`, true)
 		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')
 		.append('h-full', full)
 		.append('cursor-pointer', href)

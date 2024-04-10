@@ -2,7 +2,7 @@
 	import { type BadgeProps, badgeDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
 	type $$Props = BadgeProps & Omit<ElementProps<'span'>, 'size'>;
 
@@ -18,7 +18,7 @@
 		transitioned,
 		variant
 	} = {
-		...$themeStore.defaults?.component,
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<BadgeProps>;
 
@@ -41,7 +41,7 @@
 		.option('badgeFontSizes', size, size)
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.prepend('badge', true)
+		.prepend(`badge badge-${variant}`, true)
 		.prepend('badge-removable', removable)
 		.append('w-full', full)
 		.append('z-20 badge', true)

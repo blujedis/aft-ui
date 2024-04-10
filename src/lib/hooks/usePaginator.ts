@@ -1,5 +1,3 @@
-import { get, writable, type Writable } from 'svelte/store';
-
 export interface PaginatorOptions<T = any> {
 	items?: string | number | T[]; // the number of items in the collection or a collection itself.
 	page?: string | number; // the start page that is selected selected.
@@ -14,7 +12,6 @@ export interface Paginator<T = any> extends PaginatorOptions<T> {
 	pageSize: number;
 	pages: number;
 	ellipsis: boolean;
-
 	totalPages: number;
 	startPage: number;
 	endPage: number;
@@ -23,7 +20,8 @@ export interface Paginator<T = any> extends PaginatorOptions<T> {
 	activePages: (string | number)[];
 }
 
-function getPaginator<T = any>(options = {} as PaginatorOptions<T>) {
+export function usePaginator<T = any>(options = {} as PaginatorOptions<T>) {
+
 	// eslint-disable-next-line prefer-const
 	let { items, page, pageSize, pages, ellipsis } = {
 		items: 0,
@@ -125,122 +123,5 @@ function getPaginator<T = any>(options = {} as PaginatorOptions<T>) {
 	};
 
 	return api;
+
 }
-
-export type PaginatorStore<T = any> = Writable<Paginator<T>> & {
-	getRange(items?: T[]): T[] | null;
-	update(options: PaginatorOptions<T>): void;
-	hasPage(page: string | number): boolean;
-	hasPrev(): boolean;
-	hasNext(): boolean;
-	goto(page: string | number): void;
-	prev(): void;
-	next(): void;
-	reset(options?: PaginatorOptions<T>): void;
-};
-
-/**
- * Gets new pagination store.
- *
- * @param options paginator options for pagination store.
- */
-function usePaginator<T = any>(options: PaginatorOptions<T>): PaginatorStore<T> {
-	const initialOptions = { ...options };
-	const initialPaginator = getPaginator(options);
-
-	const store = writable({ ...initialPaginator });
-
-	/**
-	 * Gets the current store's items.
-	 */
-	function getStore() {
-		return get(store);
-	}
-
-	/**
-	 * Updates the store using new or partial options.
-	 *
-	 * @param options paginator options to update the store with.
-	 */
-	function update(options: PaginatorOptions<T>) {
-		store.update((s) => {
-			const { items, page, pageSize, pages, ellipsis } = s;
-			return getPaginator({ items, page, pageSize, pages, ellipsis, ...options });
-		});
-	}
-
-	/**
-	 * Gets a range of items using start and end rage values.
-	 *
-	 * @param items optional items used to parse out current range of items.
-	 */
-	function getRange(items?: T[]) {
-		const { items: storeItems, startRecord: rangeStart, endRecord: rangeEnd } = getStore();
-		if (Array.isArray(items)) return items.slice(rangeStart, rangeEnd + 1);
-		else if (Array.isArray(storeItems)) return storeItems.slice(rangeStart, rangeEnd + 1);
-		else return null;
-	}
-
-	/**
-	 * Navigate to a specific page.
-	 *
-	 * @param page the page number to navigate to.
-	 */
-	function goto(page: string | number) {
-		update({ page });
-	}
-
-	/**
-	 * Navigate to a the previous page.
-	 */
-	function prev() {
-		goto(getStore().page - 1);
-	}
-
-	/**
-	 * Navigate to a the next page.
-	 */
-	function next() {
-		goto(getStore().page + 1);
-	}
-
-	function hasPage(page: string | number) {
-		const { startPage, endPage } = getStore();
-		page = parseInt(page + '');
-		return page >= startPage && page <= endPage;
-	}
-
-	function hasNext() {
-		return hasPage(getStore().page + 1);
-	}
-
-	function hasPrev() {
-		return hasPage(getStore().page - 1);
-	}
-
-	/**
-	 * Reset the store with initial options merged with new options provided if any.
-	 */
-	function reset(options?: PaginatorOptions<T>) {
-		store.update((s) => {
-			return getPaginator({ ...initialOptions, ...options });
-		});
-	}
-
-	return {
-		...store,
-		getRange,
-		update,
-		hasPage,
-		hasPrev,
-		hasNext,
-		goto,
-		prev,
-		next,
-		reset
-	};
-}
-
-export { getPaginator };
-
-export default usePaginator;

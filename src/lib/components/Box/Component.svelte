@@ -2,7 +2,7 @@
 	import { type BoxProps, boxDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
 	import type { ElementProps, ThemeColor } from '$lib/types';
 
 	type Tag = $$Generic<HTMLTag>;
@@ -26,6 +26,7 @@
 		transitioned,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as $$Props;
 

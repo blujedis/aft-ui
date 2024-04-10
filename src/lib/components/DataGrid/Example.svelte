@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { DataGrid, type DataGridColumnConfig, type DataGridProps } from '.';
+	import DataGridSortIcon from './SortIcon.svelte';
+	import { DataGridPager } from '../DataGridPager';
 	import { jsondata } from '../_Example/jsondata';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
@@ -12,6 +14,7 @@
 	import Section from '../_Example/Section.svelte';
 	import { flip } from 'svelte/animate';
 	import { DataGridFilterCell } from '../DataGridFilterCell';
+	import { usePaginator } from '$lib/hooks';
 
 	type Data = (typeof jsondata)[number];
 	type Column = DataGridColumnConfig<Data>;
@@ -41,15 +44,23 @@
 	let data = jsondata; // .slice(0, 15);
 
 	const initColumns = [
-		{ accessor: 'id', label: 'ID', width: '75px' },
-		{ accessor: 'title', filterable: true, width: '150px' },
-		{ accessor: 'description', filterable: true, width: '300px', resizeable: true },
-		{ accessor: 'category' },
-		{ accessor: 'price' },
-		{ accessor: 'actions' }
+		{ accessor: 'id', label: 'ID', width: '75px', sortable: true },
+		{ accessor: 'title', filterable: true, sortable: true, width: '150px' },
+		{ accessor: 'description', filterable: true, width: '300px', resizeable: true, sortable: true },
+		{ accessor: 'category', sortable: true },
+		{ accessor: 'price', sortable: true },
+		{ accessor: 'actions', label: 'Actions' }
 	] as DataGridColumnConfig<Data>[];
 
 	const flipDurationMs = 300;
+
+	const pg = usePaginator({
+		items: data
+		// page,
+		// pages,
+		// pageSize,
+		// ellipsis,
+	});
 </script>
 
 <ExamplePage {title} {description}>
@@ -66,16 +77,17 @@
 
 		<DataGridHeader>
 			<DataGridRow divided={false}>
-				{#each columns as { accessor, label }, index (index)}
-					<div animate:flip={{ duration: 300 }}>
-						<DataGridHeaderCell {accessor} let:sort let:sortdir>
-							{#if accessor === 'actions'}
-								<div class="text-center">Actions</div>
-							{:else}
-								<button on:click={sort} class="outline-none">{label} ({sortdir})</button>
-							{/if}
-						</DataGridHeaderCell>
-					</div>
+				{#each columns as { accessor, label, sortable }, index (index)}
+					<DataGridHeaderCell {accessor} let:sort let:sortdir>
+						{#if accessor === 'actions'}
+							<div class="text-center inline-flex">Actions</div>
+						{:else}
+							<button tabindex="-1" on:click={sort} class="outline-none text-left">
+								{label}
+								<DataGridSortIcon state={sortdir} size="sm" />
+							</button>
+						{/if}
+					</DataGridHeaderCell>
 				{/each}
 			</DataGridRow>
 
@@ -124,5 +136,9 @@
 				</div>
 			{/each}
 		</DataGridBody>
+		<DataGridPager slot="pager" />
 	</DataGrid>
 </ExamplePage>
+
+<style>
+</style>

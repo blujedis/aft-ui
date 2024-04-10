@@ -4,13 +4,12 @@
 		HTMLBaseAttributes,
 		HTMLButtonAttributes
 	} from 'svelte/elements';
-	import type { SelectStoreValue } from '$lib/stores/select.old';
 	import { type PaginationContext, Icon } from '$lib/components';
 	import { type PaginationPageProps, paginationPageDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { getContext } from 'svelte';
-	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
 
 	type Tag = $$Generic<'a' | 'button' | 'span'>;
 	type NativeProps = Tag extends 'button'
@@ -29,12 +28,14 @@
 		next,
 		previous,
 		rounded,
+		selected,
 		size,
 		theme,
 		transitioned,
 		value,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component, ['shadowed']),
 		...defaults,
 		focused: context.globals?.focused,
 		hovered: context.globals?.hovered,
@@ -47,25 +48,14 @@
 
 	const th = themer($themeStore);
 
-	$: selected = $context?.page === value;
+	// $: selected = $context?.page === value;
 
 	$: paginationPageClasses = th
 		.create('PaginationPage')
-		.bundle(
-			['selectedBgAriaSelected', 'filledTextAriaSelected'],
-			// { $base: 'aria-selected:text-white dark:aria-selected:text-white' },
-			theme,
-			variant === 'filled'
-		)
-		.bundle(
-			['selectedSoftBgAriaSelected', 'unfilledTextAriaSelected'],
-			// { $base: 'aria-selected:text-current dark:aria-selected:text-white' },
-			theme,
-			variant === 'soft'
-		)
+		.bundle(['selectedBgAriaSelected', 'filledTextAriaSelected'], theme, variant === 'filled')
+		.bundle(['selectedSoftBgAriaSelected', 'unfilledTextAriaSelected'], theme, variant === 'soft')
 		.bundle(
 			['selectedBorderAriaSelected', 'unfilledTextAriaSelected'],
-			// {	$base: 'aria-selected:text-current dark:aria-selected:text-white'	},
 			theme,
 			variant === 'flushed'
 		)
@@ -78,6 +68,7 @@
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('roundeds', boolToMapValue(rounded), rounded && ((previous || next) as boolean))
+		.prepend(`pagination-page`, true)
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
 			['filled', 'soft'].includes(variant)
@@ -116,10 +107,9 @@
 	this={as}
 	role={as === 'a' ? 'link' : 'button'}
 	tabindex="-1"
-	aria-labelledby=""
 	use:forwardedEvents
 	{...$$restProps}
-	href="#"
+	href={`?pg=${value}`}
 	class={paginationPageClasses}
 	aria-current={selected ? 'page' : null}
 	aria-selected={selected}

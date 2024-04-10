@@ -20,6 +20,7 @@
 		theme,
 		transitioned,
 		variant,
+		underlined,
 		class: klass,
 		navWrapperClasses,
 		navContainerClasses,
@@ -38,7 +39,8 @@
 		size,
 		theme,
 		transitioned,
-		variant
+		variant,
+		underlined
 	});
 
 	export const context = setContext('Tabs', {
@@ -53,7 +55,6 @@
 	$: tabsClasses = th
 		.create('TabsWrapper')
 		.option('formBorder', theme, variant === 'flushed')
-		.option('elementDivide', theme, ['filled'].includes(variant))
 		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
 		.prepend(`tabs tabs-${variant}`, true)
 		.append('-mb-px', ['flushed', 'filled'].includes(variant))
@@ -62,6 +63,7 @@
 		.append('w-full', full)
 		.append('space-x-2', ['flushed', 'pills'].includes(variant))
 		.append('mb-1', variant === 'text')
+		.append('divide-frame-900/20 dark:divide-frame-600', variant === 'filled')
 		.append('not-sr-only isolate inline-flex flex-wrap mb-4', true)
 		.append($$restProps.class, true)
 		.compile();

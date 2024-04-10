@@ -49,6 +49,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
+		.prepend(`input input-${variant} input-${theme}`, true)
 		.append('w-full', full)
 		.append('dark:bg-transparent', ['outlined', 'flushed', 'text'].includes(variant))
 		.append('peer border-0', ['flushed'].includes(variant))

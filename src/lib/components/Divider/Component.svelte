@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { type DividerProps, dividerDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import { boolToMapValue } from '$lib/utils';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 	import type { ElementProps } from '$lib/types';
 
 	type $$Props = DividerProps & Omit<ElementProps<'div'>, 'size'>;
 
 	export let { orientation, dropshadowed, rounded, shadowed, size, theme, transitioned } = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<$$Props>;
 

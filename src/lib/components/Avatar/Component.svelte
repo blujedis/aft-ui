@@ -51,7 +51,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('hovered', variant, theme, hovered)
-		.prepend('avatar', true)
+		.prepend(`avatar avatar-${variant}`, true)
 		.append(
 			'ring-2 ring-[color:rgb(var(--body-bg-light))] dark:ring-[color:rgb(var(--body-bg-dark))]',
 			stacked
@@ -67,7 +67,7 @@
 				.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 				.bundle([ 'mainRing', 'unfilledText'], { $base: 'ring-1' }, theme, variant === 'outlined')
 				.bundle(['softBg', 'unfilledText'], {}, theme, variant === 'soft')
-				.prepend('avatar avatar-placeholder', true)
+				.prepend(`avatar avatar-${variant} avatar-placeholder`, true)
 				.option('roundeds', boolToMapValue(rounded), rounded)
 				.option('shadows', boolToMapValue(shadowed), shadowed)
 				.option('hovered', variant, theme, hovered)

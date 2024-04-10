@@ -36,7 +36,6 @@
 		.option('common', 'focusedOutlineVisible', focused)
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
-		.option('common', 'muteSelected', true)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
 		.prepend('breadcrumb-option', true)
@@ -56,6 +55,7 @@
 		.option('breadcrumbFilledIconWidth', size, size)
 		.prepend('breadcrumb-option-icon', true)
 		.append('opacity-40', true) // mutes icon separators
+		.append('opacity-20', theme === 'frame' && variant === 'soft')
 		.append('h-full flex-shrink-0 pointer-events-none', true)
 		.compile();
 

@@ -35,7 +35,7 @@ export const gridDefaultFilters = [
 export function filterRows<D extends Record<string, unknown>, C extends DataGridColumnConfig<D>>(criteria = [] as DataGridFilterCriteria<D>[], rows = [] as D[], columns = [] as C[]) {
 
   const vals = criteria.map(c => c.query).filter(v => !!v);
-  if (!vals.length) return rows;
+  if (!vals.length) return [...rows];
 
   const ands = criteria.filter(c => c.join === 'and' || typeof c.join === 'undefined');
   const ors = criteria.filter(c => c.join === 'or');
@@ -64,23 +64,3 @@ export function filterRows<D extends Record<string, unknown>, C extends DataGrid
   return result;
 
 }
-
-
-
-// export function searchArray<T extends Record<string, unknown>>(
-// 	query: string,
-// 	items: T[],
-// 	accessors: (keyof T | ({ accessor: keyof T } & Record<string, unknown>))[]
-// ): T[] {
-
-// 	if (!accessors.length)
-// 		return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
-
-// 	if (typeof accessors[0] === 'string') {
-// 		const _accessors = accessors as (keyof T)[];
-// 		return items.filter((item) => _accessors.some((key) => isLike(query, item[key])));
-// 	}
-
-// 	return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
-
-// }

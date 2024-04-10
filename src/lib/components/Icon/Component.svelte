@@ -9,13 +9,14 @@
 	import Icon from '@iconify/svelte';
 	import { themer, themeStore } from '$lib/theme';
 	import type { ThemeColor } from '$lib/types';
+	import { cleanObj } from '$lib/utils';
 	type $$Props = IconProps;
 	export let { hovered, icon, size, stroke, theme, transitioned } = {
+		...cleanObj($themeStore.defaults?.component, ['focused', 'shadowed', 'rounded']),
 		...defaults
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
-	$: _theme = (['white', 'black'].includes(theme) ? '' : theme) as ThemeColor;
 
 	$: iconClasses = th
 		.create('Icon')
@@ -24,6 +25,8 @@
 		.option('iconStroke', theme, theme && stroke)
 		.option('hovered', 'filled', theme, hovered)
 		.option('common', 'transitioned', transitioned)
+		.prepend(`icon icon-${theme}`, true)
+		.append('inline-flex pointer-events-none', true)
 		.append($$restProps.class, true)
 		.compile();
 </script>

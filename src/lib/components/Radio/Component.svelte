@@ -2,7 +2,7 @@
 	import { type RadioProps, radioDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
 	import { Label } from '$lib/components';
 	import type { ElementProps } from '$lib/types';
 
@@ -15,6 +15,7 @@
 		full,
 		group,
 		hovered,
+		id,
 		rounded,
 		shadowed,
 		size,
@@ -24,6 +25,7 @@
 		variant,
 		unstyled
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<$$Props>;
 
@@ -48,6 +50,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('common', 'disabled', disabled)
+		.prepend(`radio radio-${variant} radio-${theme}`, true)
 		.append('w-full', full)
 		.append(
 			'flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent',
@@ -60,11 +63,12 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<Label for={value} visible={$$slots.default} class={labelClasses}>
+<Label for={id} visible={$$slots.default} class={labelClasses}>
 	<input
 		use:forwardedEvents
 		on:change
 		{...$$restProps}
+		{id}
 		bind:group
 		{value}
 		type="radio"

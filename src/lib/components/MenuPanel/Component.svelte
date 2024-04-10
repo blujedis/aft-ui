@@ -45,7 +45,7 @@
 		.option('roundeds', rounded === 'full' ? 'xl2' : boolToMapValue(rounded), rounded)
 		.option('elementBorder', theme, bordered)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
-		.prepend('dropdown-panel', true)
+		.prepend('menu-panel', true)
 		.append('border', bordered)
 		.append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true)
 		.append(position === 'right' ? 'right-0' : 'left-0', true)

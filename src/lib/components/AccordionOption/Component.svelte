@@ -66,7 +66,7 @@
 		.option('elementDivide', theme, isBordered && variant === 'outlined')
 		.option('elementBorder', theme, isBordered)
 		.option('accordionOptionRoundeds', size, rounded)
-		.prepend(`accordian-option accordion-${variant}`, true)
+		.prepend(`accordian-option`, true)
 		.prepend('accordion-collapsed', !isSelected)
 		.prepend('accordion-expanded', isSelected)
 		.prepend('accordion-detached', detached && ['filled', 'outlined'].includes(variant))

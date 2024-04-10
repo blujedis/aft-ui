@@ -21,7 +21,6 @@
 		.option('fieldPadding', size, size)
 		.prepend('datagrid-cell', true)
 		.append('col-span-full', full)
-		// .append('py-0.5', stacked)
 		.append($$restProps.class, true)
 		.compile();
 </script>
