@@ -1,8 +1,7 @@
-<script>import { useResizer } from "../../hooks";
-import { setContext } from "svelte";
+<script>import { setContext } from "svelte";
 import { cleanObj, boolToMapValue, uniqid } from "../../utils";
-import { themeStore, themer } from "../../theme";
-import { useSelect } from "../../stores";
+import { ensureArray, themeStore, themer } from "../../theme";
+import { useSelect } from "../../stores/select";
 import {
   gridDefaults as defaults
 } from "./module";
@@ -10,15 +9,18 @@ export let {
   autocols,
   columns,
   divided,
+  filters,
   filter: initFilter,
   focused,
   full,
+  reorderable,
+  resizeable,
   rows,
   rounded,
   rowkey,
   shadowed,
   size,
-  sortMultiple,
+  sortable,
   sorter,
   sticky,
   stacked,
@@ -27,29 +29,39 @@ export let {
   transitioned,
   onBeforeRemove
 } = {
+  ...cleanObj($themeStore.defaults?.component),
   ...defaults
 };
 let datagrid = void 0;
 export const store = useSelect({
   datagrid,
-  sorting: false,
+  mode: "multiple",
+  filters: [],
+  // applied filters
   sort: [],
-  selected: [],
-  filtered: [],
+  // applied sort.
   rows: [],
-  unsorted: [],
+  // source rows.
+  selected: [],
+  // selected rows.
+  filtered: [],
+  // current filtered rows.
   columns: normalizeColumns(columns)
 });
 const globals = {
   autocols,
   columns,
   divided,
+  filters,
   focused,
   full,
+  reorderable,
+  resizeable,
   rounded,
   rowkey,
   shadowed,
   size,
+  sortable,
   sticky,
   stacked,
   striped,
@@ -73,25 +85,41 @@ setContext("DataGrid", {
 });
 const th = themer($themeStore);
 $:
-  gridClasses = th.create("DataGrid").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("common", "divided", divided).option("common", "bordered", divided).option("fieldFontSizes", size, size).prepend(`datagrid`, true).append("divide-y", divided).append("w-full", full).append("relative", sticky).append("border", divided).append("flow-root", true).append($$restProps.class, true).compile();
+  gridClasses = th.create("DataGrid").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, divided).option("fieldFontSizes", size, size).prepend(`datagrid`, true).append("w-full", full).append("border", divided).append("relative", sticky).append("w-full", !stacked).append("max-w-screen-md m-auto", stacked).append("flow-root overflow-clip", true).append($$restProps.class, true).compile();
 function getDataGridTemplate(cols) {
   cols = cols || $store.columns;
   const values = cols.map((c) => c.width);
   return values.join(" ") + "";
 }
 function normalizeColumns(cols) {
-  return cols.map((c) => {
+  const foundKeys = [];
+  const normalized = cols.map((c) => {
     c.label = c.label || c.accessor;
     c.id = c.id || uniqid();
     c.width = c.width || "1fr";
+    c.transform = c.transform || ((v) => v);
+    let curKey = c.rowkey;
+    if (typeof curKey === "undefined" && rowkey === c.accessor)
+      curKey = rowkey;
+    if (typeof curKey !== "undefined" && !foundKeys.includes(curKey))
+      foundKeys.push(curKey);
+    if (typeof c.reorderable === "undefined" && reorderable)
+      c.reorderable = true;
+    if (typeof c.resizeable === "undefined" && resizeable)
+      c.resizeable = true;
+    if (typeof c.sortable === "undefined" && sortable)
+      c.sortable = true;
     return c;
   });
+  rowkey = foundKeys[0];
+  return normalized;
 }
 function updateColumn(accessor, config, done) {
   const index = $store.columns.findIndex((c) => c.accessor == accessor);
   store.update((s) => {
-    const columns2 = [...s.columns];
+    let columns2 = [...s.columns];
     columns2[index] = { ...columns2[index], ...config };
+    columns2 = normalizeColumns(columns2);
     if (done)
       done(columns2);
     return { ...s, columns: columns2 };
@@ -107,54 +135,47 @@ function swapColumns(source, target) {
     return { ...s, columns: cols };
   });
 }
-function prepareSortArray(stored, accessors) {
-  let clone = [...accessors];
-  const shouldPurge = accessors.filter((a) => a.charAt(0) === "-" && stored.includes(a));
-  stored.forEach((s) => {
-    if (!clone.includes(s) && !clone.includes("-" + s))
-      clone.unshift(s);
-  });
-  clone = clone.filter((c) => !shouldPurge.includes(c) && !!c);
-  return clone;
-}
 function getSortToken(accessor) {
   const token = $store.sort.filter((k) => [accessor, `-${accessor}`].includes(k));
   if (!token[0])
     return 0;
   return token[0].charAt(0) === "-" ? -1 : 1;
 }
-function sortby(...accessors) {
-  const nextSort = prepareSortArray(
-    sortMultiple ? [...$store.sort] : [$store.sort[0]],
-    accessors
-  );
-  const collection = !nextSort.length ? $store.unsorted : $store.filtered;
-  const obj = { sort: nextSort };
-  if (!$store.sorting) {
-    obj.sorting = true;
-    obj.unsorted = [...$store.filtered];
-  }
-  if (!nextSort.length) {
-    obj.sorting = false;
-    obj.unsorted = [];
-  }
-  Promise.resolve(sorter(collection, nextSort)).then(
-    (filtered) => store.update((s) => {
-      return { ...s, filtered, ...obj };
-    })
-  ).catch((ex) => console.warn(ex.message));
+async function resolveFilter(criteria) {
+  return Promise.resolve(initFilter(criteria, $store.rows, $store.columns));
 }
-function filter(query, accessor, ...accessors) {
-  const _accessors = Array.isArray(accessor) ? accessor : [accessor, ...accessors];
-  Promise.resolve(initFilter(query, $store.rows, _accessors)).then((filtered) => {
+async function sortby(accessors, reset2 = false) {
+  const _accessors = ensureArray(accessors).filter((v) => typeof v !== "undefined" && v !== "");
+  if (!_accessors.length)
+    reset2 = true;
+  const filtered = await resolveFilter($store.filters);
+  if (reset2) {
     store.update((s) => {
-      return { ...s, filtered };
+      return { ...s, filtered: [...filtered], sort: [] };
     });
-  }).catch((ex) => console.warn(ex.message));
+  } else {
+    const sort = _accessors;
+    Promise.resolve(sorter(filtered, sort)).then((sorted) => {
+      store.update((s) => {
+        return { ...s, filtered: [...sorted], sort };
+      });
+    }).catch((ex) => console.warn(ex.message));
+  }
+}
+async function filter(...criteria) {
+  try {
+    const filtered = await resolveFilter(criteria);
+    store.update((s) => {
+      return { ...s, filtered, filters: criteria };
+    });
+  } catch (ex) {
+    const err = ex;
+    console.warn(err.message);
+  }
 }
 function reset() {
   store.update((s) => {
-    return { ...s, filtered: [...s.rows], sort: [] };
+    return { ...s, filtered: [...s.rows], sort: [], selected: [] };
   });
 }
 async function remove(key) {
@@ -169,7 +190,7 @@ async function remove(key) {
   });
 }
 store.update((s) => {
-  return { ...s, rows: [...rows], filtered: [...rows], unsorted: [...rows] };
+  return { ...s, rows: [...rows], filtered: [...rows] };
 });
 </script>
 
@@ -184,3 +205,5 @@ store.update((s) => {
 		{stacked}
 	/>
 </div>
+
+<slot name="pager" />

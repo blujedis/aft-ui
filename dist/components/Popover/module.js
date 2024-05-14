@@ -1,5 +1,7 @@
 export const popoverDefaults = {
-    shadowed: 'md',
-    size: 'md',
-    theme: 'frame'
+    arrowed: true,
+    as: 'div',
+    escapeable: true,
+    events: ['hover', 'focus'],
+    role: 'tooltip'
 };

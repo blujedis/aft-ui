@@ -21,7 +21,6 @@ export interface Paginator<T = any> extends PaginatorOptions<T> {
 }
 
 export function usePaginator<T = any>(options = {} as PaginatorOptions<T>) {
-
 	// eslint-disable-next-line prefer-const
 	let { items, page, pageSize, pages, ellipsis } = {
 		items: 0,
@@ -39,7 +38,6 @@ export function usePaginator<T = any>(options = {} as PaginatorOptions<T>) {
 	page = parseInt(page as string);
 	pageSize = parseInt(pageSize as string);
 	pages = parseInt(pages as string);
-
 
 	// Total number of pages based on the
 	// size or number of items to display.
@@ -85,7 +83,7 @@ export function usePaginator<T = any>(options = {} as PaginatorOptions<T>) {
 
 	// Get end record for range.
 	const endRecord = Math.min(startRecord + pageSize - 1, items - 1);
-	
+
 	// Array of pages.
 	let activePages = Array.from(Array(endPage + 1 - startPage).keys()).map((i) => startPage + i) as (
 		| string
@@ -123,5 +121,4 @@ export function usePaginator<T = any>(options = {} as PaginatorOptions<T>) {
 	};
 
 	return api;
-
 }

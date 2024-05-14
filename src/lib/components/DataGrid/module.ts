@@ -9,7 +9,12 @@ import type {
 	TypeOrValue
 } from '$lib/types';
 import { sortArray, type SortAccessor, type Primer } from '$lib/utils';
-import { filterRows, gridDefaultFilters, type DataGridFilterCriteria, type DataGridFilterListItem } from './filter';
+import {
+	filterRows,
+	gridDefaultFilters,
+	type DataGridFilterCriteria,
+	type DataGridFilterListItem
+} from './filter';
 
 export type SortToken = 'asc' | 'desc' | 0 | 1 | '' | null;
 
@@ -44,7 +49,7 @@ export interface DataGridContextProps<C, D, F = DataGridFilterListItem> {
 	autocols: boolean;
 	divided: boolean;
 	columns: C[];
-	filters: F[],
+	filters: F[];
 	focused: ThemeFocused;
 	full: boolean;
 	reorderable: boolean;
@@ -81,7 +86,9 @@ export type DataGridContext<C = DataGridColumnConfig, D = DataGridDataItem> = Se
 	globals: DataGridContextProps<C, D>;
 };
 
-export type DataGridProps<C, D, F = DataGridFilterListItem> = Partial<DataGridContextProps<C, D, F>> & {
+export type DataGridProps<C, D, F = DataGridFilterListItem> = Partial<
+	DataGridContextProps<C, D, F>
+> & {
 	columns: C[];
 	filter?: (criteria: DataGridFilterCriteria<D>[], rows: D[], columns: C[]) => D[] | Promise<D[]>;
 	sorter?: (items: D[], accessors: (keyof D)[], primer?: Primer) => D[] | Promise<D[]>;

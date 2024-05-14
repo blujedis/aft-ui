@@ -2,6 +2,7 @@
 import { themeStore, styler, themer } from "../../theme";
 import { getContext } from "svelte";
 import { useResizer } from "../../hooks";
+import { boolToMapValue } from "../../utils";
 const context = getContext("DataGrid");
 export let { autocols, divided, focused, rounded, size, stacked, sticky, theme, onAfterResize } = {
   ...defaults,
@@ -17,7 +18,7 @@ export let { autocols, divided, focused, rounded, size, stacked, sticky, theme, 
 const st = styler($themeStore);
 const th = themer($themeStore);
 $:
-  gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("common", "bordered", divided).option("common", "divided", divided).prepend("datagrid-header", true).append("divide-y", divided).append("sticky top-0 z-10 overflow-clip", sticky).append("rounded-b-none", rounded).append("shadow-sm", sticky).append("!border-b-0", !sticky).compile();
+  gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("elementBorder", theme, sticky || divided).option("elementBg", theme, theme).prepend("datagrid-header", true).append("divide-y border-b", divided).append("sticky top-0 z-10 shadow-sm", sticky).append("rounded-b-none", rounded).append("max-w-full", true).compile();
 function init(node) {
   if (stacked)
     return;

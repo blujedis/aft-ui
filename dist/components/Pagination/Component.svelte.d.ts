@@ -3,7 +3,7 @@ import { type PaginationProps } from './module';
 declare class __sveltets_Render<Item extends Record<string, any>> {
     props(): {
         context?: {
-            globals: Omit<Partial<{
+            globals: Partial<Omit<{
                 focused: boolean;
                 hovered: boolean;
                 rounded: import("../../types").ThemeRounded;
@@ -11,18 +11,10 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
                 theme: import("../../types").ThemeColor;
                 transitioned: boolean;
                 variant: import("./module").PaginationVariant;
-            }>, "rounded" | "hovered" | "focused" | "size" | "theme" | "transitioned" | "variant">;
-            set(this: void, value: import("../../stores/paginator").Paginator<Record<string, any>>): void;
-            update: ((this: void, updater: import("svelte/store").Updater<import("../../stores/paginator").Paginator<Record<string, any>>>) => void) & ((options: import("../../stores/paginator").PaginatorOptions<Record<string, any>>) => void);
-            subscribe(this: void, run: import("svelte/store").Subscriber<import("../../stores/paginator").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../../stores/paginator").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
-            getRange(items?: Record<string, any>[] | undefined): Record<string, any>[] | null;
-            hasPage(page: string | number): boolean;
-            hasPrev(): boolean;
-            hasNext(): boolean;
-            goto(page: string | number): void;
-            prev(): void;
-            next(): void;
-            reset(options?: import("../../stores/paginator").PaginatorOptions<Record<string, any>> | undefined): void;
+            }, "rounded" | "hovered" | "transitioned" | "focused" | "size" | "theme" | "variant">>;
+            set(this: void, value: import("../../hooks/usePaginator").Paginator<any>): void;
+            update(this: void, updater: import("svelte/store").Updater<import("../../hooks/usePaginator").Paginator<any>>): void;
+            subscribe(this: void, run: import("svelte/store").Subscriber<import("../../hooks/usePaginator").Paginator<any>>, invalidate?: import("svelte/store").Invalidator<import("../../hooks/usePaginator").Paginator<any>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
     } & PaginationProps<Item> & import("svelte/elements").HTMLAttributes<HTMLElement>;
     events(): {} & {
@@ -30,7 +22,7 @@ declare class __sveltets_Render<Item extends Record<string, any>> {
     };
     slots(): {
         default: {
-            page: number;
+            current: number;
             startPage: number;
             endPage: number;
             rangeStart: number;
@@ -45,7 +37,7 @@ export type ComponentEvents<Item extends Record<string, any>> = ReturnType<__sve
 export type ComponentSlots<Item extends Record<string, any>> = ReturnType<__sveltets_Render<Item>['slots']>;
 export default class Component<Item extends Record<string, any>> extends SvelteComponent<ComponentProps<Item>, ComponentEvents<Item>, ComponentSlots<Item>> {
     get context(): {
-        globals: Omit<Partial<{
+        globals: Partial<Omit<{
             focused: boolean;
             hovered: boolean;
             rounded: import("../../types").ThemeRounded;
@@ -53,18 +45,10 @@ export default class Component<Item extends Record<string, any>> extends SvelteC
             theme: import("../../types").ThemeColor;
             transitioned: boolean;
             variant: import("./module").PaginationVariant;
-        }>, "rounded" | "hovered" | "focused" | "size" | "theme" | "transitioned" | "variant">;
-        set(this: void, value: import("../../stores/paginator").Paginator<Record<string, any>>): void;
-        update: ((this: void, updater: import("svelte/store").Updater<import("../../stores/paginator").Paginator<Record<string, any>>>) => void) & ((options: import("../../stores/paginator").PaginatorOptions<Record<string, any>>) => void);
-        subscribe(this: void, run: import("svelte/store").Subscriber<import("../../stores/paginator").Paginator<Record<string, any>>>, invalidate?: import("svelte/store").Invalidator<import("../../stores/paginator").Paginator<Record<string, any>>> | undefined): import("svelte/store").Unsubscriber;
-        getRange(items?: Record<string, any>[] | undefined): Record<string, any>[] | null;
-        hasPage(page: string | number): boolean;
-        hasPrev(): boolean;
-        hasNext(): boolean;
-        goto(page: string | number): void;
-        prev(): void;
-        next(): void;
-        reset(options?: import("../../stores/paginator").PaginatorOptions<Record<string, any>> | undefined): void;
+        }, "rounded" | "hovered" | "transitioned" | "focused" | "size" | "theme" | "variant">>;
+        set(this: void, value: import("../../hooks/usePaginator").Paginator<any>): void;
+        update(this: void, updater: import("svelte/store").Updater<import("../../hooks/usePaginator").Paginator<any>>): void;
+        subscribe(this: void, run: import("svelte/store").Subscriber<import("../../hooks/usePaginator").Paginator<any>>, invalidate?: import("svelte/store").Invalidator<import("../../hooks/usePaginator").Paginator<any>> | undefined): import("svelte/store").Unsubscriber;
     };
 }
 export {};

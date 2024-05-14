@@ -25,11 +25,16 @@
 
 	$: optionClasses = th
 		.create('SelectListOption')
-		.bundle(['selectedBgAriaSelected'], { 
-			$base: 'aria-selected:text-white' 
-		}, theme, theme)
+		.bundle(
+			['selectedBgAriaSelected'],
+			{
+				$base: 'aria-selected:text-white'
+			},
+			theme,
+			theme
+		)
 		.option('bgFocus', theme, focused)
-		.option('panelBgHover', theme,  hovered)
+		.option('panelBgHover', theme, hovered)
 		.option('fieldFontSizes', size, size)
 		.option('menuPadding', size, size)
 		.prepend('select-list-option', true)

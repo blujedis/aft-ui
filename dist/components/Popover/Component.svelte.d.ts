@@ -1,19 +1,22 @@
 import { SvelteComponent } from "svelte";
-import { type PopoverProps } from './module';
-declare const __propDef: {
-    props: PopoverProps & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
-    events: {
+import type { ElementProps } from '../../types';
+declare class __sveltets_Render<Tag extends 'div' | 'a'> {
+    props(): Pick<import("../../hooks/usePopover").PopoverOptions, "events" | "middleware" | "placement" | "strategy" | "offset" | "padding" | "sticky" | "escapeable"> & {
+        as?: Tag | undefined;
+        role?: import("svelte/elements").AriaRole | null | undefined;
+        trigger?: string | undefined;
+        onChange?: ((state: boolean) => any) | undefined;
+    } & Omit<ElementProps<Tag>, "size">;
+    events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        default: {
-            close: () => void;
-        };
+    slots(): {
+        default: {};
     };
-};
-export type ComponentProps = typeof __propDef.props;
-export type ComponentEvents = typeof __propDef.events;
-export type ComponentSlots = typeof __propDef.slots;
-export default class Component extends SvelteComponent<ComponentProps, ComponentEvents, ComponentSlots> {
+}
+export type ComponentProps<Tag extends 'div' | 'a'> = ReturnType<__sveltets_Render<Tag>['props']>;
+export type ComponentEvents<Tag extends 'div' | 'a'> = ReturnType<__sveltets_Render<Tag>['events']>;
+export type ComponentSlots<Tag extends 'div' | 'a'> = ReturnType<__sveltets_Render<Tag>['slots']>;
+export default class Component<Tag extends 'div' | 'a'> extends SvelteComponent<ComponentProps<Tag>, ComponentEvents<Tag>, ComponentSlots<Tag>> {
 }
 export {};

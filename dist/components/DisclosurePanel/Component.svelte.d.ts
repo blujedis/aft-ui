@@ -5,6 +5,7 @@ declare class __sveltets_Render<Tag extends HTMLTag> {
         [name: string]: any;
     } & {
         as?: keyof import("svelte/elements").SvelteHTMLElements | undefined;
+        focustrap?: boolean | undefined;
         unmount?: boolean | undefined;
     } & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events(): {} & {

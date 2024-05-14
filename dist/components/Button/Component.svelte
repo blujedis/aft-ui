@@ -1,5 +1,5 @@
 <script>import { get_current_component } from "svelte/internal";
-import { boolToMapValue, forwardEventsBuilder } from "../../utils";
+import { boolToMapValue, forwardEventsBuilder, cleanObj } from "../../utils";
 import { themeStore, themer } from "../../theme";
 import { buttonDefaults as defaults } from "./module";
 export let {
@@ -18,22 +18,22 @@ export let {
   variant,
   underlined
 } = {
-  ...$themeStore?.defaults?.component,
+  ...cleanObj($themeStore.defaults?.component),
   ...defaults
 };
 const th = themer($themeStore);
 const href = "#";
 $:
-  buttonClasses = th.create("Button").bundle(["mainText"], theme, variant === "text").bundle(
-    ["mainBg", "whiteText"],
-    { frame: "text-light dark:text-dark" },
+  buttonClasses = th.create("Button").bundle(["unfilledText"], theme, variant === "text").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
+    ["mainRing", "unfilledText"],
+    { $base: "ring-1 ring-inset" },
     theme,
-    variant === "filled"
-  ).bundle(["mainText", "mainRing"], { $base: "ring-1 ring-inset" }, theme, variant === "outlined").bundle(["mainText", "ghostBgHover"], { dark: "hover:text-white" }, theme, variant === "ghost").bundle(["softText", "softBg"], theme, variant === "soft").option("hovered", variant, theme, hovered).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("common", "ringed", bordered).option("fieldFontSizes", size, size).option("fieldLeading", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed && variant !== "text").option(
+    variant === "outlined"
+  ).bundle(["ghostBgHover", "softText"], { dark: "hover:text-white" }, theme, variant === "ghost").bundle(["softBg", "softText"], theme, variant === "soft").option("hovered", variant, theme, hovered && variant !== "ghost").option("elementRing", theme, bordered).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("fieldButtonSizes", size, size).option("fieldLeading", size, size).option("buttonPadding", size, size && variant !== "text").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed && variant !== "text").option(
     "dropshadows",
     boolToMapValue(shadowed && variant === "text" ? shadowed : dropshadowed),
     shadowed && variant === "text" || dropshadowed
-  ).option("common", "disabled", disabled).append("underline", underlined && underlined !== "hover").append("hover:underline", underlined === "hover").append("max-w-fit", !full).append("w-full", full).append("ring-1", bordered).append("inline-flex items-center justify-center cursor-pointer outline-none", true).append($$restProps.class, true).compile();
+  ).option("common", "disabled", disabled).prepend(`button button-${variant}`, true).append("underline", underlined && underlined !== "hover").append("hover:underline", underlined === "hover").append("max-w-fit", !full).append("w-full", full).append("ring-1", bordered).append("inline-flex items-center justify-center cursor-pointer outline-none", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

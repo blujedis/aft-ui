@@ -11,7 +11,6 @@
 	function subscribe(fn: (dark: boolean, api: ColorModeHook) => Unsubscriber) {
 		return store.subscribe((s) => fn(s, store));
 	}
-
 </script>
 
 <svelte:head>

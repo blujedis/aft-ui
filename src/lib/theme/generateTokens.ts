@@ -28,7 +28,12 @@ type TokenOpacity =
 	| 95
 	| 100;
 type TokenWidth = 0 | 1 | 2 | 3 | 4 | 8;
-type TokenColor = ThemeColor | `${ThemeColor}-${ThemeShade}` | `${ThemeColor}-${ThemeShade}/${TokenOpacity}` | `${ThemeShade}/${TokenOpacity}` | ThemeShade;
+type TokenColor =
+	| ThemeColor
+	| `${ThemeColor}-${ThemeShade}`
+	| `${ThemeColor}-${ThemeShade}/${TokenOpacity}`
+	| `${ThemeShade}/${TokenOpacity}`
+	| ThemeShade;
 type TokenTuple = [TypeOrValue<TokenColor>, TypeOrValue<TokenColor>?];
 type TokenValue = TypeOrValue<TokenColor> | TokenTuple;
 
@@ -39,8 +44,8 @@ type TokenConfHandler = (tokens: TokenMap) => string | TokenConfInit;
 type TokenConfInit =
 	| string
 	| (Partial<Record<ThemeColor, TokenValue>> & {
-		$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
-	});
+			$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
+	  });
 
 type TokenConf = Record<ThemeColor, TokenValue> & {
 	$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
@@ -113,17 +118,9 @@ const focusRingModifiers = [
 	'group-focus:ring',
 	'group-focus-within:ring'
 ];
-const selectedBgModifiers = [
-	'aria-selected:bg',
-	'aria-expanded:bg',
-	'aria-checked:bg'
-];
+const selectedBgModifiers = ['aria-selected:bg', 'aria-expanded:bg', 'aria-checked:bg'];
 
-const selectedTextModifiers = [
-	'aria-selected:text',
-	'aria-expanded:text',
-	'aria-checked:text'
-];
+const selectedTextModifiers = ['aria-selected:text', 'aria-expanded:text', 'aria-checked:text'];
 
 const placeholder = {
 	$base: '',
@@ -209,8 +206,6 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 	} = options;
 
 	return {
-
-
 		// Borders
 
 		borders: {
@@ -225,7 +220,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			],
 			colors: () =>
 				createColorMap(themeColors, defaultShade, true, {
-					frame: [formBorderLight, formBorderDark],
+					frame: [formBorderLight, formBorderDark]
 				})
 		},
 
@@ -260,7 +255,6 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 				$base: ['frame-950/5', dividerDark]
 			}
 		},
-
 
 		elementDivide: {
 			variant: 'element',
@@ -322,7 +316,10 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			modifiers: ['bg'],
 			colors: () =>
 				createColorMap(themeColors, defaultShade, true, {
-					frame: [(dividerLight + '').replace('frame-', ''), (dividerDark + '').replace('frame-', '')]
+					frame: [
+						(dividerLight + '').replace('frame-', ''),
+						(dividerDark + '').replace('frame-', '')
+					]
 				})
 		},
 
@@ -346,7 +343,9 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 				'aria-selected:border',
 				'aria-[current="page"]:bg'
 			],
-			colors: 'bg.colors'
+			colors: createColorMap(themeColors, defaultShade, true, {
+				frame: [500, 700]
+			})
 		},
 
 		bgSelectedAccent: {
@@ -435,8 +434,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			}
 		},
 
-
-		// Text Styles 
+		// Text Styles
 
 		textProgress: {
 			variant: 'progress',
@@ -487,7 +485,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'unfilled',
 			modifiers: ['text'],
 			colors: () =>
-				createColorMap(themeColors, defaultShade, getMin(defaultShade, -100, 400), {
+				createColorMap(themeColors, defaultShade, defaultShade, {
 					frame: [bodyTextLight, bodyTextDark],
 					white: [bodyTextLight, bodyTextDark],
 					black: `text-black  dark:text-${bodyTextDark}`
@@ -499,18 +497,19 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			modifiers: ['text'],
 			colors: {
 				$base: 'text-white dark:text-white',
-				white: [bodyTextLight, bodyTextLight],
-			},
+				white: [bodyTextLight, bodyTextLight]
+			}
 		},
 
 		textSoft: {
 			variant: 'soft',
 			modifiers: ['text'],
-			colors: () => createColorMap(themeColors, defaultShade, getMin(defaultShade, -100, 400), {
-				frame: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
-				white: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
-				black: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
-			})
+			colors: () =>
+				createColorMap(themeColors, defaultShade, getMin(defaultShade, -100, 400), {
+					frame: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
+					white: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
+					black: `text-${bodyTextLight} dark:text-${bodyTextDark}`
+				})
 		},
 
 		textSelectedFilled: {
@@ -539,7 +538,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 			variant: 'muted',
 			modifiers: ['text'],
 			colors: {
-				$base: `aria-selected:opacity-${disabledOpacity}`,
+				$base: `aria-selected:opacity-${disabledOpacity}`
 			}
 		},
 
@@ -593,15 +592,10 @@ function getCommon(options: Required<GenerateOptions>) {
 
 	options.formBorderDark = options.formBorderDark || options.formBorderLight;
 
-	const {
-		disabledOpacity,
-		focusOffset,
-		focusWidth,
-		defaultShade,
-	} = options as Required<GenerateOptions>;
+	const { disabledOpacity, focusOffset, focusWidth, defaultShade } =
+		options as Required<GenerateOptions>;
 
 	const common = {
-
 		// Focused
 		focusedOutline: `outline-none focus:outline-[${focusWidth}px] focus:outline-offset-${focusOffset}`,
 		focusedOutlineVisible: `outline-none focus-visible:outline-[${focusWidth}px] focus-visible:outline-offset-${focusOffset}`,
@@ -615,42 +609,13 @@ function getCommon(options: Required<GenerateOptions>) {
 
 		// Misc
 		transitioned: 'transition motion-reduce:transition-none',
-		disabled: `disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
+		disabled: `opacity-100 disabled:opacity-${disabledOpacity - 10} aria-disabled:opacity-${disabledOpacity - 10} dark:disabled:opacity-${disabledOpacity} dark:aria-disabled:opacity-${disabledOpacity} pointer-events-none`,
 
-		// Values - makes various theme shade/color props availble to "common" options.
-
+		// Range
 		rangeValue: `${defaultShade}`,
 		rangeThumb: `${getMin(defaultShade, -200, 300)}`,
 		rangeBgLight: `frame-200/50`,
-		rangeBgDark: `frame-900/50`,
-
-		// Text
-		// muteSelected: `aria-selected:opacity-${disabledOpacity}`,
-		// mutedText: `text-${bodyTextLight}/60 dark:text-${bodyTextDark}/40`,
-
-		// Selected States
-		// selectedBodyTextAriaSelected: `aria-selected:text-${bodyTextDark} dark:aria-selected:text-${bodyTextDark}`,
-		// selectedBodyTextAriaExpanded: `aria-expanded:text-${bodyTextDark} dark:aria-expanded:text-${bodyTextDark}`,
-		// selectedBodyTextAriaChecked: `aria-checked:text-${bodyTextDark} dark:aria-checked:text-${bodyTextDark}`,
-
-		// Backgrounds
-		// panelBg: `bg-${panelBgLight} dark:bg-${panelBgDark}`,
-		// panelBgHover: 'hover:bg-frame-200/50 hover:dark:bg-frame-900/40',
-		// panelContainerBg: `bg-${panelContainerBgLight} dark:bg-${panelContainerBgDark}`,
-		// elementBg: `bg-${elementBgLight} dark:bg-${elementBgDark}`,
-
-
-		// Bordering
-		// ringed: `ring-${dividerLight} dark:ring-${dividerDark}`,
-		// bordered: `border-${dividerLight} dark:border-${dividerDark}`,
-		// divided: `divide-${dividerLight} dark:divide-${dividerDark}`,
-		// elementBorder: `border-${dividerLight} dark:border-${dividerDark}`,
-		// formBorder: `border-${formBorderColorLight} dark:border-${formBorderColorDark}`,
-		// panelBorder: `border-${panelBorderLight} dark:border-${panelBorderDark}`,
-
-		// Strokes & Fills
-		// progressStroke: `stroke-frame-${softShade} dark:stroke-frame-${softShade}`,
-
+		rangeBgDark: `frame-900/50`
 	};
 
 	return objectToString('common', common);
@@ -756,23 +721,26 @@ function flattenArray(arr: any[]): any[] {
 function splitWhen(value: string | string[], tokens: string[]): string[] {
 	const nextToken = tokens.shift();
 	if (!nextToken) return ensureArray(value);
-	return flattenArray(ensureArray(value).reduce((a, c) => {
-		if (c.includes(nextToken)) {
-			const split = c.split(nextToken)
-			a = [...a, ...splitWhen(split, tokens)];
-		}
-		else {
-			a = [...a, c]
-		}
-		return a;
-	}, [] as string[])).filter(v => v !== '');
+	return flattenArray(
+		ensureArray(value).reduce((a, c) => {
+			if (c.includes(nextToken)) {
+				const split = c.split(nextToken);
+				a = [...a, ...splitWhen(split, tokens)];
+			} else {
+				a = [...a, c];
+			}
+			return a;
+		}, [] as string[])
+	).filter((v) => v !== '');
 }
 
 function createLabel(modifier: string) {
 	const mod = modifier.split(':');
 	const type = mod.pop()?.split('-')[0];
 	if (!type) throw new Error(`Failed to create token group label using modifier ${modifier}`);
-	const suffix = capitalizeEach(splitWhen(mod, ['-', '[', '='])).join('').replace(/['"&[\]>]/g, '');
+	const suffix = capitalizeEach(splitWhen(mod, ['-', '[', '=']))
+		.join('')
+		.replace(/['"&[\]>]/g, '');
 	return type.charAt(0).toUpperCase() + type.slice(1) + suffix;
 }
 
@@ -794,7 +762,7 @@ function normalizeToken(
 
 		// color level with opacity modifie ex 500/50
 		if (color && value.includes('/') && !value.includes('-')) {
-			const [shade,] = value.split('/');
+			const [shade] = value.split('/');
 			const result = shade === color ? value : `${color}-${value}`;
 			return result;
 		}
@@ -851,7 +819,6 @@ function buildClass(
 ) {
 	if (!conf) return [];
 
-
 	const _conf = { ...placeholder, ...getConfig(tokens, conf) };
 	const { $base, ...nConf } = _conf as TokenConf;
 	const result = {} as Record<string, any>;
@@ -887,7 +854,6 @@ export function generateTokens(options?: Partial<GenerateOptions>) {
 	const common = getCommon(options as Required<GenerateOptions>);
 
 	for (const [_gKey, gConf] of Object.entries(tokens)) {
-
 		const { modifiers, variant, colors } = getConfig(tokens, gConf) as TokenVariant;
 
 		const modifiersArr = ensureArray(modifiers);
@@ -901,7 +867,7 @@ export function generateTokens(options?: Partial<GenerateOptions>) {
 			// like [some-tag]:bg
 			if (name.includes('[')) {
 				const [nPrefix, nSuffix] = name.split('[');
-				name = `${nPrefix}${nSuffix.charAt(0).toUpperCase() + nSuffix.slice(1)}`
+				name = `${nPrefix}${nSuffix.charAt(0).toUpperCase() + nSuffix.slice(1)}`;
 			}
 
 			if (keys.includes(name))
@@ -917,7 +883,6 @@ export function generateTokens(options?: Partial<GenerateOptions>) {
 	result.unshift(common);
 
 	return result.join('\n\n');
-
 }
 
 // bg-[rgb(var(--color-primary-600))]/[0.50]

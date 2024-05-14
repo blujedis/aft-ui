@@ -20,30 +20,36 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
     panel?: HTMLDivElement;
     trigger?: HTMLDivElement;
 };
-export type SelectListContext<T extends SelectListItem = SelectListItem> = SelectStore<SelectListStore> & {
+export type SelectListContext<T extends SelectListItem = SelectListItem> = Omit<SelectStore<SelectListStore>, 'select' | 'toggle' | 'restore'> & {
     open(): void;
     close(): void;
     toggle(): void;
     isSelected(key: SelectListItemKey): boolean;
     isSelected(item: T): boolean;
     add({ value, label, group, selected }: T): void;
+    select(key: SelectListItemKey): void;
+    select(item: T): void;
     remove(key: SelectListItemKey): void;
     remove(item: T): void;
-    restoreSelected(restoreInput?: boolean): void;
-    restoreSelected(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+    restore(restoreInput?: boolean): void;
+    restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
     filter(query?: string): void;
     globals: SelectListContextProps;
 };
 export type SelectListContextProps = {
     badgeProps?: BadgeProps;
     disabled?: boolean;
+    exclusive?: boolean;
     filterable?: boolean;
     full?: boolean;
     focused?: boolean;
     hovered?: boolean;
-    multiple?: boolean;
+    tags?: boolean;
+    min?: number;
+    max?: number;
     newable?: boolean;
     placeholder?: string;
+    recordless?: boolean | string;
     removable?: boolean;
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
@@ -58,9 +64,9 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
     autoclose?: boolean;
     escapable?: boolean;
     items: T[];
-    store?: SelectStore<SelectListStore>;
     value?: any;
     visible?: boolean;
     filter?: FilterQuery<T>;
+    onChange?: (values: SelectStoreValue | SelectStoreValue[]) => any;
 };
 export declare const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps>;

@@ -21,7 +21,7 @@ export let {
 } = {
   ...defaults
 };
-export const store = writable({ active: -1, readonly, score, selected: -1 });
+const store = writable({ active: -1, readonly, score, selected: -1 });
 setContext("Rating", {
   ...store,
   globals: {

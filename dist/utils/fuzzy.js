@@ -7,8 +7,8 @@ const pos = [];
 const charCache = [];
 const defaults = {
     strategy: 'simple',
-    places: 2,
-    threshold: 4,
+    places: 4,
+    threshold: 2,
     keys: []
 };
 /**
@@ -139,7 +139,10 @@ export function fuzzyFull(needle, haystack, optionsOrThreshold) {
  * Filters array of values which match the needles threshold.
  *
  * @example
- * fuzzyMatch('pet', ['peter', 'paul', 'john'], { threshold: 2}) > boolean
+ * fuzzyFilter('pet', ['peter', 'paul', 'john'], { threshold: 2}) >> boolean
+ * fuzzyFilter('pet',
+ * 	[{ name: peter }, { name: 'paul' }, { name: 'john'}],
+ *  { threshold: 2, keys: ['name']}) >> boolean;
  *
  * @param needle the needle to evaluate against haystack.
  * @param haystack the haystack string to be evaluated for match.

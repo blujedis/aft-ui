@@ -1,0 +1,21 @@
+import type { HTMLTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+export type BoxVariant = 'filled' | 'outlined' | 'soft';
+export type BoxProps<Tag extends HTMLTag = 'div'> = {
+    as?: Tag;
+    bordered?: boolean;
+    centered?: boolean;
+    dropshadowed?: ThemeShadowed;
+    emptied?: boolean;
+    focused?: boolean;
+    full?: boolean;
+    href?: string;
+    hovered?: boolean;
+    rounded?: ThemeRounded;
+    shadowed?: ThemeShadowed;
+    size?: ThemeSize;
+    skeletoned?: boolean;
+    theme?: ThemeColor;
+    transitioned?: boolean;
+    variant?: BoxVariant;
+};
+export declare const boxDefaults: Partial<BoxProps<'div'>>;

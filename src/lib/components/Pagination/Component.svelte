@@ -1,5 +1,6 @@
 <script lang="ts">
-	import usePaginator from '$lib/stores/paginator';
+	import { writable } from 'svelte/store';
+	import { usePaginator } from '$lib/hooks/usePaginator';
 	import { type PaginationProps, paginationDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
@@ -28,19 +29,20 @@
 		...defaults
 	} as Required<PaginationProps>;
 
-	const pg = usePaginator({
-		page,
-		pages,
-		pageSize,
-		ellipsis,
-		items
-	});
+	const pg = writable(
+		usePaginator({
+			page,
+			pages,
+			pageSize,
+			ellipsis,
+			items
+		})
+	);
 
 	const globals = cleanObj({
 		focused,
 		hovered,
 		rounded,
-		// shadowed,
 		size,
 		theme,
 		transitioned,
@@ -73,7 +75,6 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-
 <nav
 	use:forwardedEvents
 	aria-label="Pagination"
@@ -81,7 +82,7 @@
 	class={paginationControllerClasses}
 >
 	<slot
-		page={$pg.page}
+		current={$pg.page}
 		startPage={$pg.startPage}
 		endPage={$pg.endPage}
 		rangeStart={$pg.startRecord}

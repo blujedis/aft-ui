@@ -28,26 +28,25 @@ export type SelectListStore<T extends SelectListItem = SelectListItem> = {
 	trigger?: HTMLDivElement;
 };
 
-export type SelectListContext<T extends SelectListItem = SelectListItem> =
-	Omit<SelectStore<SelectListStore>, 'select' | 'toggle' | 'restore'> & {
-		open(): void;
-		close(): void;
-		toggle(): void;
-		isSelected(key: SelectListItemKey): boolean;
-		isSelected(item: T): boolean;
-		add({ value, label, group, selected }: T): void;
-		select(key: SelectListItemKey): void;
-		select(item: T): void;
-		remove(key: SelectListItemKey): void;
-		remove(item: T): void;
-		restore(restoreInput?: boolean): void;
-		restore(
-			selectedItems: SelectListItemKey | SelectListItemKey[],
-			restoreInput?: boolean
-		): void;
-		filter(query?: string): void;
-		globals: SelectListContextProps;
-	};
+export type SelectListContext<T extends SelectListItem = SelectListItem> = Omit<
+	SelectStore<SelectListStore>,
+	'select' | 'toggle' | 'restore'
+> & {
+	open(): void;
+	close(): void;
+	toggle(): void;
+	isSelected(key: SelectListItemKey): boolean;
+	isSelected(item: T): boolean;
+	add({ value, label, group, selected }: T): void;
+	select(key: SelectListItemKey): void;
+	select(item: T): void;
+	remove(key: SelectListItemKey): void;
+	remove(item: T): void;
+	restore(restoreInput?: boolean): void;
+	restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+	filter(query?: string): void;
+	globals: SelectListContextProps;
+};
 
 export type SelectListContextProps = {
 	badgeProps?: BadgeProps;
@@ -58,7 +57,7 @@ export type SelectListContextProps = {
 	focused?: boolean;
 	hovered?: boolean;
 	tags?: boolean; // multiple tags mode.
-	min?: number;	// min tags required.
+	min?: number; // min tags required.
 	max?: number; // max tags allowed.
 	newable?: boolean; // can add new tags
 	placeholder?: string;
@@ -85,17 +84,17 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-{
-	autoclose: true,
-	escapable: true,
-	filterable: false,
-	filter: (q, i) =>
-		i.filter(
-			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-		),
-	recordless: false,
-	size: 'md',
-	theme: 'frame',
-	value: '',
-	variant: 'outlined'
-};
+	{
+		autoclose: true,
+		escapable: true,
+		filterable: false,
+		filter: (q, i) =>
+			i.filter(
+				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+			),
+		recordless: false,
+		size: 'md',
+		theme: 'frame',
+		value: '',
+		variant: 'outlined'
+	};

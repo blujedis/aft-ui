@@ -2,7 +2,7 @@ import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 
 export type MenuPanelProps = {
-	full?: boolean, 
+	full?: boolean;
 	bordered?: boolean;
 	position?: 'left' | 'right';
 	rounded?: ThemeRounded;

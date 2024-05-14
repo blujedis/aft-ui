@@ -40,7 +40,7 @@
 		.append('max-w-full', true)
 		.compile();
 
-	// this works but will allow resizing beyond boundary of 
+	// this works but will allow resizing beyond boundary of
 	// the grid. Needs some work to prevent that.
 	function init(node: HTMLDivElement) {
 		if (stacked) return; // can't resize columns when in stacked mode.

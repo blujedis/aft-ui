@@ -1,7 +1,13 @@
 import { twMerge, type ClassNameValue } from 'tailwind-merge';
 import { ensureArray, mergeConfigs } from '$lib/theme';
 import classnames from 'classnames';
-import type { PropsWithoutPrefix, ThemeColor, ThemeConfig, ThemeOption, ThemeOptions } from '../types/theme';
+import type {
+	PropsWithoutPrefix,
+	ThemeColor,
+	ThemeConfig,
+	ThemeOption,
+	ThemeOptions
+} from '../types/theme';
 
 type PrimitiveBase = boolean | string | number | undefined | null;
 
@@ -164,21 +170,19 @@ export function themer<C extends ThemeConfig>(themeConfig: C) {
 			if (arguments.length === 4) {
 				extend = extendOrProp as Record<string, any>;
 				prop = propOrWhen as PropsWithoutPrefix<P, '$'> | undefined;
-			}
-			else {
+			} else {
 				when = propOrWhen as Primitive;
 				prop = extendOrProp as PropsWithoutPrefix<P, '$'> | undefined;
 				extend = {};
 			}
 			if (typeof prop === 'undefined' || !when) return api;
-	
+
 			let merged = keys.reduce(
 				(result, k) => {
 					// top level value in states or value from common options.
 					let opt = _options[k as K] as Record<string, any>;
 					const commonOpt = (_options as any).common[k];
-					if (!opt && commonOpt)
-						opt = { [prop || '$base']: commonOpt };
+					if (!opt && commonOpt) opt = { [prop || '$base']: commonOpt };
 					if (typeof opt === 'undefined' && !commonOpt)
 						throw new Error(
 							`${instanceName} option ${k} using property ${prop as string} was NOT found.`

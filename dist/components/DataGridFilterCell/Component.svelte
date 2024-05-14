@@ -1,11 +1,14 @@
-<script>import { usePopover } from "../../hooks";
-import { gridFilterCellDefaults as defaults } from "./module";
+<script>import {
+  gridFilterCellDefaults as defaults,
+  filterPopoverDefaults
+} from "./module";
 import { themeStore, themer } from "../../theme";
+import {} from "../DataGrid/filter";
 import { getContext } from "svelte";
 import { DataGridCell } from "../DataGridCell";
 import { debounce } from "../../utils";
 import FilterPopover from "./FilterPopover.svelte";
-import { Disclosure } from "..";
+import { Icon, Popover } from "..";
 const context = getContext("DataGrid");
 export let { column, focused, size, stacked, theme } = {
   ...defaults,
@@ -13,30 +16,51 @@ export let { column, focused, size, stacked, theme } = {
   stacked: context.globals?.stacked,
   theme: context.globals?.theme
 };
-$:
-  queryByOne = "=";
-$:
-  queryValueOne = "";
-$:
-  queryByTwo = "=";
-$:
-  queryValueTwo = "";
-$:
-  queryAndOr = "and";
+const filters = context.globals?.filters;
+let filterData = {
+  ...filterPopoverDefaults
+};
 const th = themer($themeStore);
-const [trigger, content] = usePopover({
-  offset: 0
-});
 $:
-  gridFilterCellClasses = th.create("DataGridFilterInputWrapper").prepend("datagrid-filter-cell", true).append("relative px-0 py-0 flex items-center", true).compile();
+  gridFilterCellClasses = th.create("DataGridFilterInputWrapper").option("common", "focusedRingWithin", focused).option("ringFocusWithin", theme, focused).prepend("datagrid-filter-cell", true).append("focus-within:ring-offset-0 focus-within:ring-inset", focused).append("relative px-0 py-0 flex items-center z-10", true).compile();
 $:
-  gridFilterInputClasses = th.create("DataGridFilterInput").option("fieldPadding", size, size).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).prepend("datagrid-filter-input", true).append("outline-none bg-transparent relative w-full pr-8", true).compile();
-function handleFilter(value, accessor) {
-  if (!accessor)
-    return;
+  gridFilterInputClasses = th.create("DataGridFilterInput").option("fieldPadding", size, size).prepend("datagrid-filter-input", true).append("outline-none bg-transparent relative w-full pr-8", true).compile();
+function lookupFilterHandler(criteria) {
+  return (context.globals?.filters || []).find((f) => f.value === criteria)?.handler;
+}
+function handleFilter() {
+  const criteria = [
+    {
+      accessor: column.accessor,
+      condition: filterData.criteriaOne,
+      query: filterData.valueOne,
+      handler: lookupFilterHandler(filterData.criteriaOne)
+    }
+  ];
+  if (filterData.criteriaTwo && filterData.valueTwo || ["empty", "!empty"].includes(filterData.criteriaTwo)) {
+    criteria.push({
+      accessor: column.accessor,
+      condition: filterData.criteriaTwo,
+      query: filterData.valueTwo,
+      join: filterData.join,
+      handler: lookupFilterHandler(filterData.criteriaTwo)
+    });
+  }
   debounce(() => {
-    context.filter(value, accessor);
-  })();
+    context.filter(...criteria);
+  }, 200)();
+}
+function handleInputChange() {
+  if (!filterData.valueOne)
+    handleResetFilter();
+  else
+    handleFilter();
+}
+function handleResetFilter() {
+  filterData = {
+    ...filterPopoverDefaults
+  };
+  handleFilter();
 }
 </script>
 
@@ -48,32 +72,22 @@ function handleFilter(value, accessor) {
 					type="text"
 					placeholder="filter"
 					class={gridFilterInputClasses}
-					bind:value={queryValueOne}
-					on:input={(e) => handleFilter(e.currentTarget?.value, column.accessor)}
+					bind:value={filterData.valueOne}
+					on:input={handleInputChange}
 				/>
 			</slot>
 			<slot name="icon">
-				<Disclosure
-					as="div"
-					escapable
-					autoclose
-					class="absolute right-0 mr-2 flex items-center"
-					let:toggle
-					let:visible
-				>
-					<button use:trigger on:click={toggle} class="outline-none">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
-							><path
-								fill="currentColor"
-								d="M15 19.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0L9.29 16.7a.989.989 0 0 1-.29-.83v-5.12L4.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L15 10.75zM7.04 5L11 10.06v5.52l2 2v-7.53L16.96 5z"
-							/></svg
-						>
-					</button>
-
-					<div use:content class:invisible={!visible}>
-						<FilterPopover bind:queryValueOne bind:queryAndOr />
-					</div>
-				</Disclosure>
+				<button class="outline-none absolute right-2">
+					<Icon icon="mdi:filter-outline" theme="frame" size="sm" />
+				</button>
+				<Popover role="dialog" events="click">
+					<FilterPopover
+						bind:data={filterData}
+						{filters}
+						applyFilter={handleFilter}
+						resetFilter={handleResetFilter}
+					/>
+				</Popover>
 			</slot>
 		{/if}
 	</DataGridCell>

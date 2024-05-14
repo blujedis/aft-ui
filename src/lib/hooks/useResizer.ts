@@ -87,9 +87,9 @@ const cursorMap = {
 const defaults: ResizerOptions = {
 	classname: 'resizer',
 	handles: {},
-	onResizing: () => { },
-	onResized: () => { },
-	onDestroy: () => { }
+	onResizing: () => {},
+	onResized: () => {},
+	onDestroy: () => {}
 };
 
 function bindStyles(el: ResizerElement, props: Record<string, string>) {
@@ -180,7 +180,6 @@ export function useResizer(options = {} as ResizerOptions) {
 		let initialPos: ResizerPosition | null;
 		let maxWidth: number;
 
-
 		element.style.position = 'relative';
 
 		const parent = element.parentElement?.getBoundingClientRect();
@@ -197,8 +196,7 @@ export function useResizer(options = {} as ResizerOptions) {
 			if (!parentElement) return 0;
 			const children = Array.from(parentElement.children);
 			return children.reduce((a, c) => {
-				if (c !== el)
-					a += c.clientWidth;
+				if (c !== el) a += c.clientWidth;
 				return a;
 			}, 0);
 		}
@@ -227,12 +225,10 @@ export function useResizer(options = {} as ResizerOptions) {
 			initialPos = { x: event.pageX, y: event.pageY };
 
 			active.classList.add(`${classname}-active`);
-
 		}
 
 		// Actively resizing.
 		function onMove(event: MouseEvent) {
-
 			if (!active || !initialPos || !initialRect || !parent) return;
 			event.preventDefault();
 

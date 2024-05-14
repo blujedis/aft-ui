@@ -3,7 +3,7 @@ import { type TabsProps, type TabsStore } from './module';
 declare const __propDef: {
     props: {
         context?: {
-            globals: Omit<Partial<{
+            globals: Partial<Omit<{
                 focused: boolean;
                 full: boolean;
                 hovered: boolean;
@@ -12,7 +12,8 @@ declare const __propDef: {
                 theme: import("../../types").ThemeColor;
                 transitioned: boolean;
                 variant: import("../..").TabVariant;
-            }>, "rounded" | "hovered" | "full" | "focused" | "size" | "theme" | "transitioned" | "variant">;
+                underlined: boolean;
+            }, "rounded" | "hovered" | "full" | "transitioned" | "focused" | "size" | "theme" | "variant" | "underlined">>;
             set(this: void, value: TabsStore): void;
             update(this: void, updater: import("svelte/store").Updater<TabsStore>): void;
             subscribe(this: void, run: import("svelte/store").Subscriber<TabsStore>, invalidate?: import("svelte/store").Invalidator<TabsStore> | undefined): import("svelte/store").Unsubscriber;
@@ -30,7 +31,7 @@ export type ComponentEvents = typeof __propDef.events;
 export type ComponentSlots = typeof __propDef.slots;
 export default class Component extends SvelteComponent<ComponentProps, ComponentEvents, ComponentSlots> {
     get context(): {
-        globals: Omit<Partial<{
+        globals: Partial<Omit<{
             focused: boolean;
             full: boolean;
             hovered: boolean;
@@ -39,7 +40,8 @@ export default class Component extends SvelteComponent<ComponentProps, Component
             theme: import("../../types").ThemeColor;
             transitioned: boolean;
             variant: import("../..").TabVariant;
-        }>, "rounded" | "hovered" | "full" | "focused" | "size" | "theme" | "transitioned" | "variant">;
+            underlined: boolean;
+        }, "rounded" | "hovered" | "full" | "transitioned" | "focused" | "size" | "theme" | "variant" | "underlined">>;
         set(this: void, value: TabsStore): void;
         update(this: void, updater: import("svelte/store").Updater<TabsStore>): void;
         subscribe(this: void, run: import("svelte/store").Subscriber<TabsStore>, invalidate?: import("svelte/store").Invalidator<TabsStore> | undefined): import("svelte/store").Unsubscriber;

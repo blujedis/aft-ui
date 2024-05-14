@@ -12,9 +12,11 @@
 
 	const th = themer($themeStore);
 
-	$: cardImageClasses = th.create('CardImage')
-	.prepend(`card-image`, true)
-	.append($$restProps.class, true).compile();
+	$: cardImageClasses = th
+		.create('CardImage')
+		.prepend(`card-image`, true)
+		.append($$restProps.class, true)
+		.compile();
 </script>
 
 <div class={cardImageClasses}>

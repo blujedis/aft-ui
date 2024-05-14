@@ -1,9 +1,10 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '../../types';
 import type { DisclosureTransition, DisclosureTransitionOption } from '../Disclosure';
 export type SelectListPanelProps = {
+    bordered?: boolean;
     full?: boolean;
-    multiple?: boolean;
-    origin?: 'left' | 'right' | 'center';
+    tags?: boolean;
+    recordless?: boolean;
     position?: 'left' | 'right';
     rounded?: ThemeRounded;
     shadowed?: ThemeShadowed;
@@ -12,13 +13,4 @@ export type SelectListPanelProps = {
         type: DisclosureTransition;
     });
 };
-export declare const selectListPanelDefaults: {
-    origin: string;
-    position: string;
-    shadowed: string;
-    theme: string;
-    transition: {
-        start: number;
-        type: string;
-    };
-};
+export declare const selectListPanelDefaults: SelectListPanelProps;

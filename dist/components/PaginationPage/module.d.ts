@@ -4,6 +4,7 @@ import type { IconifyIcon } from '@iconify/svelte';
 export type PaginationPageVariant = 'filled' | 'flushed' | 'soft';
 export type PaginationPageProps<Tag> = {
     as?: Tag;
+    disabled?: boolean;
     focused?: ThemeFocused;
     hovered?: boolean;
     next?: boolean | string | IconifyIcon;

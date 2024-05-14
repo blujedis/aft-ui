@@ -1,5 +1,5 @@
 export const menuPanelDefaults = {
-    origin: 'center',
+    bordered: true,
     position: 'left',
     shadowed: 'sm',
     theme: 'default',

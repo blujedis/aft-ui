@@ -1,8 +1,8 @@
 const component = {
     focused: true,
     hovered: true,
-    rounded: 'sm',
-    shadowed: 'none',
+    rounded: 'none',
+    shadowed: '',
     size: 'md',
     theme: 'frame',
     transitioned: true

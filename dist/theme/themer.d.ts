@@ -1,6 +1,6 @@
 import { type ClassNameValue } from 'tailwind-merge';
 import classnames from 'classnames';
-import type { PropsWithoutPrefix, ThemeConfig, ThemeOption, ThemeOptions } from '../types/theme';
+import type { PropsWithoutPrefix, ThemeColor, ThemeConfig, ThemeOption, ThemeOptions } from '../types/theme';
 type PrimitiveBase = boolean | string | number | undefined | null;
 type Primitive = PrimitiveBase | Record<string, any> | PrimitiveBase[];
 export interface ThemerApi<C extends ThemeConfig> {
@@ -21,8 +21,8 @@ export interface ThemerApi<C extends ThemeConfig> {
      * @param when if value is truthy add value otherwise reject.
      */
     option<K extends ThemeOption, P extends keyof ThemeOptions[K]>(key: K, prop: PropsWithoutPrefix<keyof ThemeOptions[K], '$'> | undefined, variant: PropsWithoutPrefix<keyof ThemeOptions[K][P], '$'>, when: Primitive): ThemerApi<C>;
-    bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(keys: K[], prop: PropsWithoutPrefix<P, '$'> | undefined, when: Primitive): ThemerApi<C>;
-    bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(keys: K[], extend: Record<string, any>, prop: PropsWithoutPrefix<P, '$'> | undefined, when: Primitive): ThemerApi<C>;
+    bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(keys: (K | PropsWithoutPrefix<keyof ThemeOptions['common'], '$'>)[], prop: PropsWithoutPrefix<P, '$'> | undefined, when: Primitive): ThemerApi<C>;
+    bundle<K extends ThemeOption, P extends keyof ThemeOptions[K]>(keys: (K | PropsWithoutPrefix<keyof ThemeOptions['common'], '$'>)[], extend: Record<string, any>, prop: PropsWithoutPrefix<P, '$'> | undefined | ThemeColor, when: Primitive): ThemerApi<C>;
     /**
      * Removes class strings, called ONLY after classnames() is called
      * and before Tailwind Merge if enabled.

@@ -9,9 +9,9 @@ let ref;
 const th = themer($themeStore);
 const st = styler($themeStore);
 $:
-  rangeStyles = st.create("RangeStyles").color("--track-background-color", $themeStore.options.common.rangeBg, true).color("--thumb-background-color", `${theme}-${$themeStore.options.common.rangeThumb}`, true).color("--track-accent-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).color("--thumb-border-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
+  rangeStyles = st.create("RangeStyles").color("--track-background-color", $themeStore.options.common.rangeBgLight, true).color("--track-background-color-dark", $themeStore.options.common.rangeBgDark, true).color("--thumb-background-color", `${theme}-${$themeStore.options.common.rangeThumb}`, true).color("--track-accent-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).color("--thumb-border-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
 $:
-  rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
+  rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("range", true).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
 $$restProps.min = $$restProps.min || 0;
 $$restProps.max = $$restProps.max || 100;
 function handleInputChange(e) {
@@ -36,23 +36,22 @@ onMount(() => {
 />
 
 <style>
-	/* :root {
-	 --color-range-dark: 255 255 255;
-	} */
-
+	/* we could detect dark mode and pass down a single var for track but you end up with 
+	   listeners just to toggle this on off? using html.dark selector globally drawbacks but...*/
+	:global(html.dark .range) {
+		background-color: var(--track-background-color-dark) !important;
+	}
 	input[type='range'] {
 		background-color: var(--track-background-color);
 		background-image: linear-gradient(var(--track-accent-color), var(--track-accent-color));
 		background-size: 0% 100%;
 		background-repeat: no-repeat;
 	}
-
 	/* IMPORTANT If you attempt to combine the below styles together 
 	they will not be applied. Each pseudo selecteor for the 
 	thumb must be defined for each browser type. It'd be SUPER
 	if this were better standardized wouldn't it??
 	*/
-
 	input[type='range']::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		        appearance: none;
@@ -63,19 +62,15 @@ onMount(() => {
 		border-radius: 50%;
 		background-color: var(--thumb-background-color);
 	}
-
 	input[type='range']:focus::-webkit-slider-thumb {
 		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
-
 	input[type='range']:focus::-moz-range-thumb {
 		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
-
 	input[type='range']:focus::-ms-thumb {
 		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
-
 	input[type='range']::-moz-range-thumb {
 		-moz-appearance: none;
 		     appearance: none;
@@ -86,7 +81,6 @@ onMount(() => {
 		border-radius: 50%;
 		background: var(--thumb-background-color);
 	}
-
 	input[type='range']::-ms-thumb {
 		appearance: none;
 		height: var(--thumb-size);
@@ -96,7 +90,6 @@ onMount(() => {
 		border-radius: 50%;
 		background: var(--thumb-background-color);
 	}
-
 	input[type='range']::-webkit-slider-runnable-track {
 		-webkit-appearance: none;
 		box-shadow: none;
@@ -104,7 +97,6 @@ onMount(() => {
 		background: transparent;
 		margin: 0 -2px;
 	}
-
 	input[type='range']::-moz-range-track {
 		margin: 0 -2px;
 	}

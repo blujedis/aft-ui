@@ -9,18 +9,18 @@ declare class __sveltets_Render<Tag extends HTMLTag> {
             close: () => void;
             toggle: () => void;
             modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
-                visible: boolean;
+                panel?: HTMLElement | undefined;
             }>>) => void;
             set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
-                visible: boolean;
+                panel?: HTMLElement | undefined;
             }>>): void;
             update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
-                visible: boolean;
+                panel?: HTMLElement | undefined;
             }>>>): void;
             subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
-                visible: boolean;
+                panel?: HTMLElement | undefined;
             }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
-                visible: boolean;
+                panel?: HTMLElement | undefined;
             }>>> | undefined): import("svelte/store").Unsubscriber;
         } | undefined;
     } & DisclosureProps<DisclosureStore, keyof import("svelte/elements").SvelteHTMLElements> & {
@@ -47,18 +47,18 @@ export default class Component<Tag extends HTMLTag> extends SvelteComponent<Comp
         close: () => void;
         toggle: () => void;
         modify: (values: Partial<import("../../stores").DisclosureStoreOptions<{
-            visible: boolean;
+            panel?: HTMLElement | undefined;
         }>>) => void;
         set(this: void, value: Required<import("../../stores").DisclosureStoreOptions<{
-            visible: boolean;
+            panel?: HTMLElement | undefined;
         }>>): void;
         update(this: void, updater: import("svelte/store").Updater<Required<import("../../stores").DisclosureStoreOptions<{
-            visible: boolean;
+            panel?: HTMLElement | undefined;
         }>>>): void;
         subscribe(this: void, run: import("svelte/store").Subscriber<Required<import("../../stores").DisclosureStoreOptions<{
-            visible: boolean;
+            panel?: HTMLElement | undefined;
         }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
-            visible: boolean;
+            panel?: HTMLElement | undefined;
         }>>> | undefined): import("svelte/store").Unsubscriber;
     } & import("svelte/store").Writable<import("../../stores").DisclosureStoreOptions<Record<string, unknown>>> & import("../../stores").DisclosureMethods<Record<string, unknown>>;
 }

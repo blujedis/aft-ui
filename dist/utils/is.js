@@ -65,11 +65,13 @@ export function isConstructorType(value, compare) {
 /**
  * Simple function using indexOf for SQL LIKE evaluation.
  *
- * @param query the search query.
- * @param value the value to apply search query against.
+ * @param value the value to compare.
+ * @param compare the value to inspect as like above value.
  */
-export function isLike(query, value) {
-    return (value + '').toLowerCase().indexOf(query.toLowerCase()) > -1;
+export function isLike(value, compare) {
+    value = value.toLowerCase();
+    compare = compare.toLowerCase();
+    return compare.indexOf(value) > -1;
 }
 /**
  * Checks if value is instanceOf Type.
@@ -260,7 +262,7 @@ export function isNotDeepEqual(value, compare) {
     return !isDeepEqual(value, compare);
 }
 /**
- * Checks if string, array or object is empty object.
+ * Checks if string, array or object is empty.
  *
  * @param value the value to inspect as empty string, array or object.
  */
@@ -268,6 +270,50 @@ export function isEmpty(value) {
     return ((isString(value) && isEqual(value, '')) ||
         (isArray(value) && isEqual(value.length, 0)) ||
         (isPlainObject(value) && isEqual(Object.keys(value).length, 0)));
+}
+/**
+ * Checks if string, array or object is not empty.
+ *
+ * @param value the value to inspect as not empty string, array or object.
+ */
+export function isNotEmpty(value) {
+    return !isEmpty(value);
+}
+/**
+ * Checks if value is greater than compare.
+ *
+ * @param value the value to inspect as greater than compare.
+ * @param compare the value to inspect as less than value.
+ */
+export function isGreaterThan(value, compare) {
+    return value > compare;
+}
+/**
+ * Checks if value is greater than or equal to compare.
+ *
+ * @param value the value to inspect as greater than or equal to compare.
+ * @param compare the value to inspect as less than or equal to value.
+ */
+export function isGreaterThanOrEqual(value, compare) {
+    return value >= compare;
+}
+/**
+ * Checks if value is less than compare.
+ *
+ * @param value the value to inspect as less than compare.
+ * @param compare the value to inspect as greater than value.
+ */
+export function isLessThan(value, compare) {
+    return value < compare;
+}
+/**
+ * Checks if value is less than or equal to compare.
+ *
+ * @param value the value to inspect as less than or equal to compare.
+ * @param compare the value to inspect as greater than or equal to value.
+ */
+export function isLessThanOrEqual(value, compare) {
+    return value <= compare;
 }
 /**
  * Checks if value is boolean.

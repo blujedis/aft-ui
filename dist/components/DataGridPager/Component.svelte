@@ -1,12 +1,6 @@
 <script>import { getContext } from "svelte";
 import { gridPagerDefaults as defaults } from "./module";
-import {
-  themeStore,
-  pickCleanProps,
-  themer,
-  Pagination,
-  PaginationPage
-} from "../..";
+import { themeStore, themer, Pagination, PaginationPage } from "../..";
 const context = getContext("DataGrid");
 export let { ellipsis, page, pageSize, pages, size, theme, variant } = {
   ...defaults,
@@ -19,7 +13,7 @@ $:
 
 <Pagination
 	{variant}
-	items={$context.filtered.length}
+	items={$context.filtered || []}
 	page={1}
 	{pageSize}
 	{pages}

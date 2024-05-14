@@ -1,4 +1,3 @@
-
 export type FileInputReaderType = 'text' | 'url' | 'binary' | 'buffer';
 
 export type FileInputProps = {
@@ -14,8 +13,5 @@ export type FileInputProps = {
 
 export const fileInputDefaults: Partial<FileInputProps> = {
 	name: 'file',
-	readAs: 'url',
+	readAs: 'url'
 };
-
-
-

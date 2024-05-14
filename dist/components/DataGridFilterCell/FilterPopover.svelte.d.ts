@@ -1,11 +1,19 @@
 import { SvelteComponent } from "svelte";
 import type { ThemeRounded } from '../../types';
+import type { DataGridFilterListItem } from '../DataGrid/filter';
 declare const __propDef: {
     props: {
-        onChange?: ((data: Record<string, any>) => void) | undefined;
         rounded?: ThemeRounded | undefined;
-        queryValueOne: string;
-        queryAndOr?: string | undefined;
+        filters?: DataGridFilterListItem[] | undefined;
+        data?: {
+            criteriaOne: string;
+            valueOne: string;
+            criteriaTwo: string;
+            valueTwo: string;
+            join: "and" | "or";
+        } | undefined;
+        applyFilter?: (() => void) | undefined;
+        resetFilter?: (() => void) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

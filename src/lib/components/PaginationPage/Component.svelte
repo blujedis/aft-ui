@@ -23,12 +23,12 @@
 
 	export let {
 		as,
+		disabled: initDisabled,
 		focused,
 		hovered,
 		next,
 		previous,
 		rounded,
-		selected,
 		size,
 		theme,
 		transitioned,
@@ -48,7 +48,13 @@
 
 	const th = themer($themeStore);
 
-	// $: selected = $context?.page === value;
+	$: disabled =
+		(previous && $context.page === 1) ||
+		(next && $context.page === $context.endPage) ||
+		initDisabled ||
+		false;
+
+	$: console.log(disabled);
 
 	$: paginationPageClasses = th
 		.create('PaginationPage')
@@ -59,7 +65,6 @@
 			theme,
 			variant === 'flushed'
 		)
-		.option('mutedText', theme, true)
 		.option('panelBgHover', theme, hovered && ['filled', 'soft'].includes(variant))
 		.option('fieldFontSizes', size, size)
 		.option('paginationGroupedPadding', size, size && ['filled', 'soft'].includes(variant))
@@ -68,6 +73,7 @@
 		.option('outlineFocusVisible', theme, focused)
 		.option('common', 'transitioned', transitioned)
 		.option('roundeds', boolToMapValue(rounded), rounded && ((previous || next) as boolean))
+		.option('common', 'disabled', disabled)
 		.prepend(`pagination-page`, true)
 		.append(
 			'relative inline-flex items-center justify-center font-semibold focus:z-20',
@@ -77,15 +83,16 @@
 			'inline-flex items-center border-t-2 border-transparent font-medium border-x-0 border-b-0',
 			variant === 'flushed'
 		)
-		.append('z-10', ['filled', 'soft'].includes(variant) && selected)
+		.append('z-10', ['filled', 'soft'].includes(variant) && $context.page === value)
 		.append(
 			'hover:border-frame-300 dark:hover:border-frame-600',
-			variant === 'flushed' && !selected
+			variant === 'flushed' && !($context.page === value)
 		)
-		.append('pointer-events-none', value === '...' || selected)
+		.append('pointer-events-none', value === '...' || $context.page === value)
 		.append('px-2', (previous || next) as any)
 		.append('rounded-r-none', previous as any)
 		.append('rounded-l-none', next as any)
+		.append('cursor-pointer', as === 'button')
 		.append($$restProps.class, true)
 		.compile();
 
@@ -96,10 +103,13 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	function handleSelect(value: string | number) {
-		if (previous) context.prev();
-		else if (next) context.next();
-		else context.goto(value);
+	function handleClick(p: number) {
+		if (as === 'a') return undefined;
+		return (e: Event) => {
+			context.update((s) => {
+				return { ...s, page: p };
+			});
+		};
 	}
 </script>
 
@@ -107,13 +117,19 @@
 	this={as}
 	role={as === 'a' ? 'link' : 'button'}
 	tabindex="-1"
+	href={next
+		? `?page=${Math.min(7, ($context.page || 1) + 1)}`
+		: previous
+			? `?page=${Math.max(1, ($context.page || 1) - 1)}`
+			: `?page=${value}`}
+	on:click={handleClick(previous ? $context.page - 1 : next ? $context.page + 1 : value)}
 	use:forwardedEvents
 	{...$$restProps}
-	href={`?pg=${value}`}
+	{disabled}
 	class={paginationPageClasses}
-	aria-current={selected ? 'page' : null}
-	aria-selected={selected}
-	on:click={() => handleSelect(value)}
+	aria-current={$context.page === value ? 'page' : null}
+	aria-selected={$context.page === value}
+	aria-disabled={disabled}
 >
 	<slot>
 		{#if previous}

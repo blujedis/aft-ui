@@ -4,6 +4,7 @@
 	import { PaginationPage } from '../PaginationPage';
 	import { jsondata } from '../_Example/jsondata';
 	import { colors } from '$lib/constants';
+	import { page as p } from '$app/stores';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 	const title = 'Pagination';
@@ -20,7 +21,10 @@
 		variant: 'grouped' as PaginationVariant
 	};
 
-	let pagination = null as Pagination<any> | null;
+	let items = jsondata;
+	let page = parseInt($p.url.searchParams.get('page') || '1');
+	let pageSize = 3;
+	let pages = 5;
 </script>
 
 <ExamplePage {title} {description}>
@@ -29,23 +33,78 @@
 			<div>
 				<Pagination
 					{...props}
-					bind:this={pagination}
 					variant="flushed"
-					items={jsondata.length}
-					page={1}
-					pageSize={10}
-					pages={10}
+					bind:items
+					bind:page
+					bind:pageSize
+					bind:pages
 					theme={color}
 					let:activePages
-					let:page
+					let:endPage
 				>
+					<PaginationPage previous />
+					<!-- <PaginationPage as="a" previous /> -->
 					{#each activePages as pg}
-						<PaginationPage value={pg} selected={page === pg}>{pg}</PaginationPage>
+						<PaginationPage value={pg}>{pg}</PaginationPage>
+						<!-- <PaginationPage as="a" value={pg}>{pg}</PaginationPage> -->
 					{/each}
+					<PaginationPage next />
+					<!-- <PaginationPage as="a" next /> -->
 				</Pagination>
 			</div>
 
 			<div>
+				<Pagination
+					{...props}
+					variant="filled"
+					theme={color}
+					ellipsis
+					bind:items
+					bind:page
+					bind:pageSize
+					bind:pages
+					let:activePages
+					let:endPage
+				>
+					<!-- <PaginationPage previous  /> -->
+					<PaginationPage as="a" previous />
+					{#each activePages as pg}
+						<!-- <PaginationPage value={pg}>{pg}</PaginationPage> -->
+						<PaginationPage as="a" value={pg}>{pg}</PaginationPage>
+					{/each}
+					<!-- <PaginationPage
+						next
+					/> -->
+					<PaginationPage as="a" next />
+				</Pagination>
+			</div>
+
+			<div>
+				<Pagination
+					{...props}
+					variant="soft"
+					bind:items
+					bind:page
+					bind:pageSize
+					bind:pages
+					theme={color}
+					let:activePages
+					let:endPage
+				>
+					<!-- <PaginationPage previous /> -->
+					<PaginationPage as="a" previous />
+					{#each activePages as pg}
+						<!-- <PaginationPage value={pg}>{pg}</PaginationPage> -->
+						<PaginationPage as="a" value={pg}>{pg}</PaginationPage>
+					{/each}
+					<!-- <PaginationPage
+						next
+					/> -->
+					<PaginationPage as="a" next />
+				</Pagination>
+			</div>
+
+			<!-- <div>
 				<Pagination
 					{...props}
 					bind:this={pagination}
@@ -68,9 +127,9 @@
 					{/each}
 					<PaginationPage as="a" next />
 				</Pagination>
-			</div>
+			</div> -->
 
-			<div>
+			<!-- <div>
 				<Pagination
 					{...props}
 					bind:this={pagination}
@@ -93,7 +152,7 @@
 					{/each}
 					<PaginationPage as="a" next />
 				</Pagination>
-			</div>
+			</div> -->
 		</div>
 	{/each}
 </ExamplePage>

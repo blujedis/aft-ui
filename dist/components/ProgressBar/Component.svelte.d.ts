@@ -11,7 +11,7 @@ declare const __propDef: {
         size?: import("../../types").ThemeSize | undefined;
         theme?: import("../../types").ThemeColor | undefined;
         value?: any;
-        variant?: "filled" | undefined;
+        variant?: string | number | symbol | undefined;
     } & Omit<import("svelte/elements").HTMLProgressAttributes, "size">;
     events: {
         [evt: string]: CustomEvent<any>;

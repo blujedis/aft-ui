@@ -4,7 +4,7 @@ import type { ButtonProps } from '../Button/module';
 import type { ButtonGroupVariant } from '../ButtonGroupItem';
 export type ButtonGroupProps = Omit<ButtonProps<'button' | 'a'>, 'disabled' | 'variant'> & {
     multiple?: boolean;
-    selected?: SelectStoreValue | SelectStoreValue[];
+    value?: SelectStoreValue;
     variant?: ButtonGroupVariant;
 };
 export type ButtonGroupContext = SelectStore & {

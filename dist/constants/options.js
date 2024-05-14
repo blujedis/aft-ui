@@ -62,6 +62,7 @@ export const fieldLeading = {
 export const fontSizes = {
     unstyled: '',
     base: 'text-base',
+    xss: 'text-[10px] leading-3',
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-base',
@@ -94,6 +95,15 @@ export const fieldFontSizes = {
     xl: fontSizes.lg,
     xl2: fontSizes.xl
 };
+export const fieldButtonSizes = {
+    unstyled: '',
+    xs: fontSizes.xss,
+    sm: fontSizes.xs,
+    md: fontSizes.sm,
+    lg: fontSizes.base,
+    xl: fontSizes.lg,
+    xl2: fontSizes.xl
+};
 export const fieldPaddingY = {
     unstyled: '',
     xs: 'py-0.5',
@@ -120,15 +130,6 @@ export const fieldUpperPaddingY = {
     lg: 'py-2.5',
     xl: 'py-3',
     xl2: 'py-3.5'
-};
-export const boxPadding = {
-    unstyled: '',
-    xs: 'py-1.5 px-3',
-    sm: 'py-3 px-4',
-    md: 'py-3 px-6',
-    lg: 'py-4 px-8',
-    xl: 'py-5 px-10',
-    xl2: 'py-6 px-12'
 };
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
 export const buttonPadding = mergeConfigs(fieldPaddingY, {

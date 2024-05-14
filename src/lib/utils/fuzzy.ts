@@ -286,8 +286,8 @@ export function fuzzyFull(
  *
  * @example
  * fuzzyFilter('pet', ['peter', 'paul', 'john'], { threshold: 2}) >> boolean
- * fuzzyFilter('pet', 
- * 	[{ name: peter }, { name: 'paul' }, { name: 'john'}], 
+ * fuzzyFilter('pet',
+ * 	[{ name: peter }, { name: 'paul' }, { name: 'john'}],
  *  { threshold: 2, keys: ['name']}) >> boolean;
  *
  * @param needle the needle to evaluate against haystack.

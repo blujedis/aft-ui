@@ -15,6 +15,7 @@ export type TabsProps = {
     theme?: ThemeColor;
     transitioned?: boolean;
     variant?: TabVariant;
+    underlined?: boolean;
     navWrapperClasses?: string;
     navContainerClasses?: string;
     navClasses?: string;
@@ -36,6 +37,7 @@ export type TabsContext = Writable<TabsStore> & {
         theme: ThemeColor;
         transitioned: boolean;
         variant: TabVariant;
+        underlined: boolean;
     };
 };
 export declare const tabsDefaults: Partial<TabsProps>;

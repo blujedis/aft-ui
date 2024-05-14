@@ -1,35 +1,38 @@
 import { SvelteComponent } from "svelte";
-import { type SelectListContext, type SelectListStore, type SelectListItem } from './module';
-import { type SelectStore } from '../..';
+import { type SelectListItem } from './module';
 declare class __sveltets_Render<Item extends SelectListItem> {
     props(): {
-        store?: SelectStore<SelectListStore<Item>> | undefined;
-        context?: SelectListContext | undefined;
+        isSelected?: ((itemOrKey: any) => any) | undefined;
+        setLabel?: ((itemOrKey?: any) => void) | undefined;
+        open?: (() => void) | undefined;
+        close?: (() => void) | undefined;
+        toggle?: (() => void) | undefined;
+        add?: (({ value, label, group, selected }: Item) => void) | undefined;
+        select?: ((itemOrKey: any) => void) | undefined;
+        remove?: ((itemOrKey: any) => void) | undefined;
+        filter?: ((query?: string | undefined) => Promise<void>) | undefined;
     } & import("../..").SelectListContextProps & {
         autoclose?: boolean | undefined;
         escapable?: boolean | undefined;
         items: Item[];
-        store?: SelectStore<SelectListStore<SelectListItem>> | undefined;
         value?: any;
         visible?: boolean | undefined;
         filter?: import("../..").FilterQuery<Item> | undefined;
-    } & Omit<import("svelte/elements").HTMLSelectAttributes, "size">;
+        onChange?: ((values: any) => any) | undefined;
+    } & Omit<import("svelte/elements").HTMLSelectAttributes, "size" | "multiple">;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
         default: {
             visible: boolean | undefined;
-            selectedItems: import("../..").SelectStoreValue[];
+            selectedItems: any;
             filtered: Item[];
             filtering: boolean | undefined;
-            isSelected: ((value?: import("../..").SelectStoreValue) => boolean) & {
-                (key: import("../..").SelectStoreValue): boolean;
-                (item: SelectListItem): boolean;
-            };
             open: () => void;
             close: () => void;
-            toggle: (value?: import("../..").SelectStoreValue) => void;
+            toggle: (value?: any) => void;
+            select: (value?: any) => void;
         };
         select: {};
     };
@@ -38,20 +41,14 @@ export type ComponentProps<Item extends SelectListItem> = ReturnType<__sveltets_
 export type ComponentEvents<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['events']>;
 export type ComponentSlots<Item extends SelectListItem> = ReturnType<__sveltets_Render<Item>['slots']>;
 export default class Component<Item extends SelectListItem> extends SvelteComponent<ComponentProps<Item>, ComponentEvents<Item>, ComponentSlots<Item>> {
-    get store(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<Item>> & import("../..").SelectStoreMethods & import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>>;
-    get context(): import("svelte/store").Writable<import("../..").SelectStoreOptions & SelectListStore<SelectListItem>> & import("../..").SelectStoreMethods & {
-        open(): void;
-        close(): void;
-        toggle(): void;
-        isSelected(key: import("../..").SelectStoreValue): boolean;
-        isSelected(item: SelectListItem): boolean;
-        add({ value, label, group, selected }: SelectListItem): void;
-        remove(key: import("../..").SelectStoreValue): void;
-        remove(item: SelectListItem): void;
-        restoreSelected(restoreInput?: boolean | undefined): void;
-        restoreSelected(selectedItems: import("../..").SelectStoreValue | import("../..").SelectStoreValue[], restoreInput?: boolean | undefined): void;
-        filter(query?: string | undefined): void;
-        globals: import("../..").SelectListContextProps;
-    };
+    get isSelected(): (itemOrKey: any) => any;
+    get setLabel(): (itemOrKey?: any) => void;
+    get open(): () => void;
+    get close(): () => void;
+    get toggle(): () => void;
+    get add(): ({ value, label, group, selected }: Item) => void;
+    get select(): (itemOrKey: any) => void;
+    get remove(): (itemOrKey: any) => void;
+    get filter(): ((query?: string | undefined) => Promise<void>) & import("../..").FilterQuery<Item>;
 }
 export {};

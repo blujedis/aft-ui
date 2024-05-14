@@ -1,4 +1,3 @@
-
 export const boxPadding = {
 	unstyled: '',
 	xs: 'p-4',

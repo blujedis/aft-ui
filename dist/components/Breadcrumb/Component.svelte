@@ -24,7 +24,7 @@ const th = themer($themeStore);
 $:
   items = generateBreadcrumbs();
 $:
-  breadcrumbNavClasses = th.create("Breadcrumb").bundle(["mainBg", "whiteText"], theme, variant === "filled").bundle(["mainText"], theme, variant === "text").bundle(["softBg", "mainText"], {}, theme, variant === "soft").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("breadcrumb", true).append("w-full", full).append(
+  breadcrumbNavClasses = th.create("Breadcrumb").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(["unfilledText"], theme, variant === "text").bundle(["softBg", "unfilledText"], {}, theme, variant === "soft").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`breadcrumb breadcrumb-${variant}`, true).append("w-full", full).append(
     "px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center",
     true
   ).append("!pl-0", variant === "text").append($$restProps.class, true).compile();

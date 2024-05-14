@@ -7,6 +7,5 @@ export type MenuOptionProps<Tag extends 'a' | 'button'> = {
     size?: ThemeSize;
     theme?: ThemeColor;
     transitioned?: boolean;
-    key?: string | number;
 };
 export declare const menuOptionDefaults: MenuOptionProps<'a'>;

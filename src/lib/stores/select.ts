@@ -1,4 +1,3 @@
-
 import { ensureArray } from '$lib';
 import { writable, type Writable } from 'svelte/store';
 
@@ -30,7 +29,6 @@ export type SelectStore<P extends Record<string, any> = Record<string, any>> = W
 export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	options = {} as P & SelectStoreOptions
 ): SelectStore<P> {
-
 	options = {
 		min: 0,
 		max: 0,
@@ -39,8 +37,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	};
 
 	const isArray =
-		['multiple', 'single-array'].includes('mode') || Array.isArray(options.selected)
-			? true : false;
+		['multiple', 'single-array'].includes('mode') || Array.isArray(options.selected) ? true : false;
 	const isSingleArray = options.mode === 'single-array';
 
 	// If multiple selected must be an array.
@@ -52,16 +49,14 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	function canRemove(selected: any) {
 		if (!isArray || isSingleArray) return true;
 		const len = selected.length;
-		if (len - 1 >= (options.min || 0))
-			return true;
+		if (len - 1 >= (options.min || 0)) return true;
 		return false;
 	}
 
 	function canAdd(selected: any) {
 		if (!options.max || !isArray || isSingleArray) return true;
 		const len = selected.length;
-		if (len + 1 <= options.max)
-			return true;
+		if (len + 1 <= options.max) return true;
 		return false;
 	}
 
@@ -79,10 +74,11 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 			let selected = value;
 			if (isArray)
 				selected = isSingleArray
-					? [value] : s.selected.includes(value)
-						? s.selected : [...s.selected, value]
-			if (typeof options.onChange === 'function')
-				options.onChange(selected);
+					? [value]
+					: s.selected.includes(value)
+						? s.selected
+						: [...s.selected, value];
+			if (typeof options.onChange === 'function') options.onChange(selected);
 			return { ...s, selected };
 		});
 	}
@@ -91,10 +87,8 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		store.update((s) => {
 			if (!canRemove(s.selected)) return { ...s };
 			let selected = value;
-			if (isArray)
-				selected = isSingleArray ? [] : s.selected.filter((v: any) => v !== value)
-			if (typeof options.onChange === 'function')
-				options.onChange(selected);
+			if (isArray) selected = isSingleArray ? [] : s.selected.filter((v: any) => v !== value);
+			if (typeof options.onChange === 'function') options.onChange(selected);
 			return { ...s, selected };
 		});
 	}
@@ -106,18 +100,13 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 			const hasValue = isArray ? selected.includes(value) : value === selected;
 			if (isSingleArray) {
 				selected = hasValue ? [] : [value];
-			}
-			else if (isArray) {
-				if (hasValue && canRemove(selected))
-					selected = selected.filter((v: any) => v !== value);
-				else if (canAdd(selected))
-					selected = [...selected, value];
-			}
-			else {
+			} else if (isArray) {
+				if (hasValue && canRemove(selected)) selected = selected.filter((v: any) => v !== value);
+				else if (canAdd(selected)) selected = [...selected, value];
+			} else {
 				selected = hasValue ? undefined : value;
 			}
-			if (typeof options.onChange === 'function')
-				options.onChange(selected);
+			if (typeof options.onChange === 'function') options.onChange(selected);
 			return { ...s, selected };
 		});
 	}
@@ -128,8 +117,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 			return;
 		}
 		store.update((s) => {
-			if (typeof options.onChange === 'function')
-				options.onChange(_selected);
+			if (typeof options.onChange === 'function') options.onChange(_selected);
 			return { ...s, selected };
 		});
 	}
@@ -139,6 +127,6 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 		reset,
 		select,
 		unselect,
-		toggle,
+		toggle
 	};
 }

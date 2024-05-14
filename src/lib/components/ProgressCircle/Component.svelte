@@ -3,7 +3,7 @@
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
 	import { themeStore, styler, themer } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
-	import { boolToMapValue, cleanObj} from '$lib/utils';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
 	type $$Props = ProgressCircleProps & Omit<ElementProps<'svg'>, 'size'>;
 

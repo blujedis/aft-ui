@@ -11,7 +11,7 @@ declare class __sveltets_Render<Data extends DataGridDataItem> {
     slots(): {
         default: {
             sort: () => void;
-            sortdir: number;
+            sortdir: 0 | 1 | -1;
         };
     };
 }

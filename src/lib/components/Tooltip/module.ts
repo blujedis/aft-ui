@@ -4,22 +4,31 @@ import type { AriaRole } from 'svelte/elements';
 
 export type TooltipVariant = 'filled' | 'outlined' | 'soft';
 
-export type TooltipProps<Tag> = &
-	Pick<PopoverOptions, 'events' | 'escapeable' | 'middleware' | 'offset' | 'padding' | 'placement' | 'strategy' | 'sticky'> & {
-		arrowed?: boolean;
-		as?: Tag;
-		escapeable?: boolean;
-		events?: PopoverEvent | PopoverEvent[];
-		role?: AriaRole | null | undefined;
-		rounded?: ThemeRounded;
-		shadowed?: ThemeShadowed;
-		size?: ThemeSize;
-		theme?: ThemeColor;
-		transitioned?: boolean;
-		trigger?: string;
-		variant?: TooltipVariant;
-		onChange?: (state: boolean) => any;
-	};
+export type TooltipProps<Tag> = Pick<
+	PopoverOptions,
+	| 'events'
+	| 'escapeable'
+	| 'middleware'
+	| 'offset'
+	| 'padding'
+	| 'placement'
+	| 'strategy'
+	| 'sticky'
+> & {
+	arrowed?: boolean;
+	as?: Tag;
+	escapeable?: boolean;
+	events?: PopoverEvent | PopoverEvent[];
+	role?: AriaRole | null | undefined;
+	rounded?: ThemeRounded;
+	shadowed?: ThemeShadowed;
+	size?: ThemeSize;
+	theme?: ThemeColor;
+	transitioned?: boolean;
+	trigger?: string;
+	variant?: TooltipVariant;
+	onChange?: (state: boolean) => any;
+};
 
 export const tooltipDefaults: Partial<TooltipProps<'div'>> = {
 	arrowed: true,
@@ -30,5 +39,5 @@ export const tooltipDefaults: Partial<TooltipProps<'div'>> = {
 	role: 'tooltip',
 	size: 'md',
 	theme: 'secondary',
-	variant: 'filled',
+	variant: 'filled'
 };

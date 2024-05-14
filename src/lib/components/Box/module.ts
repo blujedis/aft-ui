@@ -5,8 +5,8 @@ export type BoxVariant = 'filled' | 'outlined' | 'soft';
 export type BoxProps<Tag extends HTMLTag = 'div'> = {
 	as?: Tag;
 	bordered?: boolean;
-	centered?: boolean
-	dropshadowed?: ThemeShadowed
+	centered?: boolean;
+	dropshadowed?: ThemeShadowed;
 	emptied?: boolean;
 	focused?: boolean;
 	full?: boolean;
@@ -25,5 +25,5 @@ export const boxDefaults: Partial<BoxProps<'div'>> = {
 	as: 'div',
 	centered: true,
 	size: 'md',
-	theme: 'frame',
+	theme: 'frame'
 };

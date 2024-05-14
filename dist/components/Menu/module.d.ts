@@ -24,7 +24,6 @@ export type MenuProps = {
     disabled?: boolean;
     focused?: boolean;
     hovered?: boolean;
-    store?: DisclosureStore;
     theme?: ThemeColor;
     transitioned?: boolean;
     variant?: MenuButtonVariant;

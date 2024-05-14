@@ -10,5 +10,5 @@ export type SelectOptionProps = {
 };
 
 export const selectOptionDefaults: Partial<SelectOptionProps> = {
-	size: 'md',
+	size: 'md'
 };

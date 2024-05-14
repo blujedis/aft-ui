@@ -1,5 +1,5 @@
-<script>import { writable } from "svelte/store";
-import { uniqid } from "../../utils";
+<script>import { uniqid } from "../../utils";
+import { flip } from "svelte/animate";
 import { getContext } from "svelte";
 import { gridHeaderCellDefaults as defaults } from "./module";
 import { themeStore, themer } from "../../theme";
@@ -7,15 +7,15 @@ const context = getContext("DataGrid");
 const id = uniqid();
 let dragging = false;
 let focusing = false;
-export let { accessor, draggable, focused, size, stacked, theme } = {
+export let { accessor, focused, size, theme } = {
   ...defaults,
   focused: context.globals?.focused,
   size: context.globals?.size,
-  stacked: context.globals?.stacked,
-  theme: context.globals?.theme,
-  draggable: true
+  theme: context.globals?.theme
 };
 const th = themer($themeStore);
+$:
+  config = $context.columns.find((v) => v.accessor === accessor);
 $:
   sortkey = $context?.sort.find((v) => [accessor, "-" + accessor].includes(v));
 $:
@@ -23,11 +23,14 @@ $:
 $:
   isLast = $context.columns.findIndex((c) => c.accessor === accessor) === $context.columns.length - 1;
 $:
-  gridHeaderCellClasses = th.create("DataGridHeaderCell").option("gridHeaderPadding", size, size).option("common", "focusedRingWithin", focused && !dragging).option("ringFocusWithin", theme, focused).prepend("datagrid-cell datagrid-header-cell", true).append("group-[.dragging]:bg-secondary peer", true).append("select-none focus:ring-inset", true).append($$restProps.class, true).compile();
+  gridHeaderCellClasses = th.create("DataGridHeaderCell").option("gridHeaderPadding", size, size).option("common", "focusedRingWithin", focused && !dragging).option("ringFocusWithin", theme, focused).prepend("datagrid-cell datagrid-header-cell", true).append("group-hover:cursor-move", config.reorderable).append(
+    "group-[.dragging]:bg-primary-500/70 group-[.dragging]:text-white dark:group-[.dragging]:bg-primary-800/80",
+    config.reorderable
+  ).append("select-none outline-none focus-within:ring-offset-0 focus-within:ring-inset", true).append($$restProps.class, true).compile();
 $:
-  dividerClasses = th.create("DataGridHeaderCellDivider").option("panelBg", theme, theme).prepend("datagrid-header-cell-divider", true).append("w-0.5 h-1/2 absolute z-0 top-1/4 -right-0.5", true).compile();
+  dividerClasses = th.create("DataGridHeaderCellDivider").option("dividerBg", theme, theme).prepend("datagrid-header-cell-divider", true).append("w-0.5 h-1/2 absolute z-10 top-1/4 -right-[1.5px]", true).compile();
 function sort() {
-  const key = sortdir === 0 ? accessor : "-" + accessor;
+  const key = sortdir === 0 ? accessor : sortdir === 1 ? "-" + accessor : "";
   context.sortby(key);
 }
 function getHeaderChildren(child) {
@@ -83,16 +86,16 @@ function onDrop(event) {
 }
 </script>
 
-<div class="relative group" class:dragging>
-	{#if draggable}
+<div class="datagrid-header-cell-wrapper relative group pl-1 pr-0.5" class:dragging>
+	{#if config.reorderable}
 		<div
 			role="columnheader"
 			{id}
-			tabindex="-1"
+			tabindex="0"
 			{...$$restProps}
 			aria-grabbed={dragging}
 			class={gridHeaderCellClasses}
-			{draggable}
+			draggable={config.reorderable}
 			on:dragstart={onDragStart}
 			on:dragover={onDragOver}
 			on:drop={onDrop}

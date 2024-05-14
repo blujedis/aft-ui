@@ -13,16 +13,16 @@ export let {
   rounded,
   shadowed,
   size,
-  store: initStore,
   theme,
   transitioned,
   underlined,
   variant,
   visible
 } = {
+  ...cleanObj($themeStore.defaults?.component),
   ...defaults
 };
-export const store = initStore || useDisclosure({
+export const store = useDisclosure({
   visible
 });
 const th = themer($themeStore);
@@ -45,7 +45,7 @@ setContext("Menu", {
   globals
 });
 $:
-  menuClasses = th.create("Menu").append("w-full", full).append("relative inline-block clear-both", true).append($$restProps.class, true).compile();
+  menuClasses = th.create("Menu").append("w-full", full).prepend(`menu menu-${variant} menu-${theme}`, true).append("relative inline-block clear-both", true).append($$restProps.class, true).compile();
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
@@ -69,11 +69,5 @@ function handleKeydown(e) {
 	on:keydown={handleKeydown}
 	class={menuClasses}
 >
-	<slot
-		visible={$store.visible}
-		active={$store.active}
-		open={store.open}
-		close={store.close}
-		toggle={store.toggle}
-	/>
+	<slot visible={$store.visible} open={store.open} close={store.close} toggle={store.toggle} />
 </div>

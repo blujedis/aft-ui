@@ -6,7 +6,7 @@ declare const __propDef: {
         caret?: string | import("@iconify/svelte").IconifyIcon | undefined;
         filterable?: boolean | undefined;
         hovered?: boolean | undefined;
-        multiple?: boolean | undefined;
+        tags?: boolean | undefined;
         newable?: boolean | undefined;
         placeholder?: string | undefined;
         removable?: boolean | undefined;
@@ -24,9 +24,6 @@ declare const __propDef: {
         };
         icon: {};
         input: {
-            handleInputUpdate: (e: Event & {
-                currentTarget: EventTarget | HTMLInputElement;
-            }) => void;
             handleInputKeydown: (e: {
                 currentTarget: EventTarget & HTMLInputElement;
             } & KeyboardEvent) => Promise<void>;

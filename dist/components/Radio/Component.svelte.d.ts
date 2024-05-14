@@ -3,6 +3,8 @@ import { type RadioProps } from './module';
 declare const __propDef: {
     props: RadioProps & Omit<import("svelte/elements").HTMLInputAttributes, "size">;
     events: {
+        change: Event;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {

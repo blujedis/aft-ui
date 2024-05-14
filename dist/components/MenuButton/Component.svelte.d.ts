@@ -4,12 +4,12 @@ declare const __propDef: {
         rounded?: import("../../types").ThemeRounded | undefined;
         hovered?: boolean | undefined;
         full?: boolean | undefined;
+        transitioned?: boolean | undefined;
+        disabled?: boolean | undefined;
         shadowed?: import("../../types").ThemeShadowed | undefined;
         size?: import("../../types").ThemeSize | undefined;
         theme?: import("../../types").ThemeColor | undefined;
-        transitioned?: boolean | undefined;
         bordered?: boolean | undefined;
-        disabled?: boolean | undefined;
         variant?: import("..").ButtonVariant | undefined;
         dropshadowed?: import("../../types").ThemeShadowed | undefined;
         href?: string | null | undefined;

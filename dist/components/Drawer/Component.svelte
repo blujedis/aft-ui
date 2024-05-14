@@ -31,7 +31,7 @@ $:
 $:
   drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile();
 $:
-  drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll z-20 bg-white", true).append($$restProps.class, true).compile();
+  drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll bg-white", true).append($$restProps.class, true).compile();
 function handleClose() {
   store.close();
 }
@@ -50,7 +50,7 @@ function handleClick(e) {
 <svelte:window on:keydown={handleKeydown} />
 
 {#if $store.visible}
-	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+	<div class="relative z-40" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		{#if backdrop}
 			<div
 				role="button"

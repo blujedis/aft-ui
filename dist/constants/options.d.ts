@@ -61,6 +61,7 @@ export declare const fieldLeading: {
 export declare const fontSizes: {
     unstyled: string;
     base: string;
+    xss: string;
     xs: string;
     sm: string;
     md: string;
@@ -93,6 +94,15 @@ export declare const fieldFontSizes: {
     xl: string;
     xl2: string;
 };
+export declare const fieldButtonSizes: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
 export declare const fieldPaddingY: {
     unstyled: string;
     xs: string;
@@ -112,15 +122,6 @@ export declare const fieldPaddingTightY: {
     xl2: string;
 };
 export declare const fieldUpperPaddingY: {
-    unstyled: string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xl2: string;
-};
-export declare const boxPadding: {
     unstyled: string;
     xs: string;
     sm: string;

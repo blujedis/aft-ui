@@ -1,4 +1,5 @@
-<script>import { createCustomEvent } from "../../utils";
+<script>import { themeStore, themer } from "../../theme";
+import { createCustomEvent } from "../../utils";
 import { setContext } from "svelte";
 import {
   disclosureDefaults as defaults
@@ -8,40 +9,48 @@ export let {
   as,
   autoclose,
   escapable,
+  focustrap,
   opened,
   store: initStore,
   transition
 } = { ...defaults };
-let disclosure;
 const element = as;
 export const store = useDisclosure({ visible: opened });
 setContext("Disclosure", {
   ...store,
-  transition
+  focustrap,
+  transition,
+  open: handleOpen,
+  close: handleClose,
+  toggle: handleToggle
 });
+const th = themer($themeStore);
+$:
+  disclosureClasses = th.create("Disclosure").prepend("disclosure", true).append($$restProps.class, true).compile();
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
 function handleOpen() {
   store.open();
   setTimeout(() => {
-    disclosure?.focus();
+    $store.panel?.focus();
   });
 }
 function handleClose() {
   store.close();
 }
 function handleToggle() {
-  if ($store.visible)
+  if ($store.visible) {
     handleClose();
-  else
+  } else {
     handleOpen();
+  }
 }
 function handleKeydown(e) {
   if (!$store.visible || e.repeat)
     return;
   const target = e.target;
-  if (e.key === "Escape" && escapable && (target.matches("body") || target === disclosure)) {
+  if (e.key === "Escape" && escapable && (target.matches("body") || target === $store.panel)) {
     e.preventDefault();
     store.close();
   }
@@ -52,12 +61,11 @@ function handleKeydown(e) {
 
 <svelte:element
 	this={element}
-	tabindex="-1"
 	role="presentation"
 	{...$$restProps}
-	bind:this={disclosure}
 	use:clickOutside
 	on:click_outside={handleClose}
+	class={disclosureClasses}
 >
 	<slot open={handleOpen} close={handleClose} toggle={handleToggle} visible={$store?.visible} />
 </svelte:element>

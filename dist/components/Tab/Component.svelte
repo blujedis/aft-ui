@@ -31,7 +31,8 @@ export let {
   size: context.globals?.size,
   theme: context.globals?.theme,
   transitioned: context.globals?.transitioned,
-  variant: context.globals?.variant
+  variant: context.globals?.variant,
+  underlined: context.globals?.underlined
 };
 let panel;
 let initialized = false;
@@ -43,14 +44,13 @@ const additionalProps = {
 const th = themer($themeStore);
 $:
   tabClasses = th.create("TabClass").bundle(
-    ["selectedBgAriaSelected", "selectedWhiteTextAriaSelected"],
+    ["selectedBgAriaSelected", "filledTextAriaSelected"],
     theme,
     ["filled", "pills"].includes(variant) && selected
-  ).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("buttonPadding", size, size).option("fieldFontSizes", size, size).option("fieldLeading", size, size).option("panelAccordionBg", theme, ["filled", "pills"].includes(variant)).option(
-    "panelAccordionBgHover",
-    theme,
-    ["filled", "pills"].includes(variant) && hovered && !selected
-  ).option("roundeds", boolToMapValue(rounded), rounded).prepend("tab", true).prepend("tab-selected", selected).append("w-full", full).append("group-first:pl-0", variant === "text").append("rounded-none group-first:rounded-l group-last:rounded-r", variant === "filled").append("inline-flex items-center justify-center outline-none h-full", true).compile();
+  ).option("unfilledTextAriaSelected", theme, ["flushed", "text"].includes(variant)).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("buttonPadding", size, size).option("fieldFontSizes", size, size).option("fieldLeading", size, size).option("roundeds", boolToMapValue(rounded), rounded).prepend("tab", true).append(
+    "bg-frame-100 dark:bg-frame-700 hover:bg-frame-200/70 dark:bg-frame-900/40",
+    ["filled", "pills"].includes(variant)
+  ).prepend("tab-selected", selected).append("w-full", full).append("hover:underline", variant === "text" && !selected && underlined).append("rounded-none group-first:rounded-l group-last:rounded-r", variant === "filled").append("inline-flex items-center justify-center outline-none h-full", true).compile();
 function init(node) {
   let tabs = $context.tabs;
   if (!initialized) {

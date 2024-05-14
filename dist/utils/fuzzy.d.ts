@@ -99,7 +99,10 @@ export declare function fuzzyFull(needle: string, haystack: string, options?: Om
  * Filters array of values which match the needles threshold.
  *
  * @example
- * fuzzyMatch('pet', ['peter', 'paul', 'john'], { threshold: 2}) > boolean
+ * fuzzyFilter('pet', ['peter', 'paul', 'john'], { threshold: 2}) >> boolean
+ * fuzzyFilter('pet',
+ * 	[{ name: peter }, { name: 'paul' }, { name: 'john'}],
+ *  { threshold: 2, keys: ['name']}) >> boolean;
  *
  * @param needle the needle to evaluate against haystack.
  * @param haystack the haystack string to be evaluated for match.

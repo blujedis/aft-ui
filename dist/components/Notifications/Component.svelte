@@ -11,9 +11,9 @@ export let { Component, duration, group, position, transition } = {
 };
 const th = themer($themeStore);
 $:
-  notificationContainerClasses = th.create("NotificationContainer").append("sm:items-start items-start", position.startsWith("top")).append("sm:items-end items-end", position.startsWith("bottom")).append("pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-20", true).append($$restProps.class, true).compile();
+  notificationContainerClasses = th.create("NotificationContainer").prepend(`notifications-container`, true).append("sm:items-start items-start", position.startsWith("top")).append("sm:items-end items-end", position.startsWith("bottom")).append("pointer-events-none fixed inset-0 flex p-6 sm:p-4 z-50", true).append($$restProps.class, true).compile();
 $:
-  notificationListClasses = th.create("NotificationContainerList").append("flex w-full flex-col space-y-2 items-center sm:items-end", true).append("sm:items-start", position === "top-left" || position === "bottom-left").append("sm:items-center", position === "top-center" || position === "bottom-center").compile();
+  notificationListClasses = th.create("NotificationContainerList").prepend(`notifications`, true).append("flex w-full flex-col space-y-2 items-center sm:items-end", true).append("sm:items-start", position === "top-left" || position === "bottom-left").append("sm:items-center", position === "top-center" || position === "bottom-center").compile();
 $:
   filtered = $notifications.filter((item) => item.group === group);
 $:

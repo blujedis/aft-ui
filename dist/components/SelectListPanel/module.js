@@ -1,7 +1,8 @@
 export const selectListPanelDefaults = {
-    origin: 'center',
+    bordered: true,
     position: 'left',
-    shadowed: 'md',
+    recordless: true,
+    shadowed: 'sm',
     theme: 'frame',
     transition: { start: 0.95, type: 'scale' }
 };

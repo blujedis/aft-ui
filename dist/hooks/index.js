@@ -4,3 +4,4 @@ export * from './usePopover';
 export * from './useFocusTrap';
 export * from './useColorMode';
 export * from './useResizer';
+export * from './usePaginator';

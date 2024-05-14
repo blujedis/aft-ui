@@ -1,7 +1,7 @@
 <script>import { tweened } from "svelte/motion";
 import { progressCircleDefaults as defaults } from "./module";
 import { themeStore, styler, themer } from "../../theme";
-import { boolToMapValue } from "../../utils";
+import { boolToMapValue, cleanObj } from "../../utils";
 export let {
   animate,
   delay,
@@ -17,6 +17,7 @@ export let {
   value,
   tracksize
 } = {
+  ...cleanObj($themeStore.defaults?.component),
   ...defaults
 };
 export const store = tweened(value, {
@@ -37,7 +38,7 @@ const st = styler($themeStore);
 $:
   progressCircleStyles = st.create("ProgressCircleStyles").add("height", diameter, true).add("width", diameter, true).add("transform", "rotate(-90deg)", true).compile();
 $:
-  progressCircleClasses = th.create("ProgressCircle").option("dropshadows", boolToMapValue(shadowed), shadowed).append($$restProps.class, true).compile();
+  progressCircleClasses = th.create("ProgressCircle").option("dropshadows", boolToMapValue(shadowed), shadowed).prepend(`progress-circle progress-circle-${theme}`, true).append($$restProps.class, true).compile();
 $:
   progressCircleTrackClasses = th.create("ProgressCircleTrack").bundle(["progressStroke"], theme, true).append("fill-transparent", true).compile();
 $:

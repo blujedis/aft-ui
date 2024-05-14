@@ -3,7 +3,6 @@ export const accordionDefaults = {
     ...accordionOptionDefaults,
     as: 'div',
     multiple: false,
-    selected: []
-    // theme: 'frame',
-    // variant: 'filled'
+    selected: [],
+    variant: 'text'
 };

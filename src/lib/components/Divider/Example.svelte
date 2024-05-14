@@ -15,14 +15,12 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, 
+		transitioned: false as boolean
 	};
 </script>
 
 <ExamplePage {title} {description}>
 	{#each colors as color}
-		<div class="mb-4">
-
-		</div>
+		<div class="mb-4"></div>
 	{/each}
 </ExamplePage>

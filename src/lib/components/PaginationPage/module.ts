@@ -6,12 +6,12 @@ export type PaginationPageVariant = 'filled' | 'flushed' | 'soft';
 
 export type PaginationPageProps<Tag> = {
 	as?: Tag;
+	disabled?: boolean;
 	focused?: ThemeFocused;
 	hovered?: boolean;
 	next?: boolean | string | IconifyIcon;
 	previous?: boolean | string | IconifyIcon;
 	rounded?: ThemeRounded;
-	selected?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	transitioned?: boolean;

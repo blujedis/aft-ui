@@ -1,6 +1,8 @@
+/// <reference types="svelte" />
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
-import type { PaginatorOptions, PaginatorStore } from '../../stores/paginator';
-export type PaginationContext<T extends Record<string, any> = Record<string, any>> = PaginatorStore<T> & {
+import type { PaginatorOptions, Paginator } from '../../hooks/usePaginator';
+import type { Writable } from 'svelte/store';
+export type PaginationContext<T extends Record<string, any> = Record<string, any>> = Writable<Paginator<T>> & {
     globals: {
         focused: boolean;
         hovered: boolean;

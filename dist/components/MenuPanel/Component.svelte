@@ -6,7 +6,7 @@ import { useFocusNav } from "../../hooks";
 import { boolToMapValue } from "../../utils";
 import { writable } from "svelte/store";
 const context = getContext("Menu");
-export let { origin, position, rounded, shadowed, theme, transition } = {
+export let { bordered, full, position, rounded, shadowed, theme, transition } = {
   ...defaults,
   ...context?.globals
 };
@@ -14,9 +14,30 @@ const th = themer($themeStore);
 $:
   ref = writable();
 $:
-  nav = useFocusNav($ref?.firstChild);
+  nav = useFocusNav($ref?.firstChild, {
+    onInit
+  });
 $:
-  panelClasses = th.create("MenuPanel").bundle(["panelBg"], theme, true).option("common", "ringed", true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("dropdown-panel", true).append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append($$restProps.class, true).compile();
+  panelClasses = th.create("MenuPanel").option("panelBg", theme, true).option("elementRing", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("elementBorder", theme, bordered).option("shadows", boolToMapValue(shadowed), shadowed).prepend("menu-panel", true).append("border", bordered).append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append($$restProps.class, true).compile();
+$:
+  activeItem = { el: void 0, index: void 0 };
+function onInit(items = []) {
+  if (!items.length)
+    return;
+  activeItem = items.reduce(
+    (a, c, i) => {
+      if (c.classList.contains("menu-option-active")) {
+        a.el = c;
+        a.index = Math.max(0, i - 1);
+      }
+      return a;
+    },
+    { el: void 0, index: void 0 }
+  );
+  if (!activeItem.el)
+    activeItem = { el: items[0], index: 0 };
+  activeItem.el?.focus();
+}
 function setFocus(el) {
   el.focus();
 }

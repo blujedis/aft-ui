@@ -63,8 +63,12 @@ export function themer(themeConfig) {
             if (typeof prop === 'undefined' || !when)
                 return api;
             let merged = keys.reduce((result, k) => {
-                const opt = _options[k];
-                if (typeof opt === 'undefined')
+                // top level value in states or value from common options.
+                let opt = _options[k];
+                const commonOpt = _options.common[k];
+                if (!opt && commonOpt)
+                    opt = { [prop || '$base']: commonOpt };
+                if (typeof opt === 'undefined' && !commonOpt)
                     throw new Error(`${instanceName} option ${k} using property ${prop} was NOT found.`);
                 return mergeConfigs(result, opt); // TODO: fix types.
             }, {});

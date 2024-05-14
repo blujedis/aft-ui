@@ -6,9 +6,12 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        recordless: {};
         default: {
-            currentElement: HTMLElement | undefined;
-            currentIndex: number | undefined;
+            activeItem: {
+                el?: HTMLElement | undefined;
+                index?: number | undefined;
+            };
         };
     };
 };

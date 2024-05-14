@@ -8,8 +8,8 @@ declare const __propDef: {
     slots: {
         default: {
             search: {
-                (query: string, accessors?: import("../DataGrid").FilterAccessor<import("../DataGrid").DataGridDataItem>[] | undefined): void;
-                (query: string, accessor: import("../DataGrid").FilterAccessor<import("../DataGrid").DataGridDataItem>, ...accessors: import("../DataGrid").FilterAccessor<import("../DataGrid").DataGridDataItem>[]): void;
+                (criteria: import("../DataGrid/filter").DataGridFilterCriteria<import("../DataGrid").DataGridDataItem>): void;
+                (...criteria: import("../DataGrid/filter").DataGridFilterCriteria<import("../DataGrid").DataGridDataItem>[]): void;
             };
         };
     };

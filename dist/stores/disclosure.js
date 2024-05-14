@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 export function useDisclosure(props = {}) {
+    props.onChange = props.onChange || (() => { });
     const store = writable({ visible: false, ...props });
     function open() {
         store.update((s) => {

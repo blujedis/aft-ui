@@ -307,7 +307,7 @@ export function isNotEmpty(value: unknown) {
 
 /**
  * Checks if value is greater than compare.
- * 
+ *
  * @param value the value to inspect as greater than compare.
  * @param compare the value to inspect as less than value.
  */
@@ -317,7 +317,7 @@ export function isGreaterThan(value: any, compare: any) {
 
 /**
  * Checks if value is greater than or equal to compare.
- * 
+ *
  * @param value the value to inspect as greater than or equal to compare.
  * @param compare the value to inspect as less than or equal to value.
  */
@@ -325,10 +325,9 @@ export function isGreaterThanOrEqual(value: any, compare: any) {
 	return value >= compare;
 }
 
-
 /**
  * Checks if value is less than compare.
- * 
+ *
  * @param value the value to inspect as less than compare.
  * @param compare the value to inspect as greater than value.
  */
@@ -338,7 +337,7 @@ export function isLessThan(value: any, compare: any) {
 
 /**
  * Checks if value is less than or equal to compare.
- * 
+ *
  * @param value the value to inspect as less than or equal to compare.
  * @param compare the value to inspect as greater than or equal to value.
  */

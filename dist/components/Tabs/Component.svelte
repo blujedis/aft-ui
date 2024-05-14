@@ -15,6 +15,7 @@ export let {
   theme,
   transitioned,
   variant,
+  underlined,
   class: klass,
   navWrapperClasses,
   navContainerClasses,
@@ -31,7 +32,8 @@ const globals = cleanObj({
   size,
   theme,
   transitioned,
-  variant
+  variant,
+  underlined
 });
 export const context = setContext("Tabs", {
   ...store,
@@ -40,7 +42,7 @@ export const context = setContext("Tabs", {
 let panel;
 const th = themer($themeStore);
 $:
-  tabsClasses = th.create("TabsWrapper").option("common", "formBorder", variant === "flushed").option("common", "divided", ["filled"].includes(variant)).option("shadows", boolToMapValue(shadowed), shadowed && variant !== "text").prepend(`tabs tabs-${variant}`, true).append("-mb-px", ["flushed", "filled"].includes(variant)).append("divide-x", variant === "filled").append("border-b", variant === "flushed").append("w-full", full).append("space-x-2", ["flushed", "pills"].includes(variant)).append("mb-1", variant === "text").append("not-sr-only isolate inline-flex flex-wrap mb-4", true).append($$restProps.class, true).compile();
+  tabsClasses = th.create("TabsWrapper").option("formBorder", theme, variant === "flushed").option("shadows", boolToMapValue(shadowed), shadowed && variant !== "text").prepend(`tabs tabs-${variant}`, true).append("-mb-px", ["flushed", "filled"].includes(variant)).append("divide-x", variant === "filled").append("border-b", variant === "flushed").append("w-full", full).append("space-x-2", ["flushed", "pills"].includes(variant)).append("mb-1", variant === "text").append("divide-frame-900/20 dark:divide-frame-600", variant === "filled").append("not-sr-only isolate inline-flex flex-wrap mb-4", true).append($$restProps.class, true).compile();
 $:
   selectClasses = th.create("TabsSelect").prepend(`tabs-${variant}`, true).prepend("tabs", true).append("sr-only mb-4", true).compile();
 function mount(node) {

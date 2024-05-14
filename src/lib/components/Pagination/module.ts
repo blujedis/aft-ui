@@ -1,13 +1,15 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { PaginatorOptions, PaginatorStore } from '$lib/stores/paginator';
+// import type { PaginatorOptions, PaginatorStore } from '$lib/stores/paginator';
+import type { PaginatorOptions, Paginator } from '$lib/hooks/usePaginator';
+import type { Writable } from 'svelte/store';
 
 export type PaginationContext<T extends Record<string, any> = Record<string, any>> =
-	PaginatorStore<T> & {
+	// PaginatorStore<T> & {
+	Writable<Paginator<T>> & {
 		globals: {
 			focused: boolean;
 			hovered: boolean;
 			rounded: ThemeRounded;
-			// shadowed: ThemeShadowed;
 			size: ThemeSize;
 			theme: ThemeColor;
 			transitioned: boolean;

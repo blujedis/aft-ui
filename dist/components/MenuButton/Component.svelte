@@ -9,7 +9,7 @@ export let { caret, full, rounded, roticon, size, shadowed, theme, variant } = {
 };
 const th = themer($themeStore);
 $:
-  buttonClasses = th.create("MenuButton").append("h-full", true).append($$restProps.class, true).compile();
+  buttonClasses = th.create("MenuButton").prepend(`menu-button`, true).append("h-full", true).append($$restProps.class, true).compile();
 $:
   iconClasses = th.create("MenuButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", !!caret && roticon).append(
     typeof roticon === "string" ? roticon : "-rotate-180",

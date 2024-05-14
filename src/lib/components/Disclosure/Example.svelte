@@ -7,8 +7,6 @@
 
 	const title = 'Disclosure';
 	const description = 'Base component for disclosing an element or group of elements.';
-	const code = `
-  `;
 
 	const props = {
 		disabled: false,
@@ -51,7 +49,7 @@
 	];
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4">
 		{#key props}
 			<label for="filled">

@@ -3,15 +3,17 @@ import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder } from "../../utils";
 import { getContext } from "svelte";
-export let { disabled, size, theme, transitioned, value, variant, unstyled } = {
-  ...defaults
+const context = getContext("Select");
+export let { disabled, size, value } = {
+  ...defaults,
+  ...context.globals
 };
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("SelectOption").option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center", true).append($$restProps.class, true).compile();
+  selectOptionClasses = th.create("SelectOption").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<option use:forwardedEvents {...$$restProps} {value} class={inputClasses}>
+<option use:forwardedEvents {...$$restProps} {value} {disabled} class={selectOptionClasses}>
 	<slot />
 </option>

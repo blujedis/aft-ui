@@ -144,7 +144,6 @@ export const fieldUpperPaddingY = {
 	xl2: 'py-3.5'
 };
 
-
 export const fieldPadding = mergeConfigs(fieldPaddingY, fieldPaddingX, fieldLeading);
 
 export const buttonPadding = mergeConfigs(

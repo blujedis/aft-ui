@@ -7,4 +7,11 @@ export type DataGridFilterCellProps = {
     stacked?: boolean;
     theme?: ThemeColor;
 };
+export declare const filterPopoverDefaults: {
+    criteriaOne: string;
+    valueOne: string;
+    criteriaTwo: string;
+    valueTwo: string;
+    join: "and" | "or";
+};
 export declare const gridFilterCellDefaults: Partial<DataGridFilterCellProps>;

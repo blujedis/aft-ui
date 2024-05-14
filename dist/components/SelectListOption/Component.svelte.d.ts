@@ -8,7 +8,7 @@ declare class __sveltets_Render<Tag extends 'button' | 'a'> {
     };
     slots(): {
         default: {
-            active: boolean;
+            active: any;
         };
     };
 }

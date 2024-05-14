@@ -7,7 +7,7 @@ declare class __sveltets_Render<Tag extends HTMLTag> {
         roticon?: string | boolean | undefined;
         rotiangle?: 90 | 180 | undefined;
         selectable?: boolean | undefined;
-        key?: import("../..").SelectStoreValue;
+        key?: any;
         theme?: import("../../types").ThemeColor | undefined;
         variant?: import("./module").AccordionVariant | undefined;
     } & ElementProps<Tag>;

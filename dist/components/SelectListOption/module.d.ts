@@ -5,7 +5,7 @@ export type SelectListOptionProps<Tag extends 'a' | 'button'> = {
     as?: Tag;
     focused?: boolean;
     hovered?: boolean;
-    multiple?: boolean;
+    tags?: boolean;
     removable?: boolean;
     size?: ThemeSize;
     theme?: ThemeColor;

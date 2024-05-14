@@ -1,5 +1,5 @@
 import { getProperty } from 'dot-prop';
-import { isLike, isNumeric } from './is';
+import { isNumeric } from './is';
 /**
  * Inserts a new item into an array without mutating.
  *
@@ -26,22 +26,6 @@ export function ensureArray(value, clean = true) {
     if (Array.isArray(value))
         return (clean ? value.filter((v) => typeof v !== 'undefined') : value);
     return [value];
-}
-/**
- * Rudamentary search filter applying indexOf checking against all or specified accessor fields.
- *
- * @param query the search query.
- * @param items an array of items to apply the search to.
- * @param accessors optional accessor keys applying search to only these keys.
- */
-export function searchArray(query, items, accessors) {
-    if (!accessors.length)
-        return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
-    if (typeof accessors[0] === 'string') {
-        const _accessors = accessors;
-        return items.filter((item) => _accessors.some((key) => isLike(query, item[key])));
-    }
-    return items.filter((item) => Object.entries(item).some(([_key, val]) => isLike(query, val)));
 }
 function defaultComparator(a, b) {
     return a == b ? 0 : a > b ? 1 : -1;

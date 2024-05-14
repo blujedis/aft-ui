@@ -33,10 +33,10 @@ export declare function isConstructorType(value: unknown, compare: string): bool
 /**
  * Simple function using indexOf for SQL LIKE evaluation.
  *
- * @param query the search query.
- * @param value the value to apply search query against.
+ * @param value the value to compare.
+ * @param compare the value to inspect as like above value.
  */
-export declare function isLike(query: string, value: any): boolean;
+export declare function isLike(value: string, compare: string): boolean;
 /**
  * Checks if value is instanceOf Type.
  *
@@ -138,11 +138,45 @@ export declare function isDeepEqual(value: unknown, compare: unknown): boolean;
  */
 export declare function isNotDeepEqual(value: unknown, compare: unknown): boolean;
 /**
- * Checks if string, array or object is empty object.
+ * Checks if string, array or object is empty.
  *
  * @param value the value to inspect as empty string, array or object.
  */
 export declare function isEmpty(value: unknown): boolean;
+/**
+ * Checks if string, array or object is not empty.
+ *
+ * @param value the value to inspect as not empty string, array or object.
+ */
+export declare function isNotEmpty(value: unknown): boolean;
+/**
+ * Checks if value is greater than compare.
+ *
+ * @param value the value to inspect as greater than compare.
+ * @param compare the value to inspect as less than value.
+ */
+export declare function isGreaterThan(value: any, compare: any): boolean;
+/**
+ * Checks if value is greater than or equal to compare.
+ *
+ * @param value the value to inspect as greater than or equal to compare.
+ * @param compare the value to inspect as less than or equal to value.
+ */
+export declare function isGreaterThanOrEqual(value: any, compare: any): boolean;
+/**
+ * Checks if value is less than compare.
+ *
+ * @param value the value to inspect as less than compare.
+ * @param compare the value to inspect as greater than value.
+ */
+export declare function isLessThan(value: any, compare: any): boolean;
+/**
+ * Checks if value is less than or equal to compare.
+ *
+ * @param value the value to inspect as less than or equal to compare.
+ * @param compare the value to inspect as greater than or equal to value.
+ */
+export declare function isLessThanOrEqual(value: any, compare: any): boolean;
 /**
  * Checks if value is boolean.
  *
@@ -162,14 +196,14 @@ export declare function isValue(value: unknown): boolean;
  * @param value the value to inspect as true.
  * @param loose when true, returns true if true, 1 or 'yes'.
  */
-export declare function isTrue(value: unknown, loose?: boolean): boolean;
+export declare function isTrue(value: unknown, loose?: boolean): value is true;
 /**
  * Checks if is false.
  *
  * @param value the value to inspect as false.
  * @param loose when true, returns false if false, 0 or 'no'.
  */
-export declare function isFalse(value: unknown, loose?: boolean): boolean;
+export declare function isFalse(value: unknown, loose?: boolean): value is false;
 /**
  * Checks if the value is truthy.
  *

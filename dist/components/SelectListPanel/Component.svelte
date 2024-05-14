@@ -3,15 +3,12 @@ import { themeStore, themer } from "../../theme";
 import { transitioner } from "../Disclosure";
 import { getContext } from "svelte";
 import { useFocusNav } from "../../hooks";
-import { boolToMapValue } from "../../utils";
+import { boolToMapValue, cleanObj } from "../../utils";
 const context = getContext("SelectListContext");
-export let { full, multiple, origin, position, rounded, shadowed, theme, transition } = {
+export let { bordered, full, position, recordless, rounded, shadowed, tags, theme, transition } = {
+  ...cleanObj($themeStore?.defaults?.component, ["focused", "hovered", "size", "transitioned"]),
   ...defaults,
-  full: context.globals?.full,
-  multiple: context.globals?.multiple,
-  rounded: context.globals?.rounded,
-  shadowed: context.globals?.shadowed,
-  theme: context.globals?.theme
+  ...cleanObj(context.globals)
 };
 const th = themer($themeStore);
 $:
@@ -24,7 +21,11 @@ $:
 $:
   activeItem = { el: void 0, index: void 0 };
 $:
-  panelClasses = th.create("SelectListPanel").option("panelBg", theme, theme).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("common", "bordered", true).prepend("select-list-panel", true).append("outline-none", true).append(`absolute z-30 mt-1 text-left min-w-32 border`, true).append(position === "right" ? "right-0" : "left-0", true).append(origin === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", origin === "center").append("min-w-full", full).append($$restProps.class, true).compile();
+  recordlessMsg = typeof recordless === "string" ? recordless : `No options available.`;
+$:
+  panelClasses = th.create("SelectListPanel").option("panelBg", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, bordered).prepend("select-list-panel", true).append("border", bordered).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append("min-w-full", full).append(`absolute mt-1 text-left min-w-32 outline-none z-30`, true).append($$restProps.class, true).compile();
+$:
+  recordlessClasses = th.create("SelectListPanelRecordless").option("menuPadding", context.globals?.size, context.globals?.size).option("fieldFontSizes", context.globals?.size, context.globals?.size).compile();
 function onInit(items = []) {
   if (!items.length || $context.filtering)
     return;
@@ -48,15 +49,14 @@ function onNavigate(el, index) {
 function onSelected(el, e) {
   e.preventDefault();
   const key = el.dataset.key;
-  if (!multiple && $context.input) {
+  if (!tags && $context.input) {
     context.toggle();
-    context.restoreSelected(key, false);
+    if (!context.globals?.filterable)
+      context.select(key);
+    else
+      context.restore(key, false);
     setTimeout(() => {
-      if ($context.input) {
-        const nextValue = $context.items.find((i) => key === i.value)?.label || "";
-        $context.input.value = nextValue;
-        $context.input.focus();
-      }
+      $context.input?.focus();
     });
   } else {
     context.select(key);
@@ -85,7 +85,19 @@ function onFind(items) {
 		class={panelClasses}
 	>
 		<div class="py-1" role="none">
-			<slot currentElement={activeItem.el} currentIndex={activeItem.index} />
+			{#if recordless && !$context.filtered.length}
+				<slot name="recordless">
+					<div class={recordlessClasses}>
+						{#if typeof recordless === 'string'}
+							<span>{recordless}</span>
+						{:else}
+							<span>{recordlessMsg}</span>
+						{/if}
+					</div>
+				</slot>
+			{:else}
+				<slot {activeItem} />
+			{/if}
 		</div>
 	</div>
 {/if}

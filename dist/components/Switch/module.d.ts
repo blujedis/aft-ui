@@ -1,6 +1,5 @@
 import type { ThemeColor, ThemeShadowed, ThemeSize } from '../../types';
 export type SwitchProps = {
-    position?: 'right' | 'left' | 'top' | 'bottom';
     classHandle?: string;
     classSlider?: string;
     disabled?: boolean;
@@ -11,5 +10,6 @@ export type SwitchProps = {
     srtext?: string;
     theme?: ThemeColor;
     transitioned?: boolean;
+    unlabeled?: boolean;
 };
 export declare const switchDefaults: Partial<SwitchProps>;

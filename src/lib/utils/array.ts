@@ -1,5 +1,5 @@
 import { getProperty } from 'dot-prop';
-import {  isNumeric } from './is';
+import { isNumeric } from './is';
 
 /**
  * Inserts a new item into an array without mutating.

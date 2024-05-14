@@ -7,12 +7,15 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            click: () => void;
-            drop: (e: DragEvent & {
+            onClick: () => void;
+            onDrop: (e: DragEvent) => void;
+            onDropOver: (e: DragEvent & {
+                currentTarget: EventTarget & HTMLElement;
+            }) => void;
+            onDropEnd: (e: DragEvent & {
                 currentTarget: EventTarget & HTMLElement;
             }) => void;
         };
-        input: {};
     };
 };
 export type ComponentProps = typeof __propDef.props;

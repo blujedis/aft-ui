@@ -2,6 +2,7 @@
 import { type Writable } from 'svelte/store';
 interface DisclosureBaseOptions {
     visible?: boolean;
+    onChange?: (state: 0 | 1) => void;
 }
 export type DisclosureStoreOptions<P extends Record<string, unknown> = Record<string, unknown>> = DisclosureBaseOptions & P;
 export interface DisclosureMethods<P extends Record<string, unknown> = Record<string, unknown>> {

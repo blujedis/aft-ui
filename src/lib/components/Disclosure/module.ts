@@ -9,7 +9,8 @@ import type {
 } from 'svelte/transition';
 import { fly, fade, scale, blur, slide, crossfade } from 'svelte/transition';
 
-export type DisclosureContext = DisclosureStore & {
+export type DisclosureContext = DisclosureStore<{ panel?: HTMLElement }> & {
+	focustrap: boolean;
 	transition: DisclosureTransitionOption | (Record<string, any> & { type: DisclosureTransition });
 };
 

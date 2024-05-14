@@ -2,20 +2,21 @@
 import { themer, themeStore } from "../../theme";
 import { get_current_component } from "svelte/internal";
 import { forwardEventsBuilder, boolToMapValue } from "../../utils";
-import c from "classnames";
+import { Label } from "../Label";
 export let {
   checked,
   classHandle,
   classSlider,
   disabled,
   focused,
+  for: labelFor,
   hovered,
-  position,
   shadowed,
   size,
   srtext,
   theme,
-  transitioned
+  transitioned,
+  unlabeled
 } = {
   ...defaults
 };
@@ -43,30 +44,33 @@ $:
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<span class={c('switch-wrapper flickerless not-sr-only', $$restProps.class)}>
-	<span
-		role="switch"
-		tabindex="0"
-		class={labelClasses}
-		aria-checked={checked}
-		aria-disabled={disabled}
-	>
-		<span class="sr-only">{srtext}</span>
-		<span aria-hidden="true" class={backdropClasses} />
-		<span aria-hidden="true" class={fillClasses} aria-checked={checked} />
-		<span aria-hidden="true" class={handleClasses} />
-		<input
-			{...$$restProps}
-			tabindex="-1"
-			bind:this={ref}
-			type="checkbox"
-			use:forwardedEvents
-			bind:checked
-			class={inputClasses}
-			{disabled}
-		/>
+<Label for={labelFor} visible={unlabeled !== false} class={$$restProps.class}>
+	<span class="switch-wrapper flickerless">
+		<slot />
+		<span
+			role="switch"
+			tabindex="0"
+			class={labelClasses}
+			aria-checked={checked}
+			aria-disabled={disabled}
+		>
+			<span class="sr-only">{srtext}</span>
+			<span aria-hidden="true" class={backdropClasses} />
+			<span aria-hidden="true" class={fillClasses} aria-checked={checked} />
+			<span aria-hidden="true" class={handleClasses} />
+			<input
+				{...$$restProps}
+				tabindex="-1"
+				bind:this={ref}
+				type="checkbox"
+				use:forwardedEvents
+				bind:checked
+				class={inputClasses}
+				{disabled}
+			/>
+		</span>
 	</span>
-</span>
+</Label>
 
 <style>
 	.flickerless {

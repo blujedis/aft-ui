@@ -34,19 +34,24 @@ const passthru = cleanObj({
 $:
   isSelected = $context.selected?.includes(value);
 $:
-  buttonClasses = th.create("ButtonGroupItem").bundle(["mainText"], theme, variant === "flushed").bundle(["mainBg", "selectedAccentBgAriaChecked"], theme, variant === "filled").bundle(
-    ["selectedBgAriaChecked", "selectedWhiteTextAriaChecked"],
+  buttonClasses = th.create("ButtonGroupItem").bundle(["unfilledText"], theme, variant === "flushed").bundle(["mainBg", "selectedAccentBgAriaChecked"], theme, variant === "filled").bundle(
+    ["selectedBgAriaChecked", "unfilledText", "filledTextAriaChecked"],
     theme,
     variant === "outlined"
-  ).bundle(["mainText", "mainRing"], { $base: "ring-1 ring-inset" }, theme, variant === "outlined").bundle(
-    ["mainText", "ghostBgHover", "selectedGhostBgAriaChecked", "selectedGhostTextAriaChecked"],
+  ).bundle(
+    ["mainRing", "unfilledText"],
+    { $base: "ring-1 ring-inset" },
+    theme,
+    variant === "outlined"
+  ).bundle(
+    ["ghostBgHover", "unfilledText", "selectedSoftBgAriaChecked", "unfilledTextAriaChecked"],
     theme,
     variant === "ghost"
   ).bundle(
-    ["softText", "softBg", "selectedSoftBgAriaChecked", "selectedWhiteTextAriaChecked"],
+    ["softBg", "unfilledText", "selectedSoftBgAriaChecked", "unfilledTextAriaChecked"],
     theme,
     variant === "soft"
-  ).option("buttonPadding", size, size).option("common", "bordered", variant === "filled").prepend("button-group-item", true).append("first:border-l-0 border-l", variant === "filled").append("px-1", variant === "flushed").append("flex-1", full).append("first:rounded-r-none last:rounded-l-none -ml-px", variant !== "ghost").append("relative first:ml-0 focus:z-10 aria-checked:pointer-events-none", true).append($$restProps.class, true).compile();
+  ).option("buttonPadding", size, size).option("elementBorder", theme, ["filled"].includes(variant)).option("elementSoftBorder", theme, ["soft"].includes(variant)).prepend("button-group-item", true).append("first:border-l-0 border-l", ["filled", "soft"].includes(variant)).append("px-1", variant === "flushed").append("flex-1", full).append("first:rounded-r-none last:rounded-l-none -ml-px", variant !== "ghost").append("relative first:ml-0 focus:z-10 aria-checked:pointer-events-none", true).append($$restProps.class, true).compile();
 function handleSelect(value2) {
   if ($context?.selected?.includes(value2))
     context.unselect(value2);
