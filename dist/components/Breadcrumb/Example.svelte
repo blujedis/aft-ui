@@ -1,25 +1,21 @@
-<script lang="ts">
-	import Section from '../_Example/Section.svelte';
-	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import { Breadcrumb } from '.';
-	import { BreadcrumbOption } from '../BreadcrumbOption';
-	import { colors } from '$lib/constants';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-
-	const title = 'Breadcrumb';
-	const description = 'Component for displaying breadcrumbs as paths.';
-	const code = `
+<script>import Section from "../_Example/Section.svelte";
+import ExamplePage from "../_Example/ExamplePage.svelte";
+import { Breadcrumb } from ".";
+import { BreadcrumbOption } from "../BreadcrumbOption";
+import { colors } from "../../constants";
+const title = "Breadcrumb";
+const description = "Component for displaying breadcrumbs as paths.";
+const code = `
   `;
-
-	const props = {
-		full: false,
-		rounded: 'none' as ThemeRounded,
-		shadowed: 'none' as ThemeShadowed,
-		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean,
-		variant: 'text' as any
-	};
+const props = {
+  full: false,
+  rounded: "none",
+  shadowed: "none",
+  size: "md",
+  theme: "default",
+  transitioned: false,
+  variant: "text"
+};
 </script>
 
 <ExamplePage {title} {description}>

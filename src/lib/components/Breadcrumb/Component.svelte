@@ -8,6 +8,7 @@
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
+	import { onNavigate } from '$app/navigation';
 
 	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 
@@ -29,8 +30,6 @@
 	});
 
 	const th = themer($themeStore);
-
-	$: items = generateBreadcrumbs();
 
 	$: breadcrumbNavClasses = th
 		.create('Breadcrumb')
@@ -58,8 +57,8 @@
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
-	function generateBreadcrumbs() {
-		const split = ($page.route?.id || '')
+	function generateBreadcrumbs(_route: { id: string | null }) {
+		const split = (_route?.id || '')
 			.slice(1)
 			.split('/')
 			.filter((v) => v !== '');
@@ -90,7 +89,7 @@
 <nav class={breadcrumbNavClasses} aria-label="Breadcrumb">
 	<ol use:forwardedEvents {...$$restProps} class={breadcrumbListClasses}>
 		{#if generate}
-			{#each items as item}
+			{#each generateBreadcrumbs($page.route) as item}
 				<BreadcrumbOption {...item} />
 			{/each}
 		{/if}
