@@ -28,7 +28,7 @@
 	} = {
 		...cleanObj($themeStore.defaults?.component),
 		...defaults
-	} as $$Props;
+	} as Required<BoxProps<Tag>>;
 
 	const th = themer($themeStore);
 
