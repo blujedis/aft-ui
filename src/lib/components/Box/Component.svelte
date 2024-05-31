@@ -3,9 +3,9 @@
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder, boolToMapValue, cleanObj } from '$lib/utils';
-	import type { ElementProps, ThemeColor } from '$lib/types';
+	import type { ElementProps, ThemeColor, BlockTag } from '$lib/types';
 
-	type Tag = $$Generic<HTMLTag>;
+	type Tag = $$Generic<BlockTag>;
 	type $$Props = BoxProps<Tag> & ElementProps<Tag>;
 
 	export let {

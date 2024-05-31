@@ -1,8 +1,8 @@
-import type { HTMLTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+import type { BlockTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type BoxVariant = 'filled' | 'outlined' | 'soft';
 
-export type BoxProps<Tag extends HTMLTag> = {
+export type BoxProps<Tag extends BlockTag> = {
 	as?: Tag;
 	bordered?: boolean;
 	centered?: boolean;
