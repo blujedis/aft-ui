@@ -2,7 +2,7 @@ import type { HTMLTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from
 
 export type BoxVariant = 'filled' | 'outlined' | 'soft';
 
-export type BoxProps<Tag extends HTMLTag = 'div'> = {
+export type BoxProps<Tag extends HTMLTag> = {
 	as?: Tag;
 	bordered?: boolean;
 	centered?: boolean;
