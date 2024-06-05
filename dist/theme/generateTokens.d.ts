@@ -10,6 +10,7 @@ interface GenerateOptions {
     defaultShade: ThemeShade;
     defaultSelectedShade: ThemeShade;
     softShade: TokenColor;
+    softSolidShade: TokenColor;
     softSelectedShade: TokenColor;
     hoverShade: TokenColor;
     focusShade: TokenColor;
@@ -19,6 +20,8 @@ interface GenerateOptions {
     focusWidth: number;
     formBorderLight: TokenColor;
     formBorderDark?: TokenColor;
+    elementBorderLight?: TokenColor;
+    elementBorderDark?: TokenColor;
     panelBgLight: TokenColor;
     panelBgDark: TokenColor;
     dividerLight: TokenColor;

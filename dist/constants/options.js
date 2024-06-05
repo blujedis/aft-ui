@@ -141,7 +141,16 @@ export const buttonPadding = mergeConfigs(fieldPaddingY, {
     xl: 'px-7',
     xl2: 'px-8'
 }, fieldLeading);
-export const menuPadding = mergeConfigs(fieldPaddingTightY, {
+export const alertPadding = {
+    unstyled: '',
+    xs: 'p-2.5',
+    sm: 'p-3',
+    md: 'p-4',
+    lg: 'p-5',
+    xl: 'p-6',
+    xl2: 'p-7'
+};
+export const menuPading = mergeConfigs(fieldPaddingTightY, {
     unstyled: '',
     xs: 'px-2',
     sm: 'px-2',

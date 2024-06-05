@@ -10,7 +10,6 @@
 	import { themer, themeStore } from '$lib/theme';
 	import type { ElementProps } from '$lib/types';
 	import { fade, fly } from 'svelte/transition';
-	import { useDisclosure } from '$lib/stores';
 	import { boolToMapValue } from '$lib/utils';
 	import Placeholder from './Placeholder.svelte';
 
@@ -25,12 +24,12 @@
 		shadowed,
 		size,
 		speed,
-		theme
+		theme,
+		unmount,
+		visible
 	} = {
 		...defaults
 	} as Required<$$Props>;
-
-	export const store = useDisclosure({ visible: false });
 
 	let panel: HTMLDivElement;
 
@@ -57,7 +56,7 @@
 		.compile();
 
 	function handleClose() {
-		store.close();
+		visible = false;
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -74,7 +73,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-{#if $store.visible}
+{#if (unmount && visible) || !unmount}
 	<div class="relative z-40" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		{#if backdrop}
 			<div
@@ -105,12 +104,7 @@
 					>
 						<div class={drawerClasses}>
 							<div class="relative flex-1">
-								<slot
-									visible={$store.visible}
-									close={store.close}
-									open={store.open}
-									toggle={store.toggle}
-								>
+								<slot>
 									{#if content}
 										<svelte:component this={content} {...contentProps} />
 									{:else}

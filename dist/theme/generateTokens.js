@@ -42,6 +42,7 @@ export const defaultOptions = {
     defaultShade: 500,
     defaultSelectedShade: 600,
     softShade: '500/15',
+    softSolidShade: 100,
     softSelectedShade: '500/25',
     focusShade: '500/70',
     hoverShade: '500/20',
@@ -51,10 +52,11 @@ export const defaultOptions = {
     focusWidth: 3,
     // Below require theme color prefix e.g. frame-
     formBorderLight: 'frame-950/20',
-    formBorderDark: 'frame-600',
+    formBorderDark: 'frame-600/60',
     panelBgLight: 'white',
     panelBgDark: 'frame-800',
-    dividerLight: 'frame-950/15',
+    // dividerLight: 'frame-950/15',
+    dividerLight: 'frame-950/20',
     dividerDark: 'frame-600/60',
     dividerContrastLight: 'frame-950/30',
     dividerContrastDark: 'frame-600',
@@ -63,10 +65,12 @@ export const defaultOptions = {
     panelBorderLight: 'frame-950/5',
     panelBorderDark: 'frame-600/60',
     elementBgLight: 'frame-50',
-    elementBgDark: 'frame-700'
+    elementBgDark: 'frame-700',
+    elementBorderLight: 'frame-900/10',
+    elementBorderDark: 'frame-600/50'
 };
 function getDefaultTokens(options, themeColors = colors) {
-    const { bodyTextDark, bodyTextLight, defaultShade, softShade, softSelectedShade, focusShade, hoverShade, disabledOpacity, defaultSelectedShade, panelBgDark, panelBgLight, formBorderLight, formBorderDark, dividerLight, dividerDark, panelContainerBgLight, panelContainerBgDark, elementBgLight, elementBgDark, panelBorderLight, panelBorderDark } = options;
+    const { bodyTextDark, bodyTextLight, defaultShade, softShade, softSolidShade, softSelectedShade, focusShade, hoverShade, disabledOpacity, defaultSelectedShade, panelBgDark, panelBgLight, formBorderLight, formBorderDark, dividerLight, dividerDark, panelContainerBgLight, panelContainerBgDark, elementBgLight, elementBgDark, panelBorderLight, panelBorderDark, elementBorderDark, elementBorderLight } = options;
     return {
         // Borders
         borders: {
@@ -118,11 +122,11 @@ function getDefaultTokens(options, themeColors = colors) {
                 $base: [dividerLight, dividerDark]
             }
         },
-        ringBorder: {
+        elementRing: {
             variant: 'element',
             modifiers: ['ring'],
             colors: {
-                $base: [formBorderLight, formBorderDark]
+                $base: [elementBorderLight, elementBorderDark]
             }
         },
         // Backgrounds
@@ -140,6 +144,15 @@ function getDefaultTokens(options, themeColors = colors) {
                 frame: 'bg-frame-100 dark:bg-frame-500/20',
                 white: ['white', 'white/20'],
                 black: ['black/20', 'black/20']
+            })
+        },
+        bgSoftSolid: {
+            variant: 'softSolid',
+            modifiers: ['bg'],
+            colors: createColorMap(themeColors, softSolidShade, getMax(softSolidShade, 400, 950), {
+                frame: 'bg-frame-100 dark:bg-frame-700',
+                white: ['white', 'white'],
+                black: ['frame-200', 'frame-950']
             })
         },
         bgNotification: {
@@ -328,6 +341,15 @@ function getDefaultTokens(options, themeColors = colors) {
                 black: `text-${bodyTextLight} dark:text-${bodyTextDark}`
             })
         },
+        textSolidSoft: {
+            variant: 'softSolid',
+            modifiers: ['text'],
+            colors: () => createColorMap(themeColors, getMin(defaultShade, 100, 400), getMin(defaultShade, -100, 400), {
+                frame: `text-${bodyTextLight} dark:text-${bodyTextDark}`,
+                white: `text-${bodyTextLight} dark:text-${bodyTextLight}`,
+                black: `text-${bodyTextLight} dark:text-${bodyTextDark}`
+            })
+        },
         textSelectedFilled: {
             variant: 'filled',
             modifiers: [...selectedTextModifiers],
@@ -427,9 +449,9 @@ function getMin(value, offset = 0, min = 0) {
 // ex: getMax(40, 50, 60) = 60
 // adding 40 to 50 = 90 but our max val was set to 60
 // Math.min will choose the lower or our max between 60 and 90.
-// function getMax(value: number, offset = 0, max = 0) {
-// 	return Math.min(max, value + offset);
-// }
+function getMax(value, offset = 0, max = 0) {
+    return Math.min(max, value + offset);
+}
 function createColorMap(colors, light, dark, override) {
     const result = colors.reduce((a, c) => {
         if (['white', 'black'].includes(c)) {

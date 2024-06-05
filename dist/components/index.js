@@ -2,6 +2,7 @@ export * from './Accordion';
 export * from './AccordionButton';
 export * from './AccordionOption';
 export * from './AccordionContent';
+export * from './Alert';
 export * from './Avatar';
 export * from './AvatarStack';
 export * from './Badge';

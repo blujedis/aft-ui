@@ -3,6 +3,7 @@ export * from '../constants/states';
 
 // Component Options
 export * from './AccordionOption/options';
+export * from './Alert/options';
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';

@@ -16,14 +16,14 @@
 		shadowed: 'lg' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		width: 'sm' as ThemeSize,
-		theme: 'default' as ThemeColor
+		theme: 'frame' as ThemeColor
 	};
 </script>
 
 <ExamplePage {title} {description}>
 	<div class="mb-4">
-		<Card {...props}>
-			<CardHeader variant="filled">Header</CardHeader>
+		<Card {...props} variant="outlined" shadowed="none" divided>
+			<CardHeader>Header</CardHeader>
 			<CardContent
 				>Lorem ipsum was conceived as filler text, formatted in a certain way to enable the
 				presentation of graphic elements in documents.</CardContent

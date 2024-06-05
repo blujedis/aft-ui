@@ -7,7 +7,6 @@
 } from "./module";
 import { themer, themeStore } from "../../theme";
 import { fade, fly } from "svelte/transition";
-import { useDisclosure } from "../../stores";
 import { boolToMapValue } from "../../utils";
 import Placeholder from "./Placeholder.svelte";
 export let {
@@ -19,11 +18,12 @@ export let {
   shadowed,
   size,
   speed,
-  theme
+  theme,
+  unmount,
+  visible
 } = {
   ...defaults
 };
-export const store = useDisclosure({ visible: false });
 let panel;
 const th = themer($themeStore);
 $:
@@ -33,7 +33,7 @@ $:
 $:
   drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll bg-white", true).append($$restProps.class, true).compile();
 function handleClose() {
-  store.close();
+  visible = false;
 }
 function handleKeydown(e) {
   if (!e.repeat && e.key === "Escape" && escapable) {
@@ -49,7 +49,7 @@ function handleClick(e) {
 
 <svelte:window on:keydown={handleKeydown} />
 
-{#if $store.visible}
+{#if (unmount && visible) || !unmount}
 	<div class="relative z-40" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
 		{#if backdrop}
 			<div
@@ -80,12 +80,7 @@ function handleClick(e) {
 					>
 						<div class={drawerClasses}>
 							<div class="relative flex-1">
-								<slot
-									visible={$store.visible}
-									close={store.close}
-									open={store.open}
-									toggle={store.toggle}
-								>
+								<slot>
 									{#if content}
 										<svelte:component this={content} {...contentProps} />
 									{:else}

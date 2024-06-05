@@ -41,13 +41,3 @@ export const badgeInnerMargin = {
 // 	xl: 'px-4 py-2',
 // 	xl2: 'px-5 py-2.5'
 // };
-
-// export const badgeIconSizes = {
-// 	unstyled: '',
-// 	xs: 'h-2.5 w-2.5',
-// 	sm: 'h-3 w-3',
-// 	md: 'h-3.5 w-3.5',
-// 	lg: 'h-4 w-4',
-// 	xl: 'h-4.5 w-4.5',
-// 	xl2: 'h-5 w-5'
-// };

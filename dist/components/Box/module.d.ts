@@ -1,6 +1,7 @@
-import type { HTMLTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 export type BoxVariant = 'filled' | 'outlined' | 'soft';
-export type BoxProps<Tag extends HTMLTag = 'div'> = {
+export type BlockTag = 'a' | 'button' | 'div' | 'li' | 'section' | 'article' | 'p' | 'span' | 'main';
+export type BoxProps<Tag extends BlockTag> = {
     as?: Tag;
     bordered?: boolean;
     centered?: boolean;
@@ -18,4 +19,4 @@ export type BoxProps<Tag extends HTMLTag = 'div'> = {
     transitioned?: boolean;
     variant?: BoxVariant;
 };
-export declare const boxDefaults: Partial<BoxProps<'div'>>;
+export declare const boxDefaults: Partial<BoxProps<BlockTag>>;

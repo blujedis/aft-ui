@@ -27,7 +27,7 @@ const globals = cleanObj({
 setContext("Card", { globals });
 const th = themer($themeStore);
 $:
-  cardClasses = th.create("Card").option("elementRing", theme, divided || variant === "outlined").option("cardSizes", maxwidth, maxwidth).option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("dropshadows", boolToMapValue(dropshadowed), dropshadowed).prepend(`card card-${variant}`, true).append(horizontal ? "divide-x" : "divide-y", divided || variant === "outlined").append("h-full", full).append("cursor-pointer", href).append(horizontal ? "flex" : "flex flex-col", true).append("overflow-hidden", true).append($$restProps.class, true).compile();
+  cardClasses = th.create("Card").option("elementRing", theme, divided || variant === "outlined").option("cardSizes", maxwidth, maxwidth).option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("dropshadows", boolToMapValue(dropshadowed), dropshadowed).prepend(`card`, true).prepend(`card-${variant}`, variant).append(horizontal ? "divide-x" : "divide-y", divided || variant === "outlined").append("h-full", full).append("cursor-pointer", href).append(horizontal ? "flex" : "flex flex-col", true).append("overflow-hidden", true).append("ring-1", variant === "outlined").append($$restProps.class, true).compile();
 if (href)
   $$restProps.href = href;
 </script>

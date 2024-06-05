@@ -7,8 +7,8 @@
 
 	const title = 'Modal';
 	const description = 'Modal dialog box with built in transitions.';
-	const code = `
-  `;
+
+	let visible = false;
 
 	const props = {
 		abortable: true,
@@ -17,25 +17,22 @@
 		focustrap: true,
 		rounded: 'sm' as ThemeRounded,
 		shadowed: 'xl' as ThemeShadowed,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transition: 'dissolve' as DisclosureTransitionOption,
-		visible: false,
 		unmount: true
 	};
-
-	let modal: ModalComponent;
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Modal:</div>
 			<Button
 				on:click={() => {
-					modal.store?.open();
+					visible = !visible;
 				}}>Show/Hide Modal</Button
 			>
 		</label>
 	</div>
-	<Modal bind:this={modal} {...props} />
+	<Modal bind:visible {...props} />
 </ExamplePage>

@@ -11,6 +11,8 @@ export type DrawerProps = {
     size?: ThemeSize;
     speed?: ThemeSpeed;
     theme?: ThemeColor;
+    unmount?: boolean;
+    visible?: boolean | number;
 };
 export declare const drawerPositionMap: {
     left: string;

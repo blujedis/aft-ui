@@ -180,7 +180,16 @@ export declare const buttonPadding: {
     xl: string;
     xl2: string;
 } & import("../theme/utils").StringMap;
-export declare const menuPadding: {
+export declare const alertPadding: {
+    unstyled: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xl2: string;
+};
+export declare const menuPading: {
     unstyled: string;
     xs: string;
     sm: string;

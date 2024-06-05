@@ -12,7 +12,7 @@
 		rounded: 'full' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		hovered: true,
 		focused: true,
 		transitioned: false,

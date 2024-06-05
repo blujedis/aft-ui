@@ -1,6 +1,7 @@
 export * from '../constants/options';
 export * from '../constants/states';
 export * from './AccordionOption/options';
+export * from './Alert/options';
 export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';

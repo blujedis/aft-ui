@@ -17,7 +17,7 @@
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
 		tracksize: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		variant: 'filled' as ProgressCircleVariant
 	};
 </script>

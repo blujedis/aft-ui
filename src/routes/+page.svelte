@@ -8,6 +8,7 @@
 		class="mb-4 grid grid-cols-6 grid-flow-row grid-rows-3 text-sm underline text-indigo-500 place-items-center"
 	>
 		<a href="/accordion">Accordion</a>
+		<a href="/alert">Alert</a>
 		<a href="/avatar">Avatar</a>
 		<a href="/badge">Badge</a>
 		<a href="/breadcrumb">Breadcrumb</a>
@@ -20,6 +21,7 @@
 		<a href="/drawer">Drawer</a>
 		<a href="/fileinput">File Input</a>
 		<a href="/icon">Icon</a>
+		<a href="/infinitescroll">Infinite Scroll</a>
 		<a href="/input">Inputs</a>
 		<a href="/kbd">Kbd</a>
 		<a href="/menu">Menu</a>

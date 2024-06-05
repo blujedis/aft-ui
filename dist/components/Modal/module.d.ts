@@ -22,12 +22,12 @@ export type ModalProps = {
     transition?: ModalTransition | (Record<string, any> & {
         type: DisclosureTransition;
     });
-    visible?: boolean;
+    visible?: boolean | number;
     unmount?: boolean;
     unstyled?: boolean;
     onClose?: () => void;
 };
-export declare const transitions: {
+export declare const modalTransitions: {
     zoom: {
         duration: number;
         start: number;

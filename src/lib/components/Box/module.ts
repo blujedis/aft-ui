@@ -1,6 +1,17 @@
-import type { BlockTag, ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type BoxVariant = 'filled' | 'outlined' | 'soft';
+
+export type BlockTag =
+	| 'a'
+	| 'button'
+	| 'div'
+	| 'li'
+	| 'section'
+	| 'article'
+	| 'p'
+	| 'span'
+	| 'main';
 
 export type BoxProps<Tag extends BlockTag> = {
 	as?: Tag;
@@ -21,7 +32,7 @@ export type BoxProps<Tag extends BlockTag> = {
 	variant?: BoxVariant;
 };
 
-export const boxDefaults: Partial<BoxProps<'div'>> = {
+export const boxDefaults: Partial<BoxProps<BlockTag>> = {
 	as: 'div',
 	centered: true,
 	size: 'md',

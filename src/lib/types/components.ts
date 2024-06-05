@@ -16,17 +16,6 @@ export type PrimitiveValue = string | number | boolean | undefined | null;
 export type ClassArgument = PrimitiveValue | Record<string, unknown>;
 export type HTMLTag = keyof SvelteHTMLElements;
 export type ElementProps<K extends HTMLTag> = SvelteHTMLElements[K];
-export type BlockTag =
-	| 'a'
-	| 'button'
-	| 'div'
-	| 'li'
-	| 'section'
-	| 'article'
-	| 'p'
-	| 'span'
-	| 'main';
-('blockquote');
 
 /**
  * Maintains code help while allowing arbitrary values/string.

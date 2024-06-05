@@ -12,6 +12,8 @@ export type DrawerProps = {
 	size?: ThemeSize;
 	speed?: ThemeSpeed;
 	theme?: ThemeColor;
+	unmount?: boolean;
+	visible?: boolean | number;
 };
 
 export const drawerPositionMap = {
@@ -54,5 +56,6 @@ export const drawerDefaults: Partial<DrawerProps> = {
 	shadowed: 'lg',
 	size: 'sm',
 	speed: 'medium',
-	theme: 'default'
+	theme: 'frame',
+	unmount: true
 };

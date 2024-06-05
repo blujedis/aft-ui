@@ -1,5 +1,6 @@
 export { default as AvatarExample } from './Avatar/Example.svelte';
 export { default as AccordianExample } from './Accordion/Example.svelte';
+export { default as AlertExample } from './Alert/Example.svelte';
 export { default as BadgeExample } from './Badge/Example.svelte';
 export { default as BreadcrumbExample } from './Breadcrumb/Example.svelte';
 export { default as ButtonExample } from './Button/Example.svelte';
@@ -12,6 +13,7 @@ export { default as DrawerExample } from './Drawer/Example.svelte';
 export { default as FileInputExample } from './FileInput/Example.svelte';
 export { default as InputExample } from './Input/Example.svelte';
 export { default as IconExample } from './Icon/Example.svelte';
+export { default as InfiniteScrollExample } from './InfiniteScroll/Example.svelte';
 export { default as KbdExample } from './Kbd/Example.svelte';
 export { default as LabelExample } from './Label/Example.svelte';
 export { default as LoaderExample } from './Loader/Example.svelte';

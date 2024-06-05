@@ -178,7 +178,7 @@ export function useResizer(options = {} as ResizerOptions) {
 		let active: ResizerElement | null = null;
 		let initialRect: ResizerRectangle | null;
 		let initialPos: ResizerPosition | null;
-		let maxWidth: number;
+		// let maxWidth: number;
 
 		element.style.position = 'relative';
 
@@ -191,15 +191,15 @@ export function useResizer(options = {} as ResizerOptions) {
 			handle.addEventListener('mousedown', onMousedown);
 		});
 
-		function calcWidths(el?: HTMLElement) {
-			const parentElement = element.parentElement;
-			if (!parentElement) return 0;
-			const children = Array.from(parentElement.children);
-			return children.reduce((a, c) => {
-				if (c !== el) a += c.clientWidth;
-				return a;
-			}, 0);
-		}
+		// function calcWidths(el?: HTMLElement) {
+		// 	const parentElement = element.parentElement;
+		// 	if (!parentElement) return 0;
+		// 	const children = Array.from(parentElement.children);
+		// 	return children.reduce((a, c) => {
+		// 		if (c !== el) a += c.clientWidth;
+		// 		return a;
+		// 	}, 0);
+		// }
 
 		// Start resizing.
 		function onMousedown(event: MouseEvent) {
@@ -211,7 +211,7 @@ export function useResizer(options = {} as ResizerOptions) {
 
 			if (!parent) return;
 
-			maxWidth = parent.width;
+			// maxWidth = parent.width;
 
 			initialRect = {
 				width: rect.width,
@@ -235,8 +235,8 @@ export function useResizer(options = {} as ResizerOptions) {
 			const direction = active.$direction;
 
 			let delta;
-			const currentWidth = initialRect.width;
-			const currentHeight = initialRect.height;
+			// const currentWidth = initialRect.width;
+			// const currentHeight = initialRect.height;
 
 			if (direction.match('east')) {
 				delta = event.pageX - initialPos.x;

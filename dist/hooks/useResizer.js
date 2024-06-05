@@ -118,7 +118,7 @@ export function useResizer(options = {}) {
         let active = null;
         let initialRect;
         let initialPos;
-        let maxWidth;
+        // let maxWidth: number;
         element.style.position = 'relative';
         const parent = element.parentElement?.getBoundingClientRect();
         const _handles = createHandles(classname, handles, debug);
@@ -126,17 +126,15 @@ export function useResizer(options = {}) {
             element.appendChild(handle);
             handle.addEventListener('mousedown', onMousedown);
         });
-        function calcWidths(el) {
-            const parentElement = element.parentElement;
-            if (!parentElement)
-                return 0;
-            const children = Array.from(parentElement.children);
-            return children.reduce((a, c) => {
-                if (c !== el)
-                    a += c.clientWidth;
-                return a;
-            }, 0);
-        }
+        // function calcWidths(el?: HTMLElement) {
+        // 	const parentElement = element.parentElement;
+        // 	if (!parentElement) return 0;
+        // 	const children = Array.from(parentElement.children);
+        // 	return children.reduce((a, c) => {
+        // 		if (c !== el) a += c.clientWidth;
+        // 		return a;
+        // 	}, 0);
+        // }
         // Start resizing.
         function onMousedown(event) {
             event.preventDefault();
@@ -146,7 +144,7 @@ export function useResizer(options = {}) {
             const rect = element.getBoundingClientRect();
             if (!parent)
                 return;
-            maxWidth = parent.width;
+            // maxWidth = parent.width;
             initialRect = {
                 width: rect.width,
                 height: rect.height,
@@ -165,8 +163,8 @@ export function useResizer(options = {}) {
             event.preventDefault();
             const direction = active.$direction;
             let delta;
-            const currentWidth = initialRect.width;
-            const currentHeight = initialRect.height;
+            // const currentWidth = initialRect.width;
+            // const currentHeight = initialRect.height;
             if (direction.match('east')) {
                 delta = event.pageX - initialPos.x;
                 element.style.width = `${initialRect.width + delta}px`;

@@ -1,9 +1,8 @@
 <script>import { fileInputDefaults as defaults } from "./module";
-export let { name, readAs, onFormData, onReadFiles } = {
+export let { name, readAs, state, onFormData, onReadFiles } = {
   ...defaults
 };
 let input;
-let state = 0;
 function createFormData(files) {
   const data = input?.form instanceof HTMLFormElement ? new FormData(input?.form) : new FormData();
   Array.from(files).forEach((file) => data.append(name, file));
@@ -29,14 +28,26 @@ function handleFiles(files) {
   if (typeof onReadFiles !== "undefined") {
     const proms = Array.from(files).map(readFile);
     Promise.all(proms).then((result) => {
-      onReadFiles(null, result, files);
+      state = 2;
+      Promise.resolve(onReadFiles(null, result, files)).then((valid) => {
+        if (valid === false)
+          state = 3;
+      });
     }).catch((ex) => {
+      state = 3;
       onReadFiles(ex, null, files);
     });
   } else if (typeof onFormData !== "undefined") {
     try {
-      onFormData(null, createFormData(files), files);
+      state = 2;
+      Promise.resolve(
+        onFormData(null, createFormData(files), files)
+      ).then((valid) => {
+        if (valid === false)
+          state = 3;
+      });
     } catch (ex) {
+      state = 3;
       onFormData(ex, null, files);
     }
   }
@@ -58,23 +69,27 @@ function handleDragOver(e) {
 function handleDragEnd(e) {
   state = 0;
 }
-function handleClick() {
+function handleClick(e) {
+  e.preventDefault();
+  state = 0;
   input.click();
 }
 </script>
 
 <slot
+	{input}
+	{state}
 	onClick={handleClick}
 	onDrop={handleDrop}
-	onDropOver={handleDragOver}
-	onDropEnd={handleDragEnd}
+	onDragOver={handleDragOver}
+	onDragEnd={handleDragEnd}
+	onDragLeave={handleDragEnd}
 />
-
 <input
 	bind:this={input}
 	{...$$restProps}
 	{name}
-	on:change={handleInputChange}
 	type="file"
 	class="sr-only"
+	on:change={handleInputChange}
 />

@@ -43,12 +43,14 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
-		.prepend(`card card-${variant}`, true)
+		.prepend(`card`, true)
+		.prepend(`card-${variant}`, variant)
 		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')
 		.append('h-full', full)
 		.append('cursor-pointer', href)
 		.append(horizontal ? 'flex' : 'flex flex-col', true)
 		.append('overflow-hidden', true)
+		.append('ring-1', variant === 'outlined')
 		.append($$restProps.class, true)
 		.compile();
 

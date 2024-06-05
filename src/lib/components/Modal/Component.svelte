@@ -2,7 +2,6 @@
 	import { type ModalProps, modalDefaults as defaults } from './module';
 	import { themeStore, themer } from '$lib/theme';
 	import { transitioner } from '$lib/components/Disclosure';
-	import { useDisclosure } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import Placeholder from './Placeholder.svelte';
 	import { useFocusTrap } from '$lib/hooks';
@@ -31,14 +30,13 @@
 		...defaults
 	} as Required<$$Props>;
 
-	export const store = useDisclosure({ visible });
 	const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 
 	const th = themer($themeStore);
 
 	let panel = null as HTMLDivElement | null;
 
-	$: modalStyles = $store.visible
+	$: modalStyles = visible // $store.visible
 		? $$restProps.style || '' + ' display:block'
 		: ((!unmount && 'display: none') as string);
 
@@ -71,10 +69,9 @@
 		)
 		.compile();
 
-	// $: $store.visible && unmount === false && restart()
-
 	function handleClose() {
-		store.close();
+		// store.close();
+		visible = false;
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -91,7 +88,7 @@
 
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />
 
-{#if (unmount && $store.visible) || !unmount}
+{#if (unmount && visible) || !unmount}
 	<div
 		role="button"
 		tabindex="-1"
@@ -100,7 +97,7 @@
 		on:click={handleClick}
 		on:keydown={handleKeydown}
 	>
-		{#if backdrop && $store.visible}
+		{#if backdrop && visible}
 			<slot name="backdrop">
 				<div
 					class="modal-backdrop fixed inset-0 bg-frame-600 bg-opacity-70 transition-opacity"
@@ -116,12 +113,7 @@
 					use:bindFocusTrap
 					class={contentClasses}
 				>
-					<slot
-						visible={$store.visible}
-						close={store.close}
-						open={store.open}
-						toggle={store.toggle}
-					>
+					<slot>
 						{#if content}
 							<svelte:component this={content} {...contentProps} />
 						{:else}

@@ -16,7 +16,7 @@
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'xl2' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean
 	};
 

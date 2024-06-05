@@ -1,7 +1,6 @@
 <script>import { modalDefaults as defaults } from "./module";
 import { themeStore, themer } from "../../theme";
 import { transitioner } from "../Disclosure";
-import { useDisclosure } from "../../stores";
 import { fade } from "svelte/transition";
 import Placeholder from "./Placeholder.svelte";
 import { useFocusTrap } from "../../hooks";
@@ -26,12 +25,11 @@ export let {
   ...cleanObj($themeStore.defaults?.component, ["transitioned", "focused", "hovered", "size"]),
   ...defaults
 };
-export const store = useDisclosure({ visible });
 const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 const th = themer($themeStore);
 let panel = null;
 $:
-  modalStyles = $store.visible ? $$restProps.style || " display:block" : !unmount && "display: none";
+  modalStyles = visible ? $$restProps.style || " display:block" : !unmount && "display: none";
 $:
   wrapperClasses = th.create("ModalWrapper").append("fixed inset-0 z-10 overflow-y-auto", true).append($$restProps.class, true).compile();
 $:
@@ -42,7 +40,7 @@ $:
     true
   ).compile();
 function handleClose() {
-  store.close();
+  visible = false;
 }
 function handleKeydown(e) {
   if (!e.repeat && e.key === "Escape" && escapable && abortable) {
@@ -58,7 +56,7 @@ function handleClick(e) {
 
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />
 
-{#if (unmount && $store.visible) || !unmount}
+{#if (unmount && visible) || !unmount}
 	<div
 		role="button"
 		tabindex="-1"
@@ -67,7 +65,7 @@ function handleClick(e) {
 		on:click={handleClick}
 		on:keydown={handleKeydown}
 	>
-		{#if backdrop && $store.visible}
+		{#if backdrop && visible}
 			<slot name="backdrop">
 				<div
 					class="modal-backdrop fixed inset-0 bg-frame-600 bg-opacity-70 transition-opacity"
@@ -83,12 +81,7 @@ function handleClick(e) {
 					use:bindFocusTrap
 					class={contentClasses}
 				>
-					<slot
-						visible={$store.visible}
-						close={store.close}
-						open={store.open}
-						toggle={store.toggle}
-					>
+					<slot>
 						{#if content}
 							<svelte:component this={content} {...contentProps} />
 						{:else}

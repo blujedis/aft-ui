@@ -79,7 +79,7 @@
 		rounded: 'none' as ThemeRounded,
 		// shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		//theme: 'default' as ThemeColor,
+		//theme: 'frame' as ThemeColor,
 		variant: 'outlined' as any
 	};
 	const shared = {

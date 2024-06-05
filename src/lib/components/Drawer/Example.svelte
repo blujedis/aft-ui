@@ -9,28 +9,30 @@
 	const code = `
   `;
 
-	let drawer: Drawer | undefined;
+	// let drawer: Drawer | undefined;
+	let visible = false;
 
 	const props = {
 		position: 'right' as 'left' | 'right',
 		shadowed: 'xl' as ThemeShadowed,
 		size: 'md' as ThemeSimpleSize,
 		speed: 'medium' as ThemeSpeed,
-		theme: 'default' as ThemeColor
+		theme: 'frame' as ThemeColor
 	};
 
 	function show() {
-		drawer?.store?.open();
+		// 	drawer?.store?.open();
+		visible = true;
 	}
 </script>
 
-<ExamplePage {title} {description} {code}>
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">
 				Default: <button class="text-primary underline pl-4" on:click={show}>Show Drawer</button>
 			</div>
-			<Drawer bind:this={drawer} {...props} />
+			<Drawer bind:visible {...props} />
 		</label>
 	</div>
 </ExamplePage>

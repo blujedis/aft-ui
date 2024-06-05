@@ -7,13 +7,20 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            onClick: () => void;
-            onDrop: (e: DragEvent) => void;
-            onDropOver: (e: DragEvent & {
-                currentTarget: EventTarget & HTMLElement;
+            input: HTMLInputElement;
+            state: 0 | 1 | 2 | 3;
+            onClick: (e: MouseEvent & {
+                currentTarget: any;
             }) => void;
-            onDropEnd: (e: DragEvent & {
-                currentTarget: EventTarget & HTMLElement;
+            onDrop: (e: DragEvent) => void;
+            onDragOver: (e: DragEvent & {
+                currentTarget: any;
+            }) => void;
+            onDragEnd: (e: DragEvent & {
+                currentTarget: any;
+            }) => void;
+            onDragLeave: (e: DragEvent & {
+                currentTarget: any;
             }) => void;
         };
     };

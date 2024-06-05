@@ -52,7 +52,7 @@ export const dividerBg = {
 	unstyled: '',
 	white: 'bg-white dark:bg-white',
 	black: 'bg-black dark:bg-black',
-	frame: 'bg-frame-950/15 dark:bg-frame-600/60',
+	frame: 'bg-frame-950/20 dark:bg-frame-600/60',
 	primary: 'bg-primary-500 dark:bg-primary-500',
 	secondary: 'bg-secondary-500 dark:bg-secondary-500',
 	tertiary: 'bg-tertiary-500 dark:bg-tertiary-500',
@@ -78,7 +78,7 @@ export const elementBg = {
 };
 
 export const elementBorder = {
-	$base: 'border-frame-950/15 dark:border-frame-600/60',
+	$base: 'border-frame-950/20 dark:border-frame-600/60',
 	unstyled: '',
 	white: '',
 	black: '',
@@ -93,7 +93,7 @@ export const elementBorder = {
 };
 
 export const elementDivide = {
-	$base: 'divide-frame-950/15 dark:divide-frame-600/60',
+	$base: 'divide-frame-950/20 dark:divide-frame-600/60',
 	unstyled: '',
 	white: '',
 	black: '',
@@ -108,7 +108,7 @@ export const elementDivide = {
 };
 
 export const elementRing = {
-	$base: 'ring-frame-950/20 dark:ring-frame-600',
+	$base: 'ring-frame-900/10 dark:ring-frame-600/50',
 	unstyled: '',
 	white: '',
 	black: '',
@@ -213,7 +213,7 @@ export const filledTextAriaSelected = {
 };
 
 export const formBorder = {
-	$base: 'border-frame-950/20 dark:border-frame-600',
+	$base: 'border-frame-950/20 dark:border-frame-600/60',
 	unstyled: '',
 	white: '',
 	black: '',
@@ -337,7 +337,7 @@ export const mainBorder = {
 	unstyled: '',
 	white: 'border-white dark:border-white',
 	black: 'border-black dark:border-black',
-	frame: 'border-frame-950/20 dark:border-frame-600',
+	frame: 'border-frame-950/20 dark:border-frame-600/60',
 	primary: 'border-primary-500 dark:border-primary-500',
 	secondary: 'border-secondary-500 dark:border-secondary-500',
 	tertiary: 'border-tertiary-500 dark:border-tertiary-500',
@@ -352,7 +352,7 @@ export const mainBorderGroupHover = {
 	unstyled: '',
 	white: 'group-hover:border-white dark:group-hover:border-white',
 	black: 'group-hover:border-black dark:group-hover:border-black',
-	frame: 'group-hover:border-frame-950/20 dark:group-hover:border-frame-600',
+	frame: 'group-hover:border-frame-950/20 dark:group-hover:border-frame-600/60',
 	primary: 'group-hover:border-primary-500 dark:group-hover:border-primary-500',
 	secondary: 'group-hover:border-secondary-500 dark:group-hover:border-secondary-500',
 	tertiary: 'group-hover:border-tertiary-500 dark:group-hover:border-tertiary-500',
@@ -367,7 +367,7 @@ export const mainBorderPeerFocus = {
 	unstyled: '',
 	white: 'peer-focus:border-white dark:peer-focus:border-white',
 	black: 'peer-focus:border-black dark:peer-focus:border-black',
-	frame: 'peer-focus:border-frame-950/20 dark:peer-focus:border-frame-600',
+	frame: 'peer-focus:border-frame-950/20 dark:peer-focus:border-frame-600/60',
 	primary: 'peer-focus:border-primary-500 dark:peer-focus:border-primary-500',
 	secondary: 'peer-focus:border-secondary-500 dark:peer-focus:border-secondary-500',
 	tertiary: 'peer-focus:border-tertiary-500 dark:peer-focus:border-tertiary-500',
@@ -382,7 +382,7 @@ export const mainBorderPeerHover = {
 	unstyled: '',
 	white: 'peer-hover:border-white dark:peer-hover:border-white',
 	black: 'peer-hover:border-black dark:peer-hover:border-black',
-	frame: 'peer-hover:border-frame-950/20 dark:peer-hover:border-frame-600',
+	frame: 'peer-hover:border-frame-950/20 dark:peer-hover:border-frame-600/60',
 	primary: 'peer-hover:border-primary-500 dark:peer-hover:border-primary-500',
 	secondary: 'peer-hover:border-secondary-500 dark:peer-hover:border-secondary-500',
 	tertiary: 'peer-hover:border-tertiary-500 dark:peer-hover:border-tertiary-500',
@@ -397,7 +397,7 @@ export const mainOutline = {
 	unstyled: '',
 	white: 'outline-white dark:outline-white',
 	black: 'outline-black dark:outline-black',
-	frame: 'outline-frame-950/20 dark:outline-frame-600',
+	frame: 'outline-frame-950/20 dark:outline-frame-600/60',
 	primary: 'outline-primary-500 dark:outline-primary-500',
 	secondary: 'outline-secondary-500 dark:outline-secondary-500',
 	tertiary: 'outline-tertiary-500 dark:outline-tertiary-500',
@@ -412,7 +412,7 @@ export const mainRing = {
 	unstyled: '',
 	white: 'ring-white dark:ring-white',
 	black: 'ring-black dark:ring-black',
-	frame: 'ring-frame-950/20 dark:ring-frame-600',
+	frame: 'ring-frame-950/20 dark:ring-frame-600/60',
 	primary: 'ring-primary-500 dark:ring-primary-500',
 	secondary: 'ring-secondary-500 dark:ring-secondary-500',
 	tertiary: 'ring-tertiary-500 dark:ring-tertiary-500',
@@ -1026,6 +1026,36 @@ export const softBg = {
 	warning: 'bg-warning-500/15 dark:bg-warning-500/15',
 	success: 'bg-success-500/15 dark:bg-success-500/15',
 	info: 'bg-info-500/15 dark:bg-info-500/15'
+};
+
+export const softSolidBg = {
+	$base: '',
+	unstyled: '',
+	white: 'bg-white dark:bg-white',
+	black: 'bg-frame-200 dark:bg-frame-950',
+	frame: 'bg-frame-100 dark:bg-frame-700',
+	primary: 'bg-primary-100 dark:bg-primary-500',
+	secondary: 'bg-secondary-100 dark:bg-secondary-500',
+	tertiary: 'bg-tertiary-100 dark:bg-tertiary-500',
+	danger: 'bg-danger-100 dark:bg-danger-500',
+	warning: 'bg-warning-100 dark:bg-warning-500',
+	success: 'bg-success-100 dark:bg-success-500',
+	info: 'bg-info-100 dark:bg-info-500'
+};
+
+export const softSolidText = {
+	$base: '',
+	unstyled: '',
+	white: 'text-frame-700 dark:text-frame-700',
+	black: 'text-frame-700 dark:text-frame-100',
+	frame: 'text-frame-700 dark:text-frame-100',
+	primary: 'text-primary-600 dark:text-primary-400',
+	secondary: 'text-secondary-600 dark:text-secondary-400',
+	tertiary: 'text-tertiary-600 dark:text-tertiary-400',
+	danger: 'text-danger-600 dark:text-danger-400',
+	warning: 'text-warning-600 dark:text-warning-400',
+	success: 'text-success-600 dark:text-success-400',
+	info: 'text-info-600 dark:text-info-400'
 };
 
 export const softText = {

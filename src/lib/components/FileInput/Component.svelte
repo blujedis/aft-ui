@@ -4,12 +4,11 @@
 
 	type $$Props = FileInputProps & ElementProps<'input'>;
 
-	export let { name, readAs, onFormData, onReadFiles } = {
+	export let { name, readAs, state, onFormData, onReadFiles } = {
 		...defaults
 	} as Required<FileInputProps>;
 
 	let input: HTMLInputElement;
-	let state = 0 as 0 | 1 | 2;
 
 	function createFormData(files: FileList) {
 		const data =
@@ -32,20 +31,29 @@
 
 	function handleFiles(files: FileList | null | undefined) {
 		files = input.files;
-
 		if (typeof onReadFiles !== 'undefined') {
 			const proms = Array.from(files as FileList).map(readFile);
 			Promise.all(proms)
 				.then((result) => {
-					onReadFiles(null, result, files as FileList);
+					state = 2;
+					Promise.resolve(onReadFiles(null, result, files as FileList)).then((valid) => {
+						if (valid === false) state = 3;
+					});
 				})
 				.catch((ex) => {
+					state = 3;
 					onReadFiles(ex as Error, null, files as FileList);
 				});
 		} else if (typeof onFormData !== 'undefined') {
 			try {
-				onFormData(null, createFormData(files as FileList), files as FileList);
+				state = 2;
+				Promise.resolve(
+					onFormData(null, createFormData(files as FileList), files as FileList)
+				).then((valid) => {
+					if (valid === false) state = 3;
+				});
 			} catch (ex) {
+				state = 3;
 				onFormData(ex as Error, null, files as FileList);
 			}
 		}
@@ -66,32 +74,40 @@
 		handleFiles(files);
 	}
 
-	function handleDragOver(e: DragEvent & { currentTarget: EventTarget & HTMLElement }) {
+	function handleDragOver(e: DragEvent & { currentTarget: any }) {
 		e.preventDefault();
 		state = 1;
 	}
 
-	function handleDragEnd(e: DragEvent & { currentTarget: EventTarget & HTMLElement }) {
+	function handleDragEnd(e: DragEvent & { currentTarget: any }) {
 		state = 0;
 	}
 
-	function handleClick() {
+	function handleClick(
+		e: MouseEvent & {
+			currentTarget: any;
+		}
+	) {
+		e.preventDefault();
+		state = 0;
 		input.click();
 	}
 </script>
 
 <slot
+	{input}
+	{state}
 	onClick={handleClick}
 	onDrop={handleDrop}
-	onDropOver={handleDragOver}
-	onDropEnd={handleDragEnd}
+	onDragOver={handleDragOver}
+	onDragEnd={handleDragEnd}
+	onDragLeave={handleDragEnd}
 />
-
 <input
 	bind:this={input}
 	{...$$restProps}
 	{name}
-	on:change={handleInputChange}
 	type="file"
 	class="sr-only"
+	on:change={handleInputChange}
 />

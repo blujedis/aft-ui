@@ -952,6 +952,34 @@ export declare const softBg: {
     success: string;
     info: string;
 };
+export declare const softSolidBg: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const softSolidText: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
 export declare const softText: {
     $base: string;
     unstyled: string;

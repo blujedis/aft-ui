@@ -8,7 +8,6 @@
 	import { type IconProps, iconDefaults as defaults } from './module';
 	import Icon from '@iconify/svelte';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ThemeColor } from '$lib/types';
 	import { cleanObj } from '$lib/utils';
 	type $$Props = IconProps;
 	export let { hovered, icon, size, stroke, theme, transitioned } = {

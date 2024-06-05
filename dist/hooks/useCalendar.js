@@ -1,3 +1,6 @@
+/**
+ * Placeholder
+ */
 export function useCalendar(year, oneBasedMonth) {
     /* month given to Date() starts at 0 = January */
     const month = oneBasedMonth - 1;
