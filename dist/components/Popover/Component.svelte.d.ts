@@ -1,7 +1,7 @@
 import { SvelteComponent } from "svelte";
 import type { ElementProps } from '../../types';
 declare class __sveltets_Render<Tag extends 'div' | 'a'> {
-    props(): Pick<import("../../hooks/usePopover").PopoverOptions, "events" | "middleware" | "placement" | "strategy" | "offset" | "padding" | "sticky" | "escapeable"> & {
+    props(): Partial<Pick<import("../../hooks/usePopover").PopoverOptions, "events" | "middleware" | "placement" | "strategy" | "offset" | "padding" | "sticky" | "escapeable">> & {
         as?: Tag | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
         trigger?: string | undefined;

@@ -23,7 +23,7 @@
 		onChange
 	} = {
 		...defaults
-	} as Required<PopoverProps<Tag>>;
+	} as PopoverProps<Tag>;
 
 	let popover: ReturnType<typeof createPopoverInstance>;
 	let placeholderRef: HTMLElement;
@@ -47,7 +47,7 @@
 
 	onMount(() => {
 		const prevSibling = placeholderRef.previousElementSibling;
-		triggerRef = !trigger && prevSibling ? (prevSibling as HTMLElement) : trigger;
+		triggerRef = !trigger && prevSibling ? (prevSibling as HTMLElement) : (trigger as string);
 		popover = createPopoverInstance({
 			events,
 			escapeable,

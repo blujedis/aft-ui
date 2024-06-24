@@ -40,10 +40,11 @@
 	$: alertWrapperClasses = th
 		.create('AlertWrapper')
 		.prepend('alert-wrapper', true)
-		.append('absolute mx-auto', position !== 'unstyled')
+		.append('absolute mx-auto max-w-7xl', position !== 'unstyled')
 		.append(position === 'top' ? 'top-4' : 'bottom-6', position !== 'unstyled')
 		.append($mode ? 'body-dark' : 'body-light', position !== 'unstyled' && variant === 'soft')
 		.append('w-full', full)
+		.append('z-[999999]', true)
 		.compile();
 
 	$: alertClasses = th
@@ -62,7 +63,7 @@
 		.option('alertPadding', size, size)
 		.prepend(`alert alert-${variant}`, true)
 		.prepend('alert-removable', removable)
-		.append('z-50 inline-flex', true)
+		.append('inline-flex', true)
 		.append('flex', full)
 		.append($$restProps.class, true)
 		.compile();
@@ -86,7 +87,7 @@
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
-		if (!e.repeat && e.key === 'Escape' && escapable && removable) {
+		if (!e.repeat && e.key === 'Escape' && visible && escapable && removable) {
 			e.stopPropagation();
 			handleClose();
 		}
@@ -96,7 +97,7 @@
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />
 
 {#if (unmount && visible) || !unmount}
-	<div role="presentation" tabindex="-1" on:keydown={handleKeydown}>
+	<div role="presentation" tabindex="-1" on:keydown={handleKeydown} style="z-index:999999;">
 		<ConditionalElement as="div" condition={position !== 'unstyled'} class={alertWrapperClasses}>
 			<div
 				{...$$restProps}

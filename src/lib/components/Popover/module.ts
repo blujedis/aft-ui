@@ -3,16 +3,18 @@ import type { AriaRole } from 'svelte/elements';
 
 export type PopoverVariant = 'filled' | 'outlined' | 'soft';
 
-export type PopoverProps<Tag> = Pick<
-	PopoverOptions,
-	| 'events'
-	| 'escapeable'
-	| 'middleware'
-	| 'offset'
-	| 'padding'
-	| 'placement'
-	| 'strategy'
-	| 'sticky'
+export type PopoverProps<Tag> = Partial<
+	Pick<
+		PopoverOptions,
+		| 'events'
+		| 'escapeable'
+		| 'middleware'
+		| 'offset'
+		| 'padding'
+		| 'placement'
+		| 'strategy'
+		| 'sticky'
+	>
 > & {
 	as?: Tag;
 	role?: AriaRole | null | undefined;
@@ -21,7 +23,6 @@ export type PopoverProps<Tag> = Pick<
 };
 
 export const popoverDefaults: Partial<PopoverProps<'div'>> = {
-	arrowed: true,
 	as: 'div',
 	escapeable: true,
 	events: ['hover', 'focus'],

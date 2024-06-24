@@ -20,7 +20,7 @@ export type AlertProps = {
 	transition?: AlertTransition | (Record<string, any> & { type: DisclosureTransition });
 	unmount?: boolean;
 	variant?: AlertVariant;
-	visible?: boolean | number;
+	visible?: boolean | number | Date | string;
 };
 
 export const alertDefaults: Partial<AlertProps> = {

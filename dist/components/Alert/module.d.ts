@@ -19,7 +19,7 @@ export type AlertProps = {
     });
     unmount?: boolean;
     variant?: AlertVariant;
-    visible?: boolean | number;
+    visible?: boolean | number | Date | string;
 };
 export declare const alertDefaults: Partial<AlertProps>;
 export declare const alertIcons: {
