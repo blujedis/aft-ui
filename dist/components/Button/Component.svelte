@@ -37,12 +37,12 @@ $:
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-{#if as === 'button'}
-	<button use:forwardedEvents {...$$restProps} class={buttonClasses} {disabled}>
-		<slot />
-	</button>
-{:else}
+{#if href}
 	<a use:forwardedEvents {href} {...$$restProps} class={buttonClasses} aria-disabled={disabled}>
 		<slot />
 	</a>
+{:else}
+	<button use:forwardedEvents {...$$restProps} class={buttonClasses} {disabled}>
+		<slot />
+	</button>
 {/if}
