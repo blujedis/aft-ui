@@ -14,6 +14,7 @@
 		disabled,
 		focused,
 		full,
+		href,
 		hovered,
 		rounded,
 		shadowed,
@@ -29,7 +30,6 @@
 	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
-	const href = '#';
 
 	$: buttonClasses = th
 		.create('Button')

@@ -8,6 +8,7 @@ export let {
   disabled,
   focused,
   full,
+  href,
   hovered,
   rounded,
   shadowed,
@@ -22,7 +23,6 @@ export let {
   ...defaults
 };
 const th = themer($themeStore);
-const href = "#";
 $:
   buttonClasses = th.create("Button").bundle(["unfilledText"], theme, variant === "text").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
     ["mainRing", "unfilledText"],
