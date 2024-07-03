@@ -170,15 +170,7 @@ export const alertPadding = {
 	xl2: 'p-7'
 };
 
-export const menuPading = mergeConfigs(fieldPaddingTightY, {
-	unstyled: '',
-	xs: 'px-2',
-	sm: 'px-2',
-	md: 'px-2.5',
-	lg: 'px-3',
-	xl: 'px-4',
-	xl2: 'px-5'
-});
+export const menuPadding = mergeConfigs(fieldPaddingTightY, fieldPaddingX);
 
 export const iconCaretSizes = {
 	unstyled: '',

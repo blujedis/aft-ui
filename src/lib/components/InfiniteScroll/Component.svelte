@@ -58,9 +58,13 @@
 	};
 
 	onMount(() => {
-		if (window) el = document as unknown as HTMLElement;
-		else if (element) el = element;
-		else el = component.parentNode as unknown as HTMLElement;
+		if (element) el = element;
+		else if (document) el = document.body;
+		else el = component.parentNode as HTMLElement;
+
+		// if (window) el = document as unknown as HTMLElement;
+		// else if (element) el = element;
+		// else el = component.parentNode as unknown as HTMLElement;
 	});
 
 	onDestroy(() => {

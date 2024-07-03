@@ -9,7 +9,7 @@
 	} from './module';
 	import { themeStore, themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '$lib/types';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { cleanObj, createCustomEvent, ensureArray } from '$lib/utils';
 
 	type Item = $$Generic<SelectListItem>;
@@ -159,7 +159,7 @@
 	function getItem(itemOrKey: Item | SelectListItemKey) {
 		if (typeof itemOrKey === 'object' && typeof itemOrKey.value !== 'undefined')
 			return itemOrKey as Item;
-		return $store.items.find((v) => v.value === itemOrKey) as Item;
+		return items.find((v) => v.value === itemOrKey) as Item;
 	}
 
 	function restore(
@@ -321,7 +321,7 @@
 		}
 	}
 
-	items.forEach((i) => add(i));
+	items.forEach((i) => add({ ...i }));
 </script>
 
 <div class={controllerClasses}>

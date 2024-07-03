@@ -45,10 +45,10 @@ const getOffset = (target, reverse2, horizontal2) => {
   return horizontal2 ? element2.scrollWidth - element2.clientWidth - element2.scrollLeft : element2.scrollHeight - element2.clientHeight - element2.scrollTop;
 };
 onMount(() => {
-  if (window)
-    el = document;
-  else if (element)
+  if (element)
     el = element;
+  else if (document)
+    el = document.body;
   else
     el = component.parentNode;
 });

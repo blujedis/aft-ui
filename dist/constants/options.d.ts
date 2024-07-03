@@ -189,7 +189,7 @@ export declare const alertPadding: {
     xl: string;
     xl2: string;
 };
-export declare const menuPading: {
+export declare const menuPadding: {
     unstyled: string;
     xs: string;
     sm: string;

@@ -29,7 +29,7 @@ const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 let alert;
 const th = themer($themeStore);
 $:
-  alertWrapperClasses = th.create("AlertWrapper").prepend("alert-wrapper", true).append("absolute transform -translate-x-1/2  max-w-7xl", position !== "unstyled").append(position === "top" ? "top-6" : "bottom-6", position !== "unstyled").append($mode ? "body-dark" : "body-light", position !== "unstyled" && variant === "soft").append("w-full", full).append("z-[999999]", true).compile();
+  alertWrapperClasses = th.create("AlertWrapper").prepend("alert-wrapper", true).append("absolute transform left-1/2 -translate-x-1/2  max-w-7xl", position !== "unstyled").append(position === "top" ? "top-6" : "bottom-6", position !== "unstyled").append($mode ? "body-dark" : "body-light", position !== "unstyled" && variant === "soft").append("w-full", full).append("z-[999999]", true).compile();
 $:
   alertClasses = th.create("Alert").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
     ["mainRing", "unfilledText"],

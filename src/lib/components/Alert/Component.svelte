@@ -40,7 +40,7 @@
 	$: alertWrapperClasses = th
 		.create('AlertWrapper')
 		.prepend('alert-wrapper', true)
-		.append('absolute transform -translate-x-1/2  max-w-7xl', position !== 'unstyled')
+		.append('absolute transform left-1/2 -translate-x-1/2  max-w-7xl', position !== 'unstyled')
 		.append(position === 'top' ? 'top-6' : 'bottom-6', position !== 'unstyled')
 		.append($mode ? 'body-dark' : 'body-light', position !== 'unstyled' && variant === 'soft')
 		.append('w-full', full)

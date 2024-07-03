@@ -40,6 +40,7 @@ export * from './Flushed';
 export * from './Icon';
 export * from './Image';
 export * from './Input';
+export * from './InfiniteScroll';
 export * from './Kbd';
 export * from './Label';
 export * from './Loader';

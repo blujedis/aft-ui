@@ -6,6 +6,7 @@ export * from './Avatar/options';
 export * from './Badge/options';
 export * from './Breadcrumb/options';
 export * from './BreadcrumbOption/options';
+export * from './Box/options';
 export * from './Checkbox/options';
 export * from './Card/options';
 export * from './CardElement/options';

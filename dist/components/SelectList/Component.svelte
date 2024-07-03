@@ -2,7 +2,7 @@
   selectListDefaults as defaults
 } from "./module";
 import { themeStore, themer, useSelect } from "../..";
-import { onMount, setContext } from "svelte";
+import { setContext } from "svelte";
 import { cleanObj, createCustomEvent, ensureArray } from "../../utils";
 export let {
   autoclose,
@@ -137,7 +137,7 @@ async function resolveItems(query) {
 function getItem(itemOrKey) {
   if (typeof itemOrKey === "object" && typeof itemOrKey.value !== "undefined")
     return itemOrKey;
-  return $store.items.find((v) => v.value === itemOrKey);
+  return items.find((v) => v.value === itemOrKey);
 }
 function restore(selectedItemsOrRestoreInput, restoreInput) {
   if (typeof selectedItemsOrRestoreInput === "boolean") {
@@ -277,7 +277,7 @@ function handleKeydown(e) {
     }
   }
 }
-items.forEach((i) => add(i));
+items.forEach((i) => add({ ...i }));
 </script>
 
 <div class={controllerClasses}>

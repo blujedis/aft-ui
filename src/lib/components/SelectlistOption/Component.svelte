@@ -46,6 +46,7 @@
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 
 	function handleClick(e: Event & { currentTarget: HTMLElement }) {
+		e.preventDefault();
 		if (!tags && $context.input) {
 			context.toggle();
 			if ($context.filtering) context.restore(key, false);
