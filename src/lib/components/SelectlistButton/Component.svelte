@@ -10,7 +10,7 @@
 	} from '$lib/components';
 	import type { ElementProps, IconifyTuple } from '$lib/types';
 	import { boolToMapValue } from '$lib/utils';
-	import { getContext } from 'svelte';
+	import { getContext, tick } from 'svelte';
 
 	type $$Props = SelectListButtonProps & ElementProps<'input'>;
 
@@ -26,6 +26,7 @@
 		hovered,
 		name,
 		tags,
+		tagsTheme,
 		newable,
 		placeholder,
 		removable,
@@ -47,7 +48,9 @@
 		focused: context.globals?.focused,
 		hovered: context.globals?.hovered,
 		tags: context.globals?.tags,
+		tagsTheme: context.globals?.tagsTheme || context.globals?.theme,
 		newable: context.globals?.newable,
+		name: context.globals?.name,
 		placeholder: context.globals?.placeholder,
 		removable: context.globals?.removable,
 		rounded: context.globals?.rounded,
@@ -63,6 +66,7 @@
 	$: selected = $context.selected
 		.map((v: any) => $context.items.find((item) => v === item.value))
 		.filter((v: any) => typeof v !== 'undefined') as SelectListItem[];
+
 	$: labels = $context.items.filter((i) => $context.selected.includes(i.value)).map((i) => i.label);
 	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !$context.visible ? icons[0] : icons[1];
@@ -70,7 +74,7 @@
 
 	$: containerClasses = th
 		.create('SelectListButton')
-		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
 		.bundle(
 			['unfilledText', 'mainRing'],
 			{
@@ -98,7 +102,7 @@
 		.append('relative peer flex items-center min-w-[176px] outline-none', true)
 		.append('outline-none', focused && variant !== 'flushed')
 		.append('border-0', variant === 'flushed')
-		.append('max-w-[176px]', tags && !$context.selected.length)
+		// .append('max-w-[176px]', tags && !$context.selected.length && !full)
 		.append($$restProps.class, true)
 		.compile();
 
@@ -132,6 +136,7 @@
 
 	$: inputClasses = th
 		.create('SelectListInput')
+		.bundle(['filledTextPlaceholder'], theme, variant === 'filled')
 		.prepend('select-list-input', true)
 		.append('invisible', disabled) // transparent background shows as light gray.
 		.append('caret-transparent', !filterable) // caret not need if can't filter.
@@ -168,7 +173,6 @@
 			);
 			if (shouldRemove) context.remove(item.value);
 		}
-
 		$context.input?.focus();
 		return shouldRemove;
 	}
@@ -285,11 +289,10 @@
 				if ($context.filtering) {
 					const current = $context.items.find((i) => i.value === $context.selected[0]);
 					if (current) {
-						//	e.currentTarget.value = current.label as string;
-						context.select(current);
+						context.close();
+						context.filter('');
 						setTimeout(() => {
-							context.close();
-							context.filter('');
+							context.select(current);
 							$context.filtering = false;
 						});
 					}
@@ -318,6 +321,27 @@
 	function setInitialValue(el: HTMLInputElement) {
 		if (!tags && labels.length) el.value = labels[0] + '';
 	}
+
+	function handleInputFocus(
+		e: FocusEvent & {
+			currentTarget: EventTarget & HTMLInputElement;
+		}
+	) {
+		if (!filterable) return;
+		const target = e.currentTarget;
+		let len = target.value?.length;
+		// Mostly for Web Browsers
+		if (target.setSelectionRange) {
+			target.focus();
+			target.setSelectionRange(len, len);
+		} else if ((target as any).createTextRange) {
+			let t = (target as any).createTextRange();
+			t.collapse(true);
+			t.moveEnd('character', len);
+			t.moveStart('character', len);
+			t.select();
+		}
+	}
 </script>
 
 <!-- <div> -->
@@ -325,10 +349,10 @@
 	<div bind:this={$context.trigger} role="button" aria-disabled={disabled} class={containerClasses}>
 		<div class={contentWrapperClasses}>
 			{#if tags && selected.length}
-				<slot name="tags" {handleRemoveTag}>
+				<slot name="tags" removeTag={handleRemoveTag}>
 					{#each selected as item}
 						<button type="button" on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
-							<Badge {rounded} {theme} {size} {...badgeProps} class={badgeClasses}>
+							<Badge {rounded} theme={tagsTheme} {size} {...badgeProps} class={badgeClasses}>
 								<span class="pointer-events-none pr-1">
 									{item?.label}
 								</span>
@@ -360,6 +384,7 @@
 						on:keydown={handleInputKeydown}
 						on:keyup={handleInputKeyUp}
 						on:click={handleInputClick}
+						on:focus={(e) => handleInputFocus}
 					/>
 				</slot>
 			</div>

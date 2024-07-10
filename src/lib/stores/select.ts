@@ -46,9 +46,15 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	const initialSelected = options.selected;
 	const store = writable(options as Required<P & SelectStoreOptions>);
 
+	// store.subscribe(s => {
+	// 	if (typeof options.onChange === 'function')
+	// 		options.onChange(s.selected || []);
+	// });
+
 	function canRemove(selected: any) {
 		if (!isArray || isSingleArray) return true;
 		const len = selected.length;
+		if (len === 0) return true;
 		if (len - 1 >= (options.min || 0)) return true;
 		return false;
 	}
@@ -117,7 +123,7 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 			return;
 		}
 		store.update((s) => {
-			if (typeof options.onChange === 'function') options.onChange(_selected);
+			if (typeof options.onChange === 'function') options.onChange(selected);
 			return { ...s, selected };
 		});
 	}

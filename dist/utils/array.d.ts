@@ -29,3 +29,11 @@ export type Comparator = (a: any, b: any) => number;
  * @param primer an optional primer function for formatting values before compare.
  */
 export declare function sortArray<T extends Record<string, any>>(items: T[], accessors: SortAccessor<T>[], primer?: Primer): T[];
+/**
+ * Shallow compare if two arrays are equal does not compare objects
+ * or nested arrays.
+ *
+ * @param arr1 first array to compare.
+ * @param arr2 second array to compare.
+ */
+export declare function isArrayEqual(arr1: any[], arr2: any[]): boolean;

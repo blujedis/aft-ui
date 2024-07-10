@@ -9,8 +9,9 @@
 	} from './module';
 	import { themeStore, themer, useSelect, type SelectStore } from '$lib';
 	import type { ElementProps } from '$lib/types';
-	import { setContext } from 'svelte';
-	import { cleanObj, createCustomEvent, ensureArray } from '$lib/utils';
+	import { onMount, setContext, tick } from 'svelte';
+	import { cleanObj, createCustomEvent, ensureArray, isArrayEqual } from '$lib/utils';
+	import { dequal } from 'dequal';
 
 	type Item = $$Generic<SelectListItem>;
 	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size' | 'multiple'>;
@@ -37,6 +38,7 @@
 		shadowed,
 		size,
 		tags,
+		tagsTheme,
 		theme,
 		value,
 		variant,
@@ -49,6 +51,10 @@
 		...(defaults as any) // TODO: fix/review types here.
 	} as Required<$$Props>;
 
+	let mounted = false;
+	let removing = false;
+	let selecting = false;
+
 	if (newable) tags = true;
 	if (removable) tags = true;
 	if (min) tags = true;
@@ -60,6 +66,7 @@
 		min,
 		max,
 		mode: tags ? 'multiple' : 'single-array',
+		newItems: undefined,
 		items: [],
 		filtered: [],
 		persisted: [],
@@ -76,6 +83,7 @@
 		hovered,
 		min,
 		max,
+		name: $$restProps.name,
 		newable,
 		removable,
 		placeholder,
@@ -84,6 +92,7 @@
 		shadowed,
 		size,
 		tags,
+		tagsTheme,
 		theme,
 		variant,
 		transitioned,
@@ -110,12 +119,54 @@
 	const th = themer($themeStore);
 
 	$: {
-		if (
-			typeof value === 'undefined' ||
-			(Array.isArray(value) && !value.length) ||
-			(typeof value === 'string' && !value.length)
-		)
+		if (mounted && (typeof value === 'undefined' || !value?.length)) {
+			if (tags && !value.length) store.update((s) => ({ ...s, selected: value }));
 			setLabel();
+		} else if (mounted && $context.input && !$context.input.value && !tags && !filterable) {
+			setLabel(value);
+		} else if (mounted && tags && !selecting && !filterable) {
+			if (!isArrayEqual(value, $store.selected)) {
+				if (!removing) {
+					store.update((s) => ({ ...s, selected: [...value] }));
+				} else {
+					value = $store.selected;
+				}
+			}
+			if (!removing && (value === null || !value?.length)) {
+				store.update((s) => ({ ...s, selected: [] }));
+			}
+		}
+		if (!removing && !selecting) {
+			$store.items = [];
+			items.forEach((i) => add({ ...i }));
+			if (!items.length) {
+				$store.filtered = [];
+				$store.selected = [];
+			}
+		}
+		// else if (
+		// 	mounted &&
+		// 	tags &&
+		// 	!selecting &&
+		// 	!filterable &&
+		// 	!isArrayEqual(value, $store.selected)
+		// ) {
+		// 	console.log(value, $store.selected);
+		// 	if (!removing) {
+		// 		store.update((s) => ({ ...s, selected: [...value] }));
+		// 	} else {
+		// 		value = $store.selected;
+		// 	}
+		// } else if (
+		// 	mounted &&
+		// 	tags &&
+		// 	!selecting &&
+		// 	!filterable &&
+		// 	!removing &&
+		// 	(value === null || !value?.length)
+		// ) {
+		// 	store.update((s) => ({ ...s, selected: [] }));
+		// }
 	}
 
 	$: groups = $store.items.reduce(
@@ -164,24 +215,16 @@
 
 	function restore(
 		selectedItemsOrRestoreInput?: SelectListItemKey | SelectListItemKey[] | boolean,
-		restoreInput?: boolean
+		restoreInput?: boolean | null,
+		force = false
 	) {
 		if (typeof selectedItemsOrRestoreInput === 'boolean') {
 			restoreInput = selectedItemsOrRestoreInput;
 			selectedItemsOrRestoreInput = undefined;
 		}
 
-		if (!$context.filtering) {
+		if (!$context.filtering && !force) {
 			return;
-		}
-
-		if ($context.input && restoreInput) {
-			if (!tags) {
-				const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
-				if (label) $context.input.value = label || '';
-			} else {
-				$context.input.value = '';
-			}
 		}
 
 		const normalizedItems =
@@ -190,6 +233,22 @@
 				: !tags
 					? $context.persisted
 					: $context.selected;
+
+		if ($context.input) {
+			if (restoreInput) {
+				if (!tags) {
+					const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
+					if (label) $context.input.value = label || '';
+				} else {
+					$context.input.value = '';
+				}
+			} else if (force) {
+				if (!tags && normalizedItems.length) {
+					$context.input.value =
+						$context.items.find((i) => i.value === normalizedItems[0])?.label || '';
+				}
+			}
+		}
 
 		store.update((s) => {
 			return {
@@ -204,7 +263,7 @@
 
 	export function isSelected(itemOrKey: Item | SelectListItemKey) {
 		const item = getItem(itemOrKey);
-		const selected = $store.selected.includes(item.value);
+		const selected = $store.selected.includes(item?.value);
 		return selected;
 	}
 
@@ -256,23 +315,34 @@
 		}
 	}
 
-	export function select(itemOrKey: Item | SelectListItemKey) {
+	export async function select(itemOrKey: Item | SelectListItemKey) {
+		selecting = true;
 		const item = getItem(itemOrKey);
 		setLabel(item);
 		store.select(item.value);
 		if (exclusive) filter('');
+		await tick();
+		selecting = false;
 	}
 
-	export function remove(itemOrKey: Item | SelectListItemKey) {
+	export async function remove(itemOrKey: Item | SelectListItemKey) {
+		removing = true;
 		let key = itemOrKey as SelectListItemKey;
 		if (typeof itemOrKey !== 'string') key = (itemOrKey as Item).value;
+		let newSelected = $store.selected || [];
 		store.update((s) => {
 			const filteredSelected = s.selected.filter((v: any) => v !== key);
-			return { ...s, selected: filteredSelected };
+			newSelected = filteredSelected;
+			return { ...s, selected: [...filteredSelected] };
 		});
 		// really should breakout filter below to return only values
-		// then create "filterUpdateStore" or something.
+		// then create "filterUpdateStore" func or something.
 		if (exclusive) filter('');
+		await tick();
+		removing = false;
+		// Shouldn't have to call this. Need to provide multi-record
+		// update in the useSelect helper.
+		onChangeHandler(newSelected);
 	}
 
 	export async function filter(query?: string) {
@@ -321,7 +391,9 @@
 		}
 	}
 
-	items.forEach((i) => add({ ...i }));
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div class={controllerClasses}>
@@ -339,6 +411,7 @@
 				selectedItems={$store.selected}
 				filtered={$store.filtered}
 				filtering={$store.filtering}
+				{groups}
 				open={context.open}
 				close={context.close}
 				toggle={store.toggle}
@@ -349,7 +422,7 @@
 		<!-- Select cannot have a dynamic "multiple when using bind."-->
 		<slot name="select">
 			{#if tags}
-				<select tabindex="-1" class="sr-only" {...restProps} multiple bind:value>
+				<select tabindex="-1" class="sr-only" multiple {...restProps} bind:value>
 					{#if groupKeys.length}
 						{#each Object.entries(groups) as [group, items]}
 							<optgroup>{group}</optgroup>

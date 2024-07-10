@@ -85,13 +85,18 @@
 	function onSelected(el: HTMLElement, e: KeyboardEvent) {
 		e.preventDefault(); // prevent or will bubble for option select event.
 		const key = el.dataset.key as string;
+
 		if (!tags && $context.input) {
 			context.toggle();
-			if (!context.globals?.filterable) context.select(key);
-			else context.restore(key, false);
-			setTimeout(() => {
+			if (!context.globals?.filterable) {
+				context.select(key);
 				$context.input?.focus();
-			});
+			} else {
+				setTimeout(() => {
+					context.restore(key, false, true);
+					$context.input?.focus();
+				});
+			}
 		} else {
 			context.select(key);
 			setTimeout(() => {

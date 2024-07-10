@@ -43,7 +43,7 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> = Omit<
 	remove(key: SelectListItemKey): void;
 	remove(item: T): void;
 	restore(restoreInput?: boolean): void;
-	restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+	restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean, force?: boolean): void;
 	filter(query?: string): void;
 	globals: SelectListContextProps;
 };
@@ -57,8 +57,10 @@ export type SelectListContextProps = {
 	focused?: boolean;
 	hovered?: boolean;
 	tags?: boolean; // multiple tags mode.
+	tagsTheme?: ThemeColor;
 	min?: number; // min tags required.
 	max?: number; // max tags allowed.
+	name?: string; // name of the inner element.
 	newable?: boolean; // can add new tags
 	placeholder?: string;
 	recordless?: boolean | string; // display no records panel when filtered is empty.
@@ -84,17 +86,17 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-	{
-		autoclose: true,
-		escapable: true,
-		filterable: false,
-		filter: (q, i) =>
-			i.filter(
-				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-			),
-		recordless: false,
-		size: 'md',
-		theme: 'frame',
-		value: '',
-		variant: 'outlined'
-	};
+{
+	autoclose: true,
+	escapable: true,
+	filterable: false,
+	filter: (q, i) =>
+		i.filter(
+			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+		),
+	recordless: true,
+	size: 'md',
+	theme: 'frame',
+	value: '',
+	variant: 'outlined'
+};

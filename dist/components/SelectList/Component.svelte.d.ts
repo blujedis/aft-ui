@@ -8,8 +8,8 @@ declare class __sveltets_Render<Item extends SelectListItem> {
         close?: (() => void) | undefined;
         toggle?: (() => void) | undefined;
         add?: (({ value, label, group, selected }: Item) => void) | undefined;
-        select?: ((itemOrKey: any) => void) | undefined;
-        remove?: ((itemOrKey: any) => void) | undefined;
+        select?: ((itemOrKey: any) => Promise<void>) | undefined;
+        remove?: ((itemOrKey: any) => Promise<void>) | undefined;
         filter?: ((query?: string | undefined) => Promise<void>) | undefined;
     } & import("../..").SelectListContextProps & {
         autoclose?: boolean | undefined;
@@ -29,6 +29,7 @@ declare class __sveltets_Render<Item extends SelectListItem> {
             selectedItems: any;
             filtered: Item[];
             filtering: boolean | undefined;
+            groups: Record<string, Required<Item>[]>;
             open: () => void;
             close: () => void;
             toggle: (value?: any) => void;
@@ -47,8 +48,8 @@ export default class Component<Item extends SelectListItem> extends SvelteCompon
     get close(): () => void;
     get toggle(): () => void;
     get add(): ({ value, label, group, selected }: Item) => void;
-    get select(): (itemOrKey: any) => void;
-    get remove(): (itemOrKey: any) => void;
+    get select(): (itemOrKey: any) => Promise<void>;
+    get remove(): (itemOrKey: any) => Promise<void>;
     get filter(): ((query?: string | undefined) => Promise<void>) & import("../..").FilterQuery<Item>;
 }
 export {};

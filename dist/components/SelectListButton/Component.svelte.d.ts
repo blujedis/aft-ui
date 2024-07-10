@@ -7,6 +7,7 @@ declare const __propDef: {
         filterable?: boolean | undefined;
         hovered?: boolean | undefined;
         tags?: boolean | undefined;
+        tagsTheme?: import("../../types").ThemeColor | undefined;
         newable?: boolean | undefined;
         placeholder?: string | undefined;
         removable?: boolean | undefined;
@@ -20,7 +21,7 @@ declare const __propDef: {
     };
     slots: {
         tags: {
-            handleRemoveTag: (item?: SelectListItem) => Promise<boolean | undefined>;
+            removeTag: (item?: SelectListItem) => Promise<boolean | undefined>;
         };
         icon: {};
         input: {

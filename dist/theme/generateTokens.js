@@ -308,12 +308,8 @@ function getDefaultTokens(options, themeColors = colors) {
         },
         textPlaceholder: {
             variant: 'filled',
-            modifiers: ['placeholder'],
-            colors: () => createColorMap(themeColors, getMin(defaultShade, -300, 200), true, {
-                frame: 'placholder-frame-300',
-                white: 'placeholder-frame-300',
-                black: 'placeholder-frame-300'
-            })
+            modifiers: ['placeholder:text'],
+            colors: () => createColorMap(themeColors, getMin(defaultShade, -300, 200), true)
         },
         textUnfilled: {
             variant: 'unfilled',

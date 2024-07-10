@@ -51,13 +51,15 @@ function onSelected(el, e) {
   const key = el.dataset.key;
   if (!tags && $context.input) {
     context.toggle();
-    if (!context.globals?.filterable)
+    if (!context.globals?.filterable) {
       context.select(key);
-    else
-      context.restore(key, false);
-    setTimeout(() => {
       $context.input?.focus();
-    });
+    } else {
+      setTimeout(() => {
+        context.restore(key, false, true);
+        $context.input?.focus();
+      });
+    }
   } else {
     context.select(key);
     setTimeout(() => {

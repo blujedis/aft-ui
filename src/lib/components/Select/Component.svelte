@@ -38,7 +38,7 @@
 
 	$: selectClasses = th
 		.create('Select')
-		.bundle(['mainBg', 'filledText', 'filledPlaceholder'], theme, variant === 'filled')
+		.bundle(['mainBg', 'filledText', 'filledTextPlaceholder'], theme, variant === 'filled')
 		.bundle(
 			['mainRing', 'unfilledText'],
 			{ $base: 'ring-1 ring-inset' },

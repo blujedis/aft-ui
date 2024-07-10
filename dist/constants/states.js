@@ -126,20 +126,6 @@ export const elementSoftBorder = {
     success: '',
     info: ''
 };
-export const filledPlaceholder = {
-    $base: '',
-    unstyled: '',
-    white: 'placeholder-frame-300',
-    black: 'placeholder-frame-300',
-    frame: 'placeholder-placholder-frame-300',
-    primary: 'placeholder-primary-200 dark:placeholder-primary-200',
-    secondary: 'placeholder-secondary-200 dark:placeholder-secondary-200',
-    tertiary: 'placeholder-tertiary-200 dark:placeholder-tertiary-200',
-    danger: 'placeholder-danger-200 dark:placeholder-danger-200',
-    warning: 'placeholder-warning-200 dark:placeholder-warning-200',
-    success: 'placeholder-success-200 dark:placeholder-success-200',
-    info: 'placeholder-info-200 dark:placeholder-info-200'
-};
 export const filledText = {
     $base: 'text-white dark:text-white',
     unstyled: '',
@@ -195,6 +181,20 @@ export const filledTextAriaSelected = {
     warning: '',
     success: '',
     info: ''
+};
+export const filledTextPlaceholder = {
+    $base: '',
+    unstyled: '',
+    white: 'placeholder:text-white dark:placeholder:text-white',
+    black: 'placeholder:text-black dark:placeholder:text-black',
+    frame: 'placeholder:text-frame-200 dark:placeholder:text-frame-200',
+    primary: 'placeholder:text-primary-200 dark:placeholder:text-primary-200',
+    secondary: 'placeholder:text-secondary-200 dark:placeholder:text-secondary-200',
+    tertiary: 'placeholder:text-tertiary-200 dark:placeholder:text-tertiary-200',
+    danger: 'placeholder:text-danger-200 dark:placeholder:text-danger-200',
+    warning: 'placeholder:text-warning-200 dark:placeholder:text-warning-200',
+    success: 'placeholder:text-success-200 dark:placeholder:text-success-200',
+    info: 'placeholder:text-info-200 dark:placeholder:text-info-200'
 };
 export const formBorder = {
     $base: 'border-frame-950/20 dark:border-frame-600/60',

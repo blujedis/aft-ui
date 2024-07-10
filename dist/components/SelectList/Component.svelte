@@ -2,8 +2,9 @@
   selectListDefaults as defaults
 } from "./module";
 import { themeStore, themer, useSelect } from "../..";
-import { setContext } from "svelte";
-import { cleanObj, createCustomEvent, ensureArray } from "../../utils";
+import { onMount, setContext, tick } from "svelte";
+import { cleanObj, createCustomEvent, ensureArray, isArrayEqual } from "../../utils";
+import { dequal } from "dequal";
 export let {
   autoclose,
   badgeProps,
@@ -26,6 +27,7 @@ export let {
   shadowed,
   size,
   tags,
+  tagsTheme,
   theme,
   value,
   variant,
@@ -38,6 +40,9 @@ export let {
   ...defaults
   // TODO: fix/review types here.
 };
+let mounted = false;
+let removing = false;
+let selecting = false;
 if (newable)
   tags = true;
 if (removable)
@@ -52,6 +57,7 @@ const store = useSelect({
   min,
   max,
   mode: tags ? "multiple" : "single-array",
+  newItems: void 0,
   items: [],
   filtered: [],
   persisted: [],
@@ -67,6 +73,7 @@ const globals = cleanObj({
   hovered,
   min,
   max,
+  name: $$restProps.name,
   newable,
   removable,
   placeholder,
@@ -75,6 +82,7 @@ const globals = cleanObj({
   shadowed,
   size,
   tags,
+  tagsTheme,
   theme,
   variant,
   transitioned,
@@ -97,8 +105,32 @@ const context = setContext("SelectListContext", {
 });
 const th = themer($themeStore);
 $: {
-  if (typeof value === "undefined" || Array.isArray(value) && !value.length || typeof value === "string" && !value.length)
+  if (mounted && (typeof value === "undefined" || !value?.length)) {
+    if (tags && !value.length)
+      store.update((s) => ({ ...s, selected: value }));
     setLabel();
+  } else if (mounted && $context.input && !$context.input.value && !tags && !filterable) {
+    setLabel(value);
+  } else if (mounted && tags && !selecting && !filterable) {
+    if (!isArrayEqual(value, $store.selected)) {
+      if (!removing) {
+        store.update((s) => ({ ...s, selected: [...value] }));
+      } else {
+        value = $store.selected;
+      }
+    }
+    if (!removing && (value === null || !value?.length)) {
+      store.update((s) => ({ ...s, selected: [] }));
+    }
+  }
+  if (!removing && !selecting) {
+    $store.items = [];
+    items.forEach((i) => add({ ...i }));
+    if (!items.length) {
+      $store.filtered = [];
+      $store.selected = [];
+    }
+  }
 }
 $:
   groups = $store.items.reduce(
@@ -139,24 +171,30 @@ function getItem(itemOrKey) {
     return itemOrKey;
   return items.find((v) => v.value === itemOrKey);
 }
-function restore(selectedItemsOrRestoreInput, restoreInput) {
+function restore(selectedItemsOrRestoreInput, restoreInput, force = false) {
   if (typeof selectedItemsOrRestoreInput === "boolean") {
     restoreInput = selectedItemsOrRestoreInput;
     selectedItemsOrRestoreInput = void 0;
   }
-  if (!$context.filtering) {
+  if (!$context.filtering && !force) {
     return;
   }
-  if ($context.input && restoreInput) {
-    if (!tags) {
-      const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
-      if (label)
-        $context.input.value = label || "";
-    } else {
-      $context.input.value = "";
+  const normalizedItems = typeof selectedItemsOrRestoreInput !== "undefined" ? ensureArray(selectedItemsOrRestoreInput) : !tags ? $context.persisted : $context.selected;
+  if ($context.input) {
+    if (restoreInput) {
+      if (!tags) {
+        const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
+        if (label)
+          $context.input.value = label || "";
+      } else {
+        $context.input.value = "";
+      }
+    } else if (force) {
+      if (!tags && normalizedItems.length) {
+        $context.input.value = $context.items.find((i) => i.value === normalizedItems[0])?.label || "";
+      }
     }
   }
-  const normalizedItems = typeof selectedItemsOrRestoreInput !== "undefined" ? ensureArray(selectedItemsOrRestoreInput) : !tags ? $context.persisted : $context.selected;
   store.update((s) => {
     return {
       ...s,
@@ -169,7 +207,7 @@ function restore(selectedItemsOrRestoreInput, restoreInput) {
 }
 export function isSelected(itemOrKey) {
   const item = getItem(itemOrKey);
-  const selected = $store.selected.includes(item.value);
+  const selected = $store.selected.includes(item?.value);
   return selected;
 }
 export function setLabel(itemOrKey) {
@@ -219,23 +257,32 @@ export function add({ value: value2, label, group, selected }) {
     });
   }
 }
-export function select(itemOrKey) {
+export async function select(itemOrKey) {
+  selecting = true;
   const item = getItem(itemOrKey);
   setLabel(item);
   store.select(item.value);
   if (exclusive)
     filter("");
+  await tick();
+  selecting = false;
 }
-export function remove(itemOrKey) {
+export async function remove(itemOrKey) {
+  removing = true;
   let key = itemOrKey;
   if (typeof itemOrKey !== "string")
     key = itemOrKey.value;
+  let newSelected = $store.selected || [];
   store.update((s) => {
     const filteredSelected = s.selected.filter((v) => v !== key);
-    return { ...s, selected: filteredSelected };
+    newSelected = filteredSelected;
+    return { ...s, selected: [...filteredSelected] };
   });
   if (exclusive)
     filter("");
+  await tick();
+  removing = false;
+  onChangeHandler(newSelected);
 }
 export async function filter(query) {
   let filtered = await resolveItems(query);
@@ -277,7 +324,9 @@ function handleKeydown(e) {
     }
   }
 }
-items.forEach((i) => add({ ...i }));
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <div class={controllerClasses}>
@@ -295,6 +344,7 @@ items.forEach((i) => add({ ...i }));
 				selectedItems={$store.selected}
 				filtered={$store.filtered}
 				filtering={$store.filtering}
+				{groups}
 				open={context.open}
 				close={context.close}
 				toggle={store.toggle}
@@ -305,7 +355,7 @@ items.forEach((i) => add({ ...i }));
 		<!-- Select cannot have a dynamic "multiple when using bind."-->
 		<slot name="select">
 			{#if tags}
-				<select tabindex="-1" class="sr-only" {...restProps} multiple bind:value>
+				<select tabindex="-1" class="sr-only" multiple {...restProps} bind:value>
 					{#if groupKeys.length}
 						{#each Object.entries(groups) as [group, items]}
 							<optgroup>{group}</optgroup>

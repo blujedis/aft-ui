@@ -6,7 +6,7 @@ import {
   Icon
 } from "..";
 import { boolToMapValue } from "../../utils";
-import { getContext } from "svelte";
+import { getContext, tick } from "svelte";
 const context = getContext("SelectListContext");
 export let {
   badgeProps,
@@ -18,6 +18,7 @@ export let {
   hovered,
   name,
   tags,
+  tagsTheme,
   newable,
   placeholder,
   removable,
@@ -39,7 +40,9 @@ export let {
   focused: context.globals?.focused,
   hovered: context.globals?.hovered,
   tags: context.globals?.tags,
+  tagsTheme: context.globals?.tagsTheme || context.globals?.theme,
   newable: context.globals?.newable,
+  name: context.globals?.name,
   placeholder: context.globals?.placeholder,
   removable: context.globals?.removable,
   rounded: context.globals?.rounded,
@@ -61,7 +64,7 @@ $:
 $:
   useInput = filterable || newable;
 $:
-  containerClasses = th.create("SelectListButton").bundle(["mainBg", "filledText", "filledPlaceholder"], theme, variant === "filled").bundle(
+  containerClasses = th.create("SelectListButton").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
     ["unfilledText", "mainRing"],
     {
       $base: "ring-1 ring-inset"
@@ -72,7 +75,7 @@ $:
     "outlineFocusWithin",
     theme,
     focused && ["filled", "outlined", "ghost", "soft", "text"].includes(variant)
-  ).bundle(["unfilledText"], theme, variant === "text").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("roundeds", boolToMapValue(rounded), rounded && variant !== "flushed").option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`select-list-button`, true).append("w-full", full).append("relative peer flex items-center min-w-[176px] outline-none", true).append("outline-none", focused && variant !== "flushed").append("border-0", variant === "flushed").append("max-w-[176px]", tags && !$context.selected.length).append($$restProps.class, true).compile();
+  ).bundle(["unfilledText"], theme, variant === "text").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("roundeds", boolToMapValue(rounded), rounded && variant !== "flushed").option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`select-list-button`, true).append("w-full", full).append("relative peer flex items-center min-w-[176px] outline-none", true).append("outline-none", focused && variant !== "flushed").append("border-0", variant === "flushed").append($$restProps.class, true).compile();
 $:
   contentWrapperClasses = th.create("SelectListInputWrapper").option("fieldFontSizes", size, size).option("fieldPadding", size, size).prepend("select-list-content-wrapper", true).append("relative flex flex-1 gap-1 flex-wrap overflow-hidden mr-4", true).compile();
 $:
@@ -82,7 +85,7 @@ $:
 $:
   badgeClasses = th.create("SelectListBadge").append("border border-white/50", variant === "filled").append("relative flex whitespace-nowrap overflow-hidden", true).append("pr-2", removable).compile();
 $:
-  inputClasses = th.create("SelectListInput").prepend("select-list-input", true).append("invisible", disabled).append("caret-transparent", !filterable).append(
+  inputClasses = th.create("SelectListInput").bundle(["filledTextPlaceholder"], theme, variant === "filled").prepend("select-list-input", true).append("invisible", disabled).append("caret-transparent", !filterable).append(
     "relative group peer inline w-full flex-1 bg-transparent outline-none border-none",
     true
   ).append("cursor-pointer", !useInput).compile();
@@ -196,10 +199,10 @@ async function handleInputKeydown(e) {
       if ($context.filtering) {
         const current = $context.items.find((i) => i.value === $context.selected[0]);
         if (current) {
-          context.select(current);
+          context.close();
+          context.filter("");
           setTimeout(() => {
-            context.close();
-            context.filter("");
+            context.select(current);
             $context.filtering = false;
           });
         }
@@ -221,6 +224,22 @@ function setInitialValue(el) {
   if (!tags && labels.length)
     el.value = labels[0] + "";
 }
+function handleInputFocus(e) {
+  if (!filterable)
+    return;
+  const target = e.currentTarget;
+  let len = target.value?.length;
+  if (target.setSelectionRange) {
+    target.focus();
+    target.setSelectionRange(len, len);
+  } else if (target.createTextRange) {
+    let t = target.createTextRange();
+    t.collapse(true);
+    t.moveEnd("character", len);
+    t.moveStart("character", len);
+    t.select();
+  }
+}
 </script>
 
 <!-- <div> -->
@@ -228,10 +247,10 @@ function setInitialValue(el) {
 	<div bind:this={$context.trigger} role="button" aria-disabled={disabled} class={containerClasses}>
 		<div class={contentWrapperClasses}>
 			{#if tags && selected.length}
-				<slot name="tags" {handleRemoveTag}>
+				<slot name="tags" removeTag={handleRemoveTag}>
 					{#each selected as item}
 						<button type="button" on:click={() => handleRemoveTag(item)} class={badgeButtonClasses}>
-							<Badge {rounded} {theme} {size} {...badgeProps} class={badgeClasses}>
+							<Badge {rounded} theme={tagsTheme} {size} {...badgeProps} class={badgeClasses}>
 								<span class="pointer-events-none pr-1">
 									{item?.label}
 								</span>
@@ -263,6 +282,7 @@ function setInitialValue(el) {
 						on:keydown={handleInputKeydown}
 						on:keyup={handleInputKeyUp}
 						on:click={handleInputClick}
+						on:focus={(e) => handleInputFocus}
 					/>
 				</slot>
 			</div>

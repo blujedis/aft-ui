@@ -13,10 +13,16 @@ export function useSelect(options = {}) {
     options.selected = isArray ? ensureArray(options.selected) : options.selected;
     const initialSelected = options.selected;
     const store = writable(options);
+    // store.subscribe(s => {
+    // 	if (typeof options.onChange === 'function')
+    // 		options.onChange(s.selected || []);
+    // });
     function canRemove(selected) {
         if (!isArray || isSingleArray)
             return true;
         const len = selected.length;
+        if (len === 0)
+            return true;
         if (len - 1 >= (options.min || 0))
             return true;
         return false;
@@ -96,7 +102,7 @@ export function useSelect(options = {}) {
         }
         store.update((s) => {
             if (typeof options.onChange === 'function')
-                options.onChange(_selected);
+                options.onChange(selected);
             return { ...s, selected };
         });
     }

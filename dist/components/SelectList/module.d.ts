@@ -32,7 +32,7 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> = Omit<
     remove(key: SelectListItemKey): void;
     remove(item: T): void;
     restore(restoreInput?: boolean): void;
-    restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean): void;
+    restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean, force?: boolean): void;
     filter(query?: string): void;
     globals: SelectListContextProps;
 };
@@ -45,8 +45,10 @@ export type SelectListContextProps = {
     focused?: boolean;
     hovered?: boolean;
     tags?: boolean;
+    tagsTheme?: ThemeColor;
     min?: number;
     max?: number;
+    name?: string;
     newable?: boolean;
     placeholder?: string;
     recordless?: boolean | string;

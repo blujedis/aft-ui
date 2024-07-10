@@ -22,7 +22,7 @@ export let {
 };
 const th = themer($themeStore);
 $:
-  inputClasses = th.create("Input").bundle(["mainBg", "filledText", "filledPlaceholder"], theme, variant === "filled").bundle(
+  inputClasses = th.create("Input").bundle(["mainBg", "filledText", "filledTextPlaceholder"], theme, variant === "filled").bundle(
     ["mainRing", "unfilledText"],
     { $base: "ring-1 ring-inset" },
     theme,

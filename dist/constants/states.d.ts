@@ -126,20 +126,6 @@ export declare const elementSoftBorder: {
     success: string;
     info: string;
 };
-export declare const filledPlaceholder: {
-    $base: string;
-    unstyled: string;
-    white: string;
-    black: string;
-    frame: string;
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    info: string;
-};
 export declare const filledText: {
     $base: string;
     unstyled: string;
@@ -183,6 +169,20 @@ export declare const filledTextAriaExpanded: {
     info: string;
 };
 export declare const filledTextAriaSelected: {
+    $base: string;
+    unstyled: string;
+    white: string;
+    black: string;
+    frame: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    danger: string;
+    warning: string;
+    success: string;
+    info: string;
+};
+export declare const filledTextPlaceholder: {
     $base: string;
     unstyled: string;
     white: string;

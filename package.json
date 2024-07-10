@@ -50,6 +50,7 @@
 		"@floating-ui/dom": "^1.6.3",
 		"classnames": "^2.5.1",
 		"defaults": "^3.0.0",
+		"dequal": "^2.0.3",
 		"dot-prop": "^8.0.2",
 		"fuse.js": "^7.0.0",
 		"md5": "^2.3.0",

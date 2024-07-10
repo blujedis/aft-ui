@@ -3,7 +3,7 @@ export const selectListDefaults = {
     escapable: true,
     filterable: false,
     filter: (q, i) => i.filter((v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)),
-    recordless: false,
+    recordless: true,
     size: 'md',
     theme: 'frame',
     value: '',

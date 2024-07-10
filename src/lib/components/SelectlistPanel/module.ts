@@ -19,5 +19,5 @@ export const selectListPanelDefaults: SelectListPanelProps = {
 	recordless: true,
 	shadowed: 'sm',
 	theme: 'frame',
-	transition: { start: 0.95, type: 'scale' }
+	transition: 'none' // { start: 0.95, type: 'scale' }
 };

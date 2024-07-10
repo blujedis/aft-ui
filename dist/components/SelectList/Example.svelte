@@ -3,7 +3,6 @@ import { SelectList } from ".";
 import { SelectListButton } from "../SelectListButton";
 import { SelectListOption } from "../SelectListOption";
 import { SelectListPanel } from "../SelectListPanel";
-import { colors } from "../../constants";
 import { Icon } from "../Icon";
 import { themer, themeStore } from "../../theme";
 const th = themer($themeStore);
@@ -64,10 +63,11 @@ const props = {
 const shared = {
   size: "md"
 };
+const colors = ["frame", "primary", "secondary", "danger", "success", "warning"];
 </script>
 
 <ExamplePage {title} {description}>
-	<div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-6 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -88,7 +88,7 @@ const shared = {
 			</SelectList>
 		{/each}
 	</div>
-	<div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-6 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -98,6 +98,7 @@ const shared = {
 				placeholder="Please Select"
 				theme={color}
 				let:filtered
+				full
 			>
 				<SelectListButton />
 				<SelectListPanel>
@@ -110,7 +111,7 @@ const shared = {
 			</SelectList>
 		{/each}
 	</div>
-	<div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-6 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -133,7 +134,7 @@ const shared = {
 			</SelectList>
 		{/each}
 	</div>
-	<div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-6 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -156,7 +157,7 @@ const shared = {
 			</SelectList>
 		{/each}
 	</div>
-	<div class="grid grid-cols-8 gap-2 mb-4">
+	<div class="grid grid-cols-6 gap-2 mb-4">
 		{#each colors as color}
 			<SelectList
 				{...props}
@@ -179,7 +180,7 @@ const shared = {
 		{/each}
 	</div>
 	<div class="mt-8 mb-2">
-		<form on:submit={handleSubmit}>
+		<form on:submit={handleSubmit} class="flex items-center space-x-2">
 			<SelectList
 				bind:this={selectList}
 				{...props}
@@ -249,33 +250,10 @@ const shared = {
 					{:else}
 						<div class="px-4"></div>
 					{/if}
-
-					<!-- {#each filtered as item}
-						{#if !selectedItems.includes(item.value)}
-							<SelectListOption as="button" key={item.value} let:active>
-								<div class="flex justify-between items-center">
-									{item.label}
-									{#if active && !filtering}
-										<Icon icon="mdi:check" class={iconClasses} />
-									{/if}
-								</div>
-							</SelectListOption>
-						{/if}
-					{/each} -->
 				</SelectListPanel>
 			</SelectList>
-
-			<div class="mt-4">
-				<button type="submit">Submit</button>
-			</div>
+			<button type="button" class="text-sm">Reset</button>
+			<button type="submit" class="text-sm">Submit</button>
 		</form>
 	</div>
-
-	<!-- <select bind:value={selectedObj} on:change={() => console.log(selectedObj)}>
-		{#each sourceItems as item, index (index)}
-			<option value={item}>{item.label}</option>
-		{/each}
-	</select> -->
-
-	<button on:click={updateSelectList}>Update</button>
 </ExamplePage>
