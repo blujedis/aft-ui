@@ -44,7 +44,7 @@
 		"preview": "vite preview",
 		"build": "npm run lint:fix && vite build",
 		"build:package": "npm run build && npm run package",
-		"postbuild": "node postbuild.cjs"
+		"postbuild": "echo \"postbuild.cjs currently disabled\""
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.6.3",
