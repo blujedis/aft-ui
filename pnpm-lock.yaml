@@ -36,6 +36,9 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0
     devDependencies:
+      '@aft/config':
+        specifier: github:blujedis/aft-config#dev
+        version: https://codeload.github.com/blujedis/aft-config/tar.gz/1bddfb499645956d3fc7f69a4350a3c3fa37c51a(ts-node@10.9.2(@types/node@20.11.30)(typescript@5.4.3))
       '@commitlint/cli':
         specifier: ^18.4.4
         version: 18.6.1(@types/node@20.11.30)(typescript@5.4.3)
@@ -180,6 +183,10 @@ packages:
   '@aashutoshrathi/word-wrap@1.2.6':
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  '@aft/config@https://codeload.github.com/blujedis/aft-config/tar.gz/1bddfb499645956d3fc7f69a4350a3c3fa37c51a':
+    resolution: {tarball: https://codeload.github.com/blujedis/aft-config/tar.gz/1bddfb499645956d3fc7f69a4350a3c3fa37c51a}
+    version: 0.0.0-development
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -3464,6 +3471,13 @@ packages:
 snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
+
+  '@aft/config@https://codeload.github.com/blujedis/aft-config/tar.gz/1bddfb499645956d3fc7f69a4350a3c3fa37c51a(ts-node@10.9.2(@types/node@20.11.30)(typescript@5.4.3))':
+    dependencies:
+      tailwindcss: 3.4.1(ts-node@10.9.2(@types/node@20.11.30)(typescript@5.4.3))
+      tinycolor2: 1.6.0
+    transitivePeerDependencies:
+      - ts-node
 
   '@alloc/quick-lru@5.2.0': {}
 
