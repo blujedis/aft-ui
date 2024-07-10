@@ -44,8 +44,8 @@ type TokenConfHandler = (tokens: TokenMap) => string | TokenConfInit;
 type TokenConfInit =
 	| string
 	| (Partial<Record<ThemeColor, TokenValue>> & {
-		$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
-	});
+			$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
+	  });
 
 type TokenConf = Record<ThemeColor, TokenValue> & {
 	$base?: string | Partial<Record<ThemeColor | '$base', TokenValue>>;
@@ -500,8 +500,7 @@ function getDefaultTokens(options: Required<GenerateOptions>, themeColors = colo
 		textPlaceholder: {
 			variant: 'filled',
 			modifiers: ['placeholder:text'],
-			colors: () =>
-				createColorMap(themeColors, getMin(defaultShade, -300, 200), true)
+			colors: () => createColorMap(themeColors, getMin(defaultShade, -300, 200), true)
 		},
 
 		textUnfilled: {

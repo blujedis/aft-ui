@@ -11,7 +11,6 @@
 	import type { ElementProps } from '$lib/types';
 	import { onMount, setContext, tick } from 'svelte';
 	import { cleanObj, createCustomEvent, ensureArray, isArrayEqual } from '$lib/utils';
-	import { dequal } from 'dequal';
 
 	type Item = $$Generic<SelectListItem>;
 	type $$Props = SelectListProps<Item> & Omit<ElementProps<'select'>, 'size' | 'multiple'>;

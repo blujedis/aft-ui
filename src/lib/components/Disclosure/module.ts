@@ -71,7 +71,6 @@ export function transitioner(
 		};
 	else config = options;
 	const { type, ...rest } = config;
-	if (!type)
-		return null as any;
+	if (!type) return null as any;
 	return disclosureTransitions[type](node, rest);
 }

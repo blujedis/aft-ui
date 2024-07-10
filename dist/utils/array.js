@@ -103,8 +103,6 @@ export function sortArray(items, accessors, primer) {
 export function isArrayEqual(arr1, arr2) {
     if (!Array.isArray(arr1) || !Array.isArray(arr2))
         return false;
-    return arr1.length == arr2.length &&
-        arr1
-            .sort((a, b) => a - b)
-            .every((value, index) => arr2.sort((a, b) => a - b)[index] == value);
+    return (arr1.length == arr2.length &&
+        arr1.sort((a, b) => a - b).every((value, index) => arr2.sort((a, b) => a - b)[index] == value));
 }

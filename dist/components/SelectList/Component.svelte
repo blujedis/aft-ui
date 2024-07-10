@@ -4,7 +4,6 @@
 import { themeStore, themer, useSelect } from "../..";
 import { onMount, setContext, tick } from "svelte";
 import { cleanObj, createCustomEvent, ensureArray, isArrayEqual } from "../../utils";
-import { dequal } from "dequal";
 export let {
   autoclose,
   badgeProps,

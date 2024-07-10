@@ -111,14 +111,14 @@ export function sortArray<T extends Record<string, any>>(
 /**
  * Shallow compare if two arrays are equal does not compare objects
  * or nested arrays.
- * 
+ *
  * @param arr1 first array to compare.
  * @param arr2 second array to compare.
  */
 export function isArrayEqual(arr1: any[], arr2: any[]) {
 	if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
-	return arr1.length == arr2.length &&
-		arr1
-			.sort((a, b) => a - b)
-			.every((value, index) => arr2.sort((a, b) => a - b)[index] == value);
+	return (
+		arr1.length == arr2.length &&
+		arr1.sort((a, b) => a - b).every((value, index) => arr2.sort((a, b) => a - b)[index] == value)
+	);
 }

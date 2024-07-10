@@ -43,7 +43,11 @@ export type SelectListContext<T extends SelectListItem = SelectListItem> = Omit<
 	remove(key: SelectListItemKey): void;
 	remove(item: T): void;
 	restore(restoreInput?: boolean): void;
-	restore(selectedItems: SelectListItemKey | SelectListItemKey[], restoreInput?: boolean, force?: boolean): void;
+	restore(
+		selectedItems: SelectListItemKey | SelectListItemKey[],
+		restoreInput?: boolean,
+		force?: boolean
+	): void;
 	filter(query?: string): void;
 	globals: SelectListContextProps;
 };
@@ -86,17 +90,17 @@ export type SelectListProps<T extends SelectListItem> = SelectListContextProps &
 };
 
 export const selectListDefaults: Partial<SelectListProps<SelectListItem> & SelectListContextProps> =
-{
-	autoclose: true,
-	escapable: true,
-	filterable: false,
-	filter: (q, i) =>
-		i.filter(
-			(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
-		),
-	recordless: true,
-	size: 'md',
-	theme: 'frame',
-	value: '',
-	variant: 'outlined'
-};
+	{
+		autoclose: true,
+		escapable: true,
+		filterable: false,
+		filter: (q, i) =>
+			i.filter(
+				(v) => v.label.includes(q) || (v.value + '').includes(q) || (v.group + '')?.includes(q)
+			),
+		recordless: true,
+		size: 'md',
+		theme: 'frame',
+		value: '',
+		variant: 'outlined'
+	};
