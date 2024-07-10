@@ -23,13 +23,10 @@ let theme = "frame";
 let selectTwo;
 const [bindFocusTrap, handleFocusTrap] = useFocusTrap();
 const isDark = useColorMode();
-$:
-  valueOneHidden = ["empty", "!empty"].includes(data.criteriaOne);
-$:
-  valueTwoHidden = ["empty", "!empty"].includes(data.criteriaTwo);
+$: valueOneHidden = ["empty", "!empty"].includes(data.criteriaOne);
+$: valueTwoHidden = ["empty", "!empty"].includes(data.criteriaTwo);
 const th = themer($themeStore);
-$:
-  containerClasses = th.create("FilterPopoverContainer").option("panelBorder", theme, true).option("panelContainerBg", theme, true).append("absolute popover flex-col items-center w-56 p-4 shadow-sm border", true).compile();
+$: containerClasses = th.create("FilterPopoverContainer").option("panelBorder", theme, true).option("panelContainerBg", theme, true).append("absolute popover flex-col items-center w-56 p-4 shadow-sm border", true).compile();
 function handleApplyFilter() {
   setTimeout(() => {
     applyFilter();

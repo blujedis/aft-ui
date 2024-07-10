@@ -33,15 +33,13 @@ let contentRef;
 let triggerRef;
 let visible = false;
 const th = themer($themeStore);
-$:
-  popoverClasses = th.create("Badge").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
-    ["mainRing", "unfilledText"],
-    { $base: "ring-1 ring-inset" },
-    theme,
-    variant === "outlined"
-  ).bundle(["softBg", "unfilledText"], {}, theme, variant === "soft").option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("popover", true).append("z-50", true).append($$restProps.class, true).compile();
-$:
-  arrowClasses = th.create("PopoverArrow").prepend("popover-arrow", true).append("absolute pointer-events-none w-2 h-2 rotate-45 bg-inherit border-inherit", true).compile();
+$: popoverClasses = th.create("Badge").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
+  ["mainRing", "unfilledText"],
+  { $base: "ring-1 ring-inset" },
+  theme,
+  variant === "outlined"
+).bundle(["softBg", "unfilledText"], {}, theme, variant === "soft").option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("popover", true).append("z-50", true).append($$restProps.class, true).compile();
+$: arrowClasses = th.create("PopoverArrow").prepend("popover-arrow", true).append("absolute pointer-events-none w-2 h-2 rotate-45 bg-inherit border-inherit", true).compile();
 function init(node) {
   contentRef = node;
   if (contentRef)
@@ -67,8 +65,7 @@ onMount(() => {
     popover.registerTrigger(triggerRef);
   }
   return () => {
-    if (popover)
-      popover.destroy();
+    if (popover) popover.destroy();
   };
 });
 </script>

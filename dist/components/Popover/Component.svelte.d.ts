@@ -4,8 +4,8 @@ declare class __sveltets_Render<Tag extends 'div' | 'a'> {
     props(): Partial<Pick<import("../../hooks/usePopover").PopoverOptions, "events" | "middleware" | "placement" | "strategy" | "offset" | "padding" | "sticky" | "escapeable">> & {
         as?: Tag | undefined;
         role?: import("svelte/elements").AriaRole | null | undefined;
-        trigger?: string | undefined;
-        onChange?: ((state: boolean) => any) | undefined;
+        trigger?: string;
+        onChange?: (state: boolean) => any;
     } & Omit<ElementProps<Tag>, "size">;
     events(): {} & {
         [evt: string]: CustomEvent<any>;

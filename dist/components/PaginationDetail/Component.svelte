@@ -4,8 +4,7 @@ import { boolToMapValue } from "../../utils";
 export let { full, rounded, shadowed, size, theme, transitioned, variant, unstyled } = {
   ...defaults
 };
-$:
-  paginationDetailClasses = themer($themeStore).create("PaginationDetail").option("common", "transitioned", transitioned).option("kbdPadding", size, size).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`pagination-detail`, true).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile();
+$: paginationDetailClasses = themer($themeStore).create("PaginationDetail").option("common", "transitioned", transitioned).option("kbdPadding", size, size).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`pagination-detail`, true).append("w-full", full).append("flex items-center justify-center", true).append($$restProps.class, true).compile();
 </script>
 
 <div {...$$restProps} class={paginationDetailClasses}>

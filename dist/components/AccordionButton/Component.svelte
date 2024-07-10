@@ -26,24 +26,19 @@ export let {
   theme: context.globals?.theme,
   variant: context.globals?.variant
 };
-$:
-  isSelected = $context.selected?.includes(key);
-$:
-  icons = Array.isArray(caret) ? caret : [caret, caret];
-$:
-  activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
+$: isSelected = $context.selected?.includes(key);
+$: icons = Array.isArray(caret) ? caret : [caret, caret];
+$: activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 const th = themer($themeStore);
-$:
-  accordionButtonClasses = th.create("AccordionButton").bundle(
-    ["selectedBgAriaExpanded", "filledTextAriaExpanded", "elementBg"],
-    theme,
-    variant === "filled" && selectable
-  ).bundle(["unfilledTextAriaExpanded"], theme, selectable && variant !== "filled").option("panelBgHover", theme, hovered && !isSelected).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend("accordion-button", true).append("inline-flex items-center justify-between w-full outline-none", true).append($$restProps.class, true).compile();
-$:
-  iconClasses = th.create("DropdownButtonIcon").option("iconCaretSizes", size, true).prepend("accordion-caret", true).append("transition-transform duration-300 origin-center", roticon).append(
-    typeof roticon === "string" ? roticon : rotiangle === 180 ? "-rotate-180" : "rotate-90",
-    isSelected && roticon
-  ).compile();
+$: accordionButtonClasses = th.create("AccordionButton").bundle(
+  ["selectedBgAriaExpanded", "filledTextAriaExpanded", "elementBg"],
+  theme,
+  variant === "filled" && selectable
+).bundle(["unfilledTextAriaExpanded"], theme, selectable && variant !== "filled").option("panelBgHover", theme, hovered && !isSelected).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend("accordion-button", true).append("inline-flex items-center justify-between w-full outline-none", true).append($$restProps.class, true).compile();
+$: iconClasses = th.create("DropdownButtonIcon").option("iconCaretSizes", size, true).prepend("accordion-caret", true).append("transition-transform duration-300 origin-center", roticon).append(
+  typeof roticon === "string" ? roticon : rotiangle === 180 ? "-rotate-180" : "rotate-90",
+  isSelected && roticon
+).compile();
 const additionalProps = {
   disabled
 };

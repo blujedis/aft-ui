@@ -8,8 +8,7 @@ export let { accessor, full, size, theme } = {
   size: context.globals?.size,
   theme: context.globals?.theme
 };
-$:
-  gridCellClasses = themer($themeStore).create("DataGridCell").option("fieldPadding", size, size).prepend("datagrid-cell", true).append("col-span-full", full).append($$restProps.class, true).compile();
+$: gridCellClasses = themer($themeStore).create("DataGridCell").option("fieldPadding", size, size).prepend("datagrid-cell", true).append("col-span-full", full).append($$restProps.class, true).compile();
 </script>
 
 <div role="gridcell" {...$$restProps} class={gridCellClasses}>

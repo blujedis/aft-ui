@@ -1,4 +1,3 @@
-/// <reference types="svelte" />
 import type { SelectStoreValue } from '../../stores/select';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import { type Writable } from 'svelte/store';

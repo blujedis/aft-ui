@@ -13,10 +13,8 @@ export let { autocols, columns, divided, size, striped, stacked, theme } = {
   theme: context.globals?.theme
 };
 const st = styler($themeStore);
-$:
-  gridRowStyles = st.create("DataGridRow").add("--template-columns", context.getDataGridTemplate(), autocols).append($$restProps.style, true).compile();
-$:
-  gridRowClasses = themer($themeStore).create("DataGridRow").option("elementDivide", theme, divided).prepend("datagrid-row", true).append("divide-x", divided).append("grid grid-flow-col w-full", !stacked).append(stacked ? "auto-rows-fr py-1.5" : "auto-cols-fr", autocols).append($$restProps.class, true).compile();
+$: gridRowStyles = st.create("DataGridRow").add("--template-columns", context.getDataGridTemplate(), autocols).append($$restProps.style, true).compile();
+$: gridRowClasses = themer($themeStore).create("DataGridRow").option("elementDivide", theme, divided).prepend("datagrid-row", true).append("divide-x", divided).append("grid grid-flow-col w-full", !stacked).append(stacked ? "auto-rows-fr py-1.5" : "auto-cols-fr", autocols).append($$restProps.class, true).compile();
 </script>
 
 {#if $$slots.default}

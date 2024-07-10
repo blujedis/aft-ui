@@ -1,17 +1,17 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        store?: import("svelte/motion").Tweened<any> | undefined;
+        store?: import("svelte/motion").Tweened<any>;
     } & import("./module").ProgressBarTweenedOptions<any> & {
-        animate?: boolean | undefined;
-        full?: boolean | undefined;
-        max?: number | undefined;
-        rounded?: import("../../types").ThemeRounded | undefined;
-        shadowed?: import("../../types").ThemeShadowed | undefined;
-        size?: import("../../types").ThemeSize | undefined;
-        theme?: import("../../types").ThemeColor | undefined;
+        animate?: boolean;
+        full?: boolean;
+        max?: number;
+        rounded?: import("../../types").ThemeRounded;
+        shadowed?: import("../../types").ThemeShadowed;
+        size?: import("../../types").ThemeSize;
+        theme?: import("../../types").ThemeColor;
         value?: any;
-        variant?: string | number | symbol | undefined;
+        variant?: import("./module").ProgressBarVariant;
     } & Omit<import("svelte/elements").HTMLProgressAttributes, "size">;
     events: {
         [evt: string]: CustomEvent<any>;

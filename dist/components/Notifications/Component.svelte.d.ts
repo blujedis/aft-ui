@@ -10,14 +10,14 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            key?: string | undefined;
-            group?: string | undefined;
-            icon?: string | import("@iconify/svelte").IconifyIcon | undefined;
+            key?: string;
+            group?: string;
+            icon?: string | import("@iconify/svelte").IconifyIcon;
             description: string;
-            dismissible?: boolean | undefined;
-            duration?: number | undefined;
-            title?: string | undefined;
-            theme?: import("../../types").ThemeColor | undefined;
+            dismissible?: boolean;
+            duration?: number;
+            title?: string;
+            theme?: import("../../types").ThemeColor;
         };
     };
 };

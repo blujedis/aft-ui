@@ -42,15 +42,14 @@ const additionalProps = {
   "aria-disabled": disabled
 };
 const th = themer($themeStore);
-$:
-  tabClasses = th.create("TabClass").bundle(
-    ["selectedBgAriaSelected", "filledTextAriaSelected"],
-    theme,
-    ["filled", "pills"].includes(variant) && selected
-  ).option("unfilledTextAriaSelected", theme, ["flushed", "text"].includes(variant)).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("buttonPadding", size, size).option("fieldFontSizes", size, size).option("fieldLeading", size, size).option("roundeds", boolToMapValue(rounded), rounded).prepend("tab", true).append(
-    "bg-frame-100 dark:bg-frame-700 hover:bg-frame-200/70 dark:bg-frame-900/40",
-    ["filled", "pills"].includes(variant)
-  ).prepend("tab-selected", selected).append("w-full", full).append("hover:underline", variant === "text" && !selected && underlined).append("rounded-none group-first:rounded-l group-last:rounded-r", variant === "filled").append("inline-flex items-center justify-center outline-none h-full", true).compile();
+$: tabClasses = th.create("TabClass").bundle(
+  ["selectedBgAriaSelected", "filledTextAriaSelected"],
+  theme,
+  ["filled", "pills"].includes(variant) && selected
+).option("unfilledTextAriaSelected", theme, ["flushed", "text"].includes(variant)).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("common", "disabled", disabled).option("buttonPadding", size, size).option("fieldFontSizes", size, size).option("fieldLeading", size, size).option("roundeds", boolToMapValue(rounded), rounded).prepend("tab", true).append(
+  "bg-frame-100 dark:bg-frame-700 hover:bg-frame-200/70 dark:bg-frame-900/40",
+  ["filled", "pills"].includes(variant)
+).prepend("tab-selected", selected).append("w-full", full).append("hover:underline", variant === "text" && !selected && underlined).append("rounded-none group-first:rounded-l group-last:rounded-r", variant === "filled").append("inline-flex items-center justify-center outline-none h-full", true).compile();
 function init(node) {
   let tabs = $context.tabs;
   if (!initialized) {
@@ -65,8 +64,7 @@ function init(node) {
 function mount(node) {
   context.set({ ...$context, selected: node, currentIndex: index });
   const destroy = context.subscribe((s) => {
-    if (s.selected !== node)
-      selected = false;
+    if (s.selected !== node) selected = false;
   });
   return { destroy };
 }

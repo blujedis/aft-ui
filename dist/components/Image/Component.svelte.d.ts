@@ -1,12 +1,12 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: import("svelte/elements").HTMLImgAttributes & {
-        fit?: "fill" | "unstyled" | "none" | "contain" | "cover" | "scaled" | undefined;
-        full?: boolean | "width" | "height" | "w" | "h" | undefined;
-        lazyload?: boolean | import("../../utils").LazyImageOptions | undefined;
-        position?: "unstyled" | "center" | "top" | "top-right" | "top-left" | "bottom" | "bottom-right" | "botom-left" | "left" | "right" | undefined;
-        rounded?: import("../../types").ThemeRounded | undefined;
-        shadowed?: import("../../types").ThemeShadowed | undefined;
+        fit?: import("../../types").ThemeObjectFit;
+        full?: boolean | "w" | "h" | "width" | "height";
+        lazyload?: boolean | import("../../utils").LazyImageOptions;
+        position?: import("../../types").ThemeObjectPosition;
+        rounded?: import("../../types").ThemeRounded;
+        shadowed?: import("../../types").ThemeShadowed;
     };
     events: {
         [evt: string]: CustomEvent<any>;

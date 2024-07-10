@@ -8,10 +8,8 @@ export let { focused, full, rounded, transitioned, shadowed, size, theme } = {
 let ref;
 const th = themer($themeStore);
 const st = styler($themeStore);
-$:
-  rangeStyles = st.create("RangeStyles").color("--track-background-color", $themeStore.options.common.rangeBgLight, true).color("--track-background-color-dark", $themeStore.options.common.rangeBgDark, true).color("--thumb-background-color", `${theme}-${$themeStore.options.common.rangeThumb}`, true).color("--track-accent-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).color("--thumb-border-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
-$:
-  rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("range", true).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
+$: rangeStyles = st.create("RangeStyles").color("--track-background-color", $themeStore.options.common.rangeBgLight, true).color("--track-background-color-dark", $themeStore.options.common.rangeBgDark, true).color("--thumb-background-color", `${theme}-${$themeStore.options.common.rangeThumb}`, true).color("--track-accent-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).color("--thumb-border-color", `${theme}-${$themeStore.options.common.rangeValue}`, true).option("rangeThumbSizes", size, "--thumb-size", size).option("rangeBorderSizes", size, "--thumb-border-width", size).append($$restProps.style, true).compile();
+$: rangeClasses = th.create("RangeClasses").option("common", "transitioned", transitioned).option("rangeTrackSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend("range", true).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
 $$restProps.min = $$restProps.min || 0;
 $$restProps.max = $$restProps.max || 100;
 function handleInputChange(e) {

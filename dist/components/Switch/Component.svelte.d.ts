@@ -3,7 +3,7 @@ import { type SwitchProps } from './module';
 import type { ElementProps } from '../../types';
 declare const __propDef: {
     props: SwitchProps & Omit<import("svelte/elements").HTMLInputAttributes, "size"> & {
-        for?: ElementProps<'label'>['for'];
+        for?: ElementProps<"label">["for"];
     };
     events: {
         [evt: string]: CustomEvent<any>;

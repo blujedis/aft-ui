@@ -28,17 +28,13 @@ export let {
 const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 const th = themer($themeStore);
 let panel = null;
-$:
-  modalStyles = visible ? $$restProps.style || " display:block" : !unmount && "display: none";
-$:
-  wrapperClasses = th.create("ModalWrapper").append("fixed inset-0 z-10 overflow-y-auto", true).append($$restProps.class, true).compile();
-$:
-  containerClasses = th.create("ModalContainer").prepend(`modal-container`, true).append("flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0", true).append("sm:items-start", ["top", "top-center"].includes(position)).append("sm:items-end", ["bottom", "bottom-center"].includes(position)).append("sm:items-start sm:justify-end", position === "top-right").append("sm:items-end sm:justify-end", position === "bottom-right").append("sm:items-start sm:justify-start", position === "top-left").append("sm:items-end sm:justify-start", position === "bottom-left").compile();
-$:
-  contentClasses = th.create("ModalContent").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`modal-content`, true).append(
-    "bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6",
-    true
-  ).compile();
+$: modalStyles = visible ? $$restProps.style || " display:block" : !unmount && "display: none";
+$: wrapperClasses = th.create("ModalWrapper").append("fixed inset-0 z-10 overflow-y-auto", true).append($$restProps.class, true).compile();
+$: containerClasses = th.create("ModalContainer").prepend(`modal-container`, true).append("flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0", true).append("sm:items-start", ["top", "top-center"].includes(position)).append("sm:items-end", ["bottom", "bottom-center"].includes(position)).append("sm:items-start sm:justify-end", position === "top-right").append("sm:items-end sm:justify-end", position === "bottom-right").append("sm:items-start sm:justify-start", position === "top-left").append("sm:items-end sm:justify-start", position === "bottom-left").compile();
+$: contentClasses = th.create("ModalContent").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`modal-content`, true).append(
+  "bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6",
+  true
+).compile();
 function handleClose() {
   visible = false;
 }
@@ -49,8 +45,7 @@ function handleKeydown(e) {
   }
 }
 function handleClick(e) {
-  if (!panel?.contains(e.target) && abortable)
-    handleClose();
+  if (!panel?.contains(e.target) && abortable) handleClose();
 }
 </script>
 

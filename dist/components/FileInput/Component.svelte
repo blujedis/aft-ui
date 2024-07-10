@@ -13,14 +13,10 @@ function readFile(file) {
     var reader = new FileReader();
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
-    if (readAs === "text")
-      reader.readAsText(file);
-    else if (readAs === "url")
-      reader.readAsDataURL(file);
-    else if (readAs === "binary")
-      reader.readAsBinaryString(file);
-    else
-      reader.readAsArrayBuffer(file);
+    if (readAs === "text") reader.readAsText(file);
+    else if (readAs === "url") reader.readAsDataURL(file);
+    else if (readAs === "binary") reader.readAsBinaryString(file);
+    else reader.readAsArrayBuffer(file);
   });
 }
 function handleFiles(files) {
@@ -30,8 +26,7 @@ function handleFiles(files) {
     Promise.all(proms).then((result) => {
       state = 2;
       Promise.resolve(onReadFiles(null, result, files)).then((valid) => {
-        if (valid === false)
-          state = 3;
+        if (valid === false) state = 3;
       });
     }).catch((ex) => {
       state = 3;
@@ -43,8 +38,7 @@ function handleFiles(files) {
       Promise.resolve(
         onFormData(null, createFormData(files), files)
       ).then((valid) => {
-        if (valid === false)
-          state = 3;
+        if (valid === false) state = 3;
       });
     } catch (ex) {
       state = 3;
@@ -58,8 +52,7 @@ function handleInputChange(e) {
 function handleDrop(e) {
   e.preventDefault();
   const files = e?.dataTransfer?.files;
-  if (files)
-    input.files = files;
+  if (files) input.files = files;
   handleFiles(files);
 }
 function handleDragOver(e) {

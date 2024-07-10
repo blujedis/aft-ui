@@ -25,8 +25,7 @@ setContext("Disclosure", {
   toggle: handleToggle
 });
 const th = themer($themeStore);
-$:
-  disclosureClasses = th.create("Disclosure").prepend("disclosure", true).append($$restProps.class, true).compile();
+$: disclosureClasses = th.create("Disclosure").prepend("disclosure", true).append($$restProps.class, true).compile();
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
@@ -47,8 +46,7 @@ function handleToggle() {
   }
 }
 function handleKeydown(e) {
-  if (!$store.visible || e.repeat)
-    return;
+  if (!$store.visible || e.repeat) return;
   const target = e.target;
   if (e.key === "Escape" && escapable && (target.matches("body") || target === $store.panel)) {
     e.preventDefault();

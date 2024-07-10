@@ -84,8 +84,7 @@ setContext("DataGrid", {
   globals: cleanObj(globals)
 });
 const th = themer($themeStore);
-$:
-  gridClasses = th.create("DataGrid").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, divided).option("fieldFontSizes", size, size).prepend(`datagrid`, true).append("w-full", full).append("border", divided).append("relative", sticky).append("w-full", !stacked).append("max-w-screen-md m-auto", stacked).append("flow-root overflow-clip", true).append($$restProps.class, true).compile();
+$: gridClasses = th.create("DataGrid").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, divided).option("fieldFontSizes", size, size).prepend(`datagrid`, true).append("w-full", full).append("border", divided).append("relative", sticky).append("w-full", !stacked).append("max-w-screen-md m-auto", stacked).append("flow-root overflow-clip", true).append($$restProps.class, true).compile();
 function getDataGridTemplate(cols) {
   cols = cols || $store.columns;
   const values = cols.map((c) => c.width);
@@ -99,16 +98,11 @@ function normalizeColumns(cols) {
     c.width = c.width || "1fr";
     c.transform = c.transform || ((v) => v);
     let curKey = c.rowkey;
-    if (typeof curKey === "undefined" && rowkey === c.accessor)
-      curKey = rowkey;
-    if (typeof curKey !== "undefined" && !foundKeys.includes(curKey))
-      foundKeys.push(curKey);
-    if (typeof c.reorderable === "undefined" && reorderable)
-      c.reorderable = true;
-    if (typeof c.resizeable === "undefined" && resizeable)
-      c.resizeable = true;
-    if (typeof c.sortable === "undefined" && sortable)
-      c.sortable = true;
+    if (typeof curKey === "undefined" && rowkey === c.accessor) curKey = rowkey;
+    if (typeof curKey !== "undefined" && !foundKeys.includes(curKey)) foundKeys.push(curKey);
+    if (typeof c.reorderable === "undefined" && reorderable) c.reorderable = true;
+    if (typeof c.resizeable === "undefined" && resizeable) c.resizeable = true;
+    if (typeof c.sortable === "undefined" && sortable) c.sortable = true;
     return c;
   });
   rowkey = foundKeys[0];
@@ -120,8 +114,7 @@ function updateColumn(accessor, config, done) {
     let columns2 = [...s.columns];
     columns2[index] = { ...columns2[index], ...config };
     columns2 = normalizeColumns(columns2);
-    if (done)
-      done(columns2);
+    if (done) done(columns2);
     return { ...s, columns: columns2 };
   });
 }
@@ -137,8 +130,7 @@ function swapColumns(source, target) {
 }
 function getSortToken(accessor) {
   const token = $store.sort.filter((k) => [accessor, `-${accessor}`].includes(k));
-  if (!token[0])
-    return 0;
+  if (!token[0]) return 0;
   return token[0].charAt(0) === "-" ? -1 : 1;
 }
 async function resolveFilter(criteria) {
@@ -146,8 +138,7 @@ async function resolveFilter(criteria) {
 }
 async function sortby(accessors, reset2 = false) {
   const _accessors = ensureArray(accessors).filter((v) => typeof v !== "undefined" && v !== "");
-  if (!_accessors.length)
-    reset2 = true;
+  if (!_accessors.length) reset2 = true;
   const filtered = await resolveFilter($store.filters);
   if (reset2) {
     store.update((s) => {
@@ -181,8 +172,7 @@ function reset() {
 async function remove(key) {
   const item = $store.rows.find((item2) => item2[rowkey] === key);
   const shouldRemove = await Promise.resolve(onBeforeRemove(item));
-  if (!shouldRemove)
-    return;
+  if (!shouldRemove) return;
   store.update((s) => {
     const newItems = s.rows.filter((item2) => item2[rowkey] !== key);
     const newFiltered = s.filtered.filter((item2) => item2[rowkey] !== key);

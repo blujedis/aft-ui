@@ -2,19 +2,19 @@ import { SvelteComponent } from "svelte";
 import type { ElementProps } from '../../types';
 declare class __sveltets_Render<Tag extends 'div' | 'a'> {
     props(): Pick<import("../../hooks/usePopover").PopoverOptions, "events" | "middleware" | "placement" | "strategy" | "offset" | "padding" | "sticky" | "escapeable"> & {
-        arrowed?: boolean | undefined;
+        arrowed?: boolean;
         as?: Tag | undefined;
-        escapeable?: boolean | undefined;
-        events?: import("../../hooks/usePopover").PopoverEvent | import("../../hooks/usePopover").PopoverEvent[] | undefined;
+        escapeable?: boolean;
+        events?: import("../../hooks/usePopover").PopoverEvent | import("../../hooks/usePopover").PopoverEvent[];
         role?: import("svelte/elements").AriaRole | null | undefined;
-        rounded?: import("../../types").ThemeRounded | undefined;
-        shadowed?: import("../../types").ThemeShadowed | undefined;
-        size?: import("../../types").ThemeSize | undefined;
-        theme?: import("../../types").ThemeColor | undefined;
-        transitioned?: boolean | undefined;
-        trigger?: string | undefined;
-        variant?: import("./module").TooltipVariant | undefined;
-        onChange?: ((state: boolean) => any) | undefined;
+        rounded?: import("../../types").ThemeRounded;
+        shadowed?: import("../../types").ThemeShadowed;
+        size?: import("../../types").ThemeSize;
+        theme?: import("../../types").ThemeColor;
+        transitioned?: boolean;
+        trigger?: string;
+        variant?: import("./module").TooltipVariant;
+        onChange?: (state: boolean) => any;
     } & Omit<ElementProps<Tag>, "size">;
     events(): {} & {
         [evt: string]: CustomEvent<any>;

@@ -2,7 +2,7 @@ import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: Omit<import("..").ButtonProps<"a" | "button">, "shadowed" | "variant"> & {
         value: string | number;
-        variant?: import("..").ButtonGroupVariant | undefined;
+        variant?: import("..").ButtonGroupVariant;
     } & import("svelte/elements").HTMLButtonAttributes;
     events: {
         [evt: string]: CustomEvent<any>;

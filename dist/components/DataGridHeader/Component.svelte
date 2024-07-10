@@ -17,19 +17,15 @@ export let { autocols, divided, focused, rounded, size, stacked, sticky, theme, 
 };
 const st = styler($themeStore);
 const th = themer($themeStore);
-$:
-  gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("elementBorder", theme, sticky || divided).option("elementBg", theme, theme).prepend("datagrid-header", true).append("divide-y border-b", divided).append("sticky top-0 z-10 shadow-sm", sticky).append("rounded-b-none", rounded).append("max-w-full", true).compile();
+$: gridHeaderWrapperClasses = th.create("DataGridHeaderWrapper").option("elementDivide", theme, divided).option("roundeds", boolToMapValue(rounded), rounded).option("elementBorder", theme, sticky || divided).option("elementBg", theme, theme).prepend("datagrid-header", true).append("divide-y border-b", divided).append("sticky top-0 z-10 shadow-sm", sticky).append("rounded-b-none", rounded).append("max-w-full", true).compile();
 function init(node) {
-  if (stacked)
-    return;
+  if (stacked) return;
   const header = node.children[0];
-  if (!header)
-    return;
+  if (!header) return;
   const cells = Array.from(header.children);
   for (const [i, c] of cells.entries()) {
     const col = $context.columns[i];
-    if (i >= cells.length - 1 || !col.resizeable)
-      continue;
+    if (i >= cells.length - 1 || !col.resizeable) continue;
     const [resizer] = useResizer({
       onResizing: ({ newWidth }) => {
         context.updateColumn(col.accessor, { width: newWidth + "px" });

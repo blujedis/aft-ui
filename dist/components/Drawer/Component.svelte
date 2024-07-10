@@ -26,12 +26,9 @@ export let {
 };
 let panel;
 const th = themer($themeStore);
-$:
-  drawerSizeClasses = th.create("DrawerSize").append(drawerSizeMap[size], size).append("pointer-events-auto w-screen", true).compile();
-$:
-  drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile();
-$:
-  drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll bg-white", true).append($$restProps.class, true).compile();
+$: drawerSizeClasses = th.create("DrawerSize").append(drawerSizeMap[size], size).append("pointer-events-auto w-screen", true).compile();
+$: drawerPositionClasses = th.create("DrawerPosition").append(drawerPositionMap[position], position).append("pointer-events-none fixed inset-y-0 flex max-w-full", true).compile();
+$: drawerClasses = th.create("DrawerWrapper").option("shadows", boolToMapValue(shadowed), shadowed).append("flex h-full flex-col overflow-y-scroll bg-white", true).append($$restProps.class, true).compile();
 function handleClose() {
   visible = false;
 }
@@ -42,8 +39,7 @@ function handleKeydown(e) {
   }
 }
 function handleClick(e) {
-  if (!panel?.contains(e.target))
-    handleClose();
+  if (!panel?.contains(e.target)) handleClose();
 }
 </script>
 

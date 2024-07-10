@@ -1,9 +1,9 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
-    props: Omit<import("../..").ButtonProps<"a" | "button">, "disabled" | "variant"> & {
-        multiple?: boolean | undefined;
-        value?: any;
-        variant?: import("../..").ButtonGroupVariant | undefined;
+    props: Omit<import("..").ButtonProps<"a" | "button">, "disabled" | "variant"> & {
+        multiple?: boolean;
+        value?: import("../../stores/select").SelectStoreValue;
+        variant?: import("..").ButtonGroupVariant;
     } & Omit<import("svelte/elements").HTMLAttributes<HTMLSpanElement>, "size">;
     events: {
         [evt: string]: CustomEvent<any>;
@@ -11,9 +11,9 @@ declare const __propDef: {
     slots: {
         default: {
             selected: any;
-            reset: (value?: any) => void;
-            select: (value?: any) => void;
-            unselect: (value?: any) => void;
+            reset: (value?: import("../../stores/select").SelectStoreValue) => void;
+            select: (value?: import("../../stores/select").SelectStoreValue) => void;
+            unselect: (value?: import("../../stores/select").SelectStoreValue) => void;
         };
     };
 };

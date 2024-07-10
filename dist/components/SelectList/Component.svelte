@@ -42,14 +42,10 @@ export let {
 let mounted = false;
 let removing = false;
 let selecting = false;
-if (newable)
-  tags = true;
-if (removable)
-  tags = true;
-if (min)
-  tags = true;
-if (max)
-  tags = true;
+if (newable) tags = true;
+if (removable) tags = true;
+if (min) tags = true;
+if (max) tags = true;
 const store = useSelect({
   visible,
   selected: ensureArray(value),
@@ -105,8 +101,7 @@ const context = setContext("SelectListContext", {
 const th = themer($themeStore);
 $: {
   if (mounted && (typeof value === "undefined" || !value?.length)) {
-    if (tags && !value.length)
-      store.update((s) => ({ ...s, selected: value }));
+    if (tags && !value.length) store.update((s) => ({ ...s, selected: value }));
     setLabel();
   } else if (mounted && $context.input && !$context.input.value && !tags && !filterable) {
     setLabel(value);
@@ -131,32 +126,25 @@ $: {
     }
   }
 }
-$:
-  groups = $store.items.reduce(
-    (a, c) => {
-      if (!c.group)
-        return a;
-      a[c.group] = a[c.group] || [];
-      a[c.group].push(c);
-      return a;
-    },
-    {}
-  );
-$:
-  groupKeys = Object.keys(groups);
-$:
-  controllerClasses = th.create("SelectListController").prepend("select-list", true).append("relative not-sr-only inline-flex", true).append("w-full", full).append(classes, true).compile();
+$: groups = $store.items.reduce(
+  (a, c) => {
+    if (!c.group) return a;
+    a[c.group] = a[c.group] || [];
+    a[c.group].push(c);
+    return a;
+  },
+  {}
+);
+$: groupKeys = Object.keys(groups);
+$: controllerClasses = th.create("SelectListController").prepend("select-list", true).append("relative not-sr-only inline-flex", true).append("w-full", full).append(classes, true).compile();
 function onChangeHandler(selected) {
   const changedValue = tags ? selected : selected[0];
   value = changedValue;
-  if (!value.length)
-    setLabel();
-  if (typeof onChange === "function")
-    onChange(changedValue);
+  if (!value.length) setLabel();
+  if (typeof onChange === "function") onChange(changedValue);
 }
 async function resolveItems(query) {
-  if (!query)
-    return $context.items;
+  if (!query) return $context.items;
   return Promise.resolve(
     initFilter(
       query,
@@ -183,8 +171,7 @@ function restore(selectedItemsOrRestoreInput, restoreInput, force = false) {
     if (restoreInput) {
       if (!tags) {
         const label = $context.items.find((i) => $context.persisted.includes(i.value))?.label;
-        if (label)
-          $context.input.value = label || "";
+        if (label) $context.input.value = label || "";
       } else {
         $context.input.value = "";
       }
@@ -212,10 +199,8 @@ export function isSelected(itemOrKey) {
 export function setLabel(itemOrKey) {
   const item = !itemOrKey ? null : getItem(itemOrKey);
   if ($context.input) {
-    if (item && !tags)
-      $context.input.value = item.label;
-    else if (!item)
-      $context.input.value = "";
+    if (item && !tags) $context.input.value = item.label;
+    else if (!item) $context.input.value = "";
   }
 }
 export function open() {
@@ -225,14 +210,11 @@ export function close() {
   store.update((s) => ({ ...s, visible: false }));
 }
 export function toggle() {
-  if ($context.visible)
-    close();
-  else
-    open();
+  if ($context.visible) close();
+  else open();
 }
 export function add({ value: value2, label, group, selected }) {
-  if (typeof label === "undefined")
-    label = value2 + "";
+  if (typeof label === "undefined") label = value2 + "";
   group = group || "";
   const hasValue = $store.items.find((item) => item.value === value2);
   if (!hasValue) {
@@ -240,10 +222,8 @@ export function add({ value: value2, label, group, selected }) {
       const items2 = [...s.items, { value: value2, label, group }];
       let selectedItems = [...s.selected];
       if (selected && !selectedItems.includes(value2)) {
-        if (tags)
-          selectedItems.push(value2);
-        else
-          selectedItems = [value2];
+        if (tags) selectedItems.push(value2);
+        else selectedItems = [value2];
       }
       const filteredItems = !exclusive ? items2 : items2.filter((v) => !selectedItems.includes(v.value));
       return {
@@ -261,24 +241,21 @@ export async function select(itemOrKey) {
   const item = getItem(itemOrKey);
   setLabel(item);
   store.select(item.value);
-  if (exclusive)
-    filter("");
+  if (exclusive) filter("");
   await tick();
   selecting = false;
 }
 export async function remove(itemOrKey) {
   removing = true;
   let key = itemOrKey;
-  if (typeof itemOrKey !== "string")
-    key = itemOrKey.value;
+  if (typeof itemOrKey !== "string") key = itemOrKey.value;
   let newSelected = $store.selected || [];
   store.update((s) => {
     const filteredSelected = s.selected.filter((v) => v !== key);
     newSelected = filteredSelected;
     return { ...s, selected: [...filteredSelected] };
   });
-  if (exclusive)
-    filter("");
+  if (exclusive) filter("");
   await tick();
   removing = false;
   onChangeHandler(newSelected);

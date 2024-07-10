@@ -44,8 +44,7 @@ setContext("Menu", {
   ...store,
   globals
 });
-$:
-  menuClasses = th.create("Menu").append("w-full", full).prepend(`menu menu-${variant} menu-${theme}`, true).append("relative inline-block clear-both", true).append($$restProps.class, true).compile();
+$: menuClasses = th.create("Menu").append("w-full", full).prepend(`menu menu-${variant} menu-${theme}`, true).append("relative inline-block clear-both", true).append($$restProps.class, true).compile();
 const clickOutside = createCustomEvent("click", "click_outside", (e, n) => {
   return n && !n.contains(e.target) && !e.defaultPrevented && autoclose && $store.visible || false;
 });
@@ -55,8 +54,7 @@ function handleClose(e) {
 function handleKeydown(e) {
   if (e.key === "Escape" && escapable || e.key === "Tab" && $store.visible)
     return store.close();
-  if (!$store.visible && e.key === "ArrowDown")
-    return store.open();
+  if (!$store.visible && e.key === "ArrowDown") return store.open();
 }
 </script>
 

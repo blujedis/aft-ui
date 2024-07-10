@@ -29,33 +29,23 @@ export const store = tweened(value, {
 const [diameter, trackwidth] = normalizeSize();
 const center = diameter / 2;
 const radius = center - trackwidth;
-$:
-  strokeArray = 2 * 3.14 * radius;
-$:
-  strokeOffset = strokeArray * ((100 - $store) / 100);
+$: strokeArray = 2 * 3.14 * radius;
+$: strokeOffset = strokeArray * ((100 - $store) / 100);
 const th = themer($themeStore);
 const st = styler($themeStore);
-$:
-  progressCircleStyles = st.create("ProgressCircleStyles").add("height", diameter, true).add("width", diameter, true).add("transform", "rotate(-90deg)", true).compile();
-$:
-  progressCircleClasses = th.create("ProgressCircle").option("dropshadows", boolToMapValue(shadowed), shadowed).prepend(`progress-circle progress-circle-${theme}`, true).append($$restProps.class, true).compile();
-$:
-  progressCircleTrackClasses = th.create("ProgressCircleTrack").bundle(["progressStroke"], theme, true).append("fill-transparent", true).compile();
-$:
-  progressCircleValueClasses = th.create("ProgressCircleValue").bundle(["iconStroke"], theme, true).append("fill-transparent", true).compile();
-$:
-  progressCircleTextClasses = th.create("ProgressCircleText").bundle(["progressFill"], theme, true).option("progressCircleTextSizes", size, typeof size === "string").compile();
+$: progressCircleStyles = st.create("ProgressCircleStyles").add("height", diameter, true).add("width", diameter, true).add("transform", "rotate(-90deg)", true).compile();
+$: progressCircleClasses = th.create("ProgressCircle").option("dropshadows", boolToMapValue(shadowed), shadowed).prepend(`progress-circle progress-circle-${theme}`, true).append($$restProps.class, true).compile();
+$: progressCircleTrackClasses = th.create("ProgressCircleTrack").bundle(["progressStroke"], theme, true).append("fill-transparent", true).compile();
+$: progressCircleValueClasses = th.create("ProgressCircleValue").bundle(["iconStroke"], theme, true).append("fill-transparent", true).compile();
+$: progressCircleTextClasses = th.create("ProgressCircleText").bundle(["progressFill"], theme, true).option("progressCircleTextSizes", size, typeof size === "string").compile();
 function normalizeSize() {
   let nsize = 0;
   let ntsize = 0;
-  if (typeof size === "number")
-    nsize = size;
-  else
-    nsize = $themeStore.options.progressCircleSizes[size];
+  if (typeof size === "number") nsize = size;
+  else nsize = $themeStore.options.progressCircleSizes[size];
   if (typeof tracksize === "undefined" && typeof size === "string" || typeof tracksize === "string")
     ntsize = $themeStore.options.progressCircleTrackSizes[tracksize || size];
-  else if (typeof tracksize === "number")
-    ntsize = tracksize;
+  else if (typeof tracksize === "number") ntsize = tracksize;
   return [nsize, ntsize];
 }
 </script>

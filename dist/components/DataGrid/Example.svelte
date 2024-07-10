@@ -1,5 +1,5 @@
 <script>import { DataGrid } from ".";
-import DataGridSortIcon from "./SortIcon.svelte";
+import { DataGridSortIcon } from "../DataGrid";
 import { DataGridPager } from "../DataGridPager";
 import { jsondata } from "../_Example/jsondata";
 import ExamplePage from "../_Example/ExamplePage.svelte";
@@ -9,7 +9,6 @@ import { DataGridCell } from "../DataGridCell";
 import { DataGridBody } from "../DataGridBody";
 import { DataGridHeaderCell } from "../DataGridHeaderCell";
 import { DataGridSearch } from "../DataGridSearch";
-import Section from "../_Example/Section.svelte";
 import { flip } from "svelte/animate";
 import { DataGridFilterCell } from "../DataGridFilterCell";
 import { usePaginator } from "../../hooks";

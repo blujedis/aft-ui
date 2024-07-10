@@ -1,4 +1,3 @@
-/// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
 export type ColorModeHook = ReturnType<typeof useColorMode>;
 export declare function useColorMode(shouldInit?: boolean, prefers?: 'light' | 'dark'): Writable<boolean> & {

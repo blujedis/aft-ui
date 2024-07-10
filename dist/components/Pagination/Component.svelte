@@ -45,8 +45,7 @@ export const context = setContext("Pagination", {
   globals
 });
 const th = themer($themeStore);
-$:
-  paginationControllerClasses = th.create("PagerControllerNav").prepend(`pagiation pagination-${variant} pagination-${theme}`, true).option("elementDivide", theme, ["filled", "soft"].includes(variant)).option("common", "transitioned", transitioned).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementRing", theme, ["filled", "soft"].includes(variant)).option("elementBorder", theme, variant === "flushed").append("inline-flex items-center", ["filled", "soft"].includes(variant)).append("isolate inline-flex -space-x-px", ["filled", "soft"].includes(variant)).append("divide-x ring-1 ring-inset", ["filled", "soft"].includes(variant)).append("border-t isolate inline-flex", variant === "flushed").append($$restProps.class, true).compile();
+$: paginationControllerClasses = th.create("PagerControllerNav").prepend(`pagiation pagination-${variant} pagination-${theme}`, true).option("elementDivide", theme, ["filled", "soft"].includes(variant)).option("common", "transitioned", transitioned).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementRing", theme, ["filled", "soft"].includes(variant)).option("elementBorder", theme, variant === "flushed").append("inline-flex items-center", ["filled", "soft"].includes(variant)).append("isolate inline-flex -space-x-px", ["filled", "soft"].includes(variant)).append("divide-x ring-1 ring-inset", ["filled", "soft"].includes(variant)).append("border-t isolate inline-flex", variant === "flushed").append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

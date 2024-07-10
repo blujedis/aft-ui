@@ -11,11 +11,9 @@ export let { as, key, size, theme, transition, variant } = {
   theme: context.globals?.theme,
   variant: context.globals?.variant
 };
-$:
-  isSelected = $context.selected.includes(key);
+$: isSelected = $context.selected.includes(key);
 const th = themer($themeStore);
-$:
-  accordionContentClasses = th.create("AccordionContent").option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend(`accordion-content`, true).append($$restProps.class, true).compile();
+$: accordionContentClasses = th.create("AccordionContent").option("fieldFontSizes", size, size).option("buttonPadding", size, size).prepend(`accordion-content`, true).append($$restProps.class, true).compile();
 </script>
 
 {#if isSelected}

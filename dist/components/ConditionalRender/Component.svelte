@@ -2,8 +2,7 @@
 export let { condition } = {
   ...defaults
 };
-$:
-  shouldRender = typeof condition === "function" ? condition() : condition;
+$: shouldRender = typeof condition === "function" ? condition() : condition;
 </script>
 
 {#if shouldRender}

@@ -1,13 +1,13 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        label?: string | undefined;
+        label?: string;
         value?: any;
-        placeholder?: string | false | null | undefined;
+        placeholder?: string | false | null;
         items?: (string | {
             label: string;
             value: string | number;
-        })[] | undefined;
+        })[];
     };
     events: {
         [evt: string]: CustomEvent<any>;

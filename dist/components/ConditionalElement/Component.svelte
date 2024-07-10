@@ -4,8 +4,7 @@ import { forwardEventsBuilder } from "../../utils";
 export let { as, condition } = {
   ...defaults
 };
-$:
-  wrap = typeof condition === "function" ? condition() : condition;
+$: wrap = typeof condition === "function" ? condition() : condition;
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

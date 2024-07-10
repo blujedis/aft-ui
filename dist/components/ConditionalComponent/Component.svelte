@@ -4,8 +4,7 @@
 export let { as, condition } = {
   ...defaults
 };
-$:
-  wrap = typeof condition === "function" ? condition() : condition;
+$: wrap = typeof condition === "function" ? condition() : condition;
 </script>
 
 {#if wrap}

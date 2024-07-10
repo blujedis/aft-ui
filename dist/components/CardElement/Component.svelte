@@ -7,8 +7,7 @@ export let { horizontal, size, theme, type, variant } = {
   ...context.globals
 };
 const th = themer($themeStore);
-$:
-  cardElementClasses = th.create("CardContent").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(["softBg"], theme, variant === "soft").bundle(["unfilledText"], theme, ["filled", "soft"].includes(variant) && type === "content").option("cardPadding", size, size && type === "content").option("cardPaddingHeader", size, size && type === "header").option("cardPaddingFooter", size, size && type === "footer").option("cardFontSizes", size, size).prepend(`card-${type}`, true).append("flex-1", type === "content").append($$restProps.class, true).compile();
+$: cardElementClasses = th.create("CardContent").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(["softBg"], theme, variant === "soft").bundle(["unfilledText"], theme, ["filled", "soft"].includes(variant) && type === "content").option("cardPadding", size, size && type === "content").option("cardPaddingHeader", size, size && type === "header").option("cardPaddingFooter", size, size && type === "footer").option("cardFontSizes", size, size).prepend(`card-${type}`, true).append("flex-1", type === "content").append($$restProps.class, true).compile();
 </script>
 
 <div {...$$restProps} class={cardElementClasses}>

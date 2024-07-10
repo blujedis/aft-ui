@@ -9,8 +9,8 @@ declare const __propDef: {
         recordless: {};
         default: {
             activeItem: {
-                el?: HTMLElement | undefined;
-                index?: number | undefined;
+                el?: HTMLElement;
+                index?: number;
             };
         };
     };

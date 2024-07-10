@@ -3,8 +3,7 @@ export let state = 0;
 export let theme = "primary";
 export let stroke = false;
 export let size = "md";
-$:
-  activeTheme = [-1, 1, "asc", "desc"].includes(state) ? theme : "frame";
+$: activeTheme = [-1, 1, "asc", "desc"].includes(state) ? theme : "frame";
 </script>
 
 {#if !state}

@@ -1,13 +1,13 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
-    props: Omit<import("../RatingItem/module").RatingItemProps, "index"> & {
-        arrowable?: boolean | undefined;
-        hoverable?: boolean | undefined;
-        count?: number | undefined;
-        readonly?: boolean | undefined;
-        shadowed?: import("../../types").ThemeShadowed | undefined;
-        score?: number | undefined;
-        updatable?: boolean | undefined;
+    props: Omit<import("../RatingItem").RatingItemProps, "index"> & {
+        arrowable?: boolean;
+        hoverable?: boolean;
+        count?: number;
+        readonly?: boolean;
+        shadowed?: import("../../types").ThemeShadowed;
+        score?: number;
+        updatable?: boolean;
     } & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events: {
         [evt: string]: CustomEvent<any>;

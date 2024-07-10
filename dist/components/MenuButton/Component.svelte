@@ -8,13 +8,11 @@ export let { caret, full, rounded, roticon, size, shadowed, theme, variant } = {
   ...context?.globals
 };
 const th = themer($themeStore);
-$:
-  buttonClasses = th.create("MenuButton").prepend(`menu-button`, true).append("h-full", true).append($$restProps.class, true).compile();
-$:
-  iconClasses = th.create("MenuButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", !!caret && roticon).append(
-    typeof roticon === "string" ? roticon : "-rotate-180",
-    $context.visible && roticon && !!caret
-  ).append("ml-2 shrink pointer-events-none pt-px", true).compile();
+$: buttonClasses = th.create("MenuButton").prepend(`menu-button`, true).append("h-full", true).append($$restProps.class, true).compile();
+$: iconClasses = th.create("MenuButtonIcon").option("iconCaretSizes", size, true).append("transition-transform duration-300 origin-center", !!caret && roticon).append(
+  typeof roticon === "string" ? roticon : "-rotate-180",
+  $context.visible && roticon && !!caret
+).append("ml-2 shrink pointer-events-none pt-px", true).compile();
 function handleClick(e) {
   context.toggle();
 }

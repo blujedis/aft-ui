@@ -37,11 +37,9 @@ setContext("Rating", {
 });
 let ref;
 const th = themer($themeStore);
-$:
-  ratingControllerClasses = th.create("RatingController").option("dropshadows", boolToMapValue(shadowed), shadowed).append("inline-flex spacing-x-0", true).append($$restProps.class, true).compile();
+$: ratingControllerClasses = th.create("RatingController").option("dropshadows", boolToMapValue(shadowed), shadowed).append("inline-flex spacing-x-0", true).append($$restProps.class, true).compile();
 function handleSelect(selected, e) {
-  if (readonly)
-    return;
+  if (readonly) return;
   e.stopPropagation();
   e.currentTarget.focus();
   store.update((s) => {
@@ -50,21 +48,18 @@ function handleSelect(selected, e) {
   });
 }
 function handleMouseover(active, e) {
-  if (readonly || !hoverable)
-    return;
+  if (readonly || !hoverable) return;
   store.update((s) => ({ ...s, active }));
 }
 function handleMouseleave(active, e) {
-  if (readonly || !hoverable)
-    return;
+  if (readonly || !hoverable) return;
   store.update((s) => ({ ...s, active: -1 }));
 }
 function handleNavigation(up = false) {
   let active = $store.active;
   const div = ref;
   const el = document.activeElement;
-  if (!div || !div.contains(el))
-    return;
+  if (!div || !div.contains(el)) return;
   const items = Array.from(
     div.querySelectorAll(el.tagName.toLowerCase())
   );
@@ -78,10 +73,8 @@ function handleNavigation(up = false) {
     return;
   }
   active = up ? currentIndex + 1 : currentIndex - 1;
-  if (active > count - 1)
-    active = count - 1;
-  if (active < 0)
-    active = 0;
+  if (active > count - 1) active = count - 1;
+  if (active < 0) active = 0;
   store.update((s) => {
     items[s.score && active === -1 ? s.score - 1 : active].focus();
     return { ...s, active };
@@ -95,8 +88,7 @@ function handleNavigationSelect() {
   });
 }
 function handleKeydown(e) {
-  if (readonly || !arrowable || e.repeat)
-    return;
+  if (readonly || !arrowable || e.repeat) return;
   if (["ArrowUp", "ArrowDown", "ArrowRight", "ArrowLeft"].includes(e.key)) {
     handleNavigation(e.key === "ArrowUp" || e.key === "ArrowRight");
   } else if (e.key === " ") {
@@ -106,8 +98,7 @@ function handleKeydown(e) {
 function handleCleanup(e) {
 }
 function handleReset() {
-  if (readonly)
-    return;
+  if (readonly) return;
   store.update((s) => ({ ...s, score, active: -1, selected: -1 }));
 }
 </script>

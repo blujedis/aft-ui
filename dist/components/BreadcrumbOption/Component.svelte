@@ -22,12 +22,9 @@ export let {
 };
 const th = themer($themeStore);
 let mounted = false;
-$:
-  breadcrumbOptionClasses = th.create("BreadcrumbOption").option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).prepend("breadcrumb-option", true).prepend("breadcrumb-options-selected", selected).append("aria-selected:pointer-events-none outline-none aria-selected:opacity-60", true).append($$restProps.class, true).compile();
-$:
-  breadcrumbOptionWrapperClasses = th.create("BreadcrumbOptionWrapper").option("breadcrumbFilledHeight", size, size).prepend("breadcrumb-option-wrapper", true).append("flex items-center", true).compile();
-$:
-  breadcrumbIconClasses = th.create("BreadcrumbIcon").option("breadcrumbFilledIconWidth", size, size).prepend("breadcrumb-option-icon", true).append("opacity-40", true).append("opacity-20", theme === "frame" && variant === "soft").append("h-full flex-shrink-0 pointer-events-none", true).compile();
+$: breadcrumbOptionClasses = th.create("BreadcrumbOption").option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("breadcrumbMargins", size, size).prepend("breadcrumb-option", true).prepend("breadcrumb-options-selected", selected).append("aria-selected:pointer-events-none outline-none aria-selected:opacity-60", true).append($$restProps.class, true).compile();
+$: breadcrumbOptionWrapperClasses = th.create("BreadcrumbOptionWrapper").option("breadcrumbFilledHeight", size, size).prepend("breadcrumb-option-wrapper", true).append("flex items-center", true).compile();
+$: breadcrumbIconClasses = th.create("BreadcrumbIcon").option("breadcrumbFilledIconWidth", size, size).prepend("breadcrumb-option-icon", true).append("opacity-40", true).append("opacity-20", theme === "frame" && variant === "soft").append("h-full flex-shrink-0 pointer-events-none", true).compile();
 onMount(() => {
   mounted = true;
 });

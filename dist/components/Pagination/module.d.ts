@@ -1,4 +1,3 @@
-/// <reference types="svelte" />
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '../../types';
 import type { PaginatorOptions, Paginator } from '../../hooks/usePaginator';
 import type { Writable } from 'svelte/store';

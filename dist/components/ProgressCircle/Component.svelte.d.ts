@@ -1,16 +1,16 @@
 import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        store?: import("svelte/motion").Tweened<number> | undefined;
+        store?: import("svelte/motion").Tweened<number>;
     } & import("./module").ProgressCircleTweenedOptions<any> & {
-        animate?: boolean | undefined;
-        max?: number | undefined;
-        shadowed?: import("../../types").ThemeShadowed | undefined;
-        size?: number | import("../../types").ThemeSize | undefined;
-        text?: string | boolean | undefined;
-        textunit?: string | undefined;
-        theme?: import("../../types").ThemeColor | undefined;
-        tracksize?: number | import("../../types").ThemeSize | undefined;
+        animate?: boolean;
+        max?: number;
+        shadowed?: import("../../types").ThemeShadowed;
+        size?: import("../../types").ThemeSize | number;
+        text?: boolean | string;
+        textunit?: string;
+        theme?: import("../../types").ThemeColor;
+        tracksize?: import("../../types").ThemeSize | number;
         value?: any;
     } & Omit<import("svelte/elements").SVGAttributes<SVGSVGElement>, "size">;
     events: {

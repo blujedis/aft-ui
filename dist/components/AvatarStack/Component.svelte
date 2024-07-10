@@ -11,11 +11,9 @@ export const context = setContext("AvatarStack", {
   }
 });
 let stack;
-$:
-  avatarStackClasses = themer($themeStore).create("AvatarStack").prepend("avatar-stack", true).append("flex -space-x-2 overflow-hidden", true).append("isolate ", direction === "down").append($$restProps.class, true).compile();
+$: avatarStackClasses = themer($themeStore).create("AvatarStack").prepend("avatar-stack", true).append("flex -space-x-2 overflow-hidden", true).append("isolate ", direction === "down").append($$restProps.class, true).compile();
 onMount(() => {
-  if (direction !== "down")
-    return;
+  if (direction !== "down") return;
   const nodes = [...stack.children];
   nodes.reverse().forEach((n, i) => {
     const node = n;

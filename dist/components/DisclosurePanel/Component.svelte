@@ -11,8 +11,7 @@ export let { as, focustrap, unmount } = {
   focustrap: context.focustrap
 };
 const th = themer($themeStore);
-$:
-  disclosurePanelClasses = th.create("DisclosurePanel").prepend("disclosure-panel", true).append($$restProps.class, true).compile();
+$: disclosurePanelClasses = th.create("DisclosurePanel").prepend("disclosure-panel", true).append($$restProps.class, true).compile();
 const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>

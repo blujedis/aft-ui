@@ -14,10 +14,8 @@ const props = {
   transitioned: false
 };
 function toggleLoader() {
-  if (visible)
-    text = "Show Loaders";
-  else
-    text = "Hide Loaders";
+  if (visible) text = "Show Loaders";
+  else text = "Hide Loaders";
   visible = !visible;
 }
 </script>

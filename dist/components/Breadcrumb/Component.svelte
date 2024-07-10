@@ -22,18 +22,15 @@ setContext("Breadcrumb", {
   }
 });
 const th = themer($themeStore);
-$:
-  breadcrumbNavClasses = th.create("Breadcrumb").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(["unfilledText"], theme, variant === "text").bundle(["softBg", "unfilledText"], {}, theme, variant === "soft").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`breadcrumb breadcrumb-${variant}`, true).append("w-full", full).append(
-    "px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center",
-    true
-  ).append("!pl-0", variant === "text").append($$restProps.class, true).compile();
-$:
-  breadcrumbListClasses = th.create("Breadcrumb").option("fieldFontSizes", size, size).option("breadcrumbSpacings", size, size).append("inline-flex items-center", true).compile();
+$: breadcrumbNavClasses = th.create("Breadcrumb").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(["unfilledText"], theme, variant === "text").bundle(["softBg", "unfilledText"], {}, theme, variant === "soft").option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`breadcrumb breadcrumb-${variant}`, true).append("w-full", full).append(
+  "px-4 sm:px-6 lg:px-8 first:px-2 first:sm:px-4 first:lg:px-6 inline-flex items-center",
+  true
+).append("!pl-0", variant === "text").append($$restProps.class, true).compile();
+$: breadcrumbListClasses = th.create("Breadcrumb").option("fieldFontSizes", size, size).option("breadcrumbSpacings", size, size).append("inline-flex items-center", true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 function generateBreadcrumbs(_route) {
   const split = (_route?.id || "").slice(1).split("/").filter((v) => v !== "");
-  if (!split.length)
-    return [];
+  if (!split.length) return [];
   const segments = [];
   const result = split.map((s, i) => {
     s = s.replace(/\(.+\)$/, "");

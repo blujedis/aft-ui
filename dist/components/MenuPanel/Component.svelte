@@ -11,19 +11,14 @@ export let { bordered, full, position, rounded, shadowed, theme, transition } = 
   ...context?.globals
 };
 const th = themer($themeStore);
-$:
-  ref = writable();
-$:
-  nav = useFocusNav($ref?.firstChild, {
-    onInit
-  });
-$:
-  panelClasses = th.create("MenuPanel").option("panelBg", theme, true).option("elementRing", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("elementBorder", theme, bordered).option("shadows", boolToMapValue(shadowed), shadowed).prepend("menu-panel", true).append("border", bordered).append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append($$restProps.class, true).compile();
-$:
-  activeItem = { el: void 0, index: void 0 };
+$: ref = writable();
+$: nav = useFocusNav($ref?.firstChild, {
+  onInit
+});
+$: panelClasses = th.create("MenuPanel").option("panelBg", theme, true).option("elementRing", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("elementBorder", theme, bordered).option("shadows", boolToMapValue(shadowed), shadowed).prepend("menu-panel", true).append("border", bordered).append(`absolute z-30 mt-1 min-w-max focus:outline-none none`, true).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append($$restProps.class, true).compile();
+$: activeItem = { el: void 0, index: void 0 };
 function onInit(items = []) {
-  if (!items.length)
-    return;
+  if (!items.length) return;
   activeItem = items.reduce(
     (a, c, i) => {
       if (c.classList.contains("menu-option-active")) {

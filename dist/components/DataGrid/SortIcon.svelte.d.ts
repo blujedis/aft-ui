@@ -2,10 +2,10 @@ import { SvelteComponent } from "svelte";
 import type { ThemeColor, ThemeSize } from '../../types';
 declare const __propDef: {
     props: {
-        state?: 0 | 1 | -1 | undefined;
-        theme?: ThemeColor | undefined;
-        stroke?: boolean | undefined;
-        size?: ThemeSize | undefined;
+        state?: 0 | 1 | -1;
+        theme?: ThemeColor;
+        stroke?: boolean;
+        size?: ThemeSize;
     };
     events: {
         [evt: string]: CustomEvent<any>;

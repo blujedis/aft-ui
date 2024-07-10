@@ -1,18 +1,12 @@
 import { SvelteComponent } from "svelte";
-import type { DataGridDataItem } from '../DataGrid';
+import { type DataGridCellProps } from './module';
 declare class __sveltets_Render<Data extends DataGridDataItem> {
-    props(): import("..").DataGridCellProps & {
-        accessor: keyof Data;
-        focused?: boolean;
-    } & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
+    props(): DataGridCellProps<Data> & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events(): {} & {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {
-        default: {
-            sort: () => void;
-            sortdir: 0 | 1 | -1;
-        };
+        default: {};
     };
 }
 export type ComponentProps<Data extends DataGridDataItem> = ReturnType<__sveltets_Render<Data>['props']>;

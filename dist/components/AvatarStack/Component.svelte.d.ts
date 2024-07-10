@@ -5,9 +5,9 @@ declare const __propDef: {
             globals: {
                 stacked: string;
             };
-        } | undefined;
-    } & Partial<import("../..").AvatarProps> & {
-        direction?: "up" | "down" | undefined;
+        };
+    } & Partial<import("..").AvatarProps> & {
+        direction?: "up" | "down";
     } & Omit<import("svelte/elements").HTMLAttributes<HTMLSpanElement>, "size">;
     events: {
         [evt: string]: CustomEvent<any>;

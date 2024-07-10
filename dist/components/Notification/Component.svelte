@@ -10,19 +10,16 @@ export let { key, description, dismissible, group, icon, rounded, shadowed, titl
   ...defaults
 };
 const th = themer($themeStore);
-$:
-  notificationClasses = th.create("Notification").bundle(
-    ["notificationBg", "notificationText", "mainBorder"],
-    {
-      frame: "border-frame-300 dark:border-frame-400"
-    },
-    theme,
-    true
-  ).option("elementRing", theme, true).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`notification notification-${theme}`, true).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-[5px] w-80", true).append($$restProps.class, true).compile();
-$:
-  notificationIconClasses = th.create("NotificationIcon").append("pr-2 pt-1", true).compile();
-$:
-  notificationTitleClasses = th.create("NotificaionTitle").append("font-semibold", true).compile();
+$: notificationClasses = th.create("Notification").bundle(
+  ["notificationBg", "notificationText", "mainBorder"],
+  {
+    frame: "border-frame-300 dark:border-frame-400"
+  },
+  theme,
+  true
+).option("elementRing", theme, true).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`notification notification-${theme}`, true).append("pointer-events-auto w-full max-w-sm overflow-hidden border-l-[5px] w-80", true).append($$restProps.class, true).compile();
+$: notificationIconClasses = th.create("NotificationIcon").append("pr-2 pt-1", true).compile();
+$: notificationTitleClasses = th.create("NotificaionTitle").append("font-semibold", true).compile();
 </script>
 
 <div

@@ -11,13 +11,13 @@ declare const __propDef: {
                 size: import("../../types").ThemeSize;
                 theme: import("../../types").ThemeColor;
                 transitioned: boolean;
-                variant: import("../..").TabVariant;
+                variant: import("..").TabVariant;
                 underlined: boolean;
             }, "rounded" | "hovered" | "full" | "transitioned" | "focused" | "size" | "theme" | "variant" | "underlined">>;
             set(this: void, value: TabsStore): void;
             update(this: void, updater: import("svelte/store").Updater<TabsStore>): void;
             subscribe(this: void, run: import("svelte/store").Subscriber<TabsStore>, invalidate?: import("svelte/store").Invalidator<TabsStore> | undefined): import("svelte/store").Unsubscriber;
-        } | undefined;
+        };
     } & TabsProps & import("svelte/elements").HTMLAttributes<HTMLUListElement>;
     events: {
         [evt: string]: CustomEvent<any>;
@@ -39,7 +39,7 @@ export default class Component extends SvelteComponent<ComponentProps, Component
             size: import("../../types").ThemeSize;
             theme: import("../../types").ThemeColor;
             transitioned: boolean;
-            variant: import("../..").TabVariant;
+            variant: import("..").TabVariant;
             underlined: boolean;
         }, "rounded" | "hovered" | "full" | "transitioned" | "focused" | "size" | "theme" | "variant" | "underlined">>;
         set(this: void, value: TabsStore): void;

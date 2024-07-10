@@ -9,13 +9,12 @@ export let { active, as, focused, hovered, size, theme, transitioned } = {
   ...cleanObj(context?.globals)
 };
 const th = themer($themeStore);
-$:
-  optionClasses = th.create("MenuOption").option("bgFocus", theme, focused).bundle(
-    ["selectedBgAriaCurrentpage"],
-    { $base: 'aria-[current="page"]:text-white' },
-    theme,
-    theme
-  ).option("panelBgHover", theme, hovered).option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("menuPadding", size, size).prepend("menu-option", true).prepend("menu-option-active", active).append("block w-full", true).append('outline-none [[data-active="true"]]:bg-info-500', true).append($$restProps.class, true).compile();
+$: optionClasses = th.create("MenuOption").option("bgFocus", theme, focused).bundle(
+  ["selectedBgAriaCurrentpage"],
+  { $base: 'aria-[current="page"]:text-white' },
+  theme,
+  theme
+).option("panelBgHover", theme, hovered).option("common", "transitioned", transitioned).option("fieldFontSizes", size, size).option("menuPadding", size, size).prepend("menu-option", true).prepend("menu-option-active", active).append("block w-full", true).append('outline-none [[data-active="true"]]:bg-info-500', true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 function handleClick(e) {
   setTimeout(() => context.close());

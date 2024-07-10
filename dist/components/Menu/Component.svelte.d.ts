@@ -21,7 +21,7 @@ declare const __propDef: {
             }>>>, invalidate?: import("svelte/store").Invalidator<Required<import("../../stores").DisclosureStoreOptions<{
                 visible: boolean;
             }>>> | undefined): import("svelte/store").Unsubscriber;
-        } | undefined;
+        };
     } & MenuProps & MenuGlobalProps & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events: {
         [evt: string]: CustomEvent<any>;

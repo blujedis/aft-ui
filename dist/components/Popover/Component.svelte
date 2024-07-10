@@ -24,12 +24,10 @@ let contentRef;
 let triggerRef;
 let visible = false;
 const th = themer($themeStore);
-$:
-  popoverClasses = th.create("Badge").prepend("popover", true).append("z-50", true).append($$restProps.class, true).compile();
+$: popoverClasses = th.create("Badge").prepend("popover", true).append("z-50", true).append($$restProps.class, true).compile();
 function init(node) {
   contentRef = node;
-  if (contentRef)
-    popover.registerContent(contentRef, { middleware, placement });
+  if (contentRef) popover.registerContent(contentRef, { middleware, placement });
 }
 onMount(() => {
   const prevSibling = placeholderRef.previousElementSibling;
@@ -48,8 +46,7 @@ onMount(() => {
     popover.registerTrigger(triggerRef);
   }
   return () => {
-    if (popover)
-      popover.destroy();
+    if (popover) popover.destroy();
   };
 });
 </script>

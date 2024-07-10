@@ -24,13 +24,11 @@ export let {
   ...defaults
 };
 const th = themer($themeStore);
-$:
-  labelClasses = th.create("RadioLabel").prepend("radio-label", true).append("flex items-center", true).compile();
-$:
-  radioClasses = th.create("Radio").bundle(["defaultText"], theme, true).option("formBorder", theme, true).option("iconSizes", size, size).option("hovered", variant, theme, hovered).option("common", "focusedOutline", focused).option("outlineFocus", theme, focused).option("common", "transitioned", transitioned).option("checkboxSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`radio radio-${variant} radio-${theme}`, true).append("w-full", full).append(
-    "flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent",
-    true
-  ).append("mr-2", $$slots.default).append($$restProps.class, true).compile();
+$: labelClasses = th.create("RadioLabel").prepend("radio-label", true).append("flex items-center", true).compile();
+$: radioClasses = th.create("Radio").bundle(["defaultText"], theme, true).option("formBorder", theme, true).option("iconSizes", size, size).option("hovered", variant, theme, hovered).option("common", "focusedOutline", focused).option("outlineFocus", theme, focused).option("common", "transitioned", transitioned).option("checkboxSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`radio radio-${variant} radio-${theme}`, true).append("w-full", full).append(
+  "flex items-center justify-center form-radio focus:ring-0 focus:ring-offset-0 bg-transparent",
+  true
+).append("mr-2", $$slots.default).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

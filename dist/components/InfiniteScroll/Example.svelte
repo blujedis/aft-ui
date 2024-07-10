@@ -7,8 +7,7 @@ let list;
 let page = 0;
 let size = 10;
 let data = [];
-$:
-  data = [...data];
+$: data = [...data];
 async function fetchData() {
   window.fetch(`https://dummyjson.com/products/?limit=${size}&skip=${size * page}`).then((res) => res.json()).then((res) => data = [...data, ...res.products]);
 }

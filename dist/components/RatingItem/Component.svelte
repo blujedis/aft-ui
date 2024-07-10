@@ -10,24 +10,18 @@ export let { background, fill, index, size, stroked } = {
 const id = uniqid();
 const initFill = getColor(fill, "#FFA41C");
 const strokeColor = stroked ? initFill : void 0;
-$:
-  percentage = index > $context.score ? 0 : index < Math.trunc($context.score) ? 1 : $context.score % 1;
-$:
-  isActive = $context.active > -1;
-$:
-  fillColor = isActive ? index <= $context.active ? initFill : "currentColor" : percentage === 1 ? initFill : percentage === 0 ? "currentColor" : `url(#${id})`;
+$: percentage = index > $context.score ? 0 : index < Math.trunc($context.score) ? 1 : $context.score % 1;
+$: isActive = $context.active > -1;
+$: fillColor = isActive ? index <= $context.active ? initFill : "currentColor" : percentage === 1 ? initFill : percentage === 0 ? "currentColor" : `url(#${id})`;
 const th = themer($themeStore);
 const st = styler($themeStore);
-$:
-  ratingStyles = st.create("RatingStyles").add("color", "transparent", true).add("outline-color", initFill, true).append($$restProps.style, true).compile();
-$:
-  ratingClasses = th.create("Rating").option("ratingSizes", size, size).append("pointer-events-none", $context.readonly).append("z-10 focus-visible:outline outline-2", true).append("hover:scale-125", true).append($$restProps.class, true).compile();
-$:
-  stops = [
-    { offset: `0%`, "stop-color": initFill, "stop-opacity": "1" },
-    { offset: `${percentage * 100}%`, "stop-color": initFill, "stop-opacity": "1" },
-    { offset: `${percentage * 100}%`, "stop-color": "currentColor", "stop-opacity": "1" }
-  ];
+$: ratingStyles = st.create("RatingStyles").add("color", "transparent", true).add("outline-color", initFill, true).append($$restProps.style, true).compile();
+$: ratingClasses = th.create("Rating").option("ratingSizes", size, size).append("pointer-events-none", $context.readonly).append("z-10 focus-visible:outline outline-2", true).append("hover:scale-125", true).append($$restProps.class, true).compile();
+$: stops = [
+  { offset: `0%`, "stop-color": initFill, "stop-opacity": "1" },
+  { offset: `${percentage * 100}%`, "stop-color": initFill, "stop-opacity": "1" },
+  { offset: `${percentage * 100}%`, "stop-color": "currentColor", "stop-opacity": "1" }
+];
 </script>
 
 <slot

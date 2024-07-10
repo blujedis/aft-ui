@@ -21,10 +21,8 @@ let filterData = {
   ...filterPopoverDefaults
 };
 const th = themer($themeStore);
-$:
-  gridFilterCellClasses = th.create("DataGridFilterInputWrapper").option("common", "focusedRingWithin", focused).option("ringFocusWithin", theme, focused).prepend("datagrid-filter-cell", true).append("focus-within:ring-offset-0 focus-within:ring-inset", focused).append("relative px-0 py-0 flex items-center z-10", true).compile();
-$:
-  gridFilterInputClasses = th.create("DataGridFilterInput").option("fieldPadding", size, size).prepend("datagrid-filter-input", true).append("outline-none bg-transparent relative w-full pr-8", true).compile();
+$: gridFilterCellClasses = th.create("DataGridFilterInputWrapper").option("common", "focusedRingWithin", focused).option("ringFocusWithin", theme, focused).prepend("datagrid-filter-cell", true).append("focus-within:ring-offset-0 focus-within:ring-inset", focused).append("relative px-0 py-0 flex items-center z-10", true).compile();
+$: gridFilterInputClasses = th.create("DataGridFilterInput").option("fieldPadding", size, size).prepend("datagrid-filter-input", true).append("outline-none bg-transparent relative w-full pr-8", true).compile();
 function lookupFilterHandler(criteria) {
   return (context.globals?.filters || []).find((f) => f.value === criteria)?.handler;
 }
@@ -51,10 +49,8 @@ function handleFilter() {
   }, 200)();
 }
 function handleInputChange() {
-  if (!filterData.valueOne)
-    handleResetFilter();
-  else
-    handleFilter();
+  if (!filterData.valueOne) handleResetFilter();
+  else handleFilter();
 }
 function handleResetFilter() {
   filterData = {

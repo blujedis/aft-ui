@@ -4,7 +4,7 @@ import type { Unsubscriber } from 'svelte/store';
 declare const __propDef: {
     props: {
         prefers?: "dark" | "light" | undefined;
-        init?: boolean | undefined;
+        init?: boolean;
     };
     events: {
         [evt: string]: CustomEvent<any>;

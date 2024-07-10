@@ -13,8 +13,7 @@ export let { autocols, columns, divided, size, striped, stacked, theme } = {
   theme: context.globals?.theme
 };
 const th = themer($themeStore);
-$:
-  gridBodyClasses = th.create("DataGridBody").option("elementDivide", theme, divided).prepend("datagrid-body overflow-y-auto", true).append("divide-y", divided).append($$restProps.class, true).compile();
+$: gridBodyClasses = th.create("DataGridBody").option("elementDivide", theme, divided).prepend("datagrid-body overflow-y-auto", true).append("divide-y", divided).append($$restProps.class, true).compile();
 </script>
 
 <div {...$$restProps} class={gridBodyClasses}>

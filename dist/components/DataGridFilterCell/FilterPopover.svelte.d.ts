@@ -3,17 +3,17 @@ import type { ThemeRounded } from '../../types';
 import type { DataGridFilterListItem } from '../DataGrid/filter';
 declare const __propDef: {
     props: {
-        rounded?: ThemeRounded | undefined;
-        filters?: DataGridFilterListItem[] | undefined;
+        rounded?: ThemeRounded;
+        filters?: DataGridFilterListItem[];
         data?: {
             criteriaOne: string;
             valueOne: string;
             criteriaTwo: string;
             valueTwo: string;
             join: "and" | "or";
-        } | undefined;
-        applyFilter?: (() => void) | undefined;
-        resetFilter?: (() => void) | undefined;
+        };
+        applyFilter?: () => void;
+        resetFilter?: () => void;
     };
     events: {
         [evt: string]: CustomEvent<any>;

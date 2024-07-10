@@ -7,13 +7,12 @@ export let { full, hovered, rounded, shadowed, size, theme, transitioned, varian
   ...defaults
 };
 const th = themer($themeStore);
-$:
-  kbdClasses = th.create("Kbd").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
-    ["mainRing", "unfilledText"],
-    { $base: "ring-1 ring-inset" },
-    theme,
-    variant === "outlined"
-  ).bundle(["softBg", "unfilledText"], theme, variant === "soft").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("kbdPadding", size, size).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`kbd kbd-${variant} kbd-${theme}`, true).append("w-full", full).append("relative inline-flex items-center justify-center align-text-bottom", true).append($$restProps.class, true).compile();
+$: kbdClasses = th.create("Kbd").bundle(["mainBg", "filledText"], theme, variant === "filled").bundle(
+  ["mainRing", "unfilledText"],
+  { $base: "ring-1 ring-inset" },
+  theme,
+  variant === "outlined"
+).bundle(["softBg", "unfilledText"], theme, variant === "soft").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("kbdPadding", size, size).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`kbd kbd-${variant} kbd-${theme}`, true).append("w-full", full).append("relative inline-flex items-center justify-center align-text-bottom", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

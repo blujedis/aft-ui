@@ -1,4 +1,3 @@
-/// <reference types="svelte" />
 import { type Writable } from 'svelte/store';
 import type { DeepPartial, ThemeConfig } from '../types/theme';
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {

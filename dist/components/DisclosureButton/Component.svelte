@@ -5,8 +5,7 @@ import { get_current_component } from "svelte/internal";
 export let as = "button";
 const context = getContext("Disclosure");
 const th = themer($themeStore);
-$:
-  disclosureButtonClasses = th.create("DisclosureButton").prepend("disclosure-button", true).append($$restProps.class, true).compile();
+$: disclosureButtonClasses = th.create("DisclosureButton").prepend("disclosure-button", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 const isElement = typeof as === "string";
 const element = as;

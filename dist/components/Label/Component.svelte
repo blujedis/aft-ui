@@ -13,8 +13,7 @@ export let { dropshadowed, inline, full, reversed, rounded, size, theme, visible
   ...defaults
 };
 const th = themer($themeStore);
-$:
-  labelClasses = th.create("Label").bundle(["unfilledText"], theme, true).option("fieldFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("dropshadows", boolToMapValue(dropshadowed), dropshadowed).prepend(`label-${theme}`, theme).prepend(`label label-${theme}`, true).append("w-full", full).append("flex items-center space-x-2", inline).append("space-x-reverse flex-row-reverse", inline && reversed).append($$restProps.class, true).compile();
+$: labelClasses = th.create("Label").bundle(["unfilledText"], theme, true).option("fieldFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("dropshadows", boolToMapValue(dropshadowed), dropshadowed).prepend(`label-${theme}`, theme).prepend(`label label-${theme}`, true).append("w-full", full).append("flex items-center space-x-2", inline).append("space-x-reverse flex-row-reverse", inline && reversed).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

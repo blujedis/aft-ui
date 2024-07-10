@@ -28,16 +28,15 @@ setContext("Select", {
   }
 });
 const th = themer($themeStore);
-$:
-  selectClasses = th.create("Select").bundle(["mainBg", "filledText", "filledTextPlaceholder"], theme, variant === "filled").bundle(
-    ["mainRing", "unfilledText"],
-    { $base: "ring-1 ring-inset" },
-    theme,
-    variant === "outlined"
-  ).bundle(["softBg", "unfilledText"], theme, variant === "soft").bundle(["mainBorder", "mainBorderGroupHover", "unfilledText"], theme, variant === "flushed").option("common", "focusedOutline", focused && variant !== "flushed").option("outlineFocus", theme, focused && variant !== "flushed").bundle(["unfilledText"], theme, variant === "text").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", boolToMapValue(rounded), rounded && variant !== "flushed").option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`select select-${variant}`, true).append("min-w-min", true).append("w-full", full || variant === "flushed").append("dark:bg-transparent", ["outlined", "flushed", "text", "ghost"].includes(variant)).append("peer px-2", variant === "flushed").append(
-    "inline-flex items-center justify-center pr-10 focus:ring-0 outline-none border-0",
-    true
-  ).append($$restProps.multiple ? "form-multiselect" : "form-select", true).append($$restProps.class, true).compile();
+$: selectClasses = th.create("Select").bundle(["mainBg", "filledText", "filledTextPlaceholder"], theme, variant === "filled").bundle(
+  ["mainRing", "unfilledText"],
+  { $base: "ring-1 ring-inset" },
+  theme,
+  variant === "outlined"
+).bundle(["softBg", "unfilledText"], theme, variant === "soft").bundle(["mainBorder", "mainBorderGroupHover", "unfilledText"], theme, variant === "flushed").option("common", "focusedOutline", focused && variant !== "flushed").option("outlineFocus", theme, focused && variant !== "flushed").bundle(["unfilledText"], theme, variant === "text").option("common", "transitioned", transitioned).option("hovered", variant, theme, hovered).option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", boolToMapValue(rounded), rounded && variant !== "flushed").option("shadows", boolToMapValue(shadowed), shadowed).option("common", "disabled", disabled).prepend(`select select-${variant}`, true).append("min-w-min", true).append("w-full", full || variant === "flushed").append("dark:bg-transparent", ["outlined", "flushed", "text", "ghost"].includes(variant)).append("peer px-2", variant === "flushed").append(
+  "inline-flex items-center justify-center pr-10 focus:ring-0 outline-none border-0",
+  true
+).append($$restProps.multiple ? "form-multiselect" : "form-select", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 const component = Flushed;
 </script>

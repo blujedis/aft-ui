@@ -9,21 +9,18 @@ let component;
 let beforeScrollHeight;
 let beforeScrollTop;
 let el;
-$:
-  if (el) {
-    if (reverse) {
-      el.scrollTop = el.scrollHeight;
-    }
-    el.addEventListener("scroll", handleScroll);
-    el.addEventListener("resize", handleScroll);
+$: if (el) {
+  if (reverse) {
+    el.scrollTop = el.scrollHeight;
   }
-$:
-  if (el && isLoading && reverse) {
-    el.scrollTop = el.scrollHeight - beforeScrollHeight + beforeScrollTop;
-  }
+  el.addEventListener("scroll", handleScroll);
+  el.addEventListener("resize", handleScroll);
+}
+$: if (el && isLoading && reverse) {
+  el.scrollTop = el.scrollHeight - beforeScrollHeight + beforeScrollTop;
+}
 const handleScroll = (e) => {
-  if (!hasMore)
-    return;
+  if (!hasMore) return;
   const target = e.target;
   const offset = getOffset(target, reverse, horizontal);
   if (offset <= threshold) {
@@ -45,12 +42,9 @@ const getOffset = (target, reverse2, horizontal2) => {
   return horizontal2 ? element2.scrollWidth - element2.clientWidth - element2.scrollLeft : element2.scrollHeight - element2.clientHeight - element2.scrollTop;
 };
 onMount(() => {
-  if (element)
-    el = element;
-  else if (document)
-    el = document.body;
-  else
-    el = component.parentNode;
+  if (element) el = element;
+  else if (document) el = document.body;
+  else el = component.parentNode;
 });
 onDestroy(() => {
   if (el) {

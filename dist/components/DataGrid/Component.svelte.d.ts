@@ -18,9 +18,9 @@ declare class __sveltets_Render<Column extends DataGridColumnConfig, Data extend
     } & Partial<DataGridContextProps<Column, Data, import("./filter").DataGridFilterListItem>> & {
         columns: Column[];
         filter?: ((criteria: DataGridFilterCriteria<Data>[], rows: Data[], columns: Column[]) => Data[] | Promise<Data[]>) | undefined;
-        sorter?: ((items: Data[], accessors: (keyof Data)[], primer?: import("../../utils").Primer | undefined) => Data[] | Promise<Data[]>) | undefined;
+        sorter?: ((items: Data[], accessors: (keyof Data)[], primer?: import("../../utils").Primer) => Data[] | Promise<Data[]>) | undefined;
         rows?: Data[] | undefined;
-        onAfterResize?: ((props: import("../..").ResizerPosition & import("../..").ResizerRectangle) => any) | undefined;
+        onAfterResize?: (props: import("../..").ResizerPosition & import("../..").ResizerRectangle) => any;
         onBeforeRemove?: ((item?: Data | undefined) => boolean | Promise<boolean>) | undefined;
     } & import("svelte/elements").HTMLAttributes<HTMLDivElement>;
     events(): {} & {

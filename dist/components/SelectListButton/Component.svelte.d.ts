@@ -2,19 +2,19 @@ import { SvelteComponent } from "svelte";
 import { type SelectListItem } from '..';
 declare const __propDef: {
     props: import("..").InputProps & {
-        badgeProps?: import("..").BadgeProps | undefined;
-        caret?: string | import("@iconify/svelte").IconifyIcon | undefined;
-        filterable?: boolean | undefined;
-        hovered?: boolean | undefined;
-        tags?: boolean | undefined;
-        tagsTheme?: import("../../types").ThemeColor | undefined;
-        newable?: boolean | undefined;
-        placeholder?: string | undefined;
-        removable?: boolean | undefined;
-        roticon?: boolean | undefined;
-        variant?: import("..").SelectListVariant | undefined;
-        onBeforeAdd?: (<T extends SelectListItem>(value: string, input: HTMLInputElement) => false | T | Promise<false | T | null | undefined> | null | undefined) | undefined;
-        onBeforeRemove?: (<T_1 extends SelectListItem>(item: T_1, input: HTMLInputElement) => boolean | Promise<boolean>) | undefined;
+        badgeProps?: import("..").BadgeProps;
+        caret?: string | import("@iconify/svelte").IconifyIcon;
+        filterable?: boolean;
+        hovered?: boolean;
+        tags?: boolean;
+        tagsTheme?: import("../../types").ThemeColor;
+        newable?: boolean;
+        placeholder?: string;
+        removable?: boolean;
+        roticon?: boolean;
+        variant?: import("..").SelectListVariant;
+        onBeforeAdd?: <T extends SelectListItem>(value: string, input: HTMLInputElement) => T | null | false | undefined | Promise<T | null | false | undefined>;
+        onBeforeRemove?: <T extends SelectListItem>(item: T, input: HTMLInputElement) => boolean | Promise<boolean>;
     } & import("svelte/elements").HTMLInputAttributes;
     events: {
         [evt: string]: CustomEvent<any>;

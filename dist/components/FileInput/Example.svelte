@@ -9,8 +9,7 @@ let uploading = 0;
 let value;
 function handleFormData(err, data, files) {
   uploading = 2;
-  if (err)
-    console.log(err);
+  if (err) console.log(err);
   if (data)
     for (const value2 of data.values()) {
       console.log(value2);

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { DataGrid, type DataGridColumnConfig, type DataGridProps } from '.';
-	import DataGridSortIcon from './SortIcon.svelte';
+	import { DataGridSortIcon } from '../DataGrid';
 	import { DataGridPager } from '../DataGridPager';
 	import { jsondata } from '../_Example/jsondata';
 	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
@@ -11,7 +11,6 @@
 	import { DataGridBody } from '../DataGridBody';
 	import { DataGridHeaderCell } from '../DataGridHeaderCell';
 	import { DataGridSearch } from '../DataGridSearch';
-	import Section from '../_Example/Section.svelte';
 	import { flip } from 'svelte/animate';
 	import { DataGridFilterCell } from '../DataGridFilterCell';
 	import { usePaginator } from '$lib/hooks';

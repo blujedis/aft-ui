@@ -27,8 +27,7 @@ export const store = tweened(value, {
   easing,
   interpolate
 });
-$:
-  progressClasses = themer($themeStore).create("ProgressBar").bundle(["progressBgWebkitProgressValue", "progressBgMozProgressBar"], theme, true).option("progressBarSizes", size, size).option("progressBarRoundedBar", boolToMapValue(rounded), rounded).option("progressBarRoundedValue", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`progress-bar progress-bar-${variant} progress-bar-${theme}`, true).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
+$: progressClasses = themer($themeStore).create("ProgressBar").bundle(["progressBgWebkitProgressValue", "progressBgMozProgressBar"], theme, true).option("progressBarSizes", size, size).option("progressBarRoundedBar", boolToMapValue(rounded), rounded).option("progressBarRoundedValue", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`progress-bar progress-bar-${variant} progress-bar-${theme}`, true).append("w-full", full).append("appearance-none", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

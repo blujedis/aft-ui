@@ -9,8 +9,7 @@ export let { disabled, size, value } = {
   ...context.globals
 };
 const th = themer($themeStore);
-$:
-  selectOptionClasses = th.create("SelectOption").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center", true).append($$restProps.class, true).compile();
+$: selectOptionClasses = th.create("SelectOption").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("common", "disabled", disabled).append("flex items-center", true).append($$restProps.class, true).compile();
 const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 

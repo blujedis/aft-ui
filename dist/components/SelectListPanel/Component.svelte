@@ -11,24 +11,18 @@ export let { bordered, full, position, recordless, rounded, shadowed, tags, them
   ...cleanObj(context.globals)
 };
 const th = themer($themeStore);
-$:
-  nav = useFocusNav($context.panel?.firstChild, {
-    onSelected,
-    onFind,
-    onInit,
-    onNavigate
-  });
-$:
-  activeItem = { el: void 0, index: void 0 };
-$:
-  recordlessMsg = typeof recordless === "string" ? recordless : `No options available.`;
-$:
-  panelClasses = th.create("SelectListPanel").option("panelBg", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, bordered).prepend("select-list-panel", true).append("border", bordered).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append("min-w-full", full).append(`absolute mt-1 text-left min-w-32 outline-none z-30`, true).append($$restProps.class, true).compile();
-$:
-  recordlessClasses = th.create("SelectListPanelRecordless").option("menuPadding", context.globals?.size, context.globals?.size).option("fieldFontSizes", context.globals?.size, context.globals?.size).compile();
+$: nav = useFocusNav($context.panel?.firstChild, {
+  onSelected,
+  onFind,
+  onInit,
+  onNavigate
+});
+$: activeItem = { el: void 0, index: void 0 };
+$: recordlessMsg = typeof recordless === "string" ? recordless : `No options available.`;
+$: panelClasses = th.create("SelectListPanel").option("panelBg", theme, true).option("roundeds", rounded === "full" ? "xl2" : boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).option("elementBorder", theme, bordered).prepend("select-list-panel", true).append("border", bordered).append(position === "right" ? "right-0" : "left-0", true).append(position === "right" ? "origin-top-right" : "origin-top-left", true).append("origin-center", full).append("min-w-full", full).append(`absolute mt-1 text-left min-w-32 outline-none z-30`, true).append($$restProps.class, true).compile();
+$: recordlessClasses = th.create("SelectListPanelRecordless").option("menuPadding", context.globals?.size, context.globals?.size).option("fieldFontSizes", context.globals?.size, context.globals?.size).compile();
 function onInit(items = []) {
-  if (!items.length || $context.filtering)
-    return;
+  if (!items.length || $context.filtering) return;
   activeItem = items.reduce(
     (a, c, i) => {
       if (c.classList.contains("select-list-option-selected")) {
@@ -69,8 +63,7 @@ function onSelected(el, e) {
 }
 function onFind(items) {
   let found = items.find((el) => el.classList.contains("select-list-option-selected"));
-  if (!found)
-    found = items.find((el) => el.classList.contains("select-list-option"));
+  if (!found) found = items.find((el) => el.classList.contains("select-list-option"));
   return found;
 }
 </script>
