@@ -18,7 +18,7 @@ export * from './CardHeader';
 export * from './CardFooter';
 export * from './CardImage';
 export * from './Checkbox';
-export * from './ColorMode';
+export * from './Colormode';
 export * from './ConditionalComponent';
 export * from './ConditionalElement';
 export * from './ConditionalRender';
