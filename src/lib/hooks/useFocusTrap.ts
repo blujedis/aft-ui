@@ -70,7 +70,6 @@ export function useFocusTrap(enabledOrOptions?: boolean | FocusTrapOptions) {
 		let node = initNode;
 		if (child) {
 			node = node.querySelector(child) as HTMLElement;
-			console.log(node);
 		}
 		if (!node) console.warn(`UseFocusTrap cannot trap focus using node of null or undefined.`);
 		if (!enabled || !node)
@@ -88,5 +87,3 @@ export function useFocusTrap(enabledOrOptions?: boolean | FocusTrapOptions) {
 
 	return [bindFocusTrap, handleFocusTrap] as [FocusTrapHook, FocusTrapHandler];
 }
-
-export default useFocusTrap;

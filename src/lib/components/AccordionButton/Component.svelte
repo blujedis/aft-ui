@@ -1,74 +1,100 @@
 <script lang="ts">
 	import { themer, themeStore } from '$lib/theme';
-	import Button from '../Button';
-	import Icon from '../Icon';
+	import { Icon } from '../Icon';
 	import { getContext } from 'svelte';
-	import type { AccordionPanelContext } from '../AccordionPanel/module';
+	import type { AccordionOptionContext } from '../AccordionOption/module';
 	import type { AccordionContext } from '../Accordion/module';
-	import ConditionalElement from '../ConditionalElement';
-	import {
-		type AccordianButtonProps,
-		accordionButtonDefaults as defaults,
-		type AccordionButtonIcon
-	} from './module';
-	import type { ElementNativeProps } from '../types';
+	import { type AccordianButtonProps, accordionButtonDefaults as defaults } from './module';
+	import type { ElementProps, IconifyTuple, HTMLTag } from '$lib/types';
 
-	type $$Props = AccordianButtonProps & ElementNativeProps<'button'>;
+	type Tag = $$Generic<HTMLTag>;
+	type $$Props = AccordianButtonProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Accordion') as AccordionContext;
-	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
+	const optionContext = getContext('AccordionOption') as AccordionOptionContext;
 
-	export let { icon, htag, name, roticon, rounded, size, theme, variant } = {
+	export let {
+		as,
+		caret,
+		disabled,
+		hovered,
+		key,
+		roticon,
+		rotiangle,
+		selectable,
+		size,
+		theme,
+		transitioned,
+		variant
+	} = {
 		...defaults,
-		name: panelContext.name,
-		rounded: context.globals.rounded,
-		size: context.globals.size,
-		theme: context.globals.theme,
-		variant: context.globals.variant
-	} as Required<AccordianButtonProps>;
+		key: optionContext.key,
+		hovered: context.globals?.hovered,
+		selectable: context.globals?.selectable,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		variant: context.globals?.variant
+	} as Required<AccordianButtonProps<Tag>>;
 
-	$: isSelected = $context.selected?.includes(name);
-	$: icons = (Array.isArray(icon) ? icon : [icon, icon]) as [
-		AccordionButtonIcon,
-		AccordionButtonIcon
-	];
+	$: isSelected = $context.selected?.includes(key);
+	$: icons = (Array.isArray(caret) ? caret : [caret, caret]) as IconifyTuple;
 	$: activeIcon = roticon ? icons[0] : !isSelected ? icons[0] : icons[1];
 
 	const th = themer($themeStore);
 
 	$: accordionButtonClasses = th
-		.create('Accordion')
-		.variant('accordionButton', variant, theme, true)
-		.append('inline-flex items-center justify-between w-full', true)
-		.append('mb-2', variant === 'pills')
+		.create('AccordionButton')
+		.bundle(
+			['selectedBgAriaExpanded', 'filledTextAriaExpanded', 'elementBg'],
+			theme,
+			variant === 'filled' && selectable
+		)
+		.bundle(['unfilledTextAriaExpanded'], theme, selectable && variant !== 'filled')
+		.option('panelBgHover', theme, hovered && !isSelected)
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'disabled', disabled)
+		.option('fieldFontSizes', size, size)
+		.option('buttonPadding', size, size)
+		.prepend('accordion-button', true)
+		.append('inline-flex items-center justify-between w-full outline-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
 	$: iconClasses = th
 		.create('DropdownButtonIcon')
-		.option('iconSizes', size, true)
+		.option('iconCaretSizes', size, true)
+		.prepend('accordion-caret', true)
 		.append('transition-transform duration-300 origin-center', roticon)
-		.append(typeof roticon === 'string' ? roticon : '-rotate-180', isSelected && roticon)
+		.append(
+			typeof roticon === 'string' ? roticon : rotiangle === 180 ? '-rotate-180' : 'rotate-90',
+			isSelected && roticon
+		)
 		.compile();
+
+	const additionalProps = {
+		disabled
+	};
 </script>
 
-<ConditionalElement id={`${name}-accordion-heading`} as={htag} condition={typeof htag === 'string'}>
-	<Button
-		aria-controls={`${name}-accordion-option`}
-		{...$$restProps}
-		unstyled
-		on:click={() => context.toggle(name)}
-		class={accordionButtonClasses}
-		aria-expanded={isSelected}
-		{rounded}
-		{size}
-	>
-		<div>
-			<slot />
-		</div>
-		{#if activeIcon}
-			<slot name="icon">
-				<Icon icon={activeIcon} class={iconClasses} />
-			</slot>
-		{/if}
-	</Button>
-</ConditionalElement>
+<svelte:element
+	this={as}
+	id={`${key}-accordion-heading`}
+	aria-controls={`${key}-accordion-option`}
+	role="button"
+	tabindex={-1}
+	{...$$restProps}
+	{...additionalProps}
+	aria-expanded={isSelected}
+	aria-disabled={disabled}
+	class={accordionButtonClasses}
+	on:click={() => context.toggle(key)}
+>
+	<div>
+		<slot />
+	</div>
+	{#if activeIcon}
+		<slot name="caret">
+			<svelte:component this={Icon} icon={activeIcon} class={iconClasses} />
+		</slot>
+	{/if}
+</svelte:element>

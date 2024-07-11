@@ -1,36 +1,30 @@
-/**
- * Global Options
- * dropshadow: (default: none)
- */
-import type { SvelteComponentTyped } from 'svelte';
-import type { popover } from './config';
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
+import type { PopoverOptions } from '$lib/hooks/usePopover';
+import type { AriaRole } from 'svelte/elements';
 
-export type PopoverVariant = keyof typeof popover;
+export type PopoverVariant = 'filled' | 'outlined' | 'soft';
 
-export type PopoverProps = {
-	arrowed?: boolean;
-	content?: string | typeof SvelteComponentTyped<any> | null;
-	rounded?: ThemeRounded;
-	shadowed?: ThemeShadowed;
-	size?: ThemeSize;
-	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
-	unstyled?: boolean;
-	variant?: PopoverVariant;
+export type PopoverProps<Tag> = Partial<
+	Pick<
+		PopoverOptions,
+		| 'events'
+		| 'escapeable'
+		| 'middleware'
+		| 'offset'
+		| 'padding'
+		| 'placement'
+		| 'strategy'
+		| 'sticky'
+	>
+> & {
+	as?: Tag;
+	role?: AriaRole | null | undefined;
+	trigger?: string;
+	onChange?: (state: boolean) => any;
 };
 
-export const popoverDefaults: PopoverProps = {
-	arrowed: true,
-	shadowed: 'md',
-	size: 'md',
-	theme: 'default',
-	unstyled: false,
-	variant: 'default'
+export const popoverDefaults: Partial<PopoverProps<'div'>> = {
+	as: 'div',
+	escapeable: true,
+	events: ['hover', 'focus'],
+	role: 'tooltip'
 };

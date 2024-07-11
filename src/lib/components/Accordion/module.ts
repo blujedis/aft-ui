@@ -1,36 +1,38 @@
-import type { SelectStore, SelectValue } from '$lib/stores/select';
-import type { accordion } from './config';
+import type { SelectStore, SelectStoreValue } from '$lib/stores/select';
 import type { AccordianOptionProps } from '../AccordionOption';
-import type { HTMLTag } from '../types';
+import type { HTMLTag, ThemeRounded, ThemeShadowed } from '$lib/types';
 import { accordionOptionDefaults } from '../AccordionOption';
-import type { ThemeRounded, ThemeShadowed } from '$lib/theme';
-
-export type AccordianVariant = keyof typeof accordion;
+import type { AccordionVariant } from '../AccordionButton/module';
 
 export type AccordionContext = SelectStore & {
-	globals: Omit<AccordianOptionProps, 'as'> & { rounded: ThemeRounded };
+	globals: Omit<AccordianOptionProps, 'as' | 'selected' | 'key'> & {
+		hovered: boolean;
+		selectable: boolean;
+		transitioned: boolean;
+		key?: any;
+	};
 };
 
 export type AccordionProps<Tag extends HTMLTag> = Omit<
 	AccordianOptionProps,
-	'as' | 'value' | 'variant'
+	'as' | 'value' | 'variant' | 'key' | 'selected'
 > & {
 	as?: Tag;
-	full?: boolean;
+	focused?: boolean;
+	hovered?: boolean;
 	multiple?: boolean;
-	selected?: SelectValue[];
+	selected?: SelectStoreValue[];
+	selectable?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
-	variant?: AccordianVariant;
+	transitioned?: boolean;
+	variant?: AccordionVariant;
 };
 
-const { variant, ...rest } = accordionOptionDefaults;
-
-export const accordionDefaults: AccordionProps<'div'> = {
-	...rest,
+export const accordionDefaults: Partial<AccordionProps<'div'>> = {
+	...accordionOptionDefaults,
 	as: 'div',
 	multiple: false,
 	selected: [],
-	theme: 'default',
-	variant: 'default'
+	variant: 'text'
 };

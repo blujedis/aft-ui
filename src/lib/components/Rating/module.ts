@@ -1,4 +1,4 @@
-import type { ThemeShadowed } from '$lib/theme';
+import type { ThemeShadowed } from '$lib/types';
 import type { Writable } from 'svelte/store';
 import type { RatingItemProps } from '../RatingItem/module';
 import { ratingDefaults } from '../RatingItem/module';

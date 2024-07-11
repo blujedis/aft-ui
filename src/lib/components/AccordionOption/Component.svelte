@@ -1,45 +1,103 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
+	import { boolToMapValue } from '$lib/utils';
+
 	import { type AccordianOptionProps, accordionOptionDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps, HTMLTag } from '../types';
-	import { getContext } from 'svelte';
-	import type { AccordionPanelContext } from '../AccordionPanel/module';
+	import { styler, themeStore, themer } from '$lib/theme';
+	import type { ElementProps, HTMLTag } from '$lib/types';
+	import { getContext, setContext } from 'svelte';
+
 	import type { AccordionContext } from '../Accordion/module';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = AccordianOptionProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = AccordianOptionProps<Tag> & ElementProps<Tag>;
 
 	const context = getContext('Accordion') as AccordionContext;
-	const panelContext = getContext('AccordionPanel') as AccordionPanelContext;
 
-	export let { as, delay, duration, easing, name, size, theme, variant } = {
+	export let {
+		as,
+		bordered,
+		detached,
+		focused,
+		key,
+		rounded,
+		selected,
+		shadowed,
+		size,
+		theme,
+		transition,
+		variant
+	} = {
 		...defaults,
-		name: panelContext.name,
-		size: context.globals.size,
-		theme: context.globals.theme,
-		variant: context.globals.variant
+		bordered: context.globals?.bordered,
+		detached: context.globals?.detached,
+		focused: context.globals?.focused,
+		rounded: context.globals?.rounded,
+		shadowed: context.globals?.shadowed,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		transition: context.globals?.transition,
+		variant: context.globals?.variant
 	} as Required<AccordianOptionProps<Tag>>;
 
-	const th = themer($themeStore);
+	setContext('AccordionOption', {
+		key
+	});
 
-	$: accordionClasses = th
+	$context.selected = selected ? [...$context.selected, key] : $context.selected;
+
+	$: isSelected = $context.selected?.includes(key);
+
+	const th = themer($themeStore);
+	const st = styler($themeStore);
+
+	$: isBordered = variant === 'outlined' || (variant === 'filled' && bordered);
+
+	$: accordionOptionStyles = st
+		.create('AccordionOption')
+		.append(`--detatched-margin:${detached === true ? '6px' : detached || '6px'}`, detached)
+		.append($$restProps.style, true)
+		.compile();
+
+	$: accordionOptionClasses = th
 		.create('AccordianOption')
-		.variant('accordionOption', variant, theme, true)
-		.option('fieldFontSizes', size, size)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('elementDivide', theme, isBordered && variant === 'outlined')
+		.option('elementBorder', theme, isBordered)
+		.option('accordionOptionRoundeds', size, rounded)
+		.prepend(`accordian-option`, true)
+		.prepend('accordion-collapsed', !isSelected)
+		.prepend('accordion-expanded', isSelected)
+		.prepend('accordion-detached', detached && ['filled', 'outlined'].includes(variant))
+		.append(`focus-visible:outline-offset-0`, focused)
+		.append('focus:z-10', true)
+		.append('border-t border-r border-l', isBordered)
+		.append('border-b', detached && isSelected && isBordered)
+		// .append('last:border-b', isSelected && isBordered)
+		.append('last:border-b', isBordered)
+		.append('relative overflow-clip outline-none transition-[margin]', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 </script>
 
-{#if $context.selected?.includes(name)}
-	<svelte:element
-		this={as}
-		id={`${name}-accordion-option`}
-		aria-labelledby={`${name}-accordion-heading`}
-		{...$$restProps}
-		class={accordionClasses}
-		transition:slide={{ axis: 'y', delay, duration, easing }}
-	>
-		<slot />
-	</svelte:element>
-{/if}
+<svelte:element
+	this={as}
+	id={`${key}-accordion-option`}
+	aria-labelledby={`${key}-accordion-heading`}
+	tabindex={isSelected ? 0 : -1}
+	{...$$restProps}
+	class={accordionOptionClasses}
+	style={accordionOptionStyles}
+>
+	<slot />
+</svelte:element>
+
+<style>
+	.accordion-detached.accordion-expanded:not(:first-child) {
+		margin-top: var(--detatched-margin); /* 6px; */
+	}
+	.accordion-detached.accordion-expanded:not(:last-child) {
+		margin-bottom: var(--detatched-margin); /* 6px; */
+	}
+</style>

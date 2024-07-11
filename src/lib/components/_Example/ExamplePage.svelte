@@ -1,49 +1,36 @@
 <script lang="ts">
-	import Highlight from 'svelte-highlight';
-	import typescript from 'svelte-highlight/languages/typescript';
-	import github from 'svelte-highlight/styles/github';
-
+	// import { ColorMode } from '../ColorMode';
+	// import { Switch } from '../Switch';
+	// import Highlight from 'svelte-highlight';
+	// import typescript from 'svelte-highlight/languages/typescript';
+	// import github from 'svelte-highlight/styles/github';
+	// import githubDark from 'svelte-highlight/styles/github-dark-dimmed';
+	// let mode = github;
 	export let title = 'Example';
 	export let description = '';
-	export let code = '';
-	export let visible = false;
-	function toggle() {
-		visible = !visible;
-	}
 </script>
 
+<!-- 
 <svelte:head>
 	{@html github}
-</svelte:head>
+</svelte:head> -->
 
-<div>
-	<div class="flex mb-4">
-		<div class="flex-1 text-xl font-semibold">{title}</div>
-		<div>
-			<div class="rounded-sm p-1 bg-slate-100 ring-slate-700 ring-opacity-10 ring-1">
-				<button
-					class={'rounded-sm px-4 py-1 border text-sm ' +
-						(!visible ? 'bg-white border' : 'border-transparent')}
-					on:click={toggle}>Preview</button
-				>
-				<button
-					class={'rounded-sm px-4 py-1 border text-sm ' +
-						(visible ? 'bg-white border' : 'border-transparent')}
-					on:click={toggle}>Code</button
-				>
-			</div>
-		</div>
+<!-- <ColorMode let:checked let:toggle>
+	<Switch {checked} on:change={toggle} shadowed="lg" class="fixed bottom-4 right-6 z-30" />
+</ColorMode> -->
+
+<div class="relative">
+	<div class="text-xl font-semibold mb-4 ml-2">
+		<a href="/">{title}</a>
 	</div>
 	<div class="mb-6">
 		{#if description}
-			<p class="mt-2 mb-4 p-4 bg-slate-100 ring-slate-700 ring-opacity-10 ring-1">{description}</p>
+			<p
+				class="mt-2 mb-4 p-4 bg-frame-50 ring-frame-950/10 dark:bg-frame-900/40 dark:ring-frame-700/80 ring-1"
+			>
+				{description}
+			</p>
 		{/if}
 	</div>
-	<div>
-		{#if visible}
-			<Highlight language={typescript} {code} />
-		{:else}
-			<slot />
-		{/if}
-	</div>
+	<slot />
 </div>

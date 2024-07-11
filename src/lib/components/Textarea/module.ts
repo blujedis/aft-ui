@@ -4,25 +4,23 @@ import type {
 	ThemeResize,
 	ThemeRounded,
 	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { textarea } from './config';
+	ThemeSize
+} from '$lib/types';
 
-export type TextareaVariant = keyof typeof textarea;
+export type TextareaVariant = 'outlined' | 'soft' | 'text';
 
 export type TextareaProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	hovered?: boolean;
 	resize?: ThemeResize;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: TextareaVariant;
-	unstyled?: boolean;
 };
 
 export const textareaDefaults: Partial<TextareaProps> = {
@@ -30,6 +28,6 @@ export const textareaDefaults: Partial<TextareaProps> = {
 	resize: 'both',
 	rounded: 'sm',
 	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	theme: 'frame',
+	variant: 'outlined'
 };

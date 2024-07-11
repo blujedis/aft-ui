@@ -1,45 +1,21 @@
 <script lang="ts">
-	import Rating from '.';
-	import RatingItem from '../RatingItem';
-
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Rating } from '.';
+	import { RatingItem } from '../RatingItem';
+	import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
 
 	const title = 'Ratings';
-	const description = 'Star rating component.';
-	const code = `
-  `;
+	const description = 'Rating component that supports custom icons.';
 	let count = 5;
 
 	const props = {
-		fill: 'warning' as ThemeColor,
+		fill: 'success-300' as ThemeColor,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'sm' as ThemeSize
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<!-- <Checkbox label="Transition" bind:checked={props.transitioned} /> -->
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.fill} />
-		<SelectSize bind:value={props.size} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-4 gap-4">
 		<label for="auto">
 			<div class="text-sm mb-1">Default:</div>
@@ -69,7 +45,7 @@
 
 		<label for="custom-icon">
 			<div class="text-sm mb-1">Custom Icon:</div>
-			<Rating let:mouseover let:mouseleave let:select fill="danger.600" score={2.7}>
+			<Rating let:mouseover let:mouseleave let:select fill="firebrick" score={2.7}>
 				{#each Array(count) as r, index}
 					<RatingItem {index} let:uid let:stops let:classes let:styles let:fill let:stroke>
 						<!-- svelte-ignore a11y-mouse-events-have-key-events -->

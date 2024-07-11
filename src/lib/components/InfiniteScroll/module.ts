@@ -1,0 +1,14 @@
+export type InfiniteScrollProps = {
+	threshold?: number;
+	horizontal?: boolean;
+	element?: HTMLElement | null;
+	hasMore?: boolean | number;
+	reverse?: boolean;
+	window?: boolean;
+};
+
+export const infiniteScrollDefaults: Partial<InfiniteScrollProps> = {
+	threshold: 0,
+	element: null,
+	hasMore: true
+};

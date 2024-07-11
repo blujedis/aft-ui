@@ -1,38 +1,33 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { breadcrumbNav } from './config';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+
+import type { BreadcrumbVariant } from '../BreadcrumbOption/module';
 
 export type BreadcrumbContext = {
 	globals: {
+		focused: boolean;
 		rounded: ThemeRounded;
 		shadowed: ThemeShadowed;
 		size: ThemeSize;
 		theme: ThemeColor;
-		transitioned: ThemeTransitioned;
+		transitioned: boolean;
 		variant: BreadcrumbVariant;
 	};
 };
 
-export type BreadcrumbVariant = keyof typeof breadcrumbNav;
-
 export type BreadcrumbProps = {
+	focused?: boolean;
 	full?: boolean;
-	generated?: boolean;
+	generate?: boolean;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: BreadcrumbVariant;
 };
 
 export const breadcrumbDefaults: Partial<BreadcrumbProps> = {
 	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	theme: 'frame',
+	variant: 'text'
 };

@@ -1,0 +1,22 @@
+import type { IconifyIcon } from '@iconify/svelte';
+import { type InputProps } from '../Input';
+import type { SelectListItem } from '../SelectList';
+import type { BadgeProps } from '../Badge';
+import type { ThemeColor } from '../../types';
+export type SelectListVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text';
+export type SelectListButtonProps = InputProps & {
+    badgeProps?: BadgeProps;
+    caret?: string | IconifyIcon;
+    filterable?: boolean;
+    hovered?: boolean;
+    tags?: boolean;
+    tagsTheme?: ThemeColor;
+    newable?: boolean;
+    placeholder?: string;
+    removable?: boolean;
+    roticon?: boolean;
+    variant?: SelectListVariant;
+    onBeforeAdd?: <T extends SelectListItem>(value: string, input: HTMLInputElement) => T | null | false | undefined | Promise<T | null | false | undefined>;
+    onBeforeRemove?: <T extends SelectListItem>(item: T, input: HTMLInputElement) => boolean | Promise<boolean>;
+};
+export declare const selectListButtonDefaults: Partial<SelectListButtonProps>;

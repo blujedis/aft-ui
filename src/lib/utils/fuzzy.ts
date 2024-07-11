@@ -48,8 +48,8 @@ const pos = [] as number[];
 const charCache = [] as number[];
 const defaults = {
 	strategy: 'simple' as Strategy,
-	places: 2,
-	threshold: 4,
+	places: 4,
+	threshold: 2,
 	keys: [] as string[]
 };
 
@@ -197,12 +197,10 @@ export function fuzzyMatch(
 			threshold: optionsOrThreshold
 		};
 	}
-
 	options = {
 		...defaults,
 		...options
 	};
-
 	const { strategy, places, threshold } = options as Required<FuzzyOptions>;
 
 	return similarity(needle, haystack, { strategy, places }).score >= threshold;
@@ -287,7 +285,10 @@ export function fuzzyFull(
  * Filters array of values which match the needles threshold.
  *
  * @example
- * fuzzyMatch('pet', ['peter', 'paul', 'john'], { threshold: 2}) > boolean
+ * fuzzyFilter('pet', ['peter', 'paul', 'john'], { threshold: 2}) >> boolean
+ * fuzzyFilter('pet',
+ * 	[{ name: peter }, { name: 'paul' }, { name: 'john'}],
+ *  { threshold: 2, keys: ['name']}) >> boolean;
  *
  * @param needle the needle to evaluate against haystack.
  * @param haystack the haystack string to be evaluated for match.

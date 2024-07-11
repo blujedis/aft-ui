@@ -1,15 +1,9 @@
-import type { SelectValue, SelectStore } from '$lib/stores/select';
-import type {
-	ThemeColor,
-	ThemeFocused,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { select } from './config';
+import type { SelectStoreValue, SelectStore } from '$lib/stores/select';
+import type { ThemeColor, ThemeFocused, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-export type SelectVariant = keyof typeof select;
+export type SelectVariant = 'filled' | 'outlined' | 'soft' | 'flushed' | 'text'; // keyof typeof select;
+
+export type SelectValue = string | number;
 
 export type SelectContext = SelectStore & {
 	//
@@ -19,23 +13,23 @@ export type SelectProps = {
 	disabled?: boolean;
 	focused?: ThemeFocused;
 	full?: boolean;
+	hovered?: boolean;
 	multiple?: boolean;
 	placeholder?: boolean | string;
+	rows?: number; // mapped to native size attribute.
 	rounded?: ThemeRounded;
-	selected?: SelectValue | SelectValue[];
+	value?: SelectStoreValue | SelectStoreValue[];
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: SelectVariant;
-	unstyled?: boolean;
 };
 
 export const selectDefaults: Partial<SelectProps> = {
 	focused: true,
-	placeholder: true,
-	rounded: 'sm',
 	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	theme: 'frame',
+	variant: 'outlined',
+	value: ''
 };

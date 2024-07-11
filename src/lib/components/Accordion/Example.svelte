@@ -1,85 +1,158 @@
 <script lang="ts">
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import Accordion, { type AccordianVariant } from '.';
-	import AccordionButton from '../AccordionButton';
-	import AccordionOption from '../AccordionOption';
-	import AccordionPanel from '../AccordionPanel';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
+	import { Accordion } from '.';
+	import { AccordionButton, type AccordionVariant } from '../AccordionButton';
+	import { AccordionOption } from '../AccordionOption';
+	import { colors } from '$lib/constants';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+	import type { DisclosureTransitionOption } from '../Disclosure';
+	import Section from '../_Example/Section.svelte';
+	import { AccordionContent } from '../AccordionContent';
 
 	const title = 'Accordion';
-	const description = 'Boilerplate component for accordions.';
-	const code = `
-  `;
+	const description =
+		'Accordion component with single or multiple expanded using various transitions.';
 
 	const props = {
+		focused: true,
 		multiple: false,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
-		shadowed: 'none' as ThemeShadowed,
+		bordered: true,
+		// shadowed: 'none' as ThemeShadowed,
+		selectable: true,
 		size: 'md' as ThemeSize,
-		theme: 'danger' as ThemeColor,
-		variant: 'default' as AccordianVariant
+		theme: 'frame' as ThemeColor,
+		transition: 'expand' as DisclosureTransitionOption
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<!-- <Checkbox label="Full" bind:checked={props.full} /> -->
-		<Checkbox label="Multiple" bind:checked={props.multiple} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
+<ExamplePage {title} {description}>
+	<div class="text-sm mb-4">
+		Use width on top level Accordion element to constrain from full width.
+	</div>
 
 	<Section>
-		<hr />
+		<div class="text-2xl font-semibold mb-4">Text</div>
+		<div class="grid grid-cols-9 gap-2 items-start mb-4">
+			{#each colors as color}
+				<Accordion {...props}>
+					<AccordionOption key={0}>
+						<AccordionButton>One</AccordionButton>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1}>
+						<AccordionButton>Two</AccordionButton>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+				</Accordion>
+			{/each}
+		</div>
 	</Section>
 
-	<!-- <div class="flex space-x-2">
-		<label for="filled">
-			<div class="text-sm">Filled:</div>
-		</label> -->
-	{#key props}
-		<Accordion {...props}>
-			<AccordionPanel name={0}>
-				<AccordionButton>One</AccordionButton>
-				<AccordionOption class="p-4"
-					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-					est laborum.</AccordionOption
-				>
-			</AccordionPanel>
-			<AccordionPanel name={1}>
-				<AccordionButton>Two</AccordionButton>
-				<AccordionOption class="p-4"
-					>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-					sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-					est laborum.</AccordionOption
-				>
-			</AccordionPanel>
-		</Accordion>
-	{/key}
-	<!-- </div> -->
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Filled</div>
+		<div class="grid grid-cols-9 gap-2 items-start mb-4">
+			{#each colors as color}
+				<Accordion {...props} theme={color} variant="filled">
+					<AccordionOption key={0}>
+						<AccordionButton>One</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1}>
+						<AccordionButton>Two</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+				</Accordion>
+			{/each}
+		</div>
+	</Section>
+
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Outlined</div>
+		<div class="grid grid-cols-9 gap-2 items-start mb-4">
+			{#each colors as color}
+				<Accordion {...props} theme={color} variant="outlined">
+					<AccordionOption key={0}>
+						<AccordionButton>One</AccordionButton>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1} selected={color === 'primary'}>
+						<AccordionButton>Two</AccordionButton>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent key={2}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+				</Accordion>
+			{/each}
+		</div>
+	</Section>
+
+	<Section>
+		<div class="text-2xl font-semibold mb-4">Filled (Detached)</div>
+		<div class="grid grid-cols-9 gap-2 items-start mb-4">
+			{#each colors as color}
+				<Accordion {...props} theme={color} variant="filled" detached>
+					<AccordionOption key={0}>
+						<AccordionButton>One</AccordionButton>
+						<AccordionContent key={0}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={1}>
+						<AccordionButton>Two</AccordionButton>
+						<AccordionContent key={1}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+					<AccordionOption key={2}>
+						<AccordionButton>Three</AccordionButton>
+						<AccordionContent>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua.
+						</AccordionContent>
+					</AccordionOption>
+				</Accordion>
+			{/each}
+		</div>
+	</Section>
 </ExamplePage>

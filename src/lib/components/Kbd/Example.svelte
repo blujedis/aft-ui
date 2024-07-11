@@ -1,21 +1,8 @@
 <script lang="ts">
-	import Kbd, { type KbdVariant } from '.';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Kbd, type KbdVariant } from '.';
+	import { colors } from '$lib/constants';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 
 	const title = 'KBD';
 	const description = 'Themed KBD elements and variants.';
@@ -24,35 +11,28 @@
 
 	const props = {
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		hovered: true,
+		rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, //  ThemeTransitioned,
-		variant: 'default' as KbdVariant
+		variant: 'filled' as KbdVariant
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Kbd {...props} />
-		</label>
-	</div>
+<ExamplePage {title} {description}>
+	{#each colors as color}
+		<div class="grid grid-cols-3 gap-4 mb-4">
+			<label for="filled">
+				<Kbd {...props} variant="filled" theme={color}>space</Kbd>
+			</label>
+			<label for="filled">
+				<Kbd {...props} variant="outlined" theme={color}>cmd + i</Kbd>
+			</label>
+			<label for="filled">
+				<Kbd {...props} variant="soft" theme={color}>ctrl + shift</Kbd>
+			</label>
+		</div>
+	{/each}
 </ExamplePage>

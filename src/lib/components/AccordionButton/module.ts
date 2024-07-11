@@ -1,27 +1,30 @@
-import type { SelectValue } from '$lib/stores/select';
-import type { ThemeColor } from '$lib/theme';
-import type { IconifyIcon } from '@iconify/svelte';
+import type { SelectStoreValue } from '$lib/stores/select';
+import type { ThemeColor, Iconify, HTMLTag } from '$lib/types';
 import type { ButtonProps } from '../Button';
-import type { accordionButton } from './config';
-import type { HTMLTag } from '../types';
+// import type { accordionButton } from './config';
 
-export type AccordionButtonVariant = keyof typeof accordionButton;
+export type AccordionVariant = 'filled' | 'outlined' | 'text'; // keyof typeof accordionButton;
 
-export type AccordionButtonIcon = string | IconifyIcon;
-
-export type AccordianButtonProps = Omit<ButtonProps<'button'>, 'variant' | 'full'> & {
-	icon?: AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
-	htag?: HTMLTag; // wraps button used for aria-labelledby undefined to disable.
+export type AccordianButtonProps<Tag extends HTMLTag> = Omit<
+	ButtonProps<'button'>,
+	'as' | 'variant' | 'full' | 'focused' | 'underlined' | 'rounded' | 'shadowed' | 'href'
+> & {
+	as?: Tag;
+	caret?: Iconify; // AccordionButtonIcon | [AccordionButtonIcon, AccordionButtonIcon];
 	roticon?: boolean | string; // when true rotate expand icon ignore collapse.
-	name?: SelectValue;
+	rotiangle?: 90 | 180;
+	selectable?: boolean;
+	key?: SelectStoreValue;
 	theme?: ThemeColor;
-	variant?: AccordionButtonVariant;
+	variant?: AccordionVariant;
 };
 
-export const accordionButtonDefaults: Partial<AccordianButtonProps> = {
-	icon: ['mdi:chevron-down', 'mdi:chevron-up'],
-	roticon: false,
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+export const accordionButtonDefaults: Partial<AccordianButtonProps<'button'>> = {
+	as: 'button',
+	// ['octicon:chevron-down-24', 'octicon:chevron-up-24'], 180 example
+	// [ 'octicon:chevron-right-24'] set rotiangle to 90 which gives you ▶ to ▼
+	caret: 'octicon:chevron-down-24',
+	roticon: true,
+	rotiangle: 180,
+	size: 'sm'
 };

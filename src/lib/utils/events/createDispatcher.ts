@@ -1,5 +1,5 @@
 import { createEventDispatcher } from 'svelte';
-import type { DispatchOptions } from 'svelte/internal';
+import type { DispatchOptions } from 'svelte';
 
 export type DispatchHandler<T = any> = <K extends Extract<keyof T, string>>(
 	type: K,
@@ -14,6 +14,7 @@ export type EventRemap<K extends string, T extends Record<string, any>> = {
 export function createDispatcher<
 	K extends string,
 	T extends Record<string, unknown> = Record<string, unknown>
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(name: K, map = {} as T): DispatchHandler<EventRemap<K, T>> & { $name: string } {
 	const dispatcher = createEventDispatcher() as any;
 	dispatcher.$name = name;

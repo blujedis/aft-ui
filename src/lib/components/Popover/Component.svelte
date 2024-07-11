@@ -1,91 +1,78 @@
 <script lang="ts">
-	import { themer, themeStore } from '$lib/theme';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import { get_current_component } from 'svelte/internal';
 	import { type PopoverProps, popoverDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { onMount } from 'svelte';
+	import { createPopoverInstance } from '$lib/hooks/usePopover';
 
-	type $$Props = PopoverProps & ElementNativeProps<'div'>;
+	type Tag = $$Generic<'div' | 'a'>;
+	type $$Props = PopoverProps<Tag> & Omit<ElementProps<Tag>, 'size'>;
 
 	export let {
-		arrowed,
-		content,
-		id,
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transitioned,
-		unstyled,
-		variant
+		as,
+		escapeable,
+		events,
+		middleware,
+		offset,
+		padding,
+		placement,
+		role,
+		sticky,
+		strategy,
+		trigger,
+		onChange
 	} = {
 		...defaults
-	} as Required<$$Props>;
+	} as PopoverProps<Tag>;
 
-	const role = $$restProps.role ?? arrowed ? 'tooltip' : 'region';
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	let popover: ReturnType<typeof createPopoverInstance>;
+	let placeholderRef: HTMLElement;
+	let contentRef: HTMLElement;
+	let triggerRef: string | HTMLElement;
+	let visible = false;
+
 	const th = themer($themeStore);
 
 	$: popoverClasses = th
-		.create('Popover')
-		.variant('popover', variant, theme, true)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-		.option('popoverSizes', size, size)
-		.append('popover', true)
+		.create('Badge')
+		.prepend('popover', true)
+		.append('z-50', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
+	function init(node: HTMLElement) {
+		contentRef = node;
+		if (contentRef) popover.registerContent(contentRef, { middleware, placement });
+	}
+
+	onMount(() => {
+		const prevSibling = placeholderRef.previousElementSibling;
+		triggerRef = !trigger && prevSibling ? (prevSibling as HTMLElement) : (trigger as string);
+		popover = createPopoverInstance({
+			events,
+			escapeable,
+			offset,
+			padding,
+			placement,
+			sticky,
+			strategy,
+			onChange: (state) => (visible = state)
+		});
+		if (triggerRef) {
+			popover.registerTrigger(triggerRef);
+		}
+		return () => {
+			if (popover) popover.destroy();
+		};
+	});
 </script>
 
-<div use:forwardedEvents {role} {...$$restProps} class={popoverClasses}>
-	<slot>
-		{#if typeof content === 'string'}
-			{content}
-		{:else}
-			<svelte:component this={content} />
-		{/if}
-	</slot>
-	{#if arrowed}
-		<div id="arrow" data-popper-arrow />
-	{/if}
-</div>
+{#if !triggerRef}
+	<div bind:this={placeholderRef} />
+{/if}
 
-<style>
-	#arrow,
-	#arrow::before {
-		position: absolute;
-		width: 8px;
-		height: 8px;
-		z-index: -1;
-		background: inherit;
-	}
-
-	#arrow {
-		visibility: hidden;
-	}
-
-	#arrow::before {
-		visibility: visible;
-		content: '';
-		transform: rotate(45deg);
-		background: inherit;
-	}
-
-	:global(.popover[data-popper-placement^='bottom'] > #arrow) {
-		top: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='top'] > #arrow) {
-		bottom: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='left'] > #arrow) {
-		right: -4px;
-	}
-
-	:global(.popover[data-popper-placement^='right'] > #arrow) {
-		left: -4px;
-	}
-</style>
+{#if visible && triggerRef}
+	<svelte:element this={as} use:init {...$$restProps} {role} class={popoverClasses}>
+		<slot />
+	</svelte:element>
+{/if}

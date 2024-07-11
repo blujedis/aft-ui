@@ -1,6 +1,7 @@
-export type ConditionalElementProps<Tag> = {
-	events?: boolean; // when true fwd events for container.
-	as?: Tag;
+import type { HTMLTag } from '$lib/types';
+
+export type ConditionalElementProps<T extends HTMLTag> = {
+	as: T;
 	condition: boolean | ((...args: any[]) => boolean);
 };
 

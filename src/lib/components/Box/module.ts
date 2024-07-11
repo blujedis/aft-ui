@@ -1,0 +1,40 @@
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
+
+export type BoxVariant = 'filled' | 'outlined' | 'soft';
+
+export type BlockTag =
+	| 'a'
+	| 'button'
+	| 'div'
+	| 'li'
+	| 'section'
+	| 'article'
+	| 'p'
+	| 'span'
+	| 'main';
+
+export type BoxProps<Tag extends BlockTag> = {
+	as?: Tag;
+	bordered?: boolean;
+	centered?: boolean;
+	dropshadowed?: ThemeShadowed;
+	emptied?: boolean;
+	focused?: boolean;
+	full?: boolean;
+	href?: string;
+	hovered?: boolean;
+	rounded?: ThemeRounded;
+	shadowed?: ThemeShadowed;
+	size?: ThemeSize;
+	skeletoned?: boolean;
+	theme?: ThemeColor;
+	transitioned?: boolean;
+	variant?: BoxVariant;
+};
+
+export const boxDefaults: Partial<BoxProps<BlockTag>> = {
+	as: 'div',
+	centered: true,
+	size: 'md',
+	theme: 'frame'
+};

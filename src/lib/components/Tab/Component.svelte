@@ -1,77 +1,152 @@
 <script lang="ts">
-	import type { HtmlTag } from 'svelte/internal';
-
+	import { get_current_component } from 'svelte/internal';
+	import { Flushed } from '../Flushed';
 	import { themer, themeStore } from '$lib/theme';
 	import { type TabProps, tabDefaults as defaults } from './module';
-	import Button from '../Button';
-	import type { ElementNativeProps, ElementProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 	import { getContext } from 'svelte';
-	import type { TabControllerContext } from '../TabController';
-	import type { SelectValue } from '$lib/stores/select';
+	import type { TabsContext } from '$lib/components/Tabs';
+	import { boolToMapValue, forwardEventsBuilder } from '$lib/utils';
+	import { ConditionalComponent } from '$lib/components';
 
 	type Tag = $$Generic<'a' | 'button'>;
-	type NativeProps = Tag extends 'button'
-		? ElementNativeProps<'button', 'disabled' | 'value'>
-		: ElementNativeProps<'a'>;
-	type $$Props = TabProps<Tag> & NativeProps;
+	type $$Props = TabProps<Tag> & ElementProps<Tag>;
 
-	const context = getContext('TabController') as TabControllerContext;
+	type Temp = ElementProps<'button'>;
+
+	let t: Temp['id'];
+
+	const context = getContext('Tabs') as TabsContext;
 
 	export let {
 		as,
 		disabled,
 		focused,
 		full,
+		hovered,
+		id,
 		rounded,
+		selected,
 		size,
 		theme,
+		label,
 		transitioned,
 		underlined,
-		value,
 		variant
 	} = {
 		...defaults,
-		...context?.globals
+		focused: context.globals?.focused,
+		full: context.globals?.full,
+		hovered: context.globals?.hovered,
+		rounded: context.globals?.rounded,
+		size: context.globals?.size,
+		theme: context.globals?.theme,
+		transitioned: context.globals?.transitioned,
+		variant: context.globals?.variant,
+		underlined: context.globals?.underlined
 	} as Required<TabProps<Tag>>;
+
+	let panel: HTMLDivElement | undefined;
+	let initialized = false;
+	let index = -1;
+
+	const additionalProps = {
+		disabled,
+		'aria-disabled': disabled
+	};
 
 	const th = themer($themeStore);
 
 	$: tabClasses = th
-		.create('Tab')
-		.variant('tab', variant, theme, true)
+		.create('TabClass')
+		.bundle(
+			['selectedBgAriaSelected', 'filledTextAriaSelected'],
+			theme,
+			['filled', 'pills'].includes(variant) && selected
+		)
+		.option('unfilledTextAriaSelected', theme, ['flushed', 'text'].includes(variant))
+		// .option('panelBgHover', theme, ['filled', 'pills'].includes(variant) && hovered && !selected)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'disabled', disabled)
 		.option('buttonPadding', size, size)
 		.option('fieldFontSizes', size, size)
-		.option('roundeds', rounded, rounded)
+		.option('fieldLeading', size, size)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.prepend('tab', true)
 		.append(
-			'rounded-br-none rounded-bl-none',
-			['labeled', 'default', 'underlined'].includes(variant)
+			'bg-frame-100 dark:bg-frame-700 hover:bg-frame-200/70 dark:bg-frame-900/40',
+			['filled', 'pills'].includes(variant)
 		)
-		.append('inline-flex items-center justify-center', true)
-		.append('whitespace-nowrap', variant === 'flushed')
-		.append('w-full', full && ['grouped', 'labeled'].includes(variant))
-		.append('px-10', full && ['pills', 'underlined', 'default'].includes(variant))
-		.append(
-			'relative focus:z-10 first:ml-0 -ml-px first:ml-0 first:rounded-r-none last:rounded-l-none',
-			variant === 'grouped'
-		)
-		.append('pointer-events-none', $context?.selected?.includes(value))
-		.append($$restProps.class, true)
-		.compile(true);
+		.prepend('tab-selected', selected)
+		.append('w-full', full)
+		.append('hover:underline', variant === 'text' && !selected && underlined)
+		// .append('whitespace-nowrap', variant === 'flushed')
+		// .append('group-first:pl-0', variant === 'text')
+		// .append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant === 'outlined')
+		.append('rounded-none group-first:rounded-l group-last:rounded-r', variant === 'filled')
+		.append('inline-flex items-center justify-center outline-none h-full', true)
+		.compile();
 
-	function handleSelect(value: SelectValue) {
-		if ($context?.selected?.includes(value)) context.unselect(value);
-		else context.select(value);
+	function init(node: HTMLElement & { $select: () => any }) {
+		let tabs = $context.tabs;
+		if (!initialized) {
+			node.$select = () => (selected = true);
+			tabs = [...tabs, node];
+			const currentIndex = selected ? tabs.indexOf(node) : $context.currentIndex;
+			context.set({ ...$context, tabs, currentIndex });
+			initialized = true;
+		}
+		index = tabs.indexOf(node);
 	}
+
+	function mount(node: HTMLElement) {
+		context.set({ ...$context, selected: node, currentIndex: index });
+		const destroy = context.subscribe((s) => {
+			if (s.selected !== node) selected = false;
+		});
+		return { destroy };
+	}
+
+	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<svelte:element
-	this={as}
-	{...$$restProps}
-	class={tabClasses}
-	aria-current={$context?.selected?.includes(value)}
-	aria-selected={$context?.selected?.includes(value)}
-	aria-labelledby={value + ''}
-	on:click={() => handleSelect(value)}
->
-	<slot />
-</svelte:element>
+<li role="presentation" class:w-full={full} class="flex group">
+	<ConditionalComponent
+		as={Flushed}
+		condition={variant === 'flushed'}
+		{selected}
+		{theme}
+		group={true}
+		{hovered}
+		{focused}
+		class="-mb-px"
+	>
+		<svelte:element
+			this={as}
+			use:forwardedEvents
+			use:init
+			aria-controls={`tab-panel-${index}`}
+			{...$$restProps}
+			{...additionalProps}
+			role="tab"
+			tabindex="0"
+			class={tabClasses}
+			aria-current={selected}
+			aria-selected={selected}
+			on:click={() => (selected = true)}
+		>
+			<slot name="label">
+				{label}
+			</slot>
+		</svelte:element>
+	</ConditionalComponent>
+	{#if selected}
+		<div class="hidden">
+			<div bind:this={panel} use:mount>
+				<slot />
+			</div>
+		</div>
+	{/if}
+</li>

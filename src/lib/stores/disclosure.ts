@@ -1,54 +1,53 @@
-import { writable, get, type Writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
-interface DisclosureBaseProps {
+interface DisclosureBaseOptions {
 	visible?: boolean;
+	onChange?: (state: 0 | 1) => void;
 }
 
-export type DisclosureProps<P extends Record<string, unknown> = Record<string, unknown>> =
-	DisclosureBaseProps & P;
+export type DisclosureStoreOptions<P extends Record<string, unknown> = Record<string, unknown>> =
+	DisclosureBaseOptions & P;
 
 export interface DisclosureMethods<P extends Record<string, unknown> = Record<string, unknown>> {
 	open: () => void;
 	close: () => void;
 	toggle: () => void;
-	modify: (values: Partial<DisclosureProps<P>>) => void;
+	modify: (values: Partial<DisclosureStoreOptions<P>>) => void;
 }
 
 export type DisclosureStore<P extends Record<string, unknown> = Record<string, unknown>> = Writable<
-	DisclosureProps<P>
+	DisclosureStoreOptions<P>
 > &
 	DisclosureMethods<P>;
 
 export function useDisclosure<P extends Record<string, unknown> = Record<string, unknown>>(
-	props = {} as DisclosureProps<P>
+	props = {} as DisclosureStoreOptions<P>
 ) {
-	const store = writable({ visible: false, ...props } as Required<DisclosureProps<P>>);
-
-	function getStore() {
-		return get(store);
-	}
-
-	function handleUpdate(newStore: DisclosureProps<P>) {
-		// Placeholder.
-		return newStore as Required<DisclosureProps<P>>;
-	}
+	props.onChange = props.onChange || (() => {});
+	const store = writable({ visible: false, ...props } as Required<DisclosureStoreOptions<P>>);
 
 	function open() {
-		store.update((s) => handleUpdate({ ...s, visible: true }));
+		store.update((s) => {
+			return { ...s, visible: true };
+		});
 	}
 
 	function close() {
-		store.update((s) => handleUpdate({ ...s, visible: false }));
+		store.update((s) => {
+			return { ...s, visible: false };
+		});
 	}
 
 	function toggle() {
-		const visible = getStore().visible;
-		store.update((s) => handleUpdate({ ...s, visible: !visible }));
+		store.update((s) => {
+			return { ...s, visible: !s.visible };
+		});
 	}
 
-	function modify(values: Partial<DisclosureProps<P>>) {
-		console.log(values);
-		store.update((s) => handleUpdate({ ...s, ...values }));
+	function modify(values: Partial<DisclosureStoreOptions<P>>) {
+		store.update((s) => {
+			return { ...s, ...values };
+		});
 	}
 
 	return {

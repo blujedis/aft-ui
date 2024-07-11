@@ -1,69 +1,53 @@
 <script lang="ts">
-	import Input, { type InputVariant } from '.';
+	import { Input } from '.';
 	import type {
 		ThemeColor,
+		ThemeFocused,
 		ThemeRounded,
 		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+		ThemeSize
+	} from '$lib/types';
+	import { colors } from '$lib/constants';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
 
 	const title = 'Input';
 	const description = 'Themed input form elements and variants.';
-	const code = `
-  `;
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
+		focused: true,
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		hovered: true,
+		rounded: 'md' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as InputVariant
+		theme: 'frame' as ThemeColor,
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
+<ExamplePage {title} {description}>
+	{#each colors as color}
+		<div class="grid grid-cols-5 gap-4 mb-4">
+			<label for="outline">
+				<Input {...props} variant="filled" theme={color} placeholder="Last Name" />
+			</label>
 
-	<Section>
-		<hr />
-	</Section>
+			<label for="filled">
+				<Input {...props} variant="outlined" theme={color} placeholder="First Name" />
+			</label>
 
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Input {...props} variant="outlined" placeholder="First Name" />
-		</label>
-		<label for="outline">
-			<div class="text-sm">Filled:</div>
-			<Input {...props} variant="filled" placeholder="Last Name" />
-		</label>
-		<label for="link">
-			<div class="text-sm">Flushed:</div>
-			<Input {...props} variant="flushed" />
-		</label>
-	</div>
+			<label for="outline">
+				<Input {...props} variant="soft" theme={color} placeholder="Last Name" />
+			</label>
+
+			<label for="flushed">
+				<Input {...props} variant="flushed" theme={color} placeholder="DOB" />
+			</label>
+
+			<label for="text">
+				<Input {...props} variant="text" theme={color} placeholder="DOB" />
+			</label>
+		</div>
+	{/each}
 </ExamplePage>

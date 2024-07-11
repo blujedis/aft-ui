@@ -1,29 +1,31 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
-import type { card } from './config';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-export type CardVariant = keyof typeof card;
+import type { CardVariant } from '../CardElement';
 
 export type CardContext = {
 	globals: {
 		size?: ThemeSize;
 		theme?: ThemeColor;
-		wide?: boolean;
+		horizontal?: boolean;
+		variant?: CardVariant;
 	};
 };
 
 export type CardProps = {
-	edged?: boolean;
+	bordered?: boolean;
+	divided?: boolean;
+	dropshadowed?: ThemeShadowed;
+	full?: boolean;
+	horizontal?: boolean;
+	href?: string;
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
 	variant?: CardVariant;
-	wide?: boolean;
+	maxwidth?: ThemeSize;
 };
 
 export const cardDefaults: Partial<CardProps> = {
-	edged: true,
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	size: 'md'
 };

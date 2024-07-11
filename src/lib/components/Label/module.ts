@@ -1,29 +1,16 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { label } from './config';
-
-export type LabelVariant = keyof typeof label;
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type LabelProps = {
 	full?: boolean;
+	inline?: boolean;
 	rounded?: ThemeRounded;
-	shadowed?: ThemeShadowed;
 	dropshadowed?: ThemeShadowed;
+	reversed?: boolean;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
-	variant?: LabelVariant;
-	unstyled?: boolean;
+	visible?: boolean;
 };
 
 export const labelDefaults: Partial<LabelProps> = {
-	rounded: 'full',
-	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	visible: true
 };

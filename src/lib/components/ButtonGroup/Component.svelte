@@ -5,61 +5,68 @@
 		type ButtonGroupContext
 	} from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 	import { setContext } from 'svelte';
 	import { useSelect } from '$lib/stores/select';
-	import { ensureArray } from '$lib/utils';
+	import { cleanObj, ensureArray, boolToMapValue } from '$lib/utils';
 
-	type $$Props = ButtonGroupProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = ButtonGroupProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let {
 		focused,
 		full,
+		hovered,
 		multiple,
 		rounded,
-		selected,
+		value,
 		shadowed,
 		size,
 		theme,
 		transitioned,
-		underlined,
 		variant
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<ButtonGroupProps>;
 
-	export const store = useSelect({ selected: ensureArray(selected), multiple });
+	const store = useSelect({ selected: value, mode: multiple ? 'multiple' : 'single' });
 
 	setContext<ButtonGroupContext>('ButtonGroup', {
 		...store,
 		globals: {
 			focused,
 			full,
+			hovered,
 			rounded,
 			size,
 			theme,
 			transitioned,
-			underlined,
 			variant
 		}
 	});
 
 	$: buttonGroupClasses = themer($themeStore)
 		.create('ButtonGroup')
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`button-group button-group-${variant}`, true)
 		.append('w-full', full)
-		.append('isolate inline-flex [&>:not(:first-child):not(:last-child)]:rounded-none', true)
+		.append('[&>:not(:first-child):not(:last-child)]:rounded-none', variant !== 'ghost')
+		.append('isolate inline-flex', true)
+		.append('space-x-4', variant === 'flushed')
+		.append('gap-1', ['ghost', 'flushed'].includes(variant))
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
+	function handleReset() {
+		store.reset();
+	}
 </script>
 
 <span role="list" class={buttonGroupClasses}>
 	<slot
-		selectedItems={$store.selected}
+		selected={$store.selected}
 		reset={store.reset}
 		select={store.select}
 		unselect={store.unselect}
-		isSelected={store.isSelected}
 	/>
 </span>

@@ -8,60 +8,93 @@
 		drawerOffsetMap
 	} from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 	import { fade, fly } from 'svelte/transition';
-	import { useDisclosure } from '$lib/stores';
+	import { boolToMapValue } from '$lib/utils';
 	import Placeholder from './Placeholder.svelte';
 
-	type $$Props = DrawerProps & ElementNativeProps<'div'>;
+	type $$Props = DrawerProps & ElementProps<'div'>;
 
-	export let { backdrop, content, contentProps, position, shadowed, size, speed, theme, variant } =
-		{
-			...defaults
-		} as Required<$$Props>;
+	export let {
+		backdrop,
+		content,
+		escapable,
+		contentProps,
+		position,
+		shadowed,
+		size,
+		speed,
+		theme,
+		unmount,
+		visible
+	} = {
+		...defaults
+	} as Required<$$Props>;
 
-	export const store = useDisclosure({ visible: false });
+	let panel: HTMLDivElement;
 
 	const th = themer($themeStore);
 
 	$: drawerSizeClasses = th
 		.create('DrawerSize')
-		//	.variant('drawer', variant, theme, true)
 		.append(drawerSizeMap[size], size)
 		.append('pointer-events-auto w-screen', true)
 
-		.compile(true);
+		.compile();
 
 	$: drawerPositionClasses = th
 		.create('DrawerPosition')
 		.append(drawerPositionMap[position], position)
 		.append('pointer-events-none fixed inset-y-0 flex max-w-full', true)
-		.compile(true);
+		.compile();
 
 	$: drawerClasses = th
 		.create('DrawerWrapper')
-		.option('shadows', shadowed, shadowed)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.append('flex h-full flex-col overflow-y-scroll bg-white', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleClose() {
-		store.close();
+		visible = false;
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (!e.repeat && e.key === 'Escape' && escapable) {
+			e.stopPropagation();
+			handleClose();
+		}
+	}
+
+	function handleClick(e: any) {
+		if (!panel?.contains(e.target)) handleClose();
 	}
 </script>
 
-{#if $store.visible}
-	<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-		<div
-			class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-			transition:fade={{ duration: 100 }}
-		/>
+<svelte:window on:keydown={handleKeydown} />
+
+{#if (unmount && visible) || !unmount}
+	<div class="relative z-40" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+		{#if backdrop}
+			<div
+				role="button"
+				tabindex="-1"
+				bind:this={panel}
+				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
+				transition:fade={{ duration: 100 }}
+				on:click={handleClick}
+				on:keydown={handleKeydown}
+			/>
+		{/if}
 
 		<div class="fixed inset-0 overflow-hidden">
 			<div class="absolute inset-0 overflow-hidden">
 				<div class={drawerPositionClasses}>
 					<div
-						in:fly={{ x: drawerOffsetMap[size][position], duration: drawerSpeedMap[speed] }}
+						in:fly={{
+							x: drawerOffsetMap[size][position],
+							duration: drawerSpeedMap[speed]
+						}}
 						out:fly={{
 							x: drawerOffsetMap[size][position],
 							duration: drawerSpeedMap[speed] * 1.5,
@@ -71,12 +104,7 @@
 					>
 						<div class={drawerClasses}>
 							<div class="relative flex-1">
-								<slot
-									visible={$store.visible}
-									close={store.close}
-									open={store.open}
-									toggle={store.toggle}
-								>
+								<slot>
 									{#if content}
 										<svelte:component this={content} {...contentProps} />
 									{:else}

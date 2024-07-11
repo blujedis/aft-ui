@@ -2,23 +2,19 @@
 	import { type ConditionalElementProps, conditionalElementDefaults as defaults } from './module';
 	import { get_current_component } from 'svelte/internal';
 	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps, HTMLTag } from '../types';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = ConditionalElementProps<Tag> & ElementNativeProps<Tag>;
 
-	export let { as, events, condition } = {
+	type $$Props = ConditionalElementProps<Tag> & ElementProps<Tag>; // AdditionalProps;
+
+	export let { as, condition } = {
 		...defaults
-	} as Required<ConditionalElementProps<Tag>>;
+	} as $$Props;
 
 	$: wrap = typeof condition === 'function' ? condition() : condition;
 
-	const forwardEventsNoop = (node: any) => {
-		return { destroy() {} };
-	};
-	const forwardedEvents = events
-		? forwardEventsBuilder(get_current_component())
-		: forwardEventsNoop;
+	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
 {#if wrap}

@@ -1,8 +1,7 @@
 import { twMerge } from 'tailwind-merge';
-import type { Path, ThemeColor, ThemeColorShade, TypeOrKey } from './types';
-import { appcolors, tailwindcolors, namedcolors } from './palettes';
 import { getProperty } from 'dot-prop';
-import { prefixes as colorPrefixes } from './constants';
+import type { Path, ThemeColor, ThemeShade, TypeOrValue } from '../types';
+import { colors, shades } from '../constants/colors';
 
 export type StringMap = Record<string, string | string[]>;
 export type MergeConfigPredicate = (value: string) => string;
@@ -18,10 +17,6 @@ export function ensureArray<T = any>(value?: null | T | T[]) {
 	return [value] as T[];
 }
 
-const tailwindKeys = Object.keys(tailwindcolors);
-const appKeys = Object.keys(appcolors);
-const namedKeys = Object.keys(namedcolors);
-
 /**
  * Checks if color looks like css color.
  *
@@ -33,120 +28,82 @@ export function isCssColor(color: string) {
 }
 
 /**
- * Checks if value is a Tailwind color.
+ * Verifies that value is a known theme color.
  *
- * @param color the color to eval as Tailwind color.
+ * @param color the color to verify as theme color.
  */
-export function isTailwindColor(color: string) {
-	return tailwindKeys.includes(color);
+export function isThemeColor(color: string) {
+	const [name, shade] = (color || '').replace(/^(--|--color)/, '').split('-');
+	const normalizedShade = typeof shade === 'undefined' ? 500 : parseInt(shade);
+	const hasColor = ['white', 'black', ...colors].includes(name.toLowerCase() as ThemeColor);
+	const hasShade = shades.includes(normalizedShade as ThemeShade);
+	if (hasShade && hasColor) return color;
+	return null;
 }
 
 /**
- * Checks if value is an app color from palette.
+ * Gets a normalized color value.
  *
- * @param color the color to eval as App color.
+ * @param color the color to normalize.
+ * @param def a default fallback value.
+ * @param opacity optional opacity to be applied when theme color is used.
  */
-export function isAppColor(color: string) {
-	return appKeys.includes(color);
-}
-
-/**
- * Checks if value is a known css color.
- *
- * @param color color the color to eval as css color.
- */
-export function isNamedColor(color: string) {
-	return namedKeys.includes(color);
-}
-
-/**
- * Parses a Tailwind path into parts, modifiers, prefix and color.
- *
- * @example
- * const parsed = parseClass('hover:bg-primary-500');
- * parsed = { modifiers: ['hover'], prefix: 'bg', color: ['primary', '500'] };
- *
- * @param path the class path to be parsed.
- */
-export function parseClass(path: string) {
-	let modifiers = [] as string[];
-	if (path.includes(':')) {
-		const idx = path.lastIndexOf(':');
-		if (~idx) {
-			modifiers = path.slice(0, idx).split(':');
-			path = path.slice(idx + 1);
-		}
-	}
-	path = path.replace(/(-|\.)/g, '.');
-	let color = path.split('.') as [ThemeColor, ThemeColorShade | undefined, string];
-	let prefix = '';
-	if (colorPrefixes.includes(color[0] as any)) {
-		prefix = (color.shift() || '') as string;
-		if (color[1] === ('DEFAULT' as any)) color[1] = 500;
-	}
-	color = color.filter((v) => !!v) as [ThemeColor, ThemeColorShade | undefined, string];
-	if (!color[1]) color[1] = undefined;
-	const namespace = color[1]
-		? `${color[0]}.${color[1]}`
-		: ['white', 'black', 'transparent', 'current', 'inherit'].includes(color[0])
-		? color[0]
-		: `${color[0]}.500`; // if no shade set to 500 if not white, black, current...etc.
-	color[2] = namespace;
-	return {
-		modifiers,
-		prefix,
-		color,
-		namespace
-	};
-}
-
-/**
- * Converts a Tailwind color class to a dot notation path.
- *
- * @example
- * const bg = 'bg-primary-300';
- * const path = classToPath(bg); // bg.primary.300
- * const path = classToPath(bg, true); // primary.300
- *
- * @param path the path to convert to dot notation path
- * @param stripPrefix when true prefixes such as 'bg', 'text' are stripped.
- */
-export function classToColorPath(path: string) {
-	return parseClass(path).namespace;
-}
-
-/**
- * Returns a tuple with color name and shade if any.
- *
- * @param path the color class to be parsed.
- */
-export function classToColorSegments(path: string) {
-	const { color } = parseClass(path);
-	return color;
-}
-
-/**
- * Normalizes the color value returning the normalized hex, rgb, hsl color.
- *
- * @param value a tailwind color, named color, theme color or defined color.
- */
-export function classToColor(value: string) {
-	if (isCssColor(value)) return value;
-	if (isNamedColor(value)) return namedcolors[value as keyof typeof namedcolors];
-	const [color, shade, namespace] = classToColorSegments(value);
-	if (isAppColor(color)) return getProperty(appcolors, namespace);
-	else if (isTailwindColor(color as string)) return getProperty(tailwindcolors, namespace);
-	return value;
+export function getColor(color: string, def?: string, opacity?: string) {
+	const themeColor = isThemeColor(color);
+	if (themeColor)
+		return opacity
+			? `rgb(var(--color-${themeColor})/${opacity})`
+			: `rgb(var(--color-${themeColor}))`;
+	if (color === null || typeof color === 'undefined' || typeof color !== 'string') return def || '';
+	return color; // we get here it's some string perhaps a named color?
 }
 
 /**
  * Picks a value using dot notation path.
  *
- * @param props an object containing properties and values.
+ * @param obj an object containing properties and values.
  * @param key the dot notation key to pick.
  */
-export function pickProp<P extends Record<string, any>>(props: P, key: TypeOrKey<Path<P>>) {
-	return getProperty(props, key as string) || '';
+export function pickProp<O extends Record<string, any>>(obj: O, key: TypeOrValue<Path<O>>) {
+	obj = obj || {};
+	return getProperty(obj, key as string);
+}
+
+/**
+ * Picks values from an object.
+ *
+ * @param obj the object to pick values from.
+ * @param keys the keys to pick.
+ */
+export function pickProps<O extends Record<string, any>, R = Partial<O>>(
+	obj: O,
+	key: TypeOrValue<Path<O>>,
+	...keys: TypeOrValue<Path<O>>[]
+) {
+	keys = [key, ...keys];
+	return (keys || []).reduce((a, c) => {
+		a[c] = pickProp(obj, c);
+		return a;
+	}, {} as Partial<O>) as R;
+}
+
+/**
+ * Picks values from an object.
+ *
+ * @param obj the object to pick values from.
+ * @param keys the keys to pick.
+ */
+export function pickCleanProps<O extends Record<string, any>, R = Partial<O>>(
+	obj: O,
+	key: TypeOrValue<Path<O>>,
+	...keys: TypeOrValue<Path<O>>[]
+) {
+	keys = [key, ...keys];
+	return (keys || []).reduce((a, c) => {
+		const val = pickProp(obj, c);
+		if (typeof val !== 'undefined') a[c] = val;
+		return a;
+	}, {} as Partial<O>) as R;
 }
 
 /**
@@ -228,7 +185,27 @@ export function mergeConfigs<
 	}, target as any);
 }
 
-// type CompileValue = string | number | boolean;
+// eslint-disable-next-line @typescript-eslint/ban-types
+interface BEMString extends String {
+	state(...state: string[]): string;
+}
+
+/**
+ * Generate a BEM css class.
+ *
+ * @param block the main block element.
+ * @param child optional child element.
+ */
+export function bem(block: string, child?: string) {
+	const arr = [block];
+	if (child) arr.push(child);
+	const str = new String(arr.join('__')) as BEMString;
+	str.state = (...state: string[]) => str + '--' + state.join('-');
+	return str;
+}
+
+type CompileValue = string | number | boolean;
+
 /**
  * Compiles Template String Array to reusable string with backed in formatting.
  *
@@ -241,32 +218,29 @@ export function mergeConfigs<
  * @param template template array string using backticks.
  * @param keys the keys contained in the template array string above.
  */
-// export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
-//   return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
-//     const isArray = Array.isArray(data);
-//     let clone: Record<string, unknown> | CompileValue[];
-//     if (isArray)
-//       clone = [...data, ...rest];
-//     else if (typeof data !== 'object')
-//       clone = [data, ...rest];
-//     else
-//       clone = { ...data };
-//     const strArr = template.slice() as unknown as string[];
-//     keys.forEach((k, i) => {
-//       const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
-//       strArr[i] = strArr[i] + dataVal;
-//     });
-//     return strArr.join('');
-//   };
-// }
+export function compileTemplate(template: TemplateStringsArray, ...keys: string[]) {
+	return (data: Record<string, unknown> | CompileValue[], ...rest: CompileValue[]): string => {
+		const isArray = Array.isArray(data);
+		let clone: Record<string, unknown> | CompileValue[];
+		if (isArray) clone = [...data, ...rest];
+		else if (typeof data !== 'object') clone = [data, ...rest];
+		else clone = { ...data };
+		const strArr = template.slice() as unknown as string[];
+		keys.forEach((k, i) => {
+			const dataVal = Array.isArray(clone) ? clone[i] : clone[k];
+			strArr[i] = strArr[i] + dataVal;
+		});
+		return strArr.join('');
+	};
+}
 
-// declare global {
-//   interface String {
-//     $join: (arg: string | string[], ...args: string[]) => string;
-//   }
-// }
+declare global {
+	interface String {
+		$join: (arg: string | string[], ...args: string[]) => string;
+	}
+}
 
-// String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
-//   args = ([this, arg, ...args].flat()) as string[];
-//   return args.join(' ').trim();
-// };
+String.prototype.$join = function (arg: string | string[], ...args: (string | string[])[]) {
+	args = [this, arg, ...args].flat() as string[];
+	return args.join(' ').trim();
+};

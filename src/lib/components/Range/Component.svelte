@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { themer, styler, themeStore, pickProp, classToColorSegments } from '$lib/theme';
-	import { onMount } from 'svelte';
+	import { themeStore, themer, styler } from '$lib/theme';
 	import { type RangeProps, rangeDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import { onMount } from 'svelte';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue } from '$lib/utils';
 
-	type $$Props = RangeProps & ElementNativeProps<'input', 'size'>;
+	type $$Props = RangeProps & Omit<ElementProps<'input'>, 'size'>;
 
-	export let { focused, full, rounded, transitioned, shadowed, size, theme, variant } = {
+	export let { focused, full, rounded, transitioned, shadowed, size, theme } = {
 		...defaults
 	} as Required<RangeProps>;
 
@@ -15,17 +16,13 @@
 	const th = themer($themeStore);
 	const st = styler($themeStore);
 
-	$: trackBg = classToColorSegments($themeStore.components.rangeTrackBackground[variant][theme]);
-	$: trackAccent = classToColorSegments($themeStore.components.rangeTrackAccent[variant][theme]);
-	$: thumbBg = classToColorSegments($themeStore.components.rangeThumbBackground[variant][theme]);
-	$: thumbBorder = classToColorSegments($themeStore.components.rangeThumbBorder[variant][theme]);
-
 	$: rangeStyles = st
 		.create('RangeStyles')
-		.palette(trackBg[0], trackBg[1], '--track-background-color', true)
-		.palette(trackAccent[0], trackAccent[1], '--track-accent-color', true)
-		.palette(thumbBg[0], thumbBg[1], '--thumb-background-color', true)
-		.palette(thumbBorder[0], thumbBorder[1], '--thumb-border-color', true)
+		.color('--track-background-color', $themeStore.options.common.rangeBgLight, true)
+		.color('--track-background-color-dark', $themeStore.options.common.rangeBgDark, true)
+		.color('--thumb-background-color', `${theme}-${$themeStore.options.common.rangeThumb}`, true)
+		.color('--track-accent-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
+		.color('--thumb-border-color', `${theme}-${$themeStore.options.common.rangeValue}`, true)
 		.option('rangeThumbSizes', size, '--thumb-size', size)
 		.option('rangeBorderSizes', size, '--thumb-border-width', size)
 		.append($$restProps.style, true)
@@ -33,16 +30,15 @@
 
 	$: rangeClasses = th
 		.create('RangeClasses')
-		.option('focusedVisible', theme, focused)
-		.option('common', 'transition', transitioned)
+		.option('common', 'transitioned', transitioned)
 		.option('rangeTrackSizes', size, size)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend('range', true)
 		.append('w-full', full)
 		.append('appearance-none', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	// IMPORTANT: without min/max selected range
 	// background will not be visible.
@@ -56,7 +52,6 @@
 		const val = parseFloat(target.value);
 		target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
 	}
-
 	onMount(() => {
 		handleInputChange();
 	});
@@ -72,6 +67,12 @@
 />
 
 <style>
+	/* we could detect dark mode and pass down a single var for track but you end up with 
+	   listeners just to toggle this on off? using html.dark selector globally drawbacks but...*/
+	:global(html.dark .range) {
+		background-color: var(--track-background-color-dark) !important;
+	}
+
 	input[type='range'] {
 		background-color: var(--track-background-color);
 		background-image: linear-gradient(var(--track-accent-color), var(--track-accent-color));
@@ -82,7 +83,7 @@
 	/* IMPORTANT If you attempt to combine the below styles together 
 	they will not be applied. Each pseudo selecteor for the 
 	thumb must be defined for each browser type. It'd be SUPER
-	if input type range were standardized wouldn't it??
+	if this were better standardized wouldn't it??
 	*/
 
 	input[type='range']::-webkit-slider-thumb {
@@ -92,7 +93,19 @@
 		border: solid var(--thumb-border-color);
 		border-width: var(--thumb-border-width);
 		border-radius: 50%;
-		background: var(--thumb-background-color);
+		background-color: var(--thumb-background-color);
+	}
+
+	input[type='range']:focus::-webkit-slider-thumb {
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
+	}
+
+	input[type='range']:focus::-moz-range-thumb {
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
+	}
+
+	input[type='range']:focus::-ms-thumb {
+		box-shadow: 0px 0px 0px 1px var(--thumb-background-color);
 	}
 
 	input[type='range']::-moz-range-thumb {

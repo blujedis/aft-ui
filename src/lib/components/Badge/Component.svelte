@@ -1,58 +1,59 @@
 <script lang="ts">
 	import { type BadgeProps, badgeDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
-	import Icon from '../Icon';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
-	type $$Props = BadgeProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = BadgeProps & Omit<ElementProps<'span'>, 'size'>;
 
-	export let { removable, full, rounded, shadowed, size, theme, transitioned, variant, unstyled } =
-		{
-			...defaults
-		} as Required<BadgeProps>;
+	export let {
+		focused,
+		full,
+		hovered,
+		removable,
+		rounded,
+		shadowed,
+		size,
+		theme,
+		transitioned,
+		variant
+	} = {
+		...cleanObj($themeStore.defaults?.component),
+		...defaults
+	} as Required<BadgeProps>;
 
 	const th = themer($themeStore);
+	const additionalProps = focused ? { tabindex: 0 } : {};
 
-	$: badgeClasses = unstyled
-		? th
-				.create('Badge')
-				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-				.option('badgePadding', size, size)
-				.option('badgeFontSizes', size, size)
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed)
-				.append('w-full', full)
-				.append('relative inline-flex items-center', true)
-				.append($$restProps.class, true)
-				.compile(true)
-		: th
-				.create('Badge')
-				.variant('badge', variant, theme, true)
-				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-				.option('badgePadding', size, size && !removable)
-				.option('badgeFieldPadding', size, size && !!removable)
-				.option('badgeFontSizes', size, size)
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed)
-				.append('w-full', full)
-				.append('inline-block mr-1', true)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: badgeClasses = th
+		.create('Badge')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+		.bundle(
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['softBg', 'softText'], {}, theme, variant === 'soft')
+		.option('common', 'transitioned', transitioned)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('badgeFontSizes', size, size)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`badge badge-${variant}`, true)
+		.prepend('badge-removable', removable)
+		.append('w-full', full)
+		.append('z-20 badge', true)
+		.append('relative inline-flex items-center leading-tight justify-center', !removable)
+		.append($$restProps.class, true)
+		.compile();
 
-	const forwardedEvents = forwardEventsBuilder(get_current_component());
+	$: badgeInnerClasses = th.create('BadgeInner').option('badgeInnerMargin', size, size).compile();
 </script>
 
-{#if removable}
-	<button use:forwardedEvents {...$$restProps} class={badgeClasses}>
+<span {...additionalProps} {...$$restProps} class={badgeClasses}>
+	<div class={badgeInnerClasses}>
 		<slot />
-		<slot name="icon">×</slot>
-	</button>
-{:else}
-	<span {...$$restProps} class={badgeClasses}>
-		<slot />
-	</span>
-{/if}
+	</div>
+</span>

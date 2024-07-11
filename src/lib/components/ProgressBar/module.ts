@@ -1,5 +1,5 @@
 import { cubicOut } from 'svelte/easing';
-import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 import type { progressBar } from './config';
 
 export type ProgressBarVariant = keyof typeof progressBar;
@@ -29,7 +29,7 @@ export const progressBarDefaults: ProgressBarProps<any> = {
 	easing: cubicOut,
 	max: 100,
 	size: 'md',
-	theme: 'default',
+	theme: 'frame',
 	value: 0,
-	variant: 'default'
+	variant: 'filled'
 };

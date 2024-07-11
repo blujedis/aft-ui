@@ -1,30 +1,62 @@
 <script lang="ts">
 	import { type CardProps, cardDefaults as defaults, type CardContext } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 	import { setContext } from 'svelte';
+	import { cleanObj, boolToMapValue } from '$lib/utils';
 
-	type $$Props = CardProps & ElementNativeProps<'div'>;
+	type $$Props = CardProps & ElementProps<'div'>;
 
-	export let { edged, rounded, shadowed, size, theme, variant, wide } = {
+	export let {
+		divided,
+		dropshadowed,
+		full,
+		horizontal,
+		href,
+		maxwidth,
+		rounded,
+		shadowed,
+		size,
+		theme,
+		variant
+	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<CardProps>;
 
-	setContext('Card', { globals: { size, theme, wide } } as CardContext);
+	const globals = cleanObj({
+		horizontal,
+		size,
+		theme,
+		variant
+	});
+
+	setContext('Card', { globals } as CardContext);
 
 	const th = themer($themeStore);
 
 	$: cardClasses = th
 		.create('Card')
-		.variant('card', variant, theme, true)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.append('ring-1 ring-black ring-opacity-5', edged)
-		.append('text-sm h-full', true)
+		.option('elementRing', theme, divided || variant === 'outlined')
+		.option('cardSizes', maxwidth, maxwidth)
+		.option('elementDivide', theme, divided)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
+		.prepend(`card`, true)
+		.prepend(`card-${variant}`, variant)
+		.append(horizontal ? 'divide-x' : 'divide-y', divided || variant === 'outlined')
+		.append('h-full', full)
+		.append('cursor-pointer', href)
+		.append(horizontal ? 'flex' : 'flex flex-col', true)
+		.append('overflow-hidden', true)
+		.append('ring-1', variant === 'outlined')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
+	if (href) $$restProps.href = href;
 </script>
 
-<div {...$$restProps} class={cardClasses}>
+<svelte:element this={href ? 'a' : 'div'} {...$$restProps} class={cardClasses}>
 	<slot />
-</div>
+</svelte:element>

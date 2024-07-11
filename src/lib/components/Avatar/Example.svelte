@@ -1,22 +1,10 @@
 <script lang="ts">
-	import Avatar, { type AvatarVariant } from '.';
-	import AvatarStack from '../AvatarStack';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Avatar, type AvatarVariant } from '.';
+	import { AvatarStack } from '../AvatarStack';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
+	import { colors } from '$lib/constants';
+	import type { AccordionVariant } from '..';
 
 	const title = 'Avatar';
 	const description = `Avatar element with or without stacked groups.`;
@@ -28,10 +16,10 @@
 		notification: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
-		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		variant: 'default' as AvatarVariant,
-		direction: 'up' as 'up' | 'down'
+		size: 'sm' as ThemeSize,
+		direction: 'up' as 'up' | 'down',
+		theme: 'frame',
+		variant: 'filled' as AccordionVariant
 	};
 
 	const urls = [
@@ -40,47 +28,98 @@
 		'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
 		'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 	];
+
+	const counters = ['200+', '12', '3', '7', '16', '2', '8', '9', '19'];
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Notification" bind:checked={props.notification} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
-	<div class="grid grid-cols-5 gap-4 mb-4">
+<ExamplePage {title} {description}>
+	<div class="grid grid-cols-2 gap-4">
 		<div>
-			<Avatar src={urls[0]} alt="" {...props} />
+			<div class="text-2xl font-semibold mb-4">Basic Avatar</div>
+			<Avatar src={urls[0]} alt="" />
 		</div>
 		<div>
-			<Avatar src={urls[1]} alt="" {...props} theme="primary" notification />
-		</div>
-		<div>
-			<Avatar src={urls[2]} alt="" {...props} theme="success" notification />
-		</div>
-		<div>
-			<Avatar src={urls[3]} alt="" {...props} theme="danger" notification />
-		</div>
-		<div>
-			<Avatar src={urls[3]} alt="" {...props} placeholder />
+			<div class="text-2xl font-semibold mb-4">Avatar Stack</div>
+			{#key props}
+				<AvatarStack direction="up" rounded="full">
+					{#each urls as url, i}
+						<Avatar src={url} alt="" />
+					{/each}
+				</AvatarStack>
+			{/key}
 		</div>
 	</div>
-	<div>
-		{#key props}
-			<AvatarStack {...props}>
-				{#each urls as url}
-					<Avatar src={url} alt="" />
-				{/each}
-			</AvatarStack>
-		{/key}
+
+	<div class="text-2xl font-semibold mb-4">Avatar w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar
+				animate="ping"
+				size="md"
+				src={urls[i] || urls[2]}
+				alt=""
+				theme={color}
+				notification
+				hovered
+			/>
+		{/each}
+	</div>
+	<div class="text-2xl font-semibold mb-4">Avatar w/ Counter</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar
+				size="xs"
+				src={urls[i] || urls[2]}
+				alt=""
+				theme={color}
+				notification
+				hovered
+				counter={counters[i]}
+			/>
+		{/each}
+	</div>
+
+	<!-- <div class="text-2xl font-semibold mb-4">Outlined w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src={urls[i] || urls[2]} alt="" variant="outlined" theme={color} notification />
+		{/each}
+	</div> -->
+
+	<!-- <div class="text-2xl font-semibold mb-4">Ghost w/ Notification</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar
+				src={urls[i] || urls[2]}
+				alt=""
+				variant="ghost"
+				theme={color}
+				notification
+				animate="pulse"
+			/>
+		{/each}
+	</div> -->
+
+	<div class="text-2xl font-semibold mb-4">Placeholders <span class="text-xs">(Filled)</span></div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="filled" theme={color} placeholder />
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">
+		Placeholders <span class="text-xs">(Outlined)</span>
+	</div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="outlined" theme={color} placeholder />
+		{/each}
+	</div>
+
+	<div class="text-2xl font-semibold mb-4">Placeholders <span class="text-xs">(Soft)</span></div>
+	<div class="grid grid-cols-9 gap-4 mb-4">
+		{#each colors as color, i}
+			<Avatar src="" alt="" variant="soft" theme={color} placeholder />
+		{/each}
 	</div>
 </ExamplePage>

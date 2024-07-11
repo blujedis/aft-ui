@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { ElementProps } from '../types';
-	type $$Props = ElementProps<'div'> & {};
+	import type { ElementProps } from '$lib/types';
+	type $$Props = ElementProps<'div'> & Record<string, any>;
 </script>
 
-<div class={('mb-8 ' + $$restProps.class).trim()}>
+<div class={('mb-8' + ($$restProps.class || '')).trim()}>
 	<slot />
 </div>

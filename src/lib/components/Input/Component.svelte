@@ -1,68 +1,83 @@
 <script lang="ts">
 	import { type InputProps, inputDefaults as defaults } from './module';
-	import { themer, themeStore } from '$lib/theme';
+	import { themeStore, themer } from '$lib';
+	import { Flushed } from '../Flushed';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
-	type $$Props = InputProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = InputProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
+		chars,
 		disabled,
 		focused,
 		full,
+		hovered,
 		rounded,
 		shadowed,
 		size,
 		theme,
 		transitioned,
-		variant,
-		unstyled
+		value,
+		variant
 	} = {
+		...$themeStore.defaults?.component,
 		...defaults
 	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: inputClasses = unstyled
-		? th
-				.create('Input')
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
-				.option('placeholders', theme, true)
-				.option('common', 'transition', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('fieldPadding', size, size)
-				.option('roundeds', rounded, rounded && variant !== 'flushed')
-				.option('shadows', shadowed, shadowed)
-				.option('disableds', theme, disabled)
-				.append('w-full', full)
-				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center', true)
-				.append($$restProps.class, true)
-				.compile(true)
-		: th
-				.create('Input')
-				.variant('input', variant, theme, true)
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.append('focus:ring-offset-0 focus:border-transparent', variant !== 'flushed')
-				.option('placeholders', theme, true)
-				.option('common', 'transition', transitioned)
-				.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('fieldPadding', size, size)
-				.option('roundeds', rounded, rounded && variant !== 'flushed')
-				.option('shadows', shadowed, shadowed)
-				.option('disableds', theme, disabled)
-				.append('w-full', full)
-				.append('px-2', variant === 'flushed')
-				.append('flex items-center justify-center', true)
-				.append($$restProps.class, true)
-				.compile(true);
-
+	$: inputClasses = th
+		.create('Input')
+		.bundle(['mainBg', 'filledText', 'filledTextPlaceholder'], theme, variant === 'filled')
+		.bundle(
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'softBg', 'softText'], theme, variant === 'soft')
+		.bundle(['mainBorder', 'mainBorderGroupHover', 'unfilledText'], theme, variant === 'flushed')
+		.option('common', 'focusedOutline', focused && variant !== 'flushed') // variant === 'outlined'
+		.option('outlineFocus', theme, focused && variant !== 'flushed')
+		.bundle(['unfilledText'], theme, variant === 'text')
+		.option('common', 'transitioned', transitioned)
+		.option('hovered', variant, theme, hovered)
+		.option('fieldFontSizes', size, size)
+		.option('fieldPadding', size, size)
+		.option('roundeds', boolToMapValue(rounded), rounded && variant !== 'flushed')
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('common', 'disabled', disabled)
+		.prepend(`input input-${variant} input-${theme}`, true)
+		.append('w-full', full)
+		.append('dark:bg-transparent', ['outlined', 'flushed', 'text'].includes(variant))
+		.append('peer border-0', ['flushed'].includes(variant))
+		.append('px-1', variant === 'flushed')
+		.append('inline-flex items-center justify-center outline-none', true)
+		.append($$restProps.class, true)
+		.compile();
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<input {...$$restProps} use:forwardedEvents class={inputClasses} />
+{#if variant === 'flushed'}
+	<svelte:component this={Flushed} {theme} {focused}>
+		<input
+			{...$$restProps}
+			use:forwardedEvents
+			bind:value
+			size={chars}
+			class={inputClasses}
+			on:input
+		/>
+	</svelte:component>
+{:else}
+	<input
+		{...$$restProps}
+		use:forwardedEvents
+		bind:value
+		size={chars}
+		class={inputClasses}
+		on:input
+	/>
+{/if}

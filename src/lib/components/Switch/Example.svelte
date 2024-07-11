@@ -1,51 +1,32 @@
 <script lang="ts">
-	import Switch, { type SwitchVariant } from '.';
-	import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Switch, Label } from '$lib/components';
+	import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
+	import { colors } from '$lib/constants';
 
-	const title = 'Select';
-	const description = 'Themed select list.';
-	const code = `
-  `;
+	const title = 'Switch';
+	const description = 'Toggle switch component.';
+
+	let checked = true;
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
+		focused: true,
 		shadowed: 'none' as ThemeShadowed,
-		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as SwitchVariant
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
+<ExamplePage {title} {description}>
 	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Switch {...props} />
-		</label>
+		{#each colors as color}
+			<Label tabindex={-1}>
+				<Switch {...props} bind:checked theme={color} size="md" />
+			</Label>
+		{/each}
 	</div>
+
+	<Label>
+		<Switch {...props} bind:checked theme="primary" size="md" />
+	</Label>
 </ExamplePage>

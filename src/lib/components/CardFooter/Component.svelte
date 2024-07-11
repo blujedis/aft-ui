@@ -1,14 +1,14 @@
 <script lang="ts">
-	import CardContent from '../CardContent';
-	import type { ElementNativeProps } from '../types';
+	import { CardElement } from '$lib/components';
+	import type { ElementProps } from '$lib/types';
 	import { type CardFooterProps, cardFooterDefaults as defaults } from './module';
-	type $$Props = CardFooterProps & ElementNativeProps<'div'>;
+	type $$Props = CardFooterProps & ElementProps<'div'>;
 
 	export let { size } = {
 		...defaults
 	} as Required<CardFooterProps>;
 </script>
 
-<svelte:component this={CardContent} {...$$restProps} mode="footer" {size}>
+<svelte:component this={CardElement} {...$$restProps} type="footer" {size}>
 	<slot />
 </svelte:component>

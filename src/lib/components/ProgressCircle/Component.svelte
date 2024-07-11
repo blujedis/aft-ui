@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { type ProgressCircleProps, progressCircleDefaults as defaults } from './module';
-	import { styler, themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
+	import { themeStore, styler, themer } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
-	type $$Props = ProgressCircleProps & Omit<ElementNativeProps<'svg'>, 'size'>;
+	type $$Props = ProgressCircleProps & Omit<ElementProps<'svg'>, 'size'>;
 
 	export let {
 		animate,
@@ -19,9 +20,9 @@
 		textunit,
 		theme,
 		value,
-		variant,
 		tracksize
 	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<ProgressCircleProps>;
 
@@ -51,27 +52,28 @@
 
 	$: progressCircleClasses = th
 		.create('ProgressCircle')
-		.option('dropshadows', shadowed, shadowed)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`progress-circle progress-circle-${theme}`, true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleTrackClasses = th
 		.create('ProgressCircleTrack')
-		.variant('progressCircleTrack', variant, theme, true)
+		.bundle(['progressStroke'], theme, true)
 		.append('fill-transparent', true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleValueClasses = th
 		.create('ProgressCircleValue')
-		.variant('progressCircleValue', variant, theme, true)
+		.bundle(['iconStroke'], theme, true)
 		.append('fill-transparent', true)
-		.compile(true);
+		.compile();
 
 	$: progressCircleTextClasses = th
 		.create('ProgressCircleText')
-		.variant('progressCircleText', variant, theme, true)
+		.bundle(['progressFill'], theme, true)
 		.option('progressCircleTextSizes', size as 'md', typeof size === 'string')
-		.compile(true);
+		.compile();
 
 	function normalizeSize() {
 		let nsize = 0;

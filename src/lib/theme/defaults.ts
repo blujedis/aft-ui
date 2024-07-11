@@ -1,19 +1,16 @@
-import type { ThemeDefaults } from './types';
+import type { ThemeDefaults } from '../types/theme';
 
 const component = {
-	// focused: true,
-	// rounded: 'sm',
-	// shadowed: undefined,
-	// size: 'md',
-	// theme: 'default',
-	// transitioned: true
+	focused: true,
+	hovered: true,
+	rounded: 'none',
+	shadowed: '',
+	size: 'md',
+	theme: 'frame',
+	transitioned: true
 } as ThemeDefaults['component'];
 
 const defaults: ThemeDefaults = {
-	global: {
-		bg: 'bg-white',
-		text: 'text-default-700'
-	},
 	component
 };
 

@@ -1,25 +1,17 @@
 <script lang="ts">
-	import { type NotificationProps, notificationsDefaults as defaults } from './module';
+	import { type NotificationProps, notificationDefaults as defaults } from './module';
 	import useNotifications from '$lib/stores/notification';
-	import { themer, themeStore, type ThemeColor } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
-	import Icon from '../Icon';
+	import { themer, themeStore } from '$lib/theme';
+	import type { ElementProps } from '$lib/types';
+	import { Icon } from '$lib/components/Icon';
+	import { boolToMapValue } from '$lib/utils';
 
-	type $$Props = NotificationProps & ElementNativeProps<'div'>;
+	type $$Props = NotificationProps & ElementProps<'div'>;
 
-	export let {
-		key,
-		description,
-		dismissible,
-		duration,
-		group,
-		icon,
-		rounded,
-		shadowed,
-		title,
-		theme,
-		variant
-	} = {
+	export let { key, description, dismissible, group, icon, rounded, shadowed, title, theme } = {
+		theme: $themeStore.defaults?.component.theme,
+		shadowed: $themeStore.defaults?.component.shadowed,
+		rounded: $themeStore.defaults?.component.rounded,
 		...defaults
 	} as Required<$$Props>;
 
@@ -27,24 +19,28 @@
 
 	$: notificationClasses = th
 		.create('Notification')
-		.variant('notification', variant, theme, true)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.append('pointer-events-auto w-full max-w-sm overflow-hidden bg-white border-l-4 w-80', true)
+		.bundle(
+			['notificationBg', 'notificationText', 'mainBorder'],
+			{
+				frame: 'border-frame-300 dark:border-frame-400'
+			},
+			theme,
+			true
+		)
+		.option('elementRing', theme, true)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`notification notification-${theme}`, true)
+		.append('pointer-events-auto w-full max-w-sm overflow-hidden border-l-[5px] w-80', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
-	$: notificationIconClasses = th
-		.create('NotificationIcon')
-		.variant('notificationIcon', variant, theme, true)
-		.append('pr-2 pt-1', true)
-		.compile(true);
+	$: notificationIconClasses = th.create('NotificationIcon').append('pr-2 pt-1', true).compile();
 
 	$: notificationTitleClasses = th
 		.create('NotificaionTitle')
-		.variant('notificationTitle', variant, theme, true)
 		.append('font-semibold', true)
-		.compile(true);
+		.compile();
 </script>
 
 <div

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type AvatarStackProps, avatarStackDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import { onMount, setContext } from 'svelte/internal';
-	import type { ElementNativeProps } from '../types';
+	import { onMount, setContext } from 'svelte';
+	import type { ElementProps } from '$lib/types';
 
-	type $$Props = AvatarStackProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = AvatarStackProps & Omit<ElementProps<'span'>, 'size'>;
 
 	export let { direction } = {
 		...defaults
@@ -21,16 +21,17 @@
 
 	$: avatarStackClasses = themer($themeStore)
 		.create('AvatarStack')
+		.prepend('avatar-stack', true)
 		.append('flex -space-x-2 overflow-hidden', true)
 		.append('isolate ', direction === 'down')
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	// Prevents user from having to decorate each
 	// Avatar with a z-index, should we do this?
 	onMount(() => {
 		if (direction !== 'down') return;
-		const nodes = [...stack.children];
+		const nodes = [...(stack.children as any)];
 		nodes.reverse().forEach((n, i) => {
 			const node = n as HTMLElement;
 			node.style.zIndex = i + '';

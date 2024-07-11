@@ -1,0 +1,16 @@
+import { SvelteComponent } from "svelte";
+declare const __propDef: {
+    props: {
+        value?: string;
+    };
+    events: {
+        [evt: string]: CustomEvent<any>;
+    };
+    slots: {};
+};
+export type SelectPositionProps = typeof __propDef.props;
+export type SelectPositionEvents = typeof __propDef.events;
+export type SelectPositionSlots = typeof __propDef.slots;
+export default class SelectPosition extends SvelteComponent<SelectPositionProps, SelectPositionEvents, SelectPositionSlots> {
+}
+export {};

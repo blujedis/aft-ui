@@ -1,6 +1,6 @@
+import type { NotificationPosition } from '$lib/components/Notifications';
 import { writable, get as getSvelteStore, type Writable } from 'svelte/store';
-import type { NotificationItem } from '$lib/components/Notification';
-import type { NotificationPosition } from '$lib/components/NotificationController';
+import type { Notification } from '$lib/components/Notification/module';
 
 export type NotificationState = 'enabled' | 'locked' | 'unlocked';
 
@@ -12,9 +12,9 @@ export interface NotificationOptions {
 	position?: NotificationPosition;
 }
 
-export interface NotificationStore extends Writable<NotificationItem[]> {
-	get: (key: string) => NotificationItem | undefined;
-	add: (item: NotificationItem) => void;
+export interface NotificationStore extends Writable<Notification[]> {
+	get: (key: string) => Notification | undefined;
+	add: (item: Notification) => void;
 	remove: (key: string) => void;
 	lock: (group: string) => void;
 	unlock: (group: string) => void;
@@ -55,6 +55,7 @@ function getGroup(group: string) {
 }
 
 function getOptions(group: string) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { state, ...rest } = getGroup(group);
 	return rest;
 }
@@ -90,7 +91,7 @@ export function createNotificationStore(
 		} as Required<NotificationOptions> & { state: NotificationState }
 	}));
 
-	const store = writable([] as NotificationItem[]);
+	const store = writable([] as Notification[]);
 
 	/**
 	 * Gets the notification items from store.
@@ -113,7 +114,7 @@ export function createNotificationStore(
 	 *
 	 * @param notification the notification object to be added.
 	 */
-	function add(notification: NotificationItem) {
+	function add(notification: Notification) {
 		// Unique key for removal.
 		const key = notification.key || uniqid();
 		const items = getItems();

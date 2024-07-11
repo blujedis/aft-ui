@@ -1,107 +1,122 @@
 <script lang="ts">
 	import { type SwitchProps, switchDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import { get_current_component, onMount } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import { get_current_component } from 'svelte/internal';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
+	import { Label } from '../Label';
 
-	type $$Props = SwitchProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = SwitchProps &
+		Omit<ElementProps<'input'>, 'size'> & { for?: ElementProps<'label'>['for'] };
 
 	export let {
-		classBackdrop,
-		classFill,
+		checked,
 		classHandle,
+		classSlider,
 		disabled,
 		focused,
+		for: labelFor,
+		hovered,
 		shadowed,
 		size,
 		srtext,
 		theme,
-		variant,
-		unstyled
+		transitioned,
+		unlabeled
 	} = {
 		...defaults
 	} as Required<$$Props>;
 
-	let checked = false;
+	let ref: HTMLInputElement;
 
 	const th = themer($themeStore);
 
-	$: buttonClasses = th
-		.create('SwitchButton')
+	$: labelClasses = th
+		.create('SwitchLabel')
 		.option('switchButtonSizes', size, size)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-		.append('focus:ring-offset-2', focused)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('hovered', 'filled', theme, hovered)
+		.option('common', 'transitioned', transitioned)
+
 		.append('pointer-events-none', disabled)
 		.append(
 			'group relative inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-full',
 			true
 		)
-		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: backdropClasses = th
 		.create('SwitchBackdrop')
-		.variant('switchBackdrop', variant, theme, true)
+		.prepend('switch-backdrop', true)
 		.append('pointer-events-none absolute h-full w-full rounded-md', true)
-		.append(classBackdrop, true)
-		.compile(true);
+		.compile();
 
 	// enabled: bg-indigo-600 / bg-gray-200 - h-4 w-9
 	$: fillClasses = th
 		.create('SwitchFill')
-		.variant('switchFill', variant, theme, true)
+		.bundle(['switchBgAriaChecked'], theme, true)
 		.option('switchFillSizes', size, size)
-		.option('shadows', shadowed, shadowed)
-		.option('disableds', theme, disabled)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('common', 'disabled', disabled)
+		.prepend('switch-slider', true)
 		.append(
-			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out',
+			'pointer-events-none absolute mx-auto rounded-full transition-colors duration-200 ease-in-out ring-0',
 			true
 		)
-		.append(classFill, true)
-		.compile(true);
+		.append(classSlider, true)
+		.compile();
 
 	// enabled: translate-x-5 / 0 - border-gray-200 bg-white - h-5 w-5
 	$: handleClasses = th
 		.create('SwitchHandle')
-		.variant('switchHandle', variant, theme, true)
 		.option('switchHandleSizes', size, size)
-		.option('disableds', theme, disabled)
+		.option('common', 'disabled', disabled)
+		.prepend('switch-handle', true)
+		.append('bg-white border-frame-300', true)
 		.append(
 			'pointer-events-none absolute left-0 inline-block transform rounded-full border shadow ring-0 transition-transform duration-200 ease-in-out',
 			true
 		)
 		.append(classHandle, true)
-		.compile(true);
+		.compile();
+
+	$: inputClasses = th
+		.create('SwitchInput')
+		.append('sr-only', true)
+		.append($$restProps.class, true)
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<span class="flickerless">
-	<button
-		type="button"
-		class={buttonClasses}
-		role="switch"
-		aria-checked={checked}
-		{disabled}
-		aria-disabled={disabled}
-		on:click={() => (checked = !checked)}
-	>
-		<span class="sr-only">{srtext}</span>
-
-		<!-- bg-white otherwise there is a bleed, should be background of page.-->
-		<span aria-hidden="true" class={backdropClasses} />
-
-		<!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200"  h-4 w-9  -->
-		<span aria-hidden="true" class={fillClasses} aria-disabled={disabled} />
-
-		<!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0"  border-gray-200 bg-white  h-5 w-5  -->
-		<span aria-hidden="true" class={handleClasses} aria-disabled={disabled} />
-
-		<input use:forwardedEvents class="hidden" type="checkbox" bind:checked />
-	</button>
-</span>
+<Label for={labelFor} visible={unlabeled !== false} class={$$restProps.class}>
+	<span class="switch-wrapper flickerless">
+		<slot />
+		<span
+			role="switch"
+			tabindex="0"
+			class={labelClasses}
+			aria-checked={checked}
+			aria-disabled={disabled}
+		>
+			<span class="sr-only">{srtext}</span>
+			<span aria-hidden="true" class={backdropClasses} />
+			<span aria-hidden="true" class={fillClasses} aria-checked={checked} />
+			<span aria-hidden="true" class={handleClasses} />
+			<input
+				{...$$restProps}
+				tabindex="-1"
+				bind:this={ref}
+				type="checkbox"
+				use:forwardedEvents
+				bind:checked
+				class={inputClasses}
+				{disabled}
+			/>
+		</span>
+	</span>
+</Label>
 
 <style>
 	.flickerless {

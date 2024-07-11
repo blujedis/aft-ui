@@ -1,16 +1,11 @@
 <script lang="ts">
-	import {
-		type ModalProps,
-		modalDefaults as defaults,
-		type ModalTransition,
-		transitions,
-		type TransitionParams
-	} from './module';
-	import { themer, themeStore } from '$lib/theme';
-	import { useDisclosure } from '$lib/stores';
-	import { fly, fade, scale } from 'svelte/transition';
+	import { type ModalProps, modalDefaults as defaults } from './module';
+	import { themeStore, themer } from '$lib/theme';
+	import { transitioner } from '$lib/components/Disclosure';
+	import { fade } from 'svelte/transition';
 	import Placeholder from './Placeholder.svelte';
 	import { useFocusTrap } from '$lib/hooks';
+	import { boolToMapValue, cleanObj } from '$lib/utils';
 
 	type $$Props = ModalProps;
 
@@ -27,34 +22,33 @@
 		shadowed,
 		theme,
 		transition,
-		variant,
 		visible,
 		unmount,
 		unstyled
 	} = {
+		...cleanObj($themeStore.defaults?.component, ['transitioned', 'focused', 'hovered', 'size']),
 		...defaults
 	} as Required<$$Props>;
 
-	export const store = useDisclosure({ visible });
 	const [bindFocusTrap, handleFocusTrap] = useFocusTrap(focustrap);
 
 	const th = themer($themeStore);
 
 	let panel = null as HTMLDivElement | null;
 
-	$: modalStyles = $store.visible
+	$: modalStyles = visible // $store.visible
 		? $$restProps.style || '' + ' display:block'
 		: ((!unmount && 'display: none') as string);
 
 	$: wrapperClasses = th
 		.create('ModalWrapper')
-		.variant('modal', variant, theme, true)
 		.append('fixed inset-0 z-10 overflow-y-auto', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: containerClasses = th
 		.create('ModalContainer')
+		.prepend(`modal-container`, true)
 		.append('flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0', true)
 		.append('sm:items-start', ['top', 'top-center'].includes(position))
 		.append('sm:items-end', ['bottom', 'bottom-center'].includes(position))
@@ -62,22 +56,22 @@
 		.append('sm:items-end sm:justify-end', position === 'bottom-right')
 		.append('sm:items-start sm:justify-start', position === 'top-left')
 		.append('sm:items-end sm:justify-start', position === 'bottom-left')
-		.compile(true);
+		.compile();
 
 	$: contentClasses = th
 		.create('ModalContent')
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.prepend(`modal-content`, true)
 		.append(
 			'bg-white relative transform overflow-hidden px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:mx-8 sm:w-full sm:max-w-sm sm:p-6',
 			true
 		)
-		.compile(true);
-
-	// $: $store.visible && unmount === false && restart()
+		.compile();
 
 	function handleClose() {
-		store.close();
+		// store.close();
+		visible = false;
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -90,69 +84,36 @@
 	function handleClick(e: any) {
 		if (!panel?.contains(e.target) && abortable) handleClose();
 	}
-
-	function transitioner(node: HTMLElement, { type }: { type: ModalTransition }) {
-		if (typeof type === 'function') return type(node);
-
-		const options = transitions[type] as TransitionParams;
-
-		if (type === 'none') {
-			return { duration: 0 };
-		}
-
-		if (type === 'announce') {
-			if (position === 'top') {
-				options.duration = 200;
-				options.y = -200;
-			}
-			return fly(node, options);
-		}
-		if (type === 'reveal') {
-			if (position === 'bottom') {
-				options.duration = 200;
-				options.y = 200;
-			}
-			return fly(node, options);
-		}
-		if (type === 'zoom') {
-			return scale(node, options);
-		}
-		return fade(node, options);
-	}
 </script>
 
 <svelte:window on:keydown={handleKeydown} on:keydown={handleFocusTrap} />
 
-{#if (unmount && $store.visible) || !unmount}
+{#if (unmount && visible) || !unmount}
 	<div
-		role="dialog"
-		aria-modal="true"
+		role="button"
+		tabindex="-1"
 		class="relative z-10"
 		style={modalStyles}
-		aria-labelledby={labelby}
 		on:click={handleClick}
 		on:keydown={handleKeydown}
 	>
-		{#if backdrop && $store.visible}
-			<div
-				class="fixed inset-0 bg-slate-600 bg-opacity-50 transition-opacity"
-				transition:fade={{ duration: 100 }}
-			/>
+		{#if backdrop && visible}
+			<slot name="backdrop">
+				<div
+					class="modal-backdrop fixed inset-0 bg-frame-600 bg-opacity-70 transition-opacity"
+					transition:fade={{ duration: 100 }}
+				/>
+			</slot>
 		{/if}
-		<div class={wrapperClasses}>
+		<div role="dialog" aria-modal="true" class={wrapperClasses}>
 			<div class={containerClasses}>
 				<div
 					bind:this={panel}
-					transition:transitioner={{ type: transition }}
+					transition:transitioner={transition}
 					use:bindFocusTrap
 					class={contentClasses}
 				>
-					<slot
-						visible={$store.visible}
-						close={store.close}
-						open={store.open}
-						toggle={store.toggle}
-					>
+					<slot>
 						{#if content}
 							<svelte:component this={content} {...contentProps} />
 						{:else}

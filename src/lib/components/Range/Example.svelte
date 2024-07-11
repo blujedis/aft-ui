@@ -1,55 +1,33 @@
 <script lang="ts">
-	import Range from './';
-
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Range } from './';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
+	import { colors } from '$lib/constants/colors';
 
 	const title = 'Range';
-	const description = 'Input range with themes.';
-	const code = `
-  `;
+	const description = 'Input range component.';
 
 	const props = {
 		full: false,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
-		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor
+		size: 'sm' as ThemeSize
+		// theme: 'primary' as ThemeColor
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
-	<div class="flex space-x-12">
-		{#key props}
-			<Range value="65" {...props} size="xs" />
-			<Range value="50" {...props} size="sm" />
-			<Range value="25" {...props} size="md" />
-			<Range value="36" {...props} size="lg" />
-			<Range value="70" {...props} size="xl" />
-			<Range value="40" {...props} size="xl2" />
-		{/key}
+<ExamplePage {title} {description}>
+	<div class="grid grid-cols-3 gap-4">
+		{#each colors as color}
+			<div class="grid grid-cols-3 gap-2 mb-8">
+				<Range value="65" {...props} theme={color} size="xs" />
+				<Range value="50" {...props} theme={color} size="sm" />
+				<Range value="25" {...props} theme={color} size="md" />
+				<Range value="36" {...props} theme={color} size="lg" />
+				<Range value="70" {...props} theme={color} size="xl" />
+				<Range value="40" {...props} theme={color} size="xl2" />
+			</div>
+		{/each}
 	</div>
 	<!-- <input
 		type="range"

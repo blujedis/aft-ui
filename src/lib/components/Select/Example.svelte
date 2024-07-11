@@ -1,22 +1,9 @@
 <script lang="ts">
-	import Select, { type SelectVariant } from '.';
-	import SelectOption from '../SelectOption';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Select, type SelectVariant } from '.';
+	import { SelectOption } from '../SelectOption';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
+	import { colors } from '$lib/constants';
 
 	const title = 'Select';
 	const description = 'Themed select list.';
@@ -27,64 +14,66 @@
 		disabled: false,
 		focused: true, // true: focus-visible.
 		full: false,
+		hovered: true,
 		rounded: 'none' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as SelectVariant
+		variant: 'outlined' as SelectVariant
 	};
 
 	const items = [
 		{ label: 'JavaScript', value: 'javascript' },
 		{ label: 'Java', value: 'java' },
-		{ label: 'Python', value: 'python' },
+		{ label: 'Python', value: 'python', checked: true },
 		{ label: 'React', value: 'react' },
 		{ label: 'Rust', value: 'rust' }
 	];
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
+<ExamplePage {title} {description}>
+	{#each colors as color}
+		<div class="grid grid-cols-5 gap-4 mb-4">
+			<Select {...props} variant="filled" value="react" theme={color}>
+				{#each items as item}
+					<SelectOption value={item.value} selected={item.value === 'react'}
+						>{item.label}</SelectOption
+					>
+				{/each}
+			</Select>
 
-	<Section>
-		<hr />
-	</Section>
+			<Select {...props} variant="outlined" value="react" theme={color}>
+				{#each items as item}
+					<SelectOption value={item.value} selected={item.value === 'react'}
+						>{item.label}</SelectOption
+					>
+				{/each}
+			</Select>
 
-	<div class="grid grid-cols-3 gap-4">
-		<label for="filled">
-			<div class="text-sm">Outlined:</div>
-			<Select {...props} variant="outlined" selected="react">
+			<Select {...props} variant="soft" value="java" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'java'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
-		</label>
-		<label for="outline">
-			<div class="text-sm">Filled:</div>
-			<Select {...props} variant="filled" selected="java">
+
+			<Select {...props} variant="flushed" value="rust" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'rust'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
-		</label>
-		<label for="link">
-			<div class="text-sm">Flushed:</div>
-			<Select {...props} variant="flushed" selected="rust">
+
+			<Select {...props} variant="text" value="rust" theme={color}>
 				{#each items as item}
-					<SelectOption value={item.value}>{item.label}</SelectOption>
+					<SelectOption value={item.value} selected={item.value === 'rust'}
+						>{item.label}</SelectOption
+					>
 				{/each}
 			</Select>
-		</label>
-	</div>
+		</div>
+	{/each}
 </ExamplePage>

@@ -1,21 +1,8 @@
 <script lang="ts">
-	import Radio, { type RadioVariant } from '.';
-	import type {
-		ThemeColor,
-		ThemeRounded,
-		ThemeShadowed,
-		ThemeSize,
-		ThemeTransitioned
-	} from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { Radio, type RadioVariant } from '.';
+	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
+	import { colors } from '$lib/constants/colors';
 
 	const title = 'Radio';
 	const description = 'Themed radio input element.';
@@ -24,38 +11,25 @@
 
 	const props = {
 		disabled: false,
-		focused: true, // true: focus-visible.
 		full: false,
-		rounded: 'none' as ThemeRounded,
+		focused: true,
+		rounded: 'full' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
-		transitioned: false as boolean, // ThemeTransitioned,
-		variant: 'default' as RadioVariant
+		transitioned: false as boolean // ThemeTransitioned,
 	};
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
-
-	<Section>
-		<hr />
-	</Section>
-
-	<div class="grid grid-cols-3 gap-4">
+<ExamplePage {title} {description}>
+	<!-- <div class="grid grid-cols-3 gap-4">
 		<label for="filled">
 			<div class="text-sm">Outlined:</div>
 			<Radio {...props} />
 		</label>
+	</div> -->
+	<div class="grid grid-cols-8 gap-2">
+		{#each colors as color}
+			<Radio {...props} theme={color} />
+		{/each}
 	</div>
 </ExamplePage>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { themer, themeStore } from '$lib/theme';
 	import { RatingItem } from '../RatingItem';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 	import {
 		type RatingProps,
 		ratingControllerDefaults as defaults,
@@ -9,8 +9,9 @@
 	} from './module';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { boolToMapValue } from '$lib/utils';
 
-	type $$Props = RatingProps & ElementNativeProps<'div'>;
+	type $$Props = RatingProps & ElementProps<'div'>;
 
 	export let {
 		arrowable,
@@ -28,7 +29,7 @@
 		...defaults
 	} as Required<RatingProps>;
 
-	export const store = writable({ active: -1, readonly, score, selected: -1 } as RatingStoreValue);
+	const store = writable({ active: -1, readonly, score, selected: -1 } as RatingStoreValue);
 
 	setContext('Rating', {
 		...store,
@@ -49,10 +50,10 @@
 
 	$: ratingControllerClasses = th
 		.create('RatingController')
-		.option('dropshadows', shadowed, shadowed)
+		.option('dropshadows', boolToMapValue(shadowed), shadowed)
 		.append('inline-flex spacing-x-0', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	function handleSelect(selected: number, e: MouseEvent) {
 		if (readonly) return;
@@ -64,11 +65,13 @@
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleMouseover(active: number, e: MouseEvent) {
 		if (readonly || !hoverable) return;
 		store.update((s) => ({ ...s, active }));
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleMouseleave(active: number, e: MouseEvent) {
 		if (readonly || !hoverable) return;
 		store.update((s) => ({ ...s, active: -1 }));
@@ -122,10 +125,9 @@
 		}
 	}
 
-	// after navigation and if score revert back to
-	// score if no selection has been made.
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	function handleCleanup(e: Event & { currentTarget: EventTarget & HTMLDivElement }) {
-		const currentTarget = e.currentTarget;
+		// const currentTarget = e.currentTarget;
 		// requestAnimationFrame(() => {
 		// 	// if our clean up element doesn't contain the current active
 		// 	// element then we can proceed with our cleanup.
@@ -145,6 +147,8 @@
 
 <div
 	{...$$restProps}
+	role="listbox"
+	tabindex="-1"
 	bind:this={ref}
 	class={ratingControllerClasses}
 	on:keydown={handleKeydown}

@@ -1,46 +1,75 @@
 <script lang="ts">
+	import { cleanObj } from '$lib/utils';
 	import {
 		type AccordionProps,
 		accordionDefaults as defaults,
 		type AccordionContext
 	} from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps, HTMLTag } from '$lib/types';
 	import { useSelect } from '$lib/stores/select';
 	import { setContext } from 'svelte';
 
 	type Tag = $$Generic<HTMLTag>;
-	type $$Props = AccordionProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = AccordionProps<Tag> & ElementProps<Tag>;
 
-	export let { as, full, multiple, selected, rounded, shadowed, size, theme, variant } = {
+	export let {
+		as,
+		bordered,
+		detached,
+		focused,
+		hovered,
+		multiple,
+		rounded,
+		selected,
+		selectable,
+		shadowed,
+		size,
+		theme,
+		transition,
+		transitioned,
+		variant
+	} = {
+		...cleanObj($themeStore.defaults?.component),
 		...defaults
 	} as Required<AccordionProps<Tag>>;
 
-	export const store = useSelect({ multiple, selected });
+	export const store = useSelect({ mode: 'multiple', selected });
+
+	const globals = cleanObj({
+		bordered,
+		detached,
+		hovered,
+		focused,
+		rounded,
+		selectable,
+		shadowed,
+		size,
+		theme,
+		transition,
+		transitioned,
+		variant
+	});
 
 	setContext('Accordion', {
 		...store,
-		globals: {
-			rounded: variant === 'pills' ? rounded : 'none',
-			shadowed,
-			size,
-			theme,
-			variant
-		}
-	}) as AccordionContext;
+		globals
+	}) as unknown as AccordionContext; // need to review these types.
 
 	const th = themer($themeStore);
 
-	if (rounded === 'full' && variant !== 'pills')
+	if (rounded === 'full')
 		console.warn(`Rounded downgraded to "xl2", full not supported by variant "${variant}".`);
 
 	$: accordionClasses = th
 		.create('Accordion')
-		.variant('accordion', variant, theme, true)
-		.option('roundeds', rounded === 'full' && variant !== 'pills' ? 'xl2' : rounded, rounded)
-		.option('shadows', shadowed, shadowed)
+		.option('elementDivide', theme, variant === 'filled')
+		.append('divide-y', variant === 'filled' && !bordered)
+		.prepend(`accordion accordion-${variant}`, true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
+	function handleReset() {}
 </script>
 
 <svelte:element
@@ -52,8 +81,7 @@
 	<slot
 		select={store.select}
 		unselect={store.unselect}
-		reset={store.reset}
-		isSelected={store.isSelected}
+		reset={handleReset}
 		selectedItems={$store.selected}
 	/>
 </svelte:element>

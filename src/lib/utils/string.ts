@@ -1,6 +1,3 @@
-import type { ThemeColor } from '$lib/theme/constants';
-import { ensureArray } from './array';
-
 type CompileValue = string | number | boolean;
 
 /**

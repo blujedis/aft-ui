@@ -1,74 +1,83 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import { themer, themeStore } from '$lib/theme';
+	import { boolToMapValue, forwardEventsBuilder, cleanObj } from '$lib/utils';
+	import { themeStore, themer } from '$lib/theme';
 	import { type ButtonProps, buttonDefaults as defaults } from './module';
-	import type { ElementNativeProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 
 	type Tag = $$Generic<'button' | 'a'>;
-	type $$Props = ButtonProps<Tag> & ElementNativeProps<Tag>;
+	type $$Props = ButtonProps<Tag> & ElementProps<Tag>;
 
 	export let {
 		as,
+		bordered,
 		disabled,
 		focused,
 		full,
+		href,
+		hovered,
 		rounded,
 		shadowed,
+		dropshadowed,
 		size,
 		theme,
 		transitioned,
 		variant,
-		underlined,
-		unstyled
-	} = { ...defaults, ...$themeStore.defaults.component } as Required<ButtonProps<Tag>>;
+		underlined
+	} = {
+		...cleanObj($themeStore.defaults?.component),
+		...defaults
+	} as Required<ButtonProps<Tag>>;
 
 	const th = themer($themeStore);
 
-	$: buttonClasses = unstyled
-		? th
-				.create('Button')
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.option('common', 'transition', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('buttonPadding', size, size && variant !== 'text')
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed && variant !== 'text')
-				.option('dropshadows', shadowed, shadowed && variant === 'text')
-				.option('disableds', theme, disabled)
-				.append('underline', underlined)
-				.append('w-full', full)
-				.append($$restProps.class, true)
-				.compile(true)
-		: th
-				.create('Button')
-				.variant('button', variant, theme, true)
-				.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-				.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
-				.option('common', 'transition', transitioned)
-				.option('fieldFontSizes', size, size)
-				.option('buttonPadding', size, size && variant !== 'text')
-				.option('roundeds', rounded, rounded)
-				.option('shadows', shadowed, shadowed && variant !== 'text')
-				.option('dropshadows', shadowed, shadowed && variant === 'text')
-				.option('disableds', theme, disabled)
-				.append('underline', underlined)
-				.append('w-full', full)
-				.append('inline-flex items-center justify-center transition-all', true)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: buttonClasses = th
+		.create('Button')
+		.bundle(['unfilledText'], theme, variant === 'text')
+		.bundle(['mainBg', 'filledText'], theme, variant === 'filled')
+		.bundle(
+			['mainRing', 'unfilledText'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['ghostBgHover', 'softText'], { dark: 'hover:text-white' }, theme, variant === 'ghost')
+		.bundle(['softBg', 'softText'], theme, variant === 'soft')
+		.option('hovered', variant, theme, hovered && variant !== 'ghost')
+		.option('elementRing', theme, bordered)
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'transitioned', transitioned)
+		.option('fieldButtonSizes', size, size)
+		.option('fieldLeading', size, size)
+		.option('buttonPadding', size, size && variant !== 'text')
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed && variant !== 'text')
+		.option(
+			'dropshadows',
+			boolToMapValue(shadowed && variant === 'text' ? shadowed : dropshadowed),
+			(shadowed && variant === 'text') || dropshadowed
+		)
+		.option('common', 'disabled', disabled)
+		.prepend(`button button-${variant}`, true)
+		.append('underline', underlined && underlined !== 'hover')
+		.append('hover:underline', underlined === 'hover')
+		.append('max-w-fit', !full)
+		.append('w-full', full)
+		.append('ring-1', bordered)
+		.append('inline-flex items-center justify-center cursor-pointer outline-none', true)
+		.append($$restProps.class, true)
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<svelte:element
-	this={typeof as === 'undefined' ? 'button' : 'a'}
-	use:forwardedEvents
-	{...$$restProps}
-	class={buttonClasses}
-	{disabled}
-	aria-disabled={disabled}
->
-	<slot />
-</svelte:element>
+{#if href}
+	<a use:forwardedEvents {href} {...$$restProps} class={buttonClasses} aria-disabled={disabled}>
+		<slot />
+	</a>
+{:else}
+	<button use:forwardedEvents {...$$restProps} class={buttonClasses} {disabled}>
+		<slot />
+	</button>
+{/if}

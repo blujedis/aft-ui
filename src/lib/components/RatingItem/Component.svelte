@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { classToColor, styler, themer, themeStore } from '$lib/theme';
+	import { themeStore, getColor, styler, themer } from '$lib';
 	import { getContext } from 'svelte';
 	import { type RatingItemProps, ratingDefaults as defaults } from './module';
-	import type { RatingContext } from '../Rating';
+	import type { RatingContext } from '$lib/components/Rating';
 	import { uniqid } from '$lib/utils';
-	import type { ElementNativeProps, ElementProps } from '../types';
+	import type { ElementProps } from '$lib/types';
 
 	type $$Props = RatingItemProps & ElementProps<'svg'>;
 
@@ -17,7 +17,7 @@
 
 	// let ref: SVGElement | undefined;
 	const id = uniqid();
-	const initFill = classToColor(fill) || '#FFA41C';
+	const initFill = getColor(fill, '#FFA41C'); // accepts color or theme color ex: danger-600
 	const strokeColor = stroked ? initFill : undefined;
 
 	$: percentage =
@@ -29,10 +29,10 @@
 			? initFill
 			: 'currentColor'
 		: percentage === 1
-		? initFill
-		: percentage === 0
-		? 'currentColor'
-		: `url(#${id})`;
+			? initFill
+			: percentage === 0
+				? 'currentColor'
+				: `url(#${id})`; // SVG Pattern references Linear Gradient by ID
 
 	const th = themer($themeStore);
 	const st = styler($themeStore);
@@ -51,7 +51,7 @@
 		.append('z-10 focus-visible:outline outline-2', true)
 		.append('hover:scale-125', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	$: stops = [
 		{ offset: `0%`, 'stop-color': initFill, 'stop-opacity': '1' },

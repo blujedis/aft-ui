@@ -1,14 +1,15 @@
-import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/theme';
-import type { EasingFunction, TransitionConfig } from 'svelte/types/runtime/transition';
-import type { modal } from './config';
-import { SvelteComponentTyped } from 'svelte';
+import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
+import { SvelteComponent } from 'svelte';
 import type { DisclosureMethods } from '$lib/stores';
+import {
+	disclosureTransitions,
+	type DisclosureTransitionOption,
+	type DisclosureTransition
+} from '../Disclosure';
 
-export class ModalComponent extends SvelteComponentTyped<ModalProps> {
+export class ModalComponent extends SvelteComponent<ModalProps> {
 	disclosure?: DisclosureMethods;
 }
-
-export type ModalVariant = keyof typeof modal;
 
 export type ModalPosition =
 	| 'top'
@@ -22,25 +23,12 @@ export type ModalPosition =
 	| 'center-center'
 	| 'bottom-center';
 
-export interface TransitionParams {
-	delay?: number;
-	duration?: number;
-	easing?: EasingFunction;
-	start?: number;
-	y?: number;
-}
-
-export type TransitionHandler = <O extends TransitionParams>(
-	node: Element,
-	options?: O
-) => TransitionConfig;
-
-export type ModalTransition = 'fade' | 'announce' | 'zoom' | 'reveal' | 'none' | TransitionHandler;
+export type ModalTransition = DisclosureTransitionOption;
 
 export type ModalProps = {
 	abortable?: boolean; // when true can escape or click background to abort.
 	backdrop?: string | boolean;
-	content?: typeof SvelteComponentTyped<Record<string, unknown>>;
+	content?: typeof SvelteComponent<Record<string, unknown>>;
 	contentProps?: Record<string, unknown>;
 	escapable?: boolean;
 	focustrap?: boolean;
@@ -49,20 +37,18 @@ export type ModalProps = {
 	rounded?: ThemeRounded;
 	shadowed?: ThemeShadowed;
 	theme?: ThemeColor;
-	transition?: ModalTransition;
-	variant?: ModalVariant;
-	visible?: boolean;
+	transition?: ModalTransition | (Record<string, any> & { type: DisclosureTransition });
+	visible?: boolean | number;
 	unmount?: boolean;
 	unstyled?: boolean;
 	onClose?: () => void;
 };
 
-export const transitions = {
-	fade: { duration: 200, start: 0.5 },
-	zoom: { duration: 200, start: 0.95 },
-	announce: { duration: 400, y: -600 },
-	reveal: { duration: 400, y: 600 },
-	none: { duration: 0 }
+export const modalTransitions = {
+	...disclosureTransitions,
+	zoom: { duration: 200, start: 0.925, type: 'scale' },
+	swipe: { duration: 200, axis: 'y', type: 'slide' },
+	dissolve: { duration: 200, start: 0.8, type: 'fade' }
 };
 
 export const modalDefaults: Partial<ModalProps> = {
@@ -70,7 +56,6 @@ export const modalDefaults: Partial<ModalProps> = {
 	labelby: 'Modal',
 	rounded: 'md',
 	shadowed: 'lg',
-	theme: 'default',
-	variant: 'default',
+	theme: 'frame',
 	unmount: true
 };

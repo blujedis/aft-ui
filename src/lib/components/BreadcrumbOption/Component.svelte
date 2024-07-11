@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { type BreadcrumbOptionProps, breadcrumbOptionDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
-	import type { ElementNativeProps } from '../types';
-	import Icon from '../Icon';
-	import { getContext } from 'svelte';
+	import type { ElementProps } from '$lib/types';
+	import { Icon } from '../Icon';
+	import { getContext, onMount } from 'svelte';
 	import type { BreadcrumbContext } from '../Breadcrumb/module';
 
-	type $$Props = BreadcrumbOptionProps & ElementNativeProps<'a'>;
+	type $$Props = BreadcrumbOptionProps & ElementProps<'a'>;
 
 	const context = getContext<BreadcrumbContext>('Breadcrumb');
 
 	export let {
+		focused,
 		href,
 		index,
 		icon,
@@ -28,31 +29,50 @@
 	} as Required<BreadcrumbOptionProps>;
 
 	const th = themer($themeStore);
-
-	$: breadcrumbOptionListClasses = th
-		.create('BreadcrumbListItem')
-		.variant('breadcrumbOptionItem', variant, theme, true)
-		.compile();
+	let mounted = false;
 
 	$: breadcrumbOptionClasses = th
-		.create('Breadcrumb')
-		.variant('breadcrumbOption', variant, theme, true)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
+		.create('BreadcrumbOption')
+		.option('common', 'focusedOutlineVisible', focused)
+		.option('outlineFocusVisible', theme, focused)
+		.option('common', 'transitioned', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('breadcrumbMargins', size, size)
-		.append('pointer-events-none', selected)
+		.prepend('breadcrumb-option', true)
+		.prepend('breadcrumb-options-selected', selected)
+		.append('aria-selected:pointer-events-none outline-none aria-selected:opacity-60', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
+
+	$: breadcrumbOptionWrapperClasses = th
+		.create('BreadcrumbOptionWrapper')
+		.option('breadcrumbFilledHeight', size, size)
+		.prepend('breadcrumb-option-wrapper', true)
+		.append('flex items-center', true)
+		.compile();
+
+	$: breadcrumbIconClasses = th
+		.create('BreadcrumbIcon')
+		.option('breadcrumbFilledIconWidth', size, size)
+		.prepend('breadcrumb-option-icon', true)
+		.append('opacity-40', true) // mutes icon separators
+		.append('opacity-20', theme === 'frame' && variant === 'soft')
+		.append('h-full flex-shrink-0 pointer-events-none', true)
+		.compile();
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <li>
-	<div class="flex items-center">
+	<div class={breadcrumbOptionWrapperClasses}>
 		<slot>
-			{#if separator && index > 0}
-				{#if variant === 'filled'}
+			{#if separator && index !== 0}
+				{#if variant !== 'text'}
 					<svg
-						class="h-full w-6 flex-shrink-0 pointer-events-none"
+						class:invisible={!mounted}
+						class={breadcrumbIconClasses}
 						viewBox="0 0 24 44"
 						preserveAspectRatio="none"
 						fill="currentColor"

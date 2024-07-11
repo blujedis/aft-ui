@@ -1,26 +1,21 @@
-import type { ThemeColor, ThemeFocused, ThemeShadowed, ThemeSize } from '$lib/theme';
-import type { switchBackdrop } from './config';
-
-export type SwitchVariant = keyof typeof switchBackdrop;
+import type { ThemeColor, ThemeShadowed, ThemeSize } from '$lib/types';
 
 export type SwitchProps = {
 	classHandle?: string;
-	classFill?: string;
-	classBackdrop?: string;
+	classSlider?: string;
 	disabled?: boolean;
-	focused?: ThemeFocused;
+	focused?: boolean;
+	hovered?: boolean;
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	srtext?: string;
 	theme?: ThemeColor;
-	variant?: SwitchVariant;
-	unstyled?: boolean;
+	transitioned?: boolean;
+	unlabeled?: boolean;
 };
 
 export const switchDefaults: Partial<SwitchProps> = {
-	focused: true,
 	size: 'md',
-	srtext: 'Use Switch',
-	theme: 'default',
-	variant: 'default'
+	srtext: 'Toggle Switch',
+	theme: 'frame'
 };

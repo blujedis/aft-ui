@@ -1,6 +1,4 @@
-import Breadcrumb from './Component.svelte';
+import BreadcrumbOption from './Component.svelte';
 export * from './module';
-export * from './config';
-export * from './options';
-export { Breadcrumb };
-export default Breadcrumb;
+
+export { BreadcrumbOption };

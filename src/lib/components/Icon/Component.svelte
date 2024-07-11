@@ -5,20 +5,29 @@
 	 * @see https://docs.iconify.design/icon-components/svelte/dimensions.html#:~:text=%22cil%3Atruck%22-,class,-%3D%22big%2Dicon
 	 */
 
-	import { Icon, type IconProps, iconDefaults as defaults } from './module';
-	import { themeStore, themer } from '$lib/theme';
+	import { type IconProps, iconDefaults as defaults } from './module';
+	import Icon from '@iconify/svelte';
+	import { themer, themeStore } from '$lib/theme';
+	import { cleanObj } from '$lib/utils';
 	type $$Props = IconProps;
-	export let { icon, size, unstyled } = { ...defaults } as Required<$$Props>;
+	export let { hovered, icon, size, stroke, theme, transitioned } = {
+		...cleanObj($themeStore.defaults?.component, ['focused', 'shadowed', 'rounded']),
+		...defaults
+	} as Required<$$Props>;
 
 	const th = themer($themeStore);
 
-	$: iconClasses = unstyled
-		? $$restProps.class
-		: th
-				.create('Icon')
-				.option('iconSizes', size, size)
-				.append($$restProps.class, true)
-				.compile(true);
+	$: iconClasses = th
+		.create('Icon')
+		.option('iconSizes', size, size)
+		.option('iconText', theme, theme && !stroke)
+		.option('iconStroke', theme, theme && stroke)
+		.option('hovered', 'filled', theme, hovered)
+		.option('common', 'transitioned', transitioned)
+		.prepend(`icon icon-${theme}`, true)
+		.append('inline-flex pointer-events-none', true)
+		.append($$restProps.class, true)
+		.compile();
 </script>
 
-<Icon {...$$restProps} {icon} class={iconClasses} aria-hidden={true} />
+<Icon {icon} class={iconClasses} aria-hidden={true} />

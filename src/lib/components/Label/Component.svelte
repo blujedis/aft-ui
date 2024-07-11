@@ -2,42 +2,45 @@
 	import { type LabelProps, labelDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import { boolToMapValue, forwardEventsBuilder, cleanObj } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
-	type $$Props = LabelProps & Omit<ElementNativeProps<'span'>, 'size'>;
+	type $$Props = LabelProps & Omit<ElementProps<'label'>, 'size'>;
 
-	export let {
-		dropshadowed,
-		full,
-		rounded,
-		shadowed,
-		size,
-		theme,
-		transitioned,
-		variant,
-		unstyled
-	} = {
+	export let { dropshadowed, inline, full, reversed, rounded, size, theme, visible } = {
+		...cleanObj($themeStore.defaults?.component, [
+			'transitioned',
+			'focused',
+			'hovered',
+			'shadowed',
+			'rounded'
+		]),
 		...defaults
 	} as Required<$$Props>;
 
-	$: labelClasses = themer($themeStore)
+	const th = themer($themeStore);
+
+	$: labelClasses = th
 		.create('Label')
-		.variant('label', variant, theme, true)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
+		.bundle(['unfilledText'], theme, true)
 		.option('fieldFontSizes', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.option('dropshadows', shadowed, shadowed)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('dropshadows', boolToMapValue(dropshadowed), dropshadowed)
+		.prepend(`label-${theme}`, theme)
+		.prepend(`label label-${theme}`, true)
 		.append('w-full', full)
-		.append('flex items-center justify-center', true)
+		.append('flex items-center space-x-2', inline)
+		.append('space-x-reverse flex-row-reverse', inline && reversed)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+{#if visible}
+	<label use:forwardedEvents {...$$restProps} class={labelClasses}>
+		<slot />
+	</label>
+{:else}
 	<slot />
-</label>
+{/if}

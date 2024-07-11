@@ -1,108 +1,84 @@
 <script lang="ts">
-	import ButtonGroup from '.';
-	import ButtonGroupItem, { type ButtonGroupItemVariant } from '../ButtonGroupItem';
-	import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/theme';
-	import Section from '../_Example/Section.svelte';
-	import SelectTheme from '../_Example/SelectTheme.svelte';
-	import SelectSize from '../_Example/SelectSize.svelte';
-	import SelectRounded from '../_Example/SelectRounded.svelte';
-	import SelectShadowed from '../_Example/SelectShadowed.svelte';
-	import ListOptions from '../_Example/ListOptions.svelte';
-	import ToggleOptions from '../_Example/ToggleOptions.svelte';
+	import { ButtonGroup } from '.';
+	import { colors } from '$lib/constants';
+	import { ButtonGroupItem, type ButtonGroupVariant } from '../ButtonGroupItem';
 	import ExamplePage from '../_Example/ExamplePage.svelte';
-	import Checkbox from '../_Example/Checkbox.svelte';
+	import type {
+		ThemeColor,
+		ThemeRounded,
+		ThemeShadowed,
+		ThemeSize,
+		ThemeFocused
+	} from '$lib/types';
 
 	const title = 'Button Groups';
 	const description = 'Themed Buttons within selectable groups.';
 	const code = `
   `;
 
-	let visible = false;
-	let darkmode = false;
-
 	const props = {
 		disabled: false,
 		focused: true,
-		full: false,
+		full: true,
+		// hovered: false,
 		multiple: false,
-		rounded: 'none' as ThemeRounded,
+		rounded: 'sm' as ThemeRounded,
 		shadowed: 'none' as ThemeShadowed,
 		size: 'md' as ThemeSize,
-		theme: 'default' as ThemeColor,
+		theme: 'frame' as ThemeColor,
 		transitioned: false as boolean, // ThemeTransitioned,
 		underlined: false,
-		variant: 'default' as ButtonGroupItemVariant
+		variant: 'filled' as ButtonGroupVariant
 	};
 
 	const buttons = [
-		{ value: 'java', label: 'Java' },
+		// { value: 'java', label: 'Java' },
 		{ value: 'javascript', label: 'JavaScript' },
 		{ value: 'python', label: 'Python' },
 		{ value: 'react', label: 'React' }
 	];
 </script>
 
-<ExamplePage {title} {description} {code}>
-	<ToggleOptions>
-		<Checkbox label="Focused" bind:checked={props.focused} />
-		<Checkbox label="Full" bind:checked={props.full} />
-		<Checkbox label="Transitioned" bind:checked={props.transitioned} />
-		<Checkbox label="Disabled" bind:checked={props.disabled} />
-		<Checkbox label="Underlined" bind:checked={props.underlined} />
-	</ToggleOptions>
-	<ListOptions>
-		<SelectTheme bind:value={props.theme} />
-		<SelectSize bind:value={props.size} />
-		<SelectRounded bind:value={props.rounded} />
-		<SelectShadowed bind:value={props.shadowed} />
-	</ListOptions>
+<ExamplePage {title} {description}>
+	{#each colors as theme}
+		<div class="grid grid-cols-5 gap-2 mt-4">
+			<ButtonGroup {...props} {theme} class="bg-frame-50 dark:bg-frame-950/50">
+				{#each buttons as button}
+					<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+				{/each}
+			</ButtonGroup>
 
-	<Section>
-		<hr />
-	</Section>
+			<div>
+				<ButtonGroup {...props} variant="outlined" {theme}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
+			</div>
 
-	<div class={darkmode ? 'bg-gray-900 p-4' : 'bg-white'}>
-		<div class="grid grid-cols-2 gap-2">
 			<div>
-				<div class="text-sm">Filled:</div>
-				{#key props}
-					<ButtonGroup {...props}>
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
+				<ButtonGroup {...props} variant="flushed" {theme}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
 			</div>
+
 			<div>
-				<div class="text-sm">Outlined:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="outlined">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
+				<ButtonGroup {...props} variant="ghost" {theme}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
 			</div>
+
 			<div>
-				<div class="text-sm">Link:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="link">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
-			</div>
-			<div>
-				<div class="text-sm">Ghost:</div>
-				{#key props}
-					<ButtonGroup {...props} variant="ghost">
-						{#each buttons as button}
-							<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
-						{/each}
-					</ButtonGroup>
-				{/key}
+				<ButtonGroup {...props} variant="soft" {theme}>
+					{#each buttons as button}
+						<ButtonGroupItem value={button.value}>{button.label}</ButtonGroupItem>
+					{/each}
+				</ButtonGroup>
 			</div>
 		</div>
-	</div>
+	{/each}
 </ExamplePage>

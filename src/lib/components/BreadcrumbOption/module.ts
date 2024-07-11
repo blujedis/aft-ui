@@ -1,11 +1,12 @@
-import type { ThemeColor, ThemeSize, ThemeTransitioned } from '$lib/theme';
+import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 import type { breadcrumbOption } from './config';
 
-export type BreadcrumbOptionVariant = keyof typeof breadcrumbOption;
+export type BreadcrumbVariant = keyof typeof breadcrumbOption;
 
 export type BreadcrumbOptionProps = {
 	label?: string;
+	focused?: ThemeFocused;
 	href?: string;
 	index?: number; // only used when generated from Breadcrumb parent.
 	icon?: string | IconifyIcon;
@@ -14,13 +15,21 @@ export type BreadcrumbOptionProps = {
 	separator?: string | IconifyIcon;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
-	variant?: BreadcrumbOptionVariant;
+	transitioned?: boolean;
+	variant?: BreadcrumbVariant;
 };
 
 export const breadcrumbOptionDefaults: Partial<BreadcrumbOptionProps> = {
+	focused: true,
 	size: 'md',
 	separator: 'mdi-light:chevron-right',
-	theme: 'default',
-	variant: 'default'
+	theme: 'frame',
+	variant: 'text'
 };
+
+// export const variantMap = {
+// 	text: 'textHover',
+// 	ghost: 'textHover',
+// 	glass: 'textHover',
+// 	filled: 'textHover'
+// } as Record<Exclude<ThemeVariant, 'flushed' | 'outlined'>, keyof typeof globals>;

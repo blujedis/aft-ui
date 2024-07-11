@@ -2,15 +2,16 @@
 	import { type TextareaProps, textareaDefaults as defaults } from './module';
 	import { themer, themeStore } from '$lib/theme';
 	import { get_current_component } from 'svelte/internal';
-	import { forwardEventsBuilder } from '$lib/utils';
-	import type { ElementNativeProps } from '../types';
+	import { forwardEventsBuilder, boolToMapValue } from '$lib/utils';
+	import type { ElementProps } from '$lib/types';
 
-	type $$Props = TextareaProps & Omit<ElementNativeProps<'input'>, 'size'>;
+	type $$Props = TextareaProps & Omit<ElementProps<'input'>, 'size'>;
 
 	export let {
 		disabled,
 		focused,
 		full,
+		hovered,
 		resize,
 		rounded,
 		shadowed,
@@ -18,32 +19,40 @@
 		theme,
 		transitioned,
 		variant,
-		unstyled
+		value
 	} = {
 		...defaults
 	} as Required<$$Props>;
 
-	$: textareaClasses = themer($themeStore)
+	const th = themer($themeStore);
+
+	$: textareaClasses = th
 		.create('Textarea')
-		.variant('textarea', variant, theme, true)
-		.option(focused === 'default' ? 'focusedSizes' : 'focusedVisibleSizes', size, focused)
-		.option(focused === 'default' ? 'focused' : 'focusedVisible', theme, focused)
+		.bundle(
+			['unfilledText', 'mainRing'],
+			{ $base: 'ring-1 ring-inset' },
+			theme,
+			variant === 'outlined'
+		)
+		.bundle(['softBg', 'unfilledText'], theme, variant === 'soft')
+		.bundle(['unfilledText'], theme, variant === 'text')
+		.option('common', 'focusedOutline', focused)
+		.option('outlineFocus', theme, focused)
+		.option('common', 'transitioned', transitioned)
+		.option('hovered', variant, theme, hovered)
 		.option('resizes', resize, resize)
-		.option('placeholders', theme, true)
-		.option('common', 'transition', transitioned)
-		.remove(transitioned === 'colors' ? 'transition-all' : 'transition-colors', transitioned)
 		.option('fieldFontSizes', size, size)
 		.option('fieldPadding', size, size)
-		.option('roundeds', rounded, rounded)
-		.option('shadows', shadowed, shadowed)
-		.option('disableds', theme, disabled)
+		.option('roundeds', boolToMapValue(rounded), rounded)
+		.option('shadows', boolToMapValue(shadowed), shadowed)
+		.option('common', 'disabled', disabled)
 		.append('w-full', full)
-		.append('flex items-center justify-center form-textarea', true)
-		.append('border-0 ring-1 ring-black ring-opacity-5', variant === 'filled')
+		.append('dark:bg-transparent', ['outlined', 'text'].includes(variant))
+		.append('flex items-center justify-center  focus:outline-none border-0', true)
 		.append($$restProps.class, true)
-		.compile(true);
+		.compile();
 
 	const forwardedEvents = forwardEventsBuilder(get_current_component());
 </script>
 
-<textarea {...$$restProps} use:forwardedEvents class={textareaClasses} />
+<textarea {...$$restProps} use:forwardedEvents bind:value class={textareaClasses} />

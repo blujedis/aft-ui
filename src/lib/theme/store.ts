@@ -1,40 +1,15 @@
 import { writable, type Writable, get as storeGet } from 'svelte/store';
-import type { DeepPartial, ThemeConfig } from './types';
-import defaults from './defaults';
-import * as options from './options';
-import * as components from '../components/configs';
-import * as componentOptions from '../components/options';
-import { appcolors } from './palettes';
+import type { DeepPartial, ThemeConfig, ThemeDefaults } from '../types/theme';
+import { cleanObj, simpleClone } from '../utils';
+import defaults from 'defaults';
 
 export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 	get(): T;
 	update(theme: DeepPartial<T>): void;
+	defaultTheme: T;
 };
 
-const defaultTheme = {
-	options: { ...options, ...componentOptions },
-	defaults,
-	components,
-	palette: appcolors
-};
-
-/**
- * Replaces target values with overrides, ensures all target values exist.
- *
- * @param target the target to merge overrides into.
- * @param overrides the values used to override target values.
- */
-function ensureDefaults(target: Record<string, any>, overrides: Record<string, any>) {
-	let k: keyof typeof target | keyof typeof overrides;
-	const cloneTarget = { ...target };
-	for (k in cloneTarget) {
-		const t = cloneTarget[k];
-		const s = overrides[k];
-		if (typeof t === 'object' && typeof s === 'object') ensureDefaults(t, s);
-		else if (typeof t === 'string' && typeof s === 'string') cloneTarget[k] = s;
-	}
-	return cloneTarget;
-}
+let _themeStore: ThemeStore<any>;
 
 /**
  * Internal store creator.
@@ -42,14 +17,20 @@ function ensureDefaults(target: Record<string, any>, overrides: Record<string, a
  * @param initTheme the initial them to be applied.
  * @param baseTheme the base them so we can ensure all properties.
  */
-function createStoreInternal<T extends ThemeConfig>(
-	{ options, defaults, components, ...rest }: DeepPartial<T>,
-	baseTheme = { ...defaultTheme }
+export function createStoreInternal<T extends ThemeConfig>(
+	userTheme: DeepPartial<T>,
+	defaultTheme = {} as T
 ): ThemeStore<T> {
-	const normalized = {
-		...ensureDefaults(baseTheme, { options, defaults, components }),
-		...rest
-	} as unknown as T;
+	if (_themeStore) return _themeStore as ThemeStore<T>;
+
+	// Create simple clone to ensure not modules
+	// props exist otherwise structuredClone will fail internally.
+	const userClone = simpleClone(userTheme);
+	const normalized = defaults(userClone, defaultTheme as DeepPartial<T>) as Required<T>;
+
+	normalized.defaults.component = cleanObj(normalized.defaults.component) as Required<
+		ThemeDefaults['component']
+	>;
 
 	const store = writable(normalized);
 
@@ -58,11 +39,11 @@ function createStoreInternal<T extends ThemeConfig>(
 	 *
 	 * NOTE: similar to interal store.set() but ensures defaults and validates types.
 	 *
-	 * @param theme the them configuration to update to.
+	 * @param updateTheme the them configuration to update to.
 	 */
-	function update(theme: DeepPartial<T>) {
+	function update(updateTheme: DeepPartial<T>) {
 		store.update((s) => {
-			return ensureDefaults(s, theme) as unknown as T;
+			return defaults(simpleClone(updateTheme), s) as Required<T>;
 		});
 	}
 
@@ -70,14 +51,17 @@ function createStoreInternal<T extends ThemeConfig>(
 		return storeGet(store);
 	}
 
-	return {
+	const themeStoreInternal = {
 		...store,
 		get,
-		update
+		update,
+		defaultTheme
 	};
-}
 
-export const themeStore = createStoreInternal(defaultTheme);
+	if (!_themeStore) _themeStore = themeStoreInternal;
+
+	return _themeStore as ThemeStore<T>;
+}
 
 /**
  * Creates a new store which updates the default store's components and options when changed.
@@ -87,12 +71,12 @@ export const themeStore = createStoreInternal(defaultTheme);
  */
 export function createStore<T extends Record<string, unknown> & DeepPartial<ThemeConfig>>(
 	extendTheme: T,
-	baseTheme = { ...defaultTheme }
+	defaultTheme = { ..._themeStore.defaultTheme }
 ) {
-	const store = createStoreInternal(extendTheme, baseTheme);
-	store.subscribe((s) => {
-		// update default store on change.
-		themeStore.update({ options: s.options, defaults: s.defaults, components: s.components });
+	const store = createStoreInternal(extendTheme, defaultTheme);
+	_themeStore.subscribe(({ options, defaults, components }) => {
+		// update internal store on change.
+		_themeStore.update({ options, defaults, components });
 	});
 	return store as ThemeStore<T & ThemeConfig>;
 }

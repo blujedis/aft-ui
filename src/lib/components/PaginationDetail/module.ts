@@ -1,13 +1,6 @@
-import type {
-	ThemeColor,
-	ThemeRounded,
-	ThemeShadowed,
-	ThemeSize,
-	ThemeTransitioned
-} from '$lib/theme';
-import type { paginationDetail } from './config';
+import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
 
-export type PaginationDetailVariant = keyof typeof paginationDetail;
+export type PaginationDetailVariant = 'filled' | 'flushed' | 'soft';
 
 export type PaginationDetailProps = {
 	full?: boolean;
@@ -15,7 +8,7 @@ export type PaginationDetailProps = {
 	shadowed?: ThemeShadowed;
 	size?: ThemeSize;
 	theme?: ThemeColor;
-	transitioned?: ThemeTransitioned;
+	transitioned?: boolean;
 	variant?: PaginationDetailVariant;
 	unstyled?: boolean;
 };
@@ -23,6 +16,6 @@ export type PaginationDetailProps = {
 export const paginationDetailDefaults: Partial<PaginationDetailProps> = {
 	rounded: 'full',
 	size: 'md',
-	theme: 'default',
-	variant: 'default'
+	theme: 'frame',
+	variant: 'filled'
 };
