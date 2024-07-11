@@ -5,8 +5,8 @@ let _themeStore;
 /**
  * Internal store creator.
  *
- * @param initTheme the initial them to be applied.
- * @param baseTheme the base them so we can ensure all properties.
+ * @param userTheme the user defined theme.
+ * @param defaultTheme the base them so we can ensure all properties.
  */
 export function createStoreInternal(userTheme, defaultTheme = {}) {
     if (_themeStore)
@@ -45,8 +45,8 @@ export function createStoreInternal(userTheme, defaultTheme = {}) {
 /**
  * Creates a new store which updates the default store's components and options when changed.
  *
- * @param initTheme the initial them to be applied.
- * @param baseTheme the base them so we can ensure all properties.
+ * @param extendTheme extend the defined theme.
+ * @param defaultTheme the base them so we can ensure all properties.
  */
 export function createStore(extendTheme, defaultTheme = { ..._themeStore.defaultTheme }) {
     const store = createStoreInternal(extendTheme, defaultTheme);

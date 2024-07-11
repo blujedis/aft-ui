@@ -20,7 +20,7 @@ export interface NotificationStore extends Writable<Notification[]> {
 /**
  * Creates a new notification store.
  *
- * @param options the options to be used globally.
+ * @param initOptions the options to be used globally.
  */
 export declare function createNotificationStore(initOptions?: NotificationOptions): NotificationStore;
 declare const useNotifications: NotificationStore;

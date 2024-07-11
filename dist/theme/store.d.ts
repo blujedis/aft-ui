@@ -8,14 +8,14 @@ export type ThemeStore<T> = Omit<Writable<T>, 'update'> & {
 /**
  * Internal store creator.
  *
- * @param initTheme the initial them to be applied.
- * @param baseTheme the base them so we can ensure all properties.
+ * @param userTheme the user defined theme.
+ * @param defaultTheme the base them so we can ensure all properties.
  */
 export declare function createStoreInternal<T extends ThemeConfig>(userTheme: DeepPartial<T>, defaultTheme?: T): ThemeStore<T>;
 /**
  * Creates a new store which updates the default store's components and options when changed.
  *
- * @param initTheme the initial them to be applied.
- * @param baseTheme the base them so we can ensure all properties.
+ * @param extendTheme extend the defined theme.
+ * @param defaultTheme the base them so we can ensure all properties.
  */
 export declare function createStore<T extends Record<string, unknown> & DeepPartial<ThemeConfig>>(extendTheme: T, defaultTheme?: any): ThemeStore<T & ThemeConfig>;

@@ -13,7 +13,7 @@ type Primitive = boolean | string | number | undefined | Primitive[];
 /**
  * Creates a new styler instance.
  *
- * @param name the name of the styler used in errors/logging.
+ * @param themeConfig the them configuration.
  */
 export function styler<C extends ThemeConfig>(themeConfig: C) {
 	// type Components = typeof themeConfig.components;
@@ -91,7 +91,7 @@ export function styler<C extends ThemeConfig>(themeConfig: C) {
 		/**
 		 * Adds a style key/value to be compiled.
 		 *
-		 * @param name the option key to be add.
+		 * @param obj the object to get property from.
 		 * @param path the property of the above key to be applied.
 		 * @param key the style key to be added.
 		 * @param when if value is truthy add value otherwise reject.

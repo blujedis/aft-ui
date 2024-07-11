@@ -36,7 +36,7 @@
 
 	let panel = null as HTMLDivElement | null;
 
-	$: modalStyles = visible // $store.visible
+	$: modalStyles = visible
 		? $$restProps.style || '' + ' display:block'
 		: ((!unmount && 'display: none') as string);
 
@@ -70,7 +70,6 @@
 		.compile();
 
 	function handleClose() {
-		// store.close();
 		visible = false;
 	}
 

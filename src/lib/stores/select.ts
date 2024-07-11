@@ -32,7 +32,6 @@ export function useSelect<P extends Record<string, any> = Record<string, any>>(
 	options = {
 		min: 0,
 		max: 0,
-		mode: 'single',
 		...options
 	};
 

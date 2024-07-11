@@ -1,8 +1,6 @@
 import type { ThemeColor, ThemeRounded, ThemeShadowed } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
 
-//export type NotificationVariant = keyof typeof notification;
-
 export type Notification = {
 	key?: string;
 	group?: string;

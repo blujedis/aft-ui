@@ -2,7 +2,7 @@ import { getProperty } from 'dot-prop';
 /**
  * Creates a new styler instance.
  *
- * @param name the name of the styler used in errors/logging.
+ * @param themeConfig the them configuration.
  */
 export function styler(themeConfig) {
     // type Palette = typeof themeConfig.palette;
@@ -76,7 +76,7 @@ export function styler(themeConfig) {
         /**
          * Adds a style key/value to be compiled.
          *
-         * @param name the option key to be add.
+         * @param obj the object to get property from.
          * @param path the property of the above key to be applied.
          * @param key the style key to be added.
          * @param when if value is truthy add value otherwise reject.

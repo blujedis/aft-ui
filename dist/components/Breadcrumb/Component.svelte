@@ -5,7 +5,6 @@ import { onMount, setContext } from "svelte";
 import { cleanObj, forwardEventsBuilder, boolToMapValue } from "../../utils";
 import { BreadcrumbOption } from "../BreadcrumbOption";
 import { breadcrumbDefaults as defaults } from "./module";
-import { onNavigate } from "$app/navigation";
 export let { focused, full, generate, rounded, shadowed, size, theme, transitioned, variant } = {
   ...cleanObj($themeStore.defaults?.component),
   ...defaults

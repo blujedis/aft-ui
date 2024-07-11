@@ -1,8 +1,7 @@
 import type { ThemeColor, ThemeFocused, ThemeSize } from '$lib/types';
 import type { IconifyIcon } from '@iconify/svelte';
-import type { breadcrumbOption } from './config';
 
-export type BreadcrumbVariant = keyof typeof breadcrumbOption;
+export type BreadcrumbVariant = 'filled' | 'soft' | 'text';
 
 export type BreadcrumbOptionProps = {
 	label?: string;

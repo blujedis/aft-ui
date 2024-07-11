@@ -4,7 +4,6 @@ export function useSelect(options = {}) {
     options = {
         min: 0,
         max: 0,
-        mode: 'single',
         ...options
     };
     const isArray = ['multiple', 'single-array'].includes('mode') || Array.isArray(options.selected) ? true : false;
