@@ -7,6 +7,18 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/blujedis/aft-ui.git"
+	},
+	"bugs": {
+		"url": "https://github.com/blujedis/aft-ui/issues"
+	},
+	"homepage": "https://github.com/blujedis/aft-ui#readme",
+	"author": {
+		"name": "Blujedis",
+		"url": "https://github.com/blujedis"
+	},
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
@@ -47,7 +59,7 @@
 		"postbuild": "echo \"postbuild.cjs disabled\""
 	},
 	"dependencies": {
-		"@aft/config": "github:blujedis/aft-config#dev",
+		"@aft/config": "github:blujedis/aft-config",
 		"@floating-ui/dom": "^1.6.3",
 		"classnames": "^2.5.1",
 		"defaults": "^3.0.0",
@@ -138,7 +150,8 @@
 			[
 				"@semantic-release/npm",
 				{
-					"npmPublish": true
+					"npmPublish": false,
+					"tarballDir": "dist"
 				}
 			],
 			"@semantic-release/changelog",
