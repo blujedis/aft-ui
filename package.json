@@ -59,7 +59,6 @@
 		"postbuild": "node postbuild.cjs"
 	},
 	"dependencies": {
-		"@aft/config": "github:blujedis/aft-config",
 		"@floating-ui/dom": "^1.6.3",
 		"classnames": "^2.5.1",
 		"defaults": "^3.0.0",
@@ -78,6 +77,7 @@
 		"tailwindcss": "^3.4.4"
 	},
 	"devDependencies": {
+		"@aft/config": "github:blujedis/aft-config",
 		"@commitlint/cli": "^18.4.4",
 		"@commitlint/config-conventional": "^18.4.4",
 		"@fontsource/fira-mono": "^4.5.10",
