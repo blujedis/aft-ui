@@ -38,7 +38,7 @@ function setState(group, state) {
 /**
  * Creates a new notification store.
  *
- * @param options the options to be used globally.
+ * @param initOptions the options to be used globally.
  */
 export function createNotificationStore(initOptions = {}) {
     initOptions.group = initOptions.group || 'default';

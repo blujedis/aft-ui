@@ -2,7 +2,7 @@ const component = {
     focused: true,
     hovered: true,
     rounded: 'none',
-    shadowed: '',
+    // shadowed: '',
     size: 'md',
     theme: 'frame',
     transitioned: true

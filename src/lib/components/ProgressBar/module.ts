@@ -1,8 +1,7 @@
 import { cubicOut } from 'svelte/easing';
 import type { ThemeColor, ThemeRounded, ThemeShadowed, ThemeSize } from '$lib/types';
-import type { progressBar } from './config';
 
-export type ProgressBarVariant = keyof typeof progressBar;
+export type ProgressBarVariant = 'filled';
 
 export type ProgressBarTweenedOptions<T extends number = any> = {
 	delay?: number;

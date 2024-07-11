@@ -8,7 +8,6 @@
 	import type { BreadcrumbOptionProps } from '../BreadcrumbOption';
 	import { type BreadcrumbProps, breadcrumbDefaults as defaults } from './module';
 	import type { ElementProps } from '$lib/types';
-	import { onNavigate } from '$app/navigation';
 
 	type $$Props = BreadcrumbProps & ElementProps<'ol'>;
 

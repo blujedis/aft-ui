@@ -3,7 +3,7 @@ type Primitive = boolean | string | number | undefined | Primitive[];
 /**
  * Creates a new styler instance.
  *
- * @param name the name of the styler used in errors/logging.
+ * @param themeConfig the them configuration.
  */
 export declare function styler<C extends ThemeConfig>(themeConfig: C): {
     create: (instanceName: string) => {
