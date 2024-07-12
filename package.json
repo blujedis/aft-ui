@@ -1,6 +1,6 @@
 {
 	"name": "@aft/ui",
-	"version": "1.0.0",
+	"version": "0.0.0-development",
 	"description": "Components for Svelte using Taildwindcss library.",
 	"license": "MIT",
 	"main": "./dist/index.js",
@@ -42,7 +42,7 @@
 		"dev": "vite dev --host",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"precommit": "",
+		"precommit": "git-branch-is --not main && echo git commit preflight passed.",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"lint:fix": "prettier --plugin-search-dir . --write .",
 		"prepare": "npx husky install",
