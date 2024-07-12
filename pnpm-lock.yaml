@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@aft/config':
-        specifier: github:blujedis/aft-config
-        version: https://codeload.github.com/blujedis/aft-config/tar.gz/ea93d43a7b94529ef8da3bee6b0be9a1e6499bc6(ts-node@10.9.2(@types/node@20.11.30)(typescript@5.5.3))
       '@floating-ui/dom':
         specifier: ^1.6.3
         version: 1.6.3
@@ -39,6 +36,9 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0
     devDependencies:
+      '@aft/config':
+        specifier: github:blujedis/aft-config
+        version: https://codeload.github.com/blujedis/aft-config/tar.gz/ea93d43a7b94529ef8da3bee6b0be9a1e6499bc6(ts-node@10.9.2(@types/node@20.11.30)(typescript@5.5.3))
       '@commitlint/cli':
         specifier: ^18.4.4
         version: 18.6.1(@types/node@20.11.30)(typescript@5.5.3)
