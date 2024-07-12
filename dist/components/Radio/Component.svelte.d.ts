@@ -1,0 +1,19 @@
+import { SvelteComponent } from "svelte";
+import { type RadioProps } from './module';
+declare const __propDef: {
+    props: RadioProps & Omit<import("svelte/elements").HTMLInputAttributes, "size">;
+    events: {
+        change: Event;
+    } & {
+        [evt: string]: CustomEvent<any>;
+    };
+    slots: {
+        default: {};
+    };
+};
+export type ComponentProps = typeof __propDef.props;
+export type ComponentEvents = typeof __propDef.events;
+export type ComponentSlots = typeof __propDef.slots;
+export default class Component extends SvelteComponent<ComponentProps, ComponentEvents, ComponentSlots> {
+}
+export {};

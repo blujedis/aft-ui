@@ -1,0 +1,79 @@
+<script>import { gridSearchDefaults as defaults } from "./module";
+import { themeStore, themer } from "../../theme";
+import { getContext } from "svelte";
+import { DataGridCell } from "../DataGridCell";
+import { debounce, boolToMapValue } from "../../utils";
+const context = getContext("DataGrid");
+export let { action, focused, method, rounded, size, stacked, strategy, theme } = {
+  ...defaults,
+  focused: context.globals?.focused,
+  rounded: context.globals?.rounded,
+  size: context.globals?.size,
+  stacked: context.globals?.stacked,
+  theme: context.globals?.theme
+};
+const th = themer($themeStore);
+$: gridSearchClasses = th.create("DataGridSearch").prepend("datagrid-search", true).compile();
+$: gridSearchInputClasses = th.create("DataGridSearchInput").option("fieldFontSizes", size, size).option("fieldPadding", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).prepend("datagrid-search-input", true).append(
+  "outline-none px-4 py-2 pl-10 w-full rounded-b-none bg-transparent hover:bg-transparent !font-dark !dark:font-light",
+  true
+).compile();
+function handleSearchSubmit(e) {
+  if (strategy !== "submit" || method || action) return;
+  e.preventDefault();
+  const form = e.target;
+  if (form) {
+    debounce(() => {
+      const data = new FormData(form);
+      context.filter(data.get("search")?.toString() || "");
+    })();
+  }
+}
+function handleSearchInput(e) {
+  e.preventDefault();
+  const input = e.target;
+  if (input)
+    debounce(() => {
+      context.filter(input.value || "");
+    })();
+}
+</script>
+
+<DataGridCell size="unstyled" class={gridSearchClasses} full>
+	<slot search={context.filter}>
+		<form id="search_form" name="search_form" {action} {method} on:submit={handleSearchSubmit}>
+			<div class="flex items-center">
+				<div class="flex-1 relative p-1">
+					<svg
+						class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-frame-400 ml-3 mr-1"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+					{#if strategy === 'input'}
+						<input
+							type="search"
+							name="search"
+							placeholder="Search All Records"
+							class={gridSearchInputClasses}
+							on:input={handleSearchInput}
+						/>
+					{:else}
+						<input
+							type="search"
+							name="search"
+							placeholder="Search All Records"
+							class={gridSearchInputClasses}
+						/>
+					{/if}
+				</div>
+			</div>
+		</form>
+	</slot>
+</DataGridCell>
