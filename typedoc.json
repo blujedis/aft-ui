@@ -2,6 +2,6 @@
 	"$schema": "https://typedoc.org/schema.json",
 	"entryPoints": ["./src/lib"],
 	"out": "./docs",
-	"name": "Forewind UI",
+	"name": "Aft UI",
 	"readme": "none"
 }
