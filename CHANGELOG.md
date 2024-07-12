@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/blujedis/aft-ui/compare/v1.0.0...v1.0.1) (2024-07-12)
+
+### Bug Fixes
+
+- add mising pkg iconify/svelte ([b976a71](https://github.com/blujedis/aft-ui/commit/b976a710decb402d71a26025996fde56c12d8fc3))
+- prevent direct commits to main ([729babc](https://github.com/blujedis/aft-ui/commit/729babc5781b0aae68fc234b00fe1371bfe27dc2))
+
 # 1.0.0 (2024-07-11)
 
 ### Bug Fixes
