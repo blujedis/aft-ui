@@ -1,12 +1,12 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
-	"entryPoints": ["./src/lib"],
+	"entryPoints": ["./src/lib/index.ts"],
 	"out": "./docs",
 	"name": "Aft UI",
 	"readme": "none",
 	"validation": {
-		"notExported": false,
-		"invalidLink": false,
+		"notExported": true,
+		"invalidLink": true,
 		"notDocumented": false
 	}
 }

@@ -48,7 +48,7 @@
 		"prepare": "husky install",
 		"prepublishOnly": "npm run package",
 		"types": "tsc --emitDeclarationOnly",
-		"docs": "rimraf docs/ && typedoc --validation.notExported false && touch ./docs/.nojekyll",
+		"docs": "rimraf docs/ && typedoc && touch ./docs/.nojekyll",
 		"semantic-release": "semantic-release --branches main",
 		"test": "echo \"no tests enabled\"",
 		"test:playwright": "playwright test",
