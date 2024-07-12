@@ -3,5 +3,10 @@
 	"entryPoints": ["./src/lib"],
 	"out": "./docs",
 	"name": "Aft UI",
-	"readme": "none"
+	"readme": "none",
+	"validation": {
+		"notExported": false,
+		"invalidLink": false,
+		"notDocumented": false
+	}
 }
