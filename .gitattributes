@@ -1,2 +1,2 @@
-docs/ merge=theirs
+docs/ merge=ours
 husky/ merge=ours
