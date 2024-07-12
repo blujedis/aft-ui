@@ -1,6 +1,6 @@
 {
 	"name": "@aft/ui",
-	"version": "1.0.2",
+	"version": "1.0.0",
 	"description": "Components for Svelte using Taildwindcss library.",
 	"license": "MIT",
 	"main": "./dist/index.js",
