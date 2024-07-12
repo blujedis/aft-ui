@@ -1,2 +1,2 @@
 docs/ merge=ours
-husky/ merge=ours
+.husky/ merge=ours
