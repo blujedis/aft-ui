@@ -45,7 +45,7 @@
 		"precommit": "git-branch-is --not main && echo git commit preflight passed.",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"lint:fix": "prettier --plugin-search-dir . --write .",
-		"prepare": "husky install",
+		"prepare": "npx husky install",
 		"prepublishOnly": "npm run package",
 		"types": "tsc --emitDeclarationOnly",
 		"docs": "rimraf docs/ && typedoc && touch ./docs/.nojekyll",
