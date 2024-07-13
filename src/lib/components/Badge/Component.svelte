@@ -42,7 +42,7 @@
 		.option('roundeds', boolToMapValue(rounded), rounded)
 		.option('shadows', boolToMapValue(shadowed), shadowed)
 		.prepend(`badge badge-${variant}`, true)
-		.prepend('badge-removable', removable)
+	
 		.append('w-full', full)
 		.append('z-20 badge', true)
 		.append('relative inline-flex items-center leading-tight justify-center', !removable)
