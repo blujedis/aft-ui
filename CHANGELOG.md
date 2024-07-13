@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/blujedis/aft-ui/compare/v1.0.0...v1.1.0) (2024-07-13)
+
+
+### Bug Fixes
+
+* add missing class for badge ([a91e3b1](https://github.com/blujedis/aft-ui/commit/a91e3b1debfceb06ed05106b9608fedc4a0ff084))
+* remove master check semantic release errors ([fe5bbd8](https://github.com/blujedis/aft-ui/commit/fe5bbd8f95ac45b547a5549a706ca7c4e717afdf))
+
+
+### Features
+
+* add field placeholder ([b973392](https://github.com/blujedis/aft-ui/commit/b9733928e65168e27661d74d63b9f35a001b0a49))
+
 # 1.0.0 (2024-07-12)
 
 ### Bug Fixes
