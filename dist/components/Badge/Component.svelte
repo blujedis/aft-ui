@@ -23,7 +23,7 @@ $: badgeClasses = th.create("Badge").bundle(["mainBg", "filledText"], theme, var
   { $base: "ring-1 ring-inset" },
   theme,
   variant === "outlined"
-).bundle(["softBg", "softText"], {}, theme, variant === "soft").option("common", "transitioned", transitioned).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`badge badge-${variant}`, true).prepend("badge-removable", removable).append("w-full", full).append("z-20 badge", true).append("relative inline-flex items-center leading-tight justify-center", !removable).append($$restProps.class, true).compile();
+).bundle(["softBg", "softText"], {}, theme, variant === "soft").option("common", "transitioned", transitioned).option("common", "focusedOutlineVisible", focused).option("outlineFocusVisible", theme, focused).option("badgeFontSizes", size, size).option("roundeds", boolToMapValue(rounded), rounded).option("shadows", boolToMapValue(shadowed), shadowed).prepend(`badge badge-${variant}`, true).append("w-full", full).append("z-20 badge", true).append("relative inline-flex items-center leading-tight justify-center", !removable).append($$restProps.class, true).compile();
 $: badgeInnerClasses = th.create("BadgeInner").option("badgeInnerMargin", size, size).compile();
 </script>
 
